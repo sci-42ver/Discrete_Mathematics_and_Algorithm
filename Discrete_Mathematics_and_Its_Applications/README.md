@@ -1,6 +1,8 @@
 # [online resources](https://highered.mheducation.com/sites/125967651x/student_view0/web_resources_guide.html) from [this](https://highered.mheducation.com/sites/125967651x/information_center_view0/)
 - Discrete Mathematics and Its Applications [Student’s Solutions Guide](https://www.academia.edu/36410920/Students_Solutions_Guide) pdf with the unavailable version.
 - [test bank](https://www.stuvia.com/en-us/doc/2018491/discrete-mathematics-and-its-applications-8th-edition-rosen-test-bank.pdf)
+# markdown notice
+- "- [ ]" can't be ended with one space.
 # TODO
 - [QA 164](https://highered.mheducation.com/sites/dl/free/125967651x/1106131/Advice_on_the_Writing_Projects.pdf)
 - how is the p20 list related with discrete mathematics?
@@ -41,10 +43,12 @@
 I only read even ones because [they][SOLUTIONS_8th] have detailed explanation as [7th][SOLUTIONS_7th] and also odd ones are very similar to even ones at least for 1.1 (except for some cases that even ones are a little hard whether having asterisk marks or not).
 I also read the asterisked ones.
 - I skipped all [assessments](https://highered.mheducation.com/sites/125967651x/student_view0/self_assessments.html) because examples plus exercises are enough.
-## 1.1
+## 1
+### 1.1
 - [x] 
   a,b,d,f not.
-- 4~16,24~40,46 skipped for it to be a little too unnecessary and trivial.
+- 4~16,
+  24~40,46 skipped for it to be a little too unnecessary and trivial.
 - see answer for 18
 - [ ] a,b true because premise is false.
 - [ ] a,b,c -> inclusive or
@@ -61,7 +65,7 @@ I also read the asterisked ones.
   a) so 99th is true
   b) if "at least n" is true, then true for all $i<=n$ (i.e. n false and $100-n$ true -> $100-n=n$ -> $n=50$)
   c) see b), $99-n=n$ is impossible for $n\in\mathbb{Z}$
-## 1.2
+### 1.2
 - 2,6~8,12 skipped because similar to 10,
   14 just based on keywords
   18 (because not automatic proof, it just traverses all conditions)
@@ -94,7 +98,7 @@ I also read the asterisked ones.
 - [ ] TODO 42 [unavailable](https://web.archive.org/web/20020401000000*/http://mathforum.org/dr.math/problems/joseph8.5.97.html)
   based on [wikipedia](https://en.wikipedia.org/wiki/Zebra_Puzzle#Solution), just step by step solve the problem.
   TODO where is in [Life International](https://books.google.co.jp/books?id=elIEAAAAMBAJ&q=zebra#v=onepage&q=zebra&f=false)
-## 1.3
+### 1.3
 - 2~12,18,
   50~52 are skipped.
   14,16 I only read the 1st one.
@@ -136,7 +140,99 @@ I also read the asterisked ones.
   where $r,s$ traverse the 9 blocks
   $n$ ensures each number is assigned
   $i,j$ traverse inside the block
+### 1.4
+1. [null quantification](https://gateoverflow.in/130504/null-qunatification-rule#:~:text=Null%20Quantification%20mean%20when%20a,in%20part%20of%20a%20statement.) means some statement like $A$ in 48 doesn't have quantified variable like $x$ in 48.
+- 2~6,
+  12~16,
+  22,26,
+  28~30(similar to exercises before),
+  32~44,54,
+  58~64 skipped
+- [x] 8
+  a. rabbit hops
+  b. all animals are rabbits and hops
+  c. there is some animals are rabbits and they hop.
+  d. there is some animals are rabbits which hop.
+- [ ] 10 better with parentheses
+  a. $\exists xC(x)\wedge D(x)\wedge F(x)$
+  b. $\forall xC(x)\wedge D(x)\wedge F(x)$ wrong ("or")
+  c. $\exists xC(x)\wedge \neg D(x)\wedge F(x)$ 
+  d. $\neg (\exists xC(x)\wedge D(x)\wedge F(x))$
+  e. $\exists xC(x)\vee D(x)\vee F(x)$ This is same as the answer.
+- [x] 18
+  $\exists \to \vee$
+  $\forall \to \wedge$
+  $\neg$ just assign to each predicate
+- [x] 20 
+  a,b similar to 18
+  c~e see the ans is enough.
+- [x] 24
+  same as the examples,
+  $\forall \to \to$ to exclude the result as the condition
+  $\exists \to \wedge$ to include the result as the condition -> b,c,e
+- [ ] 46 yes based on 45.
+  45 is by definition.
+  - 45 ans
+    $T/F \to  F$ false because $T\to F$ is false
+    $F\to F$ true
+  - 46 similar
+- [ ] 48 by definition
+  a. any ... or ... means any (... or ...)
+- [x] 50
+  a. only A is T and P(x) is F -> false
+    same for the right side, Q.E.D
+- [ ] 52 -> ans
+- [ ] 56
+  inspired by p57
+  at least $\underset{i=1}{\overset{3}{\bigvee}}P(i)$
+  at most $\underset{i=1}{\overset{2}{\bigwedge}}\underset{j=i+1}{\overset{3}{\bigwedge}}(\neg P(i)\wedge \neg P(j))$
+  - ans just the exhaustion method
+### 1.5
+- 2~8,
+  14~32,
+  36~42,46,52(similar to 17) are skipped
+- [ ] 10
+  PO IMHO here $\rightarrow$ can also be $\leftrightarrow$
+- [ ] 12
+  j. here chat -> connection is wrong so no $\leftarrow$
+  k. maybe here ~~assume~~ self has chatted with self is nonsense. ~~so not chat ~~can't~~ -> $x\neq y$~~
+  so $x\neq y$ is just the condition and should be thought as the result, so no $\leftarrow$
+- [ ] 17
+  d. $\exists x \exists y (x\neq y\wedge\forall z(M(x,z)\wedge M(y,z)))\wedge \forall a(\forall z M(a,z)\to (x=a\vee y=a))$
+  - the ans is more elegant.
+- [x] 34
+  just $1,2$
+  and $1,2,3$
+- [ ] 44
+  also can use methods similar to 17.
+- [x] 48 replace $x$ with $y$ and then truth table
+- [ ] 49 similar to 48
+  a. since $P(x)=T$, so become $\exists xQ(x)$ -> $\exists yQ(y)$
+  b. similar to a
+- [ ] 50
+  a. $\exists x(P(x)\vee Q(x) \vee A)$
+  | x   | P(x) | Q(x) |
+  | --- | ---- | ---- |
+  | x1  | T    | F    |
+  | x2  | F    | T    |
+  | ... |      |      |
 
+  b. $\exists x \neg(P(x)\vee Q(x))$
+  c. see ans.
+  $\neg (\exists xP(x)\wedge(\neg \exists xQ(x)))$ ->
+  $\neg (\exists xP(x)\wedge(\forall x \neg Q(x)))$ ->
+  $\forall x \neg P(x) \vee(\exists x Q(x))$
+- [ ] 51
+  by 50 and exercises before
+  1. connectives are enough for $\neg,\vee$
+  2. 50 has includes $\exists,\forall,\to$
+  then Q.E.D
+  - The ans proves that 
+    1. $QxP(x)$
+    2. $\neg P(x)$
+    3. $P\vee Q$
+    all be transformed into PNF
+    Then based on the *order*, just one by one transform is enough.
 
 ---
 
