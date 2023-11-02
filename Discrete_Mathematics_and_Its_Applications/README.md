@@ -29,6 +29,10 @@
 - the philosophy of mathematics -> [Four schools](https://plato.stanford.edu/entries/philosophy-mathematics/).
 - p77 similar to $\exists$ ones, why the 1st isn't true for $P(x)=F$.
   See p75 caution
+- [disjunction](https://en.wikipedia.org/wiki/Logical_disjunction) means either one (i.e. disjunction) is true -> true.
+  > Because this semantics allows a disjunctive formula to be true when both of its disjuncts are true, it is an *inclusive* interpretation of *disjunction*
+  - [Disjunctive syllogism](https://en.wikipedia.org/wiki/Disjunctive_syllogism) based on $\vee$
+    while [Hypothetical syllogism](https://en.wikipedia.org/wiki/Hypothetical_syllogism) based on $\to$
 ### TODO
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
@@ -233,6 +237,74 @@ I also read the asterisked ones.
     3. $P\vee Q$
     all be transformed into PNF
     Then based on the *order*, just one by one transform is enough.
+### 1.6
+- 2~6,10,14&16&20(I only read a),30 skipped
+  here 12,22 is a little different from the ans but the logic is not wrong IMHO.
+- [ ] 8
+  can also based on "if x is an island, then x is No man".
+  so Hypothetical syllogism
+- [ ] 12
+  (p ∧ t) →(r ∨ s), q →(u ∧ t), u →p, and ¬s and conclusion q →r
+  $q\to u\to p$
+  $q\to t$
+  so
+  $q\to (p ∧ t) \to (r ∨ s)$, since $\neg s$, so $q\to r$
+  - see ans better use 11 based on what the exercise says.
+- [x] 18 why $S(M,M)$
+- [ ] 22
+  based on $p\to q\equiv \neg p\vee q$ based on the *unique false* result
+
+  $\forall x(Q(x)\to \neg R(x))$ =(Hypothetical syllogism)>
+  $\to \neg S(x)$ => 
+  $\forall x\neg Q(x)\vee \neg S(x)$
+  
+  similarly, $\forall x\neg P(x)\vee S(x)$
+  then =("Resolution")> $\forall x\neg P(x)\vee\neg Q(x)$ => 
+  $\forall xP(x)\to \neg Q(x)$
+- [x] 24 3->4
+- [ ] 26 by definition.
+- [ ] 28 similar to 26
+  *based on any variable* $a$
+  then $(\neg(\neg P(a)\wedge Q(a)))\vee R(a)$, i.e. 
+  $(P(a)\vee \neg Q(a))\vee R(a)$
+  since only one of $Q(a)$ and $\neg Q(a)$ can be true, 
+  then either $P(a)$ or $P(a)\vee R(a)$ is true.
+  so $P(a)\vee R(a)$, i.e. $\neg R(a)\to P(a)$ is true.
+  - The ans takes $\neg R(a)$ as the precise same as one of exercise before.
+- [ ] 32
+  TODO IMHO how the tautology proved without $p\wedge\neg p\equiv F$
+  ~~it is same as to prove $F\vee(p\wedge\neg p)$~~
+- [ ] 34
+  D(x): x is difficult
+  L(x): many students like x
+  E(x): x is easy
+  1. $D(logic)\vee \neg L(logic)$
+  2. $E(mathematics) \to \neg E(logic)$
+  a,~~b~~,d, T
+  ~~c~~,e F
+  - b. ~~-> $\neg D(logic)$, ~~
+    ~~but both $T\to T$ and $F\to T$ is possible, so ~~
+    $F\to T/F$, so $D(logic)$ is not determined, so nothing can be determined.
+  - c same as b.
+  - ~~-> $D(logic)$~~
+    e $E(mathematics) \to \neg E(logic)$ -> $\neg E(mathematics) \vee \neg E(logic)$
+    so the result is always T
+    then $F/T \to T$ always holds.
+- [x] 35
+  p: Superman were able to prevent evil
+  q: Superman were willing to prevent evil
+  r: Superman would do so
+  s: Superman would be malevolent
+  t: Superman exists
+  u: Superman is impotent
+
+  1. $p\wedge q \to r$
+  2. $\neg p \to u$
+  3. $\neg q \to s$
+  4. $\neg q$
+  5. $t \to (\neg u\wedge\neg s)$
+  if $t$, then $\neg s$ contray to $\neg q \to s$
+  so $\neg t$.
 
 ---
 
