@@ -8,7 +8,19 @@
 - how is the p20 list related with discrete mathematics?
 - [April 1984 issue of Annals of the History of Computing](http://ftp.math.utah.edu/pub/tex/bib/toc/annhistcomput.html#6(2):April/June:1984) relation with John W. Tukey.
 - G  ̈odel [impossible](https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems) to write a computer program that can solve all mathematical problems
-- p75 the sign in the middle of the page meaning.
+- p75 the sign in the middle of the page meaning which is first shown in p59.
+- where is "Exercise 11 in Section 4.3 provides a constructive existence proof"?
+- p126 just prove the existence by letting the 1st player *follow* the 2rd winning strategy if the 2rd is to win.
+  Does it mean do the *same as 2rd 1st step* which seems weird because its strategy is based on the next is 1st player who will change the board?
+- p128 $q\to r$ is different from p117 "begging the question" where the latter is to prove $r$ by $r$ and the former is to prove $q$ by $r$.
+## number theory
+- > Every positive integer is the sum of the squares of four integers
+  [proof p5](https://www.math.uchicago.edu/~may/VIGRE/VIGRE2008/REUPapers/Ng.pdf)
+- Fermat's last theorem [proof page 111](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
+## cs program
+- p132
+# proof method arsenal by p136
+- see 1.7~8
 # contents
 ## prologue
 - [formal languages](https://www.oreilly.com/radar/formal-informal-languages/) are more stuctured where [DALL-E](https://en.wikipedia.org/wiki/DALL-E#:~:text=The%20original%20DALL%C2%B7E%20was,3%20modified%20to%20generate%20images.) talks to the person.
@@ -33,6 +45,20 @@
   > Because this semantics allows a disjunctive formula to be true when both of its disjuncts are true, it is an *inclusive* interpretation of *disjunction*
   - [Disjunctive syllogism](https://en.wikipedia.org/wiki/Disjunctive_syllogism) based on $\vee$
     while [Hypothetical syllogism](https://en.wikipedia.org/wiki/Hypothetical_syllogism) based on $\to$
+- p114
+  since $p\to q\equiv (p\wedge \neg q)\to F$
+  so *assume* $p=T,\neg q=T$ to result in $F$ then.
+  Then $\neg q\to \neg p$ so contradiction -> $F$.
+- p115 
+  The chain just uses $n$ instead of $n^2-n$ conditional statements.
+- [tiling](https://en.wikipedia.org/wiki/Domino_tiling) checkerboards with dominoes
+- p122 limits the cases by 2 steps in the "EXAMPLE 5".
+  1. to the final digit
+  2. to the symmetric property.
+- example 14 is one special backward using $\leftrightarrow$.
+- p134 FIGURE 7 color line by line which can allow right triominoes cover three colors.
+  - here "without loss of generality" is [based on the *same* location after rotation](https://people.math.osu.edu/shapiro.6/tiling.pdf).
+    > However if there is a tiling for the board with a *missing upper left* corner, we can turn the picture by a 90 degrees to exhibit a tiling for a board with a *missing upper right* corner. Since that case was *already proved impossible*, the board with a missing upper left corner is also impossible to tile.
 ### TODO
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
@@ -47,6 +73,10 @@
 I only read even ones because [they][SOLUTIONS_8th] have detailed explanation as [7th][SOLUTIONS_7th] and also odd ones are very similar to even ones at least for 1.1 (except for some cases that even ones are a little hard whether having asterisk marks or not).
 I also read the asterisked ones.
 - I skipped all [assessments](https://highered.mheducation.com/sites/125967651x/student_view0/self_assessments.html) because examples plus exercises are enough.
+- I skipped all REVIEW QUESTIONS due to 
+  1. not finding valuable answers although [SOLUTIONS_7th] has some tips.
+  2. exercises are enough large to help the learning.
+- COMPUTER PROJECTS , COMPUTATIONS AND EXPLORATIONS and WRITING PROJECTS are a bit off the topic with the goal to learn the **maths** fundamental knowledge.
 ## 1
 ### 1.1
 - [x] 
@@ -305,6 +335,209 @@ I also read the asterisked ones.
   5. $t \to (\neg u\wedge\neg s)$
   if $t$, then $\neg s$ contray to $\neg q \to s$
   so $\neg t$.
+### 1.7
+Most of them are similar to proofs in the junior/senior high school.
+- 2,4~6&10(similar to 2) skipped
+- [ ] 8
+  $p\wedge\neg q\to F$
+  here $n=a^2,n+2=b^2$
+  then $2=(a+b)(a-b)$
+  $a+b=2\\ a-b=1$ 
+  so $a=\frac{3}{2},b=\frac{1}{2}\to a,b\notin \mathbb{Z}$, 
+  obviously $F$
+  - Also see ans where use the *consecutive* square to prove.
+- [ ] 12
+  similar to 8
+  [irrational numbers latex](https://texblog.org/2007/08/27/number-sets-prime-natural-integer-rational-real-and-complex-in-latex/)
+  $\frac{p}{q}*k=\frac{m}{n},k\in \mathbb{I}$
+  then $k=\frac{mq}{pn}\in \mathbb{Q}$ (why [Q for rational](https://math.libretexts.org/Bookshelves/Analysis/Real_Analysis_(Boman_and_Rogers)/01%3A_Numbers_-_Real_(%E2%84%9D)_and_Rational_(%E2%84%9A)/1.01%3A_Real_and_Rational_Numbers#:~:text=The%20set%20of%20rational%20numbers%20is%20denoted%20Q%20for%20quotients,Figure%201.1.)) -> contradiction.
+  - See ans notice the nonzero to ensure validity of division by $p$.
+- [x] 14,34 direct proof.
+- [x] 16,18,41 proof by contradiction.
+- [ ] 20 
+  - [x] a is obvious
+  - [ ] b is similar to a essentially.
+- [x] 22 trivial proof.
+- [ ] 24 see ans
+- [x] 26 same as the example.
+- [x] 28
+  if: by contradiction.
+  only if is easy
+- [x] 30
+  if is easy
+  only if: $(m-n)(m+n)=0$
+- [x] 32 just use $\equiv$ based on axioms with the $\mathbb{R}$
+- [x] 36 (5) is wrong.
+- [x] 38 4->1->2->3 chain, then use $\leftrightarrow$ to $3\to4$
+  - ans not use chain is also ok
+- [x] 40 7 by trying up from 3.
+- [ ] 42 see ans
+- [x] 44 i -> n is odd -> the rest.
+### 1.8
+- 2,8,12,24,32~34,42 skipped.
+- [x] 4 exhaustion.
+- [ ] 6 by definition is faster.
+- [ ] 10, 3
+  - see ans
+- [ ] 14 a bit like one riddle.
+- [ ] 16 see the ans.
+  I was wrong to prove it is right.
+- [ ] 18,20,22 contradiction. 
+  - 18 similar to example 13
+    - also see the ans.
+  - 20 if there is 2 then $r-a<\frac{1}{2},(a+1)-r<\frac{1}{2}\to1<1$
+  - 22 similar to 20 $\lfloor x\rfloor$ 
+    - latex [see](https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols)
+- [ ] 27 use one invariant.
+- [x] 28 otherwise always all zeros (all ones is impossible)
+- [ ] 30 exhaustion and then find the pattern.
+- [x] 36
+  similar to the example
+  $\sqrt[3]{2}=\frac{p}{q},q\neq 0$, then $3\mathrel{|}p,q$
+  - symbol [$\mathrel{|}$](https://tex.stackexchange.com/a/116589)
+- [ ] 38
+- [ ] 39
+  a. from sorted one, each swap would decrease.
+  b. 
+  - ans
+    a. "Without loss of generality," because we can swap among all $x_iy_i$ to keep $x_i$ sorted.
+      the rest is same as above
+    b. as the ans says, changing $y_i$ to the *increasing* order when $x_i$ increases will *increase* the sum, similarly, changing $y_i$ to the *decreasing* order when $x_i$ increases will *decrease* the sum.
+- [x] 40 this is one school recruitment interview problem I encountered.
+  | time                      | 8   | 5   | 3   |
+  | ------------------------- | --- | --- | --- |
+  | 0                         | 8   | 0   | 0   |
+  | 1                         | 3   | 5   | 0   |
+  | 2                         | 3   | 2   | 3   |
+  | 3 (skipped one step here) | 6   | 0   | 2   |
+  | 4                         | 1   | 5   | 2   |
+  | 5                         | 1   | 4   | 3   |
+
+- [x] 44 just all horizontally.
+- [ ] 46 white less than black ones because all corners are white.
+  - the ans
+    1. if 3-8, then with 4-9,10-15,19-20,13-18, they surrounded 14 so contradiction.
+    2. then 3-4
+      - three vertical -> 17-22, 18-23, and 19-24
+        > then we are again quickly forced into a sequence of placements that lead to a contradiction
+        i.e. 11-16,7-12 will make 6 surrounded.
+      - one vertical
+        > Therefore without loss of generality, we can assume that we use 22-23
+        either 21-22 or 22-23 which are same due to symmetry.
+        > we are stuck once again
+        18 was surrounded.
+- [ ] 48
+  - [x] after "path" hint of the ans
+    the circular path is cut by two cells where their distance is *even* due to "a white square and a black square" so dominoes can cover.
+- [ ] 50
+  - after hint of FIGURE 7
+    - the 1st line white mirrors to blue, etc, so not possible.
+    - the 2nd only blue is possible after the mirror test, but after anticlockwise 90-degree rotation, it becomes black, so also not possible.
+    - the 3rd, only (3,3) possible after both rotation and mirror.
+      TODO constructive proof of (3,3).
+    - the 4th line similar to the 2nd line.
+  - the ans
+    1. must remove *white*
+    2. the white will be white in all cases after the rotation, etc.
+- [ ] 51
+  a.
+    1. straight
+    2. move one square around
+      1. 111
+           1
+      2. 111
+          1
+    3. move two squares around
+      1. 11
+         11
+      2. 11
+        11
+  b.
+    - straight ones are obvious.
+    - by similar coloring with triominoes, 2.1, 2.2 and 3 can't
+  - ans
+    a. is right
+    b. is wrong.
+- [ ] 52
+  - ans use the same coloring as FIGURE 7
+    then
+    1. horizontal -> one color each
+    2. vertical -> either zero or two squares of each color.
+    ~~odd horizontal + even vertical -> ~~
+    - > assume without loss of generality that an even number of tiles are placed horizontally
+      because rotation will swap horizontal with vertical.
+      so "even number of horizontal" assumption is ok.
+### Supplementary
+Although "generally more difficult" said in p12, but it is not the case, at least for chapter 1.
+- 2~8,38(contradiction or contraposition by the ans where they are same in the nature),44 skipped.
+- [ ] 10
+  1. if $q=T$, then all three is $T$ -> (A,A,A)
+  2. $q=F$
+     1. $p=T$, 1st is $F$ 
+        2rd becomes $\neg r$ -> $T/F$ -> (R,A,R) / (R,R,R)
+     2. $p=F$, 1st is $T$
+        2rd becomes $F$ -> (A,R,R)
+  - the ans seems to be wrong.
+- [x] 12 because based on known propositional variables, the assertions $T/F$ are *fixed*.
+- [x] 14
+  Anita must be knave because if she is knight, then contradiction with "I am a knave".
+  so Boris is a knave
+  then Carmen is also a knave
+- [ ] 16 based on the assumption from the real life that "unicorns do not live".
+- [x] 18 F,T
+- [ ] 19
+  hinted by p58 EXAMPLE 11
+  1. 
+    $$
+    \overset{16}{\underset{i=1}{\bigwedge}}\:\overset{16}{\underset{j=1}{\bigwedge}}\:
+    \overset{16}{\underset{n=1}{\bigvee}}\:p(i,j,n)
+    $$
+  2. 
+    $$
+    \overset{16}{\underset{j=1}{\bigwedge}}\:\overset{16}{\underset{i=1}{\bigwedge}}\:
+    \overset{16}{\underset{n=1}{\bigvee}}\:p(i,j,n)
+    $$
+  3. 
+    $$
+    \overset{3}{\underset{r=0}{\bigwedge}}\:\overset{3}{\underset{s=0}{\bigwedge}}\:
+    \overset{4}{\underset{i=1}{\bigwedge}}\:\overset{4}{\underset{j=1}{\bigwedge}}\:
+    \overset{16}{\underset{n=1}{\bigvee}}\:p(4r+i,4s+j,n)
+    $$
+  - IMHO either the $n$ or the index $i/j/(i,j)$ can be used for $\bigvee$.
+  - latex [Spacing in Math Mode](http://www.emerson.emory.edu/services/latex/latex_119.html)
+- [x] 20
+  a. $\exists xP(x)$
+  b. $\neg\forall xP(x)$
+  c. $\forall xQ(x)$
+  d. $\forall xP(x)$
+  e. $\exists x\neg Q(x)$
+- [x] 22 same as one example, i.e. one domain with only two distinct values.
+- [ ] 24 ~~$\forall y\\(\forall x_3 G(x_3, y))\to\exists x_1\exists x_2 G(x_1, y)\wedge G(x_2, y)\wedge ((x_3=x_1)\vee(x_3=x_2))\wedge(x_1\neq x_2)$~~
+  (notice "three" instead of "two" hinted by the ans)
+  so $\forall y\\(\forall x_4 G(x_4, y))\to\overset{3}{\underset{i=1}{\exists x_i}}\overset{3}{\underset{i=1}{\bigwedge}} G(x_i, y) \wedge (\overset{3}{\underset{i=1}{\bigvee}}(x_4=x_i))\wedge(x_1\neq x_2\neq x_3)$
+  - "No one has more than three" doesn't mean "three" exactly.
+- [x] 26 a,b,c T
+- [ ] 28 by definition.
+- [ ] 30 see 28 ans.
+- [x] 32
+  a. $p\wedge\neg q$, so "it snows today, and I won't go skiing tomorrow"
+  b. "not ..." $\exists x\neg F(x)$
+  c. "all ... like ..."
+  d. $\neg x\forall y\neg F(x,y)$
+    i.e. "In one mathematics class all students don't fall asleep during lectures"
+- [ ] 34
+  hinted by the ans, use two variables to represent "in *which* *every* room"
+  $\exists x\exists y\forall zB(x,y)\wedge W(x,z)$
+  $B(x,y)$ means "There is x on the campus of y in the United States"
+  $W(x,z)$ means "z in x is painted white"
+  - the ans splits $W(,)$.
+    better move $\forall z$ after $\wedge$ to be based on $x$ instead of general.
+- [ ] 36 this is duplicate of one exercise before.
+  $\exists x\exists y(P(x)\wedge P(y)\wedge(x\neq y)\wedge(\forall z P(z)\to(z=x\vee z=y)))$
+- [ ] 40 suppose two, then contradiction.
+- [ ] 42
+- [x] 46 $5+2\sqrt{6}$ is not a perfect square 
+  -> $\sqrt{5+2\sqrt{6}}=\sqrt{2}+\sqrt{3}$ is irrational
 
 ---
 

@@ -8,3 +8,6 @@ CRLS and Discrete_Mathematicsand_Its_Applications book notes
     - Also see this [comparison](https://math.stackexchange.com/a/1930644/1059606) among them.
   - and CRLS 4th with almost [full 3rd solutions](https://sites.math.rutgers.edu/~ajl213/CLRS/CLRS.html) although teachyourselfcs doesn't recommend for the complexity.
 - More detailed see [this](https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md#algorithms-and-data-structures) related contexts.
+## textbooks used by
+### Discrete Mathematics with Applications
+1. [The University of Pittsburgh](https://sites.pitt.edu/~shk148/teaching/CS0441-2234/review-1-solution.html)
