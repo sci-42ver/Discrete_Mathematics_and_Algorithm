@@ -23,6 +23,8 @@
 - see 1.7~8
 # contents
 ## prologue
+- some highlights are lost due to failure to save.
+- data networking [diff](https://www.geeksforgeeks.org/difference-between-network-and-internet/) the Internet
 - [formal languages](https://www.oreilly.com/radar/formal-informal-languages/) are more stuctured where [DALL-E](https://en.wikipedia.org/wiki/DALL-E#:~:text=The%20original%20DALL%C2%B7E%20was,3%20modified%20to%20generate%20images.) talks to the person.
   > the language you need to know to talk to DALL-E. Right now, it’s an informal language, not a formal language with a specification in *BNF* or some other metalanguage.
   BNF adds [much limitation](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form).
@@ -60,6 +62,26 @@
   - here "without loss of generality" is [based on the *same* location after rotation](https://people.math.osu.edu/shapiro.6/tiling.pdf).
     > However if there is a tiling for the board with a *missing upper left* corner, we can turn the picture by a 90 degrees to exhibit a tiling for a board with a *missing upper right* corner. Since that case was *already proved impossible*, the board with a missing upper left corner is also impossible to tile.
 ### TODO
+## 2
+- Epistemology [diff](https://qr.ae/pKAULY) logic
+  > Epistemology, the study of how we know things and what counts as justification, tells us when we have a *false premise*
+  - [Metaphysics](https://en.wikipedia.org/wiki/Metaphysics) -> What is it that exists.
+- Venn diagram realtion with logical arguments based on [subsets](https://math.libretexts.org/Courses/Mt._San_Jacinto_College/Ideas_of_Mathematics/03%3A_Set_Theory_and_Logic/3.05%3A_Using_Venn_Diagrams_to_Analyze_Arguments).
+- notice "more than once" in p147 EXAMPLE 6 is ~~not same as this~~ [definition of "set"](https://math.stackexchange.com/a/223506) ~~but means~~.
+  - TODO can't find when the "are identical" [removed](http://wikipedia.ramselehof.de/wikiblame.php?user_lang=en&lang=en&project=wikipedia&tld=org&article=Set+%28mathematics%29&needle=are+identical&skipversions=0&ignorefirst=0&limit=&offmon=11&offtag=5&offjahr=2023&searchmethod=int&order=asc&binary_search_inverse=on&user=) but at least find the relative time when it still exists.
+    tool from [this](https://webapps.stackexchange.com/a/35914)
+  - It is now "For example, {2, 4, 6} ..." showing that duplicate is allowed.
+- "complement of B with respect to A" means 
+  1. based on A, i.e. in A
+  2. "complement of B" -> not in B
+- superset [definition](https://en.wikipedia.org/wiki/Subset#Definition)
+- 2.2.2 TABLE 1
+  - just think propositional variables as one special set $\{T,F\}$
+  - it is the general case of [Boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra#Values).
+    - See example 10 "De Morgan’s law for propositions" for how this generalization works based on using the property, i.e. [Set-builder](https://en.wikipedia.org/wiki/Set_(mathematics)#Set-builder_notation), as the *proposition* ~~in some way~~.
+      then $\notin$ becomes $\bar{A}$, etc, to convert *back* to the set theory.
+    - The use the *equivalence of proposition* $\equiv$ to prove the $\leftarrow$ if having proven $\rightarrow$.
+  - example 11 just uses the $\equiv$ implicitly.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -69,6 +91,8 @@
 - [John Tukey](https://mathshistory.st-andrews.ac.uk/Biographies/Tukey/)
   > Their educational method was to respond to John's queries by providing clues and asking *further* questions rather than giving a direct answer, a characteristic that John inherited and used throughout his career.
   > John also had the benefit of an excellent *public library* in New Bedford which even possessed *journals* such as the Journal of the American Chemical Society and the Transactions of the American Mathematical Society. He was able therefore to take his education to a high level *before* entering university
+# latex miscs
+- find symbol codes by [detexify](http://detexify.kirelabs.org/classify.html) from [this](https://tex.stackexchange.com/a/450709)
 # Exercises
 I only read even ones because [they][SOLUTIONS_8th] have detailed explanation as [7th][SOLUTIONS_7th] and also odd ones are very similar to even ones at least for 1.1 (except for some cases that even ones are a little hard whether having asterisk marks or not).
 I also read the asterisked ones.
@@ -214,7 +238,7 @@ I also read the asterisked ones.
   a. any ... or ... means any (... or ...)
 - [x] 50
   a. only A is T and P(x) is F -> false
-    same for the right side, Q.E.D
+    same for the right side, Q.E.D.
 - [ ] 52 -> ans
 - [ ] 56
   inspired by p57
@@ -260,7 +284,7 @@ I also read the asterisked ones.
   by 50 and exercises before
   1. connectives are enough for $\neg,\vee$
   2. 50 has includes $\exists,\forall,\to$
-  then Q.E.D
+  then Q.E.D.
   - The ans proves that 
     1. $QxP(x)$
     2. $\neg P(x)$
@@ -538,6 +562,119 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 42
 - [x] 46 $5+2\sqrt{6}$ is not a perfect square 
   -> $\sqrt{5+2\sqrt{6}}=\sqrt{2}+\sqrt{3}$ is irrational
+## 2
+### 2.1
+- 2~6,10,14~18,22,34~38,46 skipped
+- [ ] 8 notice self.
+- [ ] 20
+  $A=\{\emptyset\},B=\{\emptyset,\{\emptyset\}\}$
+  - a little complex
+- [ ] 24 by having the same singleton sets.
+- [x] 26 a,b,d are.
+  - a should be $\{\emptyset\}$
+- [x] 28 
+  $$
+  \forall a\in A\to a\in C\\
+  \forall b\in B\to b\in D\\
+  then\\
+  \forall (a,b)\in A\times B\to (a,b)\in C\times D
+  $$
+- [x] 30 courses taught by each professor.
+- [ ] 32 $A=\emptyset;B=\emptyset$
+  - should be "or"
+- [ ] 40
+  i.e. since nonempty for $A,B$ (hinted by the ans)
+  $\exists a (a\in A\wedge a\notin B)\exists b\in B((a,b)\in A\times B\to(a,b)\notin B\times A)$
+- [ ] 41 because the latter has something like $\{\{a,b\},c\}$ where $a\in A,b\in B\ldots$
+  while the former $\{a,b,c\}$
+  - [$;$ and $,$](https://faculty.nps.edu/ncrowe/book/ad.html#:~:text=Queries%20are%20things%20you%20type,and%20semicolons%20mean%20%22or%22.) in prolog although $;$ means "and" [somewhere](https://math.stackexchange.com/a/3092850/1059606).
+  - ans here should be $\{((a,b),c),\ldots\}$ and $\{(a,b,c),\ldots\}$
+- [x] 42 similar to 41
+- [ ] 44 $\forall a\forall b\exists c \ldots b=c$, similarly $\forall a\exists b\forall c \ldots b=c$ Q.E.D.
+  - ans
+    symmetry.
+- [ ] 50
+  - ans
+    a. if $S\in S$ then we don't conform to the condition $x\notin x$, so should $S\notin S$
+    b. similar to a.
+  - based on p147 where the *property*, i.e. $x\notin x$ here, may "leads to paradoxes".
+- [ ] 51 $C_n^{i},i=1\sim n$ selection.
+### 2.2
+- 2~4,22~24,28,34,40~42,54~66,74 skipped
+- [ ] 6 the membership table is more intuitive where $\emptyset$ always corresponds to $F$.
+- [x] 8,10,12,20(e) similar to 6 ans, the "Set-builder notation" is intuitive.
+  - 12
+    $\{x|x\in A\vee(x\in A\wedge x\in B)\}=\{x|(x\in A\vee x\in A)\wedge(x\in A \vee x\in B)\}
+    =\{x|x\in A\}=A$
+  - here I only offer the 12 because the rest are really similar (in some way, no need to offer 12 at all).
+  - ans of 12 is a bit complex.
+- [ ] 14 by Venn
+- [x] 16 by definition with "Set-builder notation".
+- [ ] 18 
+  see ans based on $T/F$ pairs of (A,B).
+- [ ] 21
+  definition
+  a. the latter means "in A and in U but not in B"
+    since in A -> in U
+    so "in A but not in B", i.e. $A-B$
+- [x] 26,36,52 by definition
+  in A then remove C, then remove B or (B but in C) because the latter *has been removed* before.
+- [ ] 30 TODO what is A~D exactly?
+- [ ] 32
+  a(C is superset of A,B),b(C is the subset of A,B) not
+  c can based on the venn.
+- [ ] 38, i.e. $A\oplus B=A\cup B-(A\cap B)$
+- [ ] 44
+  b see the ans by using proof by cases
+- [ ] 46
+  - can be seen as truth table of *exclusive or* $\oplus$, so associative.
+  - [detailed](https://math.stackexchange.com/a/4343192/1059606)
+    keywords: In the first of these cases, symmetric under permutation (so just permute among $A,B,C$),since Δ is commutative (IMHO no need if already permutation)
+- [ ] 47 yes
+  ~~if $A\neq B$, then $\exists x\in A\notin B\to\{x|x\in A\vee x\in C\wedge\}$~~
+  - venn can be intuitive but not strict.
+  - ~~TODO strict proof~~
+    similar to the one exercise before
+    1. $\forall x\in A\wedge x\notin C\to x\in B\oplus C\to x\in B$
+    2. 
+      $$
+      \overline{A\oplus C}=\overline{B\oplus C},\\
+      \forall x(x\in A\wedge x\in C, \text{i.e. } x\in \overline{A\oplus C})\to x\in \overline{B\oplus C},
+      x\in C\to x\in B\cap C
+      $$
+    based on above $A=B$
+- [ ] 48
+  based on 46, 
+  the left means odd, i.e. either $A\oplus B$ or $C\oplus D$, then $A/B$ based on $C,D/\emptyset$, so odd
+  the right is similar.
+- [ ] 50 $|A\cup B|\le |A|+|B|$
+- [ ] 68 b,d T
+  - see ans 
+    allow duplicate.
+- [x] 70
+  a. ~~$A+B$~~ 
+    $A\cup B$
+  b. $A\cap B$
+  c. $B-A$
+  d. $A+B$
+- [ ] 72
+  a,b are trivial using available axioms
+  c $A\cup B=(A-B)\cup(A\cap B)\cup(B-A)$ then 
+    $A-B=\emptyset,B-A=\emptyset$
+  d similar to c where $|A-B|\ge 0$.
+  e 
+  - see ans 
+    c. need plus "if"
+      and it proves $p\wedge\neg q$ is impossible to be $F$, so Q.E.D.
+  - e. 
+    - [Steinhaus Transform proof](https://mathoverflow.net/a/210750) where [metric definition](https://en.wikipedia.org/wiki/Metric_space#Definition) 1~3 are trivial.
+      - where $\le$ numerator is based on applying $r$ and then metric definition 4 for $d(x,y)$.
+    - prove [the cardinality of symmetric difference](https://math.stackexchange.com/a/2128814/1059606) is metric 
+      based on exercise 48 conclusion, if $x\in B$, then in *even* sets
+      so $(A△B)△(B△C)=A△C$
+      - similar to above, definition 1~3 are trivial.
+    - "third observation above" then use [Steinhaus Transform](https://mathoverflow.net/a/18090).
+
 
 ---
 

@@ -7,6 +7,7 @@ CRLS and Discrete_Mathematicsand_Its_Applications book notes
     - Also many recommend [Discrete Mathematics with Applications](https://math.stackexchange.com/a/207527/1059606).
     - Also see this [comparison](https://math.stackexchange.com/a/1930644/1059606) among them.
   - and CRLS 4th with almost [full 3rd solutions](https://sites.math.rutgers.edu/~ajl213/CLRS/CLRS.html) although teachyourselfcs doesn't recommend for the complexity.
+    - it is enough to read it to [cover](https://qr.ae/pKA9wQ) the "data structures" although [too serious](https://qr.ae/pKA9b0).
 - More detailed see [this](https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md#algorithms-and-data-structures) related contexts.
 ## textbooks used by
 ### Discrete Mathematics with Applications
