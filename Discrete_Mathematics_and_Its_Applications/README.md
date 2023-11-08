@@ -29,30 +29,38 @@
   > the language you need to know to talk to DALL-E. Right now, it’s an informal language, not a formal language with a specification in *BNF* or some other metalanguage.
   BNF adds [much limitation](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form).
 ## 1
+### 1.1
 - [Atomic propositions p2](https://www.cs.cmu.edu/~emc/15414-f12/lecture/propositional_logic.pdf)
 - [logic](https://web.archive.org/web/20071218193638/https://www.utm.edu/research/iep/a/aristotl.htm#H5)
   > The heart of Aristotle's logic is the syllogism, the classic example of which is as follows
 - "p only if q" means only if q is true, p can be true.
-- compare TABLE 5 and TABLE 6, the "p if q" changes one `F` to `T`.
+- compare TABLE 5 and TABLE 6, the $p\leftrightarrow q$ changes one `F` to `T`.
+### 1.2
+### 1.3
 - p54
   $p\to q\equiv \neg p \vee q$ because they are both 3 false and 1 true property.
 - p57
   $Q_4$ implies all [anti-diagonals](https://www.geeksforgeeks.org/return-an-array-of-anti-diagonals-of-given-nn-square-matrix/)
 - p59
   - the duplicate numbers in each row is not taken in account because nine cells must not be duplicated if to assign 1 to 9 into them.
+### 1.4
 - the philosophy of mathematics -> [Four schools](https://plato.stanford.edu/entries/philosophy-mathematics/).
-- p77 similar to $\exists$ ones, why the 1st isn't true for $P(x)=F$.
+- p77 similar to $\exists$ ones, why the 1st ~~isn't true for $P(x)=F$~~ uses $\to$ instead of $\wedge$.
   See p75 caution
 - [disjunction](https://en.wikipedia.org/wiki/Logical_disjunction) means either one (i.e. disjunction) is true -> true.
   > Because this semantics allows a disjunctive formula to be true when both of its disjuncts are true, it is an *inclusive* interpretation of *disjunction*
   - [Disjunctive syllogism](https://en.wikipedia.org/wiki/Disjunctive_syllogism) based on $\vee$
     while [Hypothetical syllogism](https://en.wikipedia.org/wiki/Hypothetical_syllogism) based on $\to$
+### 1.5
+### 1.6
+### 1.7
 - p114
   since $p\to q\equiv (p\wedge \neg q)\to F$
   so *assume* $p=T,\neg q=T$ to result in $F$ then.
   Then $\neg q\to \neg p$ so contradiction -> $F$.
 - p115 
   The chain just uses $n$ instead of $n^2-n$ conditional statements.
+### 1.8
 - [tiling](https://en.wikipedia.org/wiki/Domino_tiling) checkerboards with dominoes
 - p122 limits the cases by 2 steps in the "EXAMPLE 5".
   1. to the final digit
@@ -63,6 +71,7 @@
     > However if there is a tiling for the board with a *missing upper left* corner, we can turn the picture by a 90 degrees to exhibit a tiling for a board with a *missing upper right* corner. Since that case was *already proved impossible*, the board with a missing upper left corner is also impossible to tile.
 ### TODO
 ## 2
+### 2.1
 - Epistemology [diff](https://qr.ae/pKAULY) logic
   > Epistemology, the study of how we know things and what counts as justification, tells us when we have a *false premise*
   - [Metaphysics](https://en.wikipedia.org/wiki/Metaphysics) -> What is it that exists.
@@ -71,6 +80,7 @@
   - TODO can't find when the "are identical" [removed](http://wikipedia.ramselehof.de/wikiblame.php?user_lang=en&lang=en&project=wikipedia&tld=org&article=Set+%28mathematics%29&needle=are+identical&skipversions=0&ignorefirst=0&limit=&offmon=11&offtag=5&offjahr=2023&searchmethod=int&order=asc&binary_search_inverse=on&user=) but at least find the relative time when it still exists.
     tool from [this](https://webapps.stackexchange.com/a/35914)
   - It is now "For example, {2, 4, 6} ..." showing that duplicate is allowed.
+### 2.2
 - "complement of B with respect to A" means 
   1. based on A, i.e. in A
   2. "complement of B" -> not in B
@@ -82,10 +92,16 @@
       then $\notin$ becomes $\bar{A}$, etc, to convert *back* to the set theory.
     - The use the *equivalence of proposition* $\equiv$ to prove the $\leftarrow$ if having proven $\rightarrow$.
   - example 11 just uses the $\equiv$ implicitly.
-- “one-to-one” means not mul-to-one, i.e. if *only use one in the domain*, then *no redundancy* in the *domain*.
-  "onto" means no redundancy in the *codomain*.
+### 2.3
+- p170 function definition implies no one-to-mul and part-to-total/part (i.e. must total-to-...).
+  “one-to-one” means not mul-to-one, i.e. if *only use one in the domain*, then *no redundancy* in the *domain*.
+  "onto" means no redundancy in the *codomain*, i.e. no total-to-part.
 - > A one-to-one correspondence is called invertible
-  only needs one-to-one to make "invertible" possible.
+  ~~only needs one-to-one to make "invertible" possible.~~
+  - one-by-one due to above p170 definition where $a$ as $f^{-1}$
+    image needs to be *unique* for each $b$. -> " more than one such a"
+  - onto due to "each element of A" which applying to $f^{-1}$ means "each element of B" in p170
+    -> "no such a"
 - Stirling's approximation proof
   - [1](#stirling)
   - [2](https://en.wikipedia.org/wiki/Stirling%27s_approximation#Alternative_derivations)
@@ -121,7 +137,12 @@
           - TODO 
             - "the maximum of the function at $x_{0}$ must be a "true" maximum 
             (the number ${\displaystyle \eta >0}$ must exist)"
-### [stirling]
+- see [miscs_ipynb] for related infos about quadrature.
+- compared with p173, 
+  partial function $\exists a\in A\exists b_1,b_2\in B,f(a)=b_1\wedge (f(a)=b_2\to b_1=b_2)$
+  total function $\forall a\in A\exists b_1,b_2\in B,f(a)=b_1\wedge (f(a)=b_2\to b_1=b_2)$ this is a bit contrary to the definition of the onto function, while the latter doesn't need uniqueness.
+- 
+#### [stirling]
 - Theorem 3.3
   - here assume that $t \ge -\sqrt{n}$ because 
     $t\le -\sqrt{n},f_n=0\to e^{-\frac{t^2}{2}}$ is trivial.
@@ -135,6 +156,7 @@
     - how [this](https://en.wikipedia.org/wiki/Stirling%27s_approximation#Derivation) uses trapezoid rule by skipping $lni,i\in[2,n-1]$.
     - how [this](https://faculty.washington.edu/moishe/hanoiex/counting/Stirling.pdf) skips $-log(n+1)$ in $d_n-d_{n+1}$
   - bell curve inflection points [analogy](https://flexbooks.ck12.org/cbook/ck-12-probability-and-statistics-concepts/section/7.5/related/lesson/density-curve-of-the-normal-distribution-adv-pst/#:~:text=The%20points%20at%20which%20the,deviation%20away%20from%20the%20mean.)
+### 2.4
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -734,3 +756,4 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
 [SOLUTIONS_7th]:./discrete-structure-solution-student39s-solutions-guide_compress_7th.pdf
 [stirling]:./papers/stirling.pdf
+[miscs_ipynb]:./miscs_snippets/miscs.ipynb
