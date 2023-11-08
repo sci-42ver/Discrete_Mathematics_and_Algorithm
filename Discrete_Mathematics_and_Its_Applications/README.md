@@ -82,6 +82,59 @@
       then $\notin$ becomes $\bar{A}$, etc, to convert *back* to the set theory.
     - The use the *equivalence of proposition* $\equiv$ to prove the $\leftarrow$ if having proven $\rightarrow$.
   - example 11 just uses the $\equiv$ implicitly.
+- “one-to-one” means not mul-to-one, i.e. if *only use one in the domain*, then *no redundancy* in the *domain*.
+  "onto" means no redundancy in the *codomain*.
+- > A one-to-one correspondence is called invertible
+  only needs one-to-one to make "invertible" possible.
+- Stirling's approximation proof
+  - [1](#stirling)
+  - [2](https://en.wikipedia.org/wiki/Stirling%27s_approximation#Alternative_derivations)
+    - [Laplace's method](https://en.wikipedia.org/wiki/Laplace%27s_method#Formal_statement_and_proof) applied for $M=n,f(x)=lnx-x$
+      1. $f'(x)=\frac{1}{x}-1,x>0$ so $f(1)=max$ which implies $f''(x)<0$
+      - in [this](https://en.wikipedia.org/wiki/Laplace%27s_method#General_theory_of_Laplace's_method), inspired by "Formal statement and proof",
+        ${\displaystyle \int _{a}^{b}e^{Mf(x)}\,dx\approx {\sqrt {\frac {2\pi }{M|f''(x_{0})|}}}e^{Mf(x_{0})}{\text{ as }}M\to \infty .}$
+        is due to:
+        by using $y=\sqrt{M|f''(x_0)|}(x-x_0)$, since 
+        $a-x_0\neq 0,b-x_0\neq 0$
+        so $\underset{M\to\infin}{\lim}\int_{\sqrt{M|f''(x_0)|}(a-x_0)}^{\sqrt{M|f''(x_0)|}(b-x_0)}\frac{e^{-\frac{y^2}{2}}}{\sqrt{M|f''(x_0)|}}dy=\underset{M\to\infin}{\lim}\int_{-\infin}^{\infin}\frac{e^{-\frac{y^2}{2}}}{\sqrt{M|f''(x_0)|}}dy=\underset{M\to\infin}{\lim}\sqrt{\frac{2\pi}{M|f''(x_0)|}}$
+        - the rest is trivial.
+      - the bound proof
+        is based on 
+        1. the limit boundness and continuity, so ${\displaystyle f''(c)\geq f''(x_{0})-\varepsilon .}$ 
+          or 
+          - ${\displaystyle f''(x_{0})+\varepsilon <0.}$ which then ensures $f(x)\le f(x_0)$ based on $f'(x_0)=0$
+            then ${\displaystyle |x-x_{0}|\geq \delta ,f''(x_{0})<0}\to{\displaystyle f(x)\leq f(x_{0})-\eta }$
+        2. similar to the above inspiration,
+          substitute ${\displaystyle y={\sqrt {n(-f''(x_{0})+\varepsilon )}}(x-x_{0}).}$
+        3. the rest is trivial for $a,b\neq\infin$
+           1. $\underset{n\to\infin}{\lim}e^{-\eta n}\to 0$ is the dominant item in the limit.
+        4. if 
+          - > Note that the above proof obviously fails
+            - because $b-a=\infin$ which is independent from $n$, so $\underset{n\to\infin}{\lim}(b-a)e^{-\eta n}$ is undetermined.
+          - sufficient but *not necessary* assumption ${\displaystyle \int _{a}^{b}e^{nf(x)}\,dx<\infty ,n=1}$
+            see above "in [this]"
+            - $e^{R+Mf(x_0)}$ is factor, it can be ignored when compared with $\infin$
+              then the rest is just $\sqrt{\frac{2\pi}{|f''(x_0)|}}$
+            - > but it is enough to demand that the integral is finite for some ${\displaystyle n=N.}$
+              
+              i.e. use $e^{-(n-N)\eta}\int_{a}^{b}e^{Nf(x)}dx$ where $0*A=0,A=\int_{a}^{b}e^{Nf(x)}\neq\infin$
+          - TODO 
+            - "the maximum of the function at $x_{0}$ must be a "true" maximum 
+            (the number ${\displaystyle \eta >0}$ must exist)"
+### [stirling]
+- Theorem 3.3
+  - here assume that $t \ge -\sqrt{n}$ because 
+    $t\le -\sqrt{n},f_n=0\to e^{-\frac{t^2}{2}}$ is trivial.
+  - [dominated convergence theorem](https://en.wikipedia.org/wiki/Dominated_convergence_theorem#Statement)
+    needs 2 predicates
+    1. the sequence converges pointwise to a function f
+    2. dominated by some integrable function
+    - TODO Lebesgue integral
+      - why $\int_S \limsup_{n\to\infty} |f-f_n|\,d\mu = 0,$
+  - TODO
+    - how [this](https://en.wikipedia.org/wiki/Stirling%27s_approximation#Derivation) uses trapezoid rule by skipping $lni,i\in[2,n-1]$.
+    - how [this](https://faculty.washington.edu/moishe/hanoiex/counting/Stirling.pdf) skips $-log(n+1)$ in $d_n-d_{n+1}$
+  - bell curve inflection points [analogy](https://flexbooks.ck12.org/cbook/ck-12-probability-and-statistics-concepts/section/7.5/related/lesson/density-curve-of-the-normal-distribution-adv-pst/#:~:text=The%20points%20at%20which%20the,deviation%20away%20from%20the%20mean.)
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -600,7 +653,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - based on p147 where the *property*, i.e. $x\notin x$ here, may "leads to paradoxes".
 - [ ] 51 $C_n^{i},i=1\sim n$ selection.
 ### 2.2
-- 2~4,22~24,28,34,40~42,54~66,74 skipped
+- 2~4,22~24,28,34,40~42,54~66,74\\\\\\\\\\\\\\\\\\\\\\\\\\ skipped
 - [ ] 6 the membership table is more intuitive where $\emptyset$ always corresponds to $F$.
 - [x] 8,10,12,20(e) similar to 6 ans, the "Set-builder notation" is intuitive.
   - 12
@@ -680,3 +733,4 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
 [SOLUTIONS_7th]:./discrete-structure-solution-student39s-solutions-guide_compress_7th.pdf
+[stirling]:./papers/stirling.pdf
