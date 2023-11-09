@@ -185,6 +185,10 @@
   - `\makebox` [unavailable](https://tex.stackexchange.com/a/6840)
     Also [`\settowidth`](https://tex.stackexchange.com/a/37294)
     and [`\parbox`](https://tex.stackexchange.com/a/269950)
+# QA miscs
+- see the self-designed [template](./QA_template/template.md).
+- [mathjax](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference)
+- search [help](https://math.stackexchange.com/search)
 # Exercises
 I only read even ones because [they][SOLUTIONS_8th] have detailed explanation as [7th][SOLUTIONS_7th] and also odd ones are very similar to even ones at least for 1.1 (except for some cases that even ones are a little hard whether having asterisk marks or not).
 I also read the asterisked ones.
@@ -770,7 +774,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       - similar to above, definition 1~3 are trivial.
     - "third observation above" then use [Steinhaus Transform](https://mathoverflow.net/a/18090).
 ### 2.3
-- 4~6,10,18,28,30~32,38,44 skipped
+- 4~6,10,18,28,30~32,38,44,60~66(64,66 notice the domain) skipped
 - [x] 2
   a. one-to-mul, so not
   b. yes
@@ -903,6 +907,33 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [x] 54
   a. by definition
   b. similar to a
+- [ ] 58
+  $\lceil a\rceil\le n$
+  - see the ans
+    it is "the number of integers n" instead of "integers n".
+    - after 1st hinted by the ans.
+      the integers are $\{x|\lceil a\rceil\ge x\le\lfloor b\rfloor\}$, so 
+      $\lfloor b\rfloor-\lceil a\rceil+1$
+- [x] 68
+  first draw $\lceil x\rceil$ then move up based on $\lfloor\frac{x}{2}\rfloor$
+- [x] 70
+  a,b similar to the methods to scale/move function along the axis learned in the senior high school.
+  c,d draw original function and then transform it to splitted straight lines
+  e $\forall k\in\mathbf{N},\frac{x}{2}=k\Rightarrow f(x)=k^2\\\frac{x}{2}\in(k,k+1)\Rightarrow f(x)=k(k+1)$
+  f similar to e
+  g based on one example before, $f(x)=2\lceil\frac{x}{2}\rceil$ then similar to b
+- [ ] 72
+  - notice we need to prove both $f\circ g$ and $g\circ f$ because they are not always same 
+    - although for the inverse function they must be same by definition because let $g=f^{-1}$ 
+      and applying the $f\circ f^{-1}$ with get the the other equation.
+      but due to ["Begging the question"](https://en.wikipedia.org/wiki/Begging_the_question) we can't use it.
+      > when an argument's premises *assume* the truth of the *conclusion*
+    - based on [this](https://math.stackexchange.com/a/1234668/1059606) which is got in the QA recommendation when [asking](https://math.stackexchange.com/questions/ask) the question "Why does the proof of inverse function need the both ordering, i.e. $f\circ f^{-1}$?" but not after appending "and $f^{-1}\circ f$", 
+      both $(f\circ g)\circ (g^{-1}\circ f^{-1})$ and $(g^{-1}\circ f^{-1})\circ (f\circ g)$ are needed to be proven because 
+      $(f^{-1}\circ f)(x)=x$ while $(f\circ f^{-1})(1)=2$ (the above example can be generalized to $\mathbb{R}$ domain with added $f^{-1}(x)=x-1,x\neq 1$).
+  - use [associative property](https://math.stackexchange.com/a/1267985/1059606) same as the ans
+    - the ans uses the nested function property.
+- [ ] 
 
 ---
 
