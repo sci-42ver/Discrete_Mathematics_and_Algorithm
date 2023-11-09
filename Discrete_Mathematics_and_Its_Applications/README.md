@@ -119,7 +119,7 @@
         1. the limit boundness and continuity, so ${\displaystyle f''(c)\geq f''(x_{0})-\varepsilon .}$ 
           or 
           - ${\displaystyle f''(x_{0})+\varepsilon <0.}$ which then ensures $f(x)\le f(x_0)$ based on $f'(x_0)=0$
-            then ${\displaystyle |x-x_{0}|\geq \delta ,f''(x_{0})<0}\to{\displaystyle f(x)\leq f(x_{0})-\eta }$
+            then ${\displaystyle |x-x_{0}|\geq \delta ,f''(x_{0})<0}\Rightarrow{\displaystyle f(x)\leq f(x_{0})-\eta }$
         2. similar to the above inspiration,
           substitute ${\displaystyle y={\sqrt {n(-f''(x_{0})+\varepsilon )}}(x-x_{0}).}$
         3. the rest is trivial for $a,b\neq\infin$
@@ -139,13 +139,13 @@
             (the number ${\displaystyle \eta >0}$ must exist)"
 - see [miscs_ipynb] for related infos about quadrature.
 - compared with p173, 
-  partial function $\exists a\in A\exists b_1,b_2\in B,f(a)=b_1\wedge (f(a)=b_2\to b_1=b_2)$
-  total function $\forall a\in A\exists b_1,b_2\in B,f(a)=b_1\wedge (f(a)=b_2\to b_1=b_2)$ this is a bit contrary to the definition of the onto function, while the latter doesn't need uniqueness.
+  partial function $\exists a\in A\exists b_1,b_2\in B,f(a)=b_1\wedge (f(a)=b_2\Rightarrow b_1=b_2)$
+  total function $\forall a\in A\exists b_1,b_2\in B,f(a)=b_1\wedge (f(a)=b_2\Rightarrow b_1=b_2)$ this is a bit contrary to the definition of the onto function, while the latter doesn't need uniqueness.
 - 
 #### [stirling]
 - Theorem 3.3
   - here assume that $t \ge -\sqrt{n}$ because 
-    $t\le -\sqrt{n},f_n=0\to e^{-\frac{t^2}{2}}$ is trivial.
+    $t\le -\sqrt{n},f_n=0\Rightarrow e^{-\frac{t^2}{2}}$ is trivial.
   - [dominated convergence theorem](https://en.wikipedia.org/wiki/Dominated_convergence_theorem#Statement)
     needs 2 predicates
     1. the sequence converges pointwise to a function f
@@ -168,6 +168,23 @@
   > John also had the benefit of an excellent *public library* in New Bedford which even possessed *journals* such as the Journal of the American Chemical Society and the Transactions of the American Mathematical Society. He was able therefore to take his education to a high level *before* entering university
 # latex miscs
 - find symbol codes by [detexify](http://detexify.kirelabs.org/classify.html) from [this](https://tex.stackexchange.com/a/450709)
+- align math proof with [comments](https://tex.stackexchange.com/a/47691)
+- [qed](https://stackoverflow.com/a/1910526/21294350) [location](https://tex.stackexchange.com/a/34018) to the [default](https://tex.stackexchange.com/a/564722) [end](https://tex.stackexchange.com/a/144984)
+- nice [emptyset](https://tex.stackexchange.com/a/22799)
+- arrow $\Rightarrow$ is [preferred](https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols) to be separate from $\rightarrow$ used in the conditional statement although [this](https://www.actual.world/resources/tex/doc/Proofs.pdf) doesn't use the former and p173 also use $\to$.
+  So in the following exercises, when using the strict abstract propositional logic, I probably still use the $\to$ instead of $\Rightarrow$.
+  Also [see](https://math.stackexchange.com/q/711817/1059606)
+- text [above](https://tex.stackexchange.com/a/103993) arrow
+- when $\begin{aligned}$ is [preferred](https://tex.stackexchange.com/a/95408)
+  to $\begin{aligned*}$
+- "implies" arrow [location](https://math.stackexchange.com/questions/711817/mathematical-notation-arrow-sign)
+- `&` in `\aligned` is to [alternate](https://tex.stackexchange.com/a/159724) between left-aligned and right-aligned, so `&&` will make alternate *again*, becoming the original one.
+## katex
+- available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
+- set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
+  - `\makebox` [unavailable](https://tex.stackexchange.com/a/6840)
+    Also [`\settowidth`](https://tex.stackexchange.com/a/37294)
+    and [`\parbox`](https://tex.stackexchange.com/a/269950)
 # Exercises
 I only read even ones because [they][SOLUTIONS_8th] have detailed explanation as [7th][SOLUTIONS_7th] and also odd ones are very similar to even ones at least for 1.1 (except for some cases that even ones are a little hard whether having asterisk marks or not).
 I also read the asterisked ones.
@@ -293,16 +310,16 @@ I also read the asterisked ones.
   d. $\neg (\exists xC(x)\wedge D(x)\wedge F(x))$
   e. $\exists xC(x)\vee D(x)\vee F(x)$ This is same as the answer.
 - [x] 18
-  $\exists \to \vee$
-  $\forall \to \wedge$
+  $\exists \Rightarrow \vee$
+  $\forall \Rightarrow \wedge$
   $\neg$ just assign to each predicate
 - [x] 20 
   a,b similar to 18
   c~e see the ans is enough.
 - [x] 24
   same as the examples,
-  $\forall \to \to$ to exclude the result as the condition
-  $\exists \to \wedge$ to include the result as the condition -> b,c,e
+  $\forall \Rightarrow \to$ to exclude the result as the condition
+  $\exists \Rightarrow \wedge$ to include the result as the condition -> b,c,e
 - [ ] 46 yes based on 45.
   45 is by definition.
   - 45 ans
@@ -382,14 +399,17 @@ I also read the asterisked ones.
 - [x] 18 why $S(M,M)$
 - [ ] 22
   based on $p\to q\equiv \neg p\vee q$ based on the *unique false* result
-
-  $\forall x(Q(x)\to \neg R(x))$ =(Hypothetical syllogism)>
-  $\to \neg S(x)$ => 
-  $\forall x\neg Q(x)\vee \neg S(x)$
-  
-  similarly, $\forall x\neg P(x)\vee S(x)$
-  then =("Resolution")> $\forall x\neg P(x)\vee\neg Q(x)$ => 
-  $\forall xP(x)\to \neg Q(x)$
+  $$
+  \newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{7cm}}}}}
+  \begin{align*}
+  \neg \exists x(Q(x)\wedge  R(x))&\myrightarrow{\neg(T\wedge T)=F\Rightarrow T\to \neg T=F}\forall x(Q(x)\to \neg R(x))\\
+  \text{with }\forall x(\neg R(x)\to \neg S(x))&\myrightarrow{\text{Hypothetical syllogism}}\forall x(Q(x)\to \neg S(x))\\
+  &\myrightarrow{\begin{align*}\text{only }(T,T),Q(x)\to \neg S(x)=F\\\Rightarrow \text{only }(T,T),\neg Q(x)\vee \neg S(x)=F\end{align*}}\forall x\neg Q(x)\vee \neg S(x)\\
+  \text{similarly,} \forall x\neg P(x)\vee S(x)&\\
+  \text{then} &\myrightarrow{\text{Resolution}}\forall x\neg P(x)\vee\neg Q(x)\\
+  &\myrightarrow{}\forall xP(x)\to \neg Q(x)
+  \end{align*}
+  $$
 - [x] 24 3->4
 - [ ] 26 by definition.
 - [ ] 28 similar to 26
@@ -442,7 +462,7 @@ Most of them are similar to proofs in the junior/senior high school.
   here $n=a^2,n+2=b^2$
   then $2=(a+b)(a-b)$
   $a+b=2\\ a-b=1$ 
-  so $a=\frac{3}{2},b=\frac{1}{2}\to a,b\notin \mathbb{Z}$, 
+  so $a=\frac{3}{2},b=\frac{1}{2}\Rightarrow a,b\notin \mathbb{Z}$, 
   obviously $F$
   - Also see ans where use the *consecutive* square to prove.
 - [ ] 12
@@ -484,7 +504,7 @@ Most of them are similar to proofs in the junior/senior high school.
 - [ ] 18,20,22 contradiction. 
   - 18 similar to example 13
     - also see the ans.
-  - 20 if there is 2 then $r-a<\frac{1}{2},(a+1)-r<\frac{1}{2}\to1<1$
+  - 20 if there is 2 then $r-a<\frac{1}{2},(a+1)-r<\frac{1}{2}\Rightarrow1<1$
   - 22 similar to 20 $\lfloor x\rfloor$ 
     - latex [see](https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols)
 - [ ] 27 use one invariant.
@@ -612,8 +632,8 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   e. $\exists x\neg Q(x)$
 - [x] 22 same as one example, i.e. one domain with only two distinct values.
 - [ ] 24 ~~$\forall y\\(\forall x_3 G(x_3, y))\to\exists x_1\exists x_2 G(x_1, y)\wedge G(x_2, y)\wedge ((x_3=x_1)\vee(x_3=x_2))\wedge(x_1\neq x_2)$~~
-  (notice "three" instead of "two" hinted by the ans)
-  so $\forall y\\(\forall x_4 G(x_4, y))\to\overset{3}{\underset{i=1}{\exists x_i}}\overset{3}{\underset{i=1}{\bigwedge}} G(x_i, y) \wedge (\overset{3}{\underset{i=1}{\bigvee}}(x_4=x_i))\wedge(x_1\neq x_2\neq x_3)$
+  - (notice "three" instead of "two" hinted by the ans)
+    so $\forall y(\forall x_4 G(x_4, y)\to\overset{3}{\underset{i=1}{\exists x_i}}\overset{3}{\underset{i=1}{\bigwedge}} G(x_i, y) \wedge (\overset{3}{\underset{i=1}{\bigvee}}(x_4=x_i))\wedge(x_1\neq x_2\neq x_3))$
   - "No one has more than three" doesn't mean "three" exactly.
 - [x] 26 a,b,c T
 - [ ] 28 by definition.
@@ -642,11 +662,11 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - 2~6,10,14~18,22,34~38,46 skipped
 - [ ] 8 notice self.
 - [ ] 20
-  $A=\{\emptyset\},B=\{\emptyset,\{\emptyset\}\}$
+  $A=\{\varnothing\},B=\{\varnothing,\{\varnothing\}\}$
   - a little complex
 - [ ] 24 by having the same singleton sets.
 - [x] 26 a,b,d are.
-  - a should be $\{\emptyset\}$
+  - a should be $\{\varnothing\}$
 - [x] 28 
   $$
   \forall a\in A\to a\in C\\
@@ -655,7 +675,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   \forall (a,b)\in A\times B\to (a,b)\in C\times D
   $$
 - [x] 30 courses taught by each professor.
-- [ ] 32 $A=\emptyset;B=\emptyset$
+- [ ] 32 $A=\varnothing;B=\varnothing$
   - should be "or"
 - [ ] 40
   i.e. since nonempty for $A,B$ (hinted by the ans)
@@ -676,7 +696,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 51 $C_n^{i},i=1\sim n$ selection.
 ### 2.2
 - 2~4,22~24,28,34,40~42,54~66,74\\\\\\\\\\\\\\\\\\\\\\\\\\ skipped
-- [ ] 6 the membership table is more intuitive where $\emptyset$ always corresponds to $F$.
+- [ ] 6 the membership table is more intuitive where $\varnothing$ always corresponds to $F$.
 - [x] 8,10,12,20(e) similar to 6 ans, the "Set-builder notation" is intuitive.
   - 12
     $\{x|x\in A\vee(x\in A\wedge x\in B)\}=\{x|(x\in A\vee x\in A)\wedge(x\in A \vee x\in B)\}
@@ -720,7 +740,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     based on above $A=B$
 - [ ] 48
   based on 46, 
-  the left means odd, i.e. either $A\oplus B$ or $C\oplus D$, then $A/B$ based on $C,D/\emptyset$, so odd
+  the left means odd, i.e. either $A\oplus B$ or $C\oplus D$, then $A/B$ based on $C,D/\varnothing$, so odd
   the right is similar.
 - [ ] 50 $|A\cup B|\le |A|+|B|$
 - [ ] 68 b,d T
@@ -735,7 +755,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 72
   a,b are trivial using available axioms
   c $A\cup B=(A-B)\cup(A\cap B)\cup(B-A)$ then 
-    $A-B=\emptyset,B-A=\emptyset$
+    $A-B=\varnothing,B-A=\varnothing$
   d similar to c where $|A-B|\ge 0$.
   e 
   - see ans 
@@ -749,7 +769,133 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       so $(A△B)△(B△C)=A△C$
       - similar to above, definition 1~3 are trivial.
     - "third observation above" then use [Steinhaus Transform](https://mathoverflow.net/a/18090).
-
+### 2.3
+- 4~6,10,18,28,30~32,38,44 skipped
+- [x] 2
+  a. one-to-mul, so not
+  b. yes
+  c. $n=\pm 2$ no one corresponding image.
+- [ ] 8
+  g. $\lceil\frac{1}{2}\rceil$ (here the $\frac{1}{2}$ inside the $\lfloor\ldots\rfloor$ can be dropped)
+  h. similar to g, $\lceil\frac{1}{2}\rceil+\lfloor\frac{1}{2}\rfloor=1$
+  - the h is $\lceil\ldots\rceil$ so should be $+1$
+- [x] 12 i.e. whether monotonic
+- [ ] 14 let one variable be 0, and whether the unary function onto.
+  a,c,d are
+  - See ans d
+- [x] 16 a,b
+- [ ] 20 see ans
+  c. just swap.
+- [x] 22
+  a,d are
+  - see ans by the inverse function.
+- [x] 24 definition.
+- [ ] 26 
+  a. $\ldots<\ldots\to\ldots=\ldots$
+  b. function may equal somewhere.
+  - see ans for the strict proof
+- [ ] 34
+  a. contradiction
+    if f not then also $f(k),k=g(x)$, i.e. $f\circ g$
+  b. similar to a
+  c. 
+    1. if g onto, then $f\circ g$
+  - see ans for c
+    here let -> $\forall$.
+    - a,b is direct proof different from above.
+  - here c 
+    g is onto -> f is onto
+    - intuitively, A can map to *all* B, if f is not onto, then B can't map to all C,
+      also A can't map to all C, so $f\circ g$ is not onto, contradiction.
+    - this doesn't need g is onto at all. See a ...
+- [x] 36
+  no need for f to be one-to-one
+  $$
+  \begin{align*}
+  g(x_1)=g(x_2) &\Rightarrow\\
+  f(g(x_1))=f(g(x_2)) &\Rightarrow &&&& f\circ g\ \text{are one-to-one}\\
+  x_1=x_2 &
+  \end{align*}
+  $$
+- [x] 37
+  $$
+  \begin{align*}
+  &&&\text{let } g:A\to B,\forall y\in B,f(y)=k=f\circ g(x)&&&&&&f\circ g,f\ \text{are onto}&\\
+  \overset{?}{\Rightarrow}&&&y=g(x)&&&&&&\text{this = needs f to be one-to-one}&
+  \end{align*}
+  $$
+  - intuitively
+    draw [map graph][2_3_37]
+  - does $g,f\circ f\to f$?
+    similar to 36, here the g is also one redundant predicate.
+    $$
+    \begin{align*}
+    \text{let } f:B\to C,&g:A\to B\\
+    \forall z\in C\exists x\in A,&g(x)=y,f\circ g(x)=z\\
+    \Rightarrow&\exists y\in B f(y)=z. \tag*{$\blacksquare$}
+    \end{align*}
+    $$
+- [ ] 40
+  $f\circ g(x)=a(cx+d)+b=acx+ad+b$
+  $g\circ f(x)=c(ax+b)+d=acx+bc+d$
+  so necessary and sufficient: $b=d,ad=bc$
+  - see the ans
+- [ ] 42
+  a. based on definition 4
+  $$
+  \begin{align*}
+  f(S\bigcup T)=&\{f(x)|x\in(S\bigcup T)\}\\
+  =&\{f(x)|x\in S\vee x\in T\}\\
+  =&\{f(x)|x\in S\}\bigcup\{f(x)|x\in T\}\\
+  =&f(S)\bigcup f(T)
+  \end{align*}
+  $$
+  b. similar to above but
+  - $\{f(x)|x\in S\wedge x\in T\}\neq \{f(x)|x\in S\}\bigcap\{f(x)|x\in T\}$
+    because maybe 
+    $$
+    \exists s\in S,\exists t\in T,s,t\notin S\bigcap T\Rightarrow (f(s)=f(t))\wedge
+    (\forall k\in S\bigcap T,f(k)\neq f(s))
+    $$
+  - then $\subseteq$ is by definition
+  - see ans for the detailed proof
+- [ ] 46
+  a. similar to 42, here only show one side.
+  $$
+  \begin{align*}
+  &\text{suppose }b\in S\bigcup T,f^{-1}(b)=a\\
+  &b\in S\to a\in f^{-1}(S)\quad\text{or}\quad b\in T \to a\in f^{-1}(T)\\
+  \Rightarrow& a\in f^{-1}(S)\bigcup f^{-1}(T)
+  \end{align*}
+  $$
+  b. all "if and only if" are by definition.
+    compared with 42, here inverse *back* -> *break* $\bigcap$ -> inverse -> $\bigcap$
+    but 42 can't do something similar to this.
+    - intuitively 
+      use one example,
+      $$
+      S=\{1,2\},T=\{2,3\},f(0)=1,f(1)=f(2)=2,f(3)=3\\
+      \Rightarrow f^{-1}(S)={0,1,2},f^{-1}(T)={1,2,3},f^{-1}(S\bigcap T)={1,2}
+      $$
+      - algebraical proof:
+        $$
+        \newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{7cm}}}}}
+        \begin{align*}
+        & & f^{-1}(S)&=&&f^{-1}((S\bigcap T)\bigcup(S\bigcap \overline{T})),\text{let }A=(S\bigcap T)\bigcup(S\bigcap \overline{T})\\
+        & & f^{-1}(T)&=&&f^{-1}((S\bigcap T)\bigcup(\overline{S}\bigcap T)),\text{let }B=(S\bigcap T)\bigcup(T\bigcap \overline{S})\\
+        &\myrightarrow{\text{use (a) result}}& f^{-1}(S)\bigcap f^{-1}(T)&=&&(f^{-1}(S\bigcap T)\bigcup f^{-1}(S\bigcap \overline{T}))\bigcup(f^{-1}(S\bigcap T)\bigcup f^{-1}(T\bigcap \overline{S})),\\
+        & & (\overline{S}\bigcap T)\bigcap(\overline{S}\bigcap T)&=&&(\varnothing)\bigcap(\varnothing)\\
+        &\myrightarrow{\text{due to function mapping any preimage to one \textbf{unique} image}}& (f^{-1}(\overline{S}\bigcap T))\bigcap(f^{-1}(\overline{T}\bigcap S))&=&&\varnothing\\
+        &\text{similarly }& (f^{-1}(\overline{S}\bigcap T))\bigcap(f^{-1}(T\bigcap S))&=&&\varnothing\\
+        &\text{and }& (f^{-1}(\overline{T}\bigcap S))\bigcap(f^{-1}(T\bigcap S))&=&&\varnothing,\\
+        &\text{then due to only \textbf{one} of four combinations between } A \text{ and } B& f^{-1}(S)\bigcap f^{-1}(T)&=&&f^{-1}(S\bigcap T)\tag*{$\blacksquare$}
+        \end{align*}
+        $$
+- [x] 48,50 prove by case
+- [x] 52,56 similar to one example $n\le x\lt n+1$
+- [x] 54
+  a. by definition
+  b. similar to a
 
 ---
 
@@ -757,3 +903,6 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 [SOLUTIONS_7th]:./discrete-structure-solution-student39s-solutions-guide_compress_7th.pdf
 [stirling]:./papers/stirling.pdf
 [miscs_ipynb]:./miscs_snippets/miscs.ipynb
+
+<!-- exercise help pdf -->
+[2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
