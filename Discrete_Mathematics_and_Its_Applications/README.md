@@ -877,20 +877,27 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       S=\{1,2\},T=\{2,3\},f(0)=1,f(1)=f(2)=2,f(3)=3\\
       \Rightarrow f^{-1}(S)={0,1,2},f^{-1}(T)={1,2,3},f^{-1}(S\bigcap T)={1,2}
       $$
-      - algebraical proof:
-        $$
-        \newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{7cm}}}}}
-        \begin{align*}
-        & & f^{-1}(S)&=&&f^{-1}((S\bigcap T)\bigcup(S\bigcap \overline{T})),\text{let }A=(S\bigcap T)\bigcup(S\bigcap \overline{T})\\
-        & & f^{-1}(T)&=&&f^{-1}((S\bigcap T)\bigcup(\overline{S}\bigcap T)),\text{let }B=(S\bigcap T)\bigcup(T\bigcap \overline{S})\\
-        &\myrightarrow{\text{use (a) result}}& f^{-1}(S)\bigcap f^{-1}(T)&=&&(f^{-1}(S\bigcap T)\bigcup f^{-1}(S\bigcap \overline{T}))\bigcup(f^{-1}(S\bigcap T)\bigcup f^{-1}(T\bigcap \overline{S})),\\
-        & & (\overline{S}\bigcap T)\bigcap(\overline{S}\bigcap T)&=&&(\varnothing)\bigcap(\varnothing)\\
-        &\myrightarrow{\text{due to function mapping any preimage to one \textbf{unique} image}}& (f^{-1}(\overline{S}\bigcap T))\bigcap(f^{-1}(\overline{T}\bigcap S))&=&&\varnothing\\
-        &\text{similarly }& (f^{-1}(\overline{S}\bigcap T))\bigcap(f^{-1}(T\bigcap S))&=&&\varnothing\\
-        &\text{and }& (f^{-1}(\overline{T}\bigcap S))\bigcap(f^{-1}(T\bigcap S))&=&&\varnothing,\\
-        &\text{then due to only \textbf{one} of four combinations between } A \text{ and } B& f^{-1}(S)\bigcap f^{-1}(T)&=&&f^{-1}(S\bigcap T)\tag*{$\blacksquare$}
-        \end{align*}
-        $$
+      - compared with 42(b), 
+        - here the function inherent property doesn't allow the **one-to-mul** mapping, so 
+          $\nexists a\in S\cap\overline{T},b\in T\cap\overline{S},f^{-1}(a)=f^{-1}(b)$
+          then nothing added to $f^{-1}(S\bigcap T)$ based on $f^{-1}(S)\bigcap f^{-1}(T)$
+        - the 42(b) allows **mul-to-one** mapping, so 
+          $\exists a\in S\cap\overline{T},b\in T\cap\overline{S},f(a)=f(b)$
+          then maybe something added to $f(S\bigcap T)$ based on $f(S)\bigcap f(T)$
+    - algebraical proof:
+      $$
+      \newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{7cm}}}}}
+      \begin{align*}
+      & & f^{-1}(S)&=&&f^{-1}((S\bigcap T)\bigcup(S\bigcap \overline{T})),\text{let }A=(S\bigcap T)\bigcup(S\bigcap \overline{T})\\
+      & & f^{-1}(T)&=&&f^{-1}((S\bigcap T)\bigcup(\overline{S}\bigcap T)),\text{let }B=(S\bigcap T)\bigcup(T\bigcap \overline{S})\\
+      &\myrightarrow{\text{use (a) result}}& f^{-1}(S)\bigcap f^{-1}(T)&=&&(f^{-1}(S\bigcap T)\bigcup f^{-1}(S\bigcap \overline{T}))\bigcup(f^{-1}(S\bigcap T)\bigcup f^{-1}(T\bigcap \overline{S})),\\
+      & & (\overline{S}\bigcap T)\bigcap(\overline{S}\bigcap T)&=&&(\varnothing)\bigcap(\varnothing)\\
+      &\myrightarrow{\text{due to function mapping any preimage to one \textbf{unique} image}}& (f^{-1}(\overline{S}\bigcap T))\bigcap(f^{-1}(\overline{T}\bigcap S))&=&&\varnothing\\
+      &\text{similarly }& (f^{-1}(\overline{S}\bigcap T))\bigcap(f^{-1}(T\bigcap S))&=&&\varnothing\\
+      &\text{and }& (f^{-1}(\overline{T}\bigcap S))\bigcap(f^{-1}(T\bigcap S))&=&&\varnothing,\\
+      &\text{then due to only \textbf{one} of four combinations between } A \text{ and } B& f^{-1}(S)\bigcap f^{-1}(T)&=&&f^{-1}(S\bigcap T)\tag*{$\blacksquare$}
+      \end{align*}
+      $$
 - [x] 48,50 prove by case
 - [x] 52,56 similar to one example $n\le x\lt n+1$
 - [x] 54
