@@ -933,7 +933,53 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       $(f^{-1}\circ f)(x)=x$ while $(f\circ f^{-1})(1)=2$ (the above example can be generalized to $\mathbb{R}$ domain with added $f^{-1}(x)=x-1,x\neq 1$).
   - use [associative property](https://math.stackexchange.com/a/1267985/1059606) same as the ans
     - the ans uses the nested function property.
-- [ ] 
+- [x] 74 by contradiction
+  - if not one-to-one but onto, then "not one-to-one" means $\exists a_1,a_2\in A,\exists b\in B,f(a_1)=f(a_2)=b$, then with $|A|=|B|$, it is impossible to be onto 
+    because even the rest except $a_1,a_2$ is one-to-one, *one* element in $B$ is not onto.
+    - this means same as the ans which is similar to the following $|A|<|B|$.
+  - if one-to-one but not onto, then $|A|<|B|$ -> contradiction.
+- [x] 76
+  a. T definition based on $n\lt n\le n+1$
+  b. F $0.5+0.5$
+  c. T $n\le\frac{x}{2}\le n+1$ then two cases for n odd($\frac{n+1}{2}$)/even($\frac{n+2}{2}$), $\blacksquare$
+    - the ans, here assume use $n'$ in ans
+      1. $k=0$ corresponds to odd $n=2n'-1$
+      2. $0\lt k\le 2$ corresponds to even $n=2n'$
+      3. $2\lt k\lt 4$ corresponds to odd $n=2n'+1$
+  d. F let 
+    $x=(n+1)^2-\epsilon,\epsilon\in[0,1)$
+    the right is $n$
+    while the left is $n+1$
+  e. three different cases after using "without loss of generality".
+    - see the ans to consider *only* the exceeding cases.
+- [x] 78 three cases, here only show one, the rest is similar.
+  $n\le x\lt n+\frac{1}{3}$ no right terms round up -> 0, also for the left.
+- [ ] 80 
+  let "the domain of definition" be $S$
+  a. "u if f is *undefined* at a." by definition -> the corresponding elements in $A$ are in $A-S$ -> partial function
+  - The ans shows $f^{*}$ is one *total* function although the question says "can be viewed".
+- [ ] 81
+  a. index function 
+  - see cardinality of a set with [**repeating**](https://math.stackexchange.com/a/391522/1059606) elements
+  b. make both sets as specific tuples, and index them.
+  - see the ans for strict maths description where
+    1. bijection is due to one-to-one (the conclusion to prove) and onto ($\{1, 2, \ldots , m\}$ is the entire codomain)
+    2. bijection implies the existence of $g^{-1}$
+- [ ] 82
+  - ~~does "proper" mean infinite?~~
+  - see the ans
+    a. just prove not finite -> infinite.
+      TODO [Pigeonhole principle](https://builtin.com/data-science/pigeonhole-principle) means mul-to-one but here the proper subset to the universal set means onto impossible but not for one-to-one which doesn't allow mul-to-one.
+      > Case A is the case illustrating the essence of the pigeonhole principle
+      
+    b. just define one [choice function](https://en.wikipedia.org/wiki/Axiom_of_choice#Statement) (i.e. self-mapping function)
+    $$
+    f(a_i) = a_{i+1}\\
+    f(x)=x\text{ when }x\in S-{a_{i},\ldots}
+    $$
+      which is **infinite**, the $a_{i+1}$ avoids duplicate -> *one-to-one*
+      since 
+      $a_{i+1}$ starts from $a_1$, so *onto* for $A= S − \{a_0\}$
 
 ---
 
