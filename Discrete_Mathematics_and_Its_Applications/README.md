@@ -198,6 +198,30 @@ check p10 whether the ideas of each chapter are mastered.
       see [this](https://en.wikiversity.org/wiki/Continuum_mechanics/Calculus_of_variations#Minima_of_functionals) where is to get the maxima/Minima based on the *conditions for endpoints*.
     - (7)~(16) finish the proof.
     - for [multi-dimensional](https://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation#Statement) just list *multiple one-dimensional* Euler–Lagrange equations, see $i=1,\ldots,n$
+- FIGURE 3 doesn't circle the $\frac{p}{q}\text{ due to }p,q\text{ are not coprime}$ and use the sequence property in p204 to prove countable.
+- Cantor Diagonal Method for 
+  1. [theory of "computation"](https://concretenonsense.wordpress.com/2011/07/12/cantors-diagonal-argument-and-undecidability/)
+    - > Now, consider the Turing machine $M_{\text{bad}}$ which, given input $\langle M \rangle$, does the opposite of what $D$ does on input $\langle M, M \rangle$
+      TODO here maybe the diagonal is not one must.  
+      > But *we’ve enumerated all* the Turing machines, so we have a contradiction! Therefore, L is not decidable.
+  2. real numbers
+    - example 5
+      is based on [**contradiction**](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Uncountable_set) between assumption that the set *can be listed* which is by sequence property and the result that one element is *not in the list*.
+      - $\frac{m}{2^n}$ for $m$ is odd due to something like $\frac{3}{4}=\frac{1}{4}+\frac{1}{2}$, so the latter two have two binary expansions implies the 1st also has.
+        - This is the book why
+          > expansion has a tail end that consists entirely of the digit 9 is excluded
+          - IMHO this exclusion **doesn't influence** the book proof because their decimal representation is not same although their eventual values are *same*.
+            This is similar to the above where allows something like $0.1000\ldots$ and $0.0111\ldots=0.1000\ldots$ to both exist.
+            but not the [following](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Real_numbers)
+            - But for the following wikipedia proof, it **influences** because it needs to construct one **bijection** map which doesn't allow *two* different decimal/binary representations mapped to the *same* real value.
+      - ~~TODO meaning of~~
+        > Also, f2 (t) is not a bijection to (0, 1) for the strings in T appearing after the binary point in the binary expansions of 0, 1, and the numbers in sequence r.
+        TODO means same as
+        >  These are called dyadic numbers and have the form m / 2n where m is an odd integer and n is a natural number
+      - > Define the bijection g(t) from T to (0, 1): If t is the nth string in sequence s, let g(t) be the nth number in sequence r ; otherwise, g(t) = 0.t2.
+        this just *scales* the subset $r$ with "two binary expansions" to *half*, but due to infinite, the scale doesn't take the effects for the cardinality.
+        more specifically, it ensures *one-to-one index* for $s\to r,\text{ where }s\in T$.
+      - Then use "composite function" to enlarge the bijection.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
