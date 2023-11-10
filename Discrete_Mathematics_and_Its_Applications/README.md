@@ -167,6 +167,37 @@ check p10 whether the ideas of each chapter are mastered.
     means these spheres don't overlap to *differentiate* among them. 
 - TODO
   Kissing Problem seems to associate with [traverse problem](https://www3.cs.stonybrook.edu/~bender/newpub/2012-BenderBoCh-fun-kissing.pdf) but this doesn't relate with the [spheres](https://en.wikipedia.org/wiki/Kissing_number#One_dimension)
+### 2.5
+- p204 
+  $a_n=f(n)\Rightarrow (f(n)\to a_n,\text{one-to-one from }\mathbf{Z^+})\wedge (f^{-1}(a_n)=n,\text{due to the \textbf{unique} index})$
+- [Calculus of variations](https://en.wikipedia.org/wiki/Calculus_of_variations#Euler%E2%80%93Lagrange_equation)
+  here "variations" are "small changes in functions and functionals". More intuitively, it means $\delta y(x)$ which means the difference for the **entire** function instead of at one specific point, see [profoundphysics](https://profoundphysics.com/calculus-of-variations-for-beginners/).
+  - > Generally, a valid functional that takes in a full function and returns just a *single* number can be obtained by writing the functional as a *definite integral*.
+    > crucially, the *same* number for all values of the variable *x*
+    so it describes the property of the *entire* function, see [functional](https://en.wikipedia.org/wiki/Functional_(mathematics)#Duality) typically as one [definite integral](https://en.wikipedia.org/wiki/Calculus_of_variations#Example).
+    - See the table in "Functions vs Functionals".
+    - > a functional derivative considers the change in a functional *with respect to a function*
+    - > **Similarly**, there is an important concept in calculus of variations called the variation of a functional.
+    - "What Does The Euler-Lagrange Equation Tell Us?" where $\frac{\delta F}{\delta y}$ can be used to optimize for the maxima and minima.
+      > The goal of these steps and of any calculus of variations problem is to *find the function y(x)* – the function making a given *functional stationary*.
+    - steps:
+      1. Write down a functional F(y) describing the problem in the form of a *definite integral* over some function f(x,y,y’).
+      2. *Identify* the integrand function f(x,y,y’). You’ll need this for the Euler-Lagrange equation.
+      3. Write down the Euler-Lagrange equation for the function f identified in the last step.
+      4. Solve the resulting *differential equation* for y(x). This is the function that makes the original functional F(y) stationary.
+    - [Beltrami identity](https://en.wikipedia.org/wiki/Beltrami_identity#Derivation)
+  - TODO [Lagrangian mechanics](https://en.wikipedia.org/wiki/Lagrangian_mechanics) [diff](https://physics.stackexchange.com/a/265257/313379) with others
+    > classical mechanics – or more precisely, Lagrangian mechanics
+    > this formulation of classical mechanics where we use *calculus of variations and the action principle* is called Lagrangian mechanics.
+    - > there is a formulation of classical mechanics that also uses calculus of variations, but instead of the Euler-Lagrange equation, it takes advantage of the *Beltrami identity*.
+      > This formulation goes by the name of *Hamiltonian* mechanics
+  - > This states that the dynamics of a field are obtained by *minimizing the action* – which being a functional, of course, requires the tools of variational calculus.
+  - euler lagrange equation [derivation](https://mathworld.wolfram.com/Euler-LagrangeDifferentialEquation.html), [wikipedia](https://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation#Statement) and [libretexts](https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electro-Optics/Direct_Energy_(Mitofsky)/11%3A_Calculus_of_Variations/11.03%3A_Derivation_of_the_Euler-Lagrange_Equation) are similar which are less familiar for me.
+    $dv=d(\delta q)$
+    - > But we are varying the path only, not the endpoints
+      see [this](https://en.wikiversity.org/wiki/Continuum_mechanics/Calculus_of_variations#Minima_of_functionals) where is to get the maxima/Minima based on the *conditions for endpoints*.
+    - (7)~(16) finish the proof.
+    - for [multi-dimensional](https://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation#Statement) just list *multiple one-dimensional* Euler–Lagrange equations, see $i=1,\ldots,n$
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -994,7 +1025,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       which is **infinite**, the $a_{i+1}$ avoids duplicate -> *one-to-one*
       since 
       $a_{i+1}$ starts from $a_1$, so *onto* for $A= S − \{a_0\}$
-    - This is similar to p197 how to sum the infinite series.
+    - This is similar to p197 how to sum the infinite series and p204 example 2.
 ### 2.4
 - 2~4,10~12,18~22,30~32,36,40~42,46~48 skipped
 - [x] 6
