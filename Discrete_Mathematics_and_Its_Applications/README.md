@@ -1,3 +1,4 @@
+check p10 whether the ideas of each chapter are mastered.
 # [online resources](https://highered.mheducation.com/sites/125967651x/student_view0/web_resources_guide.html) from [this](https://highered.mheducation.com/sites/125967651x/information_center_view0/)
 - Discrete Mathematics and Its Applications [Student’s Solutions Guide](https://www.academia.edu/36410920/Students_Solutions_Guide) pdf with the unavailable version.
 - [test bank](https://www.stuvia.com/en-us/doc/2018491/discrete-mathematics-and-its-applications-8th-edition-rosen-test-bank.pdf)
@@ -157,6 +158,15 @@
     - how [this](https://faculty.washington.edu/moishe/hanoiex/counting/Stirling.pdf) skips $-log(n+1)$ in $d_n-d_{n+1}$
   - bell curve inflection points [analogy](https://flexbooks.ck12.org/cbook/ck-12-probability-and-statistics-concepts/section/7.5/related/lesson/density-curve-of-the-normal-distribution-adv-pst/#:~:text=The%20points%20at%20which%20the,deviation%20away%20from%20the%20mean.)
 ### 2.4
+- the Lucas sequence [relation](https://en.wikipedia.org/wiki/Lucas_number#Relationship_to_Fibonacci_numbers) with the Fibonacci sequence and other [interesting](https://brilliant.org/wiki/lucas-numbers/#applications-in-nature) properties.
+- sphere packing [relation](https://en.wikipedia.org/wiki/Sphere_packing#Other_spaces) with Hamming code
+  > with the spheres defined by Hamming distance
+  [figure](https://www.myreadingroom.co.in/notes-and-studymaterial/68-dcn/800-hamming-distance.html)
+  - [so](https://en.wikipedia.org/wiki/Hamming_distance#Error_detection_and_error_correction) 
+    > a code C is said to be k error detecting if, and only if, the minimum Hamming distance between any two of its codewords is *at least k+1*
+    means these spheres don't overlap to *differentiate* among them. 
+- TODO
+  Kissing Problem seems to associate with [traverse problem](https://www3.cs.stonybrook.edu/~bender/newpub/2012-BenderBoCh-fun-kissing.pdf) but this doesn't relate with the [spheres](https://en.wikipedia.org/wiki/Kissing_number#One_dimension)
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -179,6 +189,10 @@
   to $\begin{aligned*}$
 - "implies" arrow [location](https://math.stackexchange.com/questions/711817/mathematical-notation-arrow-sign)
 - `&` in `\aligned` is to [alternate](https://tex.stackexchange.com/a/159724) between left-aligned and right-aligned, so `&&` will make alternate *again*, becoming the original one.
+  for example for the 1st $&$, the *left* of it is *right* aligned and the right of it is left aligned
+  but for $&&$, the left is kept *same* and the right is *alternated*.
+- newline "\\" must be in the maths mode or something like "\begin{align*}".
+- [multiline](https://tex.stackexchange.com/questions/36343/multiline-text-under-over-arrows#comment72468_36343) in xRightarrow using [`substack`](https://tex.stackexchange.com/a/63192)
 ## katex
 - available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
 - set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
@@ -980,6 +994,70 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       which is **infinite**, the $a_{i+1}$ avoids duplicate -> *one-to-one*
       since 
       $a_{i+1}$ starts from $a_1$, so *onto* for $A= S − \{a_0\}$
+    - This is similar to p197 how to sum the infinite series.
+### 2.4
+- 2~4,10~12,18~22,30~32,36,40~42,46~48 skipped
+- [x] 6
+  d. due to $(k+1)^2-k^2=2k+1$
+- [ ] 8 see the ans
+- [ ] 14
+  here doesn't show the initial condition.
+- [x] 16
+  g. just two cases
+    $$
+    \begin{equation}
+      a_n=
+      \begin{cases}
+        \frac{n}{2}, & \text{if n is even} \\
+        \frac{n-1}{2}, & \text{otherwise}
+      \end{cases}
+    \end{equation}
+    $$
+- [ ] 24
+  a. $B(k)=(B(k-1)-P)*(1+\frac{r}{12})$
+  - see the ans.
+- [ ] 26
+  e. not $4^n\ldots$
+- [ ] 27
+  - see the ans
+    ~~assume $k^2 \lt a_n \lt (k + 1)^2$~~
+    - ~~here should be $k^2\le a_n \lt (k + 1)^2$ because $n+k$ numbers can contain $k^2$ but not $(k + 1)^2$ which is not in the square sequence.~~
+      here we don't allow the sequence like $1,2,\ldots,n,(k+1)^2$, i.e. $1,2,\ldots,n,k^2$.
+      so $k^2\le a_n \lt (k + 1)^2$ is impossible, i.e. something like $\{1,2,3,4\}$ not taken in account.
+      - this can also be shown in $l=\{1, 2, \ldots, a_n\}$ where the last term $a_n$ is the nonsquare.
+      - so $a_n=n+k$ by calculating the cardinality of the sequence $l$
+- [ ] 28
+  $$
+  \newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{7cm}}}}}
+  \begin{align*}
+    \text{let }a_n=t,&&\frac{t(t-1)}{2}\lt n&\le \frac{t(t+1)}{2}\\
+    \myrightarrow{}&&(t-\frac{1}{2})^2-\frac{1}{4}\lt 2n&\le (t+\frac{1}{2})^2-\frac{1}{4}\\
+    \myrightarrow{t-\frac{1}{2}\lt 2n+\frac{1}{4},\quad 2n\lt(t+\frac{1}{2})^2}&&
+    \sqrt{2n}-\frac{1}{2}\lt t&\lt\sqrt{2n+\frac{1}{4}}+\frac{1}{2}\\
+    \myrightarrow{\substack{\text{the left implies }t\text{ can't be} \lfloor\sqrt{2n}-\frac{1}{2}\rfloor,\\\text{the right implies }\lfloor\sqrt{2n}+\frac{3}{2}\rfloor\text{ impossible }\\\text{because }(\sqrt{2n}+\frac{3}{2})-(\sqrt{2n+\frac{1}{4}}+\frac{1}{2})>\sqrt{2n+1}-\sqrt{2n+\frac{1}{4}}>0}}&&t&=\lfloor\sqrt{2n}+\frac{1}{2}\rfloor\tag*{$\blacksquare$}
+  \end{align*}
+  $$
+  - the ans just find the alternate **exact** answer and prove equivalence with the question conclusion instead of proving by the result range.
+    - ~~it assumes $\lfloor\sqrt{2n}\rfloor=m$~~
+      if $\sqrt{2n}$ rounds up by becoming the **closest integer**, then 
+      $\lfloor\sqrt{2n}+\frac{1}{2}\rfloor$ and $\lceil\sqrt{2n+\frac{1}{4}}-\frac{1}{2}\rceil$ must be same (see them on the number axis)
+      - so $\sqrt{2n}$ rounds down, then 
+        $\sqrt{2n}\le m+\frac{1}{2}$, see the ans
+        - notice the "smaller" implies $\sqrt{2n+\frac{1}{4}}\gt m+\frac{1}{2}$ 
+          not having $=$.
+- [ ] 34
+  a. $\sum_{i=1}^{3}(2i-3)=2*6-9=3$
+    hinted by the ans (notice the $2i$ instead of $i$)
+- [ ] 38
+  - this method can be generalized with induction for all $\sum_{k=1}^{n}k^n,n\in\mathbb{N}$
+- [ ] 43
+  $\text{let }\lfloor\sqrt{m}\rfloor=t,\sum=1*3+2*5+\ldots+(t-1)*(2*(t-1)+1)+t*(m-(t-1)^2)$
+  then hinted by the ans, $\sum_{k=1}^{t-1}(2k^2+k)+t*(m-(t-1)^2)\blacksquare$
+  - see the ans here should be $t*(m-t^2+1)$ where 
+    $t^2$ means the start index of $\lfloor\sqrt{m}\rfloor$
+    and $+1$ means take in account the integer index $\lfloor\sqrt{m}\rfloor^2$.
+- [x] 44 similar to 43.
+
 
 ---
 
