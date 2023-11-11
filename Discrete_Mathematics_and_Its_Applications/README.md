@@ -288,6 +288,7 @@ check p10 whether the ideas of each chapter are mastered.
 - newline "\\" must be in the maths mode or something like "\begin{align*}".
 - [multiline](https://tex.stackexchange.com/questions/36343/multiline-text-under-over-arrows#comment72468_36343) in xRightarrow using [`substack`](https://tex.stackexchange.com/a/63192)
 - emptyset [preferred $\varnothing$](https://math.stackexchange.com/questions/917467/is-varnothing-an-empty-set#comment1893997_917472)
+- not comma among [multiple](https://dept.math.lsa.umich.edu/~kesmith/295handout1-2010.pdf) $\forall,\exists$ and $\ni$ for "so that".
 ## katex
 - available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
 - set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
@@ -1232,24 +1233,54 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 
 ### Supplementary
 - [ ] 16
+  as the problem says, p172 definition 4 use the same $f$ for different domains,i.e. both $A\to B$ and $\forall S\subset A \exists T\subset B,S\to T$
+  the following ~~is based on that *both domains conform to* the one-to-one property of $f$, etc,~~ ~~which is trivial due to $f(S)=f(\bigcup s_i)=\bigcup f(s_i)=\bigcup t_i=T$~~ ~~see~~ a,b proves that $f(x):A\to B$ and $S_f(X) = f(X)$ have the **same** property w.r.t. one-to-one and onto where they use only the property of 
+  $f(x)$ but not $f(X)$.
   a. let $X=\bigcup a_i$
     then $S_f(X)=f(X)=f(\bigcup a_i)=\bigcup b_i$
     - see the ans which focus on one specific element.
   
   b. $\forall X_2\exists X_1,f(X_2)=X_1=S_f(X_2)\blacksquare$
     - better see the ans where doesn't use the **direct generalization** the onto to the function of one *set*
-    - $ X = \{ x \subset A | f(x) \subset Y \}$ implies $Sf (X) \in Y\Rightarrow Sf (X) \subset Y$
-      - here there is no way inside the set definition for $f(x)=Y$ since the problem only shows "f is a function from A to B" but not "f is a function from P(A) to P(A)", so the domain w.r.t. $x$ and $X$ are **not same**.
-      - $S_f(a)=f(a)=b\wedge a\in X\Rightarrow b\in S_f(X)$
+    - $ X = \{ x \subset A | f(x) \subset Y \}$ implies $S_f (X) \in Y\Rightarrow S_f (X) \subset Y$
+      - $ X = \{ x \subset A | f(x) \subset Y \}$
+        it is due to the onto property, so each $f(x)$
+        must have at least one corresponding $x$
+        - but see p186 definition, it allows more than one $x$.
+      - here doesn't imply because if $f(x)$ is not onto, then
+        $\exists y\in Y,\nexists x\in A\ni f(x)=y$
+        which is just what the $ Y \subseteq S_f (X)$ says.
+    - here there is no way for $f(x)=Y$ to be in the set definition $ X = { x \in A | f(x) \in Y }$ 
+      since the problem only shows "f is a function from A to B" but not "f is a function from P(A) to P(A)", so the domain w.r.t. $x$ and $X$ are **not same**.
+    - $S_f(a)=f(a)=b\wedge a\in X\Rightarrow b\in S_f(X)$
   
   c. ~~TODO $f^{-1}$ may not exist if not one-to-one correspondence.~~
-    See p186 where the definition is "precisely *all preimages* of all elements of S".
-    So $a\in S_{f^{-1}}(Y_1)=f^{-1}(Y_1)$ means a is one **preimage** of 
-    $b\in Y$.
-    - $Y_1\neq Y_2\Rightarrow f^{-1}(Y_1)\neq f^{-1}(Y_2)\Rightarrow S\subset Y_1-Y_2\ldots?$
-    - The onto ensures $f^{-1}(Y_1-Y_2)\neq\varnothing\Rightarrow f^{-1}(Y_2+(Y_1-Y_2))=f^{-1}(Y_1)\neq f^{-1}(Y_2)$
+    - the ans
+      See p186 where the definition is "precisely *all preimages* of all elements of S".
+      So $a\in S_{f^{-1}}(Y_1)=f^{-1}(Y_1)$ means a is one **preimage** of 
+      $b\in Y$.
+      - $Y_1\neq Y_2\Rightarrow f^{-1}(Y_1)\neq f^{-1}(Y_2)\Rightarrow S\subset Y_1-Y_2\ldots?$
+      - The onto ensures $f^{-1}(Y_1-Y_2)\neq\varnothing\Rightarrow f^{-1}(Y_2+(Y_1-Y_2))=f^{-1}(Y_1)\neq f^{-1}(Y_2)$
+      - intuitively but not strict (at least for the uncountable infinite set)
+        $f:A\to B\text{ is onto}\Rightarrow |A|\ge|B|\Rightarrow |B|\le|A|\Rightarrow f^{-1}:B\to A\text{ is one-to-one}$
 
-  d. 
+  d. similar to b
+    $$
+    \begin{align*}
+      \text{we claim that }\quad&\forall X\in B,\exists Y=f(X)\Rightarrow S_{f^{-1}}(Y)=X&\\
+      \text{1. trivially, }X\text{ is mapped from }A\text{ to }B\text{ by }f\text{, then back by }S_{f^{-1}}\quad&S_{f^{-1}}(Y)\supseteq X&\\
+      \text{2. suppose }\quad&\forall a\in S_{f^{-1}}(Y)\Rightarrow a\in f^{-1}(Y)&\\
+      \text{due to one-to-one of }f\quad&a\in X&\text{otherwise, }\exists b\in Y a_1\in X a=a_2\notin X\ni f(a_1)=b,f(a_2)=b,\text{ contradiction with one-to-one}\\
+      &\Rightarrow S_{f^{-1}}(Y)\subseteq X&\\
+      \text{based on 1. 2. ,}\quad&S_{f^{-1}}(Y)= X&
+    \end{align*}
+    $$
+    - the ans
+      ${u \in A |f(u) \in {f(x) |x \in X }}$ is based on one-to-one property because $Y = {f(x) | x \in X }$ maps each 
+      $x$ to one unique $f(x)$, similarly for the former, each 
+      $f(u)$ is mapped to one unique $u$, so one-to-one
+- [ ] 
+
 ---
 
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
