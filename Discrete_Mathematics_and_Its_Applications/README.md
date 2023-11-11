@@ -4,6 +4,8 @@ check p10 whether the ideas of each chapter are mastered.
 - [test bank](https://www.stuvia.com/en-us/doc/2018491/discrete-mathematics-and-its-applications-8th-edition-rosen-test-bank.pdf)
 # markdown notice
 - "- [ ]" can't be ended with one space.
+- not use number bullet list inside "-" bullet list which may be changed to "a,b,c"
+- use number bullet list instead of "a,b,c" to help the indentation.
 # TODO
 - [QA 164](https://highered.mheducation.com/sites/dl/free/125967651x/1106131/Advice_on_the_Writing_Projects.pdf)
 - how is the p20 list related with discrete mathematics?
@@ -20,6 +22,38 @@ check p10 whether the ideas of each chapter are mastered.
 - Fermat's last theorem [proof page 111](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 ## cs program
 - p132
+## miscs
+### regex
+- how to pretend "[a-z]." with one blank line when manipulating the following strings:
+```bash
+    - ans 
+  a.  
+# or
+    - ans 
+      test
+  a.  
+# or
+    - countable infinite
+      here I only gives the sequence pattern $\{1,11,1.1,111,11.1,1.11,\ldots\}$
+  d. similar to c
+# but not 
+    - ans 
+      test
+
+  a.  
+# only match to "a."
+ - ans
+    a. is right
+    b. is wrong.
+```
+  - With `[ ]+- .*\n[ \n\w]+[ ]+[a-z]\.` ~~all the above three~~ 1,2,4,5 will be changed, although not perfect, but it is fine to change the format. Then use 
+    The following targets 1,2,4.
+    - With `([ ]+- .*\n[ \n\w]+\w\n)([ ]+[a-z]\.)` -> `$1\n$2` only the 2rd is modified,
+      then with `([ ]+- .*\n)( +[a-z]\.)` -> `$1\n$2` only the 1st is modified.
+  - since the pattern is a bit complex where "." may be used in maths and as punctuation
+    the `([ ]+- .*\n[ ]+[^a-z\.]+[ \n\w\$\\\{,\.\}]+)` will contain two "[a-z].",
+    so better use some more general tool like python to meet the above requirements.                                                                                        
+  - ~~The key remaining purpose is to track all [**nonblank**](https://stackoverflow.com/a/45933959/21294350) lines after the "-" line~~
 # proof method arsenal by p136
 - see 1.7~8
 # contents
@@ -99,7 +133,7 @@ check p10 whether the ideas of each chapter are mastered.
   "onto" means no redundancy in the *codomain*, i.e. no total-to-part.
 - > A one-to-one correspondence is called invertible
   ~~only needs one-to-one to make "invertible" possible.~~
-  - one-by-one due to above p170 definition where $a$ as $f^{-1}$
+  - one-to-one due to above p170 definition where $a$ as $f^{-1}$
     image needs to be *unique* for each $b$. -> " more than one such a"
   - onto due to "each element of A" which applying to $f^{-1}$ means "each element of B" in p170
     -> "no such a"
@@ -206,7 +240,7 @@ check p10 whether the ideas of each chapter are mastered.
       > But *we’ve enumerated all* the Turing machines, so we have a contradiction! Therefore, L is not decidable.
   2. real numbers
     - example 5
-      is based on [**contradiction**](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Uncountable_set) between assumption that the set *can be listed* which is by sequence property and the result that one element is *not in the list*.
+      is based on [**contradiction**][Cantor_diagonal_argument_string] between assumption that the set *can be listed* which is by sequence property and the result that one element is *not in the list*.
       - $\frac{m}{2^n}$ for $m$ is odd due to something like $\frac{3}{4}=\frac{1}{4}+\frac{1}{2}$, so the latter two have two binary expansions implies the 1st also has.
         - This is the book why
           > expansion has a tail end that consists entirely of the digit 9 is excluded
@@ -222,6 +256,11 @@ check p10 whether the ideas of each chapter are mastered.
         this just *scales* the subset $r$ with "two binary expansions" to *half*, but due to infinite, the scale doesn't take the effects for the cardinality.
         more specifically, it ensures *one-to-one index* for $s\to r,\text{ where }s\in T$.
       - Then use "composite function" to enlarge the bijection.
+- > It can be shown that the smallest infinite cardinal numbers form an infinite *sequence*
+  [see](https://en.wikipedia.org/wiki/Continuum_hypothesis#Cardinality_of_infinite_sets)
+  > Assuming the axiom of choice, there is a unique smallest cardinal number
+  the function inherently implies "unique".
+- Continuum hypothesis is [not proven at present](https://en.wikipedia.org/wiki/Hilbert%27s_problems#Table_of_problems).
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -240,14 +279,15 @@ check p10 whether the ideas of each chapter are mastered.
   So in the following exercises, when using the strict abstract propositional logic, I probably still use the $\to$ instead of $\Rightarrow$.
   Also [see](https://math.stackexchange.com/q/711817/1059606)
 - text [above](https://tex.stackexchange.com/a/103993) arrow
-- when $\begin{aligned}$ is [preferred](https://tex.stackexchange.com/a/95408)
-  to $\begin{aligned*}$
+- when `\begin{aligned}` is [preferred](https://tex.stackexchange.com/a/95408)
+  to `\begin{aligned*}`
 - "implies" arrow [location](https://math.stackexchange.com/questions/711817/mathematical-notation-arrow-sign)
 - `&` in `\aligned` is to [alternate](https://tex.stackexchange.com/a/159724) between left-aligned and right-aligned, so `&&` will make alternate *again*, becoming the original one.
-  for example for the 1st $&$, the *left* of it is *right* aligned and the right of it is left aligned
-  but for $&&$, the left is kept *same* and the right is *alternated*.
+  for example for the 1st `&`, the *left* of it is *right* aligned and the right of it is left aligned
+  but for `&&`, the left is kept *same* and the right is *alternated*.
 - newline "\\" must be in the maths mode or something like "\begin{align*}".
 - [multiline](https://tex.stackexchange.com/questions/36343/multiline-text-under-over-arrows#comment72468_36343) in xRightarrow using [`substack`](https://tex.stackexchange.com/a/63192)
+- emptyset [preferred $\varnothing$](https://math.stackexchange.com/questions/917467/is-varnothing-an-empty-set#comment1893997_917472)
 ## katex
 - available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
 - set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
@@ -504,8 +544,8 @@ I also read the asterisked ones.
   2. $E(mathematics) \to \neg E(logic)$
   a,~~b~~,d, T
   ~~c~~,e F
-  - b. ~~-> $\neg D(logic)$, ~~
-    ~~but both $T\to T$ and $F\to T$ is possible, so ~~
+  - b. ~~-> $\neg D(logic)$,~~
+    ~~but both $T\to T$ and $F\to T$ is possible, so~~
     $F\to T/F$, so $D(logic)$ is not determined, so nothing can be determined.
   - c same as b.
   - ~~-> $D(logic)$~~
@@ -592,6 +632,7 @@ Most of them are similar to proofs in the junior/senior high school.
   a. from sorted one, each swap would decrease.
   b. 
   - ans
+
     a. "Without loss of generality," because we can swap among all $x_iy_i$ to keep $x_i$ sorted.
       the rest is same as above
     b. as the ans says, changing $y_i$ to the *increasing* order when $x_i$ increases will *increase* the sum, similarly, changing $y_i$ to the *decreasing* order when $x_i$ increases will *decrease* the sum.
@@ -635,19 +676,24 @@ Most of them are similar to proofs in the junior/senior high school.
   a.
     1. straight
     2. move one square around
-      1. 111
-           1
-      2. 111
-          1
+    ```bash
+    1. 111
+         1
+    2. 111
+        1
+    ```
     3. move two squares around
+    ```bash
       1. 11
          11
       2. 11
         11
+    ```
   b.
     - straight ones are obvious.
     - by similar coloring with triominoes, 2.1, 2.2 and 3 can't
   - ans
+
     a. is right
     b. is wrong.
 - [ ] 52
@@ -655,7 +701,7 @@ Most of them are similar to proofs in the junior/senior high school.
     then
     1. horizontal -> one color each
     2. vertical -> either zero or two squares of each color.
-    ~~odd horizontal + even vertical -> ~~
+    ~~odd horizontal + even vertical ->~~
     - > assume without loss of generality that an even number of tiles are placed horizontally
       because rotation will swap horizontal with vertical.
       so "even number of horizontal" assumption is ok.
@@ -763,12 +809,13 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     symmetry.
 - [ ] 50
   - ans
+
     a. if $S\in S$ then we don't conform to the condition $x\notin x$, so should $S\notin S$
     b. similar to a.
   - based on p147 where the *property*, i.e. $x\notin x$ here, may "leads to paradoxes".
 - [ ] 51 $C_n^{i},i=1\sim n$ selection.
 ### 2.2
-- 2~4,22~24,28,34,40~42,54~66,74\\\\\\\\\\\\\\\\\\\\\\\\\\ skipped
+- 2~4,22~24,28,34,40~42,54~66,74 skipped
 - [ ] 6 the membership table is more intuitive where $\varnothing$ always corresponds to $F$.
 - [x] 8,10,12,20(e) similar to 6 ans, the "Set-builder notation" is intuitive.
   - 12
@@ -782,7 +829,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   see ans based on $T/F$ pairs of (A,B).
 - [ ] 21
   definition
-  a. the latter means "in A and in U but not in B"
+  1. the latter means "in A and in U but not in B"
     since in A -> in U
     so "in A but not in B", i.e. $A-B$
 - [x] 26,36,52 by definition
@@ -832,6 +879,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   d similar to c where $|A-B|\ge 0$.
   e 
   - see ans 
+
     c. need plus "if"
       and it proves $p\wedge\neg q$ is impossible to be $F$, so Q.E.D.
   - e. 
@@ -839,7 +887,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       - where $\le$ numerator is based on applying $r$ and then metric definition 4 for $d(x,y)$.
     - prove [the cardinality of symmetric difference](https://math.stackexchange.com/a/2128814/1059606) is metric 
       based on exercise 48 conclusion, if $x\in B$, then in *even* sets
-      so $(A△B)△(B△C)=A△C$
+      so $(A\Delta B)\Delta (B\Delta C)=A\Delta C$
       - similar to above, definition 1~3 are trivial.
     - "third observation above" then use [Steinhaus Transform](https://mathoverflow.net/a/18090).
 ### 2.3
@@ -1008,18 +1056,18 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     - this means same as the ans which is similar to the following $|A|<|B|$.
   - if one-to-one but not onto, then $|A|<|B|$ -> contradiction.
 - [x] 76
-  a. T definition based on $n\lt n\le n+1$
-  b. F $0.5+0.5$
-  c. T $n\le\frac{x}{2}\le n+1$ then two cases for n odd($\frac{n+1}{2}$)/even($\frac{n+2}{2}$), $\blacksquare$
+  1. T definition based on $n\lt n\le n+1$
+  2. F $0.5+0.5$
+  3. T $n\le\frac{x}{2}\le n+1$ then two cases for n odd($\frac{n+1}{2}$)/even($\frac{n+2}{2}$), $\blacksquare$
     - the ans, here assume use $n'$ in ans
-      1. $k=0$ corresponds to odd $n=2n'-1$
-      2. $0\lt k\le 2$ corresponds to even $n=2n'$
-      3. $2\lt k\lt 4$ corresponds to odd $n=2n'+1$
-  d. F let 
+      - $k=0$ corresponds to odd $n=2n'-1$
+      - $0\lt k\le 2$ corresponds to even $n=2n'$
+      - $2\lt k\lt 4$ corresponds to odd $n=2n'+1$
+  4. F let 
     $x=(n+1)^2-\epsilon,\epsilon\in[0,1)$
     the right is $n$
     while the left is $n+1$
-  e. three different cases after using "without loss of generality".
+  5. three different cases after using "without loss of generality".
     - see the ans to consider *only* the exceeding cases.
 - [x] 78 three cases, here only show one, the rest is similar.
   $n\le x\lt n+\frac{1}{3}$ no right terms round up -> 0, also for the left.
@@ -1030,6 +1078,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 81
   a. index function 
   - see cardinality of a set with [**repeating**](https://math.stackexchange.com/a/391522/1059606) elements
+
   b. make both sets as specific tuples, and index them.
   - see the ans for strict maths description where
     1. bijection is due to one-to-one (the conclusion to prove) and onto ($\{1, 2, \ldots , m\}$ is the entire codomain)
@@ -1037,6 +1086,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 82
   - ~~does "proper" mean infinite?~~
   - see the ans
+
     a. just prove not finite -> infinite.
       TODO [Pigeonhole principle](https://builtin.com/data-science/pigeonhole-principle) means mul-to-one but here the proper subset to the universal set means onto impossible but not for one-to-one which doesn't allow mul-to-one.
       > Case A is the case illustrating the essence of the pigeonhole principle
@@ -1060,13 +1110,13 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [x] 16
   g. just two cases
     $$
-    \begin{equation}
+    \begin{equation*}
       a_n=
       \begin{cases}
         \frac{n}{2}, & \text{if n is even} \\
         \frac{n-1}{2}, & \text{otherwise}
       \end{cases}
-    \end{equation}
+    \end{equation*}
     $$
 - [ ] 24
   a. $B(k)=(B(k-1)-P)*(1+\frac{r}{12})$
@@ -1112,8 +1162,94 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     $t^2$ means the start index of $\lfloor\sqrt{m}\rfloor$
     and $+1$ means take in account the integer index $\lfloor\sqrt{m}\rfloor^2$.
 - [x] 44 similar to 43.
+### 2.5
+- ~~TODO~~ why THEOREM 2, i.e. exercise 41, can't be proven using $a\le b,b\le a\Rightarrow a=b$?
+  see example 6 where uncountable, so $|A|$ is not one number at all.
+- [ ] 2
+  a. countably infinite. $f(n)=n+10$
+  b. countably infinite. $f(n)=-2n+1$
+  c. finite
+  d. uncountable, similar to the above [Cantor_diagonal_argument_string]
+    then $(0,1)\subset(0,2)$, so also uncountable for the latter
+  e. countably infinite
+    $$
+    \begin{equation*}
+      f(n)=
+      \begin{cases}
+        (2,\frac{n+1}{2}),n\text{ is odd}\\
+        (3,\frac{n}{2}),n\text{ is even}\\
+      \end{cases}
+    \end{equation*}
+    $$
+  f. countably infinite $f(n)=10n$
+  - better use "one-to-one correspondence" symbol $\leftrightarrow$
+    although by p204 write in sequence $f(n)$
+    - f. notice the negative ones.
+- [ ] 4
+  a. subset of integers -> countable by exercise 16 or example 5.
+    $f(n)=3*\lfloor\frac{n-1}{2}\rfloor+n\%2$
+  b. similar $\text{but not } k\Rightarrow (k*\lfloor\frac{n-1}{k-1}\rfloor+n\%(k-1))$
+    so $f(n)=5*(k*\lfloor\frac{n-1}{k-1}\rfloor+n\%(k-1)),k=7$
+  c. since only one digit is allowed, so "Cantor's diagonalization argument" doesn't apply.
+    - countable infinite
+      here I only gives the sequence pattern $\{1,11,1.1,111,11.1,1.11,\ldots\}$
 
+  d. similar to c
+    $\{1,9,11,1.1,99,9.9,19,1.9,91,9.1,\ldots\}$
+    number count sequence of the same pattern: $1*(2^1),2*(2^2),3*(2^3)$ where 
+    $i*$ means (c) pattern number
+    $2^i$ means possible ~~combination~~ types of i-length digit string if only 2 digit numbers are allowed.
+  - ans
+    - similar to 2, negative ones need to be considered.
+    - c. needs [$.\overline{1}$](https://math.stackexchange.com/a/1309970/1059606)
+    - d. is **not similar** to c
+- [ ] 6
+  move to the next odd number
+  - see the ans
+    here doesn't tackle with the new added guest when already only even
+    but from the original to only even.
+- [ ] 8
+  do as example 2 does "countably infinite" times
+  - ans is related with 6.
+- [ ] 9 similar to 8
+  the above three move processes are similar to how the **turing machine** works by step-by-step running.
+  - the ans maps all to the even number
+- [x] 10 
+  $B=\mathbb{R}$
+  a. $A-B=\{"a"\}$
+  the rest are similar.
+- [x] 12
+  $A \subset B\Rightarrow A\to B\text{is one-to-one}$
+- [ ] 14
+  $|A|=|B|\blacksquare$
+  - notice the infinite set.
+    [See](https://math.stackexchange.com/a/4804634/1059606) where $\mathfrak{n}_100$ is due to the [generalized](https://en.wikipedia.org/wiki/Continuum_hypothesis#The_generalized_continuum_hypothesis) continuum hypothesis.
+- [ ] 15 contradiction
+  - see the ans use ordered list (i.e. sequence) to prove.
+- [ ] 16 contradiction that subset can't be listed but the superset can.
+  - better direct proof which is similar to 15
+- [ ] 18 based on the one-to-one correspondence definition.
+- [ ] 
+### Supplementary
+- [ ] 16
+  a. let $X=\bigcup a_i$
+    then $S_f(X)=f(X)=f(\bigcup a_i)=\bigcup b_i$
+    - see the ans which focus on one specific element.
+  
+  b. $\forall X_2\exists X_1,f(X_2)=X_1=S_f(X_2)\blacksquare$
+    - better see the ans where doesn't use the **direct generalization** the onto to the function of one *set*
+    - $ X = \{ x \subset A | f(x) \subset Y \}$ implies $Sf (X) \in Y\Rightarrow Sf (X) \subset Y$
+      - here there is no way inside the set definition for $f(x)=Y$ since the problem only shows "f is a function from A to B" but not "f is a function from P(A) to P(A)", so the domain w.r.t. $x$ and $X$ are **not same**.
+      - $S_f(a)=f(a)=b\wedge a\in X\Rightarrow b\in S_f(X)$
+  
+  c. ~~TODO $f^{-1}$ may not exist if not one-to-one correspondence.~~
+    See p186 where the definition is "precisely *all preimages* of all elements of S".
+    So $a\in S_{f^{-1}}(Y_1)=f^{-1}(Y_1)$ means a is one **preimage** of 
+    $b\in Y$.
+    - $Y_1\neq Y_2\Rightarrow f^{-1}(Y_1)\neq f^{-1}(Y_2)\Rightarrow S\subset Y_1-Y_2\ldots?$
+    - The onto ensures $f^{-1}(Y_1-Y_2)\neq\varnothing\Rightarrow f^{-1}(Y_2+(Y_1-Y_2))=f^{-1}(Y_1)\neq f^{-1}(Y_2)$
 
+  d. 
 ---
 
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
@@ -1123,3 +1259,5 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
+
+[Cantor_diagonal_argument_string]:https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Uncountable_set
