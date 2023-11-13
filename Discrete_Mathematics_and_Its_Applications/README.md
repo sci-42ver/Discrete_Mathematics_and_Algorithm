@@ -18,42 +18,12 @@ check p10 whether the ideas of each chapter are mastered.
 - p128 $q\to r$ is different from p117 "begging the question" where the latter is to prove $r$ by $r$ and the former is to prove $q$ by $r$.
 ## number theory
 - > Every positive integer is the sum of the squares of four integers
+
   [proof p5](https://www.math.uchicago.edu/~may/VIGRE/VIGRE2008/REUPapers/Ng.pdf)
 - Fermat's last theorem [proof page 111](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 ## cs program
 - p132
 ## miscs
-### regex
-- how to pretend "[a-z]." with one blank line when manipulating the following strings:
-```bash
-    - ans 
-  a.  
-# or
-    - ans 
-      test
-  a.  
-# or
-    - countable infinite
-      here I only gives the sequence pattern $\{1,11,1.1,111,11.1,1.11,\ldots\}$
-  d. similar to c
-# but not 
-    - ans 
-      test
-
-  a.  
-# only match to "a."
- - ans
-    a. is right
-    b. is wrong.
-```
-  - With `[ ]+- .*\n[ \n\w]+[ ]+[a-z]\.` ~~all the above three~~ 1,2,4,5 will be changed, although not perfect, but it is fine to change the format. Then use 
-    The following targets 1,2,4.
-    - With `([ ]+- .*\n[ \n\w]+\w\n)([ ]+[a-z]\.)` -> `$1\n$2` only the 2rd is modified,
-      then with `([ ]+- .*\n)( +[a-z]\.)` -> `$1\n$2` only the 1st is modified.
-  - since the pattern is a bit complex where "." may be used in maths and as punctuation
-    the `([ ]+- .*\n[ ]+[^a-z\.]+[ \n\w\$\\\{,\.\}]+)` will contain two "[a-z].",
-    so better use some more general tool like python to meet the above requirements.                                                                                        
-  - ~~The key remaining purpose is to track all [**nonblank**](https://stackoverflow.com/a/45933959/21294350) lines after the "-" line~~
 # proof method arsenal by p136
 - see 1.7~8
 # contents
@@ -62,6 +32,7 @@ check p10 whether the ideas of each chapter are mastered.
 - data networking [diff](https://www.geeksforgeeks.org/difference-between-network-and-internet/) the Internet
 - [formal languages](https://www.oreilly.com/radar/formal-informal-languages/) are more stuctured where [DALL-E](https://en.wikipedia.org/wiki/DALL-E#:~:text=The%20original%20DALL%C2%B7E%20was,3%20modified%20to%20generate%20images.) talks to the person.
   > the language you need to know to talk to DALL-E. Right now, it’s an informal language, not a formal language with a specification in *BNF* or some other metalanguage.
+
   BNF adds [much limitation](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form).
 ## 1
 ### 1.1
@@ -132,6 +103,7 @@ check p10 whether the ideas of each chapter are mastered.
   “one-to-one” means not mul-to-one, i.e. if *only use one in the domain*, then *no redundancy* in the *domain*.
   "onto" means no redundancy in the *codomain*, i.e. no total-to-part.
 - > A one-to-one correspondence is called invertible
+
   ~~only needs one-to-one to make "invertible" possible.~~
   - one-to-one due to above p170 definition where $a$ as $f^{-1}$
     image needs to be *unique* for each $b$. -> " more than one such a"
@@ -195,9 +167,11 @@ check p10 whether the ideas of each chapter are mastered.
 - the Lucas sequence [relation](https://en.wikipedia.org/wiki/Lucas_number#Relationship_to_Fibonacci_numbers) with the Fibonacci sequence and other [interesting](https://brilliant.org/wiki/lucas-numbers/#applications-in-nature) properties.
 - sphere packing [relation](https://en.wikipedia.org/wiki/Sphere_packing#Other_spaces) with Hamming code
   > with the spheres defined by Hamming distance
+
   [figure](https://www.myreadingroom.co.in/notes-and-studymaterial/68-dcn/800-hamming-distance.html)
   - [so](https://en.wikipedia.org/wiki/Hamming_distance#Error_detection_and_error_correction) 
     > a code C is said to be k error detecting if, and only if, the minimum Hamming distance between any two of its codewords is *at least k+1*
+
     means these spheres don't overlap to *differentiate* among them. 
 - TODO
   Kissing Problem seems to associate with [traverse problem](https://www3.cs.stonybrook.edu/~bender/newpub/2012-BenderBoCh-fun-kissing.pdf) but this doesn't relate with the [spheres](https://en.wikipedia.org/wiki/Kissing_number#One_dimension)
@@ -208,6 +182,7 @@ check p10 whether the ideas of each chapter are mastered.
   here "variations" are "small changes in functions and functionals". More intuitively, it means $\delta y(x)$ which means the difference for the **entire** function instead of at one specific point, see [profoundphysics](https://profoundphysics.com/calculus-of-variations-for-beginners/).
   - > Generally, a valid functional that takes in a full function and returns just a *single* number can be obtained by writing the functional as a *definite integral*.
     > crucially, the *same* number for all values of the variable *x*
+
     so it describes the property of the *entire* function, see [functional](https://en.wikipedia.org/wiki/Functional_(mathematics)#Duality) typically as one [definite integral](https://en.wikipedia.org/wiki/Calculus_of_variations#Example).
     - See the table in "Functions vs Functionals".
     - > a functional derivative considers the change in a functional *with respect to a function*
@@ -229,6 +204,7 @@ check p10 whether the ideas of each chapter are mastered.
   - euler lagrange equation [derivation](https://mathworld.wolfram.com/Euler-LagrangeDifferentialEquation.html), [wikipedia](https://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation#Statement) and [libretexts](https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electro-Optics/Direct_Energy_(Mitofsky)/11%3A_Calculus_of_Variations/11.03%3A_Derivation_of_the_Euler-Lagrange_Equation) are similar which are less familiar for me.
     $dv=d(\delta q)$
     - > But we are varying the path only, not the endpoints
+
       see [this](https://en.wikiversity.org/wiki/Continuum_mechanics/Calculus_of_variations#Minima_of_functionals) where is to get the maxima/Minima based on the *conditions for endpoints*.
     - (7)~(16) finish the proof.
     - for [multi-dimensional](https://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation#Statement) just list *multiple one-dimensional* Euler–Lagrange equations, see $i=1,\ldots,n$
@@ -236,8 +212,10 @@ check p10 whether the ideas of each chapter are mastered.
 - Cantor Diagonal Method for 
   1. [theory of "computation"](https://concretenonsense.wordpress.com/2011/07/12/cantors-diagonal-argument-and-undecidability/)
     - > Now, consider the Turing machine $M_{\text{bad}}$ which, given input $\langle M \rangle$, does the opposite of what $D$ does on input $\langle M, M \rangle$
+
       TODO here maybe the diagonal is not one must.  
       > But *we’ve enumerated all* the Turing machines, so we have a contradiction! Therefore, L is not decidable.
+
   2. real numbers
     - example 5
       is based on [**contradiction**][Cantor_diagonal_argument_string] between assumption that the set *can be listed* which is by sequence property and the result that one element is *not in the list*.
@@ -246,24 +224,37 @@ check p10 whether the ideas of each chapter are mastered.
           > expansion has a tail end that consists entirely of the digit 9 is excluded
           - IMHO this exclusion **doesn't influence** the book proof because their decimal representation is not same although their eventual values are *same*.
             This is similar to the above where allows something like $0.1000\ldots$ and $0.0111\ldots=0.1000\ldots$ to both exist.
-            but not the [following](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Real_numbers)
+            but not the [following](https://en.wikipedia.org/wiki/Cantor's_diagonal_argument#Real_numbers)
             - But for the following wikipedia proof, it **influences** because it needs to construct one **bijection** map which doesn't allow *two* different decimal/binary representations mapped to the *same* real value.
       - ~~TODO meaning of~~
         > Also, f2 (t) is not a bijection to (0, 1) for the strings in T appearing after the binary point in the binary expansions of 0, 1, and the numbers in sequence r.
+
         TODO means same as
         >  These are called dyadic numbers and have the form m / 2n where m is an odd integer and n is a natural number
       - > Define the bijection g(t) from T to (0, 1): If t is the nth string in sequence s, let g(t) be the nth number in sequence r ; otherwise, g(t) = 0.t2.
+
         this just *scales* the subset $r$ with "two binary expansions" to *half*, but due to infinite, the scale doesn't take the effects for the cardinality.
         more specifically, it ensures *one-to-one index* for $s\to r,\text{ where }s\in T$.
+        - then the rest $T-s$, it is trivial that they are one-to-one. <a id="binary_string_0_1"></a>
+        - here one-to-one is trivial
+          - [due](https://abstractmath.org/MM/MMRealNumbers.htm#:~:text=Every%20real%20number%20can%20be,for%20numbers%20such%20as%202.56.)) to
+            > A real number is a number that can be represented as a (possibly infinite) decimal expansion
+
+            even without the above map, the decimal expansion is onto to $R$, so also $(0,1)$.
       - Then use "composite function" to enlarge the bijection.
+      - > He first removed a countably infinite subset from each of these sets so that there is a *bijection* between the remaining *uncountable* sets
+
+        here assume that uncountable infinite can biject to each other.
 - > It can be shown that the smallest infinite cardinal numbers form an infinite *sequence*
+
   [see](https://en.wikipedia.org/wiki/Continuum_hypothesis#Cardinality_of_infinite_sets)
   > Assuming the axiom of choice, there is a unique smallest cardinal number
+
   the function inherently implies "unique", i.e. only one $y$ for $f(x)=y$.
   - Also [see](#Axiom_of_choice)
 - Continuum hypothesis is [not proven at present](https://en.wikipedia.org/wiki/Hilbert%27s_problems#Table_of_problems).
 - Here from p203 definition 2, the "onto" to $|A|\ge |B|$ is not direct
-  proof [see](https://math.stackexchange.com/a/286800/1059606) <a id="onto_compare_cardinality"></a>
+  proof see [this](https://math.stackexchange.com/a/286800/1059606) and my [rejected edit](https://math.stackexchange.com/review/suggested-edits/2036195) <a id="onto_compare_cardinality"></a>
   - the 1st part of the proof is same as [this](http://www.randomservices.org/random/foundations/Functions.html#aoc) which referenced [here "duality"](https://math.libretexts.org/Courses/Monroe_Community_College/MTH_220_Discrete_Math/Appendices/A.1%3A_Cardinality-additional_info#:~:text=A%E2%89%88C.-,A%20one%2Dto%2Done%20function%20f%20from%20A%20onto%20B,the%20same%20number%20of%20elements.)
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
@@ -658,11 +649,14 @@ Most of them are similar to proofs in the junior/senior high school.
     2. then 3-4
       - three vertical -> 17-22, 18-23, and 19-24
         > then we are again quickly forced into a sequence of placements that lead to a contradiction
+
         i.e. 11-16,7-12 will make 6 surrounded.
       - one vertical
         > Therefore without loss of generality, we can assume that we use 22-23
+
         either 21-22 or 22-23 which are same due to symmetry.
         > we are stuck once again
+
         18 was surrounded.
 - [ ] 48
   - [x] after "path" hint of the ans
@@ -708,6 +702,7 @@ Most of them are similar to proofs in the junior/senior high school.
     2. vertical -> either zero or two squares of each color.
     ~~odd horizontal + even vertical ->~~
     - > assume without loss of generality that an even number of tiles are placed horizontally
+
       because rotation will swap horizontal with vertical.
       so "even number of horizontal" assumption is ok.
 ### Supplementary
@@ -1102,6 +1097,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       - Also [see](https://plato.stanford.edu/entries/axiom-choice/) where $f(X)\in X$ implies choose **inside** each subset
         or see wikipedia
         > given the sets {{4, 5, 6}, {10, 12}, {1, 400, 617, 8000}}, the set containing each smallest element is {4, 10, 1}
+
     $$
     f(a_i) = a_{i+1}\\
     f(x)=x\text{ when }x\in S-{a_{i},\ldots}
@@ -1251,6 +1247,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     see the p203 definition, "has the same cardinality as the set of positive integers" means that we must show explicity **equal**
     - also [see](https://math.stackexchange.com/a/4804647/1059606)
       > When working with infinite sets there is very little reason to think that any coherent notion of "size" exists in the first place.
+
       comparing two countable infinite sets $A,B$ by $|A|\ge |B|$ is no use.
   - see p204 here more strictly $g$ is one-to-one correspondence, but onto is enough to construct the sequence.
 - [ ] 24
@@ -1266,6 +1263,98 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       - This is same as $g(n) = f^{−1}(m) =k\in A,\text{here k is unknown}$
         - where "$n^{th}$ smallest element" sequence means injective and the infinite length of the sequence means [surjective](https://en.wikipedia.org/wiki/Bijection,_injection_and_surjection), so bijection -> $|A|=|\mathbf{Z^+}|$
     - the key idea is the indexed sequence by $\mathbf{Z^+}$
+- [ ] 25
+  just similar to index with positive numbers
+  $K\to S$ is one-to-one due to "where *no two* elements of S have the same label"
+  then $\mathbf{Z^+} \to K$ is also one-to-one for the same reason $\blacksquare$.
+  - see the ans
+    - the a finite string of keyboard characters $K$ is not finite but infinite countable due to **maybe infinite length**.
+      countable because for each length-$k$ we can list $24^k$ which is finite -> infinite series/sequence -> countable.
+- [ ] 26 
+  ~~by using key "0~9" and "." which are "a finite list characters" to construct "a finite string of keyboard characters", then one-to-one map to $\mathbf{R}$~~
+  above is not always one "finite string".
+  - hint has finished the proof by chaning the above strikethroughed ones to the context of "0~9" and "/".
+    - see the ans "negative" -> "-"
+- [ ] 27
+  $A_1,A_2-A_1,\ldots,A_n-\sum_{k=1}^{n-1}A_{k}$
+  this sequence each $A_i$ can be listed, then $A_n-\sum_{k=1}^{n-1}A_{k}$ can also be listed, so the sequence can be listed
+  $\blacksquare$
+  - the ans just uses another list method similar to 2.5-4.
+- [ ] 28
+  write them in one matrix
+  then zigzag similar to 2.5-4,27.
+  - see the ans using 27 directly.
+- [ ] 29 using 25 with "0,1".
+  compared with here, [Cantor_diagonal_argument_string] can always add one new element by **appending digit "1"** to $s$ to differentiate with all the rest due to the property of infinity.
+  - the ans just use $\underset{i=1}{\overset{n}{\bigcup}} S_i,|S_i|=2^i$
+- [ ] 30 
+  similar to 28 $S={(a,b,c)|a\neq 0}\subset \mathbf{Z^+}\times\mathbf{Z^+}\times\mathbf{Z^+}$ is ~~finite~~ countable.
+  then for each $(a,b,c)$, max 2 solutions construct the solution set
+  $T={x_1,x_2}$
+  - so a union of $|S|$ number of 
+    $T_i$, by exercise 27, countable. 
+  - see the ans it just reprove 28 by 27
+- [x] 31
+  one-to-one is trivial
+  onto:
+  $$
+  \begin{align*}
+    \text{1. let } m+n=2t+1,t\in\mathbf{N}&\Rightarrow m\in(0,2t+1)\\
+    f(m,n)=t(2t-1)+m\in(2t^2-t,2t^2+t+1)&\Rightarrow f(m,n)\in[2t^2-t+1,2t^2+t]\\
+    \text{2. let } m+n=2t+2,t\in\mathbf{N}&\Rightarrow m\in(0,2t+2)\\
+    f(m,n)=t(2t+1)+m\in(2t^2+t,2t^2+3t+2)&\Rightarrow f(m,n)\in[2t^2+t+1,2t^2+3t+1]\\
+    \text{3. since when }m+n=2(t+1)+1&\Rightarrow f(m,n)\in[(t+1)(2(t+1)-1)+1,(t+1)(2(t+1)+1)]\\
+    &\Rightarrow f(m,n)\in[2t^2+3t+2,2t^2+5t+3]\\
+    \text{notice here }2t^2+3t+2\text{ is after }2t^2+3t+1,\text{,then the sequence is constructed beginning from }1&\tag*{$\blacksquare$}\\
+  \end{align*}
+  $$
+  - the ans doesn't prove by cases, which is more elegant.
+- [ ] 32
+  $(3n + 1)^2\in{1,16,7^2,\ldots}$ which lacks many numbers, how to achieve as the problem says?
+  notice here is one-to-one but not onto, so $\blacksquare$
+  - see the ans for the strict proof which use three cases including one case that one is negative and one not.
+    better use the other two cases that 
+    1. both nonnegative.
+    2. both negative.
+    ~~here $(3n + 1)^2$ is monotonically increasing for $\mathbf{Z}\to\mathbf{Z^+}$, i.e. one-to-one.~~
+  - $\mathbf{Q}\times\mathbf{Q}\to\mathbf{Q}$ is obvious by using the one-to-one map $S=\mathbf{Q}\to\mathbf{Z^+}$ which is obtained from the index due to the countability of 
+    $\mathbf{Q}$
+    then the composite $S\times S$ is also one-to-one
+    - TODO [this](https://mathoverflow.net/a/228288) offers one explicit equation, referenced in [this](https://math.stackexchange.com/questions/1061115/on-the-problem-of-polynomial-bijection-from-mathbb-q-times-mathbb-q-to-math#comment2159965_1061115) stating that the bijection is much nontrivial.
+      - > That problem has a negative solution: *no algorithm* can take a polynomial and determine whether it has integer roots.
+        > The *undergraduate*-level references for this seem *limited*. Most papers on H10Q approach it differently, via Diophantine definitions of the integers in the rationals, so they motivate this problem but don't help to solve it.
+- [ ] 34
+  - [x] a. $f(x)=\frac{1}{2}(\frac{1}{x}-\frac{1}{1-x})\Rightarrow f'(x)=\frac{1}{2}(-\frac{1}{x^2}-\frac{1}{(1-x)^2})$, so one-to-one
+     then use $\lim$ to prove onto, i.e. codomain is $\mathbf{R}$.
+  - [ ] b. use above $f(x)$ and 
+    $g(x)=\frac{2}{\pi}*arctan(x)$
+    - see the ans whose codomain is the subset of $(0,1)$
+      the above codomain is $(-1,1)$
+- [x] 35 is just [Cantor_diagonal_argument_string]
+  - > Represent a subset of the set of positive integers as an infinite bit string with ith bit 1 if i belongs to the subset and 0 otherwise.
+
+    this is trivial by the bit string definition.
+  - > Suppose that you can list these infinite strings in a sequence indexed by the positive integers.
+
+    is due to the assumption of that the conclusion is right.
+    > Assume that there is such a one-to-one correspondence.
+  - the rest see the above link and [this](#binary_string_0_1) for the binary string set to $(0,1)$.
+- [ ] 36
+  - the wikipedia proof is similar to the ans after "There is one technical point here"
+  - then $S={x|x\in(0,1)}|,\aleph_0\overset{\text{exercise 35 due to "cannot appear"}}{\lt}P(\mathbf{Z^+})| \overset{\text{exercise 36}}{=}|S|\overset{\text{exercise 34}}{=} |R|$
+  - the ans
+    - > We can encode subsets of the set of positive integers as strings of, say, 5’s and 6’s
+      similar to 35 0/1
+    - [Terminating](https://www.cuemath.com/numbers/terminating-decimal/) Decimal Definition
+      > A number has a terminating decimal expansion if the digits after the decimal point terminate or are *finite*
+      - [proof](https://math.stackexchange.com/questions/1404291/whether-a-real-number-is-a-dyadic-rational-iff-its-binary-expansion-terminates#:~:text=A%20real%20number%20is%20a%20dyadic%20rational%20if,if%20its%20binary%20expansion%20terminates.&text=Since%20this%20is%20base%2D2,x%20is%20a%20dyadic%20rational.) where
+        1. "if" just use the definition
+        2. "only if" uses $|a|\neq+\infin$
+        > Another equivalent way of defining the *dyadic* rationals is that they are the real numbers that have a *terminating* binary representation
+      - TODO [$0.d_1\ldotsd_{n−1}\bar{1}$](https://math.stackexchange.com/questions/1641233/what-points-in-0-1-will-have-two-binary-expansions#comment3346986_1641252) is recurrent by [definition](https://en.wikipedia.org/wiki/Repeating_decimal), see 
+        $\frac{593}{53}$
+        - this is also shown in the ans
+          > we can *decide* to always *use* the terminating form
 ### Supplementary
 - [ ] 16
   as the problem says, p172 definition 4 use the same $f$ for different domains,i.e. both $A\to B$ and $\forall S\subset A \exists T\subset B,S\to T$
@@ -1314,38 +1403,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       ${u \in A |f(u) \in {f(x) |x \in X }}$ is based on one-to-one property because $Y = {f(x) | x \in X }$ maps each 
       $x$ to one unique $f(x)$, similarly for the former, each 
       $f(u)$ is mapped to one unique $u$, so one-to-one
-- [ ] 25
-  just similar to index with positive numbers
-  $K\to S$ is one-to-one due to "where *no two* elements of S have the same label"
-  then $\mathbf{Z^+} \to K$ is also one-to-one for the same reason $\blacksquare$.
-  - see the ans
-    - the a finite string of keyboard characters $K$ is not finite but infinite countable due to **maybe infinite length**.
-      countable because for each length-$k$ we can list $24^k$ which is finite -> infinite series/sequence -> countable.
-- [ ] 26 
-  ~~by using key "0~9" and "." which are "a finite list characters" to construct "a finite string of keyboard characters", then one-to-one map to $\mathbf{R}$~~
-  above is not always one "finite string".
-  - hint has finished the proof by chaning the above strikethroughed ones to the context of "0~9" and "/".
-    - see the ans "negative" -> "-"
-- [ ] 27
-  $A_1,A_2-A_1,\ldots,A_n-\sum_{k=1}^{n-1}A_{k}$
-  this sequence each $A_i$ can be listed, then $A_n-\sum_{k=1}^{n-1}A_{k}$ can also be listed, so the sequence can be listed
-  $\blacksquare$
-  - the ans just uses another list method similar to 2.5-4.
-- [ ] 28
-  write them in one matrix
-  then zigzag similar to 2.5-4,27.
-  - see the ans using 27 directly.
-- [ ] 29 using 25 with "0,1".
-  compared with here, [Cantor_diagonal_argument_string] can always add one new element by **appending digit "1"** to $s$ to differentiate with all the rest due to the property of infinity.
-  - the ans just use $\underset{i=1}{\overset{n}{\bigcup}} S_i,|S_i|=2^i$
-- [ ] 30 
-  similar to 28 $S={(a,b,c)|a\neq 0}\subset \mathbf{Z^+}\times\mathbf{Z^+}\times\mathbf{Z^+}$ is ~~finite~~ countable.
-  then for each $(a,b,c)$, max 2 solutions construct the solution set
-  $T={x_1,x_2}$
-  - so a union of $|S|$ number of 
-    $T_i$, by exercise 27, countable. 
-  - see the ans it just reprove 28 by 27
-- [ ] 
+not write solutions in 2.5 here.
 
 ---
 
@@ -1357,4 +1415,4 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
 
-[Cantor_diagonal_argument_string]:https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Uncountable_set
+[Cantor_diagonal_argument_string]:https://en.wikipedia.org/wiki/Cantor's_diagonal_argument#Uncountable_set
