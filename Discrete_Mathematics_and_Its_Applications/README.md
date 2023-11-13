@@ -99,7 +99,7 @@ check p10 whether the ideas of each chapter are mastered.
     - The use the *equivalence of proposition* $\equiv$ to prove the $\leftarrow$ if having proven $\rightarrow$.
   - example 11 just uses the $\equiv$ implicitly.
 ### 2.3
-- p170 function definition implies no one-to-mul and part-to-total/part (i.e. must total-to-...).
+- p170 function definition implies no one-to-mul and part-to-total/part (i.e. must total-to-...). <a id="default_total_function"></a>
   “one-to-one” means not mul-to-one, i.e. if *only use one in the domain*, then *no redundancy* in the *domain*.
   "onto" means no redundancy in the *codomain*, i.e. no total-to-part.
 - > A one-to-one correspondence is called invertible
@@ -108,6 +108,7 @@ check p10 whether the ideas of each chapter are mastered.
   - one-to-one due to above p170 definition where $a$ as $f^{-1}$
     image needs to be *unique* for each $b$. -> " more than one such a"
   - onto due to "each element of A" which applying to $f^{-1}$ means "each element of B" in p170
+    so no part-to-total
     -> "no such a"
 - Stirling's approximation proof
   - [1](#stirling)
@@ -284,6 +285,8 @@ check p10 whether the ideas of each chapter are mastered.
 - [multiline](https://tex.stackexchange.com/questions/36343/multiline-text-under-over-arrows#comment72468_36343) in xRightarrow using [`substack`](https://tex.stackexchange.com/a/63192)
 - emptyset [preferred $\varnothing$](https://math.stackexchange.com/questions/917467/is-varnothing-an-empty-set#comment1893997_917472)
 - not comma among [multiple](https://dept.math.lsa.umich.edu/~kesmith/295handout1-2010.pdf) $\forall,\exists$ and $\ni$ for "so that".
+- representation for [capital](https://www.overleaf.com/learn/latex/Mathematical_fonts) letters where both $\mathbb{P}$ and $\mathcal{P}$ are ok.
+  [detailed](https://tex.stackexchange.com/a/58124)
 ## katex
 - available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
 - set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
@@ -1245,7 +1248,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       $\le\mathbf{Z^+}$ -> countable.
   - ~~TODO similar to mapping $\mathbf{Z^+}\to B$, is mine solution right?~~
     see the p203 definition, "has the same cardinality as the set of positive integers" means that we must show explicity **equal**
-    - also [see](https://math.stackexchange.com/a/4804647/1059606)
+    - also [see][comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one]
       > When working with infinite sets there is very little reason to think that any coherent notion of "size" exists in the first place.
 
       comparing two countable infinite sets $A,B$ by $|A|\ge |B|$ is no use.
@@ -1355,6 +1358,125 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
         $\frac{593}{53}$
         - this is also shown in the ans
           > we can *decide* to always *use* the terminating form
+- [ ] 37
+  > a string of symbols from a finite alphabet
+  similar to 29, here the string is obviously finite to be stored on the computer.
+  then the number is $\underset{i=1}{\overset{n}{\bigcup}} S_i,|S_i|=26^i$ by changing 2 to 26.
+  - ans
+    - > all computer programs in a particular language is a *subset* of the set of all strings of a finite alphabet
+      because *valid word strings* are limited.
+      - > which is a countable set by the result from Exercise 16, it is itself a countable set
+        should be 
+        > which is a countable set, it is itself a countable set by the result from Exercise 16
+- [ ] 38
+  > associating to the real number $0.d_1 d_2 \ldots d_n \ldots$ the function f with $f (n) = d_n$
+  this map $(0,1)\to f$ is one-to-one trivially ~~even for binary decimal representations $0.1\bar{0}$ and $0.0\bar{1}$~~
+  - it must be onto to the *subset* $S$ of the set of all functions $T$.
+  - then $|\mathbf{R}|=|S|<|T|$ so T is uncountable.
+  - as the ans said, here must forbid one of $0.1\bar{0}$ and 
+    $0.0\bar{1}$
+    since $0.1\bar{0}=0.0\bar{1}\Rightarrow f(0.1\bar{0})\neq f(0.0\bar{1})$ contradict with the function inherent property that each preimage has one **unique** image.
+- [x] 39
+  "com-puter program" number is countable, i.e. the set $S$ of com-puter programs.
+  but the subset $T$ corresponding to 38 in the set $V$ of all functions may be not countable.
+  then $|S|<|T|<|V|$ 
+  so the onto map from $S$ to $V$ is unavailable.
+  - > We say that a function is computable if there is a com-puter program that finds the values of this function
+    > Consequently, there are only a countable number of computable functions
+    so for the set $P$ of computable functions, i.e. com-puter program that finds the values of one function, $|P|<|S|$.
+- [ ] 40
+  hint's proof
+  $\text{suppose }f(s)=T\Rightarrow \exists s\in T=f(s),s\notin f(s),\text{ then contradiction}\blacksquare$
+  this proves $f$ exists that doesn't map to $T$, but how to prove that no $f$ can't map to $T$?
+  - after hinted by the ans
+    just use the above for each $f$, then always $\forall f:S\to \mathcal{P}(S)\exists T\in \mathcal{P}(S),f\not\to T,\text{ f is not onto}\blacksquare$
+  - see the ans
+    [comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one] shows not onto doesn't mean the opposite $|S|\le |\mathcal{P}(S)|$
+    - here should be $|S|\neq |\mathcal{P}(S)|$
+  - this is same as the wikipedia [proof](https://en.wikipedia.org/wiki/Cantor%27s_theorem#Proof), see "Equivalently, and slightly more formally" if having questions after reading the proof.
+- [ ] 41
+  1. $\forall a\in A$
+    based on the assumption, let $a$ be the first the element, then because both $f$ and $g$ are injective, so the sequence is [well-defined](https://en.wikipedia.org/wiki/Well-defined_expression) which is same as what [Schröder_Bernstein_theorem] shows where [the partition](https://en.wikipedia.org/wiki/Partition_of_a_set#Examples) imply this.
+    > A function is well defined if it gives the same result when the representation of the input is changed *without changing* the value of the input
+    - the ans
+      > Thus, if x is in both the chain generated by y1 and the chain generated by y2, then the chain generated by y1 and the chain generated by y2 are both the same as the chain generated by x and are therefore the same chain.
+      here suppose $y_1$ and $y_2$ are two different chains, i.e. $x$ in two different. Then based on $x$ conversely (see book p32 for "converse" meaning), they should be same, contradiction $\blacksquare$.
+  2. first split into ending or not
+    then not ones is splitted into definite or not.
+    ending ones trivially end with $A$ or $B$
+    For infinitely not ending, think as $f:a_i\to b_i+1,g:b_i+1\to a_i+1,i\in \mathbf{N}$, then one infinite sequence is constructed.
+    - the ans
+      > if there is a b ∈ B with g(b) = a
+      implies loop possibility (type 1)
+      this just means backward to self.
+      - > g may not be a surjection
+        implies possible stopping, also maybe all not stopping. (type 2)
+        > This means that there are injections $f : A\to B$ and $g : B\to A$
+        since their statuses are same. both A and B are possible to end at. (type 3,4)
+  3. 1,4 is trivial because of existence
+    - based on d,e. This function selection is due to
+      1. type 4 with $g^{-1}(a)$ 
+        is to select the end element $b\in B$ of type 4 when **onto**
+      2. similarly type 3 must be with $f(a)$ to map the end element 
+        $a\in A$.
+      3. the rest can be either $f$ or $g$ because both side (forward/backward) can be run.
+        This is also shown in [Schröder_Bernstein_theorem]
+  4. by injection of $f$ 
+    and partial function $g^{-1}$ (this line is hinted by the ans) <a id="injective_f_g_inverse"></a>
+    - the ans use (a) result
+      $$
+      \text{suppose not one-to-one, then }\exists a_1,a_2\in A\exists b\in B a_1\neq a_2\ni h(a_1)=h(a_2)=b\\
+      \text{then }b\text{ is in two different chains, contradiction}\tag*{$\blacksquare$}
+      $$
+      - similar to e, since A can be always inside the chain (1,2,4) or at the end (3), so forward always works.
+        i.e. use the injective property $f$
+    - ~~since 3 has taken all $a$ in account, so $h(a)$ must exist without caring about whether $h(a)$ has its meaning,~~
+      ~~which is different from 5 where it begins from $B$, so two cases must be separate to solve with.~~
+      since one-to-one needs to prove $\forall x_1\neq x_2,h(x_1)\neq h(x_2)$, so no need to care about the detailed infos about 
+      **what is exactly $x_1,x_2$**,
+      but onto needs to prove $\forall y,\exists x,h(x)=y$ this needs **exact** equation of $x$ <a id="comparison_proof_onto_with_one_to_one"></a>
+  5. type 4 is enough because $g$ is injective so **partial** function $g^{-1}$ is onto.
+    ~~so p207 is based on the strict total function shown in p170 [default_total_function](#default_total_function)~~
+    ~~> However, this is not the case because when you have an injection from a set A to a set B *that may not be onto*, and another injection from B to A that also may not be onto~~
+    - the above is wrong because not use one same single function definition of $h$ with (d),(e)
+      see the ans
+    - the ans just use the chain locality
+      where 1~3 doesn't ends with B, so backward or forward.
+      4 ends with B, so the end is backwarded from $g(b)$ with $g^{-1}$ to get.
+  - after hinted by this solution
+    This is wrong [see](#care_about_construction_of_func) 
+    $$
+    \text{here }g^{-1} \text{ first to make onto can take effect, otherwise }\quad f\quad\text{ always has its definition , then }g^{-1}\text{ can't take effect.}\\
+    \begin{equation*}
+      h(x)=
+      \begin{cases}
+        g^{-1}(x)&\text{if this \textbf{partial} inverse function has definition at}\quad x,\text{mark this as}x\in S,f(S)=T\\
+        f(x)&\text{otherwise}
+      \end{cases}
+    \end{equation*}
+    $$
+    - one-to-one
+      1. if both $x_1,x_2\in S\bigvee x_1,x_2\in A-S$, then by [this](#injective_f_g_inverse), they are one-to-one
+      2. WLOG, if $x_1\in S,x_2\in A-S$, suppose $f(x_2)=g^{-1}(x_1)\in T$ then $x_2$ should be in $S$ because it is mapped to $T$, contradiction
+        - This is wrong, although this contradiction is right, but the above $g^{-1}$ is wrong because it has priority of <a id="care_about_construction_of_func"></a>
+          $g^{-1}$ over $f$ and doesn't make sure that they don't overlap.
+          See [Schröder_Bernstein_theorem] example [1](https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem#Examples) where $C_k$ ensures non-overlap which is just ~~B~~A-stopper because it can only starts from $[0,1]$ which is f domain.
+          ~~This implies A/B-stopper has the priority over the doubly infinite.~~
+      with 1,2 $\blacksquare$
+    - onto
+      $g^{-1}$ is enough to map to all $B$.
+      ~~this also shows that the above $f(x)$ is **fake** which can't happen here.~~
+    - here we can also use the graph similar to [2_3_37] to help understanding this problem.
+  - this one is same as [wikipedia][Schröder_Bernstein_theorem]
+    - TODO meaning
+      > each a in A and b in B is in exactly one such sequence to within identity
+    - the book problem definitions of A-stopper and B-stopper are same as here where both cares about the **very beginning** one.
+    - it shows bijection by using partial $f^{-1}$ and 
+      $f$
+      > between its elements in A and **its** elements in B.
+      - so with *all* three cases, then the *partial* ones can be combined to get the *onto* although this isn't said explicitly.
+    - the figure shows onto with $a\sim f$
+  - 
 ### Supplementary
 - [ ] 16
   as the problem says, p172 definition 4 use the same $f$ for different domains,i.e. both $A\to B$ and $\forall S\subset A \exists T\subset B,S\to T$
@@ -1415,4 +1537,9 @@ not write solutions in 2.5 here.
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
 
+<!-- wikipedia -->
 [Cantor_diagonal_argument_string]:https://en.wikipedia.org/wiki/Cantor's_diagonal_argument#Uncountable_set
+[Schröder_Bernstein_theorem]:https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem#Proof
+
+<!-- math stackexchange -->
+[comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one]:https://math.stackexchange.com/a/4804647/1059606
