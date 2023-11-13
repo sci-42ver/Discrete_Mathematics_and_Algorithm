@@ -259,8 +259,12 @@ check p10 whether the ideas of each chapter are mastered.
 - > It can be shown that the smallest infinite cardinal numbers form an infinite *sequence*
   [see](https://en.wikipedia.org/wiki/Continuum_hypothesis#Cardinality_of_infinite_sets)
   > Assuming the axiom of choice, there is a unique smallest cardinal number
-  the function inherently implies "unique".
+  the function inherently implies "unique", i.e. only one $y$ for $f(x)=y$.
+  - Also [see](#Axiom_of_choice)
 - Continuum hypothesis is [not proven at present](https://en.wikipedia.org/wiki/Hilbert%27s_problems#Table_of_problems).
+- Here from p203 definition 2, the "onto" to $|A|\ge |B|$ is not direct
+  proof [see](https://math.stackexchange.com/a/286800/1059606) <a id="onto_compare_cardinality"></a>
+  - the 1st part of the proof is same as [this](http://www.randomservices.org/random/foundations/Functions.html#aoc) which referenced [here "duality"](https://math.libretexts.org/Courses/Monroe_Community_College/MTH_220_Discrete_Math/Appendices/A.1%3A_Cardinality-additional_info#:~:text=A%E2%89%88C.-,A%20one%2Dto%2Done%20function%20f%20from%20A%20onto%20B,the%20same%20number%20of%20elements.)
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -328,7 +332,7 @@ I also read the asterisked ones.
   modification after reading the answer
   a) so 99th is true
   b) if "at least n" is true, then true for all $i<=n$ (i.e. n false and $100-n$ true -> $100-n=n$ -> $n=50$)
-  c) see b), $99-n=n$ is impossible for $n\in\mathbb{Z}$
+  c) see b), $99-n=n$ is impossible for $n\in\mathbf{Z}$
 ### 1.2
 - 2,6~8,12 skipped because similar to 10,
   14 just based on keywords
@@ -576,14 +580,14 @@ Most of them are similar to proofs in the junior/senior high school.
   here $n=a^2,n+2=b^2$
   then $2=(a+b)(a-b)$
   $a+b=2\\ a-b=1$ 
-  so $a=\frac{3}{2},b=\frac{1}{2}\Rightarrow a,b\notin \mathbb{Z}$, 
+  so $a=\frac{3}{2},b=\frac{1}{2}\Rightarrow a,b\notin \mathbf{Z}$, 
   obviously $F$
   - Also see ans where use the *consecutive* square to prove.
 - [ ] 12
   similar to 8
   [irrational numbers latex](https://texblog.org/2007/08/27/number-sets-prime-natural-integer-rational-real-and-complex-in-latex/)
-  $\frac{p}{q}*k=\frac{m}{n},k\in \mathbb{I}$
-  then $k=\frac{mq}{pn}\in \mathbb{Q}$ (why [Q for rational](https://math.libretexts.org/Bookshelves/Analysis/Real_Analysis_(Boman_and_Rogers)/01%3A_Numbers_-_Real_(%E2%84%9D)_and_Rational_(%E2%84%9A)/1.01%3A_Real_and_Rational_Numbers#:~:text=The%20set%20of%20rational%20numbers%20is%20denoted%20Q%20for%20quotients,Figure%201.1.)) -> contradiction.
+  $\frac{p}{q}*k=\frac{m}{n},k\in \mathbf{I}$
+  then $k=\frac{mq}{pn}\in \mathbf{Q}$ (why [Q for rational](https://math.libretexts.org/Bookshelves/Analysis/Real_Analysis_(Boman_and_Rogers)/01%3A_Numbers_-_Real_(%E2%84%9D)_and_Rational_(%E2%84%9A)/1.01%3A_Real_and_Rational_Numbers#:~:text=The%20set%20of%20rational%20numbers%20is%20denoted%20Q%20for%20quotients,Figure%201.1.)) -> contradiction.
   - See ans notice the nonzero to ensure validity of division by $p$.
 - [x] 14,34 direct proof.
 - [x] 16,18,41 proof by contradiction.
@@ -599,7 +603,7 @@ Most of them are similar to proofs in the junior/senior high school.
 - [x] 30
   if is easy
   only if: $(m-n)(m+n)=0$
-- [x] 32 just use $\equiv$ based on axioms with the $\mathbb{R}$
+- [x] 32 just use $\equiv$ based on axioms with the $\mathbf{R}$
 - [x] 36 (5) is wrong.
 - [x] 38 4->1->2->3 chain, then use $\leftrightarrow$ to $3\to4$
   - ans not use chain is also ok
@@ -916,6 +920,8 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   a. $\ldots<\ldots\to\ldots=\ldots$
   b. function may equal somewhere.
   - see ans for the strict proof
+- [ ] 33b because 2.5-22 needs it.
+  b. due to the definition $\forall c\in C,\exists b\in B,f(b)=c$, then $\exists a\in A g(a)=b\Rightarrow f(g(a))=c\blacksquare$
 - [ ] 34
   a. contradiction
     if f not then also $f(k),k=g(x)$, i.e. $f\circ g$
@@ -1048,7 +1054,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       > when an argument's premises *assume* the truth of the *conclusion*
     - based on [this](https://math.stackexchange.com/a/1234668/1059606) which is got in the QA recommendation when [asking](https://math.stackexchange.com/questions/ask) the question "Why does the proof of inverse function need the both ordering, i.e. $f\circ f^{-1}$?" but not after appending "and $f^{-1}\circ f$", 
       both $(f\circ g)\circ (g^{-1}\circ f^{-1})$ and $(g^{-1}\circ f^{-1})\circ (f\circ g)$ are needed to be proven because 
-      $(f^{-1}\circ f)(x)=x$ while $(f\circ f^{-1})(1)=2$ (the above example can be generalized to $\mathbb{R}$ domain with added $f^{-1}(x)=x-1,x\neq 1$).
+      $(f^{-1}\circ f)(x)=x$ while $(f\circ f^{-1})(1)=2$ (the above example can be generalized to $\mathbf{R}$ domain with added $f^{-1}(x)=x-1,x\neq 1$).
   - use [associative property](https://math.stackexchange.com/a/1267985/1059606) same as the ans
     - the ans uses the nested function property.
 - [x] 74 by contradiction
@@ -1092,7 +1098,10 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       TODO [Pigeonhole principle](https://builtin.com/data-science/pigeonhole-principle) means mul-to-one but here the proper subset to the universal set means onto impossible but not for one-to-one which doesn't allow mul-to-one.
       > Case A is the case illustrating the essence of the pigeonhole principle
       
-    b. just define one [choice function](https://en.wikipedia.org/wiki/Axiom_of_choice#Statement) (i.e. self-mapping function)
+    b. just define one [choice function](https://en.wikipedia.org/wiki/Axiom_of_choice#Statement) (i.e. self-mapping function) <a id="Axiom_of_choice"></a>
+      - Also [see](https://plato.stanford.edu/entries/axiom-choice/) where $f(X)\in X$ implies choose **inside** each subset
+        or see wikipedia
+        > given the sets {{4, 5, 6}, {10, 12}, {1, 400, 617, 8000}}, the set containing each smallest element is {4, 10, 1}
     $$
     f(a_i) = a_{i+1}\\
     f(x)=x\text{ when }x\in S-{a_{i},\ldots}
@@ -1155,7 +1164,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   a. $\sum_{i=1}^{3}(2i-3)=2*6-9=3$
     hinted by the ans (notice the $2i$ instead of $i$)
 - [ ] 38
-  - this method can be generalized with induction for all $\sum_{k=1}^{n}k^n,n\in\mathbb{N}$
+  - this method can be generalized with induction for all $\sum_{k=1}^{n}k^n,n\in\mathbf{N}$
 - [ ] 43
   $\text{let }\lfloor\sqrt{m}\rfloor=t,\sum=1*3+2*5+\ldots+(t-1)*(2*(t-1)+1)+t*(m-(t-1)^2)$
   then hinted by the ans, $\sum_{k=1}^{t-1}(2k^2+k)+t*(m-(t-1)^2)\blacksquare$
@@ -1216,7 +1225,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   the above three move processes are similar to how the **turing machine** works by step-by-step running.
   - the ans maps all to the even number
 - [x] 10 
-  $B=\mathbb{R}$
+  $B=\mathbf{R}$
   a. $A-B=\{"a"\}$
   the rest are similar.
 - [x] 12
@@ -1230,7 +1239,33 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 16 contradiction that subset can't be listed but the superset can.
   - better direct proof which is similar to 15
 - [ ] 18 based on the one-to-one correspondence definition.
-- [ ] 
+- [ ] 20 just use the one-to-one correspondence chain
+  - see the ans for the more formal description.
+- [ ] 22 [$|A|\ge |B|$](#onto_compare_cardinality) and 
+  ~~countable of A -> $|A|\in \mathbf{N}$~~
+  - see the ans countable infinite won't imply $|A|\in \mathbf{N}$
+    but map $\mathbf{Z^+}\to A$ (see this as indexing one infinite series)
+    - it uses onto from $\mathbf{Z^+}$ to the target, so the target size must be
+      $\le\mathbf{Z^+}$ -> countable.
+  - ~~TODO similar to mapping $\mathbf{Z^+}\to B$, is mine solution right?~~
+    see the p203 definition, "has the same cardinality as the set of positive integers" means that we must show explicity **equal**
+    - also [see](https://math.stackexchange.com/a/4804647/1059606)
+      > When working with infinite sets there is very little reason to think that any coherent notion of "size" exists in the first place.
+      comparing two countable infinite sets $A,B$ by $|A|\ge |B|$ is no use.
+  - see p204 here more strictly $g$ is one-to-one correspondence, but onto is enough to construct the sequence.
+- [ ] 24
+  suppose $\exists A,|A|\le |\mathbf{Z^+}|\text{ by one-to-one}$ then how to prove 
+  $|A|\neq |\mathbf{Z^+}|$?
+  - see the ans
+    - the problem needs to prove impossibility of $<$ instead of possibility of $<$
+      so maybe should prove $|A|= |\mathbf{Z^+}|$ 
+      (since $<$ is excluded) or 
+      $|A|> |\mathbf{Z^+}|$
+    - after being hinted, use $\mathbf{Z^+}$ to index (one-to-one map)
+      $A$, then $|\mathbf{Z^+}|\le|A|$
+      - This is same as $g(n) = f^{−1}(m) =k\in A,\text{here k is unknown}$
+        - where "$n^{th}$ smallest element" sequence means injective and the infinite length of the sequence means [surjective](https://en.wikipedia.org/wiki/Bijection,_injection_and_surjection), so bijection -> $|A|=|\mathbf{Z^+}|$
+    - the key idea is the indexed sequence by $\mathbf{Z^+}$
 ### Supplementary
 - [ ] 16
   as the problem says, p172 definition 4 use the same $f$ for different domains,i.e. both $A\to B$ and $\forall S\subset A \exists T\subset B,S\to T$
@@ -1279,6 +1314,37 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       ${u \in A |f(u) \in {f(x) |x \in X }}$ is based on one-to-one property because $Y = {f(x) | x \in X }$ maps each 
       $x$ to one unique $f(x)$, similarly for the former, each 
       $f(u)$ is mapped to one unique $u$, so one-to-one
+- [ ] 25
+  just similar to index with positive numbers
+  $K\to S$ is one-to-one due to "where *no two* elements of S have the same label"
+  then $\mathbf{Z^+} \to K$ is also one-to-one for the same reason $\blacksquare$.
+  - see the ans
+    - the a finite string of keyboard characters $K$ is not finite but infinite countable due to **maybe infinite length**.
+      countable because for each length-$k$ we can list $24^k$ which is finite -> infinite series/sequence -> countable.
+- [ ] 26 
+  ~~by using key "0~9" and "." which are "a finite list characters" to construct "a finite string of keyboard characters", then one-to-one map to $\mathbf{R}$~~
+  above is not always one "finite string".
+  - hint has finished the proof by chaning the above strikethroughed ones to the context of "0~9" and "/".
+    - see the ans "negative" -> "-"
+- [ ] 27
+  $A_1,A_2-A_1,\ldots,A_n-\sum_{k=1}^{n-1}A_{k}$
+  this sequence each $A_i$ can be listed, then $A_n-\sum_{k=1}^{n-1}A_{k}$ can also be listed, so the sequence can be listed
+  $\blacksquare$
+  - the ans just uses another list method similar to 2.5-4.
+- [ ] 28
+  write them in one matrix
+  then zigzag similar to 2.5-4,27.
+  - see the ans using 27 directly.
+- [ ] 29 using 25 with "0,1".
+  compared with here, [Cantor_diagonal_argument_string] can always add one new element by **appending digit "1"** to $s$ to differentiate with all the rest due to the property of infinity.
+  - the ans just use $\underset{i=1}{\overset{n}{\bigcup}} S_i,|S_i|=2^i$
+- [ ] 30 
+  similar to 28 $S={(a,b,c)|a\neq 0}\subset \mathbf{Z^+}\times\mathbf{Z^+}\times\mathbf{Z^+}$ is ~~finite~~ countable.
+  then for each $(a,b,c)$, max 2 solutions construct the solution set
+  $T={x_1,x_2}$
+  - so a union of $|S|$ number of 
+    $T_i$, by exercise 27, countable. 
+  - see the ans it just reprove 28 by 27
 - [ ] 
 
 ---
