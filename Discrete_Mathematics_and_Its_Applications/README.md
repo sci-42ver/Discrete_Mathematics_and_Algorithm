@@ -781,7 +781,9 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   -> $\sqrt{5+2\sqrt{6}}=\sqrt{2}+\sqrt{3}$ is irrational
 ## 2
 ### 2.1
-- 2~6,10,14~18,22,34~38,46 skipped
+- 2~6,
+  10,14~18,
+  22,34~38,46 skipped
 - [ ] 8 notice self.
 - [ ] 20
   $A=\{\varnothing\},B=\{\varnothing,\{\varnothing\}\}$
@@ -818,7 +820,10 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - based on p147 where the *property*, i.e. $x\notin x$ here, may "leads to paradoxes".
 - [ ] 51 $C_n^{i},i=1\sim n$ selection.
 ### 2.2
-- 2~4,22~24,28,34,40~42,54~66,74 skipped
+- 2~4,
+  22~24,
+  28,34,40~42,
+  54~66,74 skipped
 - [ ] 6 the membership table is more intuitive where $\varnothing$ always corresponds to $F$.
 - [x] 8,10,12,20(e) similar to 6 ans, the "Set-builder notation" is intuitive.
   - 12
@@ -894,7 +899,9 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       - similar to above, definition 1~3 are trivial.
     - "third observation above" then use [Steinhaus Transform](https://mathoverflow.net/a/18090).
 ### 2.3
-- 4~6,10,18,28,30~32,38,44,60~66(64,66 notice the domain) skipped
+- 4~6,
+  10,18,28,30~32,
+  38,44,60~66(64,66 notice the domain) skipped
 - [x] 2
   a. one-to-mul, so not
   b. yes
@@ -1110,7 +1117,12 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       $a_{i+1}$ starts from $a_1$, so *onto* for $A= S − \{a_0\}$
     - This is similar to p197 how to sum the infinite series and p204 example 2.
 ### 2.4
-- 2~4,10~12,18~22,30~32,36,40~42,46~48 skipped
+- 2~4,
+  10~12,
+  18~22,
+  30~32,
+  36,40~42,
+  46~48 skipped
 - [x] 6
   d. due to $(k+1)^2-k^2=2k+1$
 - [ ] 8 see the ans
@@ -1333,6 +1345,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     $g(x)=\frac{2}{\pi}*arctan(x)$
     - see the ans whose codomain is the subset of $(0,1)$
       the above codomain is $(-1,1)$
+      so it should be $g(x)=\frac{1}{\pi}*arctan(x)+\frac{1}{2}$ <a id="map_R_0_1"></a>
 - [x] 35 is just [Cantor_diagonal_argument_string]
   - > Represent a subset of the set of positive integers as an infinite bit string with ith bit 1 if i belongs to the subset and 0 otherwise.
 
@@ -1344,7 +1357,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - the rest see the above link and [this](#binary_string_0_1) for the binary string set to $(0,1)$.
 - [ ] 36
   - the wikipedia proof is similar to the ans after "There is one technical point here"
-  - then $S={x|x\in(0,1)}|,\aleph_0\overset{\text{exercise 35 due to "cannot appear"}}{\lt}P(\mathbf{Z^+})| \overset{\text{exercise 36}}{=}|S|\overset{\text{exercise 34}}{=} |R|$
+  - then $S={x|x\in(0,1)}|,\aleph_0\overset{\text{exercise 35 due to "cannot appear"}}{\lt}\mathcal{P}(\mathbf{Z^+})| \xlongequal{\text{exercise 36}}|S|\xlongequal{\text{exercise 34}} |R|$
   - the ans
     - > We can encode subsets of the set of positive integers as strings of, say, 5’s and 6’s
       similar to 35 0/1
@@ -1476,8 +1489,42 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       > between its elements in A and **its** elements in B.
       - so with *all* three cases, then the *partial* ones can be combined to get the *onto* although this isn't said explicitly.
     - the figure shows onto with $a\sim f$
-  - 
+### 2.6
+- most of them are skipped because I have learnt linear algebra.
+  2~16,
+  20~28
+  32~34 skipped
+- [ ] 17 b after hinted
+  here $\sum_{q}b_{qi}a_{jq}$ is based on $B=[b_{ji}]$
+  $[\sum_{q}a_{jq}b_{qi}]=[c_{ji}]\xlongequal{\mathbf{AB}=[c_{ij}]}(\mathbf{AB})^t$
+- [ ] 18 notice both sides or use the $\mathbf{A}^{-1}$ definition.
+- [ ] 30 notice $\mathbf{A}\wedge\mathbf{B}$ or 
+  $\mathbf{A}\vee\mathbf{B}$ don't need $\mathbf{A,B}$ to be the square.
 ### Supplementary
+- 4,38 skipped
+  the following without "see the ans" and the tick default to need to see the ans, e.g. 10.
+- [x] 2
+  $$
+  \forall a\in A\Rightarrow a\in B\\
+  \forall S\in \mathcal{P}(A),(\forall k\in S\Rightarrow k\in A\Rightarrow \exists T\in\mathcal{P}(B),k\in T)\tag*{$\blacksquare$}
+  $$
+  (this one is not strict because that $T$ is one-to-one map from $S$ is not shown.)
+  or based on power set definition
+  or based on this [$\Leftrightarrow$](https://en.wikipedia.org/wiki/Power_set), this is same as the ans says.
+  $$
+  \forall S\in \mathcal{P}(A)\Leftrightarrow S\subseteq A\subseteq B\Leftrightarrow S\in \mathcal{P}(B)\\
+  \text{then } \mathcal{P}(A)\subseteq \mathcal{P}(B)
+  $$
+- [ ] 6
+  - see the ans for how to use the description of words as the media to prove.
+- [ ] 8 removal order doesn't influence the result.
+  - similar to 6 see the ans
+- [ ] 10 use $\le B\le$ as the media
+  then the second $\le$ only becomes $=$ when 
+  $A=B$.
+- [x] 12
+  by definition, $|\bar{A}\bigcap\bar{B}|=|U-A-B| \xlongequal{\text{principle of inclusion–exclusion}} \text{right-side}$
+- [x] 14 [see](#default_total_function), because $\forall x\in S\exists \text{ unique } y\in f(S)\ni y=f(x)$
 - [ ] 16
   as the problem says, p172 definition 4 use the same $f$ for different domains,i.e. both $A\to B$ and $\forall S\subset A \exists T\subset B,S\to T$
   the following ~~is based on that *both domains conform to* the one-to-one property of $f$, etc,~~ ~~which is trivial due to $f(S)=f(\bigcup s_i)=\bigcup f(s_i)=\bigcup t_i=T$~~ ~~see~~ a,b proves that $f(x):A\to B$ and $S_f(X) = f(X)$ have the **same** property w.r.t. one-to-one and onto where they use only the property of 
@@ -1497,7 +1544,9 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
         $\exists y\in Y,\nexists x\in A\ni f(x)=y$
         which is just what the $ Y \subseteq S_f (X)$ says.
     - here there is no way for $f(x)=Y$ to be in the set definition $ X = { x \in A | f(x) \in Y }$ 
-      since the problem only shows "f is a function from A to B" but not "f is a function from P(A) to P(A)", so the domain w.r.t. $x$ and $X$ are **not same**.
+      since the problem only shows "f is a function from A to B" but not "f is a function from $\mathcal{P}(A)$
+      to $\mathcal{P}(A)$", 
+      so the domain w.r.t. $x$ and $X$ are **not same**.
     - $S_f(a)=f(a)=b\wedge a\in X\Rightarrow b\in S_f(X)$
   
   c. ~~TODO $f^{-1}$ may not exist if not one-to-one correspondence.~~
@@ -1525,7 +1574,79 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       ${u \in A |f(u) \in {f(x) |x \in X }}$ is based on one-to-one property because $Y = {f(x) | x \in X }$ maps each 
       $x$ to one unique $f(x)$, similarly for the former, each 
       $f(u)$ is mapped to one unique $u$, so one-to-one
-not write solutions in 2.5 here.
+- [x] 18,22 prove by two cases
+- [ ] 20
+  let $\{x\}$ be the [fraction part](https://en.wikipedia.org/wiki/Floor_and_ceiling_functions#Notation).
+  - hinted by the ans
+    notice here should both use [$x-\lfloor x\rfloor$](https://en.wikipedia.org/wiki/Fractional_part#For_negative_numbers) to help generalize the ideas to negative from positive, then $\{x\}\in(0,1)$
+    1. then if $\{x+y\}\in(0,1]$ then round up one
+      both $\{y\}$ and $\{x\}$ will round up one -> $\neq$
+    2. if $\{x+y\}\in(1,2)$ -> ok.
+    - see the ans 
+      for case 1 maybe $\{y\}$ or $\{x\}$ be 0, then equal.
+- [x] 24
+  similar to 20, let $\frac{x}{4}=n+\epsilon$, but here $\epsilon\in[0,1)$ 
+  then the right side is $n$
+  the left side is $\lfloor\frac{\lfloor 2n+2\epsilon\rfloor}{2}\rfloor=\lfloor\frac{2n\text{ or }2n+1}{2}\rfloor=n$
+- [x] 26
+  similar to 20,
+  $x=k+\epsilon,\epsilon\in[0,1)$
+  then it is to prove $t=n+k,\lfloor \frac{t+\epsilon}{m}\rfloor=\lfloor \frac{t}{m}\rfloor$
+  since $m\ge 1\gt\epsilon\Rightarrow\frac{\epsilon}{m}\in[0,1)$
+  to make $\frac{t}{m}$ to round up *another* one based on $\lfloor\frac{t}{m}\rfloor$, we need at least $\frac{1}{m}\gt\frac{\epsilon}{m}$, then it is impossible. $\blacksquare$
+- [ ] 27
+  similar to 20
+  $\text{let }x=n+\epsilon,\epsilon\in[0,1),m\epsilon\in[k,k+1),\text{where }k\in\mathbf{N}\wedge k\in[0,m-1]$
+  left side: $mn+k$
+  right side: $\text{to let }\lfloor x+\frac{i}{m}\rfloor=\lfloor \frac{mn+m\epsilon+i}{m}\rfloor\text{ round up based on} n$
+  we need $m\epsilon+i\ge m\Rightarrow k+i\ge m,i\ge m-k$, since $i$ stop at $n-1$ so there are $k$ right terms rounding up.$\blacksquare$
+  - see the ans how to be tuned with this specific sum sequence.
+    where small error: should be $\text{through }\lfloor x + (m - r − 1)/m\rfloor$
+- [ ] 28
+  pattern: $1\xrightarrow{}2\xrightarrow{+u_1}3\xrightarrow{+u_1}4\xrightarrow{+u_2}6\xrightarrow{+u_2}8\xrightarrow{+u_3}11\ldots$
+  proof of this pattern:
+  $$
+  \begin{equation*}
+    u_n=
+    \begin{cases}
+      u_{\frac{n-1}{2}}+u_{n-1},n \text{is odd}\\
+      u_{\frac{n}{2}}+u_{n-1},n \text{is even}\\
+    \end{cases}
+    ,n\ge 3
+  \end{equation*}
+  $$
+  without the proof let $u_{n+1}=u_{n}+u_{n-1},n\ge 3$ this is always one subset of Ulam numbers, which is infinite series,$\blacksquare$
+  - this pattern is wrong, from [this](https://en.wikipedia.org/wiki/Ulam_number#Properties) maybe there is no well-defined function for this.
+    TODO maybe [related](https://math.stackexchange.com/q/4199847/1059606)
+- [ ] 30
+  [see](https://testbook.com/question-answer/the-next-term-of-the-sequence-1-3-4-8-15-27--609237f563fb2bc627007d50)
+- [ ] 31
+  $$
+  10=2*5\\
+  13=3+10\\
+  39=3*13\\
+  43\neq 5+39\text{ here I start from 5th term, and associate with distance 3}
+  $$
+  - [see](https://www.european-rubber-journal.com/article/2093179/erj-brainteaser-april#:~:text=Question%203%3A%20What%20comes%20next,numbers%20are%20177%20and%20885.)
+- [ ] 32
+  since by [this](https://mathspace.co/textbooks/syllabuses/Syllabus-999/topics/Topic-19889/subtopics/Subtopic-263668/#:~:text=An%20irrational%20number%20is%20a,nor%20recurring%20are%20irrational%20numbers.), 
+  so "A non-terminating, non-repeating decimal" is irrational, then by [Cantor_diagonal_argument_string] $\blacksquare$
+  - notice [$\mathbf{R}=\mathbf{Q}\bigcup\mathbf{P}$](https://math.stackexchange.com/a/1435320/1059606), irrational [symbol](https://byjus.com/maths/irrational-numbers/#:~:text=Generally%2C%20the%20symbol%20used%20to,the%20real%20and%20rational%20number.)
+  - see the ans $\mathbf{Q}$ is countable.
+- [ ] 34 
+  since the count of subsets with size $i$ is $|\mathbin{Z^+}|^i$
+  - the above $|\mathbin{Z^+}|=\aleph_0$ so $|\mathbin{Z^+}|^i$ has no real meanings, see [comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one].
+  - the ans first limit it to $S_n$.
+- [ ] 35
+  injection from $(0,1)$ to $(0,1)\times(0,1)$ is trivial by using $f:x\to(x,x)$
+  - injection $R\to (0,1)$, etc see [2.5-34](#map_R_0_1) which uses the ans 
+    $arctan(x)\ldots$, similarly for 
+    $R\times R\to(0,1)\times(0,1)$.
+  then the injection chain proves the theorem $\blacksquare$.
+  - > do not end with an infinite string of 9s
+    see 2.5-38 just forbid this pattern.
+- [x] 36 $\text{since }\forall x=a+bi\in\mathbf{C},f:x\to(a,b)\text{ is one-to-one correspondence}\Rightarrow|\mathbf{C}|=|\mathbf{R}\times\mathbf{R}|\text{ with the 35 conclusion}\blacksquare$
+- [ ] 
 
 ---
 
