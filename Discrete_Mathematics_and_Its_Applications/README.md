@@ -35,6 +35,9 @@ check p10 whether the ideas of each chapter are mastered.
 
   BNF adds [much limitation](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form).
 ## 1
+### added after reviewing
+- modus ponens means by [**placing**](https://en.wikipedia.org/wiki/Modus_ponens) $P$, then $Q$
+  modus tollens means ["taking away"](https://en.wikipedia.org/wiki/Modus_tollens) $Q$, i.e. $\neg Q$, then $\neg P$
 ### 1.1
 - [Atomic propositions p2](https://www.cs.cmu.edu/~emc/15414-f12/lecture/propositional_logic.pdf)
 - [logic](https://web.archive.org/web/20071218193638/https://www.utm.edu/research/iep/a/aristotl.htm#H5)
@@ -95,7 +98,7 @@ check p10 whether the ideas of each chapter are mastered.
   - just think propositional variables as one special set $\{T,F\}$
   - it is the general case of [Boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra#Values).
     - See example 10 "De Morgan’s law for propositions" for how this generalization works based on using the property, i.e. [Set-builder](https://en.wikipedia.org/wiki/Set_(mathematics)#Set-builder_notation), as the *proposition* ~~in some way~~.
-      then $\notin$ becomes $\bar{A}$, etc, to convert *back* to the set theory.
+      then $\notin$ becomes $\overline{A}$, etc, to convert *back* to the set theory.
     - The use the *equivalence of proposition* $\equiv$ to prove the $\leftarrow$ if having proven $\rightarrow$.
   - example 11 just uses the $\equiv$ implicitly.
 ### 2.3
@@ -208,7 +211,7 @@ check p10 whether the ideas of each chapter are mastered.
 
       see [this](https://en.wikiversity.org/wiki/Continuum_mechanics/Calculus_of_variations#Minima_of_functionals) where is to get the maxima/Minima based on the *conditions for endpoints*.
     - (7)~(16) finish the proof.
-    - for [multi-dimensional](https://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation#Statement) just list *multiple one-dimensional* Euler–Lagrange equations, see $i=1,\ldots,n$
+    - for [multi-dimensional](https://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation#Statement) just list *multiple one-dimensional* Euler–Lagrange equations, see $i=1,\ldots ,n$
 - FIGURE 3 doesn't circle the $\frac{p}{q}\text{ due to }p,q\text{ are not coprime}$ and use the sequence property in p204 to prove countable.
 - Cantor Diagonal Method for 
   1. [theory of "computation"](https://concretenonsense.wordpress.com/2011/07/12/cantors-diagonal-argument-and-undecidability/)
@@ -257,6 +260,97 @@ check p10 whether the ideas of each chapter are mastered.
 - Here from p203 definition 2, the "onto" to $|A|\ge |B|$ is not direct
   proof see [this](https://math.stackexchange.com/a/286800/1059606) and my [rejected edit](https://math.stackexchange.com/review/suggested-edits/2036195) <a id="onto_compare_cardinality"></a>
   - the 1st part of the proof is same as [this](http://www.randomservices.org/random/foundations/Functions.html#aoc) which referenced [here "duality"](https://math.libretexts.org/Courses/Monroe_Community_College/MTH_220_Discrete_Math/Appendices/A.1%3A_Cardinality-additional_info#:~:text=A%E2%89%88C.-,A%20one%2Dto%2Done%20function%20f%20from%20A%20onto%20B,the%20same%20number%20of%20elements.)
+## [A_Guide_to_Writing_Proofs]
+I read it after chapter 1,2 but when I read it I thought I should read it while reading chapter 1,2 although that may be with many obstacles if not having all knowledge from the chapter 1,2.
+- maths [argument](https://bridges.education.uconn.edu/wp-content/uploads/sites/753/2016/03/ARP_Grade3_Fractional-Parts-of-Candy-Bars-Packet-Overview.pdf)
+- p2
+  assumption: just one step forward
+  write out what it would mean for $Q(x)$: just one step backward
+- [universe of discourse](https://en.wikibooks.org/wiki/Discrete_Mathematics/Logic/Page_2#Universe_of_Discourse) ,i.e. domain
+- For the exercises here, I only reviewed them by thinking of how to prove them and don't write down the proofs to most of them because they are similar to the book exercises after each subsection which are enough to grasp the ideas.
+- 1.1.3 exercise 1
+  $$
+  \forall x\in X \cup(Y \cap Z)\\
+  \Rightarrow x\in X\vee (x\in Y\wedge x\in Z)\\
+  \Rightarrow
+  \begin{cases}
+    \xRightarrow{\text{if }x\in X\text{ but }x\notin Y \cap Z} x\in X\cup Y\\
+    \xRightarrow{\text{if }x\in Y\cap Z\text{ then }x\in X\cup Y\text{ due to }x\in Y} x\in(X\cup Y)\cap Z 
+  \end{cases}\\
+  \text{ the above case 1 may deny this conclusion and the \textbf{exercise 2 solves} this problem}
+  $$
+- 1.1.4 $\bigcup$ and $\overline{Z}\text{ with }Z$ may imply "proof by cases".
+- section 2.2 EXAMPLE 11 uses **logic**, i.e. definition, to prove set equation.
+- always "as desired" to mark as $\blacksquare$ which may end with $\blacksquare$ again ~~or not~~.
+- ~~"specialization" means similar to "instantiation" in section 1.6 TABLE 2 p103 -> "in particular".~~
+- contraposition is based on ~~"converse"~~ contrapositive.
+- $(p \wedge \neg q) \to r$
+  is based on
+  $$
+  \text{suppose }p\text{ is true. the following skip some trivial steps}\\
+  \begin{cases}
+    q=T
+    \begin{cases}
+      \xRightarrow{\text{left side, i.e. }(p \wedge \neg q) \to r} r=F/T\\
+      \xRightarrow{\text{right side, i.e. }p \to (q\vee r)} r=F/T
+    \end{cases}\\
+    q=F
+    \begin{cases}
+      \xRightarrow{\text{left side}} p\to r\\
+      \xRightarrow{\text{right side}} p\to r\\
+    \end{cases}
+  \end{cases}
+  $$
+  - or more intuitively
+    the left side means if both p and **not q**, then r
+    the right side means if p, then either q or **not q** which implies r simialr to p6. <a id="tautology_q_neg_q"></a>
+    trivially they mean same.
+- > have no way of using the hypothesis
+
+  this is based on using the direct proof, i.e. $f(x_1)=f(x_2)$ and $x_1<x_2$ don't match.
+  but if using WLOG and "proof by contradiction", $\neg(f(x_1)<f(x_2))=(f(x_1)=f(x_2))\Rightarrow\neg (x_1<x_2)=(x_1=x_2)$ which is just the "However ..." context.
+- p9
+  $(p\wedge\neg r\to\neg q)\equiv( q\to\neg p\vee r)$
+  similar to [this](#tautology_q_neg_q), $q$ with $p$ correspond to $r$ after the $\vee$.
+  - or think it as p is **the ~~assumption~~ hypothesis** as the doc says,
+    then $\neg r\to \neg q$ contraposition is $q\to r$
+- 1.2.1 exercises
+  1. it is to prove $\forall x\notin B\to x\notin A$, this contraposition is just the hypothesis 
+    $\forall x\in A\to x\in B\Rightarrow A\subseteq B$
+  2. trivial by $M=0\to\ldots$
+  3. $y=(x+y)-x$ is trivial
+    it is to prove based on assumption $\forall x\in\mathbf{Z}$
+    then $\forall y\notin\mathbf{Z}\Rightarrow x+y\notin \mathbf{Z}$, this contraposition is same as before.
+  4. similar to 3 
+    transform to $x\in A(x\in B\to x\in A\cap B)$
+- Example 5 in Section 1.7 shows vacuously true proposition is featured of the negative premise, so $\varnothing \subseteq A \cap \overline{B}$ should be **trivially** true where the conclusion is true regardless of the premise.
+- Proof by contradiction
+  see p113,114 where
+  $\neg q\to(r\wedge\neg r),q\text{ is the conclusion to prove}$ can be thought as $(p \wedge\neg q) \to F,\text{where }p\text{ is }r$ which is shown in "This leads to the contradiction $p\wedge\neg p$" and same as example 14 shows.
+- 1.2.2 exercises
+  1. trivial using the definition.
+    or similarly as the example $\exists x\in A\wedge x\notin A$ contradiction.
+  2. since "for all sets A and B"
+    suppose select $B\ni A\subseteq B$
+    then $B\cap \overline{A}=B$
+    if $A\neq \varnothing$
+    then 
+    $$
+    \exists a\in A\subseteq B\Rightarrow a\in B\\
+    \text{ but }a\notin \overline{A}\Rightarrow a\notin B\cap \overline{A}\text{ contradiction }\tag*{$\blacksquare$}
+    $$
+  3. suppose $\neq\varnothing$
+    then suppose $T=x\in A\cup B$
+    let $S=(\overline{A} \cup \overline{B})\cap(\overline{A} \cup B)\cap(A \cup \overline{B})$
+    then
+    - if $x\in (A\cap \overline{B})$, then 
+      $x\notin (\overline{A} \cup B)\Rightarrow x\notin S\Rightarrow x\notin S\cap T$
+    - for $x\in (A\cap B)$ and 
+      $x\in (B\cap \overline{A})$, it is similar.
+## 3
+### 3.1
+- "Kitab al-jabr w’al muquabala" may be [arabic](https://en.wikipedia.org/wiki/Languages_of_Iraq)
+- TODO The Art of Computer Programming ([TAOCP](https://www-cs-faculty.stanford.edu/~knuth/taocp.html))
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -395,7 +489,7 @@ I also read the asterisked ones.
 - [x] 64 $\neg F=T; \neg T=F$
 - [x] 66
   a($p=T,s=F$),b($p=F=s,q=T$),c($p=T=q=s,r=F$)
-- [ ] 68 $Q\bigwedge\underset{i\in odd}{\bigvee}p(i,1)$
+- [ ] 68 $Q\wedge\underset{i\in odd}{\vee}p(i,1)$
   all is not in even -> in one of odd.
 - [x] 70 $\underset{i=1}{\overset{9}{\bigwedge}}\underset{j=1}{\overset{9}{\bigwedge}}\underset{n=1}{\overset{9}{\bigvee}}p(i,j,n)$
 - [x] 72
@@ -977,18 +1071,18 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   a. based on definition 4
   $$
   \begin{align*}
-  f(S\bigcup T)=&\{f(x)|x\in(S\bigcup T)\}\\
+  f(S\cup T)=&\{f(x)|x\in(S\cup T)\}\\
   =&\{f(x)|x\in S\vee x\in T\}\\
-  =&\{f(x)|x\in S\}\bigcup\{f(x)|x\in T\}\\
-  =&f(S)\bigcup f(T)
+  =&\{f(x)|x\in S\}\cup\{f(x)|x\in T\}\\
+  =&f(S)\cup f(T)
   \end{align*}
   $$
   b. similar to above but
-  - $\{f(x)|x\in S\wedge x\in T\}\neq \{f(x)|x\in S\}\bigcap\{f(x)|x\in T\}$
+  - $\{f(x)|x\in S\wedge x\in T\}\neq \{f(x)|x\in S\}\cap\{f(x)|x\in T\}$
     because maybe 
     $$
-    \exists s\in S,\exists t\in T,s,t\notin S\bigcap T\Rightarrow (f(s)=f(t))\wedge
-    (\forall k\in S\bigcap T,f(k)\neq f(s))
+    \exists s\in S,\exists t\in T,s,t\notin S\cap T\Rightarrow (f(s)=f(t))\wedge
+    (\forall k\in S\cap T,f(k)\neq f(s))
     $$
   - then $\subseteq$ is by definition
   - see ans for the detailed proof
@@ -996,9 +1090,9 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   a. similar to 42, here only show one side.
   $$
   \begin{align*}
-  &\text{suppose }b\in S\bigcup T,f^{-1}(b)=a\\
+  &\text{suppose }b\in S\cup T,f^{-1}(b)=a\\
   &b\in S\to a\in f^{-1}(S)\quad\text{or}\quad b\in T \to a\in f^{-1}(T)\\
-  \Rightarrow& a\in f^{-1}(S)\bigcup f^{-1}(T)
+  \Rightarrow& a\in f^{-1}(S)\cup f^{-1}(T)
   \end{align*}
   $$
   b. all "if and only if" are by definition.
@@ -1008,27 +1102,27 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       use one example,
       $$
       S=\{1,2\},T=\{2,3\},f(0)=1,f(1)=f(2)=2,f(3)=3\\
-      \Rightarrow f^{-1}(S)={0,1,2},f^{-1}(T)={1,2,3},f^{-1}(S\bigcap T)={1,2}
+      \Rightarrow f^{-1}(S)={0,1,2},f^{-1}(T)={1,2,3},f^{-1}(S\cap T)={1,2}
       $$
       - compared with 42(b), 
         - here the function inherent property doesn't allow the **one-to-mul** mapping, so 
           $\nexists a\in S\cap\overline{T},b\in T\cap\overline{S},f^{-1}(a)=f^{-1}(b)$
-          then nothing added to $f^{-1}(S\bigcap T)$ based on $f^{-1}(S)\bigcap f^{-1}(T)$
+          then nothing added to $f^{-1}(S\cap T)$ based on $f^{-1}(S)\cap f^{-1}(T)$
         - the 42(b) allows **mul-to-one** mapping, so 
           $\exists a\in S\cap\overline{T},b\in T\cap\overline{S},f(a)=f(b)$
-          then maybe something added to $f(S\bigcap T)$ based on $f(S)\bigcap f(T)$
+          then maybe something added to $f(S\cap T)$ based on $f(S)\cap f(T)$
     - algebraical proof:
       $$
       \newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{7cm}}}}}
       \begin{align*}
-      & & f^{-1}(S)&=&&f^{-1}((S\bigcap T)\bigcup(S\bigcap \overline{T})),\text{let }A=(S\bigcap T)\bigcup(S\bigcap \overline{T})\\
-      & & f^{-1}(T)&=&&f^{-1}((S\bigcap T)\bigcup(\overline{S}\bigcap T)),\text{let }B=(S\bigcap T)\bigcup(T\bigcap \overline{S})\\
-      &\myrightarrow{\text{use (a) result}}& f^{-1}(S)\bigcap f^{-1}(T)&=&&(f^{-1}(S\bigcap T)\bigcup f^{-1}(S\bigcap \overline{T}))\bigcup(f^{-1}(S\bigcap T)\bigcup f^{-1}(T\bigcap \overline{S})),\\
-      & & (\overline{S}\bigcap T)\bigcap(\overline{S}\bigcap T)&=&&(\varnothing)\bigcap(\varnothing)\\
-      &\myrightarrow{\text{due to function mapping any preimage to one \textbf{unique} image}}& (f^{-1}(\overline{S}\bigcap T))\bigcap(f^{-1}(\overline{T}\bigcap S))&=&&\varnothing\\
-      &\text{similarly }& (f^{-1}(\overline{S}\bigcap T))\bigcap(f^{-1}(T\bigcap S))&=&&\varnothing\\
-      &\text{and }& (f^{-1}(\overline{T}\bigcap S))\bigcap(f^{-1}(T\bigcap S))&=&&\varnothing,\\
-      &\text{then due to only \textbf{one} of four combinations between } A \text{ and } B& f^{-1}(S)\bigcap f^{-1}(T)&=&&f^{-1}(S\bigcap T)\tag*{$\blacksquare$}
+      & & f^{-1}(S)&=&&f^{-1}((S\cap T)\cup(S\cap \overline{T})),\text{let }A=(S\cap T)\cup(S\cap \overline{T})\\
+      & & f^{-1}(T)&=&&f^{-1}((S\cap T)\cup(\overline{S}\cap T)),\text{let }B=(S\cap T)\cup(T\cap \overline{S})\\
+      &\myrightarrow{\text{use (a) result}}& f^{-1}(S)\cap f^{-1}(T)&=&&(f^{-1}(S\cap T)\cup f^{-1}(S\cap \overline{T}))\cup(f^{-1}(S\cap T)\cup f^{-1}(T\cap \overline{S})),\\
+      & & (\overline{S}\cap T)\cap(\overline{S}\cap T)&=&&(\varnothing)\cap(\varnothing)\\
+      &\myrightarrow{\text{due to function mapping any preimage to one \textbf{unique} image}}& (f^{-1}(\overline{S}\cap T))\cap(f^{-1}(\overline{T}\cap S))&=&&\varnothing\\
+      &\text{similarly }& (f^{-1}(\overline{S}\cap T))\cap(f^{-1}(T\cap S))&=&&\varnothing\\
+      &\text{and }& (f^{-1}(\overline{T}\cap S))\cap(f^{-1}(T\cap S))&=&&\varnothing,\\
+      &\text{then due to only \textbf{one} of four combinations between } A \text{ and } B& f^{-1}(S)\cap f^{-1}(T)&=&&f^{-1}(S\cap T)\tag*{$\blacksquare$}
       \end{align*}
       $$
 - [x] 48,50 prove by case
@@ -1367,7 +1461,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
         1. "if" just use the definition
         2. "only if" uses $|a|\neq+\infin$
         > Another equivalent way of defining the *dyadic* rationals is that they are the real numbers that have a *terminating* binary representation
-      - TODO [$0.d_1\ldotsd_{n−1}\bar{1}$](https://math.stackexchange.com/questions/1641233/what-points-in-0-1-will-have-two-binary-expansions#comment3346986_1641252) is recurrent by [definition](https://en.wikipedia.org/wiki/Repeating_decimal), see 
+      - TODO [$0.d_1\ldotsd_{n−1}\overline{1}$](https://math.stackexchange.com/questions/1641233/what-points-in-0-1-will-have-two-binary-expansions#comment3346986_1641252) is recurrent by [definition](https://en.wikipedia.org/wiki/Repeating_decimal), see 
         $\frac{593}{53}$
         - this is also shown in the ans
           > we can *decide* to always *use* the terminating form
@@ -1383,12 +1477,12 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
         > which is a countable set, it is itself a countable set by the result from Exercise 16
 - [ ] 38
   > associating to the real number $0.d_1 d_2 \ldots d_n \ldots$ the function f with $f (n) = d_n$
-  this map $(0,1)\to f$ is one-to-one trivially ~~even for binary decimal representations $0.1\bar{0}$ and $0.0\bar{1}$~~
+  this map $(0,1)\to f$ is one-to-one trivially ~~even for binary decimal representations $0.1\overline{0}$ and $0.0\overline{1}$~~
   - it must be onto to the *subset* $S$ of the set of all functions $T$.
   - then $|\mathbf{R}|=|S|<|T|$ so T is uncountable.
-  - as the ans said, here must forbid one of $0.1\bar{0}$ and 
-    $0.0\bar{1}$
-    since $0.1\bar{0}=0.0\bar{1}\Rightarrow f(0.1\bar{0})\neq f(0.0\bar{1})$ contradict with the function inherent property that each preimage has one **unique** image.
+  - as the ans said, here must forbid one of $0.1\overline{0}$ and 
+    $0.0\overline{1}$
+    since $0.1\overline{0}=0.0\overline{1}\Rightarrow f(0.1\overline{0})\neq f(0.0\overline{1})$ contradict with the function inherent property that each preimage has one **unique** image.
 - [x] 39
   "com-puter program" number is countable, i.e. the set $S$ of com-puter programs.
   but the subset $T$ corresponding to 38 in the set $V$ of all functions may be not countable.
@@ -1469,7 +1563,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     \end{equation*}
     $$
     - one-to-one
-      1. if both $x_1,x_2\in S\bigvee x_1,x_2\in A-S$, then by [this](#injective_f_g_inverse), they are one-to-one
+      1. if both $x_1,x_2\in S\vee x_1,x_2\in A-S$, then by [this](#injective_f_g_inverse), they are one-to-one
       2. WLOG, if $x_1\in S,x_2\in A-S$, suppose $f(x_2)=g^{-1}(x_1)\in T$ then $x_2$ should be in $S$ because it is mapped to $T$, contradiction
         - This is wrong, although this contradiction is right, but the above $g^{-1}$ is wrong because it has priority of <a id="care_about_construction_of_func"></a>
           $g^{-1}$ over $f$ and doesn't make sure that they don't overlap.
@@ -1523,14 +1617,14 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   then the second $\le$ only becomes $=$ when 
   $A=B$.
 - [x] 12
-  by definition, $|\bar{A}\bigcap\bar{B}|=|U-A-B| \xlongequal{\text{principle of inclusion–exclusion}} \text{right-side}$
+  by definition, $|\overline{A}\cap\overline{B}|=|U-A-B| \xlongequal{\text{principle of inclusion–exclusion}} \text{right-side}$
 - [x] 14 [see](#default_total_function), because $\forall x\in S\exists \text{ unique } y\in f(S)\ni y=f(x)$
 - [ ] 16
   as the problem says, p172 definition 4 use the same $f$ for different domains,i.e. both $A\to B$ and $\forall S\subset A \exists T\subset B,S\to T$
-  the following ~~is based on that *both domains conform to* the one-to-one property of $f$, etc,~~ ~~which is trivial due to $f(S)=f(\bigcup s_i)=\bigcup f(s_i)=\bigcup t_i=T$~~ ~~see~~ a,b proves that $f(x):A\to B$ and $S_f(X) = f(X)$ have the **same** property w.r.t. one-to-one and onto where they use only the property of 
+  the following ~~is based on that *both domains conform to* the one-to-one property of $f$, etc,~~ ~~which is trivial due to $f(S)=f(\cup s_i)=\cup f(s_i)=\cup t_i=T$~~ ~~see~~ a,b proves that $f(x):A\to B$ and $S_f(X) = f(X)$ have the **same** property w.r.t. one-to-one and onto where they use only the property of 
   $f(x)$ but not $f(X)$.
-  a. let $X=\bigcup a_i$
-    then $S_f(X)=f(X)=f(\bigcup a_i)=\bigcup b_i$
+  a. let $X=\cup a_i$
+    then $S_f(X)=f(X)=f(\cup a_i)=\cup b_i$
     - see the ans which focus on one specific element.
   
   b. $\forall X_2\exists X_1,f(X_2)=X_1=S_f(X_2)\blacksquare$
@@ -1631,7 +1725,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 32
   since by [this](https://mathspace.co/textbooks/syllabuses/Syllabus-999/topics/Topic-19889/subtopics/Subtopic-263668/#:~:text=An%20irrational%20number%20is%20a,nor%20recurring%20are%20irrational%20numbers.), 
   so "A non-terminating, non-repeating decimal" is irrational, then by [Cantor_diagonal_argument_string] $\blacksquare$
-  - notice [$\mathbf{R}=\mathbf{Q}\bigcup\mathbf{P}$](https://math.stackexchange.com/a/1435320/1059606), irrational [symbol](https://byjus.com/maths/irrational-numbers/#:~:text=Generally%2C%20the%20symbol%20used%20to,the%20real%20and%20rational%20number.)
+  - notice [$\mathbf{R}=\mathbf{Q}\cup\mathbf{P}$](https://math.stackexchange.com/a/1435320/1059606), irrational [symbol](https://byjus.com/maths/irrational-numbers/#:~:text=Generally%2C%20the%20symbol%20used%20to,the%20real%20and%20rational%20number.)
   - see the ans $\mathbf{Q}$ is countable.
 - [ ] 34 
   since the count of subsets with size $i$ is $|\mathbin{Z^+}|^i$
@@ -1652,6 +1746,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
 [SOLUTIONS_7th]:./discrete-structure-solution-student39s-solutions-guide_compress_7th.pdf
+[A_Guide_to_Writing_Proofs]:./A_Guide_to_Writing_Proofs.pdf
 [stirling]:./papers/stirling.pdf
 [miscs_ipynb]:./miscs_snippets/miscs.ipynb
 
