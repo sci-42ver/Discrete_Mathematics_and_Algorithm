@@ -347,6 +347,38 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
       $x\notin (\overline{A} \cup B)\Rightarrow x\notin S\Rightarrow x\notin S\cap T$
     - for $x\in (A\cap B)$ and 
       $x\in (B\cap \overline{A})$, it is similar.
+- 1.2.3
+  1. example 16
+    $$
+    \text{since }A\neq\varnothing\wedge B\neq\varnothing\\
+    \Rightarrow\forall (a,b)\in A\times B\text{, i.e. } a\in A,b\in B\\
+    \Rightarrow (a,b)\in B\times A\\
+    \Rightarrow A\subseteq B,B\subseteq A\\
+    \Rightarrow A=B
+    $$
+  2. the 2nd is similar to the above
+  3. first assume $A\neq\varnothing$, then to prove $B=\varnothing$
+    - then use contradiction
+      if $B\neq\varnothing$
+      then $A\times B\neq\varnothing$ which contradicts with the hypothesis $A\times B=\varnothing$
+  4. 
+    $$
+    \forall x\in (X\cup Y)\cap Z\wedge x\notin X\\
+    \xRightarrow{(X\cup Y)\cap\overline{X}} x\in Y\\
+    \xRightarrow{\cap Z} x\in (Y\cap Z)\\
+    $$
+- strategies are [more ~~generalized~~ targeted at the long term](https://www.clearpointstrategy.com/blog/strategy-vs-tactics) than tactics.
+  > Strategy defines your long-term goals
+- p11 three examples are all $\forall x\forall y P(x,y)\to Q(x,y)\text{ here }x,y\text{ can be the generalized variable like } (m,n)\text{ or function }f$.
+  See example 17 which is the above case
+  - example 17~~has "rational" -> $\exists p,q\frac{p}{q}$~~,18 has $\exists$ inside the $P(x,y)$
+- 2.1
+  1. 
+  2. $\exists m=1$
+  3. $\exists n=m$
+  4. trivial with the algebra arithmetic.
+  5. similar to the above
+- TODO 2.2
 ## 3
 ### 3.1
 - "Kitab al-jabr w’al muquabala" may be [arabic](https://en.wikipedia.org/wiki/Languages_of_Iraq)
