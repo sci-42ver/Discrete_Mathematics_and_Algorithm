@@ -8,6 +8,9 @@
 \usepackage{enumitem}
 \usepackage{pifont,amssymb}
 \usepackage{float}
+
+% \usepackage[normalem]{ulem}
+
 % https://www.overleaf.com/learn/latex/Hyperlinks#Reference_guide to use ref link
 % https://tex.stackexchange.com/a/82913/308105
 % TODO cleveref https://tex.stackexchange.com/questions/83037/difference-between-ref-varioref-and-cleveref-decision-for-a-thesis
@@ -54,6 +57,15 @@
 \newcommand{\cmark}{\ding{51}}%
 \newcommand{\correctanswer}{{\renewcommand{\emptysquare}{\checkedsquare}\item\leavevmode}}
 
+% https://tex.stackexchange.com/a/20613/308105
+% here 0 is one renaming for one box https://tex.stackexchange.com/a/46483/308105
+% \rule https://en.wikibooks.org/wiki/LaTeX/Rules_and_Struts
+% \wd https://tex.stackexchange.com/a/222617/308105
+% \rlap https://www.tutorialspoint.com/tex_commands/rlap.htm https://tex.stackexchange.com/a/146100/308105
+% \ht https://tex.stackexchange.com/a/258779/308105
+\newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
+\rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}{#2}} 
+
 % \setlength{\mathindent}{0pt}
 
 % https://www.overleaf.com/learn/latex/%5Chfuzz this doesn't influence the typesetting https://tex.stackexchange.com/a/50850/308105
@@ -68,16 +80,16 @@
 % \nopagebreak may not influence this
 % TODO see this https://tex.stackexchange.com/a/2282/308105, https://tex.stackexchange.com/questions/701558/how-to-make-the-multiple-floating-blocks-not-occupying-the-whole-page-while-keep?noredirect=1#comment1744632_701558 to think of one better solution
 % with the \par, then no need for the preceding "\\" to separate it from others.
-    % \par\addvspace{10pt}
-    % \begin{algorithm}[H]
-    \begin{algorithm}[htb]
+    \par\addvspace{10pt}
+    \begin{algorithm}[H]
+    % \begin{algorithm}[htb]
         \setstretch{1.10}
         \caption{#1}\label{alg:#2}
 }
 {
 % https://tex.stackexchange.com/a/701544/308105
     \end{algorithm}
-    % \vspace{10pt}
+    \vspace{10pt}
 }
 \setlist{nolistsep}
 
@@ -204,13 +216,24 @@
 \begin{document}
 
 \setlength{\parindent}{20pt}
+\section{TODO}
+\subsection{use codes to check the following exercises}
+\begin{itemize}
+    \item 3.1-28,
+\end{itemize}
 \section{Predefined Rules}
 \begin{enumerate}
     \item If the following item has: \\
           \ecc{\item }
           Then probably this item has errors corrected by the ans(wer).
+
+          % not use verbatim* which contains visible whitespaces as short squat "u"s https://tex.stackexchange.com/a/448105/308105
+          % https://tex.stackexchange.com/a/107657/308105
+    \item for the \verb|\begin{align*}| and \verb|\begin{cases*}|, I use the same format as the book p206 shows.
 \end{enumerate}
 \section{section 3.1}
+
+% \texttt{\begin{align*} and \begin{cases*}}
 
 % https://tex.stackexchange.com/a/64476/308105
 \setlength{\textfloatsep}{0pt}% Remove \textfloatsep
@@ -423,12 +446,7 @@
         \item the ans modified the action when $x<a_m$, this speeds up more.
     }
     \ModProcName{four sublists}
-    \mywrongitem \CapProcTargetName \AlgorithmRef\\
-    \ecc{
-        \item lack the func parameter
-        \item My original thoughts are that we put all values mapped from the domain in one new set, and check whether duplicate conditions occur for each mapped value by \textbf{traversing} the list for the same value with the current calculated one. Obviously, this has the much higher complexity.\\
-        The ans just use the $hit$ to make $one\_one$ false when accessed twice, avoiding the traverse.
-    }
+    \mywrongitem \CapProcTargetName \AlgorithmRef
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
         \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a list},x:\text{ the target element}$)}{}
         $c_i\coloneqq 1\mycmt{c\text{ is the }i\text{th split point}}$\\
@@ -457,8 +475,145 @@
         \Return{$location$}
     \end{SpacingAlgorithm}
 
+    \ecc{
+        \item the ans compares with the middle first, and then to the left or right which avoids some comparison overheads.
+        \item also when $x>a_{c_1}$, we should let $i=c_1+1$ to avoid the duplicate future comparison.
+        \item TODO the ans seems to have one error because $\lfloor\frac{j+i}{4}\rfloor>i$ doesn't always hold.
+    }
+    % \clearpage
+
+    \ModProcName{four sublists corrected}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex_corrected}
+        \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a list},x:\text{ the target element}$)}{}
+        $c_i\coloneqq 1\mycmt{c\text{ is the }i\text{th split point}}$\\
+        $i\coloneqq 1,j\coloneqq n\mycmt{j,i\text{ is the tmp index}}$\\
+        $location\coloneqq 0\mycmt{location\text{ is the target index, which is inited "not found"}}$\\
+        \While{$i<j$}{
+            $c_1=i+\lfloor\frac{j-i}{4}\rfloor$\\
+            $c_2=i+\lfloor\frac{j-i}{2}\rfloor$\\
+            $c_3=i+\lfloor\frac{(j-i)*3}{4}\rfloor$\\
+            \If{$x\le a_{c_2}$}{
+                \lIf{$x\le a_{c_1}$}{
+                    $j=c_1$
+                }\Else{
+                    $i=c_1+1$\\
+                    $j=c_2$\\
+                }
+            }
+            \ElseIf{$x\le a_{c_3}$}{
+                $i=c_2+1$\\
+                $j=c_3$
+            }\lElse{
+                $i=c_3+1$
+            }
+        }
+        \lIf{$x==a_j$}{
+            $location=j$
+        }
+        \Return{$location$}
+    \end{SpacingAlgorithm}
+
+    \clearpage
+    \begin{itemize}
+        \item Here I prove $i>j$ when out of the \textbf{while} loop is impossible.\\
+              $\text{ let }j-i=4n+k,k=0\sim 3$
+              \begin{align*}
+                  c_1 & =n      \\
+                  c_2 & =
+                  \begin{cases*}
+                      2n,k=0,1 \\
+                      2n+1,k=2,3
+                  \end{cases*} \\
+                  c_3 & =
+                  \begin{cases*}
+                      3n,k=0,1 \\
+                      3n+1,k=2 \\
+                      3n+2,k=3
+                  \end{cases*}
+              \end{align*}
+              To let $i>j$, here assume $i=0$
+              although it is impossible based on the positive index assumption,
+              but $c_i$ is only based on $j-i$, so it is ok to let $i=0$.
+              % https://tex.stackexchange.com/a/203059/308105 here \begin{align*}
+              % \begin{equation*}
+              %     \begin{aligned}
+              %     \end{aligned}
+              % \end{equation*}
+
+              % here cases* has no & available. https://tex.stackexchange.com/q/124751/308105
+              $$
+                  \begin{cases}
+                      1. & j=c_1,i=0\Rightarrow 0>n\text{ \textbf{impossible}}                                                                          \\
+                      2. & j=c_2,i=c_1+1\Rightarrow \text{only }n+1>2n\text{ is possible}
+                      \Rightarrow n=0\xRightarrow{i<j}i=0,j=1                                                                                  \\
+                         & \Rightarrow x\le (a_{c_2}=a_0)\wedge x>(a_{c_1}=a_0)\text{ \textbf{impossible}}                                              \\
+                      3. & j=c_3,i=c_2+1                                                                                                       \\
+                         & \Rightarrow\begin{cases}
+                                          (k=0\text{ or }1) & 2n+1>3n\text{, here } x>(a_{c_2}=a_{c_3})(x>a_0)\text{.} \\
+                                                            & \text{so }i=c_3+1=1\text{ \textbf{impossible} here}                 \\
+                                          (k=2)             & \text{\textbf{impossible} similarly to the above }2n+2>3n+1,i=c_3+1=2         \\
+                                          (k=3)             & 2n+2>3n+2\text{ trivially \textbf{impossible}}
+                                      \end{cases}                           \\
+                      4. & i=c_3+1,j=4n+k\;\hcancel{\Rightarrow 3n+3>4n+3,\text{ \textbf{impossible}.}}                                                 \\
+                         & \Rightarrow 3n+k-1+1>4n+k\text{ \textbf{impossible}.}\text{ only } 3n+k+1>4n+k\text{ is possible}                            \\
+                         & \Rightarrow k=0,n=0,\text{originally }j-i=4n+k=0(\text{\textbf{also impossible} because \textbf{while} block condition }i<j)
+                  \end{cases}
+              $$
+              Based on the above, if $i<j$ into the while block,
+              then in the next iteration of the while loop, $i>j$ is impossible.$\quad\blacksquare$
+    \end{itemize}
+
+    \ModProcName{four sublists almost same the ans}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex_corrected}
+        \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a list},x:\text{ the target element}$)}{}
+        $c_i\coloneqq 1\mycmt{c\text{ is the }i\text{th split point}}$\\
+        $i\coloneqq 1,j\coloneqq n\mycmt{j,i\text{ is the tmp index}}$\\
+        $location\coloneqq 0\mycmt{location\text{ is the target index, which is inited "not found"}}$\\
+        \While{$i<j$}{
+            $c_1=i+\lfloor\frac{j-i}{4}\rfloor$\\
+            $c_2=i+\lfloor\frac{j-i}{2}\rfloor$\\
+            $c_3=i+\lfloor\frac{(j-i)*3}{4}\rfloor$\\
+            \If{$x> a_{c_2}$}{
+                \If{$x\le a_{c_3}$}{
+                    $i=c_2+1$\\
+                    $j=c_3$
+                }\Else{
+                    $i=c_3+1$
+                }
+            }
+            \ElseIf{$x> a_{c_3}$}{
+                $i=c_1+1$\\
+                $j=c_2$\\
+            }\lElse{
+                $j=c_1$
+            }
+        }
+        \lIf{$x==a_j$}{
+            $location=j$
+        }
+        \Return{$location$}
+    \end{SpacingAlgorithm}
+    similar to the above,
+    $$
+        \begin{cases}
+            1. & j=c_3,i=c_2+1                                                                                                        \\
+               & \Rightarrow\begin{cases}
+                                (k=0\text{ or }1) & 2n+1>3n,n=0\text{, here } x>(a_{c_2}=a_0)\wedge x\le (a_{c_3}=a_0)\text{ \textbf{impossible}.} \\
+                                (k=2)             & \text{\textbf{impossible} similarly to the above }2n+2>3n+1,n=0,c_2=c_3=1                      \\
+                                (k=3)             & 2n+2>3n+2\text{ trivially \textbf{impossible}}
+                            \end{cases} \\
+            2. & i=c_3+1,j=4n+k                                                                                                       \\
+               & \Rightarrow 3n+k-1+1>4n+k\text{ \textbf{impossible}.}\text{ only } 3n+k+1>4n+k\text{ is possible}                             \\
+               & \Rightarrow k=0,n=0,\text{originally }j-i=4n+k=0(\text{also \textbf{impossible} because \textbf{while} block condition }i<j) \\
+            3. & j=c_2,i=c_1+1\Rightarrow \text{only }n+1>2n\text{ is possible}                                                       
+            \Rightarrow n=0 \xRightarrow{x>(a_{c_2}=a_{c_3}=a_0)} j=c_1\text{ \textbf{impossible}}                                               \\
+            4. & j=c_1,i=0\Rightarrow 0>n\text{ \textbf{impossible}}                                                                           \\
+        \end{cases}
+    $$
+
 \end{todolist}
 
+\newpage
 \begin{todolist}[resume*,start=\CurTodolistToplevelIndex]
     \mywrongitem test 3
     \mywrongitem test 5

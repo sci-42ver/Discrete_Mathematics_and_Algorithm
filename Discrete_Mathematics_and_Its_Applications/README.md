@@ -460,6 +460,9 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   - `@` [inside](https://tex.stackexchange.com/a/9788/308105) the commands
     relation with [above](https://tex.stackexchange.com/a/6253/308105)
 - [`\begin{fleqn}`](https://tex.stackexchange.com/a/390092/308105)
+- sometimes we use [`aligned`](https://tex.stackexchange.com/a/54686/308105) instead of `align*`
+- flushright means right aligned, i.e. all contents can't exceed the right side.
+  See [1](https://en.wikibooks.org/wiki/LaTeX/Boxes#framebox_and_fbox) [2](https://tex.stackexchange.com/a/116781/308105)
 ### TODO
 - try use [`fltrace`](https://tex.stackexchange.com/a/39020/308105) to debug the "floating"
 # QA miscs
