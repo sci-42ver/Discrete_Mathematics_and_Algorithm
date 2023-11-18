@@ -1,0 +1,28 @@
+indentRules:
+#  shiftedalign*: "    "
+  ForRange: "    "
+#  large: "    "
+indentRulesGlobal:
+  items: "    "
+  optionalArguments: "    "
+  mandatoryArguments: "    "
+  ifElseFi: "    "
+noAdditionalIndent:
+# TODO it doesn't work for the following.
+# \ForRange{i}{1}{n}{
+# \lIf{$a_i\text{ is a letter}$}{
+#     $c=c+1$
+# }
+# \ElseIf{$a_i\text{ is a blank}$}{
+# $c=0$\\
+# \If{$len<c$}{
+# $len=c$\\
+# $word\text{ is }substr(a_{i-len}:a_{i-1})$
+# }
+# }
+# \lElse{
+#     error
+# }
+# }
+  ForRange:
+    body: 1

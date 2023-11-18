@@ -383,6 +383,40 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 ### 3.1
 - "Kitab al-jabr w’al muquabala" may be [arabic](https://en.wikipedia.org/wiki/Languages_of_Iraq)
 - TODO The Art of Computer Programming ([TAOCP](https://www-cs-faculty.stanford.edu/~knuth/taocp.html))
+- sorting algorithm [complexity](https://web.archive.org/web/20181216080432/https://www.cs.cmu.edu/~adamchik/15-121/lectures/Sorting%20Algorithms/sorting.html)
+- [insertion sort](https://www.geeksforgeeks.org/insertion-sort/) just compares each item with its former
+  and **insert** it at the appropriate location.
+  - compared with others
+    TODO [this](https://www.cprogramming.com/tutorial/computersciencetheory/sortcomp.html) different from [wikipedia](https://en.wikipedia.org/wiki/Sorting_algorithm#Comparison_sorts) about best case complexity with the bubble sort.
+- [quarters, dimes, nickels, and pennies](https://www.nbp.org/ic/nbp/programs/gep/lemon/lemon-money.html)
+- ALGORITHM 7 better adds:
+```python
+  while 
+    ...
+  if n==0:
+    break
+```
+- the lemma 1 just means always using the optimized choice.
+- p369 to prove the example 7
+  - $P(n)$ just means the greedy is the **optimal** when it selects $n$ talks
+  - basis: uses the overlap implied by the greedy.
+    "end after $e_1$" because $e_1$ is the 1st ending.
+  - inductive: 
+    1. prove the $e_1$ ~~will~~ can be always chosen **regardless** of whether to use the greedy algorithm. (prove the 1st step is optimal)
+    2. assume $e_1$ has been chosen, then based on the compatible index set 
+      $S=\{x|s_x>e_1\}$ which is also **regardless** of whether to use the greedy algorithm
+      then $P(k)$ which is optimal to 
+      $S$ based on the induction hypothesis, this constructs the $P(k+1)$ with $e_1$ $\blacksquare$.
+      (prove the next k are also optimal which is just based reusing $P(1)$ k times after removing the uncompatible talks)
+      - Also obviously $e_1$ is **always chosen** by the greedy algorithm because it is the *1st* ending.
+- 3.1.6 is similar to one exercise which defines one very special function.
+  - [halting problem](https://en.wikipedia.org/wiki/Halting_problem#Proof_concept) is
+    > The halting problem is undecidable, meaning that no general algorithm exists that solves the halting problem for **all possible** program–input pairs.
+    so finding one special counterexample is enough.
+    - for example, in the above link, $g()$ 
+      (i.e. $K(P)$ in the book) has no valid inputs to output, i.e. not one computable function.
+    - the link $halts(P)=H(P,P)\text{ in the book}$
+- 
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -419,6 +453,15 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   - `\makebox` [unavailable](https://tex.stackexchange.com/a/6840)
     Also [`\settowidth`](https://tex.stackexchange.com/a/37294)
     and [`\parbox`](https://tex.stackexchange.com/a/269950)
+## related with algorithm writing
+- `\verb` [similar](https://tex.stackexchange.com/a/47760/308105) to [`\texttt`](https://tex.stackexchange.com/a/470806/308105)
+- `\Return` should be preceded with one blank line to be separate from others.
+- [`makeatletter`](https://tex.stackexchange.com/a/8353/308105)
+  - `@` [inside](https://tex.stackexchange.com/a/9788/308105) the commands
+    relation with [above](https://tex.stackexchange.com/a/6253/308105)
+- [`\begin{fleqn}`](https://tex.stackexchange.com/a/390092/308105)
+### TODO
+- try use [`fltrace`](https://tex.stackexchange.com/a/39020/308105) to debug the "floating"
 # QA miscs
 - see the self-designed [template](./QA_template/template.md).
 - [mathjax](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference)
@@ -1772,6 +1815,45 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - > do not end with an infinite string of 9s
     see 2.5-38 just forbid this pattern.
 - [x] 36 $\text{since }\forall x=a+bi\in\mathbf{C},f:x\to(a,b)\text{ is one-to-one correspondence}\Rightarrow|\mathbf{C}|=|\mathbf{R}\times\mathbf{R}|\text{ with the 35 conclusion}\blacksquare$
+## 3
+### 3.1
+- 4~ see the [pdf](https://www.overleaf.com/read/fbychkzpsrff#459790).
+- [ ] 2
+  a.
+  - [x] input
+  - [ ] output
+  - [x] Definiteness
+  - [ ] Correctness
+  - [ ] Finiteness
+  - [ ] Effectiveness
+  
+  b. TODO what does this purpose to do?
+  - [x] input
+  - [ ] output
+  - [x] Definiteness
+  - [ ] Correctness
+  - [x] Finiteness
+  - [ ] Effectiveness
+  
+  c.
+  - [x] input
+  - [ ] output
+  - [x] Definiteness
+  - [ ] Correctness
+  - [x] Finiteness
+  - [x] Effectiveness
+  
+  d.
+  - [x] input
+  - [ ] output
+  - [ ] Definiteness
+  - [x] Correctness
+  - [x] Finiteness
+  - [x] Effectiveness
+
+  - see the ans where c is wrong.
+- [ ] 6
+  here $:=$ should be only used in the definition.
 - [ ] 
 
 ---

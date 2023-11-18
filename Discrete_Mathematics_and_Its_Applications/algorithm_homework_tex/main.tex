@@ -1,0 +1,469 @@
+% https://tex.stackexchange.com/a/145660/308105 https://latex.org/forum/viewtopic.php?p=51656#p51656 to use "\setlength{\mathindent}{0pt}"
+\documentclass{article}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage[noend,ruled,lined]{algorithm2e}
+\usepackage{mathtools}
+\usepackage{mfirstuc}
+\usepackage{enumitem}
+\usepackage{pifont,amssymb}
+\usepackage{float}
+% https://www.overleaf.com/learn/latex/Hyperlinks#Reference_guide to use ref link
+% https://tex.stackexchange.com/a/82913/308105
+% TODO cleveref https://tex.stackexchange.com/questions/83037/difference-between-ref-varioref-and-cleveref-decision-for-a-thesis
+\usepackage{hyperref}
+% https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
+\usepackage[dvipsnames]{xcolor}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=Green,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+% https://tex.stackexchange.com/a/39228/308105
+\usepackage{indentfirst}
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{3pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+
+% https://www.overleaf.com/learn/latex/Page_size_and_margins#Paper_size,_orientation_and_margins
+% \usepackage{layout}
+% \setlength{\hoffset}{0pt}
+% \setlength{\oddsidemargin}{0pt}
+% \setlength{\marginparsep}{0pt}
+% \setlength{\textwidth}{500pt}
+% https://tex.stackexchange.com/a/367867/308105
+\usepackage[left=0.3in,textwidth=7.3in]{geometry}
+
+\newlist{todolist}{enumerate}{2}
+% https://www.tug.org/TUGboat/tb09-1/tb20bechtolsheim.pdf
+\setlist[todolist]{label={\arabic*.\makebox[0pt][r]{\noexpand\emptysquare\hspace{1.3em}}},ref=\arabic*}
+
+% https://tex.stackexchange.com/a/138996/308105
+\usepackage{etoolbox,setspace}
+% \AtBeginEnvironment{algorithm}{\setstretch{20.5}}
+\setstretch{1.2}
+
+\newcommand{\emptysquare}{$\square$}
+\newcommand{\checkedsquare}{\makebox[0pt][l]{\raisebox{1pt}[0pt][0pt]{\large\hspace{1pt}\cmark}}$\square$}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\correctanswer}{{\renewcommand{\emptysquare}{\checkedsquare}\item\leavevmode}}
+
+% \setlength{\mathindent}{0pt}
+
+% https://www.overleaf.com/learn/latex/%5Chfuzz this doesn't influence the typesetting https://tex.stackexchange.com/a/50850/308105
+\hfuzz=30pt
+
+% https://tex.stackexchange.com/a/169711/308105
+% \renewcommand{\topfraction}{.5}
+% \renewcommand{\floatpagefraction}{.75}
+% https://www.overleaf.com/learn/latex/Environments#Defining_simple_environments and https://tex.stackexchange.com/a/67849/308105
+\newenvironment{SpacingAlgorithm}[2]{
+% this will make the figures more condensed https://tex.stackexchange.com/a/35130/308105
+% \nopagebreak may not influence this
+% TODO see this https://tex.stackexchange.com/a/2282/308105, https://tex.stackexchange.com/questions/701558/how-to-make-the-multiple-floating-blocks-not-occupying-the-whole-page-while-keep?noredirect=1#comment1744632_701558 to think of one better solution
+% with the \par, then no need for the preceding "\\" to separate it from others.
+    % \par\addvspace{10pt}
+    % \begin{algorithm}[H]
+    \begin{algorithm}[htb]
+        \setstretch{1.10}
+        \caption{#1}\label{alg:#2}
+}
+{
+% https://tex.stackexchange.com/a/701544/308105
+    \end{algorithm}
+    % \vspace{10pt}
+}
+\setlist{nolistsep}
+
+% https://tex.stackexchange.com/q/701531/308105
+\makeatletter
+\newenvironment{shiftedflalign*}{%
+    \vspace{-10pt}
+    \start@align\tw@\st@rredtrue\m@ne
+    % \hspace{-7pt}
+}{%
+    \endalign
+    \vspace{-40pt}
+}
+\makeatother
+
+% https://tex.stackexchange.com/a/701546/308105
+\newenvironment{shiftedalign*}[1][5pt]{%
+  \par\vspace{0ex}% adjust
+  % \hspace{#1}%
+  $\begin{aligned}%
+}{%
+  \end{aligned}$
+  \par\vspace{+1ex}% adjust
+}
+
+% https://tex.stackexchange.com/a/228609/308105 this can't work
+%\let\CondensedNewline\vspace{0.5em}
+% https://stackoverflow.com/q/43821452/21294350 not work
+% \newcommand{\CondenseNewline}{\newline[-1em]}
+
+% https://tex.stackexchange.com/a/234320/308105
+% here should use \def https://tex.stackexchange.com/a/262/308105
+\def\mylb{\\}
+\newcommand{\CondensedNewline}{\mylb[-0.5em]}
+% https://tex.stackexchange.com/questions/701531/how-to-tune-the-multiline-equation-with-the-self-defined-indentation?noredirect=1#comment1744479_701531
+\newcommand{\NoIndentEquationLine}[1]{%
+\hspace{-5pt}#1&&\CondensedNewline%
+}
+
+\newcommand{\mycmt}[1]{
+    \{#1\}
+}
+% https://tex.stackexchange.com/a/451651/308105
+\newcommand{\mywrongitem}{\itemsep0em \addtocounter{todolisti}{1}\item}
+\newcommand{\myrightitem}{\itemsep0em \addtocounter{todolisti}{1}\correctanswer}
+
+% must have one blank line between it and the "\end{algorithm}"
+\newcommand{\ecc}[1]{%
+    see the ans:%
+    \begin{itemize}[noitemsep]%
+        #1%
+    \end{itemize}
+}
+
+\newcommand{\ProcTargetName}{test}
+\newcommand{\NormalProcTargetName}{test}
+\newcommand{\CapProcTargetName}{\capitalisewords{\ProcTargetName}}
+\newcommand{\AlgorithmRef}{}
+% https://tex.stackexchange.com/a/100930/308105
+\newcommand{\CurTodolistToplevelIndex}{\number\numexpr\value{todolisti}\relax}
+% \renewcommand{\CurTodolistToplevelIndex}{\number\numexpr\value{todolisti}\relax}
+
+% use one newcommand to implement 2 \newcommand otherwise the latter one can't reuse the former's renewcommand https://tex.stackexchange.com/a/259292/308105
+% test with \textbf this is the \capitalisewords problem.
+\newcommand{\ModProcName}[1]{
+    \renewcommand{\ProcTargetName}{\textit{#1}}
+    \renewcommand{\NormalProcTargetName}{#1}
+    % here should not have maths codes with space inside "$(x, y, z)$ with $(y, z, x)$" which will be ambiguous.
+    \renewcommand{\CapProcTargetName}{\capitalisewords{#1}.}
+    
+    % \def{\ProcTargetName}{\textit{#1}}
+
+    % \def can be nested but it is no use maybe for \capitalisewords https://tex.stackexchange.com/a/318/308105 
+    % \def\NormalProcTargetName{#1}
+    % \def\CapProcTargetName{\capitalisewords{\NormalProcTargetName}.}
+    
+    % https://tex.stackexchange.com/a/70153/308105
+    \renewcommand{\AlgorithmRef}{\text{ See }\hyperref[alg:\CurTodolistToplevelIndex]{this}}
+}
+
+\SetKwComment{Comment}{\{ }{ \}}
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+% https://tex.stackexchange.com/a/302537/308105 or https://tex.stackexchange.com/a/271771/308105 which uses something like \upshape https://tug.org/pracjourn/2006-1/schmidt/schmidt.pdf
+% all default formats https://tex.stackexchange.com/a/623663/308105
+\SetProgSty{textnormal}
+
+% change for all https://tex.stackexchange.com/a/279202/308105
+% \AtBeginEnvironment{algorithm}{\let\textnormal\ttfamily}
+
+% https://stackoverflow.com/a/2212644/21294350
+\SetKwProg{proc}{procedure}{\vspace{-5pt}}{}
+% 
+\newcommand{\myproc}[2]{\proc{\normalfont#1}{#2}}
+\SetKwFor{While}{while (}{)}{}
+\SetKwFor{For}{for }{}{}
+% \SetKwIF{If}{ElseIf}{Else}{if}{then}{else if}{else}{\vspace{4pt}}
+% https://tex.stackexchange.com/a/47353/308105
+\let\oldelse\Else
+\renewcommand{\Else}[1]{\oldelse{#1\vspace{4pt}}}
+\newcommand{\ForRange}[4]{%
+    % https://www.overleaf.com/learn/latex/Spacing_in_math_mode
+    \For{#1\,$\coloneqq$\,\text{\normalfont #2}\,\KwTo \text{#3}}{ #4}
+}
+\DontPrintSemicolon
+% \renewcommand{\Return}[1]{\vspace{4pt}\KwRet{#1}}
+
+% https://tex.stackexchange.com/a/639572/308105
+% left aligned https://tex.stackexchange.com/a/145660/08105
+% \newenvironment{AlignNoSpacing}{
+%     \vspace{-15pt}
+%     \begin{flalign*}
+% }{
+%     \end{flalign*}
+%     \vspace{-25pt}
+% }
+
+\newenvironment{absolutelynopagebreak}
+  {\par\nobreak\vfil\penalty0\vfilneg
+   \vtop\bgroup}
+  {\par\xdef\tpd{\the\prevdepth}\egroup
+   \prevdepth=\tpd}
+
+\begin{document}
+
+\setlength{\parindent}{20pt}
+\section{Predefined Rules}
+\begin{enumerate}
+    \item If the following item has: \\
+          \ecc{\item }
+          Then probably this item has errors corrected by the ans(wer).
+\end{enumerate}
+\section{section 3.1}
+
+% https://tex.stackexchange.com/a/64476/308105
+\setlength{\textfloatsep}{0pt}% Remove \textfloatsep
+\setlength{\intextsep}{4pt}% Remove \textfloatsep
+% https://www.overleaf.com/learn/latex/Font_sizes%2C_families%2C_and_styles#Reference_guide
+\begin{large}
+    14 skipped
+\end{large}
+
+\begin{todolist}[itemsep=0pt,parsep=0pt,start=3]
+    \ModProcName{largest difference}
+    % \ProgSty{text}\\
+    \myrightitem \CapProcTargetName \AlgorithmRef
+    % \CurTodolistToplevelIndex
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \Input{232 and sdsd}
+        \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{integers})$}{
+        }
+        $i\coloneqq 1\mycmt{i\text{ is the search index}}$\\
+        $d\coloneqq 0\mycmt{d\text{ is the target difference}}$\\
+        \While{$i\le n-1$}{
+        \lIf{$d<a_{i+1}-a_i$}{$d=a_{i+1}-a_i$}
+        }
+        \Return{d} % \Comment{test}
+    \end{SpacingAlgorithm}
+
+    \ModProcName{number of negative integers}
+    \mywrongitem \CapProcTargetName \AlgorithmRef
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{integers})$}{}
+        $i\coloneqq 1\mycmt{i\text{ is the search index}}$\\
+        $c\coloneqq 0\mycmt{c\text{ is the number of negative integers}}$\\
+        \While{$i\le n$}{
+            \lIf{$a_i<0$}{$c=c+1$}
+        }
+        \Return{c}
+    \end{SpacingAlgorithm}
+
+    see the ans:
+    \begin{itemize}[noitemsep]
+        \item here the step size of $i$ is not explicitly shown.
+    \end{itemize}
+
+    \ModProcName{location of the largest even integer}
+    \mywrongitem \CapProcTargetName \AlgorithmRef
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{integers})$}{}
+        $c\coloneqq 1\mycmt{c\text{ is the location index}}$\\
+        $find\_even\coloneqq 0$\mycmt{$find\_even$ \text{ tracks whether even number exists}}\\
+        \ForRange{i}{1}{n}{
+            \lIf{$(a_i\%2==0$\text{ \normalfont and }$a_c<a_i)$}{$c=i$}
+        }
+        \Return{$find\_even$}
+    \end{SpacingAlgorithm}
+
+    \ecc{
+        \item here should initialize the comparison with $-\infty$
+        \item $find\_even$ isn't assigned value in the loop
+    }
+
+    \ModProcName{compute $x^n$}
+    \mywrongitem \CapProcTargetName \AlgorithmRef
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \myproc{\ProcTargetName($x$: real number, $n$: an integer)}{}
+        $c\coloneqq 1\mycmt{c\text{ is the target product}}$\\
+        \If{$n\ge 0$}{
+            \ForRange{i}{1}{n}{
+                $c=c*\cdot x$
+            }
+        }
+        \Else{
+            $n=-n$\\
+            use this new $n$ to calculate\\
+        }
+        \Return{$c$}
+    \end{SpacingAlgorithm}
+
+    \ecc{
+        \item use the absolute to combine the 2 cases
+        \item the above lack the reciprocal for the negative case.
+    }
+
+    \ModProcName{replaces the triple $(x,y,z)$ with $(y,z,x)$}
+    \myrightitem \CapProcTargetName \AlgorithmRef\\
+    Here obviously at least 3, but this will lose one variable when assigning, so one extra to save this lost one.
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \myproc{\ProcTargetName($(x, y, z)$: target tuple)}{}
+        $c\coloneqq 0\mycmt{c\text{ is the tmp variable}}$
+        % https://tex.stackexchange.com/a/259088/308105
+        % \begin{shiftedflalign*}
+        %   \NoIndentEquationLine{c=x}
+        %   \NoIndentEquationLine{x=y}
+        %   \NoIndentEquationLine{c=x}
+        %   \NoIndentEquationLine{c=x}
+        % \end{shiftedflalign*}
+
+        \begin{shiftedalign*}
+            c=x\CondensedNewline
+            x=y\CondensedNewline
+            y=z\CondensedNewline
+            z=c\CondensedNewline
+        \end{shiftedalign*}
+
+        \Return{$(x,y,z)$}
+    \end{SpacingAlgorithm}
+    \addtocounter{todolisti}{2}
+    \ModProcName{smallest integer in a finite sequence}
+    \mywrongitem \CapProcTargetName \AlgorithmRef
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{the sequence}$)}{}
+        $c\coloneqq \infty\mycmt{c\text{ is the target number}}$\\
+        \ForRange{i}{1}{n}{
+            \If{$c>a_i$}{
+                $c=a_i$
+            }
+        }
+
+        \Return{$c$}
+    \end{SpacingAlgorithm}
+
+    \ecc{
+        \item $c=a_1$ is duplicate.
+    }
+
+    % \newpage
+    \ModProcName{the last occurrence of the smallest element }
+    \myrightitem \CapProcTargetName \AlgorithmRef\\
+    This is similar to 16
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{the sequence}$)}{}
+        $c\coloneqq a_1\mycmt{c\text{ is the target number}}$\\
+        $l\coloneqq 1\mycmt{l\text{ is the target number index}}$\\
+        \ForRange{i}{2}{n}{
+            \If{$c\ge a_i$}{
+                $c=a_i$\\
+                $l=i$
+            }
+        }
+
+        \Return{$l$}
+    \end{SpacingAlgorithm}
+
+    \ModProcName{ the largest and the smallest integers}
+    \mywrongitem \CapProcTargetName \AlgorithmRef
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{the sequence}$)}{}
+        $c\coloneqq a_1\mycmt{c\text{ is the target smallest number}}$\\
+        $l\coloneqq a_1\mycmt{l\text{ is the target largest number}}$\\
+        \ForRange{i}{2}{n}{
+            \lIf{$c\ge a_i$}{
+                $c=a_i$
+            }
+            \lIf{$l\le a_i$}{
+                $l=a_i$
+            }
+        }
+
+        \Return{$c,l$}
+    \end{SpacingAlgorithm}
+
+    \ecc{
+        \item different from 18, here we don't need to track \textbf{equal} condition.
+    }
+
+    \ModProcName{ the longest word in an English sentence}
+    \myrightitem \CapProcTargetName \AlgorithmRef
+    % \clearpage
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{symbols}$)}{}
+        $c\coloneqq 0\mycmt{c\text{ is the track length}}$\\
+        $len\coloneqq 0\mycmt{len\text{ is the max length}}$\\
+        $word\coloneqq blank\mycmt{word\text{ is the finded word}}$\\
+        \ForRange{i}{1}{n}{
+        \lIf{$a_i\text{ is a letter}$}{
+            $c=c+1$
+        }
+        \ElseIf{$a_i\text{ is a blank}$}{
+        $c=0$\\
+        \If{$len<c$}{
+        $len=c$\\
+        $word\text{ is }substr(a_{i-len}:a_{i-1})$
+        }
+        }
+        \lElse{
+            error
+        }
+        }
+
+        \Return{$word$}
+    \end{SpacingAlgorithm}
+
+    Here I use $substr$ which is similar to one predefined function in C, like \href{https://stackoverflow.com/a/4214350/21294350}{this} or others, to replace the ans $word\coloneqq\lambda\ldots word\coloneqq concatenation\ldots$\\
+    Also, $length\coloneqq0$ is implied in the above $c=0$.\\
+    The ans uses $\lambda$ to represent empty string as book p189 shows.
+    \ModProcName{ whether a function is one-to-one}
+    \mywrongitem \CapProcTargetName \AlgorithmRef\\
+    \ecc{
+        \item lack the func parameter
+        \item My original thoughts are that we put all values mapped from the domain in one new set, and check whether duplicate conditions occur for each mapped value by \textbf{traversing} the list for the same value with the current calculated one. Obviously, this has the much higher complexity.\\
+        The ans just use the $hit$ to make $one\_one$ false when accessed twice, avoiding the traverse.
+    }
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{function domain},\{b_1, b_2,\ldots , b_n\}: \text{function codomain}$)}{}
+    \end{SpacingAlgorithm}
+    \ModProcName{ terminating Algorithm 3 if $x=a_m$}
+    \mywrongitem \CapProcTargetName\\
+    add $\text{if }x==a_m\text{ then }find=1;location=i;break$ before the 1st if block, \\
+    then $\text{if }find==1\text{ then }return\ldots$ before the 2nd if block\\
+    \ecc{
+        \item the ans modified the action when $x<a_m$, this speeds up more.
+    }
+    \ModProcName{four sublists}
+    \mywrongitem \CapProcTargetName \AlgorithmRef\\
+    \ecc{
+        \item lack the func parameter
+        \item My original thoughts are that we put all values mapped from the domain in one new set, and check whether duplicate conditions occur for each mapped value by \textbf{traversing} the list for the same value with the current calculated one. Obviously, this has the much higher complexity.\\
+        The ans just use the $hit$ to make $one\_one$ false when accessed twice, avoiding the traverse.
+    }
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a list},x:\text{ the target element}$)}{}
+        $c_i\coloneqq 1\mycmt{c\text{ is the }i\text{th split point}}$\\
+        $i\coloneqq 1,j\coloneqq n\mycmt{j,i\text{ is the tmp index}}$\\
+        $location\coloneqq 0\mycmt{location\text{ is the target index, which is inited "not found"}}$\\
+        \While{$i<j$}{
+            $c_1=i+\lfloor\frac{j-i}{4}\rfloor$\\
+            $c_2=i+\lfloor\frac{j-i}{2}\rfloor$\\
+            $c_3=i+\lfloor\frac{(j-i)*3}{4}\rfloor$\\
+            \lIf{$x\le a_{c_1}$}{
+                $j=c_1$
+            }
+            \ElseIf{$x\le a_{c_2}$}{
+                $i=c_1$\\
+                $j=c_2$\\
+            }\ElseIf{$x\le a_{c_3}$}{
+                $i=c_2$\\
+                $j=c_3$
+            }\lElse{
+                $i=c_3$
+            }
+        }
+        \lIf{$x==a_j$}{
+            $location=j$
+        }
+        \Return{$location$}
+    \end{SpacingAlgorithm}
+
+\end{todolist}
+
+\begin{todolist}[resume*,start=\CurTodolistToplevelIndex]
+    \mywrongitem test 3
+    \mywrongitem test 5
+    \mywrongitem test 5
+    \mywrongitem test 5
+\end{todolist}
+
+\end{document}
