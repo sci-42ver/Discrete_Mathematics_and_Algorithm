@@ -4,5 +4,7 @@
 *.log
 *.out
 *.synctex.gz
+*.synctex(busy)
 *.fdb_latexmk
+*-clean.tex
 main.pdf

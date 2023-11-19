@@ -1,4 +1,5 @@
 @ArnoMittelbach Could I ask some small questions? 1. With only `\let\mylb\\ \renewcommand{\\}{& x \mylb[1cm]}` it only works for text instead of the `align*` block. What causes this weird result? 2. With yours, only `align*` but not text works. After some search especially https://tex.stackexchange.com/a/383381/308105, I know `\let` will make `\myhalign` expansion same as `\halign`. Then the above means `\let\myhalign\let\mylb\\...\myhalign` which is nested. So how does this nested block make `\\` in the `align*` block work?
+After viewing this [reference Tex SX link](https://tex.stackexchange.com/a/39020/308105) referred to by many Tex SX links, I viewed the `ltoutput.dtx` file and found the `\makeatletter\setlength{\@fptop}{0pt}\setlength{\@fpsep}{3pt}\makeatother` can solve the above problem. See the [codes](https://www.overleaf.com/read/jfzppwscpxqm#375fa6) which is a bit different from the above in my 2nd comment. Hope this can help the future readers.
 
 check p10 whether the ideas of each chapter are mastered.
 # [online resources](https://highered.mheducation.com/sites/125967651x/student_view0/web_resources_guide.html) from [this](https://highered.mheducation.com/sites/125967651x/information_center_view0/)
@@ -456,6 +457,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
     Also [`\settowidth`](https://tex.stackexchange.com/a/37294)
     and [`\parbox`](https://tex.stackexchange.com/a/269950)
 ## related with algorithm writing
+See the `texdoc latex-refsheet` help.
 - `\verb` [similar](https://tex.stackexchange.com/a/47760/308105) to [`\texttt`](https://tex.stackexchange.com/a/470806/308105)
 - `\Return` should be preceded with one blank line to be separate from others.
 - [`makeatletter`](https://tex.stackexchange.com/a/8353/308105)
@@ -494,6 +496,7 @@ $ latexdef -t latex -s -f -E cases
     - [`m@th`](https://tex.stackexchange.com/a/153398/308105)
     - [`\crcr`](https://tex.stackexchange.com/a/229792/308105)
 - what is [RobustCommand](http://labmaster.mi.infn.it/wwwasdoc.web.cern.ch/wwwasdoc/TL8/texmf/doc/latex/base/html/clsguide/node36.html#:~:text=%5CDeclareRobustCommand*%20%7B,commands%20and%20make%20them%20robust.)
+- differences between `cases` and `cases*` since `\addtolength{\jot}{-5pt}` only applies to the latter.
 # QA miscs
 - see the self-designed [template](./QA_template/template.md).
 - [mathjax](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference)
