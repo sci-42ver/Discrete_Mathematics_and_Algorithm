@@ -1,3 +1,8 @@
+%%%%%%%%%%%%%%%%
+% See the online code if not using overleaf now. https://www.overleaf.com/read/jvcqvktqhbmm#725f7c
+% maybe this is outdated.
+%%%%%%%%%%%%%%%%
+
 % \global https://en.wikibooks.org/wiki/TeX/global#:~:text=%5Cglobal%20is%20a%20TeX%20command,count%2C%20%5Ccountdef%2C%20etc. is related with the group which is related with gdef xdef https://tex.stackexchange.com/a/353139/308105.
 
 % edef expands when defined https://tex.stackexchange.com/a/353139/308105
@@ -8,10 +13,12 @@
 \usepackage{graphicx} % Required for inserting images
 
 \usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage[nodisplayskipstretch]{setspace}
 
 \begin{document}
 
-% \maketitle
+\hfuzz=50pt
 
 \section{basics}
 
@@ -36,7 +43,8 @@
 
 \section{nested error with def}
 
-\newenvironment{condensedalign*}{%
+Here use \verb|\let\mylb\\ \renewcommand{\\}{\mylb[1cm]}| to implement the text spacing and \verb|\let\myhalign\halign \def\halign{...}| to implement the aligned block.
+\newenvironment{CondensedAlign*}{%
     % to make text with \\ work
     \let\mylb\\
     % these will fail
@@ -55,8 +63,6 @@
     test
     \par\vspace{0ex}% adjust
     $\aligned
-    %   \let\mylb\\
-    % \renewcommand{\\}{\mylb[1cm]}
 }{
     \endaligned$
     \par\vspace{+1ex}% adjust
@@ -64,18 +70,185 @@
     \renewcommand{\\}{\mylb}
 }
 
-\begin{condensedalign*}
-	1  \\
-	2  \\
-	3
-\end{condensedalign*}
-test\\
-test
-\begin{align*}
-	1 \\
-	2 \\
-	3
-\end{align*}
+\begin{CondensedAlign*}
+    1  \\
+    2  \\
+    3  \\
+    \begin{cases*}
+        test \\
+        test
+    \end{cases*}
+    % TODO why this fail
+    % \begin{cases}
+    %     test\\
+    %     test
+    % \end{cases}
+\end{CondensedAlign*}
+\begin{itemize}
+    \item After \verb|\CondensedAlign*|, spacing is reset.\\
+          test\\
+          test\\
+    \item \verb|\cases| with \verb|\\[20pt]| works.\\
+          $\aligned
+              \begin{cases}
+                  test \\[20pt]
+                  test
+              \end{cases}
+              \endaligned$\\
+    \item \verb|\def\hbalign| only works when defined in the aligned env.
+          \let\myhalign\hbalign
+          \def\hbalign{%
+              \let\mylb\\
+              \renewcommand{\\}{\mylb[10cm]}
+              \myhalign
+          }
+          \\
+          $\begin{aligned}
+                  1 \\
+                  2 \\
+                  3
+              \end{aligned}$
+\end{itemize}
+
+\hfuzz=60pt
+
+\subsection{failure of case-version condensedalign}
+
+\begin{enumerate}
+    \item
+
+          \verb|\everydisplay=\expandafter{\the\everydisplay\setstretch{0.9}}| can work.
+          \newenvironment{CondensedCases}{%
+
+              % these don't work for the cases block
+              % \let\mylb\\
+              % \renewcommand{\\}{\mylb[1cm]}
+
+              % \let\myhalign\hhalign
+              % notice here def can't be same as above halign, otherwise many weird errors.
+              % \gdef\hhalign{%
+              %     % \let\mylb\\
+              %     % \renewcommand{\\}{\mylb[40cm]}
+              %     \let\mylb\crcr
+              %     \renewcommand{\crcr}{\mylb[40cm]}
+              %     \myhalign
+              % }
+
+              % https://tex.stackexchange.com/a/472518/308105 doesn't work for the inline mode, although warning "Command \normalsize invalid in math mode.".
+              % TODO how does this expandafter{} work?https://en.wikibooks.org/wiki/TeX/expandafter
+              \everydisplay=\expandafter{\the\everydisplay\setstretch{2}}
+
+              \par\vspace{-5ex}% adjust
+              % $\displaystyle\begin{cases}
+              % \def\normalbaselines{\lineskip}
+              $$\begin{cases}
+                      % $\displaystyle\aligned
+                      % \begin{cases}
+                      }{
+                      %   \end{cases}
+                      % \endaligned$
+                  \end{cases}$$
+              \par\vspace{-2ex}% adjust
+              \renewcommand{\\}{\mylb}
+          }
+
+          \begin{CondensedCases}
+              test2 & test2\\
+              test2 & test2
+          \end{CondensedCases}
+
+          % https://tex.stackexchange.com/a/533526/308105
+    \item use array directly. based on the source code.
+          \begin{verbatim}
+\renewenvironment{cases}{%
+  \matrix@check\cases\env@cases
+}{%
+  \endarray\right.%
+}
+\def\env@cases{%
+  \let\@ifnextchar\new@ifnextchar
+  \left\lbrace
+  \def\arraystretch{1.2}%
+  \array{@{}l@{\quad}l@{}}%
+}
+\end{verbatim}
+          % @{} meaning https://tex.stackexchange.com/a/207463/308105
+          % maybe l meaning https://mirrors.ibiblio.org/CTAN/macros/latex/required/tools/array.pdf
+
+          \begin{itemize}
+              \item with \verb|\matrix@check|:
+                    \begin{verbatim}
+\def\matrix@check#1{%
+  \@xp\ifx\csname\@currenvir\endcsname#1%
+  \else\matrix@error#1%
+    \@xp\@gobble
+  \fi
+}
+\end{verbatim}
+                    % currenvir https://tex.stackexchange.com/q/541393/308105
+                    % ifx https://tex.stackexchange.com/a/127510/308105
+                    % PassOptionsToPackage https://tex.stackexchange.com/a/385906/308105
+                    Here I interpret \verb|\@xp| as the following because it is shown in "/usr/local/texlive/2023/texmf-dist/tex/latex/amscls/amsart.cls" with \verb|\PassOptionsToPackage|:
+                    \begin{verbatim}
+\let\@xp=\expandafter
+\PassOptionsToPackage{cmex10}{amsmath}
+\end{verbatim}
+                    So it just checks and should  \textbf{not influence the above after being added to the array env}, i.e. \verb|\renewcommand{\\}|.
+                    % https://tex.stackexchange.com/a/57790/308105
+              \item \verb|\@ifnextchar| should also \textbf{not influence after being added to the array env}.
+              \item see the next item, \verb|\cases| can use \textbf{text spacing} which is \textbf{different} from the above aligned block, so it should also \textbf{not influence after being added to the array env}.
+          \end{itemize}
+          TODO Based on the above three items, so why does the \verb|amsmath \bagin{cases}| fails with the above \verb|\let\myhalign\halign \def\halign{...}|?
+
+          \renewenvironment{CondensedCases}{%
+          % \let\@ifnextchar\new@ifnextchar
+          \left\lbrace
+          \def\arraystretch{3}%
+          \array{@{}l@{\quad}l@{}}%
+          }{%
+          \endarray\right.%
+          }
+
+          \let\mylb\\
+          \renewcommand{\\}{\mylb[10cm]}
+
+          $\begin{CondensedCases}
+                  test2 & test2\\
+                  test2 & test2
+              \end{CondensedCases}$
+    \item use \verb|\cases| which also defaults to have the \verb|&| option to align, use the following without the \verb|amsmath| package, it shows "test" which implies the working \verb|\renewcommand|.
+          % \cases https://www.tutorialspoint.com/tex_commands/cases.htm
+          \begin{verbatim}
+    \let\mylb\\
+    \renewcommand{\\}{\mylb[10cm]test}
+    $|x| = \cases{x  & \text{if } x\ge 0\\-x & \text{if } x\lt 0}$
+\end{verbatim}
+          \begin{enumerate}
+              \item With \verb|\cases| definition from \verb|latexdef -t latex -s -f -E cases|:
+                    \begin{verbatim}
+% latex.ltx, line 12595:
+\DeclareRobustCommand*\cases[1]{\left\{\,\vcenter{\normalbaselines\m@th
+    \ialign{$##\hfil$&\quad{##}\hfil\crcr#1\crcr}}\right.}
+\end{verbatim}
+                    % https://www.overleaf.com/learn/latex/Articles/How_to_change_paragraph_spacing_in_LaTeX#\baselineskip_(TeX_primitive)
+                    % \lineskiplimit = -13pt
+                    % relation https://tex.stackexchange.com/a/188579/308105
+                    \setlength{\baselineskip}{12pt}
+                    I tried \verb|\baselineskip| which is related with \verb|\normalbaselines| but it has no effects on the cases block.
+                    % \the\baselineskip
+                    % https://www.overleaf.com/learn/latex/Articles/How_to_change_paragraph_spacing_in_LaTeX#\baselineskip_(TeX_primitive)
+                    \setlength{\baselineskip}{120pt}
+                    % \setlength{\normalbaselineskip}{120pt}
+                    % \def\normalbaselines{\baselineskip}
+                    $\begin{cases}
+                            test \\
+                            test
+                        \end{cases}$
+          \end{enumerate}
+
+\end{enumerate}
+\setlength{\baselineskip}{12pt}
+\verb|\baselineskip| has been reset. \\
+test\\test
 
 \end{document}
-

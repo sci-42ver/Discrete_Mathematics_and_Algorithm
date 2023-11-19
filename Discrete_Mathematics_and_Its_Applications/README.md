@@ -1,4 +1,4 @@
-@ArnoMittelbach Could I ask one small question? With only `\let\mylb\\ \renewcommand{\\}{& x \mylb[1cm]}` it only works for text instead of the `align*` block. But with yours, only `align*` but not text works. After some search especially https://tex.stackexchange.com/a/383381/308105, I know `\let` will make `\myhalign` expansion same as `\halign`. Then the above means `\let\myhalign\let\mylb\\...\myhalign` which is nested. So how does this nested block make `\\` in the `align*` block work?
+@ArnoMittelbach Could I ask some small questions? 1. With only `\let\mylb\\ \renewcommand{\\}{& x \mylb[1cm]}` it only works for text instead of the `align*` block. What causes this weird result? 2. With yours, only `align*` but not text works. After some search especially https://tex.stackexchange.com/a/383381/308105, I know `\let` will make `\myhalign` expansion same as `\halign`. Then the above means `\let\myhalign\let\mylb\\...\myhalign` which is nested. So how does this nested block make `\\` in the `align*` block work?
 
 check p10 whether the ideas of each chapter are mastered.
 # [online resources](https://highered.mheducation.com/sites/125967651x/student_view0/web_resources_guide.html) from [this](https://highered.mheducation.com/sites/125967651x/information_center_view0/)
@@ -466,8 +466,34 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - flushright means right aligned, i.e. all contents can't exceed the right side.
   See [1](https://en.wikibooks.org/wiki/LaTeX/Boxes#framebox_and_fbox) [2](https://tex.stackexchange.com/a/116781/308105)
 - [differences](https://www.overleaf.com/read/jvcqvktqhbmm#725f7c) between different `\def` and `\let`
+- `expandafter` [1](https://en.wikibooks.org/wiki/TeX/expandafter) [2](https://tex.stackexchange.com/a/519/308105)
+- whether `\let` is with `=` is all ok.
 ### TODO
 - try use [`fltrace`](https://tex.stackexchange.com/a/39020/308105) to debug the "floating"
+- how `##` [to `#`](https://tex.stackexchange.com/a/42464/308105) used in `\cases`
+```bash
+$ latexdef -t latex -s -f -E cases  
+% latex.ltx, line 12595:
+\DeclareRobustCommand*\cases[1]{\left\{\,\vcenter{\normalbaselines\m@th
+    \ialign{$##\hfil$&\quad{##}\hfil\crcr#1\crcr}}\right.}
+```
+  - [`hfil`](https://tex.stackexchange.com/a/528921/308105)
+  - [`vcenter`](https://www.tutorialspoint.com/tex_commands/vcenter.htm)
+  - reasons why use [`\crcr`](https://tex.stackexchange.com/a/132586/308105)
+  - [`ialign`](https://tug.org/TUGboat/tb07-1/tb14beet.pdf)
+    ```bash
+    $ latexdef -t latex -s -f z@skip   
+    % latex.ltx, line 502:
+    \newskip\z@skip \z@skip=0pt plus0pt minus0pt
+    $ latexdef -t latex -s -f ialign   
+    % latex.ltx, line 640:
+    \def\ialign{\everycr{}\tabskip\z@skip\halign} % initialized \halign
+    ```
+    - TODO `everycr`
+    - [`halign`](https://plain-xetex.neocities.org/misc/misc.pdf) `\halign{\it#\hfil&#&#&\bf#&#&#&\hfil\tt#\hfil\cr abc & d & e & f & g & h & i\cr a & b & c & d & e & f & ghj\cr}`
+    - [`m@th`](https://tex.stackexchange.com/a/153398/308105)
+    - [`\crcr`](https://tex.stackexchange.com/a/229792/308105)
+- what is [RobustCommand](http://labmaster.mi.infn.it/wwwasdoc.web.cern.ch/wwwasdoc/TL8/texmf/doc/latex/base/html/clsguide/node36.html#:~:text=%5CDeclareRobustCommand*%20%7B,commands%20and%20make%20them%20robust.)
 # QA miscs
 - see the self-designed [template](./QA_template/template.md).
 - [mathjax](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference)
