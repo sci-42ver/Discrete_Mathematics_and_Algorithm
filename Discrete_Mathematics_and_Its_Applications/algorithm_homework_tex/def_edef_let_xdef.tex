@@ -1,0 +1,81 @@
+% \global https://en.wikibooks.org/wiki/TeX/global#:~:text=%5Cglobal%20is%20a%20TeX%20command,count%2C%20%5Ccountdef%2C%20etc. is related with the group which is related with gdef xdef https://tex.stackexchange.com/a/353139/308105.
+
+% edef expands when defined https://tex.stackexchange.com/a/353139/308105
+% > the replacement text is fully expanded at definition time.
+% see expand control https://tex.stackexchange.com/a/519/308105
+
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{amsmath}
+
+\begin{document}
+
+% \maketitle
+
+\section{basics}
+
+\def\txt{a}
+\def\foo{\txt}
+\let\bar\foo
+\bar
+\def\txt{b}
+\bar
+
+\def\txt{a}
+\def\foo{\txt}
+\edef\bar{\foo}
+\bar
+\def\txt{b}
+\bar
+\def\foo{c}
+\bar
+
+% since def and edef all has the recursive expansion, so they can't be nested. https://tex.stackexchange.com/a/383381/308105
+% better not use def with renewcommand https://tex.stackexchange.com/questions/145314/renewcommand-for-commands-defined-with-def#comment329083_145314
+
+\section{nested error with def}
+
+\newenvironment{condensedalign*}{%
+    % to make text with \\ work
+    \let\mylb\\
+    % these will fail
+    % \def\mylb{\\}
+    % \edef\mylb{\noexpand\\}
+    \renewcommand{\\}{\mylb[1cm]}
+
+    % to make the aligned block with \\ work
+    \let\myhalign\halign
+    \def\halign{%
+        \let\mylb\\
+        \renewcommand{\\}{\mylb[1cm]}
+        \myhalign
+    }
+    test\\
+    test
+    \par\vspace{0ex}% adjust
+    $\aligned
+    %   \let\mylb\\
+    % \renewcommand{\\}{\mylb[1cm]}
+}{
+    \endaligned$
+    \par\vspace{+1ex}% adjust
+    % reset to the original
+    \renewcommand{\\}{\mylb}
+}
+
+\begin{condensedalign*}
+	1  \\
+	2  \\
+	3
+\end{condensedalign*}
+test\\
+test
+\begin{align*}
+	1 \\
+	2 \\
+	3
+\end{align*}
+
+\end{document}
+

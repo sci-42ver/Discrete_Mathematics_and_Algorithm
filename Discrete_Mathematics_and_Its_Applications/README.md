@@ -1,3 +1,5 @@
+@ArnoMittelbach Could I ask one small question? With only `\let\mylb\\ \renewcommand{\\}{& x \mylb[1cm]}` it only works for text instead of the `align*` block. But with yours, only `align*` but not text works. After some search especially https://tex.stackexchange.com/a/383381/308105, I know `\let` will make `\myhalign` expansion same as `\halign`. Then the above means `\let\myhalign\let\mylb\\...\myhalign` which is nested. So how does this nested block make `\\` in the `align*` block work?
+
 check p10 whether the ideas of each chapter are mastered.
 # [online resources](https://highered.mheducation.com/sites/125967651x/student_view0/web_resources_guide.html) from [this](https://highered.mheducation.com/sites/125967651x/information_center_view0/)
 - Discrete Mathematics and Its Applications [Student’s Solutions Guide](https://www.academia.edu/36410920/Students_Solutions_Guide) pdf with the unavailable version.
@@ -463,6 +465,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - sometimes we use [`aligned`](https://tex.stackexchange.com/a/54686/308105) instead of `align*`
 - flushright means right aligned, i.e. all contents can't exceed the right side.
   See [1](https://en.wikibooks.org/wiki/LaTeX/Boxes#framebox_and_fbox) [2](https://tex.stackexchange.com/a/116781/308105)
+- [differences](https://www.overleaf.com/read/jvcqvktqhbmm#725f7c) between different `\def` and `\let`
 ### TODO
 - try use [`fltrace`](https://tex.stackexchange.com/a/39020/308105) to debug the "floating"
 # QA miscs

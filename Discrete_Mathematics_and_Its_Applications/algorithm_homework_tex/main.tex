@@ -9,6 +9,8 @@
 \usepackage{pifont,amssymb}
 \usepackage{float}
 
+\usepackage[nodisplayskipstretch]{setspace} % for "\setstretch" macro
+
 % \usepackage[normalem]{ulem}
 
 % https://www.overleaf.com/learn/latex/Hyperlinks#Reference_guide to use ref link
@@ -41,7 +43,7 @@
 % \setlength{\marginparsep}{0pt}
 % \setlength{\textwidth}{500pt}
 % https://tex.stackexchange.com/a/367867/308105
-\usepackage[left=0.3in,textwidth=7.3in]{geometry}
+\usepackage[left=0.3in,textwidth=7.3in,top=0.3in,bottom=0.3in]{geometry}
 
 \newlist{todolist}{enumerate}{2}
 % https://www.tug.org/TUGboat/tb09-1/tb20bechtolsheim.pdf
@@ -69,7 +71,7 @@
 % \setlength{\mathindent}{0pt}
 
 % https://www.overleaf.com/learn/latex/%5Chfuzz this doesn't influence the typesetting https://tex.stackexchange.com/a/50850/308105
-\hfuzz=30pt
+\hfuzz=50pt
 
 % https://tex.stackexchange.com/a/169711/308105
 % \renewcommand{\topfraction}{.5}
@@ -115,15 +117,67 @@
   \par\vspace{+1ex}% adjust
 }
 
+% https://tex.stackexchange.com/a/234320/308105
+% here should use \def https://tex.stackexchange.com/a/262/308105
+\edef\mylb{\\}
+% \def\mylb{\newline}
+\newcommand{\CondensedNewline}{\mylb[-0.5em]}
+
+% https://tex.stackexchange.com/questions/518403/how-to-use-newenvironment-and-align-in-standalone-document#comment1311023_518403
+\newenvironment{CondensedAlign*}{%
+\let\mylb\\
+\renewcommand{\\}{\mylb[-0.1cm]}
+
+% https://tex.stackexchange.com/a/234320/308105 TODO why this only takes effects in align
+\let\myhalign\halign
+\def\halign{%
+\let\mylb\\
+\renewcommand{\\}{\mylb[-0.1cm]}
+\myhalign
+}
+
+  \par\vspace{0ex}% adjust
+  $\displaystyle\aligned
+}{
+  \endaligned$
+  \par\vspace{+1ex}% adjust
+  \renewcommand{\\}{\mylb}
+}
+
+\newenvironment{CondensedCases}{%
+
+% these don't work for the cases block
+% \let\mylb\\
+% \renewcommand{\\}{\mylb[1cm]}
+
+% \let\myhalign\hhalign
+% % notice here def can't be same as above halign, otherwise many weird errors.
+% \gdef\hhalign{%
+% \let\mylb\\
+% \renewcommand{\\}{\mylb[40cm]}
+% \myhalign
+% }
+
+% https://tex.stackexchange.com/a/472518/308105 doesn't work for the inline mode, although warning "Command \normalsize invalid in math mode.".
+\everydisplay=\expandafter{\the\everydisplay\setstretch{0.9}}
+
+  \par\vspace{-5ex}% adjust
+  $$\displaystyle\begin{cases}
+  % $\displaystyle\aligned
+  % \begin{cases}
+}{
+  %   \end{cases}
+  % \endaligned$
+  \end{cases}$$
+  \par\vspace{-2ex}% adjust
+  \renewcommand{\\}{\mylb}
+}
+
 % https://tex.stackexchange.com/a/228609/308105 this can't work
 %\let\CondensedNewline\vspace{0.5em}
 % https://stackoverflow.com/q/43821452/21294350 not work
 % \newcommand{\CondenseNewline}{\newline[-1em]}
 
-% https://tex.stackexchange.com/a/234320/308105
-% here should use \def https://tex.stackexchange.com/a/262/308105
-\def\mylb{\\}
-\newcommand{\CondensedNewline}{\mylb[-0.5em]}
 % https://tex.stackexchange.com/questions/701531/how-to-tune-the-multiline-equation-with-the-self-defined-indentation?noredirect=1#comment1744479_701531
 \newcommand{\NoIndentEquationLine}[1]{%
 \hspace{-5pt}#1&&\CondensedNewline%
@@ -218,6 +272,12 @@
 \setlength{\parindent}{20pt}
 \section{TODO}
 \subsection{use codes to check the following exercises}
+% \renewcommand{\\}{\CondensedNewline}
+% \let\mylb\\
+% \renewcommand{\\}{\mylb[0.1cm]}
+test \\
+test
+% \renewcommand{\\}{\mylb}
 \begin{itemize}
     \item 3.1-28,
 \end{itemize}
@@ -368,8 +428,10 @@
         $l\coloneqq 1\mycmt{l\text{ is the target number index}}$\\
         \ForRange{i}{2}{n}{
             \If{$c\ge a_i$}{
+                \vspace{4pt}
                 $c=a_i$\\
                 $l=i$
+                \vspace{4pt}
             }
         }
 
@@ -480,7 +542,7 @@
         \item also when $x>a_{c_1}$, we should let $i=c_1+1$ to avoid the duplicate future comparison.
         \item TODO the ans seems to have one error because $\lfloor\frac{j+i}{4}\rfloor>i$ doesn't always hold.
     }
-    % \clearpage
+    \clearpage
 
     \ModProcName{four sublists corrected}
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex_corrected}
@@ -513,11 +575,11 @@
         \Return{$location$}
     \end{SpacingAlgorithm}
 
-    \clearpage
+
     \begin{itemize}
         \item Here I prove $i>j$ when out of the \textbf{while} loop is impossible.\\
               $\text{ let }j-i=4n+k,k=0\sim 3$
-              \begin{align*}
+              \begin{CondensedAlign*}
                   c_1 & =n      \\
                   c_2 & =
                   \begin{cases*}
@@ -530,7 +592,7 @@
                       3n+1,k=2 \\
                       3n+2,k=3
                   \end{cases*}
-              \end{align*}
+              \end{CondensedAlign*}
               To let $i>j$, here assume $i=0$
               although it is impossible based on the positive index assumption,
               but $c_i$ is only based on $j-i$, so it is ok to let $i=0$.
@@ -541,30 +603,32 @@
               % \end{equation*}
 
               % here cases* has no & available. https://tex.stackexchange.com/q/124751/308105
-              $$
-                  \begin{cases}
-                      1. & j=c_1,i=0\Rightarrow 0>n\text{ \textbf{impossible}}                                                                          \\
-                      2. & j=c_2,i=c_1+1\Rightarrow \text{only }n+1>2n\text{ is possible}
-                      \Rightarrow n=0\xRightarrow{i<j}i=0,j=1                                                                                  \\
-                         & \Rightarrow x\le (a_{c_2}=a_0)\wedge x>(a_{c_1}=a_0)\text{ \textbf{impossible}}                                              \\
-                      3. & j=c_3,i=c_2+1                                                                                                       \\
-                         & \Rightarrow\begin{cases}
-                                          (k=0\text{ or }1) & 2n+1>3n\text{, here } x>(a_{c_2}=a_{c_3})(x>a_0)\text{.} \\
-                                                            & \text{so }i=c_3+1=1\text{ \textbf{impossible} here}                 \\
-                                          (k=2)             & \text{\textbf{impossible} similarly to the above }2n+2>3n+1,i=c_3+1=2         \\
-                                          (k=3)             & 2n+2>3n+2\text{ trivially \textbf{impossible}}
-                                      \end{cases}                           \\
-                      4. & i=c_3+1,j=4n+k\;\hcancel{\Rightarrow 3n+3>4n+3,\text{ \textbf{impossible}.}}                                                 \\
-                         & \Rightarrow 3n+k-1+1>4n+k\text{ \textbf{impossible}.}\text{ only } 3n+k+1>4n+k\text{ is possible}                            \\
-                         & \Rightarrow k=0,n=0,\text{originally }j-i=4n+k=0(\text{\textbf{also impossible} because \textbf{while} block condition }i<j)
-                  \end{cases}
-              $$
+
+              %   $\begin{cases}
+              \begin{CondensedCases}
+                  1. & j=c_1,i=0\Rightarrow 0>n\text{ \textbf{impossible}}                                                                          \\
+                  2. & j=c_2,i=c_1+1\Rightarrow \text{only }n+1>2n\text{ is possible}
+                  \Rightarrow n=0\xRightarrow{i<j}i=0,j=1                                                                                           \\
+                  & \Rightarrow x\le (a_{c_2}=a_0)\wedge x>(a_{c_1}=a_0)\text{ \textbf{impossible}}                                              \\
+                  3. & j=c_3,i=c_2+1                                                                                                                \\
+                  & \Rightarrow\begin{cases}
+                      (k=0\text{ or }1) & 2n+1>3n\text{, here } x>(a_{c_2}=a_{c_3})(x>a_0)\text{.}              \\
+                                        & \text{so }i=c_3+1=1\text{ \textbf{impossible} here}                   \\
+                      (k=2)             & \text{\textbf{impossible} similarly to the above }2n+2>3n+1,i=c_3+1=2 \\
+                      (k=3)             & 2n+2>3n+2\text{ trivially \textbf{impossible}}
+                  \end{cases}                     \\
+                  4. & i=c_3+1,j=4n+k\;\hcancel{\Rightarrow 3n+3>4n+3,\text{ \textbf{impossible}.}}                                                 \\
+                  & \Rightarrow 3n+k-1+1>4n+k\text{ \textbf{impossible}.}\text{ only } 3n+k+1>4n+k\text{ is possible}                            \\
+                  & \Rightarrow k=0,n=0,\text{originally }j-i=4n+k=0(\text{\textbf{also impossible} because \textbf{while} block condition }i<j)
+                  %   \end{cases}$
+              \end{CondensedCases}
+
               Based on the above, if $i<j$ into the while block,
               then in the next iteration of the while loop, $i>j$ is impossible.$\quad\blacksquare$
     \end{itemize}
 
     \ModProcName{four sublists almost same the ans}
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex_corrected}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex_ans}
         \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a list},x:\text{ the target element}$)}{}
         $c_i\coloneqq 1\mycmt{c\text{ is the }i\text{th split point}}$\\
         $i\coloneqq 1,j\coloneqq n\mycmt{j,i\text{ is the tmp index}}$\\
@@ -596,18 +660,18 @@
     similar to the above,
     $$
         \begin{cases}
-            1. & j=c_3,i=c_2+1                                                                                                        \\
+            1. & j=c_3,i=c_2+1                                                                                                                     \\
                & \Rightarrow\begin{cases}
                                 (k=0\text{ or }1) & 2n+1>3n,n=0\text{, here } x>(a_{c_2}=a_0)\wedge x\le (a_{c_3}=a_0)\text{ \textbf{impossible}.} \\
                                 (k=2)             & \text{\textbf{impossible} similarly to the above }2n+2>3n+1,n=0,c_2=c_3=1                      \\
                                 (k=3)             & 2n+2>3n+2\text{ trivially \textbf{impossible}}
                             \end{cases} \\
-            2. & i=c_3+1,j=4n+k                                                                                                       \\
-               & \Rightarrow 3n+k-1+1>4n+k\text{ \textbf{impossible}.}\text{ only } 3n+k+1>4n+k\text{ is possible}                             \\
-               & \Rightarrow k=0,n=0,\text{originally }j-i=4n+k=0(\text{also \textbf{impossible} because \textbf{while} block condition }i<j) \\
-            3. & j=c_2,i=c_1+1\Rightarrow \text{only }n+1>2n\text{ is possible}                                                       
-            \Rightarrow n=0 \xRightarrow{x>(a_{c_2}=a_{c_3}=a_0)} j=c_1\text{ \textbf{impossible}}                                               \\
-            4. & j=c_1,i=0\Rightarrow 0>n\text{ \textbf{impossible}}                                                                           \\
+            2. & i=c_3+1,j=4n+k                                                                                                                    \\
+               & \Rightarrow 3n+k-1+1>4n+k\text{ \textbf{impossible}.}\text{ only } 3n+k+1>4n+k\text{ is possible}                                 \\
+               & \Rightarrow k=0,n=0,\text{originally }j-i=4n+k=0(\text{also \textbf{impossible} because \textbf{while} block condition }i<j)      \\
+            3. & j=c_2,i=c_1+1\Rightarrow \text{only }n+1>2n\text{ is possible}
+            \Rightarrow n=0 \xRightarrow{x>(a_{c_2}=a_{c_3}=a_0)} j=c_1\text{ \textbf{impossible}}                                                 \\
+            4. & j=c_1,i=0\Rightarrow 0>n\text{ \textbf{impossible}}                                                                               \\
         \end{cases}
     $$
 
