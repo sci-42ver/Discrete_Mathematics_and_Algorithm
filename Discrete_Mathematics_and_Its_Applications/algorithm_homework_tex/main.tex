@@ -10,6 +10,15 @@
 \usepackage{float}
 
 \usepackage[normalem]{ulem}
+% \usepackage{enumitem}
+% https://texblog.org/2012/03/21/cross-referencing-list-items/
+\makeatletter
+\def\namedlabel#1#2{\begingroup
+    #2%
+    \def\@currentlabel{#2}%
+    \phantomsection\label{#1}\endgroup
+}
+\makeatother
 
 \usepackage[nodisplayskipstretch]{setspace} % for "\setstretch" macro
 
@@ -284,12 +293,6 @@
 \setlength{\parindent}{20pt}
 \section{TODO}
 \subsection{use codes to check the following exercises}
-% \renewcommand{\\}{\CondensedNewline}
-% \let\mylb\\
-% \renewcommand{\\}{\mylb[0.1cm]}
-test \\
-test
-% \renewcommand{\\}{\mylb}
 \begin{itemize}
     \item 3.1-28,46
 \end{itemize}
@@ -636,6 +639,32 @@ test
 
               Based on the above, if $i<j$ into the while block,
               then in the next iteration of the while loop, $i>j$ is impossible.$\quad\blacksquare$
+              \item The ans shows \(i<j-2\) which excludes the following cases:
+                    \begin{CondensedCases}
+                        i=j-1\Rightarrow c_{1\sim 3}=i&\text{then either } x>a_i,i=j
+                        \text{ which excludes }a_i\\
+                        &\text{or }x\le a_i,j=i\text{ which excludes }a_j\\
+                        i=j-2\Rightarrow c_1=i,c_{2,3}=i+1&\text{then} 
+                        \begin{cases}
+                            x\le a_i&\Rightarrow j=i\text{ which excludes }a_{i+1\sim2}\\
+                            a_i<x\le a_{i+1}&\Rightarrow i=j=c_2=i+1\text{ which only allows }a_{i+1}\\
+                            x>a_{i+1}&\Rightarrow i=i+2=j\text{ which only allows }a_{i+2}
+                        \end{cases}
+                    \end{CondensedCases}
+                    This also implies the above already proved \(i=j\).\\
+                    And the above \textbf{correct} ``exclude/allow'' are implied by the above \(>\Rightarrow+1\)
+                    which is also \textbf{trivial} without the above detailed description. 
+                    So \(i<j\) including the above two excluded cases \textbf{won't drop unnecessary items}. 
+                    More specifically, the above excluded cases does the ending assignments shown in the ans:
+                    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex_ans_ending}
+                        \lIf{$x=a_i$}{
+                            $location=i$
+                        }\lElseIf{$x=a_j$}{
+                            $location=j$
+                        }
+                        \(\ldots\)\\
+                        \Return{$location$}
+                    \end{SpacingAlgorithm}
     \end{itemize}
 
     \ModProcName{four sublists almost same the ans}
@@ -834,23 +863,28 @@ test
     \ModProcName{linear search for the insert position}
     \mywrongitem \CapProcTargetName \AlgorithmRef
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
-        \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a sorted increasing list, }x:\text{target}$)}{}
+        \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a sorted non-decreasing list, }x:\text{target}$)}{}
         \ForRange{i}{1}{n}{
             \If{\(x\ge a_i\)}{
                 \Break
             }
         }
-        \Return{\(i\)}
+        \Return{\(i\)} \Comment{ this is the first index with \(x<a_i\)}
     \end{SpacingAlgorithm}
     \ecc{
-        \item it should return \(i+1\) when $i\neq n+1$ and 0 when $i=n+1$
-        \item it will continue if all $<$
+        \item the ans is based on the non-increasing list, and the ans just means returning \(i\) because 
+        when \(i>n\), it can only be \(n+1\).
+        \item \sout{it should return \(i+1\) when $i\neq n+1$ and 1 when $i=n+1$ (i.e. less than all items)}
+        \item \sout{the above \textbf{break} should be \textbf{continue}.}
+        \item the above should be \(x\le a_i\) and return \(i\).
+        \item inserting at the \(i\)th means after the insertion, the inserted item is the \(i\)th element 
+        which is same as the insertion sort behavior. We can think it as \textbf{replace}.
     }
     \addtocounter{todolisti}{-1}
     \ModProcName{binary search for the insert position}
     \mywrongitem \CapProcTargetName \AlgorithmRef
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
-        \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a sorted increasing list, }x:\text{target}$)}{}
+        \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a sorted non-decreasing list, }x:\text{target}$)}{}
         \(s\coloneqq 1\mycmt{s\text{ is the start index}}\)\\
         \(end\coloneqq n\mycmt{end\text{ is the end index}}\)\\
         \(c\coloneqq \lfloor\frac{s+end}{2}\rfloor\mycmt{c\text{ is the comparison index}}\)\\
@@ -878,19 +912,26 @@ test
     Then assume when exiting, state is \(k_0\) where \(s=end=t\text{ or }t+1\)\\
     Then when exited from the state \(k_{-1}\) where \((s,end)=(t,t+1)\), either enter state \((t,t)\) when \(x\le a_t\) or \((t+1,t+1)\) when \(x> a_t\)\\
     Backwards again with the \(k_{-2}\to k_{-1}\) step is one of the following:
-    \begin{itemize}
-        \item \(end=t+1\Rightarrow k_{-2}:end=t+2\text{ or }t+3\), \(x\le a_{c}=a_{t+1}\)
-        \item \(s=c+1=(t-1)-1\Rightarrow x>a_c=a_{t-1}\)
-    \end{itemize}
+    \begin{enumerate}
+        \item \(end=t+1\Rightarrow k_{-2}:end=t+2\text{ or }t+3\), \(x\le a_{c}=a_{t+1}\) \label{item_if_3_1_46}
+        \item \(s=c+1=(t-1)-1\Rightarrow x>a_c=a_{t-1}\) \label{item_else_3_1_46}
+    \end{enumerate}
     Combined two bullet items with the above, return:\\
     \[
         \begin{cases}
-            t & a_{t-1}<x\le a_{t} \\
+            t   & a_{t-1}<x\le a_{t} \\
             t+1 & a_{t}<x\le a_{t+1}
         \end{cases}
     \]\\
     Then \(a_{ret-1}<x\le a_{ret}\)\\
-    TODO then the ans assignment of $location+1$ when \(x\ge a_i\) at the exiting loop (i.e. \(i=s=end\)) is impossible
+    \sout{TODO then the ans assignment of $location+1$ when \(x\ge a_i\) at the exiting loop (i.e. \(i=s=end\)) is impossible}
+    \ecc{
+        \item The above conclusion \ref{item_if_3_1_46} is \textbf{wrong} because at least for the last item \(a_n\),
+        there is no corresponding \(a_{n+1}\) for comparison, so we need \(location\coloneqq i+1\text{ when }x\ge a_i\) for this special case.\\
+        This is \textbf{same} as exercise 45 which also needs to \textbf{append} the list sometimes.
+        \item For conclusion \ref{item_else_3_1_46}, although for \(a_1\), \(a_0\) doesn't exist. 
+        But it is enough to insert \(x\) at \(a_1\) if \(x\le a_1\). So it is \textbf{right} at least for this case although invalid \(a_0\).
+    }
 \end{todolist}
 
 \newpage
