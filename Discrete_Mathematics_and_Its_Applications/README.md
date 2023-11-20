@@ -457,7 +457,8 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
     Also [`\settowidth`](https://tex.stackexchange.com/a/37294)
     and [`\parbox`](https://tex.stackexchange.com/a/269950)
 ## related with algorithm writing
-See the `texdoc latex-refsheet` help.
+See the `texdoc latex-refsheet` help, [`lshort`](https://tex.stackexchange.com/a/34903/308105) which shows `\right.` usage.
+Also [texfaq](https://tex.stackexchange.com/a/16439/308105)
 - `\verb` [similar](https://tex.stackexchange.com/a/47760/308105) to [`\texttt`](https://tex.stackexchange.com/a/470806/308105)
 - `\Return` should be preceded with one blank line to be separate from others.
 - [`makeatletter`](https://tex.stackexchange.com/a/8353/308105)
@@ -469,7 +470,20 @@ See the `texdoc latex-refsheet` help.
   See [1](https://en.wikibooks.org/wiki/LaTeX/Boxes#framebox_and_fbox) [2](https://tex.stackexchange.com/a/116781/308105)
 - [differences](https://www.overleaf.com/read/jvcqvktqhbmm#725f7c) between different `\def` and `\let`
 - `expandafter` [1](https://en.wikibooks.org/wiki/TeX/expandafter) [2](https://tex.stackexchange.com/a/519/308105)
+  - `\expandafter{...}` [usage](https://tex.stackexchange.com/a/594356/308105) which expands something first after `{`.
 - whether `\let` is with `=` is all ok.
+- align* implementation in [amsmath](https://tex.stackexchange.com/a/4389/308105) and maybe [others](https://tex.stackexchange.com/a/4388/308105)
+- cases with [`[]`](https://tex.stackexchange.com/a/41429/308105)
+### warning fixes
+- [underfull/overfull](https://tex.stackexchange.com/a/395370/308105) hbox and vbox
+  - their [meanings](https://www.overleaf.com/learn/how-to/Understanding_underfull_and_overfull_box_warnings#Overfull_and_underfull_boxes)
+    > “stretch out” the content
+    > exceeds the available space
+### miscs
+- how to use the [plain tex](https://www.overleaf.com/learn/latex/Questions/Can_I_run_plain_TeX_on_Overleaf%3F)
+  - [books](https://tug.org/interest.html#plain) 
+    doc [list](https://ctan.org/topic/tut-plaintex)
+    1. [Impatient](https://ftp.kddilabs.jp/CTAN/info/impatient/book.pdf).
 ### TODO
 - try use [`fltrace`](https://tex.stackexchange.com/a/39020/308105) to debug the "floating"
 - how `##` [to `#`](https://tex.stackexchange.com/a/42464/308105) used in `\cases`

@@ -15,6 +15,14 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage[nodisplayskipstretch]{setspace}
+% https://tex.stackexchange.com/a/20613/308105
+\newcommand\hcancel[2][black]{\setbox0=\hbox{#2}%
+\rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}#2} 
+
+\usepackage{listings}
+\lstset{
+   breaklines=true,
+   basicstyle=\ttfamily}
 
 \begin{document}
 
@@ -158,7 +166,8 @@ Here use \verb|\let\mylb\\ \renewcommand{\\}{\mylb[1cm]}| to implement the text 
           \end{CondensedCases}
 
           % https://tex.stackexchange.com/a/533526/308105
-    \item use array directly. based on the source code.
+    \item use \verb|array| directly. based on the source code.\\
+          Also see https://ftp.yz.yamagata-u.ac.jp/pub/CTAN/info/gentle/gentle.pdf p51 which uses \verb|matrix|. So this one is probably the \textbf{best suitable and general}
           \begin{verbatim}
 \renewenvironment{cases}{%
   \matrix@check\cases\env@cases
@@ -176,6 +185,14 @@ Here use \verb|\let\mylb\\ \renewcommand{\\}{\mylb[1cm]}| to implement the text 
           % maybe l meaning https://mirrors.ibiblio.org/CTAN/macros/latex/required/tools/array.pdf
 
           \begin{itemize}
+              \item from the above codes, \verb|{@{}l@{\quad}l@{}}| means it only allows two columns which can be checked with:
+                    \begin{verbatim}
+\usepackage{amsmath}
+$\begin{cases}
+    test & sds & adsd\\
+    test & sds & adsd
+\end{cases}$
+    \end{verbatim}
               \item with \verb|\matrix@check|:
                     \begin{verbatim}
 \def\matrix@check#1{%
@@ -197,6 +214,42 @@ Here use \verb|\let\mylb\\ \renewcommand{\\}{\mylb[1cm]}| to implement the text 
                     % https://tex.stackexchange.com/a/57790/308105
               \item \verb|\@ifnextchar| should also \textbf{not influence after being added to the array env}.
               \item see the next item, \verb|\cases| can use \textbf{text spacing} which is \textbf{different} from the above aligned block, so it should also \textbf{not influence after being added to the array env}.
+                    \hfuzz=1000pt
+                    % https://tex.stackexchange.com/a/10630/308105
+              \item By
+                    % https://tex.stackexchange.com/a/145143/308105
+                    \begin{lstlisting}
+texdoc -s amsmath -> /usr/local/texlive/2023/texmf-dist/doc/latex/amsmath/diffs-m.txt showing:
+incompatible with the plain-TeX syntax for \pmatrix, \matrix, and \cases
+\end{lstlisting}
+                    \verb|amsmath| doesn't use \verb|amstex| which also defines \verb|\cases| (based on the \verb|amsmath| doc, the \verb|amstex| is deprecated) in \begin{lstlisting}
+/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amstex.sty
+\end{lstlisting}
+                    \verb||, also shown in \verb|\RequirePackage| in
+                    \begin{lstlisting}
+/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsmath.sty
+\end{lstlisting}
+
+                    % Then with \verb=grep -r -w -e '\\jot' /usr/local/texlive | less\_n=, \verb|/usr/local/texlive/2023/texmf-dist/tex/amstex/base/amstex.tex|:\verb|\def\cases{\bgroup\spreadmlines@\jot\left\{\,\matrix\format\l&\quad\l\\}| has \verb|\matrix| which is more suitable for the above \verb|\matrix@check|. But the \verb|/usr/local/texlive/2023/texmf-dist/tex/amstex/base/amstex.tex|'s definitions are a bit too complex and
+                    maybe the above 2nd method is more suitable for the just spacing tune.
+                    \begin{itemize}
+                        \item See \verb|plain_tex_cases.tex|. However, with the plain tex, the \verb|\cases| will output one \textbf{extra brace} maybe due to not totally using the plain tex.
+
+                              TODO how does \verb|\matrix@check\cases\env@cases| work when the check doesn't throw one error?
+                    \end{itemize}
+                    % https://tex.stackexchange.com/a/14680/308105
+              \item TODO With
+                    \begin{lstlisting}
+/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsbsy.sty:\RequirePackage{amsgen}
+/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsgen.sty:\long\def\new@ifnextchar#1#2#3{%
+\end{lstlisting}
+                    in:
+                    \begin{lstlisting}
+grep -r -e 'ifnextchar' /usr/local/texlive/2023/texmf-dist/tex/latex/amsmath | less_n
+\end{lstlisting},\verb|\renewcommand{\\}{\mylb[10cm]test}| fails with \verb|cases| in \verb|amsmath| probably because something like
+                    \begin{lstlisting}
+/usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsmath.sty:\DeclareRobustCommand{\displaybreak}{\new@ifnextchar[\dspbrk@{\dspbrk@[4]}}
+\end{lstlisting}
           \end{itemize}
           TODO Based on the above three items, so why does the \verb|amsmath \bagin{cases}| fails with the above \verb|\let\myhalign\halign \def\halign{...}|?
 
@@ -219,6 +272,7 @@ Here use \verb|\let\mylb\\ \renewcommand{\\}{\mylb[1cm]}| to implement the text 
     \item use \verb|\cases| which also defaults to have the \verb|&| option to align, use the following without the \verb|amsmath| package, it shows "test" which implies the working \verb|\renewcommand|.
           % \cases https://www.tutorialspoint.com/tex_commands/cases.htm
           \begin{verbatim}
+    
     \let\mylb\\
     \renewcommand{\\}{\mylb[10cm]test}
     $|x| = \cases{x  & \text{if } x\ge 0\\-x & \text{if } x\lt 0}$
@@ -230,22 +284,23 @@ Here use \verb|\let\mylb\\ \renewcommand{\\}{\mylb[1cm]}| to implement the text 
 \DeclareRobustCommand*\cases[1]{\left\{\,\vcenter{\normalbaselines\m@th
     \ialign{$##\hfil$&\quad{##}\hfil\crcr#1\crcr}}\right.}
 \end{verbatim}
+
                     % https://www.overleaf.com/learn/latex/Articles/How_to_change_paragraph_spacing_in_LaTeX#\baselineskip_(TeX_primitive)
                     % \lineskiplimit = -13pt
                     % relation https://tex.stackexchange.com/a/188579/308105
-                    \setlength{\baselineskip}{12pt}
-                    I tried \verb|\baselineskip| which is related with \verb|\normalbaselines| but it has no effects on the cases block.
                     % \the\baselineskip
                     % https://www.overleaf.com/learn/latex/Articles/How_to_change_paragraph_spacing_in_LaTeX#\baselineskip_(TeX_primitive)
-                    \setlength{\baselineskip}{120pt}
+                    \setlength{\baselineskip}{12pt}
+                    I tried \verb|\baselineskip| which is related with \verb|\normalbaselines| but \verb|\setlength{\baselineskip}{120pt}| has no effects on the cases block.
+
                     % \setlength{\normalbaselineskip}{120pt}
                     % \def\normalbaselines{\baselineskip}
                     $\begin{cases}
                             test \\
                             test
                         \end{cases}$
+                    \addtolength{\jot}{1em}
           \end{enumerate}
-
 \end{enumerate}
 \setlength{\baselineskip}{12pt}
 \verb|\baselineskip| has been reset. \\
