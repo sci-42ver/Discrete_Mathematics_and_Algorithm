@@ -712,6 +712,74 @@ test
         \item I missed the assignment $c=tc$ after $c<tc$.
     }
 
+    \ModProcName{find the two that are
+        closest}
+    \mywrongitem \CapProcTargetName \AlgorithmRef
+    \begin{enumerate}[label=(\alph*)]
+        \item \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+                  \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a list}$)}{}
+                  $d\coloneqq 0\mycmt{d\text{ is the minimum distance}}$\\
+                  \ForRange{i}{1}{n}{
+                      \ForRange{j}{i+1}{n}{
+                          \lIf{$d<|a_i-a_j|$}{
+                              $d=|a_i-a_j|$
+                          }
+                      }
+                  }
+                  \Return{$d$}
+              \end{SpacingAlgorithm}
+        \item \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex_b}
+                  \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a sorted non-decreasing list}$)}{}
+                  $d\coloneqq 0\mycmt{d\text{ is the minimum distance}}$\\
+                  \ForRange{i}{1}{n-1}{
+                  \lIf{$d<a_{i+1}-a_i$}{
+                  $d=a_{i+1}-a_i$
+                  }
+                  }
+                  \Return{$d$}
+              \end{SpacingAlgorithm}
+    \end{enumerate}
+    \ecc{
+        \item the question needs the pair
+        \item better initing $d\coloneqq|x_1-x_2|$ to avoid the compulsory first assignment.
+        \item it finds minimum instead of maximum.
+    }
+    \begin{SpacingAlgorithm}{\capitalisewords{hinted by the ans}, \CapProcTargetName}{\CurTodolistToplevelIndex_a_mod}
+        \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a list}$)}{}
+        $d\coloneqq |x_1-x_2|\mycmt{d\text{ is the minimum distance}}$\\
+        $f_1\coloneqq 1,f_2\coloneqq 2\mycmt{(f_1,f_2)\text{ is the target pair}}$\\
+        \ForRange{i}{n}{3}{
+            \ForRange{j}{n-1}{1}{
+                \If{$d>|a_i-a_j|$}{
+                    $d=|a_i-a_j|$\\
+                    $f_1=i$\\
+                    $f_2=j$
+                }
+            }
+        }
+        \Return{$(f_1,f_2)$}
+    \end{SpacingAlgorithm}
+
+    \ModProcName{greater than the sum of all
+        previous terms}
+    \mywrongitem \CapProcTargetName \AlgorithmRef
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a list}$)}{}
+        $sum\coloneqq 0\mycmt{sum\text{ is the sum of all
+                    previous terms}}$\\
+        $S\coloneqq \varnothing\mycmt{S\text{ is the finding term set}}$\\
+        \ForRange{i}{2}{n}{
+        $sum=sum+x_{i-1}$\\
+        \lIf{$sum<x_i$}{
+            $\text{append }x_i\text{ to }S$
+        }
+        }
+        \Return{$S$}
+    \end{SpacingAlgorithm}
+    \ecc{
+        \item the ans takes $a_1>0$ in account.
+    }
+
 \end{todolist}
 
 \newpage

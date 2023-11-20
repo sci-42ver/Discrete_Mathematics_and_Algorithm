@@ -2,6 +2,13 @@ indentRules:
 #  shiftedalign*: "    "
   ForRange: "    "
 #  large: "    "
+verbatimEnvironments:
+  verbatim: 1
+  lstlisting: 1
+verbatimCommands:
+  verb: 1
+noIndentBlock:
+  verbatim: 1
 indentRulesGlobal:
   items: "    "
   optionalArguments: "    "

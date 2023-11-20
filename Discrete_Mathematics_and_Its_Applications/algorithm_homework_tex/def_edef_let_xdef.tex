@@ -16,8 +16,9 @@
 \usepackage{mathtools}
 \usepackage[nodisplayskipstretch]{setspace}
 % https://tex.stackexchange.com/a/20613/308105
-\newcommand\hcancel[2][black]{\setbox0=\hbox{#2}%
-\rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}#2} 
+% \newcommand\hcancel[2][black]{\setbox0=\hbox{#2}%
+% \rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}#2} 
+\usepackage[normalem]{ulem}
 
 \usepackage{listings}
 \lstset{
@@ -180,7 +181,7 @@ Here use \verb|\let\mylb\\ \renewcommand{\\}{\mylb[1cm]}| to implement the text 
   \def\arraystretch{1.2}%
   \array{@{}l@{\quad}l@{}}%
 }
-\end{verbatim}
+          \end{verbatim}
           % @{} meaning https://tex.stackexchange.com/a/207463/308105
           % maybe l meaning https://mirrors.ibiblio.org/CTAN/macros/latex/required/tools/array.pdf
 
@@ -192,7 +193,7 @@ $\begin{cases}
     test & sds & adsd\\
     test & sds & adsd
 \end{cases}$
-    \end{verbatim}
+                    \end{verbatim}
               \item with \verb|\matrix@check|:
                     \begin{verbatim}
 \def\matrix@check#1{%
@@ -201,7 +202,7 @@ $\begin{cases}
     \@xp\@gobble
   \fi
 }
-\end{verbatim}
+                    \end{verbatim}
                     % currenvir https://tex.stackexchange.com/q/541393/308105
                     % ifx https://tex.stackexchange.com/a/127510/308105
                     % PassOptionsToPackage https://tex.stackexchange.com/a/385906/308105
@@ -209,7 +210,7 @@ $\begin{cases}
                     \begin{verbatim}
 \let\@xp=\expandafter
 \PassOptionsToPackage{cmex10}{amsmath}
-\end{verbatim}
+                    \end{verbatim}
                     So it just checks and should  \textbf{not influence the above after being added to the array env}, i.e. \verb|\renewcommand{\\}|.
                     % https://tex.stackexchange.com/a/57790/308105
               \item \verb|\@ifnextchar| should also \textbf{not influence after being added to the array env}.
@@ -221,19 +222,19 @@ $\begin{cases}
                     \begin{lstlisting}
 texdoc -s amsmath -> /usr/local/texlive/2023/texmf-dist/doc/latex/amsmath/diffs-m.txt showing:
 incompatible with the plain-TeX syntax for \pmatrix, \matrix, and \cases
-\end{lstlisting}
+                    \end{lstlisting}
                     \verb|amsmath| doesn't use \verb|amstex| which also defines \verb|\cases| (based on the \verb|amsmath| doc, the \verb|amstex| is deprecated) in \begin{lstlisting}
 /usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amstex.sty
-\end{lstlisting}
+                    \end{lstlisting}
                     \verb||, also shown in \verb|\RequirePackage| in
                     \begin{lstlisting}
 /usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsmath.sty
-\end{lstlisting}
+                    \end{lstlisting}
 
                     % Then with \verb=grep -r -w -e '\\jot' /usr/local/texlive | less\_n=, \verb|/usr/local/texlive/2023/texmf-dist/tex/amstex/base/amstex.tex|:\verb|\def\cases{\bgroup\spreadmlines@\jot\left\{\,\matrix\format\l&\quad\l\\}| has \verb|\matrix| which is more suitable for the above \verb|\matrix@check|. But the \verb|/usr/local/texlive/2023/texmf-dist/tex/amstex/base/amstex.tex|'s definitions are a bit too complex and
                     maybe the above 2nd method is more suitable for the just spacing tune.
                     \begin{itemize}
-                        \item See \verb|plain_tex_cases.tex|. However, with the plain tex, the \verb|\cases| will output one \textbf{extra brace} maybe due to not totally using the plain tex.
+                        \item See \verb|plain_tex_cases.tex|. However, with the plain tex without loading the \verb|amsmath| package, the \verb|\cases| will output one \textbf{extra brace} \sout{maybe due to not totally using the plain tex.}
 
                               TODO how does \verb|\matrix@check\cases\env@cases| work when the check doesn't throw one error?
                     \end{itemize}
@@ -242,14 +243,14 @@ incompatible with the plain-TeX syntax for \pmatrix, \matrix, and \cases
                     \begin{lstlisting}
 /usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsbsy.sty:\RequirePackage{amsgen}
 /usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsgen.sty:\long\def\new@ifnextchar#1#2#3{%
-\end{lstlisting}
+                    \end{lstlisting}
                     in:
                     \begin{lstlisting}
 grep -r -e 'ifnextchar' /usr/local/texlive/2023/texmf-dist/tex/latex/amsmath | less_n
-\end{lstlisting},\verb|\renewcommand{\\}{\mylb[10cm]test}| fails with \verb|cases| in \verb|amsmath| probably because something like
+                    \end{lstlisting},\verb|\renewcommand{\\}{\mylb[10cm]test}| fails with \verb|cases| in \verb|amsmath| probably because something like
                     \begin{lstlisting}
 /usr/local/texlive/2023/texmf-dist/tex/latex/amsmath/amsmath.sty:\DeclareRobustCommand{\displaybreak}{\new@ifnextchar[\dspbrk@{\dspbrk@[4]}}
-\end{lstlisting}
+                    \end{lstlisting}
           \end{itemize}
           TODO Based on the above three items, so why does the \verb|amsmath \bagin{cases}| fails with the above \verb|\let\myhalign\halign \def\halign{...}|?
 
@@ -276,14 +277,14 @@ grep -r -e 'ifnextchar' /usr/local/texlive/2023/texmf-dist/tex/latex/amsmath | l
     \let\mylb\\
     \renewcommand{\\}{\mylb[10cm]test}
     $|x| = \cases{x  & \text{if } x\ge 0\\-x & \text{if } x\lt 0}$
-\end{verbatim}
+          \end{verbatim}
           \begin{enumerate}
               \item With \verb|\cases| definition from \verb|latexdef -t latex -s -f -E cases|:
                     \begin{verbatim}
 % latex.ltx, line 12595:
 \DeclareRobustCommand*\cases[1]{\left\{\,\vcenter{\normalbaselines\m@th
     \ialign{$##\hfil$&\quad{##}\hfil\crcr#1\crcr}}\right.}
-\end{verbatim}
+                    \end{verbatim}
 
                     % https://www.overleaf.com/learn/latex/Articles/How_to_change_paragraph_spacing_in_LaTeX#\baselineskip_(TeX_primitive)
                     % \lineskiplimit = -13pt
