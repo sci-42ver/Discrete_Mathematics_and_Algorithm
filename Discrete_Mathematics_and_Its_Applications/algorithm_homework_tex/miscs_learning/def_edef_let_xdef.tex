@@ -237,6 +237,28 @@ incompatible with the plain-TeX syntax for \pmatrix, \matrix, and \cases
                         \item See \verb|plain_tex_cases.tex|. However, with the plain tex without loading the \verb|amsmath| package, the \verb|\cases| will output one \textbf{extra brace} \sout{maybe due to not totally using the plain tex.}
 
                               TODO how does \verb|\matrix@check\cases\env@cases| work when the check doesn't throw one error?
+                              \begin{verbatim}
+\documentclass{article}
+
+\begin{document}
+\newenvironment{TmpCases}{%
+  \cases\envcases
+  % \envcases
+}{%
+  \endarray\right.....%
+}
+\def\envcases{%
+  % \let\@ifnextchar\new@ifnextchar
+  \left\lbrace
+  % \def\arraystretch{4}%
+  \array{@{}l@{\quad}l@{}}%
+}
+% https://ftp.kddilabs.jp/CTAN/info/impatient/book.pdf notice the last \cr
+$$|x| = \cases{x, &if $x\ge 0$;\cr
+-x,&otherwise.\cr}$$
+\[\begin{TmpCases}test\\test\end{TmpCases}\]
+\end{document}
+                              \end{verbatim}
                     \end{itemize}
                     % https://tex.stackexchange.com/a/14680/308105
               \item TODO With

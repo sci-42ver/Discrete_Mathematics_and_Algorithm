@@ -1,0 +1,27 @@
+% https://www.overleaf.com/read/yjrywgcbypmb#2ce8c4
+\documentclass{article}
+
+\usepackage{mfirstuc}
+
+\begin{document}
+
+% \maketitle
+
+\section{Introduction}
+% https://www.overleaf.com/learn/latex/Articles/How_does_%5Cexpandafter_work%3A_A_detailed_macro_case_study
+\def\foo#1#2{\number#1
+    \ifnum#1<#2
+    \expandafter\foo\expandafter{\number\numexpr#1+1\expandafter}%
+    \expandafter{\number#2\expandafter}%
+    \fi}
+
+\foo{7}{13}
+
+% http://mirror.ox.ac.uk/sites/ctan.org/systems/doc/etex/etex_man.pdf here the last } seems to default not to be expanded which is different from the above.
+\showtokens\expandafter{\jobname}
+\jobname\\
+% similar to
+\newcommand{\NormalProcTargetName}{test}
+\expandafter\capitalisewords\expandafter{\NormalProcTargetName t}
+
+\end{document}

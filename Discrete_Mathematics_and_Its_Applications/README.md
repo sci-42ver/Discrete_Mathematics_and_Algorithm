@@ -9,6 +9,20 @@ check p10 whether the ideas of each chapter are mastered.
 - "- [ ]" can't be ended with one space.
 - not use number bullet list inside "-" bullet list which may be changed to "a,b,c"
 - use number bullet list instead of "a,b,c" to help the indentation.
+# miscs
+- Linux soft link should [not use relative path](https://www.baeldung.com/linux/too-many-levels-of-symlinks)
+```bash
+$ ln -s latexindent_pl.yaml miscs_learning/latexindent_pl.yaml
+$ ls miscs_learning/latexindent_pl.yaml                       
+ls: cannot access 'miscs_learning/latexindent_pl.yaml': Too many levels of symbolic links
+$ tree --noreport -fp
+├── [drwxr-xr-x]  ./miscs_learning
+...
+# this means self "./miscs_learning/latexindent_pl.yaml" based on the relative path
+│   └── [lrwxrwxrwx]  ./miscs_learning/latexindent_pl.yaml -> latexindent_pl.yaml
+# should use the absolute path.
+$ ln -s $(pwd)/latexindent_pl.yaml miscs_learning/latexindent_pl.yaml
+```
 # TODO
 - [QA 164](https://highered.mheducation.com/sites/dl/free/125967651x/1106131/Advice_on_the_Writing_Projects.pdf)
 - how is the p20 list related with discrete mathematics?
@@ -474,6 +488,7 @@ Also [texfaq](https://tex.stackexchange.com/a/16439/308105)
 - whether `\let` is with `=` is all ok.
 - align* implementation in [amsmath](https://tex.stackexchange.com/a/4389/308105) and maybe [others](https://tex.stackexchange.com/a/4388/308105)
 - cases with [`[]`](https://tex.stackexchange.com/a/41429/308105)
+- check the package specific command definition with [`latexdef --package amsmath -f cases`](https://tex.stackexchange.com/a/591894/308105)
 ### warning fixes
 - [underfull/overfull](https://tex.stackexchange.com/a/395370/308105) hbox and vbox
   - their [meanings](https://www.overleaf.com/learn/how-to/Understanding_underfull_and_overfull_box_warnings#Overfull_and_underfull_boxes)
