@@ -433,7 +433,10 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
     - for example, in the above link, $g()$ 
       (i.e. $K(P)$ in the book) has no valid inputs to output, i.e. not one computable function.
     - the link $halts(P)=H(P,P)\text{ in the book}$
-- 
+- the bubble sort just uses the pair chains to select the **maximum** in the list in each pass, so $i$ plus one and $j$ minus one in each pass in ALGORITHM 4.
+- the [insertion sort](https://en.wikipedia.org/wiki/Insertion_sort#Best,_worst,_and_average_cases) just tracks one more item which creates one ordered sublist beginning from the first item.
+  the 2nd ~~is similar to the 1st except that it moves `x` directly to the correct place instead of propagating (the swap counts are same).~~ avoids many unnecessary swaps which uses 3 assignments by using all one assignment each time with one additional $x \leftarrow A[i]$
+  the 3rd is the recursive version of the 2nd.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -489,11 +492,16 @@ Also [texfaq](https://tex.stackexchange.com/a/16439/308105)
 - align* implementation in [amsmath](https://tex.stackexchange.com/a/4389/308105) and maybe [others](https://tex.stackexchange.com/a/4388/308105)
 - cases with [`[]`](https://tex.stackexchange.com/a/41429/308105)
 - check the package specific command definition with [`latexdef --package amsmath -f cases`](https://tex.stackexchange.com/a/591894/308105)
+- why use [`\displaystyle`](https://www.overleaf.com/learn/latex/Display_style_in_math_mode#Overriding_default_mathematical_styles)
+  - `\(\)` and `\[\]` are preferred for [better error messages](https://tex.stackexchange.com/a/513/308105) and [suitable](https://tex.stackexchange.com/a/69854/308105) for `amsmath`.
+- "``" and "''" for [quotes](https://www.maths.tcd.ie/~dwilkins/LaTeXPrimer/QuotDash.html#:~:text=Single%20quotation%20marks%20are%20produced,by%20typing%20%60%60%20and%20''%20.)
 ### warning fixes
 - [underfull/overfull](https://tex.stackexchange.com/a/395370/308105) hbox and vbox
   - their [meanings](https://www.overleaf.com/learn/how-to/Understanding_underfull_and_overfull_box_warnings#Overfull_and_underfull_boxes)
     > “stretch out” the content
     > exceeds the available space
+### notice
+- `mathtools` -> `cases*` use [**text**](https://tex.stackexchange.com/a/321661/308105) after `&`
 ### miscs
 - how to use the [plain tex](https://www.overleaf.com/learn/latex/Questions/Can_I_run_plain_TeX_on_Overleaf%3F)
   - [books](https://tug.org/interest.html#plain) 
@@ -1881,7 +1889,8 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [x] 36 $\text{since }\forall x=a+bi\in\mathbf{C},f:x\to(a,b)\text{ is one-to-one correspondence}\Rightarrow|\mathbf{C}|=|\mathbf{R}\times\mathbf{R}|\text{ with the 35 conclusion}\blacksquare$
 ## 3
 ### 3.1
-- 4~ see the [pdf](https://www.overleaf.com/read/fbychkzpsrff#459790).
+- 4~34 see the [pdf](https://www.overleaf.com/read/fbychkzpsrff#459790).
+- 38,40~42 skipped.
 - [ ] 2
   a.
   - [x] input
@@ -1918,6 +1927,18 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - see the ans where c is wrong.
 - [ ] 6
   here $:=$ should be only used in the definition.
+- [ ] 36 the list shows the states after [each pass](https://en.wikipedia.org/wiki/Bubble_sort#Step-by-step_example)
+  6, 2, 3, 1, 5, 4
+  1. 2, 3, 1, 5, 4, 6 beacuse 6 > all
+  2. 2, 1, 3, 4, 5, 6
+  3. 1, 2 ...
+  4. this step [no swap](https://en.wikipedia.org/wiki/Bubble_sort#Pseudocode_implementation), finish.
+  - TODO
+    - ~~The above 3rd step swaps 1st and 2nd, which is different from the book ALGORITHM 4, so the book one is probably wrong.~~
+    - "two more passes" is because ALGORITHM 4 doesn't stop when not swapped.
+  - Compared with the wikipedia [optimized one](https://en.wikipedia.org/wiki/Bubble_sort#Optimizing_bubble_sort)
+    `newn` excludes the ordered ending sublist(i.e. the non-stopping sequence $A[newn]\ldots A[n]$)
+    and `newn=1` implies all are ordered.
 - [ ] 
 
 ---

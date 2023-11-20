@@ -1,4 +1,3 @@
-% https://www.overleaf.com/read/yjrywgcbypmb#2ce8c4
 \documentclass{article}
 
 \usepackage{mfirstuc}
@@ -9,10 +8,11 @@
 
 \section{Introduction}
 % https://www.overleaf.com/learn/latex/Articles/How_does_%5Cexpandafter_work%3A_A_detailed_macro_case_study
+% here { in "\expandafter{\number..." is one token similar "\foo" in "\expandafter1\foo\expandafter..." to  be saved ("stored for later re-insertion back") after \expandafter
 \def\foo#1#2{\number#1
     \ifnum#1<#2
-    \expandafter\foo\expandafter{\number\numexpr#1+1\expandafter}%
-    \expandafter{\number#2\expandafter}%
+        \expandafter\foo\expandafter{\number\numexpr#1+1\expandafter}%
+        \expandafter{\number#2\expandafter}%
     \fi}
 
 \foo{7}{13}
