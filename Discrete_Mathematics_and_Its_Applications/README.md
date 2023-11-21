@@ -435,7 +435,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
     - the link $halts(P)=H(P,P)\text{ in the book}$
 - the bubble sort just uses the pair chains to select the **maximum** in the list in each pass, so $i$ plus one and $j$ minus one in each pass in ALGORITHM 4.
 - the [insertion sort](https://en.wikipedia.org/wiki/Insertion_sort#Best,_worst,_and_average_cases) just tracks one more item which creates one ordered sublist beginning from the first item.
-  the 2nd ~~is similar to the 1st except that it moves `x` directly to the correct place instead of propagating (the swap counts are same).~~ avoids many unnecessary swaps which uses 3 assignments by using all one assignment each time with one additional $x \leftarrow A[i]$
+  the 2nd ~~is similar to the 1st except that it moves `x` directly to the correct place instead of propagating (the swap counts are same).~~ avoids many unnecessary swaps which uses 3 assignments by using all one assignment each time with one additional $x \leftarrow A[i]$ which is same as ALGORITHM 5 does.
   the 3rd is the recursive version of the 2nd.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
@@ -502,6 +502,15 @@ Also [texfaq](https://tex.stackexchange.com/a/16439/308105)
     > exceeds the available space
 ### notice
 - `mathtools` -> `cases*` use [**text**](https://tex.stackexchange.com/a/321661/308105) after `&`
+- `$$` doesn't has the inherent [multiline](https://tex.stackexchange.com/a/520759/308105) support. It is [to](https://www.overleaf.com/learn/latex/Mathematical_expressions#:~:text=LaTeX,therefore%20put%20on%20separate%20lines)
+  > write expressions that are not part of a paragraph
+```tex
+% must use \cr instead of \\ https://tex.stackexchange.com/a/520759/308105
+$$\displaylines{
+    a = b\cr
+    c = d + e\cr
+}$$
+```
 ### miscs
 - how to use the [plain tex](https://www.overleaf.com/learn/latex/Questions/Can_I_run_plain_TeX_on_Overleaf%3F)
   - [books](https://tug.org/interest.html#plain) 
@@ -1890,7 +1899,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 ## 3
 ### 3.1
 - 4~34 see the [pdf](https://www.overleaf.com/read/fbychkzpsrff#459790).
-- 38,40~42 skipped.
+- 38,40~42,54~56 skipped.
 - [ ] 2
   a.
   - [x] input
@@ -1939,6 +1948,60 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - Compared with the wikipedia [optimized one](https://en.wikipedia.org/wiki/Bubble_sort#Optimizing_bubble_sort)
     `newn` excludes the ordered ending sublist(i.e. the non-stopping sequence $A[newn]\ldots A[n]$)
     and `newn=1` implies all are ordered.
+- [ ] 47 
+  - see the ans
+    since in ALGORITHM 5, it doesn't `break` the $\textbf{while }a_j>a_i$ when `j=i`
+- [ ] 48 $n$
+  if to sort as the non-increasing order, $n$ by the comparison pair sequence $(n,n-1),(n-1,n-2)\ldots$ where it compares with the item **one index before** in each iteration.
+  else, also $n$ but the comparison codes are different from the above in that it always begins comparison with the **1st** item.
+
+  The above comparison order always makes the already sorted list comparison count least.
+  - the 1st doesn't need to be compared with self.
+- [ ] 50 
+  TODO see [this](https://en.wikipedia.org/wiki/Insertion_sort#Variants) for the swap and search complexity.
+  1. inserting at the $i$th implies $i$ comparison counts.
+    $1+1+4+1+4+3+2=16$
+  2. here after each $\textbf{while}$, one **extra** comparison is needed.
+    $2+2+3+3+4+4+4=22$
+  Based on the above, for small list the linear is better.
+  - the ans lacks the 2nd $4$ for the linear one.
+  - the ans doesn't take $a_j<a_{left}$ in account.
+    TODO then for $3$, it should only have one comparison $3<4$ which drops $7$ then. Why does the ans show one for it?
+  - > not almost in decreasing order 
+    
+    see exercise 48.
+- [ ] 52
+  - b based on 50, comparison count: $1+1+1+4+1$
+  - c,d see 47,48
+  - see the ans
+    where d excludes $i=0$, so it is $1,2\ldots$ instead of $2,3\ldots$ as 48.
+- [ ] 58
+  - see the ans
+    56 only d uses one nickel.
+    - Then similar to lemma 1,
+      3 dimes can not be replaced with less than 3 coins, so it is possible. More specifically, at most 4 dimes are allowed.
+- [ ] 62 see the ans where intentionally use many same schedules to increase the overlap.
+  think of one optimal schedule -> use one overlap schedule to break it -> add overlap schedules to ensure the break before.
+- [ ] 63 
+  a. use the ALGORITHM 8 incursively until all talks are scheduled. 
+  b. assume S(1) means that 1 hall is the minimum.
+    1. S(1) is trivially true because 0 is impossible.
+    2. assume S(n-1) is true.
+      ~~Then if S(n) is wrong, then it can choose at least n-1~~
+      Then for S(n), we first do S(n-1) which is **assumed optimal**, then for the rest at least one is required, so S(n) $\blacksquare$
+  - TODO
+    the above algorithm does the same as the ans because ALGORITHM 8 will be rerun if some talks **overlap** -> going on simultaneously
+- [ ] 64
+  To make one stable matching, try matching at least one side the highest rank, e.g. $(m_1,w_3),(m_2,w_1),(m_3,w_2)$.
+  To make one not stable, just do the opposite, e.g. $(m_1,w_2),(m_2,w_3),(m_3,w_1)$
+  - The ans
+    for $(m_1,w_1),(m_2,w_3),(m_3,w_2)$ ~~is stable because~~ 
+    $w_1,m_3$ has their most preferred match.
+    Then to find the non-stable pair
+    - $m_1$ must choose $w_3$ because it is the only one before $w_1$ but $w_3$ can't choose $m_1$ due to that it is the last.
+    - TODO $m_2$ can only choose $w_2$ because $w_1$ is already satisfied, and $w_2$ also prefers $m_2$. So it is not stable
+      The ans only takes in account 3 man/woman but not 6.
+      - Here only taking in account one side is also ok, e.g. thinking about all men or women because the pair is **bidirectional**. So if one direction is not unable to be satisfied, then the pair can't exist.
 - [ ] 
 
 ---
