@@ -636,10 +636,11 @@
                   & \Rightarrow k=0,n=0,\text{originally }j-i=4n+k=0(\text{\textbf{also impossible} because \textbf{while} block condition }i<j)
                   %   \end{cases}$
               \end{CondensedCases}
-
+              \newcommand{\EndingTextQED}{\(\quad\blacksquare\)}
               Based on the above, if $i<j$ into the while block,
-              then in the next iteration of the while loop, $i>j$ is impossible.$\quad\blacksquare$
-              \item The ans shows \(i<j-2\) which excludes the following cases:
+              then in the next iteration of the while loop, $i>j$ is impossible.\EndingTextQED
+              \item Prove the cases excluded by \(i<j-2\) can be contained above \textbf{correctly}.\\
+              The ans shows \(i<j-2\) which excludes the following cases:
                     \begin{CondensedCases}
                         i=j-1\Rightarrow c_{1\sim 3}=i&\text{then either } x>a_i,i=j
                         \text{ which excludes }a_i\\
@@ -651,11 +652,13 @@
                             x>a_{i+1}&\Rightarrow i=i+2=j\text{ which only allows }a_{i+2}
                         \end{cases}
                     \end{CondensedCases}
-                    This also implies the above already proved \(i=j\).\\
-                    And the above \textbf{correct} ``exclude/allow'' are implied by the above \(>\Rightarrow+1\)
+                    This also implies the above already proved ending state \(i=j\).\\
+                    \\
+                    \textbf{Alternatively} the above \textbf{correct} ``exclude/allow'' are implied by the above \(>\Rightarrow+1\)
                     which is also \textbf{trivial} without the above detailed description. 
-                    So \(i<j\) including the above two excluded cases \textbf{won't drop unnecessary items}. 
-                    More specifically, the above excluded cases does the ending assignments shown in the ans:
+                    So \(i<j\) including the above two excluded cases \textbf{won't drop unnecessary items}. \\
+                    \\
+                    More specifically, the above excluded cases does \hypertarget{equivalence_ending}{same} as the ending assignments shown in the ans:\EndingTextQED
                     \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex_ans_ending}
                         \lIf{$x=a_i$}{
                             $location=i$
@@ -665,6 +668,31 @@
                         \(\ldots\)\\
                         \Return{$location$}
                     \end{SpacingAlgorithm}
+                \item Prove that the ``Four Sublists Almost Same The Ans" and ``Four Sublists Corrected" do the \hypertarget{equivalence_algorithm}{equivalent} nested \textbf{if} blocks.\\
+                    Since the ``Four Sublists Almost Same The Ans" and ``Four Sublists Corrected" only 
+                    differs for their \textbf{outer} \textbf{if} order and for each \(c_i\).
+                    \begin{enumerate}
+                        \item when \(c_i\) all differ, \(x\) can be only in one case of the above four \(\Rightarrow\) these two algorithms do the same.
+                        \item \(c_1=c_2\Rightarrow k=0,1\;n=0\Rightarrow c_3=c_2\) \(\Rightarrow\) Only two cases are allowed. These two algorithms do the same.
+                        \item \(c_3=c_2\Rightarrow k=2\;n=0\text{ and the above}\) \(\Rightarrow\) Only three cases are allowed. Similarly same.
+                    \end{enumerate}
+                    \vspace{10pt}
+                    
+                    \textbf{Alternatively} to prove, we only needs to care the outer \textbf{if}, obviously
+                    whether \(c_i\) are same with each other, it can only choose one for the outer \textbf{if} for both algorithms, 
+                    then since the following of them are same, so they do the same.
+                    \\
+                    \\
+                    \textbf{Alternatively}, the non-equivalence case is for that some condition blocks 
+                    have something \textbf{overlap}, so the order matters to decide which one \(x\) exists in.\\
+                    But the above \((-\infty,c_1]\), \((c_1,c_2]\ldots\) can't overlap with each other (i.e. \((-\infty,c_1]\cap(c_1,c_2]\ldots=\varnothing\)).\\
+                    If some \(c_i\) are same with each other, only some ranges become \(\varnothing\), which doesn't influence non-overlap conclusion.\EndingTextQED
+                
+                    \item Combined with the above, prove these two algorithms are totally equivalent.\\
+                    Except for the assignments of \(c_i\), when \(i<j-2\), 
+                    the above \(\textbf{while }i<j\) and the ans \(\textbf{while }i<j-2\) does the same based on the above \hyperlink{equivalence_algorithm}{equivalence}.\\
+                    Then when \(j-2\le i<j\), \hyperlink{equivalence_ending}{this} shows they do same.\\
+                    when exiting with \(i=j\), trivially they do same.\EndingTextQED
     \end{itemize}
 
     \ModProcName{four sublists almost same the ans}
@@ -926,10 +954,10 @@
     Then \(a_{ret-1}<x\le a_{ret}\)\\
     \sout{TODO then the ans assignment of $location+1$ when \(x\ge a_i\) at the exiting loop (i.e. \(i=s=end\)) is impossible}
     \ecc{
-        \item The above conclusion \ref{item_if_3_1_46} is \textbf{wrong} because at least for the last item \(a_n\),
+        \item The above conclusion \hyperref[item_if_3_1_46]{one} is \textbf{wrong} because at least for the last item \(a_n\),
         there is no corresponding \(a_{n+1}\) for comparison, so we need \(location\coloneqq i+1\text{ when }x\ge a_i\) for this special case.\\
         This is \textbf{same} as exercise 45 which also needs to \textbf{append} the list sometimes.
-        \item For conclusion \ref{item_else_3_1_46}, although for \(a_1\), \(a_0\) doesn't exist. 
+        \item For conclusion \hyperref[item_else_3_1_46]{two}, although for \(a_1\), \(a_0\) doesn't exist. 
         But it is enough to insert \(x\) at \(a_1\) if \(x\le a_1\). So it is \textbf{right} at least for this case although invalid \(a_0\).
     }
 \end{todolist}
