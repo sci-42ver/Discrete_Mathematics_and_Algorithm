@@ -2006,7 +2006,22 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     - TODO $m_2$ can only choose $w_2$ because $w_1$ is already satisfied, and $w_2$ also prefers $m_2$. So it is not stable
       The ans only takes in account 3 man/woman but not 6.
       - Here only taking in account one side is also ok, e.g. thinking about all men or women because the pair is **bidirectional**. So if one direction is not unable to be satisfied, then the pair can't exist.
-- [ ] 
+- [ ] 70
+  - Hinted by the ans, change "Halting" to "ever prints the digit 1".
+    More specifically, $H(K,K)=1\Rightarrow K(K) \text{ ever prints the digit 1}$
+    $K(K)\text{ prints the digit 1 if }H(K,K)=0$ contradiction.
+  - The ans combines "halt" and "print 1" together.
+    $(P,I)\xRightarrow{f:\text{make }P\text{ prints nothing except for 1 before halting}\to P'}(P',I)\xRightarrow{S\text{ checks whether prints }1\text{ based on the assumption}}\text{whether }P\text{ halts}$
+    if $S$ can solve the halting of $P$ based on $P'$, then 
+    $f\circ S$ can solve the halting problem, contradiction (here $f$ should be done *manually* because no program can be used to check whether halting). $\blacksquare$
+    ~~- The above real order should be $\forall (P',I)$~~
+    - IMHO, the above is not totally strict, beacuse $f$ is not done by program. It only shows $\text{manual}\circ\text{program}$ is impossible to solve the halting problem, but not for 
+      something like $\text{program}\circ\text{program}$.
+- [ ] 71
+  > if it is still running after any fixed length of time has elapsed, we do not know whether it will never halt or we just did *not wait long enough* for it to terminate.
+  TODO So how does the ans meet the requirement by "Run"ning?
+- [ ] 72
+  TODO Since [not all](https://en.wikipedia.org/wiki/NP_(complexity)) decision problems are solvable, how does the ans prove?
 
 ---
 
