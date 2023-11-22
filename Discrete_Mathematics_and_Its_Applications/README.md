@@ -498,6 +498,7 @@ Also [texfaq](https://tex.stackexchange.com/a/16439/308105)
 - why use [`\displaystyle`](https://www.overleaf.com/learn/latex/Display_style_in_math_mode#Overriding_default_mathematical_styles)
   - `\(\)` and `\[\]` are preferred for [better error messages](https://tex.stackexchange.com/a/513/308105) and [suitable](https://tex.stackexchange.com/a/69854/308105) for `amsmath`.
 - "``" and "''" for [quotes](https://www.maths.tcd.ie/~dwilkins/LaTeXPrimer/QuotDash.html#:~:text=Single%20quotation%20marks%20are%20produced,by%20typing%20%60%60%20and%20''%20.)
+- why use the starred version [`\alph*`](https://tex.stackexchange.com/questions/282172/arabic-enumerating-inside-an-alpha-enumerating#comment1157206_282173)
 ### warning fixes
 - [underfull/overfull](https://tex.stackexchange.com/a/395370/308105) hbox and vbox
   - their [meanings](https://www.overleaf.com/learn/how-to/Understanding_underfull_and_overfull_box_warnings#Overfull_and_underfull_boxes)
