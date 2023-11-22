@@ -400,6 +400,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 ### 3.1
 - "Kitab al-jabr w’al muquabala" may be [arabic](https://en.wikipedia.org/wiki/Languages_of_Iraq)
 - TODO The Art of Computer Programming ([TAOCP](https://www-cs-faculty.stanford.edu/~knuth/taocp.html))
+  > referring to The Art of Computer Programming, has come to mean the reference that answers all questions about such topics as data structures and algorithms.
 - sorting algorithm [complexity](https://web.archive.org/web/20181216080432/https://www.cs.cmu.edu/~adamchik/15-121/lectures/Sorting%20Algorithms/sorting.html)
 - [insertion sort](https://www.geeksforgeeks.org/insertion-sort/) just compares each item with its former
   and **insert** it at the appropriate location.
@@ -437,6 +438,10 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - the [insertion sort](https://en.wikipedia.org/wiki/Insertion_sort#Best,_worst,_and_average_cases) just tracks one more item which creates one ordered sublist beginning from the first item.
   the 2nd ~~is similar to the 1st except that it moves `x` directly to the correct place instead of propagating (the swap counts are same).~~ avoids many unnecessary swaps which uses 3 assignments by using all one assignment each time with one additional $x \leftarrow A[i]$ which is same as ALGORITHM 5 does.
   the 3rd is the recursive version of the 2nd.
+### 3.2
+- p241 $f=O(g)\wedge g=O(f)$ is possible, so relations in p247 need to be separately proven.
+- p251 THEOREM 4
+  similar to EXAMPLE 13, $x^n=O(f)$ is trivial. Then with THEOREM 1, proof finished.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -1903,7 +1908,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 ## 3
 ### 3.1
 - 4~34 see the [pdf](https://www.overleaf.com/read/fbychkzpsrff#459790).
-- 38,40~42,54~56 skipped.
+- 14,38,40~42,54~56 skipped.
 - [ ] 2
   a.
   - [x] input
@@ -1940,7 +1945,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - see the ans where c is wrong.
 - [ ] 6
   here $:=$ should be only used in the definition.
-- [ ] 36 the list shows the states after [each pass](https://en.wikipedia.org/wiki/Bubble_sort#Step-by-step_example)
+- [x] 36 the list shows the states after [each pass](https://en.wikipedia.org/wiki/Bubble_sort#Step-by-step_example)
   6, 2, 3, 1, 5, 4
   1. 2, 3, 1, 5, 4, 6 beacuse 6 > all
   2. 2, 1, 3, 4, 5, 6
@@ -1948,13 +1953,13 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   4. this step [no swap](https://en.wikipedia.org/wiki/Bubble_sort#Pseudocode_implementation), finish.
   - TODO
     - ~~The above 3rd step swaps 1st and 2nd, which is different from the book ALGORITHM 4, so the book one is probably wrong.~~
-    - "two more passes" is because ALGORITHM 4 doesn't stop when not swapped.
+    - "two more passes" is because ALGORITHM 4 **doesn't stop** when not swapped.
   - Compared with the wikipedia [optimized one](https://en.wikipedia.org/wiki/Bubble_sort#Optimizing_bubble_sort)
     `newn` excludes the ordered ending sublist(i.e. the non-stopping sequence $A[newn]\ldots A[n]$)
     and `newn=1` implies all are ordered.
 - [ ] 47 
   - see the ans
-    since in ALGORITHM 5, it doesn't `break` the $\textbf{while }a_j>a_i$ when `j=i`
+    since in ALGORITHM 5, it doesn't `break` the $\textbf{while }a_j>a_i$ when `j=i`, so $2,3,\ldots$
 - [ ] 48 $n$
   if to sort as the non-increasing order, $n$ by the comparison pair sequence $(n,n-1),(n-1,n-2)\ldots$ where it compares with the item **one index before** in each iteration.
   else, also $n$ but the comparison codes are different from the above in that it always begins comparison with the **1st** item.
@@ -2007,7 +2012,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       The ans only takes in account 3 man/woman but not 6.
       - Here only taking in account one side is also ok, e.g. thinking about all men or women because the pair is **bidirectional**. So if one direction is not unable to be satisfied, then the pair can't exist.
 - [ ] 70
-  - Hinted by the ans, change "Halting" to "ever prints the digit 1".
+  - **Hinted** by the ans, change "Halting" to "ever prints the digit 1".
     More specifically, $H(K,K)=1\Rightarrow K(K) \text{ ever prints the digit 1}$
     $K(K)\text{ prints the digit 1 if }H(K,K)=0$ contradiction.
   - The ans combines "halt" and "print 1" together.
@@ -2022,6 +2027,25 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   TODO So how does the ans meet the requirement by "Run"ning?
 - [ ] 72
   TODO Since [not all](https://en.wikipedia.org/wiki/NP_(complexity)) decision problems are solvable, how does the ans prove?
+### 3.2
+- 2~6,10~18,24,28~34,38~40 skipped
+- [x] 8 just use the limit and check it to avoid some cases like the oscillation limit.
+  1. 4
+  2. 5
+  3. 0
+  4. -1
+- [ ] 20 see the ans
+  both are instead of only the 1st.
+- [x] 22
+  $(\log{n})^3<\sqrt{n}\log{n}<n^{99}+n^{98}<n^{100}<(1.5)^n<10^n<(n!)^2$
+- [x] 26
+  1. $n^3\log{n}$
+  2. $6^n$
+  3. $n^nn!$
+- [ ] 36 see the ans, notice the $C>0$ requirement.
+- [ ] 42 see the ans, ~~due to the absolute comparison, the symbol may make $2^g\to 0<2^f$~~
+  the $C$ can't be lifted up to the exponent.
+- [ ] 
 
 ---
 

@@ -824,7 +824,8 @@ boxrule=0pt,boxsep=0pt,breakable}
         closest}
     \mywrongitem \CapProcTargetName \AlgorithmRef
     \begin{enumerate}[label=(\alph*)]
-        \item \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+        \item \begin{SpacingAlgorithm}
+            {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ by a brute force algorithm}}{\CurTodolistToplevelIndex}
                   \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a list}$)}{}
                   $d\coloneqq 0\mycmt{d\text{ is the minimum distance}}$\\
                   \ForRange{i}{1}{n}{
@@ -836,7 +837,8 @@ boxrule=0pt,boxsep=0pt,breakable}
                   }
                   \Return{$d$}
               \end{SpacingAlgorithm}
-        \item \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex_b}
+        \item \begin{SpacingAlgorithm}
+            {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ based on sorting}}{\CurTodolistToplevelIndex_b}
                   \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a sorted non-decreasing list}$)}{}
                   $d\coloneqq 0\mycmt{d\text{ is the minimum distance}}$\\
                   \ForRange{i}{1}{n-1}{
