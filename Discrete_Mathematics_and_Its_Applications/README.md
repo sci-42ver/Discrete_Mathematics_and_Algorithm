@@ -442,6 +442,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - p241 $f=O(g)\wedge g=O(f)$ is possible, so relations in p247 need to be separately proven.
 - p251 THEOREM 4
   similar to EXAMPLE 13, $x^n=O(f)$ is trivial. Then with THEOREM 1, proof finished.
+- Notice $\log=\log_2$
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -564,6 +565,7 @@ I also read the asterisked ones.
   1. not finding valuable answers although [SOLUTIONS_7th] has some tips.
   2. exercises are enough large to help the learning.
 - COMPUTER PROJECTS , COMPUTATIONS AND EXPLORATIONS and WRITING PROJECTS are a bit off the topic with the goal to learn the **maths** fundamental knowledge.
+- The following *skipped* ones are based on that after I thought of the exercise and checked the ans, the ans shows the same or similar to what I thought, so I didn't spend redundant time to record the more deeper understanding about the exercise.
 ## 1
 ### 1.1
 - [x] 
@@ -2028,7 +2030,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 72
   TODO Since [not all](https://en.wikipedia.org/wiki/NP_(complexity)) decision problems are solvable, how does the ans prove?
 ### 3.2
-- 2~6,10~18,24,28~34,38~40 skipped
+- 2~6,10~18,24,28~34,38~40,44~48,52~56,60~66,70,74,76 skipped
 - [x] 8 just use the limit and check it to avoid some cases like the oscillation limit.
   1. 4
   2. 5
@@ -2045,7 +2047,53 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 36 see the ans, notice the $C>0$ requirement.
 - [ ] 42 see the ans, ~~due to the absolute comparison, the symbol may make $2^g\to 0<2^f$~~
   the $C$ can't be lifted up to the exponent.
-- [ ] 
+- [ ] 50 ~~WLOG, let $a_i>0$, then $$~~
+  With the calculus limit, this is trivial.
+  - ~~$\frac{a_{n-i}}{x^i}<\frac{a_{n-i}}{x}$~~
+    The ans is probably wrong (see above it induces the $<$ instead of $>$)
+    although the $k$ [choice is right](https://cs.stackexchange.com/a/71717/161388).
+    - Assume $a_k>0$,
+      $$
+      \begin{align*}
+        &\frac{a_k}{2k}*n^i+a_{k-i}\ge 0\\
+        \Rightarrow& n^i\ge \frac{-a_{k-i}*2k}{a_k}\text{, i.e. }\frac{max(|a_{k-i}|)*2k}{a_k}\\
+        \Rightarrow& n\ge \sqrt[i]{\frac{max(|a_{k-i}|)*2k}{a_k}}\\
+        \text{just let }&n\ge \frac{max(|a_{k-i}|)*2k}{a_k}\text{, the above inequity must hold.}
+      \end{align*}
+      $$
+      here $k$ is $n$ in the question.
+      - If $a_k<0$, just think of $g(n)=-p(n)$, then 
+        $|p(n)|\ge C|a_kn^k|\Rightarrow |g(n)|\ge C|-a_kn^k|$, the do the same as the above.
+  - See [this][O_Theta_Omega_relation_with_limit] for the relation of limit with $o,\Theta,\Omega$.
+    ~~TODO strict proof~~
+    - based on the "Limits at infinity" [definition](https://en.wikipedia.org/wiki/Limit_of_a_function#Limits_at_infinity)
+      $$
+      \begin{align*}
+      &c = \lim_{n\to\infty} |\frac{f(n)}{g(n)|} \\
+      \Rightarrow&\forall \varepsilon >0\,\exists m>0\;(x>m\Rightarrow c-\epsilon<|\frac{f(x)}{g(x)}|<c+\epsilon)\\
+      \text{So we can take }&C=c-\epsilon,k=m\text{ for }\Omega\text{ if }c>0(\text{if }c=\infty\text{, we can take arbitrary small positive c})\\
+      \text{and }&C=c+\epsilon,k=m\text{ for }O\text{ if }c\neq \infty
+      \end{align*}
+      $$
+      - Notice $o$ is [different](https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann.E2.80.93Landau_notations) from $O$.
+        TODO here it doesn't take absolute everywhere as the book does.
+- [ ] 58 based on [O_Theta_Omega_relation_with_limit], it is trivial.
+  - see the ans, it needs to recursively calculate the limit.
+  - so $o\Rightarrow O\text{ but }O\nRightarrow o$
+- [ ] 68 not based on $f=\epsilon g,x\to\infty\Rightarrow \lim\frac{\log{|\epsilon|}+\log{|g|}}{\log{|g|}}=-\infty+1\neq 0$
+  here we [shouldn't compare infinity](https://www.scientificamerican.com/article/infinity-is-not-always-equal-to-infinity/#:~:text=For%20example%2C%20the%20number%20line,does%20not%20always%20equal%20infinity.)
+  - the above is wrong because $\lim\frac{\log{|\epsilon|}}{\log{|g|}}\text{ can be }\frac{\infty}{\infty}$
+- [ ] 72
+  - see the ans
+    - sum begins from 2 instead of 1
+- [ ] 73
+  - see the ans
+    - take the exponent
+    - $n+i(n-i-1)>n,i\in\{0,1,\ldots,n-1\}$
+- [ ] 75
+  - see the ans
+    - at least $n-\lceil\frac{n}{2}\rceil+1=n-(\frac{n}{2}+0\text{ or }\frac{1}{2})+1>\frac{n}{2}$
+      
 
 ---
 
@@ -2064,3 +2112,5 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 
 <!-- math stackexchange -->
 [comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one]:https://math.stackexchange.com/a/4804647/1059606
+
+[O_Theta_Omega_relation_with_limit]:https://cs.stackexchange.com/a/827/161388
