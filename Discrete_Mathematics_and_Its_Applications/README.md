@@ -33,6 +33,8 @@ $ ln -s $(pwd)/latexindent_pl.yaml miscs_learning/latexindent_pl.yaml
 - p126 just prove the existence by letting the 1st player *follow* the 2rd winning strategy if the 2rd is to win.
   Does it mean do the *same as 2rd 1st step* which seems weird because its strategy is based on the next is 1st player who will change the board?
 - p128 $q\to r$ is different from p117 "begging the question" where the latter is to prove $r$ by $r$ and the former is to prove $q$ by $r$.
+## book recommendation
+- [KlTa05] algorithm design which referenced in p260.
 ## number theory
 - > Every positive integer is the sum of the squares of four integers
 
@@ -443,6 +445,16 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - p251 THEOREM 4
   similar to EXAMPLE 13, $x^n=O(f)$ is trivial. Then with THEOREM 1, proof finished.
 - Notice $\log=\log_2$
+### 3.3
+- EXAMPLE 2 is based on the Short circuiting, so $2i+1$.
+- p258 should be $O(n^{\log[2]{7}})$
+- P [diffs](https://en.wikipedia.org/wiki/NP_(complexity)) from NP
+  >  P (all problems *solvable*, deterministically, in polynomial time) is contained in NP (problems where solutions can be *verified* in polynomial time)
+  - [NP-complete](https://en.wikipedia.org/wiki/NP-completeness#Formal_definition) is ~~one *class* of problems which are combined together~~ one problem can be reduced from **all** NP, 
+    e.g. the Boolean satisfiability problem by [Cook–Levin theorem (TODO strict proof)](https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem#Proof), "thus equivalent to the P versus NP problem" (i.e. $P\overset{?}{=}NP$).
+    > *Every* problem in NP is *reducible* to $\scriptstyle C$ in polynomial time
+    implies
+    > if *any* of these problems can be *solved* by a polynomial worst-case time algorithm, then *all* problems in the class NP can be *solved* by polynomial worst-case time algorithms
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -2093,7 +2105,41 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 75
   - see the ans
     - at least $n-\lceil\frac{n}{2}\rceil+1=n-(\frac{n}{2}+0\text{ or }\frac{1}{2})+1>\frac{n}{2}$
-      
+### 3.3
+- 2~8,14~20,30~36 skipped.
+- [ ] 23
+  TODO Based on [this](https://math.stackexchange.com/a/1629650/1059606) (i.e. probability), it should be 
+  $\frac{2n+1}{2}+\frac{n+2}{2}=\frac{3n+3}{2}$
+- [x] 10 
+  1. clear one 1 bit each step.
+  2. 1 bit count
+- [x] 12
+  1. is trivial by setting all $1\textbf{ to }n$
+  2. $\frac{n}{4}+1\le\frac{3n}{4}\Rightarrow n\ge 2$ which is always held. so $\ge(\frac{n}{4})^3$
+- [ ] 22
+  3. the ALGORITHM 3 doesn't break when equal, so same as the worst case.
+- [x] 24
+  1. since max must be decided after taking all terms in account, so it can't be smaller than $n$.
+  2. not.
+- [ ] 26 $2\log[4]{n}$
+  - see the ans
+    - should plus 3
+- [ ] 28
+  if similar to 26, we ignore **while $i\le n$**
+  let mode number size is $k<n$ with corresponding mode count $c_k$, then $\sum (c_k+2)<2n+n*c_k$ which is $O(n)$.
+  - see the ans for better explanation.
+- [x] 38
+  1. $2n+2k<4n$
+  2. sort is $O(n\log{n})$ and then 
+    compare with $n$ action.
+- [x] 40
+  the worst is $3+n$ for all using pennies.
+- [x] 44
+  4. if only counting the comparisons, $\sum_{2}^{n}(2*\log{j-1}+1)=O(n\log{n})$ by taking comparison in the **while** condition.
+- [ ] 46 For $C=A\times B$
+  $c_{ij}=\sum a_{ip}b{pj},i\le p\le j$
+  - see the ans
+    - lack $i\le j$
 
 ---
 
