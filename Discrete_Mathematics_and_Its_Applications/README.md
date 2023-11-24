@@ -517,6 +517,7 @@ Also [texfaq](https://tex.stackexchange.com/a/16439/308105)
   - `\(\)` and `\[\]` are preferred for [better error messages](https://tex.stackexchange.com/a/513/308105) and [suitable](https://tex.stackexchange.com/a/69854/308105) for `amsmath`.
 - "``" and "''" for [quotes](https://www.maths.tcd.ie/~dwilkins/LaTeXPrimer/QuotDash.html#:~:text=Single%20quotation%20marks%20are%20produced,by%20typing%20%60%60%20and%20''%20.)
 - why use the starred version [`\alph*`](https://tex.stackexchange.com/questions/282172/arabic-enumerating-inside-an-alpha-enumerating#comment1157206_282173)
+- [lof](http://www.emerson.emory.edu/services/latex/latex_162.html#:~:text=file%20is%20the%20extension%20of,lot%20(list%20of%20tables).)
 ### warning fixes
 - [underfull/overfull](https://tex.stackexchange.com/a/395370/308105) hbox and vbox
   - their [meanings](https://www.overleaf.com/learn/how-to/Understanding_underfull_and_overfull_box_warnings#Overfull_and_underfull_boxes)
@@ -538,6 +539,9 @@ $$\displaylines{
   - [books](https://tug.org/interest.html#plain) 
     doc [list](https://ctan.org/topic/tut-plaintex)
     1. [Impatient](https://ftp.kddilabs.jp/CTAN/info/impatient/book.pdf).
+- `\show` should be used in the [interaction mode](https://tex.stackexchange.com/a/11912/308105) because it is normally one error.
+  we can avoid it by [`\typeout{\meaning\foo}`](https://tex.stackexchange.com/a/324915/308105).
+  - Use `latex let_infinite_loop.tex` to check it.
 ### TODO
 - try use [`fltrace`](https://tex.stackexchange.com/a/39020/308105) to debug the "floating"
 - how `##` [to `#`](https://tex.stackexchange.com/a/42464/308105) used in `\cases`
@@ -2140,6 +2144,19 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   $c_{ij}=\sum a_{ip}b{pj},i\le p\le j$
   - see the ans
     - lack $i\le j$
+### Supplementary
+- [ ] 2
+  based on ALGORITHM 1, appends $sec_max=max$ after $max\coloneqq a_i$ with the init $sec_max\coloneq a_1$.
+
+  trivially, $O(n)$ because check $n$ items with each item check constant time.
+  - see the ans
+    - sometimes, $a_i>sec_max,\text{ but }a_i<max$
+    - $sec_max\coloneqq-\infty$ to ensure all pairs are checked.
+- [ ] 4 similar to ALGORITHM 1, check in order and then if find $x$, then loop and bookkeep the locations until it is not found, then exit all the loops.
+  trivially $O(n)$.
+  - see the ans
+    - use $first\coloneqq 0$ to indicate not found.
+- [ ] 
 
 ---
 

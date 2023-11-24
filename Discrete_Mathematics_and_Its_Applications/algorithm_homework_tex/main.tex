@@ -10,6 +10,9 @@
 \usepackage{pifont,amssymb}
 \usepackage{float}
 
+% \usepackage{textcomp}
+% \usepackage[T1]{fontenc}
+
 % \makeatletter
 % \newcommand{\citetads}[0]{%
 % \nonstopmode%
@@ -231,6 +234,13 @@
 \newcommand{\CurTodolistToplevelIndex}{\number\numexpr\value{todolisti}\relax}
 % \renewcommand{\CurTodolistToplevelIndex}{\number\numexpr\value{todolisti}\relax}
 
+\newcommand{\AlgLabel}{_default}
+% https://tex.stackexchange.com/a/47372/308105
+% \NewCommandCopy{\Suffix}{\AlgLabel}
+% \RenewCommandCopy{\Suffix}{-23}
+% \let\Suffix\AlgLabel
+\newcommand{\Suffix}{_default}
+% \NewCommandCopy{\oldAlgLabel}{\AlgLabel}
 % use one newcommand to implement 2 \newcommand otherwise the latter one can't reuse the former's renewcommand https://tex.stackexchange.com/a/259292/308105
 % test with \textbf this is the \capitalisewords problem.
 \newcommand{\ModProcName}[1]{
@@ -245,8 +255,42 @@
     % \def\NormalProcTargetName{#1}
     % \def\CapProcTargetName{\capitalisewords{\NormalProcTargetName}.}
     
+    % \item \let\Suffix\AlgLabel % here will cause the infinite loop
+    % \item \RenewCommandCopy{\Suffix}{\AlgLabel} % here will cause the infinite loop
+    \renewcommand{\AlgLabel}{\CurTodolistToplevelIndex\Suffix}
     % https://tex.stackexchange.com/a/70153/308105
-    \renewcommand{\AlgorithmRef}{\text{ See }\hyperref[alg:\CurTodolistToplevelIndex]{the pseudocode}}
+    \renewcommand{\AlgorithmRef}{\text{ See }\hyperref[alg:\AlgLabel]{the pseudocode}}
+}
+% https://tex.stackexchange.com/a/442187/308105
+\makeatletter
+\def\enumeratename{enumerate}
+\def\ifinenumerate{%
+  \ifx\@currenvir\enumeratename
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi}
+\makeatother
+
+\newcommand{\ModProcNameAndLabelSuffix}[2]{
+    \renewcommand{\ProcTargetName}{\textit{#1}}
+    \renewcommand{\NormalProcTargetName}{#1}
+    \renewcommand{\CapProcTargetName}{\capitalisewords{#1}.}
+    
+
+    % \begingroup
+    % \catcode`_=\active
+    % \def_{\_}
+    % % % \RenewCommandCopy{\Suffix}{#2}
+    % % \item \let\Suffix=-
+    % \endgroup
+    \item \let\Suffix=#2
+    % \RenewCommandCopy{\Suffix}{-23}
+
+    % \let\Suffix3suf %
+    \renewcommand{\AlgLabel}{\expandafter\CurTodolistToplevelIndex#2}
+    \show\AlgLabel
+    \renewcommand{\AlgorithmRef}{\text{ See }\hyperref[alg:\AlgLabel]{the pseudocode}}
 }
 
 \SetKwComment{Comment}{$\{$ }{ $\}$}
@@ -274,6 +318,7 @@
 \SetKw{Continue}{continue}
 \SetKw{Break}{break}
 \SetKw{And}{and}
+\SetKw{By}{by}
 \newcommand{\SepAnd}{\;\And\;}
 % \SetKwIF{If}{ElseIf}{Else}{if}{then}{else if}{else}{\vspace{4pt}}
 % https://tex.stackexchange.com/a/47353/308105
@@ -282,6 +327,10 @@
 \newcommand{\ForRange}[4]{%
     % https://www.overleaf.com/learn/latex/Spacing_in_math_mode
     \For{#1\,\(\coloneqq#2\;\)\KwTo \(#3\)}{ #4}
+}
+\newcommand{\ForRangeBy}[5]{%
+    % https://www.overleaf.com/learn/latex/Spacing_in_math_mode
+    \For{#1\,\(\coloneqq#2\;\)\KwTo \(#3\)\By #5}{ #4}
 }
 \DontPrintSemicolon
 % \renewcommand{\Return}[1]{\vspace{4pt}\KwRet{#1}}
@@ -364,16 +413,15 @@ boxrule=0pt,boxsep=0pt,breakable}
 \setlength{\textfloatsep}{0pt}% Remove \textfloatsep
 \setlength{\intextsep}{4pt}% Remove \textfloatsep
 % https://www.overleaf.com/learn/latex/Font_sizes%2C_families%2C_and_styles#Reference_guide
-\begin{large}
-    14 skipped
-\end{large}
+% \begin{large}
+%     14 skipped
+% \end{large}
 
 \begin{todolist}[itemsep=0pt,parsep=0pt,start=3]
     \ModProcName{largest difference}
     % \ProgSty{text}\\
     \myrightitem \CapProcTargetName \AlgorithmRef
-    % \CurTodolistToplevelIndex
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{integers})$}{
         }
         $i\coloneqq 1\mycmt{i\text{ is the search index}}$\\
@@ -386,7 +434,7 @@ boxrule=0pt,boxsep=0pt,breakable}
 
     \ModProcName{number of negative integers}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{integers})$}{}
         $i\coloneqq 1\mycmt{i\text{ is the search index}}$\\
         $c\coloneqq 0\mycmt{c\text{ is the number of negative integers}}$\\
@@ -403,7 +451,7 @@ boxrule=0pt,boxsep=0pt,breakable}
 
     \ModProcName{location of the largest even integer}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{integers})$}{}
         $c\coloneqq 1\mycmt{c\text{ is the location index}}$\\
         $find\_even\coloneqq 0$\mycmt{$find\_even$ \text{ tracks whether even number exists}}\\
@@ -420,7 +468,7 @@ boxrule=0pt,boxsep=0pt,breakable}
 
     \ModProcName{compute $x^n$}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($x$: real number, $n$: an integer)}{}
         $c\coloneqq 1\mycmt{c\text{ is the target product}}$\\
         \If{$n\ge 0$}{
@@ -443,7 +491,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \ModProcName{replaces the triple $(x,y,z)$ with $(y,z,x)$}
     \myrightitem \CapProcTargetName \AlgorithmRef\\
     Here obviously at least 3, but this will lose one variable when assigning, so one extra to save this lost one.
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($(x, y, z)$: target tuple)}{}
         $c\coloneqq 0\mycmt{c\text{ is the tmp variable}}$
         % https://tex.stackexchange.com/a/259088/308105
@@ -466,7 +514,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \addtocounter{todolisti}{2}
     \ModProcName{smallest integer in a finite sequence}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{the sequence}$)}{}
         $c\coloneqq \infty\mycmt{c\text{ is the target number}}$\\
         \ForRange{i}{1}{n}{
@@ -486,7 +534,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \ModProcName{the last occurrence of the smallest element }
     \myrightitem \CapProcTargetName \AlgorithmRef\\
     This is similar to 16
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{the sequence}$)}{}
         $c\coloneqq a_1\mycmt{c\text{ is the target number}}$\\
         $l\coloneqq 1\mycmt{l\text{ is the target number index}}$\\
@@ -504,7 +552,7 @@ boxrule=0pt,boxsep=0pt,breakable}
 
     \ModProcName{ the largest and the smallest integers}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{the sequence}$)}{}
         $c\coloneqq a_1\mycmt{c\text{ is the target smallest number}}$\\
         $l\coloneqq a_1\mycmt{l\text{ is the target largest number}}$\\
@@ -527,7 +575,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \ModProcName{ the longest word in an English sentence}
     \myrightitem \CapProcTargetName \AlgorithmRef
     % \clearpage
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{symbols}$)}{}
         $c\coloneqq 0\mycmt{c\text{ is the track length}}$\\
         $len\coloneqq 0\mycmt{len\text{ is the max length}}$\\
@@ -561,7 +609,7 @@ boxrule=0pt,boxsep=0pt,breakable}
         \item My original thoughts are that we put all values mapped from the domain in one new set, and check whether duplicate conditions occur for each mapped value by \textbf{traversing} the list for the same value with the current calculated one. Obviously, this has the much higher complexity.\\
         The ans just use the $hit$ to make $one\_one$ false when accessed twice, avoiding the traverse.
     }
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{function domain},\{b_1, b_2,\ldots , b_n\}: \text{function codomain}$)}{}
     \end{SpacingAlgorithm}
     \ModProcName{ terminating Algorithm 3 if $x=a_m$}
@@ -573,7 +621,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     }
     \ModProcName{four sublists}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a list},x:\text{ the target element}$)}{}
         $c_i\coloneqq 1\mycmt{c\text{ is the }i\text{th split point}}$\\
         $i\coloneqq 1,j\coloneqq n\mycmt{j,i\text{ is the tmp index}}$\\
@@ -793,7 +841,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \ModProcName{finds all modes appearing the maximum
         number of times}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a list}$)}{}
         $S\coloneqq \varnothing\mycmt{S\text{ is the set of modes}}$\\
         $c\coloneqq 0\mycmt{c\text{ is the count}}$\\
@@ -825,7 +873,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \mywrongitem \CapProcTargetName \AlgorithmRef
     \begin{enumerate}[label=(\alph*)]
         \item \begin{SpacingAlgorithm}
-            {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ by a brute force algorithm}}{\CurTodolistToplevelIndex}
+            {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ by a brute force algorithm}}{\AlgLabel}
                   \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a list}$)}{}
                   $d\coloneqq 0\mycmt{d\text{ is the minimum distance}}$\\
                   \ForRange{i}{1}{n}{
@@ -873,7 +921,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \ModProcName{greater than the sum of all
         previous terms}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a list}$)}{}
         $sum\coloneqq 0\mycmt{sum\text{ is the sum of all
                     previous terms}}$\\
@@ -895,7 +943,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \ModProcName{Adapted bubble sort}
     \myrightitem \CapProcTargetName \AlgorithmRef\\
     This is similar to the \href{https://en.wikipedia.org/wiki/Bubble_sort#Optimizing_bubble_sort}{wikipedia 1st example}
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a list}$)}{}
         $swap\coloneqq 0\mycmt{swap\text{ is the state variable}}$\\
         \ForRange{i}{1}{n-1}{
@@ -917,7 +965,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \addtocounter{todolisti}{3}
     \ModProcName{selection sort}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a list}$)}{}
         $MinIndex\coloneqq 1\mycmt{MinIndex\text{ is the global minimum index}}$\\
         $min\coloneqq a_1\mycmt{min\text{ is the minimum value}}$\\
@@ -943,7 +991,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \addtocounter{todolisti}{-1}
     \ModProcName{linear search for the insert position}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a sorted non-decreasing list, }x:\text{target}$)}{}
         \ForRange{i}{1}{n}{
             \If{\(x\ge a_i\)}{
@@ -967,7 +1015,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \addtocounter{todolisti}{-1}
     \ModProcName{binary search for the insert position}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($\{a_1, a_2,\ldots , a_n\}: \text{a sorted non-decreasing list, }x:\text{target}$)}{}
         \(s\coloneqq 1\mycmt{s\text{ is the start index}}\)\\
         \(end\coloneqq n\mycmt{end\text{ is the end index}}\)\\
@@ -1019,7 +1067,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \addtocounter{todolisti}{3}
     \ModProcName{binary insertion sort}
     \myrightitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
         \(insert\coloneqq 0\mycmt{insert\text{ is the insertion location}}\)\\
         \(s\coloneqq 1\mycmt{s\text{ is the start index}}\)\\
@@ -1050,7 +1098,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \ModProcName{insertion sort with the backwards search}
     \myrightitem \CapProcTargetName \AlgorithmRef\\
     Here assume to make the list non-decreasing.
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
         \(insert\coloneqq 0\mycmt{insert\text{ is the insertion location}}\)\\
         \ForRange{i}{2}{n}{
@@ -1095,7 +1143,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \addtocounter{todolisti}{3}
     \ModProcName{deferred acceptance algorithm}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName(\(\{m_{ij}|i,j\in\{1,2,3\}\}: \text{man preference list with }m_{ij}\text{ means }j\text{th woman }m_i\text{ prefers}
             ,\{w_{ji}\}:\text{similar to }\{m_{ij}\}\))}{}
         \tcc{Here we use the row-major arrays}
@@ -1276,7 +1324,7 @@ boxrule=0pt,boxsep=0pt,breakable}
               \(s\) women always have one pending choice after one \textbf{while} iteration.
               Then with the fact that one man can \textbf{only propose to one} woman (i.e. \(f:m\to w\) is one function),
               \(s\) men are chosen to match, leading to contradiction.
-        \item Input, Output, Definiteness(ensured by the \hyperref[alg:\number\numexpr\CurTodolistToplevelIndex-1]{C-code}), Generality(size \(s\)): trivial
+        \item Input, Output, Definiteness(ensured by the \hyperref[alg:\number\numexpr\CurTodolistToplevelIndex-1\Suffix]{C-code}), Generality(size \(s\)): trivial
         \item Correctness: See 67
     \end{enumerate}
     \addtocounter{todolisti}{-1}
@@ -1289,7 +1337,7 @@ boxrule=0pt,boxsep=0pt,breakable}
         \item skipped due to triviality.
         \item
               \CapProcTargetName \AlgorithmRef
-              \begin{SpacingAlgorithm}{\CapProcTargetName}{\CurTodolistToplevelIndex}
+              \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
                   \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
                   \(count\coloneqq 0\mycmt{count\text{ is the counter}}\)\\
                   \(candidate\coloneqq -\!1\mycmt{candidate\text{ is the emporary candidate for a majority element with}
@@ -1356,12 +1404,31 @@ boxrule=0pt,boxsep=0pt,breakable}
     }
 \end{todolist}
 
-% \newpage
-% \begin{todolist}[resume*,start=\CurTodolistToplevelIndex]
-%     \mywrongitem test 3
-%     \mywrongitem test 5
-%     \mywrongitem test 5
-%     \mywrongitem test 5
+% \section{section 3 supplementary}
+% \begin{todolist}[resume*,start=5]
+%     % \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{\textunderscore3\textunderscore supplementary}
+%     \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{-3-supplementary}
+%     % \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{_3_supplementary}
+%     % \item \ifinenumerate{enumerate}{not enumerate}
+%     \myrightitem \CapProcTargetName \AlgorithmRef
+%     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+%         \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
+%         \(max,min\mycmt{max,min\text{ are the maximum and minimum 
+%         of the sequence correspondingly}}\)\\
+        
+%     \end{SpacingAlgorithm}
+%     \ModProcName{finds the maximum and minimum of a sequence}
+%     % \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{_3_supplementary}
+%     % \item \ifinenumerate{enumerate}{not enumerate}
+%     \myrightitem \CapProcTargetName \AlgorithmRef
+%     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+%         \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
+%         \(max,min\mycmt{max,min\text{ are the maximum and minimum 
+%         of the sequence correspondingly}}\)\\
+        
+%     \end{SpacingAlgorithm}
 % \end{todolist}
+
+% \newpage
 
 \end{document}

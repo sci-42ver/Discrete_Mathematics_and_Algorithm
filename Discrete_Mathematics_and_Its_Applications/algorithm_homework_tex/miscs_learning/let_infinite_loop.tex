@@ -1,0 +1,100 @@
+% !TeX root = let_infinite_loop.tex
+
+% \documentclass{article}
+% % https://latex.org/forum/viewtopic.php?p=83008#p83008
+% \usepackage{trace}
+% \begin{document}
+% % https://tex.stackexchange.com/a/47372/308105
+% % \let\oldemph\emph
+% % \renewcommand{\emph}[1]{\textbf{\oldemph{#1}}}
+
+% % \NewCommandCopy{\oldemph}{\emph}
+% \let\oldemph\emph
+% \renewcommand{\emph}[1]{\textbf{\oldemph{#1}}}
+% \show\emph
+% \show\oldemph
+% % \RenewCommandCopy{\oldemph}{\emph}
+% % \let\oldemp\emph
+% % \renewcommand{\emph}[1]{\textbf{\oldemph{#1}}}
+% % \show\emph
+% % \traceon
+% \section{This is \emph{emphasized}}
+% % \caption{This is \emph{emphasized}}
+% % \traceoff
+% \end{document}
+
+% \documentclass{article}
+% \newcommand\foo[1]{\def\arg{#1}\ifx\arg\empty T\else F\fi}
+% \begin{document}
+% \tableofcontents
+% % \section{\foo{}} % first run writes garbage to the aux file, second crashes
+% \section{\protect\foo{}} % this is fine
+% \end{document}
+
+% \documentclass{article}
+% % \newcommand\foo[1]{\def\arg{#1}\ifx\arg\empty T\else F\fi}
+% \begin{document}
+% % % \tableofcontents
+% % \let\oldemph\emph
+% % \show\emph
+% % % \renewcommand{\emph}[1]{\textbf{\oldemph{#1}}}
+% % % \traceon
+% % % \caption{This is \emph{emphasized}}
+% % % \traceoff
+% % % \section{\foo{}} % first run writes garbage to the aux file, second crashes
+% % % \tableofcontents
+% % \section{This is \emph{emphasized}} % this is fine
+% \begin{enumerate}
+% \catcode`\_=\active
+% \def_{\textunderscore}
+% % \NewCommandCopy{\Suffix}{_3_3}
+% \endgroup
+
+\documentclass{article}
+
+% \newcommand\x[1][hmm]{#1!}
+
+\begin{document}
+
+% \x[A]
+
+% % \let\originalx\x % this would loop
+% % \show\originalx
+% % \DeclareCommandCopy\originalx\x
+% \NewCommandCopy\originalx\x
+
+% \renewcommand\x[1][oops]{\originalx[#1] ??}
+% % \RenewCommandCopy\originalx\x
+% % \renewcommand\x[1][oops]{\originalx[#1] ??}
+% % \show\x
+
+% \x[B]
+% \show\section
+\typeout{\meaning\section}
+\begingroup
+\catcode`\_=\active
+% \def_{\_}
+\def\_{\textunderscore}
+\NewCommandCopy{\Suffix}{_3_3}
+\endgroup
+\catcode`_=8
+% \let\test={\textunderscore3\textunderscore\space supplementary}
+% \test
+
+\section{test}
+% \Suffix
+% \textunderscore3\textunderscore3
+\catcode`\_=\active
+_3\\
+% \catcode`_=8
+\newcommand{\Suffix}{_3_3}
+\NewCommandCopy{\SubSuffix}{\Suffix}
+% \let\Suffix=_3
+% \show\Suffix
+\Suffix
+\SubSuffix
+_3_3
+\RenewCommandCopy{\SubSuffix}{_3_3}
+\SubSuffix
+
+\end{document}
