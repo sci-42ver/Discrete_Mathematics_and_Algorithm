@@ -542,9 +542,12 @@ $$\displaylines{
 - `\show` should be used in the [interaction mode](https://tex.stackexchange.com/a/11912/308105) because it is normally one error.
   we can avoid it by [`\typeout{\meaning\foo}`](https://tex.stackexchange.com/a/324915/308105).
   - Use `latex let_infinite_loop.tex` to check it.
+- [`@protected@testopt`](https://ctan.math.illinois.edu/macros/latex/contrib/xpatch/xpatch.pdf) is related with `\protect`.
+- use [`latexdef -o '\newcommand\test{hello}' test`](https://tex.stackexchange.com/a/638531/308105) to check self-defined cmd definition.
+- [trace](https://latex.org/forum/viewtopic.php?p=83008#p83008)
 ### TODO
 - try use [`fltrace`](https://tex.stackexchange.com/a/39020/308105) to debug the "floating"
-- how `##` [to `#`](https://tex.stackexchange.com/a/42464/308105) used in `\cases`
+- [x] how `##` [to `#`](https://tex.stackexchange.com/a/42464/308105) used in `\cases`
 ```bash
 $ latexdef -t latex -s -f -E cases  
 % latex.ltx, line 12595:
@@ -567,8 +570,24 @@ $ latexdef -t latex -s -f -E cases
     - [`halign`](https://plain-xetex.neocities.org/misc/misc.pdf) `\halign{\it#\hfil&#&#&\bf#&#&#&\hfil\tt#\hfil\cr abc & d & e & f & g & h & i\cr a & b & c & d & e & f & ghj\cr}`
     - [`m@th`](https://tex.stackexchange.com/a/153398/308105)
     - [`\crcr`](https://tex.stackexchange.com/a/229792/308105)
-- what is [RobustCommand](http://labmaster.mi.infn.it/wwwasdoc.web.cern.ch/wwwasdoc/TL8/texmf/doc/latex/base/html/clsguide/node36.html#:~:text=%5CDeclareRobustCommand*%20%7B,commands%20and%20make%20them%20robust.)
-- differences between `cases` and `cases*` since `\addtolength{\jot}{-5pt}` only applies to the latter.
+- [x] what is [RobustCommand](http://labmaster.mi.infn.it/wwwasdoc.web.cern.ch/wwwasdoc/TL8/texmf/doc/latex/base/html/clsguide/node36.html#:~:text=%5CDeclareRobustCommand*%20%7B,commands%20and%20make%20them%20robust.)
+  maybe related with [`\protect`](https://tex.stackexchange.com/a/88007/308105) (See "Since \foo• was preceded by \protect, the last line is what's written ..." where `\foo` is kept without expansion) which is always use with the ["moving argument"](https://www.complang.tuwien.ac.at/anton/latex/fragile.html#:~:text=Arguments%20to%20some%20LaTeX%20commands,arguments%20of%20%5Ccaption%20commands)
+```tex
+\foo{BAR}
+...
+!\foo• {BAR}!
+```
+  - ~~the above code implies the loop if the `\protect` functioning as [`\noexpand`](https://tex.stackexchange.com/a/4747/308105).~~
+    Also see this [example](https://tex.stackexchange.com/a/47372/308105)
+  - TODO how does the following avoid the above problem
+```tex
+\def\oldfoo{\protect\oldfoo•}
+\let\oldfoo•\foo•
+```
+  - Also see the related [codes](./algorithm_homework_tex/miscs_learning/let_protect_infinite_loop_and_underscore_redefinition.tex)
+- [x] differences between `cases` and `cases*` since `\addtolength{\jot}{-5pt}` only applies to the latter.
+  they are in different packages.
+- [`lccode`](https://texfaq.org/FAQ-activechars)
 # QA miscs
 - see the self-designed [template](./QA_template/template.md).
 - [mathjax](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference)

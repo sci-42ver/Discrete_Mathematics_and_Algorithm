@@ -7,4 +7,5 @@
 *.synctex(busy)
 *.fdb_latexmk
 *-clean.tex
+*.toc
 main.pdf

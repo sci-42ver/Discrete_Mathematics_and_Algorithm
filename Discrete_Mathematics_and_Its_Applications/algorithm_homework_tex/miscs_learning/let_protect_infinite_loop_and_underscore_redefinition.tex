@@ -1,0 +1,94 @@
+% !TeX root = let_infinite_loop.tex
+
+\documentclass{article}
+
+\begin{document}
+
+% https://tex.stackexchange.com/a/4747/308105
+\newcommand\foo[1]{\def\arg{#1}\ifx\arg\empty T\else F\fi}
+\tableofcontents
+\newpage
+I originally write this doc to show how to use \verb|\RenewCommandCopy{\Suffix}{_test_}| 
+and \verb|\let\Suffix=_test_|
+
+% "TeX will try to expand \def (does nothing), then expand whatever comes next ie the \arg"
+% so write the wrong F because \arg isn't run correctly.
+\section{Wrong toc \foo{}} % first run writes garbage to the aux file, second crashes
+\section{Right toc \protect\foo{}} % this is fine
+It is related with \verb|\protect|.\\
+\foo{}
+
+% https://tex.stackexchange.com/q/96620/308105
+% \escapechar=`^
+% \section{\string\let may cause the infinite loop}
+\section{\texttt{$\backslash$let} with \texttt{$\backslash$newcommand} as the target
+may cause the infinite loop}
+% https://tex.stackexchange.com/a/670548/308105
+\newcommand\x[1][hmm]{#1!}
+\x[A]
+% \let would loop 
+% and based on this https://tex.stackexchange.com/a/686221/308105
+% the kernel may influence the behavior, so just use the kernel offered method better.
+% \let\originalx\x
+% \show\originalx
+
+% difference from DeclareCommandCopy based on error msg https://tex.stackexchange.com/a/643233/308105
+% \DeclareCommandCopy\originalx\x
+\NewCommandCopy\originalx\x
+
+\renewcommand\x[1][oops]{\originalx[#1] ??}
+% based on the "NewCommandCopy", it will also cause infinite loop,
+% so better not use too high level nested command definition.
+% \RenewCommandCopy\originalx\x
+% \renewcommand\x[1][oops]{\originalx[#1] ??}
+% \show\x
+
+\x[B]
+
+\subsection{other examples about \texttt{$\backslash$let} 
+and \texttt{$\backslash$protect} making the loop}
+% https://tex.stackexchange.com/a/47372/308105
+% \let\oribfseries\bfseries
+% robust will keep expanding until legal https://texfaq.org/FAQ-protect
+% \DeclareRobustCommand\bfseries{\oribfseries\itshape}
+% \bfseries sd
+
+\DeclareCommandCopy{\oribfseries}{\bfseries}
+\DeclareRobustCommand\bfseries{\oribfseries\itshape}
+\bfseries sd
+
+% TODO why this protect no use to make the above loop
+\def\test{test}
+\let\oribfseries\protect\test
+\DeclareRobustCommand\test{\protect\oribfseries}
+\test sd
+
+\let\oldemph\emph
+\renewcommand{\emph}[1]{\textbf{\oldemph{#1}}}
+\emph{23}
+
+% https://texfaq.org/FAQ-activechars
+\section{\_ redefinition}
+% https://tex.stackexchange.com/a/275975/308105
+% \begingroup
+\catcode`\_=\active
+% \def_{\_}
+\def\_{\textunderscore}
+% Not use "\NewCommandCopy" with string which will cause the weird behavior, even making the "\catcode`_=8" fail
+% \NewCommandCopy{\Suffix}{_3_3}
+% \endgroup
+\catcode`_=8
+% \let can't be used with multiple characters, better with one single cmd.
+% \let\test={\textunderscore3\textunderscore\space supplementary}
+% \test
+\_3\\
+% to make the above \_ definition work
+\catcode`\_=\active
+_3_\\
+% \catcode`_=8
+\newcommand{\Suffix}{_3}
+\NewCommandCopy{\SubSuffix}{\Suffix}
+\Suffix\\
+\SubSuffix\\
+
+\end{document}
