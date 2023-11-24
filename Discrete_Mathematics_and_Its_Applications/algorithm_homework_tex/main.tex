@@ -240,6 +240,7 @@
 % \RenewCommandCopy{\Suffix}{-23}
 % \let\Suffix\AlgLabel
 \newcommand{\Suffix}{_default}
+\renewcommand{\Suffix}{_default_default}
 % \NewCommandCopy{\oldAlgLabel}{\AlgLabel}
 % use one newcommand to implement 2 \newcommand otherwise the latter one can't reuse the former's renewcommand https://tex.stackexchange.com/a/259292/308105
 % test with \textbf this is the \capitalisewords problem.
@@ -284,12 +285,14 @@
     % % % \RenewCommandCopy{\Suffix}{#2}
     % % \item \let\Suffix=-
     % \endgroup
-    \item \let\Suffix=#2
+    % \item \let\Suffix=#2
     % \RenewCommandCopy{\Suffix}{-23}
 
+    \renewcommand{\Suffix}{#2}
+
     % \let\Suffix3suf %
-    \renewcommand{\AlgLabel}{\expandafter\CurTodolistToplevelIndex#2}
-    \show\AlgLabel
+    \renewcommand{\AlgLabel}{\CurTodolistToplevelIndex\Suffix}
+    % \show\AlgLabel
     \renewcommand{\AlgorithmRef}{\text{ See }\hyperref[alg:\AlgLabel]{the pseudocode}}
 }
 
@@ -1404,30 +1407,31 @@ boxrule=0pt,boxsep=0pt,breakable}
     }
 \end{todolist}
 
-% \section{section 3 supplementary}
-% \begin{todolist}[resume*,start=5]
-%     % \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{\textunderscore3\textunderscore supplementary}
-%     \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{-3-supplementary}
-%     % \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{_3_supplementary}
-%     % \item \ifinenumerate{enumerate}{not enumerate}
-%     \myrightitem \CapProcTargetName \AlgorithmRef
-%     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
-%         \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
-%         \(max,min\mycmt{max,min\text{ are the maximum and minimum 
-%         of the sequence correspondingly}}\)\\
+\section{section 3 supplementary}
+\begin{todolist}[resume*,start=5]
+    % \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{\textunderscore3\textunderscore supplementary}
+    \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{-3-supplementary}
+    % \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{_3_supplementary}
+    % \item \ifinenumerate{enumerate}{not enumerate}
+    \myrightitem \CapProcTargetName \AlgorithmRef
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+        \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
+        \(max,min\mycmt{max,min\text{ are the maximum and minimum 
+        of the sequence correspondingly}}\)\\
         
-%     \end{SpacingAlgorithm}
-%     \ModProcName{finds the maximum and minimum of a sequence}
-%     % \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{_3_supplementary}
-%     % \item \ifinenumerate{enumerate}{not enumerate}
-%     \myrightitem \CapProcTargetName \AlgorithmRef
-%     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
-%         \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
-%         \(max,min\mycmt{max,min\text{ are the maximum and minimum 
-%         of the sequence correspondingly}}\)\\
+    \end{SpacingAlgorithm}
+
+    \ModProcName{finds the maximum and minimum of a sequence}
+    % \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{_3_supplementary}
+    % \item \ifinenumerate{enumerate}{not enumerate}
+    \myrightitem \CapProcTargetName \AlgorithmRef
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+        \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
+        \(max,min\mycmt{max,min\text{ are the maximum and minimum 
+        of the sequence correspondingly}}\)\\
         
-%     \end{SpacingAlgorithm}
-% \end{todolist}
+    \end{SpacingAlgorithm}
+\end{todolist}
 
 % \newpage
 
