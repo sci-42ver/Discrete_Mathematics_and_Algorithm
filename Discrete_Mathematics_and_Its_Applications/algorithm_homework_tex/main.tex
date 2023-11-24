@@ -10,30 +10,10 @@
 \usepackage{pifont,amssymb}
 \usepackage{float}
 
-% \usepackage{textcomp}
-% \usepackage[T1]{fontenc}
-
-% \makeatletter
-% \newcommand{\citetads}[0]{%
-% \nonstopmode%
-% \href{https://en.wikipedia.org/wiki/Boyer-Moore_majority_vote_algorithm#Correctness}{wikipedia}%
-% \errorstopmode}
-% \makeatother
-
+% \sout
 \usepackage[normalem]{ulem}
-% \usepackage{enumitem}
-% https://texblog.org/2012/03/21/cross-referencing-list-items/
-\makeatletter
-\def\namedlabel#1#2{\begingroup
-    #2%
-    \def\@currentlabel{#2}%
-    \phantomsection\label{#1}\endgroup
-}
-\makeatother
 
 \usepackage[nodisplayskipstretch]{setspace} % for "\setstretch" macro
-
-% \usepackage[normalem]{ulem}
 
 % https://www.overleaf.com/learn/latex/Hyperlinks#Reference_guide to use ref link
 % https://tex.stackexchange.com/a/82913/308105
@@ -60,11 +40,6 @@
 \makeatother
 
 % https://www.overleaf.com/learn/latex/Page_size_and_margins#Paper_size,_orientation_and_margins
-% \usepackage{layout}
-% \setlength{\hoffset}{0pt}
-% \setlength{\oddsidemargin}{0pt}
-% \setlength{\marginparsep}{0pt}
-% \setlength{\textwidth}{500pt}
 % https://tex.stackexchange.com/a/367867/308105
 \usepackage[left=0.3in,textwidth=7.3in,top=0.3in,bottom=0.3in]{geometry}
 
@@ -74,7 +49,6 @@
 
 % https://tex.stackexchange.com/a/138996/308105
 \usepackage{etoolbox,setspace}
-% \AtBeginEnvironment{algorithm}{\setstretch{20.5}}
 \setstretch{1.2}
 
 \newcommand{\emptysquare}{$\square$}
@@ -93,15 +67,10 @@
 \newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
 \rlap{\raisebox{.45\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}{#2}} 
 
-% \setlength{\mathindent}{0pt}
-
 % https://www.overleaf.com/learn/latex/%5Chfuzz this doesn't influence the typesetting https://tex.stackexchange.com/a/50850/308105
-\hfuzz=500pt
+\hfuzz=50pt
 \hbadness=99999
 
-% https://tex.stackexchange.com/a/169711/308105
-% \renewcommand{\topfraction}{.5}
-% \renewcommand{\floatpagefraction}{.75}
 % https://www.overleaf.com/learn/latex/Environments#Defining_simple_environments and https://tex.stackexchange.com/a/67849/308105
 \newenvironment{SpacingAlgorithm}[2]{
 % this will make the figures more condensed https://tex.stackexchange.com/a/35130/308105
@@ -110,7 +79,6 @@
 % with the \par, then no need for the preceding "\\" to separate it from others.
     \par\addvspace{10pt}
     \begin{algorithm}[H]
-    % \begin{algorithm}[htb]
         \setstretch{1.10}
         \caption{#1}\label{alg:#2}
 }
@@ -126,7 +94,6 @@
 \newenvironment{shiftedflalign*}{%
     \vspace{-10pt}
     \start@align\tw@\st@rredtrue\m@ne
-    % \hspace{-7pt}
 }{%
     \endalign
     \vspace{-40pt}
@@ -146,7 +113,6 @@
 % https://tex.stackexchange.com/a/234320/308105
 % here should use \def https://tex.stackexchange.com/a/262/308105
 \edef\mylb{\\}
-% \def\mylb{\newline}
 \newcommand{\CondensedNewline}{\mylb[-0.5em]}
 
 % https://tex.stackexchange.com/questions/518403/how-to-use-newenvironment-and-align-in-standalone-document#comment1311023_518403
@@ -177,10 +143,6 @@
 
 \newenvironment{CondensedCases}{%
 
-% these don't work for the cases block
-% \let\mylb\\
-% \renewcommand{\\}{\mylb[1cm]}
-
 % \let\myhalign\hhalign
 % % notice here def can't be same as above halign, otherwise many weird errors.
 % \gdef\hhalign{%
@@ -193,13 +155,8 @@
 \everydisplay=\expandafter{\the\everydisplay\setstretch{0.9}}
 
   \par\vspace{-5ex}% adjust
-  % $\displaystyle\begin{cases}
   $$\displaystyle\begin{cases}
-  % $\displaystyle\aligned
-  % \begin{cases}
 }{
-  %   \end{cases}
-  % \endaligned$
   \end{cases}$$
   \par\vspace{-2ex}% adjust
   \renewcommand{\\}{\mylb}
@@ -231,17 +188,12 @@
 \newcommand{\CapProcTargetName}{\capitalisewords{\ProcTargetName}}
 \newcommand{\AlgorithmRef}{}
 % https://tex.stackexchange.com/a/100930/308105
+% \relax https://latex.org/forum/viewtopic.php?p=69056&sid=e478faaefe977da92d6b83aaa1953637#p69056
 \newcommand{\CurTodolistToplevelIndex}{\number\numexpr\value{todolisti}\relax}
-% \renewcommand{\CurTodolistToplevelIndex}{\number\numexpr\value{todolisti}\relax}
 
 \newcommand{\AlgLabel}{_default}
 % https://tex.stackexchange.com/a/47372/308105
-% \NewCommandCopy{\Suffix}{\AlgLabel}
-% \RenewCommandCopy{\Suffix}{-23}
-% \let\Suffix\AlgLabel
 \newcommand{\Suffix}{_default}
-\renewcommand{\Suffix}{_default_default}
-% \NewCommandCopy{\oldAlgLabel}{\AlgLabel}
 % use one newcommand to implement 2 \newcommand otherwise the latter one can't reuse the former's renewcommand https://tex.stackexchange.com/a/259292/308105
 % test with \textbf this is the \capitalisewords problem.
 \newcommand{\ModProcName}[1]{
@@ -249,29 +201,15 @@
     \renewcommand{\NormalProcTargetName}{#1}
     % here should not have maths codes with space inside "$(x, y, z)$ with $(y, z, x)$" which will be ambiguous.
     \renewcommand{\CapProcTargetName}{\capitalisewords{#1}.}
-    
-    % \def{\ProcTargetName}{\textit{#1}}
 
     % \def can be nested but it is no use maybe for \capitalisewords https://tex.stackexchange.com/a/318/308105 
     % \def\NormalProcTargetName{#1}
     % \def\CapProcTargetName{\capitalisewords{\NormalProcTargetName}.}
     
-    % \item \let\Suffix\AlgLabel % here will cause the infinite loop
-    % \item \RenewCommandCopy{\Suffix}{\AlgLabel} % here will cause the infinite loop
     \renewcommand{\AlgLabel}{\CurTodolistToplevelIndex\Suffix}
     % https://tex.stackexchange.com/a/70153/308105
     \renewcommand{\AlgorithmRef}{\text{ See }\hyperref[alg:\AlgLabel]{the pseudocode}}
 }
-% https://tex.stackexchange.com/a/442187/308105
-\makeatletter
-\def\enumeratename{enumerate}
-\def\ifinenumerate{%
-  \ifx\@currenvir\enumeratename
-    \expandafter\@firstoftwo
-  \else
-    \expandafter\@secondoftwo
-  \fi}
-\makeatother
 
 % https://tex.stackexchange.com/a/638275/308105
 % https://tex.stackexchange.com/a/108703/308105
@@ -285,7 +223,7 @@
     % https://ctan.math.illinois.edu/macros/latex/base/lthooks-doc.pdf and 
     % https://tex.stackexchange.com/a/566737/308105 similar to the gdb hook
 
-    % ## https://www.alanshawn.com/latex3-tutorial/#handle-macro-expansion-like-a-boss
+    % ##1 https://www.alanshawn.com/latex3-tutorial/#handle-macro-expansion-like-a-boss
     \AddToHook{env/##1/begin}{\int_gincr:N \g_jinwen_list_int}
     \AddToHook{env/##1/end}{\int_gdecr:N \g_jinwen_list_int}
    }
@@ -309,10 +247,8 @@
 }
 
 \SetKwComment{Comment}{$\{$ }{ $\}$}
-% \SetKwComment{tcc}{/*}{*/}
 \newcommand{\mycmt}[1]{
     \{#1\}
-    % \Comment{\(#1\)}
 }
 \SetKwInOut{Input}{input}
 \SetKwInOut{Output}{output}
@@ -320,22 +256,19 @@
 % all default formats https://tex.stackexchange.com/a/623663/308105
 \SetProgSty{textnormal}
 
-% change for all https://tex.stackexchange.com/a/279202/308105
-% \AtBeginEnvironment{algorithm}{\let\textnormal\ttfamily}
-
 % https://stackoverflow.com/a/2212644/21294350
 \SetKwProg{proc}{procedure}{\vspace{-5pt}}{}
-% 
+
 \newcommand{\myproc}[2]{\proc{\normalfont#1}{#2}}
 \SetKwFor{While}{while (}{)}{}
 \SetKwFor{For}{for }{}{}
+% this doesn't suit for all cases
 % \SetKwIF{If}{ElseIf}{Else}{if}{then\vspace{0pt}}{\vspace{10pt}else if}{\vspace{10pt}else}{\vspace{10pt}endif}
 \SetKw{Continue}{continue}
 \SetKw{Break}{break}
 \SetKw{And}{and}
 \SetKw{By}{by}
 \newcommand{\SepAnd}{\;\And\;}
-% \SetKwIF{If}{ElseIf}{Else}{if}{then}{else if}{else}{\vspace{4pt}}
 % https://tex.stackexchange.com/a/47353/308105
 \let\oldelse\Else
 \renewcommand{\Else}[1]{\oldelse{#1\vspace{4pt}}}
@@ -345,27 +278,9 @@
 }
 \newcommand{\ForRangeBy}[5]{%
     % https://www.overleaf.com/learn/latex/Spacing_in_math_mode
-    \For{#1\,\(\coloneqq#2\;\)\KwTo \(#3\)\By #5}{ #4}
+    \For{#1\,\(\coloneqq#2\;\)\KwTo \(#3\;\)\By #4}{ #5}
 }
 \DontPrintSemicolon
-% \renewcommand{\Return}[1]{\vspace{4pt}\KwRet{#1}}
-
-% https://tex.stackexchange.com/a/639572/308105
-% left aligned https://tex.stackexchange.com/a/145660/08105
-% \newenvironment{AlignNoSpacing}{
-%     \vspace{-15pt}
-%     \begin{flalign*}
-% }{
-%     \end{flalign*}
-%     \vspace{-25pt}
-% }
-
-% https://tex.stackexchange.com/a/94702/308105
-% \newenvironment{absolutelynopagebreak}
-%   {\par\nobreak\vfil\penalty0\vfilneg
-%    \vtop\bgroup}
-%   {\par\xdef\tpd{\the\prevdepth}\egroup
-%    \prevdepth=\tpd}
 
 % https://tex.stackexchange.com/a/265804/308105
 \usepackage[most]{tcolorbox}
@@ -385,7 +300,7 @@ boxrule=0pt,boxsep=0pt,breakable}
 \def\quotex#1{\@ifnextchar`{\triplequote\@gobble}{\doublequote}}
 % \def\quotex#1{\@ifnextchar`{\triplequote}{\doublequote}}
 \makeatother
-% here ` in #1` is the ending ` to mark the ending.
+% here "`" in "#1`" is the ending ` to mark the ending.
 \def\singlequote#1`{[StartQ]#1[EndQ]\quoteON}
 \def\doublequote#1``{[StartQQ]#1[EndQQ]\quoteON}
 % \long to allow \par https://tex.stackexchange.com/a/1057/308105 which also shows the newcommand* meaning
@@ -422,8 +337,6 @@ boxrule=0pt,boxsep=0pt,breakable}
 \end{enumerate}
 \section{section 3.1}
 
-% \texttt{\begin{align*} and \begin{cases*}}
-
 % https://tex.stackexchange.com/a/64476/308105
 \setlength{\textfloatsep}{0pt}% Remove \textfloatsep
 \setlength{\intextsep}{4pt}% Remove \textfloatsep
@@ -434,7 +347,6 @@ boxrule=0pt,boxsep=0pt,breakable}
 
 \begin{todolist}[itemsep=0pt,parsep=0pt,start=3]
     \ModProcName{largest difference}
-    % \ProgSty{text}\\
     \myrightitem \CapProcTargetName \AlgorithmRef
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{integers})$}{
@@ -493,7 +405,7 @@ boxrule=0pt,boxsep=0pt,breakable}
         }
         \Else{
             $n=-n$\\
-            use this new $n$ to calculate\\
+            use this new $n$ to calculate\\CondensedNewline
         }
         \Return{$c$}
     \end{SpacingAlgorithm}
@@ -509,13 +421,6 @@ boxrule=0pt,boxsep=0pt,breakable}
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($(x, y, z)$: target tuple)}{}
         $c\coloneqq 0\mycmt{c\text{ is the tmp variable}}$
-        % https://tex.stackexchange.com/a/259088/308105
-        % \begin{shiftedflalign*}
-        %   \NoIndentEquationLine{c=x}
-        %   \NoIndentEquationLine{x=y}
-        %   \NoIndentEquationLine{c=x}
-        %   \NoIndentEquationLine{c=x}
-        % \end{shiftedflalign*}
 
         \begin{shiftedalign*}
             c=x\CondensedNewline
@@ -545,7 +450,6 @@ boxrule=0pt,boxsep=0pt,breakable}
         \item $c=a_1$ is duplicate.
     }
 
-    % \newpage
     \ModProcName{the last occurrence of the smallest element }
     \myrightitem \CapProcTargetName \AlgorithmRef\\
     This is similar to 16
@@ -589,7 +493,7 @@ boxrule=0pt,boxsep=0pt,breakable}
 
     \ModProcName{ the longest word in an English sentence}
     \myrightitem \CapProcTargetName \AlgorithmRef
-    % \clearpage
+
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName($a_1, a_2,\ldots , a_n: \text{symbols}$)}{}
         $c\coloneqq 0\mycmt{c\text{ is the track length}}$\\
@@ -723,15 +627,7 @@ boxrule=0pt,boxsep=0pt,breakable}
               To let $i>j$, here assume $i=0$
               although it is impossible based on the positive index assumption,
               but $c_i$ is only based on $j-i$, so it is ok to let $i=0$.
-              % https://tex.stackexchange.com/a/203059/308105 here \begin{align*}
-              % \begin{equation*}
-              %     \begin{aligned}
-              %     \end{aligned}
-              % \end{equation*}
 
-              % here cases* has no & available. https://tex.stackexchange.com/q/124751/308105
-
-              %   $\begin{cases}
               \begin{CondensedCases}
                   1. & j=c_1,i=0\Rightarrow 0>n\text{ \textbf{impossible}}                                                                          \\
                   2. & j=c_2,i=c_1+1\Rightarrow \text{only }n+1>2n\text{ is possible}
@@ -747,7 +643,6 @@ boxrule=0pt,boxsep=0pt,breakable}
                   4. & i=c_3+1,j=4n+k\;\hcancel{\Rightarrow 3n+3>4n+3,\text{ \textbf{impossible}.}}                                                 \\
                   & \Rightarrow 3n+k-1+1>4n+k\text{ \textbf{impossible}.}\text{ only } 3n+k+1>4n+k\text{ is possible}                            \\
                   & \Rightarrow k=0,n=0,\text{originally }j-i=4n+k=0(\text{\textbf{also impossible} because \textbf{while} block condition }i<j)
-                  %   \end{cases}$
               \end{CondensedCases}
               Based on the above, if $i<j$ into the while block,
               then in the next iteration of the while loop, $i>j$ is impossible.\EndingTextQED
@@ -888,7 +783,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \mywrongitem \CapProcTargetName \AlgorithmRef
     \begin{enumerate}[label=(\alph*)]
         \item \begin{SpacingAlgorithm}
-            {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ by a brute force algorithm}}{\AlgLabel}
+                  {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ by a brute force algorithm}}{\AlgLabel}
                   \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a list}$)}{}
                   $d\coloneqq 0\mycmt{d\text{ is the minimum distance}}$\\
                   \ForRange{i}{1}{n}{
@@ -901,7 +796,7 @@ boxrule=0pt,boxsep=0pt,breakable}
                   \Return{$d$}
               \end{SpacingAlgorithm}
         \item \begin{SpacingAlgorithm}
-            {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ based on sorting}}{\CurTodolistToplevelIndex_b}
+                  {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ based on sorting}}{\CurTodolistToplevelIndex_b}
                   \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a sorted non-decreasing list}$)}{}
                   $d\coloneqq 0\mycmt{d\text{ is the minimum distance}}$\\
                   \ForRange{i}{1}{n-1}{
@@ -1055,7 +950,6 @@ boxrule=0pt,boxsep=0pt,breakable}
     \\
     Based on the above, the sequence \(\{end-s\}\text{ must be }\ldots\to 1\to 0\)\\
     \\
-    % (here use \(s'\) to denote \(s\) in the before step, this notation also applies for other variables)\\
     Then assume when exiting, state is \(k_0\) where \(s=end=t\text{ or }t+1\)\\
     Then when exited from the state \(k_{-1}\) where \((s,end)=(t,t+1)\), either enter state \((t,t)\) when \(x\le a_t\) or \((t+1,t+1)\) when \(x> a_t\)\\
     Backwards again with the \(k_{-2}\to k_{-1}\) step is one of the following:
@@ -1091,7 +985,8 @@ boxrule=0pt,boxsep=0pt,breakable}
         \ForRange{i}{1}{n-1}{
         \(s=1\)\\
         \(end=i\)\\
-        % binary insertion
+        % binary insertion 
+        % the following comments are from the original binary insertion code
         \While{\(s<end\)}{
             \(c=\lfloor\frac{s+end}{2}\rfloor\)\\
             % \lIf{\(x\le a_c\)}{
@@ -1164,8 +1059,7 @@ boxrule=0pt,boxsep=0pt,breakable}
         \tcc{Here we use the row-major arrays}
         \(\{r_{ji}|i,j\in\{1,2,3\}\}\coloneqq \{0,\ldots\}\)
         \Comment{\(\{r_{ji}\}\text{ is the rejection list with }r_{ji}=1\text{ meaning }j\text{th woman rejects }i\text{th man},r_{ji}=2\text{ means pending},r_{ji}=0\text{ means unmodifiedly inited}\)}
-        % \hfuzz=60pt
-        % Ans:"add i to the proposal list for the woman j who ranks highest on his preference list"
+        % correspond to the Ans:"add i to the proposal list for the woman j who ranks highest on his preference list"
         \(\{p_{iq}|i\in\{1,2,3\},q>0\}\coloneqq \{m_{11},0,0,m_{21},\ldots\}\)
         \Comment{\(\{p_{iq}\}\text{ is the proposal list with }p_{ik}\text{ means the proposal woman by the }i\text{th man at the }k\text{th round}\)}
         \(k\coloneqq 1\mycmt{k\text{ is the round variable}}\)\\
@@ -1175,7 +1069,6 @@ boxrule=0pt,boxsep=0pt,breakable}
         % "The series of rounds ends when every suitor has exactly one pending proposal." means that it is not rejected
         \While{\(\text{each row of}\{r_{ji}\}\text{ has exactly one }2\hcancel{\SepAnd\text{the rest are all }1}\)}{
             \tcc{\sout{TODO here I think the question means all the rest are rejected when only one is pending because at the \textit{first} round \textit{always only one} pending}}
-            % add the pending items.
             % Ans: "mark i as not rejected", here assume that it means pending.
             \tcc{update the pending list}
             \ForRange{i}{1}{3}{
@@ -1264,6 +1157,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     which may be too abstract similar to the original question description.
     \begin{SpacingAlgorithm}{\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ in wikipedia}}{\CurTodolistToplevelIndex_wiki}
         \myproc{\ProcTargetName}{}
+        % the following comments show the relation with the above pseudocode.
         % this is trivially done above by some kinds of initialization
         Initialize \(e\in E\) and \(a\in A\) to free\\
         % when no free, i.e. no rejected, more specially no pending ones are rejected. See the above While loop condition.
@@ -1293,7 +1187,7 @@ boxrule=0pt,boxsep=0pt,breakable}
         \item The ``(e, a) become matched" after ``\(e'\) becomes free" corresponds to the above \(prefer_j=i\) and the following not rejected one after \(r_{ji}=1\)
     \end{enumerate}
     \addtocounter{todolisti}{-1}
-    \mywrongitem Here I put the discussion about the above algorithm together with the algorithm in this pdf 
+    \mywrongitem Here I put the discussion about the above algorithm together with the algorithm in this pdf
     for the better representation instead of in the markdown doc.\\
     See the ans. Here sum up the ans
     with quotes from the ans enclosed in the quote box:
@@ -1402,20 +1296,19 @@ boxrule=0pt,boxsep=0pt,breakable}
               leading to contradiction.
     \end{enumerate*}\\
     \ecc{
-    \item 
-    % https://kba49.wordpress.com/2013/04/12/illegal-parameter-number-in-definition-of-hytempa/
-    \href{https://en.wikipedia.org/wiki/Boyer-Moore_majority_vote_algorithm\#Correctness}{wikipedia} 
-    is similar to the 1st method of the above \hyperref[proof_one_Moore_majority_vote_algorithm]{(a)}\\
-    It proves its opposite ``output a non majority element'' is impossible by ``must reach zero ...''.\\
-    ``consumed exactly'' means the above ``canceling'', however in wikipedia 
-    it can be \textbf{consumed by other} elements which is more general 
-    because it doesn't influence ``subsequence of length N - K where m is 
-    \textbf{still} the majority element.'' to make the \textbf{induction} which ensures 
-    ``if it exists'' \textbf{won't be changed} in the induction process.
-    \item The ans is similar to the above 2nd method.\\
-    ``or the negative of the counter otherwise'' corresponds to all 
-    except for direct increment of the majority element.\\
-    ``more increases than decreases'' includes both the direct and the indirect increment because of the ``negative''
+        % https://kba49.wordpress.com/2013/04/12/illegal-parameter-number-in-definition-of-hytempa/
+        \item \href{https://en.wikipedia.org/wiki/Boyer-Moore_majority_vote_algorithm\#Correctness}{wikipedia}
+        is similar to the 1st method of the above \hyperref[proof_one_Moore_majority_vote_algorithm]{(a)}\\
+        It proves its opposite ``output a non majority element'' is impossible by ``must reach zero ...''.\\
+        ``consumed exactly'' means the above ``canceling'', however in wikipedia
+        it can be \textbf{consumed by other} elements which is more general
+        because it doesn't influence ``subsequence of length N - K where m is
+        \textbf{still} the majority element.'' to make the \textbf{induction} which ensures
+        ``if it exists'' \textbf{won't be changed} in the induction process.
+        \item The ans is similar to the above 2nd method.\\
+        ``or the negative of the counter otherwise'' corresponds to all
+        except for direct increment of the majority element.\\
+        ``more increases than decreases'' includes both the direct and the indirect increment because of the ``negative''
     }
 \end{todolist}
 
@@ -1424,23 +1317,61 @@ boxrule=0pt,boxsep=0pt,breakable}
     \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{-3-supplementary}
     % _ is one special character, which is a bit hard to use in different cmds, so not use it.
     % \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{_3_supplementary}
+    
     % \item \ifinenumerate{enumerate}{not enumerate}
     % \item \IfInList{code if in list}{code if not in list}
     \myrightitem \CapProcTargetName \AlgorithmRef
-    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
-        \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
-        \(max,min\mycmt{max,min\text{ are the maximum and minimum 
-        of the sequence correspondingly}}\)\\
-        
-    \end{SpacingAlgorithm}
+    \begin{enumerate}[label=(\alph*)]
+        \item see b
+        \item pseudocode
+              \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+                  \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
+                  \(max,min\mycmt{max,min\text{ are the maximum and minimum
+                          of the sequence correspondingly}}\)\\
+                  \(LocalMax,LocalMin\)\\
+                  \Comment{
+                      \(LocalMax,LocalMin\text{ are the local maximum and minimum
+                          of the sequence correspondingly}\)}
+                  \lIf{n\(\text{ is odd}\)}{
+                      \(max,min\coloneqq 1\)
+                  }\ElseIf{\(a_1<a_2\)}{
+                      \(max\coloneqq a_2\)\\
+                      \(min\coloneqq a_1\)
+                  }\Else{
+                      \(max\coloneqq a_1\)\\
+                      \(min\coloneqq a_2\)
+                  }
+                  \ForRangeBy{i}{2+(n+1)\%2}{n-1}{2}{
+                  \If{\(a_i<a_{i+1}\)}{
+                  \vspace{4pt}
+                  \(LocalMax=a_{i+1}\)\\
+                  \(LocalMin=a_i\)
+                  }\Else{
+                  \(LocalMin=a_{i+1}\)\\
+                  \(LocalMax=a_i\)
+                  }
+                  \lIf{\(max<LocalMax\)}{
+                      \(max=LocalMax\)
+                  }
+                  \lIf{\(min>LocalMin\)}{
+                      \(min=LocalMin\)
+                  }
+                  }
+
+              \end{SpacingAlgorithm}
+        \item \(2+\frac{[n-(1\text{ or }2)]*3}{2}=O(n),
+        \text{with -2 taken when n is even}\)\\
+              Here I take odd comparison 
+              in account in the first \(2\),
+    \end{enumerate}
 
     \ModProcName{finds the maximum and minimum of a sequence}
     \myrightitem \CapProcTargetName \AlgorithmRef
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
-        \(max,min\mycmt{max,min\text{ are the maximum and minimum 
-        of the sequence correspondingly}}\)\\
-        
+        \(max,min\mycmt{max,min\text{ are the maximum and minimum
+                of the sequence correspondingly}}\)\\
+
     \end{SpacingAlgorithm}
 \end{todolist}
 

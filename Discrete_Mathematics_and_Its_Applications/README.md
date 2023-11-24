@@ -547,6 +547,15 @@ $$\displaylines{
 - [trace](https://latex.org/forum/viewtopic.php?p=83008#p83008)
 - [`latex3` doc](https://ctan.math.illinois.edu/macros/latex/contrib/l3kernel/interface3.pdf) and source2e/latex2e.
   TODO [`NewExpandableDocumentCommand`](https://texdoc.org/serve/xparse/0) meaning.
+- [named label](https://texblog.org/2012/03/21/cross-referencing-list-items/) or use `\href`
+- check enumerate
+  [this](https://tex.stackexchange.com/a/442187/308105) can't be used with `\newlist` 
+  while [this](https://tex.stackexchange.com/a/108703/308105) can.
+- [avoid page break](https://tex.stackexchange.com/a/94702/308105)
+### algorithm2e
+- change font for [all](https://tex.stackexchange.com/a/279202/308105)
+### amsmath
+- [left aligned](https://tex.stackexchange.com/a/145660/08105) equation.
 ### TODO
 - try use [`fltrace`](https://tex.stackexchange.com/a/39020/308105) to debug the "floating"
 - [x] how `##` [to `#`](https://tex.stackexchange.com/a/42464/308105) used in `\cases`
