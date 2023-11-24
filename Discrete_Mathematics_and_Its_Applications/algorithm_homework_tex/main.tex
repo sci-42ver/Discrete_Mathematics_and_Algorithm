@@ -273,6 +273,31 @@
   \fi}
 \makeatother
 
+% https://tex.stackexchange.com/a/638275/308105
+% https://tex.stackexchange.com/a/108703/308105
+\ExplSyntaxOn
+% https://www.texdev.net/2010/05/23/from-newcommand-to-newdocumentcommand/
+\NewDocumentCommand{\listenvironments}{m}
+ {
+    % https://ctan.math.illinois.edu/macros/latex/contrib/l3kernel/interface3.pdf
+  \clist_map_inline:nn { #1 }
+   {
+    % https://ctan.math.illinois.edu/macros/latex/base/lthooks-doc.pdf and 
+    % https://tex.stackexchange.com/a/566737/308105 similar to the gdb hook
+
+    % ## https://www.alanshawn.com/latex3-tutorial/#handle-macro-expansion-like-a-boss
+    \AddToHook{env/##1/begin}{\int_gincr:N \g_jinwen_list_int}
+    \AddToHook{env/##1/end}{\int_gdecr:N \g_jinwen_list_int}
+   }
+ }
+\NewExpandableDocumentCommand{\IfInList}{mm}
+ {
+  \int_compare:nTF { \g_jinwen_list_int > 0 } { #1 } { #2 }
+ }
+\int_new:N \g_jinwen_list_int
+\ExplSyntaxOff
+\listenvironments{itemize,enumerate,todolist}
+
 \newcommand{\ModProcNameAndLabelSuffix}[2]{
     \renewcommand{\ProcTargetName}{\textit{#1}}
     \renewcommand{\NormalProcTargetName}{#1}
@@ -1400,6 +1425,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     % _ is one special character, which is a bit hard to use in different cmds, so not use it.
     % \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{_3_supplementary}
     % \item \ifinenumerate{enumerate}{not enumerate}
+    % \item \IfInList{code if in list}{code if not in list}
     \myrightitem \CapProcTargetName \AlgorithmRef
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}

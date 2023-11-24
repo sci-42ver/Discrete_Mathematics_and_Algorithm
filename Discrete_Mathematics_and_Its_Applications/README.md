@@ -545,6 +545,8 @@ $$\displaylines{
 - [`@protected@testopt`](https://ctan.math.illinois.edu/macros/latex/contrib/xpatch/xpatch.pdf) is related with `\protect`.
 - use [`latexdef -o '\newcommand\test{hello}' test`](https://tex.stackexchange.com/a/638531/308105) to check self-defined cmd definition.
 - [trace](https://latex.org/forum/viewtopic.php?p=83008#p83008)
+- [`latex3` doc](https://ctan.math.illinois.edu/macros/latex/contrib/l3kernel/interface3.pdf) and source2e/latex2e.
+  TODO [`NewExpandableDocumentCommand`](https://texdoc.org/serve/xparse/0) meaning.
 ### TODO
 - try use [`fltrace`](https://tex.stackexchange.com/a/39020/308105) to debug the "floating"
 - [x] how `##` [to `#`](https://tex.stackexchange.com/a/42464/308105) used in `\cases`
