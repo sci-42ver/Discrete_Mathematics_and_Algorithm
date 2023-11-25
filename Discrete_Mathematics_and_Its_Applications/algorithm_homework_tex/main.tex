@@ -46,6 +46,12 @@
 \newlist{todolist}{enumerate}{2}
 % https://www.tug.org/TUGboat/tb09-1/tb20bechtolsheim.pdf
 \setlist[todolist]{label={\arabic*.\makebox[0pt][r]{\noexpand\emptysquare\hspace{1.3em}}},ref=\arabic*}
+\newlist{alphlist}{enumerate}{2}
+\setlist[alphlist]{label={(\alph*)}}
+
+% https://tex.stackexchange.com/a/324915/308105
+% \newcommand{\ShowLabel}[1]{\texttt{\meaning#1}}
+\newcommand{\ShowLabel}[1]{\typeout{\meaning#1}}
 
 % https://tex.stackexchange.com/a/138996/308105
 \usepackage{etoolbox,setspace}
@@ -781,7 +787,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \ModProcName{find the two that are
         closest}
     \mywrongitem \CapProcTargetName \AlgorithmRef
-    \begin{enumerate}[label=(\alph*)]
+    \begin{alphlist}
         \item \begin{SpacingAlgorithm}
                   {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ by a brute force algorithm}}{\AlgLabel}
                   \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a list}$)}{}
@@ -806,7 +812,7 @@ boxrule=0pt,boxsep=0pt,breakable}
                   }
                   \Return{$d$}
               \end{SpacingAlgorithm}
-    \end{enumerate}
+    \end{alphlist}
     \ecc{
         \item the question needs the pair
         \item better initing $d\coloneqq|x_1-x_2|$ to avoid the compulsory first assignment.
@@ -1053,6 +1059,8 @@ boxrule=0pt,boxsep=0pt,breakable}
     \addtocounter{todolisti}{3}
     \ModProcName{deferred acceptance algorithm}
     \mywrongitem \CapProcTargetName \AlgorithmRef
+    % https://tex.stackexchange.com/questions/603954/fully-expand-an-argument-before-using-it-in-latex#comment1514660_603954
+    \ShowLabel{\expandafter{\(\AlgLabel\)}}
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName(\(\{m_{ij}|i,j\in\{1,2,3\}\}: \text{man preference list with }m_{ij}\text{ means }j\text{th woman }m_i\text{ prefers}
             ,\{w_{ji}\}:\text{similar to }\{m_{ij}\}\))}{}
@@ -1096,7 +1104,7 @@ boxrule=0pt,boxsep=0pt,breakable}
                 % ... for each such man i mark him as rejected and add j to his rejection list" Here contents before and after "and" mean the same.
                 \tcc{rejection}
                 \ForRange{i}{1}{3}{
-                    \tcc{Here only the preferred ones can be left pending}
+                    \tcc{Here only the preferred ones can be left pending} \label{only_one_chosen_deferred_acceptance}
                     \If
                     {\(r_{ji}=2\SepAnd FindIndex(j,i)>FindIndex(j,prefer_j)\)}{
                         \(r_{ji}=1\)
@@ -1130,7 +1138,7 @@ boxrule=0pt,boxsep=0pt,breakable}
             \item At the first round
                   \begin{itemize}
                       \item No proposal overlap: if no men propose to the same woman, then trivially no rejected men.
-                            So this is stable. (It \textbf{prefers to the men's side})
+                            So this is stable. (It \textbf{prefers to the men's side}) \label{prioritize_men}
                       \item Proposal overlap: if some men propose to the same woman, then only one is left pending and the rest are rejected.
                             (It then changes preferable side, i.e. it \textbf{prefers to the women's side})
                   \end{itemize}
@@ -1241,7 +1249,7 @@ boxrule=0pt,boxsep=0pt,breakable}
     \addtocounter{todolisti}{-1}
     \ModProcName{Boyer-Moore majority vote algorithm}
     \myrightitem \expandafter{\NormalProcTargetName} implementation
-    \begin{enumerate}[label=(\alph*)]
+    \begin{alphlist}
         \item if two, then these two exceeds the total number.
         \item skipped due to triviality.
         \item
@@ -1268,7 +1276,7 @@ boxrule=0pt,boxsep=0pt,breakable}
                   \Return{\(candidate\)}\tcc{This the majority element \textbf{if it exists}}
               \end{SpacingAlgorithm}
         \item by counting.
-    \end{enumerate}
+    \end{alphlist}
     \addtocounter{todolisti}{-1}
     \mywrongitem Here I put the proof together with the algorithm in this pdf instead of in the markdown doc.\\
     \begin{enumerate*}[label=(\alph*),itemjoin=\vspace{4pt}\\]
@@ -1317,11 +1325,11 @@ boxrule=0pt,boxsep=0pt,breakable}
     \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{-3-supplementary}
     % _ is one special character, which is a bit hard to use in different cmds, so not use it.
     % \ModProcNameAndLabelSuffix{finds the maximum and minimum of a sequence}{_3_supplementary}
-    
+
     % \item \ifinenumerate{enumerate}{not enumerate}
     % \item \IfInList{code if in list}{code if not in list}
     \myrightitem \CapProcTargetName \AlgorithmRef
-    \begin{enumerate}[label=(\alph*)]
+    \begin{alphlist}
         \item see b
         \item pseudocode
               \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
@@ -1360,19 +1368,69 @@ boxrule=0pt,boxsep=0pt,breakable}
 
               \end{SpacingAlgorithm}
         \item \(2+\frac{[n-(1\text{ or }2)]*3}{2}=O(n),
-        \text{with -2 taken when n is even}\)\\
-              Here I take odd comparison 
+              \text{with -2 taken when n is even}\)\\
+              Here I take odd comparison
               in account in the first \(2\),
-    \end{enumerate}
+    \end{alphlist}
 
-    \ModProcName{finds the maximum and minimum of a sequence}
-    \myrightitem \CapProcTargetName \AlgorithmRef
+    \addtocounter{todolisti}{4}
+    \ModProcName{bidirectional bubble sort}
+    \myrightitem \CapProcTargetName \AlgorithmRef\\
+    similar to 3.1-39.
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
-        \(max,min\mycmt{max,min\text{ are the maximum and minimum
-                of the sequence correspondingly}}\)\\
-
+        \(swap\coloneqq 0\mycmt{swap\text{ is the state variable}}\)\\
+        \ForRange{i}{1}{n-2}{
+        \(swap=0\)\\
+        \If{\(i\text{ is odd}\)}{
+            \(start=1\)\\
+            \(end=n-i\)\\
+        }\Else{
+            \(end=1\)\\
+            \(start=n-i\)\\
+        }
+        \ForRange{j}{start}{end}{
+        \If{\(a_{j+1}>a_j\)}{
+        \vspace{4pt}
+        \(swap=1\)\\
+        \(\text{swap }a_{j+1}\text{ and }a_j\)
+        }
+        }
+        \If{\(swap=0\)}{
+            \Break
+        }
+        }
     \end{SpacingAlgorithm}
+
+    \addtocounter{todolisti}{16}
+    \ModProcName{sum triple search}
+    \myrightitem \CapProcTargetName \AlgorithmRef\\
+    Hinted by the ans.
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+        \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
+        \(find\coloneqq 0\mycmt{find\text{ tracks whether we find the triple}}\)\\
+        \ForRange{i}{1}{n-2}{
+            \ForRange{j}{i+1}{n-1}{
+                \ForRange{k}{j+1}{n}{
+                    \If{\(a_k=a_i+a_j\)}{
+                        \(find=1\)
+                    }
+                }
+            }
+        }
+    \end{SpacingAlgorithm}
+    \ecc{
+    \item The above is same as 29... with 
+    \(
+        \sum_{i=1}^{n-2}(\frac{(n-i)(n-i-1)}{2})=O(n^3)
+    \)
+    }
+    \myrightitem See 
+    \begin{enumerate}
+        \item \sout{See the \hyperref[only_one_chosen_deferred_acceptance]{code} for why 
+        always at least one ``male optimal''}
+        \item Since the code is based on men primarily, see \hyperref[prioritize_men]{this}
+    \end{enumerate}
 \end{todolist}
 
 % \newpage

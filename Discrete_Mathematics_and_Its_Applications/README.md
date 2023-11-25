@@ -445,6 +445,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - p251 THEOREM 4
   similar to EXAMPLE 13, $x^n=O(f)$ is trivial. Then with THEOREM 1, proof finished.
 - Notice $\log=\log_2$
+- Since we only care about discrete maths, no fraction exponents, etc, are taken in account.
 ### 3.3
 - EXAMPLE 2 is based on the Short circuiting, so $2i+1$.
 - p258 should be $O(n^{\log[2]{7}})$
@@ -455,6 +456,8 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
     > *Every* problem in NP is *reducible* to $\scriptstyle C$ in polynomial time
     implies
     > if *any* of these problems can be *solved* by a polynomial worst-case time algorithm, then *all* problems in the class NP can be *solved* by polynomial worst-case time algorithms
+### number theory
+- [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -485,6 +488,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - not comma among [multiple](https://dept.math.lsa.umich.edu/~kesmith/295handout1-2010.pdf) $\forall,\exists$ and $\ni$ for "so that".
 - representation for [capital](https://www.overleaf.com/learn/latex/Mathematical_fonts) letters where both $\mathbb{P}$ and $\mathcal{P}$ are ok.
   [detailed](https://tex.stackexchange.com/a/58124)
+- frac in [big](https://tex.stackexchange.com/a/103358/308105) ceil
 ## katex
 - available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
 - set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
@@ -2175,6 +2179,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - see the ans
     - lack $i\le j$
 ### Supplementary
+- 18 skipped
 - [ ] 2
   based on ALGORITHM 1, appends $sec_max=max$ after $max\coloneqq a_i$ with the init $sec_max\coloneq a_1$.
 
@@ -2186,6 +2191,153 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   trivially $O(n)$.
   - see the ans
     - use $first\coloneqq 0$ to indicate not found.
+- [ ] 7
+  > A nonvirgin comparison must be between two elements that are still in the running to be the maximum or two elements that are still in the running to be the minimum
+  because it is insane to compare between the maximum candidate and the minimum candidate where maybe no possibilities are eliminated which is inefficient.
+  > For example, we might be comparing x and y, where all we know is that x has been eliminated as the minimum. If we find that x > y in this case, then only one possibility has been ruled out
+  because $x$ is **still** the maximum candidate, so no possibility about $x$ is eliminated.
+  - it is based on 
+    1. what to do: eliminate $2n-2$ possibilities
+    2. how to do: eliminate 1 or 2 possibilities at each step
+  - TODO since exercise 5 is $2n-2>\lceil\frac{3n}{2}\rceil-2$,
+    this exercise should be the best-case complexity and exercise 6 shows this best-case complexity is possible.
+- [ ] 8 see 2.
+  - hinted by the ans
+    if similar to 7, each pair comparison can't exclude always one possibility.
+  - proof of the lower bound [$n + \lceil \lg n \rceil - 2$][lower_bound_second_largest_element] from [this](https://stackoverflow.com/questions/3628718/find-the-2nd-largest-element-in-an-array-with-minimum-number-of-comparisons/3628777#3628777)
+    1. tightness (this is just the [upper bound](https://users.csc.calpoly.edu/~dekhtyar/349-Spring2010/lectures/lec03.349.pdf) similar to ), i.e. it [can't be ~~smaller~~ larger](https://en.wikipedia.org/wiki/Infimum_and_supremum#Formal_definition).
+      - > Firstly, you need to find the maximum, since one cannot be sure some element is the second maximum without knowing which element is the maximum
+        this may be trivial because second is based on first. So $n-1$ which is the worst/largest.
+      - > the adversary to pick a very *hard* instance of the problem
+        then p5 is to make as more matches as possible, although the [best case](https://stackoverflow.com/a/13170419/21294350) is also $O(n)$.
+        TODO see the graph or others where the best and worst differ.
+        - $\lceil \lg n \rceil$ see [this](https://math.stackexchange.com/questions/1601/lower-bound-for-finding-second-largest-element#comment4297425_1672) which is based on the binary tree in [p11][second_largest_element_Adversary] (also see 6-c)
+          use the following induction
+          $$
+          \left\lceil\frac{\lceil\frac{n}{2}\rceil}{2}\right\rceil=
+          \left\lceil\frac{\frac{n}{2}+0\text{ or }\frac{1}{2}}{2}\right\rceil=
+          \left\lceil\frac{n+1}{4}\right\rceil=
+          \left\lceil\frac{n}{4}\right\rceil
+          $$
+          - Notice here is talking about the [**worst**](https://math.stackexchange.com/questions/1601/lower-bound-for-finding-second-largest-element#comment6530597_1672) <a id="worst_lower_bound"></a>
+        - similar to the best pick among $n$ candidates, the best pick among $\lceil \lg n \rceil$ candidates to decide the second best, we **at least** need $\lceil \lg n \rceil-1$.
+        - IMHO, here $\lceil \lg n \rceil$ losers to the best need to be bookkept for the following comparison.
+    2. lower bound
+      > Let the number of elements that lost to the maximum be m.
+      The needed comparison:
+      - either best ($n-1$) -> second ($m-1$)
+      - or second ($n-2$) -> best ($m$ based on the assumption).
+    3. $m\ge\lceil \lg n \rceil$ because at least $m$ at most is $n-1$.
+      See the above or [second_largest_element_Adversary] p13 for the following:
+      > with each comparison any weight can only double
+      - > otherwise B says anything that does not disturb past answers
+        i.e. it is impossible.
+    4. The above process already shows that the worst case is possible.
+    - For the relation with problem 7, [see p3,16](https://www.cs.rochester.edu/u/brown/282/oheads/C05.pdf) which is related with graph and the state machine.
+    - ~~TODO~~ [medium][lec_13_Adversary_Arguments]
+      - here the upper and lower bound in p5 should be the supremum and the Infimum.
+        the lower bound is related with [$\Omega$](https://www-student.cse.buffalo.edu/~atri/cse331/support/lower-bound/index.html), similar upper with $O$.
+        so upper bound only needs to prove existence as the above shows.
+        - > the adversary sets that bit to whatever value will make the algorithm do the most work
+          so the lower bound decided by the *adversary* argument **depends on the specific algorithm**.
+        - Notice it is still based on worst cases, see [above](#worst_lower_bound).
+      - Here in p6 proof of lemma 1 is based on
+        1. It assumes the decision tree chooses the medium **without** knowing "elements smaller than the median", and then proves the contradiction.
+          > Our decision tree gives the *wrong* answer for this *‘swapped’* input.
+          i.e. after swapping the unknown comparison $(x_i,x_m)$, it is **still consistent** with "comparisons that we’ve already performed", but it is wrong.
+        2. The choices of the "comparisons that we’ve already performed" implies the adversary argument.
+      - > at least $2^{\frac{n}{2}−1}$ leaves
+        - here it takes all nodes in account although some are [not leaves](https://yourbasic.org/algorithms/binary-search-tree/)
+        - see [this p3](https://jeffe.cs.illinois.edu/teaching/algorithms/notes/12-lowerbounds.pdf), it means at least does $\frac{n}{2}−1$ comparison.
+      - $\binom{n}{\frac{n}{2}-1}2^{\frac{n}{2}−1}$ is based on connecting all pruned trees to the corresponding leaves of the choice tree of the set L.
+      - > depth at least
+        here means possible but not available which is also indicated by
+        > improves this lower bound to
+        and
+        > even the case k =3 is still **open**
+    - Also see [the table](https://personal.utdallas.edu/~chandra/documents/6363/lbd.pdf) where the number indicates the information number
+  - compared with 7, the latter needs to traverse all items to find the minimum, so it takes more than here.
+  - In summary, the proof is based on proving **both** the upper and the lower bound to one specific number
+    with 7 in [lec_13_Adversary_Arguments] and 8 in [lower_bound_second_largest_element] with a bit different algorithms.
+- [x] 10
+  similar to one exercise before. This is just 3.1-32
+  here only take comparison in account, then $n-1$ steps to calculate the difference between adjacent pairs and compare with the $min$.
+- [x] 14
+  is same as the reason for the bubble sort because the reason has no relation with the direction.
+- [x] 16 similar to 3.2-26, only the dominating terms are cared about.
+- [ ] 19 Use limit as [O_Theta_Omega_relation_with_limit] shows.
+  - see the ans
+    - for the detailed constructed function
+- [x] 20 similar to 19 $>n$
+- [x] 22 $2^n,n^2,4^n,n!,3^n,n^4$, so no.
+- [ ] 24 the ans nests the $2^n$.
+- [ ] 25
+  after log, $n\log{n},\log{\log{n}},\log{n},n,(\log{n})^\frac{1}{2},\log{n\log{n}}$
+  after sorting, let $k=\log{n}$
+  then $\log{\log{n}},\log{n\log{n}},(\log{n})^\frac{1}{2},\log{n},n,n\log{n}$ 
+  (2,6,5,3,4,1 -> $(\log{n})^2,n(\log{n})^{1001},2^{\sqrt{\log{2}{n}}},n^{1.0001},(1.0001)^n,n^n$)
+  - see the ans
+    - the 6 should be $\log{n}+1001*\log{\log{n}}$
+      then compared with 3, $\log{n}+1001*\log{\log{n}}<1.0001*\log{n},n\to\infty$
+- [ ] 26
+  similar to 25, $n,n^2,n!,2^n,\log{n}\log{n},\log{n}(+\log{\log{n}}+\log{\log{\log{n}}}),(\frac{3}{2}*)\log{n},\log{n}(+\frac{3}{2}*\log{\log{n}}),(\frac{4}{3}*)\log{n}(+\log{\log{n}})$ (here terms in the square brackets are not dominating terms)
+  so 5,6,8,9,7,1,2,4,3
+  - see the ans
+    - 5 is $(\log{n})^2$ which should be after 7.
+      then $n\log{n}\log{\log{n}},n(\log{n})^{\frac{3}{2}},n^{\frac{4}{3}}(\log{n})^2,n^{\frac{3}{2}},n^{\log{n}},2^{100n},2^{n^2},2^{2^n},2^{n!}$
+    - it doesn't take logarithms for all ~~as the hint shows~~.
+- [ ] 27 Use oscillating functions
+  - see the ans for more detailed examples.
+- [ ] 28 similar to lemma 1,
+  1. at most $c^i$ coins and all $c^i,i<k$ can not exceed $c^k$.
+  2. similar to THEOREM 1
+    for each $c^i$, 
+    at most is ensured by the algorithm
+    at least is ensured by that if one $c^m$ is to be substituted by $c^i,i<m$, then it is impossible.
+  - see the ans for the explanation based on base expansion
+- [ ] 30 similar to 10 checking $O(n\log{n})+n-1$
+- [ ] 32 what does "always" mean? Since if we artificially make all pairs with male optimal and female optimal, it is possible.
+  - see the ans
+    - Rita, Jan are women.
+    - Ken are men.
+  - ~~The question means *one* male optimal matching and *one* female pessimal matching.~~
+    ~~Then it is trivial if understanding the 3.1-65 code.~~
+    The ans uses contradiction by supposing that the woman can choose worse for proving "female pessimal". ~~I originally tried direct proof: that the woman can choose better is impossible.~~
+    - hinted by the ans
+      suppose the stable pair $(w,m)$ is broken and 
+      $(w,m'),m'>m\text{ for }w$ with $(w',m),w>w'\text{ for }m$, then $(w,m')$ is better than $(w,m)$, so no unstable pair is created.
+- [ ] 34 WLOG
+- [ ] 35
+  1. ~~Here assume the men are the priority as original~~
+    ~~so~~ based on original definition, we add that for matched pairs $(m,w)$, if existing some new pair 
+    $(m',w)$, the **unchanging** side $w$ prefers $m'$ to $m$,
+    then the original pair is unstable.
+  2. same as original and finish when the *less* gender completed the match. (here only the finished condition changes)
+  3. proof is same as the original.
+  - see the ans
+    - the b "*fictitious* people" **bridges the gap**, so the following can directly use the original method.
+      1. "at the bottom of everyone’s preference lists" corresponds to "prefers any mate to being *unmatched*" (this definition is trivial based on the **assumption** which is also reasonable).
+        women choose fictitious people -> unmatched
+      - Then the following original conditions are met:
+        1. same number of men and women
+        2. ranks, i.e. preference in all cases.
+      - so direct use the original proof
+- [ ] 36
+  1. similar to 35 ans, if there are $k$ pairs forbidden, extend the list with $k$ forbidden man and woman and replace the original forbidden pairs at the preference list tail with the added ones.
+  2. same as the 35.
+  - the [paper][McVitie_stable_marriage]
+    - breakmarriage
+      - theorem 3
+        it shows man i can't choose better $J$
+        and $J$ will choose her better partner.
+      - theorem 4
+        here assume k is the **first** refused so k chooses worse $(k,k_s'),k_s'<k_s\text{ for }k$ while k_s chooses better $(k_s,l)$.
+        since $l$ is not refused implied by the above first, so l also prefers $k_s$ to $l_s$, contradiction.
+      - TODO why theorem 4 based on the recursive version can choose *all* possible when only choosing only man $\ge i$.
+        or more specifically, why rule 2 thinks of $j<i$ as unsuccessful.
+      - The recursive theorem just loops one man , one woman instead of all men, all women as 3.1-65.
+    - based on the above, how does [Szwarcfiter_stable_marriage] p8 work?
+  - IMHO, this can be done similar to 35.
 - [ ] 
 
 ---
@@ -2205,5 +2357,13 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 
 <!-- math stackexchange -->
 [comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one]:https://math.stackexchange.com/a/4804647/1059606
+[lower_bound_second_largest_element]:https://math.stackexchange.com/a/1672/1059606
 
+<!-- cs stackexchange -->
 [O_Theta_Omega_relation_with_limit]:https://cs.stackexchange.com/a/827/161388
+
+<!-- paper or lectures -->
+[second_largest_element_Adversary]:https://www.cse.unsw.edu.au/~cs2011/lect/2711_Adversary.pdf
+[lec_13_Adversary_Arguments]:https://jeffe.cs.illinois.edu/teaching/algorithms/notes/13-adversary.pdf
+[Szwarcfiter_stable_marriage]:https://core.ac.uk/download/pdf/82429549.pdf
+[McVitie_stable_marriage]:./papers/McVitie_stable_marriage.pdf
