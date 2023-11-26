@@ -789,29 +789,29 @@ boxrule=0pt,boxsep=0pt,breakable}
     \mywrongitem \CapProcTargetName \AlgorithmRef
     \begin{alphlist}
         \item \begin{SpacingAlgorithm}
-                  {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ by a brute force algorithm}}{\AlgLabel}
-                  \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a list}$)}{}
-                  $d\coloneqq 0\mycmt{d\text{ is the minimum distance}}$\\
-                  \ForRange{i}{1}{n}{
-                      \ForRange{j}{i+1}{n}{
-                          \lIf{$d<|a_i-a_j|$}{
-                              $d=|a_i-a_j|$
-                          }
-                      }
-                  }
-                  \Return{$d$}
-              \end{SpacingAlgorithm}
+            {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ by a brute force algorithm}}{\AlgLabel}
+            \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a list}$)}{}
+            $d\coloneqq 0\mycmt{d\text{ is the minimum distance}}$\\
+            \ForRange{i}{1}{n}{
+                \ForRange{j}{i+1}{n}{
+                    \lIf{$d<|a_i-a_j|$}{
+                        $d=|a_i-a_j|$
+                    }
+                }
+            }
+            \Return{$d$}
+        \end{SpacingAlgorithm}
         \item \begin{SpacingAlgorithm}
-                  {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ based on sorting}}{\CurTodolistToplevelIndex_b}
-                  \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a sorted non-decreasing list}$)}{}
-                  $d\coloneqq 0\mycmt{d\text{ is the minimum distance}}$\\
-                  \ForRange{i}{1}{n-1}{
-                  \lIf{$d<a_{i+1}-a_i$}{
-                  $d=a_{i+1}-a_i$
-                  }
-                  }
-                  \Return{$d$}
-              \end{SpacingAlgorithm}
+            {\xcapitalisewords{\NormalProcTargetName}\capitalisewords{ based on sorting}}{\CurTodolistToplevelIndex_b}
+            \myproc{\ProcTargetName($\{x_1, x_2,\ldots , x_n\}: \text{a sorted non-decreasing list}$)}{}
+            $d\coloneqq 0\mycmt{d\text{ is the minimum distance}}$\\
+            \ForRange{i}{1}{n-1}{
+            \lIf{$d<a_{i+1}-a_i$}{
+            $d=a_{i+1}-a_i$
+            }
+            }
+            \Return{$d$}
+        \end{SpacingAlgorithm}
     \end{alphlist}
     \ecc{
         \item the question needs the pair
@@ -1253,28 +1253,28 @@ boxrule=0pt,boxsep=0pt,breakable}
         \item if two, then these two exceeds the total number.
         \item skipped due to triviality.
         \item
-              \CapProcTargetName \AlgorithmRef
-              \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
-                  \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
-                  \(count\coloneqq 0\mycmt{count\text{ is the counter}}\)\\
-                  \(candidate\coloneqq -\!1\mycmt{candidate\text{ is the emporary candidate for a majority element with}
-                      -\!\!1\text{ meaning not assigned}}\)\\
-                  \ForRange{i}{1}{n}{
-                      \If{\(count=0\)}{
-                          \vspace{3pt}
-                          \(candidate=i\)\\
-                          \(count=count+1\)
-                          \vspace{3pt}
-                      }
-                      \If{\(candidate=i\)}{
-                          \vspace{3pt}
-                          \(count=count+1\)
-                      }\Else{
-                          \(count=count-1\)
-                      }
-                  }
-                  \Return{\(candidate\)}\tcc{This the majority element \textbf{if it exists}}
-              \end{SpacingAlgorithm}
+        \CapProcTargetName \AlgorithmRef
+        \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+            \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
+            \(count\coloneqq 0\mycmt{count\text{ is the counter}}\)\\
+            \(candidate\coloneqq -\!1\mycmt{candidate\text{ is the emporary candidate for a majority element with}
+                -\!\!1\text{ meaning not assigned}}\)\\
+            \ForRange{i}{1}{n}{
+                \If{\(count=0\)}{
+                    \vspace{3pt}
+                    \(candidate=i\)\\
+                    \(count=count+1\)
+                    \vspace{3pt}
+                }
+                \If{\(candidate=i\)}{
+                    \vspace{3pt}
+                    \(count=count+1\)
+                }\Else{
+                    \(count=count-1\)
+                }
+            }
+            \Return{\(candidate\)}\tcc{This the majority element \textbf{if it exists}}
+        \end{SpacingAlgorithm}
         \item by counting.
     \end{alphlist}
     \addtocounter{todolisti}{-1}
@@ -1332,45 +1332,45 @@ boxrule=0pt,boxsep=0pt,breakable}
     \begin{alphlist}
         \item see b
         \item pseudocode
-              \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
-                  \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
-                  \(max,min\mycmt{max,min\text{ are the maximum and minimum
-                          of the sequence correspondingly}}\)\\
-                  \(LocalMax,LocalMin\)\\
-                  \Comment{
-                      \(LocalMax,LocalMin\text{ are the local maximum and minimum
-                          of the sequence correspondingly}\)}
-                  \lIf{n\(\text{ is odd}\)}{
-                      \(max,min\coloneqq 1\)
-                  }\ElseIf{\(a_1<a_2\)}{
-                      \(max\coloneqq a_2\)\\
-                      \(min\coloneqq a_1\)
-                  }\Else{
-                      \(max\coloneqq a_1\)\\
-                      \(min\coloneqq a_2\)
-                  }
-                  \ForRangeBy{i}{2+(n+1)\%2}{n-1}{2}{
-                  \If{\(a_i<a_{i+1}\)}{
-                  \vspace{4pt}
-                  \(LocalMax=a_{i+1}\)\\
-                  \(LocalMin=a_i\)
-                  }\Else{
-                  \(LocalMin=a_{i+1}\)\\
-                  \(LocalMax=a_i\)
-                  }
-                  \lIf{\(max<LocalMax\)}{
-                      \(max=LocalMax\)
-                  }
-                  \lIf{\(min>LocalMin\)}{
-                      \(min=LocalMin\)
-                  }
-                  }
+        \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+            \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
+            \(max,min\mycmt{max,min\text{ are the maximum and minimum
+                    of the sequence correspondingly}}\)\\
+            \(LocalMax,LocalMin\)\\
+            \Comment{
+                \(LocalMax,LocalMin\text{ are the local maximum and minimum
+                    of the sequence correspondingly}\)}
+            \lIf{n\(\text{ is odd}\)}{
+                \(max,min\coloneqq 1\)
+            }\ElseIf{\(a_1<a_2\)}{
+                \(max\coloneqq a_2\)\\
+                \(min\coloneqq a_1\)
+            }\Else{
+                \(max\coloneqq a_1\)\\
+                \(min\coloneqq a_2\)
+            }
+            \ForRangeBy{i}{2+(n+1)\%2}{n-1}{2}{
+            \If{\(a_i<a_{i+1}\)}{
+            \vspace{4pt}
+            \(LocalMax=a_{i+1}\)\\
+            \(LocalMin=a_i\)
+            }\Else{
+            \(LocalMin=a_{i+1}\)\\
+            \(LocalMax=a_i\)
+            }
+            \lIf{\(max<LocalMax\)}{
+                \(max=LocalMax\)
+            }
+            \lIf{\(min>LocalMin\)}{
+                \(min=LocalMin\)
+            }
+            }
 
-              \end{SpacingAlgorithm}
+        \end{SpacingAlgorithm}
         \item \(2+\frac{[n-(1\text{ or }2)]*3}{2}=O(n),
-              \text{with -2 taken when n is even}\)\\
-              Here I take odd comparison
-              in account in the first \(2\),
+        \text{with -2 taken when n is even}\)\\
+        Here I take odd comparison
+        in account in the first \(2\),
     \end{alphlist}
 
     \addtocounter{todolisti}{4}
@@ -1420,17 +1420,39 @@ boxrule=0pt,boxsep=0pt,breakable}
         }
     \end{SpacingAlgorithm}
     \ecc{
-    \item The above is same as 29... with 
+    \item The above is same as 29... with
     \(
-        \sum_{i=1}^{n-2}(\frac{(n-i)(n-i-1)}{2})=O(n^3)
+    \sum_{i=1}^{n-2}(\frac{(n-i)(n-i-1)}{2})=O(n^3)
     \)
     }
-    \myrightitem See 
+    \myrightitem See the above \hyperref[prioritize_men]{code description} ("since the code is based on men primarily")
     \begin{enumerate}
-        \item \sout{See the \hyperref[only_one_chosen_deferred_acceptance]{code} for why 
-        always at least one ``male optimal''}
-        \item Since the code is based on men primarily, see \hyperref[prioritize_men]{this}
+        \item \sout{See the \hyperref[only_one_chosen_deferred_acceptance]{code} for why
+                  always at least one ``male optimal''}
     \end{enumerate}
+
+    \addtocounter{todolisti}{10}
+    \ModProcName{makespan greedy algorithm}
+    \myrightitem \CapProcTargetName \AlgorithmRef\\
+    Based on 42, this algorithm is not optimal...
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+        \myproc{\ProcTargetName(\(\{t_1, t_2,\ldots , t_n\}: \text{the non-decreasing job list},p:\text{processor count}\))}{}
+        \(L_k,k\in\{1,2,\ldots,p\}\coloneqq 0\mycmt{L_k\text{ is the processor } k \text{ load}}\)\\
+        \(min\coloneqq 1\mycmt{min\text{ is the min processor load index}}\)\\
+        \ForRange{i}{1}{n}{
+            \ForRange{j}{1}{p}{
+                \lIf{\(L_{min}>L_j\)}{
+                    \(min=j\)
+                }
+            }
+            \(L_{min}=L_{min}+t_i\)
+        }
+
+    \end{SpacingAlgorithm}
+    \ecc{
+        \item ``in order'' means \(1\colon\!n\) 
+        instead of \(t_1<t_2<\ldots<t_n\)
+    }
 \end{todolist}
 
 % \newpage

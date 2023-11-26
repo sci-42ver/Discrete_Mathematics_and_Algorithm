@@ -2338,7 +2338,35 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       - The recursive theorem just loops one man , one woman instead of all men, all women as 3.1-65.
     - based on the above, how does [Szwarcfiter_stable_marriage] p8 work?
   - IMHO, this can be done similar to 35.
-- [ ] 
+- [x] 38 Don't these two times constant?
+  - hinted by the ans
+    the requiring time of the past jobs will overlap the following deadlines.
+    so maybe:
+    (requiring time, slackness): (30,10); (1,11); ...
+- [ ] 40
+  1. proof of the hint:
+     TODO no idle time
+     ~~is~~ ~~trivial~~, e.g. "(requiring time, deadline): (14,20), (1,10)" where 2nd will be late.
+  2. since the lateness is $l_i=d_i-\sum_{k=1}^{i}r_k$ 
+    (here use the initial of related terms to indicate the variable)
+    the when $d_i$ is big, the $\sum$ should also be big to let the $l_i$ less.
+    - here prove that this is also optimal, i.e. it will the possibility that lateness will be negative lowest.
+      This is equivalent to prove that if the above scheduling $S$ has one negative lateness, then no other scheduling $S'$ can have all positive lateness.
+      Suppose $s_i$ in $S$ has the negative lateness,
+      1. if swap $s_i$ with $s_m,m<i$ (here order comparison is based on the order in $S$)
+        then $l_m'=d_m'-\sum_{k=1}^{m'}r_k=d_m-\sum_{k=1}^{i}r_k<l_i<0$, then still one negative lateness.
+      2. if swap $s_i$ with $s_m,m>i$
+        similarly, $l_i'=d_i-\sum_{k=1}^{m}r_k<l_i<0$
+      Based on the induction of the above process, $S$ can't be modified to $S'$. $\blacksquare$
+  - see the ans
+    - "idle time" has no relation with the choice.
+    - the above definition of lateness is a bit wrong.
+- [ ] 42 3+7=10
+- [ ] 43 trivial
+- [ ] 46
+  - hinted by the ans
+    - $T_{j^*}\le t_{j^*}+\frac{1}{p}*\sum_{i=1}^{p}T_{i}\le L+L$
+- 
 
 ---
 
