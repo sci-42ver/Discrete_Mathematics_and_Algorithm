@@ -456,7 +456,25 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
     > *Every* problem in NP is *reducible* to $\scriptstyle C$ in polynomial time
     implies
     > if *any* of these problems can be *solved* by a polynomial worst-case time algorithm, then *all* problems in the class NP can be *solved* by polynomial worst-case time algorithms
-### number theory
+## 4
+### 4.1
+- Also see [csapp_doc] "modular_overflow" for relations between modular arithmetic and 2's complement.
+- THE [WELL-ORDERING](https://brilliant.org/wiki/the-well-ordering-principle/#:~:text=The%20well%2Dordering%20principle%20says,integers%20has%20a%20least%20element.) PROPERTY
+  - TODO [not well-ordered set](https://math.stackexchange.com/a/392861/1059606)
+  - EXAMPLE 5 in p385 uses induction to make $r\ge d$ become $r<d$.
+- > some of these operators are defined when m < 0, and even when m = 0
+  for python, `10%(-3)=-2`. While for C, it uses [`cdq;idiv   DWORD PTR [rbp-0x4]`](https://www.felixcloutier.com/x86/idiv#operation) to calculate resulting in `10%-3=1`.
+  - See the [list](https://en.wikipedia.org/wiki/Modulo#In_programming_languages) of these [differences](https://stackoverflow.com/a/3883019/21294350) and the python one is [used](https://stackoverflow.com/a/1907585/21294350) in the number theory.
+- > 17-sided regular polygon could be drawn using just a ruler and compass
+  how this is [related](https://crypto.stanford.edu/pbc/notes/numbertheory/17gon.html#:~:text=In%201796%2C%20a%20teenage%20Gauss,quadratic%20equations%20over%20the%20rationals.) with number theory?
+- [mathematical analysis](https://en.wikipedia.org/wiki/Mathematical_analysis#Main_branches)
+- > there is no multiplicative inverse of 2 modulo 6
+  [TODO](https://math.stackexchange.com/a/2670313/1059606)
+- TODO why define [Multiplicative group](https://math.stackexchange.com/a/135928/1059606)?
+- [Commutative ring](https://en.wikipedia.org/wiki/Commutative_ring#Definition_and_first_examples)
+  > To form a ring these two operations have to satisfy a number of properties: the ring has to be an abelian *group* under addition as well as a *monoid* under multiplication, where multiplication distributes over addition
+  where "abelian group" is group with [Commutativity](https://en.wikipedia.org/wiki/Abelian_group#Definition) and group is the monoid with [inverses](https://math.stackexchange.com/a/146902/1059606)
+## number theory
 - [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
@@ -489,6 +507,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - representation for [capital](https://www.overleaf.com/learn/latex/Mathematical_fonts) letters where both $\mathbb{P}$ and $\mathcal{P}$ are ok.
   [detailed](https://tex.stackexchange.com/a/58124)
 - frac in [big](https://tex.stackexchange.com/a/103358/308105) ceil
+- mod [without](https://tex.stackexchange.com/a/169946/308105) leading space
 ## katex
 - available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
 - set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
@@ -2366,7 +2385,61 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 46
   - hinted by the ans
     - $T_{j^*}\le t_{j^*}+\frac{1}{p}*\sum_{i=1}^{p}T_{i}\le L+L$
-- 
+## 4
+### 4.1
+- 2~6,
+  10,14~18,
+  26~36,
+  46~ skipped
+- [x] 3 trivially by $a\mid b\Rightarrow b=ak\Rightarrow bc=a*(ck)\Rightarrow a\mid bc$.
+- [x] 8 $a=6,b=2,c=3$
+- [ ] 12 similar to one exercise before
+  $a^2=2(2k-1),k\ge 1\Rightarrow a=2m\Rightarrow 2m^2=2k-1$ contradiction.
+  - see the ans
+    - use modular arithmetic.
+- [ ] 20 see the ans
+- [x] 21 $a\bmod m=k\Rightarrow a=k+mp,\text{ similarly, }b=k+mq\Rightarrow m\mid (a-b)=m(p-q)\quad\blacksquare$
+- [x] 22 suppose $b\bmod m=k$, then similar to 21.
+- [ ] 24 use the definition.
+  - see the ans
+- [x] 38
+  notice the order can't be changed.
+  $(a\bmod b)\bmod c=d\Rightarrow a=bk+m=bk+ck'+d\text{ here maybe }c\mid (bk+d)$
+  e.g. $(4\bmod 3)\bmod 4\neq (4\bmod 4)\bmod 3$
+  2. $(6^3\bmod 13)\ldots\Rightarrow 8^2\bmod 11=9$
+  3. similar for the following
+- [ ] 40 take negative and then use THEOREM 5. This is also ok.
+- [ ] 42 both are $kc,k=a\bmod m$
+  - see the ans
+    - better use their relation instead of separately operating on them.
+- [ ] 43
+  1. $c=0$
+  2. $c=0,d=m$
+  - see the ans
+    - b doesn't need the special 0 to construct the counterexample
+- [ ] 44 similar to 12.
+- [ ] 48
+  1. closure is trivial
+  2. $LHS=(a+b-mk+c)\bmod m\text{ while }RHS=(a+b+c-mp)\bmod m$, trivially, they are same.
+    $LHS=((ab-mk')*c)\bmod m=(abc-mk'c)\bmod m\text{ while }RHS=((bc-mp')*a)\bmod m=(abc-mp'a)\bmod m$, trivially, they are same.
+  3. Commutativity is trivial
+  4. Identity elements is trivial
+  5. Additive inverses is trivial
+  - see the ans
+    - Based on $\mathbf{Z}$.
+- [x] 49 see the above
+- [ ] 50
+  $LHS=(a*(b+c-mk))\bmod m=(a*b+a*c)\bmod m
+  \xRightarrow{\text{COROLLARY 2 with 3 modular arithmetic operations}}RHS$
+  - see the ans
+    - convert all into range $\mathbf{Z}$
+- [ ] 53
+  both not one-to-one
+  $f$ onto while $g$ doesn't.
+## 5
+### 5.2
+- [ ] 37
+- [ ] 
 
 ---
 
@@ -2395,3 +2468,5 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 [lec_13_Adversary_Arguments]:https://jeffe.cs.illinois.edu/teaching/algorithms/notes/13-adversary.pdf
 [Szwarcfiter_stable_marriage]:https://core.ac.uk/download/pdf/82429549.pdf
 [McVitie_stable_marriage]:./papers/McVitie_stable_marriage.pdf
+
+[csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
