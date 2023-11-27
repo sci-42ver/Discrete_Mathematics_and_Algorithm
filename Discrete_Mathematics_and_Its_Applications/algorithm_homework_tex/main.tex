@@ -266,10 +266,10 @@
 \SetKwProg{proc}{procedure}{\vspace{-5pt}}{}
 
 \newcommand{\myproc}[2]{\proc{\normalfont#1}{#2}}
-\SetKwFor{While}{while (}{)}{}
+\SetKwFor{While}{while (\vspace{4pt}}{)}{\vspace{4pt}}
 \SetKwFor{For}{for }{}{}
 % this doesn't suit for all cases
-% \SetKwIF{If}{ElseIf}{Else}{if}{then\vspace{0pt}}{\vspace{10pt}else if}{\vspace{10pt}else}{\vspace{10pt}endif}
+% \SetKwIF{If}{ElseIf}{Else}{if}{then\vspace{3pt}}{else if}{else}{\vspace{10pt}endif}
 \SetKw{Continue}{continue}
 \SetKw{Break}{break}
 \SetKw{And}{and}
@@ -322,6 +322,7 @@ boxrule=0pt,boxsep=0pt,breakable}
 
 \let\oldsim\sim
 \renewcommand{\sim}{\!\oldsim\!}
+\newcommand{\CondensedColon}{\colon\!}
 
 \begin{document}
 
@@ -1369,7 +1370,7 @@ boxrule=0pt,boxsep=0pt,breakable}
         \end{SpacingAlgorithm}
         \item \(2+\frac{[n-(1\text{ or }2)]*3}{2}=O(n),
         \text{with -2 taken when n is even}\)\\
-        Here I take odd comparison
+        Here I take ``n is odd" comparison
         in account in the first \(2\),
     \end{alphlist}
 
@@ -1404,7 +1405,7 @@ boxrule=0pt,boxsep=0pt,breakable}
 
     \addtocounter{todolisti}{16}
     \ModProcName{sum triple search}
-    \myrightitem \CapProcTargetName \AlgorithmRef\\
+    \mywrongitem \CapProcTargetName \AlgorithmRef\\
     Hinted by the ans.
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName(\(\{a_1, a_2,\ldots , a_n\}: \text{a list}\))}{}
@@ -1440,19 +1441,73 @@ boxrule=0pt,boxsep=0pt,breakable}
         \(L_k,k\in\{1,2,\ldots,p\}\coloneqq 0\mycmt{L_k\text{ is the processor } k \text{ load}}\)\\
         \(min\coloneqq 1\mycmt{min\text{ is the min processor load index}}\)\\
         \ForRange{i}{1}{n}{
-            \ForRange{j}{1}{p}{
-                \lIf{\(L_{min}>L_j\)}{
-                    \(min=j\)
-                }
+        \ForRange{j}{1}{p}{
+            \lIf{\(L_{min}>L_j\)}{
+                \(min=j\)
             }
-            \(L_{min}=L_{min}+t_i\)
+        }
+        \(L_{min}=L_{min}+t_i\)
         }
 
     \end{SpacingAlgorithm}
-    \ecc{
-        \item ``in order'' means \(1\colon\!n\) 
+    ``in order'' means \(1\colon\!n\)
         instead of \(t_1<t_2<\ldots<t_n\)
+\end{todolist}
+
+\section{4.2}
+\begin{todolist}[resume*,start=54]
+    \ModProcName{Cantor expansion}
+    \mywrongitem \CapProcTargetName \AlgorithmRef
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+        \myproc{\ProcTargetName(\(x: \text{number to be transformed}\))}{}
+        \(S\coloneqq\varnothing\mycmt{\text{expansion index list}}\)\\
+        \(quotient\coloneqq 1\mycmt{quotient\text{ is the division quotient}}\)\\
+        \(remainder=x\)\\
+        \While{\(remainder\neq 0\)}{
+            \(i\coloneqq 1\)\\
+            \While{\(quotient\neq 0\)}{
+                % https://tex.stackexchange.com/a/128498/308105
+                % \(quotient=\ensuremath{\frac{\displaystyle x}{\displaystyle i!}}\)
+                \(i=i+1\)\\
+                \(quotient=remainder/i!\)
+            }
+            \vspace{4pt}
+            append \(x-1\) to \(S\)\\
+            \(remainder=remainder-(x-1)!\)\\
+        }
+        \Return{\(S\)}
+    \end{SpacingAlgorithm}
+    \ecc{
+        \item better use \(a_{x-1}=\hcancel{1}\;quotient\) and use \(\lfloor\ldots\rfloor\) for \textbf{div}
+        \item similar to the ans, better iterate among \(1\CondensedColon x_0-1\)
+            after finding the first \(x\) which is \(x_0\).\\
+            More specifically, remove the outer while loop.
     }
+
+    % The Same in Binary https://www.cs.cornell.edu/~tomf/notes/cps104/twoscomp.html
+    \addtocounter{todolisti}{2}
+    \ModProcName{the difference of two binary expansions}
+    \mywrongitem \CapProcTargetName \AlgorithmRef
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+        \myproc{\ProcTargetName(\(a_{n-1}\ldots a_0,b_{n-1}\ldots b_0: \text{binary expansion of a,b in a-b}\))}{}
+        \(c_{n-1}\ldots c_0\mycmt{\text{result}}\)\\
+        \(carry,borrow\coloneqq 0\)\\
+        \ForRange{i}{0}{n-1}{
+            \If{\(a_i<b_i\)}{
+                \(c_i=2+a_i-b_i-borrow\)\\
+                \(borrow=1\)
+            }\Else{
+                \(c_i=a_i-b_i-borrow\)\\
+                \(borrow=0\)
+            }
+        }
+        \Return{\(S\)}
+    \end{SpacingAlgorithm}
+    \ecc{
+        \item should be \(a_i<b_i+borrow\)
+    }
+    \addtocounter{todolisti}{-1}
+    \mywrongitem based on 59, \(<4n\Rightarrow O(n)\)
 \end{todolist}
 
 % \newpage

@@ -474,6 +474,13 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - [Commutative ring](https://en.wikipedia.org/wiki/Commutative_ring#Definition_and_first_examples)
   > To form a ring these two operations have to satisfy a number of properties: the ring has to be an abelian *group* under addition as well as a *monoid* under multiplication, where multiplication distributes over addition
   where "abelian group" is group with [Commutativity](https://en.wikipedia.org/wiki/Abelian_group#Definition) and group is the monoid with [inverses](https://math.stackexchange.com/a/146902/1059606)
+### 4.2
+- p286 ALGORITHM 1
+  when $q=0$, $0|a_k\ldots$ is the final representation (here $|$ is one delimeter), so after 
+  $k=k+1$, we need $a_{k-1}\ldots$ to get the final representation.
+- p288 ALGORITHM 2 which uses $div$ and $\bmod$ has been said in COD which has one better algorithm and csapp.
+- EXAMPLE 9 uses the cache to avoid duplicate calculation of $a_j+b_j+c$
+- in 2019 after the book published in 2018, one better [algorithm](https://en.wikipedia.org/wiki/Multiplication_algorithm#Sch%C3%B6nhage%E2%80%93Strassen) to calculate multiply of n-bit numbers was devised.
 ## number theory
 - [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
@@ -508,6 +515,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   [detailed](https://tex.stackexchange.com/a/58124)
 - frac in [big](https://tex.stackexchange.com/a/103358/308105) ceil
 - mod [without](https://tex.stackexchange.com/a/169946/308105) leading space
+- [sum multiple-lines](https://tex.stackexchange.com/a/80461/308105)
 ## katex
 - available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
 - set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
@@ -2436,6 +2444,70 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 53
   both not one-to-one
   $f$ onto while $g$ doesn't.
+### 4.2
+- 2~12,
+  13~16,
+  18~24,
+  28,34~42,
+  46~52 (even number),
+  54,56~6 skipped because of triviality.
+- [x] 26
+  - see the ans
+    - ["reduced modulo"](https://stackoverflow.com/a/9103961/21294350)
+- [x] 30 
+  let $2*3^k=3^{k+1}-2^k$
+  1. $5=3+2(12_{3})=2\;-1_{3}=1\;-1\;-1_{3}=9-3-1$
+- [ ] 32
+  - hinted by the ans
+    - $x\bmod 11=\sum\limits_{\substack{i=1\\i\text{ is odd}}}^{n}x_i*10^i+\sum\limits_{\substack{i=1\\i\text{ is even}}}^{n}x_i*10^i\bmod 11=\sum\limits_{\substack{i=1\\i\text{ is odd}}}^{n}x_i\bmod 11*(-1)+\sum\limits_{\substack{i=1\\i\text{ is even}}}^{n}x_i\bmod 11*(1)\bmod 11\;\blacksquare$
+- [ ] 44
+  Need [carry of 1](https://en.wikipedia.org/wiki/Ones%27_complement#Negative_zero) when adding one negative number.
+  i.e. overflow [back](https://en.wikipedia.org/wiki/Signed_number_representations#Ones'_complement) to the end
+- [ ] 45
+  by using carry from 44.
+  - see the ans
+    - > subtracting −m from 111 … 1 because subtracting a bit from 1 is the same as complementing it
+      ~~because $-m+m=1\ldots 1$ when using 1's complement.~~
+- [ ] 49
+  > However, the answer is invalid if an overflow has occurred
+  because of [overflow](https://stackoverflow.com/a/32960835/21294350) where borrow is similar to [this "The Same in Binary"](https://www.cs.cornell.edu/~tomf/notes/cps104/twoscomp.html) which is trivial.
+```bash
+    1
+  0010
+- 0001
+------
+  0001
+```
+- [x] 51 trivial based on $2^{n−1} − |x|$.
+- [ ] 61
+  - see the ans
+    - here we don't need to check the remaining bits when $a_k=b_k$, because if the remaining are not same, then while loop should not stop at $k$
+- [ ] 62 $O(n\log{n})$
+  - see the ans
+    - it doesn't take $k$ in account.
+    - ~~$n+1$ is based on cache usage.~~
+- [ ] 64
+  trivially $0\le power<m$ based on $\bmod$ definition.
+  here we only cares about the for loop, loop count is $k=\lceil\log{n}\rceil$
+  and the block is less than 2 $(power\cdot power)\bmod m$
+  - then multiplication: $<2*(\log{power})^2<2*(\log{m})^2$
+  - $\bmod$ based on 65: $=O((power^2\;div\;m)\log{power^2})<O((m^2\;div\;m)\log{power})$ TODO this is wrong
+    big-O [can be compared](https://stackoverflow.com/a/11940881/21294350)
+  - see the ans
+    - > consists of multiplying two integers, each at most log m bits long
+      based on EXAMPLE 11, complexity is $O((\log{m})^2)$.
+    - > followed by a division by m, which is also log m bits long.
+      based on ALGORITHM 4, see above "based on 65" this may be $O(m\log{m})\neq O((\log{m})^2)$.
+  - Based on wikipedia, it doesn't care about $\log{m}$ when $\log{n}$ is the target variable.
+    - And its [reference p346](https://mrajacse.files.wordpress.com/2012/01/applied-cryptography-2nd-ed-b-schneier.pdf) doesn't assert the overflow check
+      the reference use `fast_exp(x,y,n)` to return $(x^y)\bmod n$
+      `y&amp1`: I guess that it checks whether the least bit is 1. Then the following is trivial based on the 2nd statement in COROLLARY 2.
+      - the check is due to the code [assignment restriction](https://stackoverflow.com/a/27175175/21294350) based on variable type referenced in [this](https://stackoverflow.com/questions/62368211/what-does-it-mean-to-not-overflow-in-this-psuedocode-assert-modulus-1#comment110303632_62368317).
+- [ ] 65
+  if we are only to prove $O(q\log{a})$,
+  obviously there are $q$ while loop and each loop $r-d$ uses maximum $\lceil\log{a}\rceil$ bit operations
+  since $q=a\;div\;d<a$, so $q-1$ is also the above case
+  then bit operation count $c<2*q*\log{a}+C(C\text{ corresponds to the ending if})\;\blacksquare$
 ## 5
 ### 5.2
 - [ ] 37
