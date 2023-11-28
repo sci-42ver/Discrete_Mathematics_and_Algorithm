@@ -481,6 +481,13 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - p288 ALGORITHM 2 which uses $div$ and $\bmod$ has been said in COD which has one better algorithm and csapp.
 - EXAMPLE 9 uses the cache to avoid duplicate calculation of $a_j+b_j+c$
 - in 2019 after the book published in 2018, one better [algorithm](https://en.wikipedia.org/wiki/Multiplication_algorithm#Sch%C3%B6nhage%E2%80%93Strassen) to calculate multiply of n-bit numbers was devised.
+### 4.3
+- Yitang Zhang's [career](https://en.wikipedia.org/wiki/Yitang_Zhang#Career) is a bit hard when after PHD he can't find one job because of maybe failure of the PHD paper.
+- > Any two prime numbers are relatively prime to each other
+  relatively prime [relation](https://www.splashlearn.com/math-vocabulary/relatively-prime#:~:text=Example%3A%20(2%2C%203),prime%20numbers%20will%20be%201.) with prime
+- extended Euclidean algorithm [proof](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm#Proof) by "follows by induction".
+## 5
+- [weak induction](https://www.cs.cornell.edu/courses/cs2800/2015fa/lectures/lec18-euclid.html)
 ## number theory
 - [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
@@ -516,6 +523,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - frac in [big](https://tex.stackexchange.com/a/103358/308105) ceil
 - mod [without](https://tex.stackexchange.com/a/169946/308105) leading space
 - [sum multiple-lines](https://tex.stackexchange.com/a/80461/308105)
+- [bmod -> binary mod](https://tex.stackexchange.com/a/42872/308105)
 ## katex
 - available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
 - set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
@@ -2508,6 +2516,85 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   obviously there are $q$ while loop and each loop $r-d$ uses maximum $\lceil\log{a}\rceil$ bit operations
   since $q=a\;div\;d<a$, so $q-1$ is also the above case
   then bit operation count $c<2*q*\log{a}+C(C\text{ corresponds to the ending if})\;\blacksquare$
+### 4.3
+- 4,8,12,16,20,26~30,
+  38~44 skipped
+- [x] 2 similar to example 3, try `[107%b for b in [2,3,5,7]]==[0]*4` in python
+- [ ] 6
+  - see the ans
+- [ ] 9 the problem is not same as the ans one. It is probably 19.
+- [ ] 10
+  - see the ans
+    - here "t is odd" is to ensure $+1$ ending.
+    - here $t=1$ also applies for $m=2^n$.
+- [ ] 11 $3^q=2^p,\text{where p,q are relatively prime}$ contradiction.
+  - see the ans
+    - > This violates the fundamental theorem of arithmetic
+      because the factorization is not unique.
+- [x] 13 $3,5,7$
+- [ ] 14 notice $1$ should be contained.
+- [ ] 18
+  $\overbrace{1+2^p-1}^{\text{factor of }2^p-1}+\overbrace{2+\ldots+2^{p-1}}^{\text{factor of }2^{p-1}\text{ after excluding duplicate ones}}+\overbrace{(2^p-1)*(2+\ldots+2^{p-1})}^{\text{combine two}}=2*(2^p-1)+(2^p-1)*(2^p-2)=(2^p-1)*2^p$
+  - see the ans
+    - should minus self from the above.
+- [ ] 22
+  1. if: 
+    obviously divisors of $n$ must be less than $n$.
+    then $\varPhi(n) = n − 1$ implies all $0<k<n$ are relatively prime to n.
+  2. only if similar to above.
+  - see the ans
+    - "conversely ..." doesn't prove the theorem.
+- [ ] 24 notice e -> 5;
+- [x] 31
+  by definition of "gcd,lcm", $(a,b)=(max(a,b),min(a,b))\text{ or }(min(a,b),max(a,b))$
+- [x] 32
+  $\gcd(a,b)=\gcd(b,a\bmod b)\ldots$
+- [x] 34 here $2,1,0,end$ with 0,end added, there are 8 divisions. 
+- [ ] 36 see the ans
+- [x] 37
+  $\gcd(2^a-1,2^b-1)=\gcd(2^b-1,2^{a\bmod b}-1)\ldots$
+  then obviously then exponent pair is $(a,b),(b,c=a\bmod b),(c,d=b\bmod c)$ which is just the 
+  $\gcd$ process. $\blacksquare$
+- [ ] 45
+  at the last step, here assume $y'$, etc, are values after the second to last step and 
+  $y_l$, etc, are values at the last step.
+  $x'=q_ly'(=r'=\gcd(x,y))+r_l(=0)$
+  so the corresponding $s,t$ of $\gcd(x,y)$ are also 
+  $s',t'$, i.e. $olds,oldt$ in $s \coloneqq oldolds − q ⋅ olds$ and they are equal to $oldolds,oldoldt$ after $oldolds\coloneqq olds$
+- [ ] 46
+  - see the ans
+- [ ] 48
+  1. $a_i=\text{the biggest element}\le i$
+  f. square of the prime 
+  - see the ans
+    - the a is a bit wrong
+- [x] 50 both equals $\gcd(m,a\bmod m)$
+  - see the ans
+    - it uses the definition which is also ok.
+- [ ] 51 see [this](https://math.stackexchange.com/a/865346/1059606) based on 
+  $f(n)=(n-a)^2+b\Rightarrow f(k+f(k))-f(k)=f(k)(2k+f(k))\Rightarrow f(k)\mid f(k+f(k))$
+- [ ] 52 similar to THEOREM 3 proof, since $p_{1\ldots n}\nmid (\Pi p_{i}+1)$, then prime factorization can be only itself and 1.
+  - The above is wrong. See the ans
+- [ ] 54 see the ans
+- [ ] 55 it should be $(4k+1)(4k+3)=4*m+3$
+- [ ] 56
+  here $f(p,q)=10*10^{d_q}+q+p*10^{d_q+1},\text{where }d_q\text{ is the digit number of the decimal representation of q}$.
+- [x] 57
+  1. one-to-one:
+    $$
+    \begin{align*}
+      &K(m'/n')=K(m/n)\\
+      \xRightarrow{\gcd(m,n)=1\Rightarrow p_i\neq q_k}&a_i=a_i',b_i=b_i',p_i=p_i',q_i=q_i'\\
+      \Rightarrow& m'=m,n=n'\tag*{$\blacksquare$}
+    \end{align*}
+    $$
+  2. onto trivial based on the unique prime factorization.
+  - see the ans
+    - "exactly one positive" is more elegant which proves one-to-one correspondance at one time
+      which is just the above "onto" but emphasizes "unique".
+### supplementary 
+- [ ] 23
+- [ ] 21
 ## 5
 ### 5.2
 - [ ] 37

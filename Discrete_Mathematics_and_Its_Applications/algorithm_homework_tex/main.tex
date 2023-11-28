@@ -242,6 +242,14 @@
 \ExplSyntaxOff
 \listenvironments{itemize,enumerate,todolist}
 
+% global \renewcommand https://tex.stackexchange.com/a/51750/308105
+\makeatletter
+\def\gnewcommand{\g@star@or@long\new@command}
+\def\grenewcommand{\g@star@or@long\renew@command}
+\def\g@star@or@long#1{% 
+  \@ifstar{\let\l@ngrel@x\global#1}{\def\l@ngrel@x{\long\global}#1}}
+\makeatother
+
 \newcommand{\ModProcNameAndLabelSuffix}[2]{
     \renewcommand{\ProcTargetName}{\textit{#1}}
     \renewcommand{\NormalProcTargetName}{#1}
@@ -1456,7 +1464,7 @@ boxrule=0pt,boxsep=0pt,breakable}
 
 \section{4.2}
 \begin{todolist}[resume*,start=54]
-    \ModProcName{Cantor expansion}
+    \ModProcNameAndLabelSuffix{Cantor expansion}{-4-2}
     \mywrongitem \CapProcTargetName \AlgorithmRef
     \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
         \myproc{\ProcTargetName(\(x: \text{number to be transformed}\))}{}
@@ -1510,6 +1518,31 @@ boxrule=0pt,boxsep=0pt,breakable}
     \mywrongitem based on 59, \(<4n\Rightarrow O(n)\)
 \end{todolist}
 
-% \newpage
+\section{4.3}
+\begin{todolist}[resume*,start=7]
+    % example 4
+    \ModProcNameAndLabelSuffix{prime factorization}{-4-3}
+    \mywrongitem \CapProcTargetName \AlgorithmRef
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+        \myproc{\ProcTargetName(\(x: \text{number to be factorized}\))}{}
+        \(dividend\coloneqq 2\)\\
+        \(i\coloneqq 1\)\\
+        \While{\(x\text{ is not prime}\)}{
+            \While{\(dividend\nmid x\)}{
+                \(\text{let }dividend\text{ equals the next prime}\)\\
+            }
+            \vspace{2pt}
+            \(a_i=dividend\)\\
+            \(x=x/dividend\)\\
+            \(i=i+1\)
+        }
+        \Return{\(\{a_i\}\)}
+    \end{SpacingAlgorithm}
+    \begin{enumerate}
+        \item the ans just iterate by step 1 with \(dividend\)
+        \item better use \(\bmod\) to indicate "not divide"
+        \item the ans stops when \(x=1\) although it is longer.
+    \end{enumerate}
+\end{todolist}
 
 \end{document}
