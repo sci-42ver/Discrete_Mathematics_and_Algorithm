@@ -486,6 +486,18 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - > Any two prime numbers are relatively prime to each other
   relatively prime [relation](https://www.splashlearn.com/math-vocabulary/relatively-prime#:~:text=Example%3A%20(2%2C%203),prime%20numbers%20will%20be%201.) with prime
 - extended Euclidean algorithm [proof](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm#Proof) by "follows by induction".
+### 4.4
+- a modulo n, i.e. $a\bmod n$
+- > $t \equiv 5 (mod 6)$ (as the reader should verify).
+  see EXAMPLE 1
+  $6=1*5+1\Rightarrow -1*5+6=1\Rightarrow -1*5\equiv 1\pmod 6$
+  - similarly
+    $30u + 26 \equiv 3 (mod 7) \Rightarrow 6u\equiv 1\pmod 7\xRightarrow{similar to above} -1*6\equiv 1\pmod 7$
+- example 8 is based on 4.1 COROLLARY 2.
+- >  they were *incorrect* in concluding that n is necessarily prime if the congruence holds
+  this doesn't mean the congruence is necessary condition for that n is prime
+  i.e. n is odd prime -> congruence. This is correct.
+- THEOREM 1 [iff proof](https://math.stackexchange.com/a/2670313/1059606) based on the Bezout's theorem.
 ## 5
 - [weak induction](https://www.cs.cornell.edu/courses/cs2800/2015fa/lectures/lec18-euclid.html)
 ## number theory
@@ -2592,6 +2604,126 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - see the ans
     - "exactly one positive" is more elegant which proves one-to-one correspondance at one time
       which is just the above "onto" but emphasizes "unique".
+### 4.4
+- 2~4,
+  10~12,
+  24,32~38,
+  54 skipped
+- [x] 6 we can also use the extended version.
+- [x] 7 trivial after hinted
+- [ ] 8 see the ans
+- [ ] 14 see the ans: notice 11 simplies the problem.
+- [ ] 15,17,18,26,42~44 see the ans
+- [x] 16
+  1. $(5,9),(7,8),(2,6),(3,4)$
+  2. i.e. $10\equiv -1\pmod 11$
+- [ ] 19
+  1. if two are congruent, then $i*a\equiv 0\pmod p\xRightarrow{i\text{ and }p\text{ are relatively prime, which is 4.3 lemma 2}}a\equiv 0\pmod p$ contradiction
+  2. 3
+  3. "p does not divide (p − 1)!" this is trivial based on Lemma 3
+    then since p is prime, so $\gcd(p,(p-1)!)=1\Rightarrow a^{p−1} \equiv 1 \pmod p$
+  4. trivial by multiplication.
+  - see the ans
+    - b is based on $p-1$ possibilities to prove existence.
+    - d is $\forall$
+      $p\mid a\Rightarrow a\equiv 0\pmod p$
+    - same as [this](https://en.wikipedia.org/wiki/Proofs_of_Fermat%27s_little_theorem#Proof_as_a_particular_case_of_Euler's_theorem)
+- [ ] 20
+  $$
+  \begin{align*}
+    4*5*(-1)\equiv 1\pmod 3\\
+    15*(-1)\equiv 1\pmod 4\\
+    12\equiv 2\pmod 5\Rightarrow 12*3\equiv 1\pmod 5\\
+    -20*2+(-15)+3*36=53
+  \end{align*}  
+  $$
+  - see the ans
+    - better explicitly show the condition of the theorem is met
+- [x] 22
+  $$
+  6t\equiv 1\pmod 7\\
+  \Rightarrow t=7u+6\\
+  \Rightarrow x=6(7u+6)+3=42u+39
+  $$
+- [ ] 28
+  ~~Use general functional $f:S(n\text{ modular equations})\to T(n\text{-tuple})$~~
+  ~~obviously this is one-to-one from the Chinese remainder theorem. If not, then $\exists k,t\in \mathbf{Z}_{m},k\neq t\xRightarrow{\text{based on the equation system}}k\equiv t\pmod m$~~
+  ~~onto is also trivial by just doing the ~~
+  if not unique, i.e. there are two n-tuples corresponding to $a$, then $\exists m_i,a\equiv t_1,t_2\pmod m_i$ contradiction.
+  - see the ans
+    - the ans may be wrong
+      because "The Chinese remainder theorem" says $n\text{-tuple}\to\text{unique }a$ but not $\text{unique }n\text{-tuple}\leftarrow a$
+- [ ] 29 by contradiction. 
+  $$
+  a=k_im_i+b\text{ contradicts with }a=km+t,t\neq b\\
+  \begin{align*}
+    &t\neq b\\
+    \Rightarrow&t=k_i'm_i+b\equiv b\pmod m_k,k\neq i\\
+    \xRightarrow{m_k|k_i'm_i,\gcd(m_i,m_j)=1\xRightarrow{\text{4.3 lemma 2}}m_k|k_i'.
+    \text{ Use this for all }k\neq i\text{ and based on relatively prime with 4.3 lemma 3}}&\Pi_{k\neq i}m_k|k_i'\\
+    \Rightarrow& k_i'=p*\Pi_{k\neq i}m_k\\
+    \Rightarrow& t>m\text{ contradiction} \tag*{$\blacksquare$}
+  \end{align*}
+  $$
+  - see the ans
+    - ~~TODO $p\mid (a-b)\nRightarrow p*\ldots\mid(a-b)$~~
+      It uses induction to show $\forall p_{ik}|m_i\Rightarrow p_{ik}|(a-b)\Rightarrow \Pi m_i=\Pi_{\text{all }i,k}p_{ik}|(a-b)$
+    - Also see [this](https://math.stackexchange.com/a/289346/1059606) which also uses induction where $a,b=m_i,m_{i+1}$.
+- [x] 30 based on 29, this is trivial to prove $x\equiv y\pmod m$, so unique.
+- [x] 37 trivial
+- [ ] 40
+  $7\mid (n^7-n)$ is trivial
+  - see the ans
+    - use $2\mid\ldots$ as the basis.
+- [ ] 41
+  equivalent to prove $2p\mid 2^p-1-1=2kp$ where $2\mid$ is trivial and $p$ is based on the Fermat’s little theorem.
+  - see the ans
+    - The above proves the converse proposition.
+- [x] 46
+use [this](https://stackoverflow.com/a/22808285/21294350) to calculate the prime factorization of $1729$
+similar to EXAMPLE 11.
+$$
+b^6\equiv 1\pmod 7\\
+b^12\equiv 1\pmod 13\\
+b^18\equiv 1\pmod 19\\
+$$
+```python
+[ins] In [6]: x=1
+         ...: quotients=[]
+         ...: for i in prime_factors(1729): quotients.append(1728/(i-1))
+         ...: quotients
+Out[6]: [288.0, 144.0, 96.0]
+```
+- [x] 48 same as 46 but more general.
+- [x] 49 trivial after computation
+- [ ] 50 see the ans better to use the table for- calculation.
+- [x] 52 similar to EXAMPLE 8.
+- [x] 53 just as the usual cases to calculate with the Chinese remainder theorem.
+- [ ] 56
+  - see the ans
+    - here is due to $r^i\equiv r^{i+p-1}\bmod (p-1)$
+    - here log is not the discrete logarithm.
+- [ ] 58
+  - here $3^2\equiv 2\pmod 7$ can't use the same method as exercise 17 because $\sqrt{2}$ is not one integer.
+  - $16>11,25>22,36>33$ so at least $5,3$ are.
+  - see the ans
+    - since $x\equiv k\pmod 11\xRightarrow{decides}x^2\ldots$, so we only need to care about $1\sim 10$
+- [ ] 59
+  see the ans use "at least" and "at most" to prove.
+- [ ] 60
+  based on 58, only care about $1\sim \frac{p-1}{2}$
+  then if $i^2\equiv j^2\pmod p,i\neq j\Rightarrow (i+j)\equiv 0\pmod p$ contradiction.
+- [ ] 62 use the "Fermat's little theorem"
+  $a^{p-1}\equiv 1\pmod p\Rightarrow (a^{\frac{p-1}{2}}-1)(a^{\frac{p-1}{2}}+1)\pmod p$
+  - see the ans
+    - the above doesn't show that both sides take one of $\pm 1$ at the same time.
+    - here "group" is due to $i*j\equiv i'*j\pmod p,i\neq i'\Rightarrow (i-i')*j\equiv 0\pmod p$ contradiction.
+- [ ] 64
+  1. $\equiv (-1)^{2n}\pmod p$
+  2. $\equiv (-1)^{2n+1}\pmod p\equiv -1\pmod p$
+- [ ] 66
+  ~~3*3=9~~ $2^3=8$ combination choices
+  $(x-4)(x+4)\equiv 0\bmod (3\text{ or }5\text{ or }7)$
 ### supplementary 
 - [ ] 23
 - [ ] 21
