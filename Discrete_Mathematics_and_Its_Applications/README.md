@@ -2724,6 +2724,23 @@ Out[6]: [288.0, 144.0, 96.0]
 - [ ] 66
   ~~3*3=9~~ $2^3=8$ combination choices
   $(x-4)(x+4)\equiv 0\bmod (3\text{ or }5\text{ or }7)$
+### 4.5
+- 2~24 skipped
+- [ ] 26
+  - see the ans
+    - use "relatively prime" to prove $\not\equiv$
+- [ ] 27
+  when not same odd or even, it can be checked.
+  when one odd and one even, $-2(x_{odd}-x_{even})$, so 
+  $5\nmid (x_{odd}-x_{even})$.
+- [x] 30 similar to 22
+- [x] 31 similar to 31
+  $$
+  9*10^{j-1}(a_j-a_{j-1})\text{ when }j,j-1
+  \text{th items are swapped with 0th is the rightmost digit of the 14-digit number}
+  $$
+- [x] 34
+  $ij\not\equiv 0\pmod 11\text{ when }11\nmid\text{both }i,j$
 ### supplementary 
 - [ ] 23
 - [ ] 21
