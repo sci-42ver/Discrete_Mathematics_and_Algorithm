@@ -498,6 +498,46 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   this doesn't mean the congruence is necessary condition for that n is prime
   i.e. n is odd prime -> congruence. This is correct.
 - THEOREM 1 [iff proof](https://math.stackexchange.com/a/2670313/1059606) based on the Bezout's theorem.
+### 4.6
+- > $f(p)=(ap+b)mod\;m$ is bijective if and only if $gcd(a,m)=1$
+
+  based on [this](https://math.stackexchange.com/a/2034684/1059606)
+  we prove $(ap)\mod m$ is bijective. ~~Based on this [description](https://math.stackexchange.com/q/4817093/1059606) of the comment,~~
+  ~~since both the domain and the codomain are $\mathbf{Z}_m$, so onto is equivalent to one-to-one, then in turn equivalent to bijective, so it is enough to prove only injective.~~
+  ~~Then by contradiction, $ap_1\equiv ap_2\pmod m,p_1\neq p_2\Rightarrow a(p_1-p_2)\equiv 0\pmod m\xRightarrow{p_1-p_2\nmid m}a\equiv $~~
+  See [this](https://math.stackexchange.com/review/suggested-edits/2044757)
+  $$
+  \begin{align}
+  &ax\equiv 0\,\xRightarrow{\text{has only one solution}}\, x\equiv 0\\
+  \iff&\gcd(m,a)=1(\text{otherwise there are one solution}x=m/\gcd(m,a))
+  \end{align}
+  $$
+- p335 affine transformation is one [linear](https://math.stackexchange.com/a/1059233/1059606) transformation
+- permutation is one-to-one because its inverse can't be one-to-mul.
+- Euler's totient function [proof](https://en.wikipedia.org/wiki/Euler%27s_totient_function#Proof_of_Euler's_product_formula)
+  - [basis](https://en.wikipedia.org/wiki/Euler%27s_totient_function#Phi_is_a_multiplicative_function)
+    based on the ~~book~~ [SOLUTIONS_8th] p111 table for Chinese remainder theorem ->  bijection.
+    $f:(a,b)\text{with }a\equiv a\pmod m,b\equiv b\pmod n\to k\equiv k\pmod mn$
+  - TODO use inclusion-exclusion principle.
+  - so in RSA, coprime probability is [higher](https://crypto.stackexchange.com/a/25649).
+    [~~TODO~~ $P^{\varPhi(N)}\equiv 1\pmod N$](https://crypto.stackexchange.com/questions/25648/how-do-we-guarantee-plaintext-is-coprime-in-rsa#comment58896_25648) (i.e. [${\displaystyle (m^{e})^{d}\equiv m{\pmod {pq}}}$](https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Proof_using_Fermat's_little_theorem)) also [see](https://crypto.stackexchange.com/a/1006)
+- RSA
+  - ~~TODO~~ [$\gcd(m,N)=1$](https://crypto.stackexchange.com/a/58182)
+    > either p  and q , and so that rather *leaks* the factorization of N
+  - why p339 $\gcd(e,(p-1)(q-1))=1$
+    see [this](https://en.wikipedia.org/wiki/RSA_(cryptosystem)#cite_note-24) because if the above condition is met, then we can use the **decryption** easily.
+    - TODO also [this](https://math.stackexchange.com/questions/1123180/understanding-why-the-public-exponent-e-is-chosen-the-way-it-is-in-rsa#comment2294881_1123643)
+      where "an element x of order r" implies [$x^r=x^0=1$](https://en.wikipedia.org/wiki/Cyclic_group#Definition_and_notation) <a id="RSA_Cauchy_theorem"></a>
+      It shows if the above condition is not met, then **one-to-mul decryption**.
+    - here $m\equiv 0\pmod p$ is the cases where $\gcd(m,p)=1$ doesn't hold. <a id="RSA_m_not_coprime_n"></a>
+  - $2525$ is to ensure [injective](https://math.stackexchange.com/a/1148743/1059606) which can be decrypted.
+- p341 although in [Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm#Description), $a<b$, i.e. here $d<(p − 1)(q − 1)$, but in the practical case, it may be not that case.
+- EXAMPLE 11
+  multiplication->encryption is same as encryption->multiplication.
+- cryptographic program [obfuscation](https://en.wikipedia.org/wiki/Obfuscation_(software)) schemes
+- cryptographic multilinear map is one [special multilinear function](https://en.wikipedia.org/wiki/Cryptographic_multilinear_map#Definition).
+- [verifiable](https://en.wikipedia.org/wiki/Verifiable_computing#Motivation_and_overview) computation
+  > with the client being able to verify the proof with *significantly less* computational effort
 ## 5
 - [weak induction](https://www.cs.cornell.edu/courses/cs2800/2015fa/lectures/lec18-euclid.html)
 ## number theory
@@ -2725,7 +2765,8 @@ Out[6]: [288.0, 144.0, 96.0]
   ~~3*3=9~~ $2^3=8$ combination choices
   $(x-4)(x+4)\equiv 0\bmod (3\text{ or }5\text{ or }7)$
 ### 4.5
-- 2~24 skipped
+- 2~24
+  28,32 skipped
 - [ ] 26
   - see the ans
     - use "relatively prime" to prove $\not\equiv$
@@ -2741,6 +2782,49 @@ Out[6]: [288.0, 144.0, 96.0]
   $$
 - [x] 34
   $ij\not\equiv 0\pmod 11\text{ when }11\nmid\text{both }i,j$
+### 4.6
+- 4,10,16~20,
+  24 skipped
+- [x] 2
+```python
+# https://stackoverflow.com/a/5927160/21294350
+string.ascii_letters[string.ascii_lowercase.index('s')+4]
+```
+- [x] 6 see p336 for the frequency list
+- [x] 8
+```python
+str="DVE CFMV KF NFEUVI,REU KYRK ZJ KYV JVVU FW JTZVETV"
+max=1
+index=0
+for i in range(25):
+    if max < str.count(string.ascii_uppercase[i]):
+        max=str.count(string.ascii_uppercase[i])
+        index=i
+print(string.ascii_uppercase[index],index,max)
+```
+- [ ] 12
+  $\frac{p-b}{a}\equiv(ap+b)\pmod 26\Rightarrow(a+1)[(a-1)p+b]\equiv 0\pmod 26\Rightarrow a=25$
+  - see the ans
+    - the above $\frac{1}{a}$ is wrong, 
+      (TODO after abstract algebra) maybe with abstract algebra, this is right. 
+    - > two different pairs (a,b) cannot give the same encryption function
+      $\forall p,(a_1-a_2)p+(b_1-b_2)\equiv 0\pmod 26$ contradiction.
+- [ ] 14
+  $\mathcal{P,C}$,etc are same as RSA.
+- [ ] 22 for each $i$th ($0\le i<m$) calculate related frequency $f_{iK}$ of each character 
+  $K$ and then $f(K)=\sum f_{iK}$
+  - see the ans
+    - show "key string" instead of the "long string".
+- [ ] 23 see the ans
+- [x] 26 [Modular multiplicative inverse](https://stackoverflow.com/a/9758173/21294350)
+  [CAS](https://en.wikipedia.org/wiki/Computer_algebra_system)
+- [x] 28 see [this](#RSA_m_not_coprime_n)
+- [x] 30 TODO [Finding primitive roots](https://en.wikipedia.org/wiki/Primitive_root_modulo_n#Finding_primitive_roots) [also](https://brilliant.org/wiki/primitive-roots/#finding-primitive-roots)
+- [ ] 32
+  encrypt with Alice's private and then Bob’s public.
+- [ ] 34
+  - TODO reasons of choices related with $\gcd$ by Paillier cryptosystem.
+    here the 2nd is to ensure [inverse](https://en.wikipedia.org/wiki/Paillier_cryptosystem#Key_generation)
 ### supplementary 
 - [ ] 23
 - [ ] 21
@@ -2748,6 +2832,9 @@ Out[6]: [288.0, 144.0, 96.0]
 ### 5.2
 - [ ] 37
 - [ ] 
+
+# TODO after abstract algebra
+- [this](#RSA_Cauchy_theorem)
 
 ---
 
