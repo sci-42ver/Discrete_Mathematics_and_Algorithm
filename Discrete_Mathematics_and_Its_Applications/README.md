@@ -2825,9 +2825,93 @@ print(string.ascii_uppercase[index],index,max)
 - [ ] 34
   - TODO reasons of choices related with $\gcd$ by Paillier cryptosystem.
     here the 2nd is to ensure [inverse](https://en.wikipedia.org/wiki/Paillier_cryptosystem#Key_generation)
-### supplementary 
+### supplementary
+- 2,8,12,42~44,48 skipped
+- [ ] 4
+  $$
+  q=\frac{a}{d}+\frac{r}{d}\in(\frac{a}{d}-\frac{1}{2},\frac{a}{d}+\frac{1}{2}]\\
+  \Rightarrow q=\lceil\frac{a}{d}-\frac{1}{2}\rceil
+  $$
+  - by induction is also ok
+    i.e. 
+    $$
+    q=0\Rightarrow a\in(-\frac{d}{2},\frac{d}{2}]\\
+    q=1\Rightarrow a\in(\frac{d}{2},\frac{3d}{2}]\\
+    \ldots
+    $$
+- [ ] 5
+  $$
+  ac-bc=m*k\\
+  \Rightarrow (a-b)*p*d=d*\frac{m}{d}*k\\
+  \xRightarrow{p\nmid }
+  $$
+  - see the ans
+    - it uses $(a-b)\in\mathbf{Z}\Rightarrow\frac{k}{p}\in\mathbf{Z}$ $\blacksquare$
+    - $e\nmid m\Rightarrow e\nmid\frac{m}{d}$
+- [ ] 6,10,14~16,19,20~22,32,40 see the ans
+- [ ] 18 direct proof: n,1 are enough to show prime.
+- [ ] 21 see the ans
+  > one of which is necessarily 2
+  because the sum of 2 primes must be even.
 - [ ] 23
-- [ ] 21
+  assume no composite (i.e. the opposite of the conclusion) we need to induct to the contradiction.
+  $$
+  (x_0+kp)^k=x_0^k+kp*F(k)\\
+  \xRightarrow{\substack{p\mid f(x_0)=\sum_{i=1}^{n}(a_k*x_0^k)+a_0\\\\ p\mid kp*\sum_{k=1}^n F(k)}} p\mid\sum_{i=1}^{n}[a_k(x_0+kp)^k]+a_0
+  $$
+  - see the ans
+    - we must show that $\sum_{k=1}^n F(k)$ is not always 0 based on "takes on each value at most n times."
+- [ ] 24 similar to one exercise or example before.
+  2: 50
+  4: 25
+  8: 12
+  16: 6
+  32: 3
+  64: 1
+  so 97
+- [ ] 26 TODO it should only divide 10 times when break after the remainder is 0.
+```python
+# https://stackoverflow.com/a/21608837/21294350
+a = int(input("What's the first number? "))
+b = int(input("What's the second number? "))
+i=0
+while 1:
+    i=i+1
+    r=a%b
+    if not r:
+        break
+    a=b
+    b=r
+    print(a,b,i)
+```
+- [ ] 28
+  - a
+  1. trivial
+  2. bring the already known common divisor "2" out, and combine later
+  3. similar to above, exclude 2 beforehand.
+  4. $\gcd(a − b, b)\mid (a-b),b\Rightarrow\gcd(a − b, b)\mid [(a-b)+b=a]$
+  - b
+  comparisons: 4 cases
+  $a/2$ -> shift
+    - see the ans
+  - c
+- [ ] 30 $Q$ is not the same form.
+  see the ans
+- [x] 34 use different common divisors pair by pair
+  e.g. $2*7*13,2*3*11,3*7*11,5*11*13$
+- [x] 35 at least 1.
+- [x] 36 $\bmod 3$ has 2 possibilities.
+- [ ] 38
+  1. only if: $x\equiv a_1\bmod(\gcd(m_1,m_2))\wedge x\equiv a_2\bmod(\gcd(m_1,m_2))\Rightarrow a_2\equiv a_1\bmod(\gcd(m_1,m_2))$
+    if: $\frac{m_1}{\gcd(m_1,m_2)}=\Pi m_{1k}$ and 
+      $\frac{m_2}{\gcd(m_1,m_2)}=\Pi m_{2j}$ are obviously relatively prime.
+      Then based on the above $x\equiv a_1\bmod(\gcd(m_1,m_2))$
+      valid system is constructed.
+  2. based on the above "if", trivial.
+    - see the ans which doesn't use "Chinese remainder theorem".
+- [ ] 46
+  $-4(d_2-d_1)\not\equiv 0\pmod 10\Rightarrow (d_2-d_1)\not\equiv 5\pmod 10$
+  $-2(d_1-d_3)$ and the rest are similar.
 ## 5
 ### 5.2
 - [ ] 37
