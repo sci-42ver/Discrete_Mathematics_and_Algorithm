@@ -540,6 +540,27 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   > with the client being able to verify the proof with *significantly less* computational effort
 ## 5
 - [weak induction](https://www.cs.cornell.edu/courses/cs2800/2015fa/lectures/lec18-euclid.html)
+### 5.1
+- inductive reasoning [diff](https://www.scribbr.com/methodology/inductive-deductive-reasoning/#:~:text=What's%20the%20difference%20between%20inductive,general%20premises%20to%20specific%20conclusions.) deductive reasoning
+  the former is based on "Seeking patterns" ~~which may be not dependable~~.
+  - > whereas inductive reasoning makes conclusions *only supported*, but not ensured, by evidence
+    see [this](https://www.linkedin.com/advice/3/how-do-you-use-deductive-inductive-reasoning-1e#:~:text=Inductive%20reasoning%20is%20a%20process,do%20not%20guarantee%20its%20truth.)
+- "co" [meaning 4](https://www.merriam-webster.com/dictionary/co#dictionary-entry-5) in codomain and coprime
+- Template for Proofs by Mathematical Induction
+  1. "for all n $\ge$ b, P(n)" by choosing the correct $b$
+  2. 
+  3,4,5 Inductive Step
+  6,7 always done similarly.
+  - So only 3~5 are the key steps.
+- EXAMPLE 13
+  case i: Here we assume each person has one pie.
+- > this step requires that $k\ge 3$
+  because
+  ~~> the first k ... $p_1$~~
+  ~~> the last k of these lines meet in a common point $p_2$~~
+  ~~if k=2, then ~~
+  > $p_1$ and $p_2$ were different points, all lines containing both of them must be the same line because two points determine a line
+  if k=2, then $p_1$ and $p_2$ may be shared by *only one* line, so it is ok for "them must be the same line".
 ## number theory
 - [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
@@ -1500,6 +1521,8 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     a. just prove not finite -> infinite.
       TODO [Pigeonhole principle](https://builtin.com/data-science/pigeonhole-principle) means mul-to-one but here the proper subset to the universal set means onto impossible but not for one-to-one which doesn't allow mul-to-one.
       > Case A is the case illustrating the essence of the pigeonhole principle
+      same as [wikipedia](https://en.wikipedia.org/wiki/Pigeonhole_principle)
+      > if n items are put into m containers, with n > m
       
     b. just define one [choice function](https://en.wikipedia.org/wiki/Axiom_of_choice#Statement) (i.e. self-mapping function) <a id="Axiom_of_choice"></a>
       - Also [see](https://plato.stanford.edu/entries/axiom-choice/) where $f(X)\in X$ implies choose **inside** each subset
@@ -2913,9 +2936,74 @@ while 1:
   $-4(d_2-d_1)\not\equiv 0\pmod 10\Rightarrow (d_2-d_1)\not\equiv 5\pmod 10$
   $-2(d_1-d_3)$ and the rest are similar.
 ## 5
+### 5.1
+- 2~46,50,56 skipped where 
+  1. 18 is similar to 4.
+  2. 36,37 similar to one example.
+  3. 40,42,60(see the ans which can be also related with 43 because set can be described by proposition) need some basic lemmas to complete the proof (i.e. $n=2$).
+  4. 46 $C_{n}^3$
+  5. 47 trivial after hinted
+- 61 see the ans
+- [ ] 25
+  need explicitly showing $(1 + h) > 0$ when inequality.
+- [ ] 48
+  begin from the minimum $x_1$ -> one $t_i$, 
+  then add one consecutive each time, which may increase one $t_i$,
+  then the algorithm from 47 is always the best.
+  - the above may be wrong, because the global optimal may be not local optimal.
+  - see the ans
+- [ ] 52 pigeonhole principle
+  - see the ans
+    - the codomain may be not same as $\{1, 2, \ldots , n \}$.
+- [ ] 53 TODO what does it do?
+  - > the second person chooses the portion he *thinks* is *at least* 1∕2 of the cake
+    what does this "think" mean?
+  - why not just equally divide?
+- [ ] 54
+  1. choose n numbers from $\{1,2,\ldots,2n\}$
+    > we can assume that both 2n + 1 and 2n + 2 are in A
+
+     because if one is not in, then $n+1$ from $\{1,\ldots,2n\}$ which must have one non-coprime pair
+  2. decide what n numbers are chosen.
+    > Since B is a collection of n + 1 numbers from {1,2,...,2n}
+
+     because $n+1$ is excluded, 
+     TODO here we should choose $n$ numbers
+  
+     - Notice: since $2\mid 2k$, so if choosing $n+1$ numbers from {1,2,...,2n} to make divisibility ~~less~~ the least possible, we must choose **all odd** numbers, i.e. $T=(S=\{1,3,5,\ldots,2n-1\})\cup \{2\}$.
+       Then there must be $p\mid q,\text{where }p,q<2n$
+       ~~so there must be $k\mid (n+1)\mid (2n+2),k<2n$~~
+       - since $n+1$ is excluded, we must choose the size-$n$ set $T'=(S-\{n+1\})\cup \{2\}$
+  3. test divisibility
+    - > If n + 1 is not one of these two numbers, then we are done
+      because the above $(p,q)$ **divisibility pair** are still left in 
+      $T'$ whose size is $n$.
+    - > But now k and 2n+ 2 are numbers in A
+      then we have $(k,2n+2)$ **divisibility pair**
+  - From EXAMPLE 11
+    it also uses all odd numbers.
+- [ ] 55
+  index $(i,j)$ by one unique number 
+  $i*n+j$.
+  Then to plus $i$ by one, we can $(+1,+2),(-2,-1),(+2,-1)$, i.e. $(+1,0)$
+  similarly $(+2,+1),(-1,-2),(-1,+2)$ i.e. $(0,+1)$
+- [ ] 62 better see [this](https://math.stackexchange.com/a/787324/1059606)
+  > Each time a line is added and it crosses k  other lines it adds k+1  regions and k  intersections.
+  this is because cross 1 line will add 2 regions due to one line splitting the space half.
+  TODO strict proof
+  > With n lines, there are $\binom{n}{2}$ intersections
+  see [this](https://math.stackexchange.com/a/787324/1059606) which is based on each pair having one intersection.
+  This can't be more because intersection is shared by at least 2.
+  - see the ans
+    - it adds one intersection at each step.
+    - >  continue drawing from this first point of intersection to the second, the line again separates one region into two
+      > leave the last point of intersection and draw our line off to infinity again, we separate another region into two
+      here when only crossing infinite, one region is added.
+      when reaching "this first point of intersection", still one
+      when from this first point of intersection to the second, another one is added.
 ### 5.2
 - [ ] 37
-- [ ] 
+- [ ] 41
 
 # TODO after abstract algebra
 - [this](#RSA_Cauchy_theorem)
