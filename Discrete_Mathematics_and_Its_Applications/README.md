@@ -2937,7 +2937,7 @@ while 1:
   $-2(d_1-d_3)$ and the rest are similar.
 ## 5
 ### 5.1
-- 2~46,50,56 skipped where 
+- 2~46,50,56~60,74,78 skipped where 
   1. 18 is similar to 4.
   2. 36,37 similar to one example.
   3. 40,42,60(see the ans which can be also related with 43 because set can be described by proposition) need some basic lemmas to complete the proof (i.e. $n=2$).
@@ -2952,6 +2952,8 @@ while 1:
   then the algorithm from 47 is always the best.
   - the above may be wrong, because the global optimal may be not local optimal.
   - see the ans
+- [x] 49 should begin at n=2 to ensure overlap.
+- [x] 51 $x − 1\text{ maybe }\not>0$ 
 - [ ] 52 pigeonhole principle
   - see the ans
     - the codomain may be not same as $\{1, 2, \ldots , n \}$.
@@ -2982,7 +2984,7 @@ while 1:
       then we have $(k,2n+2)$ **divisibility pair**
   - From EXAMPLE 11
     it also uses all odd numbers.
-- [ ] 55
+- [x] 55
   index $(i,j)$ by one unique number 
   $i*n+j$.
   Then to plus $i$ by one, we can $(+1,+2),(-2,-1),(+2,-1)$, i.e. $(+1,0)$
@@ -3001,6 +3003,124 @@ while 1:
       here when only crossing infinite, one region is added.
       when reaching "this first point of intersection", still one
       when from this first point of intersection to the second, another one is added.
+- [ ] 63
+  - [wikipedia](https://en.wikipedia.org/wiki/AM-GM_Inequality#Proof_by_induction_#1)
+    the main idea is the reorder $x_{n+1}<\alpha$.
+  - see the ans
+    - It uses 2-power
+      then for non-2-power cases, fill with average to use already proved cases.
+    - It should be $(a_1\cdots a_n)^{\frac{1}{m}}\bar{a}^{1-\frac{n}{m}}\le \bar{a}$.
+      Then after raising, $(a_1\cdots a_n)^{\frac{1}{n}}\bar{a}^{-1}\le 1$
+- [ ] 64 see the ans
+  $p\mid a_1\cdots a_n*a_{n+1}\nRightarrow p\mid a_1\cdots a_n\text{ or }p\mid a_{n+1}$
+- [x] 66
+  similar to 5.1.3, $\text{at least }m\subseteq S$
+  then $(m-2,m-1)$ can imply that 
+  $m$ is true.
+  - IMHO we should assume *ordered* $S=\{a_1,\ldots,a_m\}$
+    then $a_m-1,a_m-2$ must be not in $S$.
+- [ ] 68 see the ans
+  $n=2$, if the 1st knows the 2nd and the 2nd doesn't know the 1st, then the 2nd is the celebrity.
+  1. exclude one by one question
+    > Without loss of generality, assume that we have eliminated Alex as a possible celebrity
+    This is due to at least one is excluded. Then we use the inductive hypothesis with the remaining $k$ people.
+  2. maybe exclude the remaing k by $3(k-1)$
+     1. if not, i.e. find one celebrity, use 2 more to ensure the remaining relations between the celebrity and the Alex.
+- [x] 69
+  $$
+  G(1)=0\\
+  G(2)=1\\
+  G(3)=3\\
+  G(4)=4
+  $$
+- [x] 70
+  by hint, after the start call by the $(k+1)$th person with $i$
+  then by hypothesis, with $G(k)$ all k people are shared with each other including i which has 
+  $(k+1)$th person scandal.
+  Then at the call, $(k+1)$th person got the remaining 
+  $k$ people information.
+- [ ] 71
+  similar to 70, it has common difference $2$, then begin from $G(4)=4$.
+  - [AHajnal_058] by [64] in [hedetniemi1988]
+    - How it is related with this question.
+      - lemma 2 implies after $2n-3$ calls, at most $n-1$ F-points are constructed.
+        So we need **at least** $2n-4$ to get n F-points.
+    - proof
+      - > This  is   impossible  since  |E1| + l<k.
+        more intuitively, at least k-1 edges more are needed to make isolated $x$ F-point.
+        But $|E_1|=k-2<k-1$
+      - > If  c(n+k—  p—3) is  not  adjacent  to  any  F-point,
+        this interchanges $c(n+k—  p—3)$ with 
+        $ c(n + k—p—2),\ldots, c(n +  k—4)$
+      - here component implies [disjoint](https://en.wikipedia.org/wiki/Component_(graph_theory)) <a id="component_inherent"></a>
+        so the sequence 3 can be constructed by interchanging $\bar{\bar{c}}(i)$ with 
+        $\bar{c}(1),\ldots,\bar{c}(r)$
+      - here lemma 1 is proved by graph because
+        one line connecting all $n$ points must have at least $n-1$ edges.
+      - > the first n—3 calls can be equivalently re-ordered so that the (n—3)-rd call is in a different component of G0 to c(n—2)
+        if (n-3)rd already meets the requirement, then nothing needs to be done.
+        if not, then suppose the $k$th meets the requirement, then interchange it with $(n-3)$rd, we are done.
+      - > In fact, we can assume that $p<k$. For, ifp=k we can, by the last paragraph
+        This is due to that the interchange can make the last $p—1$ calls "all between F-points".
+      - ~~TODO the proof may be Begging the question~~
+        ~~because~~
+        > Suppose there are k F-points after the n+k—4 calls
+        the above which has been proven available by the book ans is different from ~~what to be proved~~ the following
+        > This shows that there can be *at most* k F-points.
+      - > Therefore, by the induction hypothesis there must be exactly k—r such F-points
+        TODO IMHO this is based on hypothesis
+        > Suppose there are k F-points after the n+k—4 calls
+        
+        similarly
+        > there is an equivalent re-ordering of these n+k—r—4 calls so that the last k—r are between the k—r .F-points not in C
+        this is just based on the hypothesis of what to be proved "... in which the last k calls".
+      - > In fact, we can assume that $p<k$ ...
+        It can be ignored which doesn't influence the proof.
+      - In summary
+        To prove
+        > if there are k F-points, then there is an equivalent calling sequence $c'\sim c$ in which the last k calls 
+        1. > *Suppose* there are k F-points
+        2. show $\{c(1),\ldots,c(n-2)\}$ "has no isolated vertex".
+          ~~TODO this is not used later if not using "interchanging c(n—3) and c(n—2)".~~
+          Then we can manipulate wit edges without considering "isolated vertex".
+        3. suppose contradiction
+          > the last k calls of the given sequence are *not all* between F-points
+        4. prove "c(n+k— p—3) is ~~not~~ adjacent to any F-point" based on 3
+          then construct the isolated component including $c(n+k— p—3)$, i.e. 
+          $\{\bar{c}(1)\ldots\}$.
+        
+        5. one interchange based on component [inherent property](#component_inherent)
+        6. prove $k-r$ F-points in 1~n+k-r-4 based on 4
+        7. one interchange based on $k'=k-r<k$ induction hypothesis
+        8. one interchange based on F-point disjoint property.
+- [ ] 72 see the ans
+  I tried $a_1,\lodts,a_n,2a_1,\lodts,2a_n$ to construct the sequence, but failed.
+- [ ] 73
+  here think of interval as set.
+  ~~since $I_{n+1}\cap I_k\neq \varnothing,k=1\sim n\xRightarrow{IH: K=\bigcap_{i=1}^n I_i\neq\varnothing} I_{n+1}\cap K\neq\varnothing$~~
+  here nothing shows $(I_{n+1}\cap I_1)\cap(I_{n+1}\cap I_2)\ldots\neq\varnothing$, so the above may be no sense.
+- [ ] 76
+  1. $<n(4n+3)$
+- [ ] 77
+  similar to the example
+  exclude the closest pair which is ensured to be hit, then the rest are ensured by hypothesis.
+  - > Have the people stand at mutually distinct small distances from their partners but far away from everyone else
+    TODO this may be not achieved.
+- [ ] 80
+  1. trivial based on 3x2
+  2. similar to a
+  3. no
+  4. see the ans, can be based on b
+- [ ] 81 this is similar to EXAMPLE 14.
+- [ ] 82 see [this](https://www.cut-the-knot.org/Curriculum/Games/TrominoPuzzleN.shtml)
+  where 5x5 is trivial based on inspection.
+  7x7 is based on 5x5 and 2x3 by "(1, 1), (1, 2), (2, 2), (2, 1) - removed".
+  Then based on induction.
+  because it has the cycle of 6, so 5 and 7 is enough.
+- [ ] 84
+  this is similar to one example before by step-by-step proof.
+- [ ] 85 trivial
+  - see the ans which uses one linear transform.
 ### 5.2
 - [ ] 37
 - [ ] 41
@@ -3035,5 +3155,7 @@ while 1:
 [lec_13_Adversary_Arguments]:https://jeffe.cs.illinois.edu/teaching/algorithms/notes/13-adversary.pdf
 [Szwarcfiter_stable_marriage]:https://core.ac.uk/download/pdf/82429549.pdf
 [McVitie_stable_marriage]:./papers/McVitie_stable_marriage.pdf
+[AHajnal_058]:./papers/AHajnal_058.pdf
+[hedetniemi1988]:./papers/hedetniemi1988.pdf
 
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
