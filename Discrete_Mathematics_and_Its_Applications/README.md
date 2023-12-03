@@ -539,7 +539,8 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - [verifiable](https://en.wikipedia.org/wiki/Verifiable_computing#Motivation_and_overview) computation
   > with the client being able to verify the proof with *significantly less* computational effort
 ## 5
-- [weak induction](https://www.cs.cornell.edu/courses/cs2800/2015fa/lectures/lec18-euclid.html)
+- [weak induction](https://www.cs.cornell.edu/courses/cs2800/2015fa/lectures/lec18-euclid.html) which can be transformed to strong induction trivially.
+  from 5.2 introduction, mathematical induction in the book is same as above.
 ### 5.1
 - inductive reasoning [diff](https://www.scribbr.com/methodology/inductive-deductive-reasoning/#:~:text=What's%20the%20difference%20between%20inductive,general%20premises%20to%20specific%20conclusions.) deductive reasoning
   the former is based on "Seeking patterns" ~~which may be not dependable~~.
@@ -561,6 +562,11 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   ~~if k=2, then ~~
   > $p_1$ and $p_2$ were different points, all lines containing both of them must be the same line because two points determine a line
   if k=2, then $p_1$ and $p_2$ may be shared by *only one* line, so it is ok for "them must be the same line".
+### 5.2
+- TODO is p384 the proof of lemma 1 really right?
+  - here b is ~~both~~ the least y-coordinate ~~and~~ based on the smallest x-coordinate
+- Well ordering principle is [not for real](https://people.eecs.berkeley.edu/~daw/teaching/cs70-s08/notes/n6.pdf) but for integer.
+  its main idea is the **least** exists.
 ## number theory
 - [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
@@ -3122,9 +3128,130 @@ while 1:
 - [ ] 85 trivial
   - see the ans which uses one linear transform.
 ### 5.2
-- [ ] 37
+- 2~6,14,26,30~32,37 skipped
+- [ ] 8 see the ans
+  - it uses $8+2=5*2$ and $5*3+1=8*2$
+- [ ] 9 it may still use the idea similar to before.
+- [ ] 10,16 see the ans
+  - ~~here "squares" may be not strictly nxn square.~~
+- [x] 12
+  - notice "distinct"
+  - when k + 1 is even, just multiply 2 for each factor in $\frac{k + 1}{2}$
+    when odd, just plus one with the factors of even $k$.
+- [ ] 13 this question is weird ...
+- [ ] 18 see the ans which splits into two smaller polygons as one example does.
+  > (otherwise, the region containing $v_{m+n−1}$ would not be a triangle)
+  more intuitively, the region contain the side $v_{m+n−2}v_{m+n−1}$ will not be a triangle.
+- [ ] 19
+proof of the hint without the additivity lemma
+$$
+\text{1. rectangle (with (0,0) as the bottom-left point):}\\
+mn=(m-1)(n-1)+\frac{2(m+1)+2(n-1)}{2}-1\\
+\text{2. right triangle, the bottom-left half of the above, with }k\text{ interior points on the diagonal}:\\
+\frac{mn}{2}=\frac{m+n+1+k}{2}+\frac{(m-1)(n-1)-k}{2}-1\\
+\text{3. arbitrary triangle with A(0,n),B(m,0),C(p,q) as vertices where (p,q) is the interior point in the rectangle}\\
+\text{assume that }k_1,k_2,k_3\text{ points including vertices are on AB,BC,AC}\\
+\text{let D(0,0),E(m,n),F(p,0),G(0,q) and split the big rectangle ADBE into AGC,ABE,CFB,GDFC}\\
+S_{\triangle ABC}=mn-pq-\frac{mn+(m-p)*q+(n-q)*p}{2}\\
+B_{\triangle ABC}(P)=\sum k_i-3\\
+\text{3.1 based on the 1,2 cases, care about }I(P)\\
+I_{RHS}(P)=I_{mn}(P)-\ldots=B_{\triangle ABC}(P)-2+p-1+q-1+I_{LHS}(P)\quad\text{-2 is to exclude A,B.}\\
+\text{3.2 care about }B(P)\\
+\frac{B_{RHS}(P)}{2}=\frac{-1-1-1-1-3-2(FC_i+CG_i)-(AB_i+BC_i+AC_i)}{2}=
+\frac{-B_{\triangle ABC}(P)-4-2(p-1+q-1)}{2}\quad
+\text{the 4 ``-1" are duplicate minuses of A,B,F,G, ``-3" corresponds to C, }AB_i\text{ means points inside the line AB}\\
+\text{Then}\\
+RHS=-1-(-4)+I_{RHS}(P)+\frac{B_{RHS}(P)}{2}=3+I_{LHS}(P)+\frac{\sum k_i=B_{\triangle ABC}(P)}{2}-2-2\tag*{$\blacksquare$}
+$$
+  - see the ans
+    - > so by the additivity lemma, it holds for the triangle as well.
+      this is because $S_{rect}=S_1+S_2=\ldots=I(P_1)+\ldots+I(P_2)+\ldots$
+      although by theory, maybe $I(P_1)$ corresponds to $S_2$, but it is nonsense.
+    - > To prove this, suppose there are k lattice points on the diagonal
+      here the "diagonal" can be generalized to polyline diagonal
+      Then the above $ABC$ case can use it by adding $AB,ACB,CF,CG$ diagonals which is one special induction.
+- [ ] 20
+  By lemma 1 split one triangle out with the $n+1$ case.
+  Then use the furthest triangle of the pair in the $n$ case to pair with the above.
+  - [meisters1975]
+    - [Jordan curve](https://mathworld.wolfram.com/JordanCurve.html)
+      where [non-self-intersecting](https://en.wikipedia.org/wiki/Curve#Jordan) implies simple.
+    - ~~> at which the interior angle is less than $180^o$~~
+    - > and hence forms another ear for P which is non-overlapping with the ear
+      this will restrict the quadrilateral as combination of two triangles with one common side and two not common points in the different regions splitted by the common side.
+    - TODO related with geometry
+      - why must a Jordan polygon be left when removing one point?
+      - > the two ears E,  and V_ VV+ are non-overlapping
+        here implies that overlap -> adjacent.
+    - in summary
+      case 1
+      1. two triangle -> basis step
+      3. one triangle and 
+        premise theorem: one polygon with $E_1$ excluding $V_{-}V_{+}$
+      case 2
+      4. choose $Z$ to split
+      case 2.1 splitted into two triangles similar to 1.1 -> basis step
+      case 2a one triangle similar to 1.2
+      case 2b no triangle using premise theorem
+- [ ] 21
+  1. left
+  2. right
+  3. right
+- [ ] 22
+  - see the ans
+    - ~~TODO why the side of "the smaller polygons" can be "two vertices that are not endpoints of any of these diagonals"?~~
+      This is $n=3$
+  - b
+    the case $n=5$ needs to be respectively manipulated where for the triangle we doesn't choose $uv$
+- [ ] 24
+  - > because then Alice and Ted would form an unstable pair
+    is similar to 3.1-67
+    > Because m did not end up matched with w, she must have rejected him
+    where w is paired with her rejected $m$. That case is same as (Alice,Bob).
+  - This is same as 3-supplementary-32. 
+- [ ] 28
+  - maybe using $P(b), P (b + 1), ... , P (b + j)$ as the basis step is better.
+- [ ] 31 similar to mathematical induction
+  the least element in the false set is ensured True by induction leading to contradiction.
+  - better show $P(1)$ is excluded by the basis step.
+- [ ] 33
+  1. just use many $(0,1),(1,0)$ steps to get to any point.
+- [x] 34
+  use b
+  - P(1,k) is trivial
+  - $P(n+1,k)=\frac{n(n+1)\ldots(n+k)}{k+1}+(n+1)\ldots(n+k)=\frac{(n+1)\ldots(n+k)[n+(k+1)]}{k+1}=RHS$
+- [ ] 35 see the ans
+  just reorder to make all those with parentheses before those without, 
+  then for each pair with parentheses, multiplication count is not changed with parentheses. 
+  By induction, if k parentheses can be removed, then $k+1$ can be also removed ~~because the last parenthesis is no use after no ~~
+- [ ] 36
+  1. trivial by setting $s=t=0$
+  2~3 trivial
+  4. $r=a-qc=(1-qs)a-qtb$
+  5. 
+  - see the ans
+    - a. should be positive, so (0,0) is excluded.
+- [ ] 38 see the ans
+  $2m + 1 , m + 1 , 1 , 2 ,\ldots , m, 2m, 2m −1 , \ldots , m + 2 , 2m + 2 , \ldots , 3m$
+  is based on the left-right mirror of 1.8-48 figure.
+- [ ] 39 
+  - see the ans
+    - it has no relations with well-ordering
+      but with combination.
 - [ ] 41
-
+  basis step is the minimum.
+  see the ans
+- [ ] 42 see the ans based on recursion from mathematical to strong
+  use 41 from mathematical to well-ordering, then to strong.
+  - > The strong induction principle clearly implies ordinary induction
+    because $P(1)\wedge\ldots\wedge P(k)=T\Rightarrow P(k)=T$
+    ~~IMHO, it ~~
+  - > $\forall nP(n)$ is logically equivalent to $\forall nQ(n)$
+    ~~because $P(n)$ is only valid when both ~~
+    ~~$Q(n)$ and ~~
+    This is based on "strong induction"
+- [ ] 43 same as 41
+  - see the ans or use 41,42.
 # TODO after abstract algebra
 - [this](#RSA_Cauchy_theorem)
 
@@ -3157,5 +3284,6 @@ while 1:
 [McVitie_stable_marriage]:./papers/McVitie_stable_marriage.pdf
 [AHajnal_058]:./papers/AHajnal_058.pdf
 [hedetniemi1988]:./papers/hedetniemi1988.pdf
+[meisters1975]:./papers/meisters1975.pdf
 
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
