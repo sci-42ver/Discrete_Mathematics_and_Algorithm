@@ -452,7 +452,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - P [diffs](https://en.wikipedia.org/wiki/NP_(complexity)) from NP
   >  P (all problems *solvable*, deterministically, in polynomial time) is contained in NP (problems where solutions can be *verified* in polynomial time)
   - [NP-complete](https://en.wikipedia.org/wiki/NP-completeness#Formal_definition) is ~~one *class* of problems which are combined together~~ one problem can be reduced from **all** NP, 
-    e.g. the Boolean satisfiability problem by [Cook–Levin theorem (TODO strict proof)](https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem#Proof), "thus equivalent to the P versus NP problem" (i.e. $P\overset{?}{=}NP$).
+    e.g. the Boolean satisfiability problem by [Cook–Levin theorem (TODO strict proof)](https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem#Proof), "thus equivalent to the P versus NP problem" (i.e. $P\overset{?}{=\mathrel{\mkern-3mu}=}NP$).
     > *Every* problem in NP is *reducible* to $\scriptstyle C$ in polynomial time
     implies
     > if *any* of these problems can be *solved* by a polynomial worst-case time algorithm, then *all* problems in the class NP can be *solved* by polynomial worst-case time algorithms
@@ -567,6 +567,13 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   - here b is ~~both~~ the least y-coordinate ~~and~~ based on the smallest x-coordinate
 - Well ordering principle is [not for real](https://people.eecs.berkeley.edu/~daw/teaching/cs70-s08/notes/n6.pdf) but for integer.
   its main idea is the **least** exists.
+### 5.3
+- [Well-formed formula](https://en.wikipedia.org/wiki/Well-formed_formula) is related with compiler.
+- structural induction is just one special "mathematical induction"
+  without using definition to prove like EXAMPLE 10.
+  - > if the statement is true for each of the elements used to *construct* new elements in the recursive step of the definition
+    the main idea is to find the way to construct.
+  - 
 ## number theory
 - [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
@@ -603,6 +610,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - mod [without](https://tex.stackexchange.com/a/169946/308105) leading space
 - [sum multiple-lines](https://tex.stackexchange.com/a/80461/308105)
 - [bmod -> binary mod](https://tex.stackexchange.com/a/42872/308105)
+- [big equal sign](https://tex.stackexchange.com/a/35406/308105) needs extra package or self define length `\mathrel{\mkern-3mu}`.
 ## katex
 - available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
 - set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
@@ -3252,6 +3260,129 @@ $$
     This is based on "strong induction"
 - [ ] 43 same as 41
   - see the ans or use 41,42.
+### 5.3
+- 2~4,12,15,16~20,26~28,36~38(38 similar to 34),46,52,58,60~62,66 skipped
+- [ ] 6 c,d,e are not valid.
+  see the ans where e is valid
+- [ ] 8 d see the ans
+- [ ] 10 $S_0(0)$ is also ok when recursive 
+  $S_{m+1}(n)$ and $S_{m}(n+1)$.
+- [x] 14
+  begin from [$F_1$](https://en.wikipedia.org/wiki/Fibonacci_sequence#Definition)
+  $f_{n+2}f_n-f_{n+1}^2=f_n^2+f_nf_{n+1}-f_{n+1}^2=f_{n+1}f_{n-1}-(-1)^n+f_nf_{n+1}-f_{n+1}^2=(-1)^{n+1}$
+- [ ] 21
+  1. 
+  $$
+  max(-a_1,\ldots,-a_{n+1})\overset{\text{definition by 20}}{=}max(max(-a_1,\ldots,-a_{n}),-a_{n+1})
+    \overset{\text{IH}}{=}max(-min(a_1,\ldots,a_{n}),-a_{n+1})
+    =-min(min(a_1,\ldots,a_{n}),a_{n+1})
+  $$
+  2. 
+  $$
+  max(a_1+b_1,\ldots,a_{n+1}+b_{n+1})= max(max(a_1+b_1,\ldots,a_n+b_n),a_{n+1}+b_{n+1})
+  \overset{\text{let one factor larger}}{\le} max(max(a_1,\ldots,a_n)+max(b_1,\ldots,b_n),a_{n+1}+b_{n+1})
+  \overset{\text{take = when both max factors of the sum are in one factor of max(p,q)}}{\le} max(max(a_1,\ldots,a_{n+1})+max(b_1,\ldots,b_{n+1}))
+  $$
+  - see the ans
+    - better say $k\ge 2$ in a because $max(− min(a1, \ldots , ak),−a_{k+1}) = − min(min(a1, \ldots , ak), a_{k+1})$ needs it.
+- [x] 22 similar to EXAMPLE 10.
+- [ ] 24 just use sequence definition for a,b similar to EXAMPLE 1.
+  - see the ans
+- [ ] 30
+  2. basis: $(a,a)$ are in.
+    recursive: $(a,a*k),k\in\mathbf{N}_+$
+  - see the ans
+    - a
+      since $\mathbf{Z}^+$, so $0+1$ should be excluded.
+    - b
+      - the above basis is not concrete to one specific number.
+    - c similar to a
+- [ ] 32
+  - prove when $0$ is the rightmost digit, then $01$ can't be more than $10$.
+    if $a_n\ldots a_0$ is this case where $a_0=0$
+    when n is 1, $num_{01}-num_{10}=0\text{ or }-1$
+    when 2, $num_{01}-num_{10}=0\text{ or }-1$
+  - see the ans
+  - hinted by the ans
+    - basis step, length 2 with 4 cases $01,10,11,00$
+    - inductive step:
+      1. length 3 with the ending "1"
+        if length 2 ends with 0, then at most 1 when we append 1
+        if length 2 ends with 1, then still as before ,i.e. at most 1 when we append 1.
+      2. length 3 with the ending "0", similar to the above.
+- [ ] 34 similar to EXAMPLE 12.
+  - see the ans
+    - notice $ones(\lambda)$ needs to be defined.
+- [ ] 40 notice $x$ is also considered besides $\lambda$
+- [ ] 42 see the ans which maybe adds one $1$ at each step.
+- [ ] 44 $(w^R)^{n+1}=(w^R)^n*w^R\overset{IH}{=}(w^n)^R*w^R\overset{38}{=}(w^{n+1})^R$
+  - see the ans
+    start at $\lambda$
+- [ ] 48
+  here we prioritize $n$ instead of $m$ as the 5.3.5 prologue shows.
+- [x] 49
+  1. trivial because positive implies "not exceeding m"
+  2. 
+  $$
+  \begin{align*}
+    m=1&\Rightarrow 1\\
+    n=1&\Rightarrow 1+1+\ldots+1\\
+    m<n&\Rightarrow \text{trivial}\\
+    m=n>1&\Rightarrow 1\text{ corresponds to }m\\
+    m > n > 1&\Rightarrow 
+    \begin{cases}
+      \text{either not includes }n &P_{m,n-1}\\
+      \text{or includes }n
+      \text{, then we select others after having one because the order doesn't matter}n &P_{m-n,n}\\
+    \end{cases}
+  \end{align*}
+  $$
+  3. 
+  $$
+  \begin{align*}
+    P_{5,5}&=1+P_{5,4}\\
+           &=1+P_{5,3}+P_{1,4}\\
+           &=2+P_{5,2}+P_{2,3}\\
+           &=4+P_{5,1}+P_{3,2}\\
+           &=6+1=7\\
+  \end{align*}
+  $$
+- [ ] 50
+  - why Ackermann’s function [not primitive recursive](https://math.stackexchange.com/a/96492/1059606)
+    because not having the form "f(n+1) as a function of f(n) only."
+  - TODO 
+    - [minimization operator](https://en.wikipedia.org/wiki/General_recursive_function#Examples) which differentiate General recursive from Primitive recursive.
+    - relation with the [original definition](https://en.wikipedia.org/wiki/Ackermann_function#Definition:_as_m-ary_function).
+- [ ] 53
+  $$
+  n\ge 2\\
+  A(2,n)=A(1,A(2,n-1))=\ldots=A(\overbrace{1,A(1,\ldots,A(2,1))}^{(n-1) \; \text{one}})=2^{\ldots}\text{, where n twoes}\\
+  A(3,n)=A(\overbrace{2,A(2,\ldots,A(3,1))}^{(n-1) \; \text{two}})\\
+  A(3,3)=A(2,A(2,A(3,1)))=A(2,A(2,2))=A(2,2^2)=2^{2^{2^{2}}}=2^16
+  $$
+- [ ] 54 see the ans
+- [ ] 55
+  - > If m > 0, this is greater than 0 by the inductive hypothesis
+    similar to before, by cycle, $A(m, A(m + 1, k − 1))=A(m, A(m \lodts A(m+1,1)))=A(m,A(m,\ldots A(m,2)))$, it is impossible at the last step to become 
+    $A(m,0)$. Also based on $2n,2>0$, so bigger than 0.
+    - the last A(m,2) implies $A(m + 1, k − 1)\ge 2.$
+- [ ] 56 hinted by 55
+  $$
+  A(k,0)=A(l,0)=0\\
+  \text{Assume }A(k,n)\ge A(l,n),k>l\\
+  A(k,n+1)=A(k-1,A(k,n))\\
+    \overset{55}{\ge}A(k-1,A(l,n))\\
+    \overset{IH}{\ge}A(l-1,A(l,n))=A(l,n+1)
+  $$
+  - see the ans
+    - the above $IH$ is wrong
+      because $A(l,n)$ may be not 
+      $0$, so we don't know $A(k,m)>A(l,m),m\neq 0$ when only knowing $ A(k,0)=A(l,0)$
+- [x] 64
+  5-tower of 2 $2^{65536}$ 
+## 9
+### 9.6
+- [ ] 53
 # TODO after abstract algebra
 - [this](#RSA_Cauchy_theorem)
 
