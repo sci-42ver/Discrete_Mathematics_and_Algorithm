@@ -440,6 +440,14 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - the [insertion sort](https://en.wikipedia.org/wiki/Insertion_sort#Best,_worst,_and_average_cases) just tracks one more item which creates one ordered sublist beginning from the first item.
   the 2nd ~~is similar to the 1st except that it moves `x` directly to the correct place instead of propagating (the swap counts are same).~~ avoids many unnecessary swaps which uses 3 assignments by using all one assignment each time with one additional $x \leftarrow A[i]$ which is same as ALGORITHM 5 does.
   the 3rd is the recursive version of the 2nd.
+- ~~TODO~~
+  since "ALGORITHM 3" $j\coloneqq m$ doesn't exclude one element.
+  > The search has now been restricted to a list with no more than $\lceil n/2\rceil$ elements
+  if n is odd, then after comparison, either $\frac{n+1}{2}=\lceil n/2\rceil$ or $\frac{n-1}{2}$ is left
+  if n is even, ~~either~~ $\frac{n}{2}$ ~~or $\frac{n}{2}-1$~~ is left.
+  - based on the above,
+    p256 when n is odd, it may be always leave more than half elements, i.e. $\frac{n+1}{2}$
+    so it may use $\lceil \log{n}\rceil$ comparisons.
 ### 3.2
 - p241 $f=O(g)\wedge g=O(f)$ is possible, so relations in p247 need to be separately proven.
 - p251 THEOREM 4
@@ -573,7 +581,20 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   without using definition to prove like EXAMPLE 10.
   - > if the statement is true for each of the elements used to *construct* new elements in the recursive step of the definition
     the main idea is to find the way to construct.
-  - 
+### 5.4
+- TODO special-purpose recursive machines, maybe [this](https://www.cis.upenn.edu/~alur/toplas2005.pdf)
+- recursion algorithm in p387
+  > requires $f_{n+1} − 1$ additions to find $f_n$
+
+  let S(n) denote addition count to calculate $f_n$
+  Then
+  $$
+  \text{based on }S(n)=S(n-1)+S(n-2)+1,n\ge 2\\
+  \begin{align*}
+    \text{BASIS STEP:}&S(1)=S(0)=0=f_1-1=f_2-1\\
+    \text{INDUCTIVE STEP:}&S(n+1)=S(n-1)+S(n)+1=f_n-1+f_{n+1}-1+1=f_{n+2}-1
+  \end{align*}
+  $$
 ## number theory
 - [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
@@ -3380,6 +3401,12 @@ $$
       $0$, so we don't know $A(k,m)>A(l,m),m\neq 0$ when only knowing $ A(k,0)=A(l,0)$
 - [x] 64
   5-tower of 2 $2^{65536}$ 
+### 5.4
+- 2~12(here the orders of 4,6 in the ans and the book differ),16~2 skipped
+- [ ] 14 see the ans
+  just by removing one mode and forming the recursive list.
+  with two special cases, i.e. $n=1$ and mode occupying the entire list.
+- [ ] 
 ## 9
 ### 9.6
 - [ ] 53
