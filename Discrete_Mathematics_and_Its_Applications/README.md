@@ -595,6 +595,11 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
     \text{INDUCTIVE STEP:}&S(n+1)=S(n-1)+S(n)+1=f_n-1+f_{n+1}-1+1=f_{n+2}-1
   \end{align*}
   $$
+### 5.5
+- EXAMPLE 5
+  $p\{S_1\}q$,$q\{S_2\}r$ is trivial
+  $r\{S_3\}s$ -> ~~when out~~ after each iteration, $x=mk'+m=m(k'+1)=mk$ where $k'$ is the last iteration $k$.
+  $s\{S_4\}t$ because $product=mn=m|n|\text{ when n is positive or }-m|n|\text{ when n is negative}$
 ## number theory
 - [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
@@ -3282,7 +3287,7 @@ $$
 - [ ] 43 same as 41
   - see the ans or use 41,42.
 ### 5.3
-- 2~4,12,15,16~20,26~28,36~38(38 similar to 34),46,52,58,60~62,66 skipped
+- 2~4,12,15,16~20,26~28,36~38(38 similar to 34),46,52,58,59(similar to 58),60~62,66 skipped
 - [ ] 6 c,d,e are not valid.
   see the ans where e is valid
 - [ ] 8 d see the ans
@@ -3402,7 +3407,7 @@ $$
 - [x] 64
   5-tower of 2 $2^{65536}$ 
 ### 5.4
-- 2~12(here the orders of 4,6 in the ans and the book differ),16~24,27,28,32,36~40,44~46 skipped
+- 2~12(here the orders of 4,6 in the ans and the book differ),16~24,27,28,32,36~40,44~46,47 skipped
 - [ ] 14 see the ans
   just by removing one mode and forming the recursive list.
   with two special cases, i.e. $n=1$ and mode occupying the entire list.
@@ -3458,6 +3463,13 @@ $$
   if only one element, then $m=k=0$, just return back.
 - [ ] 55 [different](https://en.wikipedia.org/wiki/Quicksort) from merge sort worst-case
   $n-1+\lceil\frac{n-1}{2}\rceil-1+\lfloor\frac{n-1}{2}\rfloor-1+\ldots=n-1+(n-3)+\ldots\le \frac{(1+n-1)(\frac{n-1}{2}+1)}{2}=\frac{n(n+1)}{4}=O(n^2)$
+### 5.5
+- 2~4,6,10 skipped
+- [ ] 5 see the ans for formal description.
+- [ ] 8 I just use $y=f_i$ this invariant.
+  - see the ans
+    - before the loop, $i$ is undefined
+- [x] 12 I just use $a=dq+r$ this invariant.
 ## 9
 ### 9.6
 - [ ] 53
