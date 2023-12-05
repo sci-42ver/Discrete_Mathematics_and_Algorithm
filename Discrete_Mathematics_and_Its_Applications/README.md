@@ -3402,14 +3402,68 @@ $$
 - [x] 64
   5-tower of 2 $2^{65536}$ 
 ### 5.4
-- 2~12(here the orders of 4,6 in the ans and the book differ),16~2 skipped
+- 2~12(here the orders of 4,6 in the ans and the book differ),16~24,27,28,32,36~40,44~46 skipped
 - [ ] 14 see the ans
   just by removing one mode and forming the recursive list.
   with two special cases, i.e. $n=1$ and mode occupying the entire list.
-- [ ] 
+- [ ] 26 see the ans
+  - "ALGORITHM 5" in p268 is not recursive.
+- [ ] 30 similar to ALGORITHM 8
+  see the ans notice here we don't need one extra $if\;n=1\; \ldots$
+- [ ] 34 similar to FIGURE 1, recursive uses $2*4=8$ for $n=5$
+  while iterative uses $2*(n-2)=6$
+- [ ] 41
+  similar to before,
+  - n=1 is trivial
+  - $n\ge 2$, remove three from the center except for the quarter which has already one missing
+    then for the three, use IH,
+    for the already missing, also use IH
+    use one right triomino for the three removed.
+- [ ] 42 here the ans doesn't state how to decide the diagonal.
+- [ ] 48
+  - see the ans
+    - it implies the worst case by the ans
+    - TODO 
+      - decision tree -> $\lceil\log{n+1}\rceil$
+      - b why not $C_{6}^{1}*C_{5}^{1}=30$ ways.
+- [ ] 50
+  - by [this](https://en.wikipedia.org/wiki/Quicksort#Lomuto_partition_scheme)
+    ```bash
+    if A[j] <= pivot then 
+      ... 
+      swap A[i] with A[j] 
+    i := i + 1 
+    swap A[i] with A[hi]
+    ```
+    just make all elements on the left side of the pivot are less than the pivot
+    but not sort them when `partition`.
+  - notice here swap can be done by many ways
+    - [1](https://tutswiki.com/data-structures-algorithms/quick-sort/)
+      $$
+      3,2,\ldots,5,4,6\quad\text{swap 5,2}\\
+      3,2,1,\ldots,7,9,5,\ldots\quad\text{swap 7,1}\\
+      1,2,3,8,7,9,5,4,6\quad\text{swap 3,1}
+      $$
+    - [2](https://www.geeksforgeeks.org/implement-quicksort-with-first-element-as-pivot/)
+      ~~it should `for (i = high-1; i > low; i–) {` to avoid duplicate swap between `high` self.~~
+      $$
+      6,4\text{ swap with self}\\
+      3,\ldots,2,9,4,6\quad\text{swap 9,2}\\
+      3,\ldots,2,1,8,9,4,6\quad\text{swap 8,2}\\
+      3,\ldots,1,2,7,8,9,4,6\quad\text{swap 7,1}\\
+      3,2,1,5,7,8,9,4,6\quad\text{swap 5,2}\\
+      1,2,3,\lodts
+      $$
+- [ ] 52 see the ans
+  if only one element, then $m=k=0$, just return back.
+- [ ] 55 [different](https://en.wikipedia.org/wiki/Quicksort) from merge sort worst-case
+  $n-1+\lceil\frac{n-1}{2}\rceil-1+\lfloor\frac{n-1}{2}\rfloor-1+\ldots=n-1+(n-3)+\ldots\le \frac{(1+n-1)(\frac{n-1}{2}+1)}{2}=\frac{n(n+1)}{4}=O(n^2)$
 ## 9
 ### 9.6
 - [ ] 53
+## 11
+Redo 5.4-48
+### 11
 # TODO after abstract algebra
 - [this](#RSA_Cauchy_theorem)
 
