@@ -595,6 +595,8 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
     \text{INDUCTIVE STEP:}&S(n+1)=S(n-1)+S(n)+1=f_n-1+f_{n+1}-1+1=f_{n+2}-1
   \end{align*}
   $$
+- iterative begins from $0$ with only one upward pass
+  while recursion may have multiple passes.
 ### 5.5
 - EXAMPLE 5
   $p\{S_1\}q$,$q\{S_2\}r$ is trivial
@@ -1828,7 +1830,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
         1. "if" just use the definition
         2. "only if" uses $|a|\neq+\infin$
         > Another equivalent way of defining the *dyadic* rationals is that they are the real numbers that have a *terminating* binary representation
-      - TODO [$0.d_1\ldotsd_{n−1}\overline{1}$](https://math.stackexchange.com/questions/1641233/what-points-in-0-1-will-have-two-binary-expansions#comment3346986_1641252) is recurrent by [definition](https://en.wikipedia.org/wiki/Repeating_decimal), see 
+      - TODO [$0.d_1\ldots d_{n−1}\overline{1}$](https://math.stackexchange.com/questions/1641233/what-points-in-0-1-will-have-two-binary-expansions#comment3346986_1641252) is recurrent by [definition](https://en.wikipedia.org/wiki/Repeating_decimal), see 
         $\frac{593}{53}$
         - this is also shown in the ans
           > we can *decide* to always *use* the terminating form
@@ -3029,13 +3031,13 @@ while 1:
   $i*n+j$.
   Then to plus $i$ by one, we can $(+1,+2),(-2,-1),(+2,-1)$, i.e. $(+1,0)$
   similarly $(+2,+1),(-1,-2),(-1,+2)$ i.e. $(0,+1)$
-- [ ] 62 better see [this](https://math.stackexchange.com/a/787324/1059606)
+- [ ] 62 better see [this](https://math.stackexchange.com/a/209679/1059606)
   > Each time a line is added and it crosses k  other lines it adds k+1  regions and k  intersections.
   this is because cross 1 line will add 2 regions due to one line splitting the space half.
   TODO strict proof
-  > With n lines, there are $\binom{n}{2}$ intersections
-  see [this](https://math.stackexchange.com/a/787324/1059606) which is based on each pair having one intersection.
-  This can't be more because intersection is shared by at least 2.
+  - > With n lines, there are $\binom{n}{2}$ intersections
+    see [this](https://math.stackexchange.com/a/787324/1059606) which is based on each pair having one intersection.
+    This can't be more because intersection is shared by at least 2.
   - see the ans
     - it adds one intersection at each step.
     - >  continue drawing from this first point of intersection to the second, the line again separates one region into two
@@ -3043,6 +3045,24 @@ while 1:
       here when only crossing infinite, one region is added.
       when reaching "this first point of intersection", still one
       when from this first point of intersection to the second, another one is added.
+  - Also see [this](https://math.stackexchange.com/a/339853/1059606) with also conditions about circle
+    - > the number of points, $\binom{n}{2}$, plus the number of lines, $\binom{n}{1}$
+      because 
+      > The number of regions it passes through is the *number of lines* it crosses *plus* one
+    - > the number of regions added to the original one, (n0)
+      this is just the condition without lines.
+    - comparison with circle <a id="5_supplementary_49"></a>
+      circle: 
+      1. cross 2 points instead of 1 -> $2\binom{n}{2}$
+      2. > For n  circles there can be up to $2\binom{n}{2}$  crossings
+        each pair of points add one more region
+        i.e. the ans in S-41
+        > form 2k new arcs, each of which splits an old region
+      3. > It divides all the regions *through* which it passes into two, thus adding one region for each region it passes through
+        This is the **key difference** because it only cares about intersection *without caring number of circles*.
+      it begins with $\binom{n}{0}$ when no circle, then 
+      plus $\binom{n}{0}$ when adding the 1st circle, then
+      plus $2\binom{n}{2}$ which is related with intersection.
 - [ ] 63
   - [wikipedia](https://en.wikipedia.org/wiki/AM-GM_Inequality#Proof_by_induction_#1)
     the main idea is the reorder $x_{n+1}<\alpha$.
@@ -3134,7 +3154,7 @@ while 1:
         7. one interchange based on $k'=k-r<k$ induction hypothesis
         8. one interchange based on F-point disjoint property.
 - [ ] 72 see the ans
-  I tried $a_1,\lodts,a_n,2a_1,\lodts,2a_n$ to construct the sequence, but failed.
+  I tried $a_1,\ldots,a_n,2a_1,\ldots,2a_n$ to construct the sequence, but failed.
 - [ ] 73
   here think of interval as set.
   ~~since $I_{n+1}\cap I_k\neq \varnothing,k=1\sim n\xRightarrow{IH: K=\bigcap_{i=1}^n I_i\neq\varnothing} I_{n+1}\cap K\neq\varnothing$~~
@@ -3220,10 +3240,10 @@ $$
     - in summary
       case 1
       1. two triangle -> basis step
-      3. one triangle and 
+      2. one triangle and 
         premise theorem: one polygon with $E_1$ excluding $V_{-}V_{+}$
       case 2
-      4. choose $Z$ to split
+      3. choose $Z$ to split
       case 2.1 splitted into two triangles similar to 1.1 -> basis step
       case 2a one triangle similar to 1.2
       case 2b no triangle using premise theorem
@@ -3261,8 +3281,8 @@ $$
 - [ ] 36
   1. trivial by setting $s=t=0$
   2~3 trivial
-  4. $r=a-qc=(1-qs)a-qtb$
-  5. 
+  1. $r=a-qc=(1-qs)a-qtb$
+  2. 
   - see the ans
     - a. should be positive, so (0,0) is excluded.
 - [ ] 38 see the ans
@@ -3303,7 +3323,7 @@ $$
     \overset{\text{IH}}{=}max(-min(a_1,\ldots,a_{n}),-a_{n+1})
     =-min(min(a_1,\ldots,a_{n}),a_{n+1})
   $$
-  2. 
+  1. 
   $$
   max(a_1+b_1,\ldots,a_{n+1}+b_{n+1})= max(max(a_1+b_1,\ldots,a_n+b_n),a_{n+1}+b_{n+1})
   \overset{\text{let one factor larger}}{\le} max(max(a_1,\ldots,a_n)+max(b_1,\ldots,b_n),a_{n+1}+b_{n+1})
@@ -3315,7 +3335,7 @@ $$
 - [ ] 24 just use sequence definition for a,b similar to EXAMPLE 1.
   - see the ans
 - [ ] 30
-  2. basis: $(a,a)$ are in.
+  1. basis: $(a,a)$ are in.
     recursive: $(a,a*k),k\in\mathbf{N}_+$
   - see the ans
     - a
@@ -3363,7 +3383,7 @@ $$
     \end{cases}
   \end{align*}
   $$
-  3. 
+  1. 
   $$
   \begin{align*}
     P_{5,5}&=1+P_{5,4}\\
@@ -3389,7 +3409,7 @@ $$
 - [ ] 54 see the ans
 - [ ] 55
   - > If m > 0, this is greater than 0 by the inductive hypothesis
-    similar to before, by cycle, $A(m, A(m + 1, k − 1))=A(m, A(m \lodts A(m+1,1)))=A(m,A(m,\ldots A(m,2)))$, it is impossible at the last step to become 
+    similar to before, by cycle, $A(m, A(m + 1, k − 1))=A(m, A(m \ldots A(m+1,1)))=A(m,A(m,\ldots A(m,2)))$, it is impossible at the last step to become 
     $A(m,0)$. Also based on $2n,2>0$, so bigger than 0.
     - the last A(m,2) implies $A(m + 1, k − 1)\ge 2.$
 - [ ] 56 hinted by 55
@@ -3457,7 +3477,7 @@ $$
       3,\ldots,2,1,8,9,4,6\quad\text{swap 8,2}\\
       3,\ldots,1,2,7,8,9,4,6\quad\text{swap 7,1}\\
       3,2,1,5,7,8,9,4,6\quad\text{swap 5,2}\\
-      1,2,3,\lodts
+      1,2,3,\ldots
       $$
 - [ ] 52 see the ans
   if only one element, then $m=k=0$, just return back.
@@ -3470,6 +3490,237 @@ $$
   - see the ans
     - before the loop, $i$ is undefined
 - [x] 12 I just use $a=dq+r$ this invariant.
+### supplementary
+- 2~10,14~18,19,20,22(similar to 21),28,32~34,42,70,74 skipped
+- [x] 12 $(64k-56n-55)*9+(56n+55)+56=64*9k-64*7n+8*(7-55)=64(9k-7n)+64*(1-7)$
+- [ ] 21 
+  basis: k=0,1
+  inductive: $(f_k+f_{k-1})f_n+(f_k+f_{k+1})f_{n+1}=f_{n+k-1+1}+f_{n+k+1}=f_{n+k+1+1}$
+- [ ] 24
+  $$
+  \text{let }F(m,n)=\frac{m(m+1)\ldots(m+n-1)}{n!}\\
+  \text{basis: }F(m,1)\text{ is trivial}\\
+  F(m,n)=F(m-1,n)+F(m,n-1)=\ldots+F(m-1,n-1)+F(m,n-1)=F(1,n)+\ldots
+  $$
+- [ ] 26
+  $$
+  LHS=\frac{sin((n+\frac{3}{2})x)-sin((n+\frac{1}{2})x)}{2}
+  +\frac{sin((\frac{2n+1}{2})x)-sin(\frac{1}{2}x)}{2}\\
+  RHS=\frac{sin((\frac{2n+3}{2})x)-sin(\frac{1}{2}x)}{2}
+  $$
+- [ ] 30
+  let $F(k):b^k\le n<b^{k+1}\Rightarrow n=a_k\ldots$
+  Then the basis step $F(0)$ is trivial.
+  if $F(k)$ then 
+  also $F(k+1)$ because $n/b\in [b^k,b^{k+1})$
+  - see the ans for uniqueness proof
+- [ ] 31
+  in summary,
+  the $k+1$ lines for $x+y\le k$ can only contain more $k$ points at $x+y\le k+1$, so contradiction.
+- [ ] 36
+$$
+\begin{align*}
+  (x_{i-1}x_j+1)(x_{i+1}x_j+1)(x_{j-1}x_i+1)(x_{j+1}x_i+1)=&x_j^2 x_i^2 x_{i-1} x_{i+1} x_{j-1} x_{j+1}\\
+  &+x_j x_i^2 x_{i+1} x_{j-1} x_{j+1}+x_j x_i^2 x_{i-1} x_{j-1} x_{j+1}
+  +x_j^2 x_i x_{i-1} x_{i+1} x_{j+1}+x_j^2 x_i x_{i-1} x_{i+1} x_{j-1}\\
+  &+x_j^2 x_{i-1} x_{i+1}+x_j x_i x_{i-1} x_{j-1}+x_j x_i x_{i-1} x_{j+1}
+  +x_j x_i x_{i+1} x_{j-1}+x_j x_i x_{i+1} x_{j+1}
+  +x_i^2 x_{j+1} x_{j-1}\\
+  &+x_{i-1}x_j+x_{i+1}x_j+x_{j-1}x_i+x_{j+1}x_i\\
+  &+1\\
+  (x_{i-1}x_i+1)(x_{i+1}x_i+1)(x_{j-1}x_j+1)(x_{j+1}x_j+1)=&x_j^2 x_i^2 x_{i-1} x_{i+1} x_{j-1} x_{j+1}\\
+  &+x_j x_i^2 x_{i+1} x_{i-1} x_{j+1}\ldots\text{ here we will get not equal items}
+\end{align*}
+$$
+  - see [this](https://math.stackexchange.com/questions/4820561/how-to-prove-x-1-frac1x-1-cdotsx-n-frac1x-n-ge-x-1-frac1x-2?noredirect=1#comment10259361_4820561) for cyclic meaning and [this](https://math.stackexchange.com/questions/4820561/how-to-prove-x-1-frac1x-1-cdotsx-n-frac1x-n-ge-x-1-frac1x-2?noredirect=1#comment10259372_4820561) extra solution.
+- [ ] 38 see the ans
+  > Thus c and all the cities with a one-way road to c have a direct road to $c_{k+1}$.
+  > All the remaining cities must have a one-way road from them to a city with a one-way road to c (that was part of the definition of c), and so they have paths of length 2 to $c_{k+1}$, via some such city.
+  suppose $c_i$ reaches $c$ "via exactly one other city" $c_j$
+  then $c_j$ can directly reach $c_{k+1}$ by the 1st quote.
+  so $c_i$ reaches $c_{k+1}$ 
+  "via exactly one other city" $c_j$.
+
+  Then 3 cases $c$, ones which can directly reach  and ones reaching via one other are all considered.
+- [ ] 40
+  - here we can't directly add all fuel to prove that it is possible to "complete a lap by obtaining gas from other cars"
+    beacuse it **may be not able to reach the next**
+    > at least one car c in the group has enough fuel to reach the next car in the group.
+  - > now pretend that the car d just ahead of car c is not present, and instead the fuel in that car is in c’s tank
+    here the pretension is allowed because
+    - > some car in this situation can complete a lap by obtaining fuel from other cars as it travels around the track.
+      let this car be $k$
+      the fuel of $c$ is $f_c$ and amount of fuel from $c$ to $d$ is $a_c$
+      assume $c->d->e$
+      - Then with the pretension, from $k$ to $e$, the fuel amount change is $f_{kc}-a_{kc}+(f_c+f_d)-(a_c+a_d)$
+        without the pretension, similarly, $f_{kc}-a_{kc}+(f_c-c_c)+(f_d-c_d)$ which is same as the above.
+- [ ] 43
+  - see the ans
+    - > $a_j = 2^{2^{a_{j−2}}}$ is a multiple of $2^s$ 
+      here $a_{j-1} = 2^{a_{j−2}}$ is enough
+    - TODO [proof of Euler's theorem](https://en.wikipedia.org/wiki/Euler%27s_theorem#Proofs)
+    - > for some integer $t_i$ , $a_i = t_i r + c$.
+      more specifically to say, $a_i = t_i r + c,i>k$, so we can use induction.
+- [ ] 44
+  1. trivial 
+  2. if $np-q>p$ then we can choose smaller $n'=n-1$ with $n'p-q>0$, contradiction
+    so $0<np-q<p$ then use IH.
+  - see the ans
+    - > The only thing left to check is that p′/q′ < 1/n
+- [x] 46
+  $$
+  M(101)=91\quad\text{trivially}\\
+  89<n<101,M(n+1)=91\Rightarrow M(n)=M(n+11-10)=M(n+1)\\
+  78<n\le 89,M(n+11)=91\Rightarrow M(n)=M(91)=91\\
+  \text{Then similar to above for the rest.}
+  $$
+  - see the ans for one more elegant description of the above to convey the same idea.
+- [x] 48
+  $R_{n+1}=R_{n}\oplus A_{n+1}$
+  then either only in $R_{n}$, i.e. odd numbers of 
+  $A_1,\ldots,A_n$,
+  or only in A_{n+1}, then even numbers of $A_1,\ldots,A_n$ plus $A_{n+1}$
+- [ ] 49 [see](#5_supplementary_49)
+- [ ] 50 
+  - see [this](https://math.stackexchange.com/questions/339750/greatest-number-of-regions-we-can-get-when-dividing-with-lines-and-circles#comment4097417_339853)
+    > the number of regions added by plane $n$ is the number of regions split by plane $n$ which is the number of regions into which the previous $n−1$ planes divides plane $n$
+    "the number of regions split by plane $n$" is equivalent to "plane $n$ is *splitted into regions*".
+    So just think as plane $n$ is fixed, then "the previous $n−1$ planes" interset with plane $n$,
+    > any three of these planes have exactly one point in common
+    this implis no plane pairs are parallel, then every plane will interset with plane n with one lines,
+    so it becomes **$n-1$ lines**,
+    then "three of these planes have exactly one point" becomes "two of these lines have exactly one point"
+    This exactly means that $n-1$ lines split the plane $n$ into $R_2(n−1)$ regions.
+    - [similarly](https://math.stackexchange.com/questions/339750/greatest-number-of-regions-we-can-get-when-dividing-with-lines-and-circles#comment4097420_339853) for $\mathbb{R}^4$ although it is not easy T visualize.
+  - The above is same as the ans
+- [ ] 51 see [this](https://math.stackexchange.com/a/1965091/1059606)
+  - it should be $t\sqrt{2}-t=(t-s)\sqrt{2}>0$
+    then $t-s<t$ is minimal, so contradiction.
+    - This is just what the hint means
+      > Then show that $a\sqrt{2} − a$ is a smaller positive integer of this form.
+  - > then contradicting the fact it has a *minimal* element
+    so there is no such a "nonempty set of positive integers" $S$ 
+    - this is just [infinite descent](https://en.wikipedia.org/wiki/Proof_by_infinite_descent)
+- [ ] 52 see the ans
+  - checking the entire is enough.
+- [x] 54 the algorithm to calculate $\gcd(a_{n-1},a_n)=c_{n-1}a_{n-1}+c_n a_n$ see 4.3-45
+  - IMHO the induction should be
+    $\gcd(a_1,\ldots,a_n,a_{n+1})=\gcd(\gcd(a_1,\ldots,a_n),a_{n+1})\overset{\text{IH, 4.3-45}}{=}\gcd(\sum_{i=1}^n c_i*a_i,a_{n+1})\overset{\text{4.3-45}}{=}c'(\sum_{i=1}^n c_i*a_i)+c''(a_{n+1})$
+- [ ] 56 similar to one exercise before.
+  - IMHO, $10x0$ and $0x01$ should be considered.
+  - > If the graph stays above the axis, then the string must be of the form $00x1$
+    ~~this is based on taking $x$ as one whole entity.~~
+    ~~because $00111\overbrace{0\ldots 0}^{\text{six 0es}}1$ will cross the axis.~~
+    The above can be splitted into $001$, $110000$, $001$.
+- [ ] 58
+  1. the basis set $abc,bac,acb$ are trivial
+    - suppose $abcx$ and $abxc$, etc, coincide, then $bck$ or $cx_1k$ or $x$ where $k$ is one letter is in the basis set, then $abcabc$ is one case of this condition between $abcx$ and $xabc$.
+    - $abxc$: 
+      $abx_1$ -> $abc$ but no element starting with $c$ in the basis set, 
+      $x_2x_3c$ ~~same as the above.~~ similarly not possible because no $ab$
+      $bx_1x_2$ -> $abacbc$ with $axbc$.
+    - $axbc$:
+    - TODO the above method to find the duplicate seems to drop something.
+  [x] 2. trivial.
+- [ ] 60 ~~$2^{\frac{6}{2}-1}=4$ possibilities~~
+  $()(),(())$ for 4 symbols
+  - see the ans
+    - the above should be $3^{\frac{6}{2}-1}=9$ by removing duplicates at each exponent calculation.
+      so $3^1-1$ when 4 symbols
+      and then $1*3+1*2=5$ because $()$ before or after $()()$ are same.
+- [x] 62 ~~we can also~~ 
+  > Otherwise x = (a) or x = ab
+  IMHO, here we should say "use induction on the usage count of the rule".
+- [ ] 64
+  $$
+  \begin{align*}
+    \text{only if:}&\\
+    &\text{basis step: }\\
+    &N(\lambda)=0\\
+    &\text{inductive step: }\\
+    &N((x)):\\
+    &\quad N((x))=1-1+N(x)=0\\
+    &\quad N(()>0,N((substr(x))>N(substr(x))\ge 0\\
+    &N(xy):\\
+    &\quad N(xy)=N(x)+N(y)=0\\
+    &\quad N(substr(x))\ge 0,N(x\; substr(y))=N(substr(y))\ge 0\\
+    \text{if:}&\\
+    &N(\lambda)=0,\text{let }u_1\text{ be the first prefix so that }N(u_1)=0\\
+    &\text{trivially the 1st character must be (,then due to }N(u) \ge 0,\text{ we must have pattern }(x)\in B\\
+    &\text{then with "(" after something like "(()" we also have pattern } xy \in B\tag*{$\blacksquare$}
+  \end{align*}
+  $$
+  - see the ans
+    - the above "only if" is right, while "if" is not strictly.
+    - > there are two cases
+      i.e. either $N(u)>0$ inside ($N(u)\ge 1$) or at some inside point $N(u)=0$ ($w=ab$).
+    - > Furthermore $N(u)\ge 0$ for every prefix u of x, since if N(u) dipped to −1 , then N((u) = 0 and we would be in the first case
+      This should be be based on IH because $length(x)<length(u)$
+      here trivially we should be based on **even length**.
+      - so "N(a) = N(b) = 0" implies even.
+        - and
+          > $N(u)\ge 1$ for all nonempty prefixes u of w, other than w itself
+          implies $N(u_{last})=1,N(w)=0$, i.e. the last character is $)$ and 
+          $N(x)=N(u_{last})-1=0$ implying x has even length.
+    - 
+- [ ] 65
+  1. we can also $assert(\text{n is even})$
+  2. IMHO $x \in T′ \wedge y \in T′ \cup S′$
+- [x] 66 this is same as one exercise before.
+- [ ] 68
+  similar to p395
+$$
+\text{let q be outputing }factorial(n)\\
+\begin{align*}
+  &p\wedge (n=0)\{return\; 0\}q&\text{ basis step}\\
+  &p\wedge \neg(n=0)\{return\; n \cdot factorial(n − 1)\}q&\text{ inductive step}\\
+\hline\\
+&p\{\ldots\}q
+\end{align*}
+$$
+- [ ] 71 see the ans
+  if "$a(n)$ is uniquely defined" isn't met, then 
+  either $a(n-1)$ or $a(a(n-1))$ has two definitions.
+  Then if $a(n-1)\le n-1$, then these two cases are same if using strong induction.
+  Then based on strong induction, if $a(k),k\le n$ is well defined, then $a(a(n))$ is well defined, same for $a(n+1)$
+- [ ] 72
+$$
+\mu^2n=1-\mu n\\
+(1-\mu n)-\lfloor(1-\mu n)\rfloor\overset{\mu n>0}{=}-\mu n-(-\lfloor(\mu n)\rfloor-1)\\
+\text{then combine all together, }(\mu n-\lfloor(\mu n)\rfloor)-\mu n+\lfloor(\mu n)\rfloor+1=1
+$$
+$$
+0\le \alpha<1-\mu\Rightarrow (1 + \mu)(1 − \alpha)\in((1+\mu)*\mu=1,1+\mu<2]\\
+\text{Then }\lfloor(1 + \mu)(1 − \alpha)\rfloor+\lfloor\alpha + \mu\rfloor=1+0=1\\
+1-\mu\le \alpha<1\Rightarrow (1 + \mu)(1 − \alpha)\in(0,(1 + \mu)*\mu=1)\\
+\text{Then }LHS=0+1=1
+$$
+  - see the ans
+    - $\alpha\neq 1-\mu$ because otherwise $(n+1)\mu=1+\lfloor n\mu\rfloor$ contradiction.
+    - in summary
+      $$
+      \alpha=n\mu-\lfloor n\mu\rfloor\in (0,1)\\
+      \text{put }a(n) = \lfloor (n+1)\mu\rfloor\text{ in the recursive equation and substitute }\lfloor n\mu\rfloor
+      \text{ with }\alpha\\
+      \text{Then we need to prove }LHS=\lfloor n\mu+\mu\rfloor+\lfloor(\lfloor n\mu\rfloor+1)\mu\rfloor=n=RHS\\
+      \Rightarrow LHS=\lfloor n\mu+\mu\rfloor+\lfloor n\mu^2-\alpha\mu+\mu\rfloor\\
+      \text{since no terms can be cancelled, so we add }\lfloor\ldots\rfloor\\
+      \begin{align*}
+        LHS&=\lfloor n\mu\rfloor+\lfloor\alpha+\mu\rfloor+\lfloor n\mu^2\rfloor+\lfloor 1-\alpha-\alpha\mu+\mu\rfloor\\
+        &=\ldots+\lfloor (1-\alpha)(1+\mu)\rfloor\\
+        &=1+\lfloor n\mu\rfloor+\lfloor n\mu^2\rfloor\\
+        &=1+n\mu+n\mu^2-1=(\mu^2+\mu)n=n\tag*{$\blacksquare$}
+      \end{align*}
+      $$
+      - The key is to find $\alpha$
+- [ ] 73
+  1. $LHS=\lfloor n\mu\rfloor+\lfloor\alpha+\mu\rfloor=\overset{\alpha<1-\mu}{=}\lfloor n\mu\rfloor$
+  - see the ans for how to prove without $\alpha$ as the media
+- [ ] 76 see the ans
+- [ ] 77
+  - by the generation pattern, to get the last n, we need reach
+    $a_1$ 1, $a_2$ 2, $\ldots$, $a_n$ n, so $f(n)=\sum_{k=1}^n a_k$
+  - see the ans for the rest
 ## 9
 ### 9.6
 - [ ] 53
