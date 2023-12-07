@@ -1,7 +1,7 @@
 @ArnoMittelbach Could I ask some small questions? 1. With only `\let\mylb\\ \renewcommand{\\}{& x \mylb[1cm]}` it only works for text instead of the `align*` block. What causes this weird result? 2. With yours, only `align*` but not text works. After some search especially https://tex.stackexchange.com/a/383381/308105, I know `\let` will make `\myhalign` expansion same as `\halign`. Then the above means `\let\myhalign\let\mylb\\...\myhalign` which is nested. So how does this nested block make `\\` in the `align*` block work?
-After viewing this [reference Tex SX link](https://tex.stackexchange.com/a/39020/308105) referred to by many Tex SX links, I viewed the `ltoutput.dtx` file and found the `\makeatletter\setlength{\@fptop}{0pt}\setlength{\@fpsep}{3pt}\makeatother` can solve the above problem. See the [codes](https://www.overleaf.com/read/jfzppwscpxqm#375fa6) which is a bit different from the above in my 2nd comment. Hope this can help the future readers.
-
 check p10 whether the ideas of each chapter are mastered.
+# outline
+much of chapter 2,5,6 have been learned before.
 # [online resources](https://highered.mheducation.com/sites/125967651x/student_view0/web_resources_guide.html) from [this](https://highered.mheducation.com/sites/125967651x/information_center_view0/)
 - Discrete Mathematics and Its Applications [Student’s Solutions Guide](https://www.academia.edu/36410920/Students_Solutions_Guide) pdf with the unavailable version.
 - [test bank](https://www.stuvia.com/en-us/doc/2018491/discrete-mathematics-and-its-applications-8th-edition-rosen-test-bank.pdf)
@@ -602,7 +602,10 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   $p\{S_1\}q$,$q\{S_2\}r$ is trivial
   $r\{S_3\}s$ -> ~~when out~~ after each iteration, $x=mk'+m=m(k'+1)=mk$ where $k'$ is the last iteration $k$.
   $s\{S_4\}t$ because $product=mn=m|n|\text{ when n is positive or }-m|n|\text{ when n is negative}$
-## number theory
+## 6
+### 6.1
+- [class D](https://www.meridianoutpost.com/resources/articles/IP-classes.php) class E ipv4
+### number theory
 - [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
@@ -3581,6 +3584,15 @@ $$
   $A_1,\ldots,A_n$,
   or only in A_{n+1}, then even numbers of $A_1,\ldots,A_n$ plus $A_{n+1}$
 - [ ] 49 [see](#5_supplementary_49)
+  - [generalization](https://math.stackexchange.com/q/4821113/1059606) to sphere similar to 50
+    Then I *rethought* the 5-Supplementary-49 exercise which is about $n$ circles dividing the plane, and I **generalized it to $n$ spheres** with the following *generalized* constraints: every two spheres intersect in exactly one **circle** and no three spheres contain a common circle. Then each new added **arc plane** caused by intersection (similar to "the number of regions into which the previous $n−1$ planes divides plane $n$" in the above comment) between two spheres will divide the region the arc plane is inside.
+    So we can also have the following equations for the sphere version:
+    $$
+    R_2(0)=1,R_2(n)=n^2−n+2,n\ge 1\\
+    R_3(n)-R_3(n-1)=R_2(n-1),n\ge 1
+    $$
+
+    In short, the above maybe **generalizes plane to curve plane** (more specifically arc plane here).
 - [ ] 50 
   - see [this](https://math.stackexchange.com/questions/339750/greatest-number-of-regions-we-can-get-when-dividing-with-lines-and-circles#comment4097417_339853)
     > the number of regions added by plane $n$ is the number of regions split by plane $n$ which is the number of regions into which the previous $n−1$ planes divides plane $n$
@@ -3721,6 +3733,82 @@ $$
   - by the generation pattern, to get the last n, we need reach
     $a_1$ 1, $a_2$ 2, $\ldots$, $a_n$ n, so $f(n)=\sum_{k=1}^n a_k$
   - see the ans for the rest
+## 6
+### 6.1
+- 2~12,18,22 (similar to 20),28~40,
+  44,48~50,
+  54~62,66,72 (similar to one exercise in chapter 5, TODO find this specific exercise),
+  76~78 skipped
+- [ ] 14 see the ans where we need care about $n<2$
+- [ ] 16 $4*26^3$
+  - see the ans
+    - the above will duplicately count $x...$ and $.x..$, etc.
+- [ ] 20 see the ans for calculation using detailed maths symbols
+- [ ] 22
+  h. if directly count, then $0$ should be manipulated specifically because the leading digit is not allowed as 0 automatically.
+    $4+9*1+8*4+8*9*1+8*1*4+7*8*4=373$ where 1 corresponds to the corresponding location digit is 0.
+- [ ] 24
+  c. here if from right to left, then the last digit will be splitted into two cases, i.e. either 0 in the right 3 digits or no 0es in the right 3 digits.
+- [ ] 26
+  1. see the ans. Here it takes 3 or 4 times as also twice and also allows leading digit 0.
+  2. here "exactly" excludes four 9s.
+- [x] 42 $C_{4}^3*C_{3}^1*4*3$
+- [x] 46 $C_{10}^4*\frac{4!}{4}$ is also ok.
+- [ ] 52 see the ans this is similar to EXAMPLE 17.
+- [ ] 53 similar to above $2^5+2^4*(6-1)+2^4+2^3*(5-1)-(2+2)*2-5$
+  here $-5$ is due to
+```bash
+000yy
+1000y
+x1000
+xx1000
+xxx1000y # here xxx should exclude 000, then multiply by 2 choices of y, we minus 2*1
+xxxx1000 # here we exclude 000y(2 choices),1000 so minus 3
+```
+  since $4*2\not<8$, so we don't need to minus more for "four consecutive 1s".
+  The above just means same as [this](https://math.stackexchange.com/a/178610/1059606).
+  - Also [see](https://math.stackexchange.com/a/922692/1059606) which uses induction so it doesn't need to care about the above trivial duplicates.
+    - > With the initial conditions
+      check with $n=3$
+     - Also [see](https://math.stackexchange.com/a/4821956/1059606)
+        ```python
+        a=0
+        b=0
+        c=0
+        sum=0
+        for i in range(3,8+1):
+          sum=a+b+c+2**(i-3)
+          a=b
+          b=c
+          c=sum
+          print("F({0})={1}".format(i,sum))
+        ```
+  - Also see [this recursion formula][consecutive_zeros_in_bit_strings]
+    it is based on constructing with 
+    either the first $n-1$ bits have $000$ ($2a_{n-1}$) or not ($2^{n-4}-a_{n-4}$)
+    the latter case is due to that we must append 0, so the last 3 of the first ${n-1}$ bits must be 
+    $100$ where $00$ is to ensure $000$ after appending and $1$ is to ensure no $000$ in $a_{n-1}$.
+    So we only needs to care about $a_{n-4}$ because 
+    $1000$ must be ended for $a_{n}$
+  - TODO [Goulden Jackson method](https://math.stackexchange.com/questions/4170314/find-a-recurrence-relation-for-the-number-of-bit-strings-of-length-n-by-goulde)
+- [ ] 64 see the ans
+- [ ] 66
+  see [this](https://math.stackexchange.com/a/3358299/1059606) (TODO generating function) which is similar to [consecutive_zeros_in_bit_strings]
+  so in this exercise case 
+$$
+a_i=2^i,i=0,1,2\\
+a_n=a_{n-1}+a_{n-2}+a_{n-3},n\ge 3\quad\text{here we append 1 for n-1,10 for n-2,100 similarly}
+$$
+- [ ] 68 it is just [$2*C_{7}^4$](https://math.stackexchange.com/a/581540/1059606) which is same as [this](http://mathcentral.uregina.ca/QQ/database/QQ.09.01/michelle1.html) where $\frac{7!}{4!3!}$ 
+  means all 7 games are labelled differently ($7!$) 
+  then $4!$ and 
+  $3!$ is based on the division rule to exclude duplicate ones.
+- [ ] 70 similar to EXAMPLE 24
+- [x] 74 $2^n$ rows where each row has two possibilities, so $2^{2^n}$
+## 8
+### 8.1
+- [ ] 29
+  TODO why not $C_{m}^n$
 ## 9
 ### 9.6
 - [ ] 53
@@ -3729,6 +3817,10 @@ Redo 5.4-48
 ### 11
 # TODO after abstract algebra
 - [this](#RSA_Cauchy_theorem)
+# TODO after Computer Networking
+- 6.1 -> "1111111 is not available as the netid of a Class A network"
+  also "hostids consisting of all 0s and all 1s are unavailable".
+- 
 
 ---
 
@@ -3748,6 +3840,7 @@ Redo 5.4-48
 <!-- math stackexchange -->
 [comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one]:https://math.stackexchange.com/a/4804647/1059606
 [lower_bound_second_largest_element]:https://math.stackexchange.com/a/1672/1059606
+[consecutive_zeros_in_bit_strings]:https://math.stackexchange.com/a/178613/1059606
 
 <!-- cs stackexchange -->
 [O_Theta_Omega_relation_with_limit]:https://cs.stackexchange.com/a/827/161388
