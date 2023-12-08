@@ -1,4 +1,19 @@
-@ArnoMittelbach Could I ask some small questions? 1. With only `\let\mylb\\ \renewcommand{\\}{& x \mylb[1cm]}` it only works for text instead of the `align*` block. What causes this weird result? 2. With yours, only `align*` but not text works. After some search especially https://tex.stackexchange.com/a/383381/308105, I know `\let` will make `\myhalign` expansion same as `\halign`. Then the above means `\let\myhalign\let\mylb\\...\myhalign` which is nested. So how does this nested block make `\\` in the `align*` block work?
+I can solve the above problem by another generating function form: 
+$$
+a(x)=\sum_{i=0}^n a_i x^i\\
+xa(x)=\sum_{i=0}^n a_i x^{i+1}\\
+x^2a(x)=\sum_{i=0}^n a_i x^{i+2}\\
+(1-x-x^2)a(x)=a_0+(a_1-a_0)x=1+x\\
+a(x)=\frac{1+x}{1-x-x^2}
+$$
+the form is same as the above one. But how does these two become same? Based on $a_1=2,a_2=3$, what does the above coefficient $1$ in $x$ and $x^2$ mean? Since $x^2=x*x$, does "0" and "01" also has this relation? And what does the ending "removing the rightmost '0'" mean?
+
+@Henry Thanks for your comments. With your clarification help, I found my original generating function reference link may not fit in this specific problem. Then I refer to [this about Generating Function for recurrence](https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Combinatorics_(Morris)/02%3A_Enumeration/08%3A_Generating_Functions_and_Recursion/8.03%3A_Using_Generating_Functions_to_Solve_Recursively-Defined_Sequences).
+
+1. Yes. It seems these two generating functions are different. Since in my above equations which is based on the original answer link "Recurrence" part referenced in the question, I let $a_0=1$ and $a_1=2$ which corresponds to "0" and "1". Then $a_2=3$ corresponds to "10","01","00". Then could you say in detail how the above $x+x^2$ deals with length 3 maybe and $(x+x^2)^2$ deals with length 6 maybe (why can we multiple $x+x^2$ to get the corresponding coefficients $a_i$ here)? And why does $x$ and $x^2$ both has coefficient "1" when length 1 and length 2 have more than 1 related strings? Thanks beforehand.
+
+2. After expanding $\frac{1+x}{1-x-x^2}$, it is $1+2x+\ldots+8x^4$ which doesn't multiple $\frac{1}{x}$, so why does the answer emphasize that $\frac{1}{x}$ corresponds to "removing the rightmost '0'"?
+
 check p10 whether the ideas of each chapter are mastered.
 # outline
 much of chapter 2,5,6 have been learned before.
@@ -3793,12 +3808,27 @@ xxxx1000 # here we exclude 000y(2 choices),1000 so minus 3
   - TODO [Goulden Jackson method](https://math.stackexchange.com/questions/4170314/find-a-recurrence-relation-for-the-number-of-bit-strings-of-length-n-by-goulde)
 - [ ] 64 see the ans
 - [ ] 66
-  see [this](https://math.stackexchange.com/a/3358299/1059606) (TODO generating function) which is similar to [consecutive_zeros_in_bit_strings]
+  see [this](https://math.stackexchange.com/a/3358299/1059606) (~~TODO~~ ~~generating function~~) which is similar to [consecutive_zeros_in_bit_strings]
   so in this exercise case 
 $$
 a_i=2^i,i=0,1,2\\
 a_n=a_{n-1}+a_{n-2}+a_{n-3},n\ge 3\quad\text{here we append 1 for n-1,10 for n-2,100 similarly}
 $$
+  - [generating function](https://math.stackexchange.com/questions/4822021/how-to-use-generating-functions-to-solve-the-problem-number-of-bit-strings-of-l?noredirect=1#comment10263914_4822021)
+    See this [code](./miscs_snippets/py_codes/usage.py) for calculation of taylor expansion coefficients.
+    - here $(x+x^2)^k$ means
+      we can concatenate multiple $0,01$ together.
+      e.g. $(x+x^2)^2$ has $2x^3$ corresponding to $0|10$ and $10|1$ both having length 3 (here $|$ is one delimiter for denotation)
+    - based on the above pattern, only one $0$ (so coefficient $1$ in $x$ which corresponds to length 1)
+      and one $10$ (so coefficient $1$ in $x^2$ which corresponds to length 2)
+      are enough to construct all possibilities.
+      - It is better to "lop off" the ending "0" at the 1st step $x+x^2$ to help understanding.
+    - it also explains [$0,01$ version](https://math.stackexchange.com/questions/4822021/how-to-use-generating-functions-to-solve-the-problem-number-of-bit-strings-of-l?noredirect=1#comment10263823_4822021)
+    - This is one more [direct different interpretation of $a_n=a_{n-1}+a_{n-2}$](https://math.stackexchange.com/questions/4822021/how-to-use-generating-functions-to-solve-the-problem-number-of-bit-strings-of-l?noredirect=1#comment10263807_4822021)
+    - > as you know the minimum and maximum numbers of strings consisting of 0  and 10  you need to get one with five bits (before you lop off the final 0 )
+      i.e. get one with *four* bits corresponding to $x^4$ after lopping.
+    - See this [summary](https://math.stackexchange.com/questions/4822021/how-to-use-generating-functions-to-solve-the-problem-number-of-bit-strings-of-l?noredirect=1#comment10262960_4822021) to verify understanding of the problem
+      kw: stringing together, do not need that final 0
 - [ ] 68 it is just [$2*C_{7}^4$](https://math.stackexchange.com/a/581540/1059606) which is same as [this](http://mathcentral.uregina.ca/QQ/database/QQ.09.01/michelle1.html) where $\frac{7!}{4!3!}$ 
   means all 7 games are labelled differently ($7!$) 
   then $4!$ and 

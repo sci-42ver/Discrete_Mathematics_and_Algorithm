@@ -9,3 +9,4 @@
 *-clean.tex
 *.toc
 main.pdf
+*.pyc
