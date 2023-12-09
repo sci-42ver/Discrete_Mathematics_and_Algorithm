@@ -490,7 +490,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   - See the [list](https://en.wikipedia.org/wiki/Modulo#In_programming_languages) of these [differences](https://stackoverflow.com/a/3883019/21294350) and the python one is [used](https://stackoverflow.com/a/1907585/21294350) in the number theory.
 - > 17-sided regular polygon could be drawn using just a ruler and compass
   how this is [related](https://crypto.stanford.edu/pbc/notes/numbertheory/17gon.html#:~:text=In%201796%2C%20a%20teenage%20Gauss,quadratic%20equations%20over%20the%20rationals.) with number theory?
-- [mathematical analysis](https://en.wikipedia.org/wiki/Mathematical_analysis#Main_branches)
+- [mathematical analysis](https://en.wikipedia.org/wiki/Mathematical_analysis#Main_branches) includes calculus.
 - > there is no multiplicative inverse of 2 modulo 6
   [TODO](https://math.stackexchange.com/a/2670313/1059606)
 - TODO why define [Multiplicative group](https://math.stackexchange.com/a/135928/1059606)?
@@ -620,6 +620,24 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 ## 6
 ### 6.1
 - [class D](https://www.meridianoutpost.com/resources/articles/IP-classes.php) class E ipv4
+### 6.2
+- TODO [infinitely many primes in arithmetical progressions an + b when a and b are relatively prime](https://math.stackexchange.com/a/806948/1059606)
+- [EXAMPLE 9](https://math.stackexchange.com/a/1552933/1059606)
+  > This means that the remaining nine servers are not enough for the other 10 or more workstations to simultaneously access different servers.
+  it means $S_{2\sim 10}$ can't afford the rest workstations, i.e. "10 or more workstations", after excluding "at most 5 workstations"
+  > there’s no harm in assuming that the workstations to which $S_1$ is directly connected are among the last five, $W_{11},W_{12},W_{13},W_{14}$, and $W_{15}$
+  this is trivial, or see [this](https://math.stackexchange.com/questions/4820561/how-to-prove-x-1-frac1x-1-cdotsx-n-frac1x-n-ge-x-1-frac1x-2#comment10259361_4820561) -> [this](https://en.wikipedia.org/wiki/Cyclic_permutation)
+  Or it can be seen as that we can label workstations arbitrarily whatever we want to do.
+- based on [this](https://math.stackexchange.com/a/42631/1059606) (also see [more graphs](https://en.wikipedia.org/wiki/Theorem_on_friends_and_strangers))
+  > either three mutual friends or three mutual enemies
+  so here two cases of "either or" can be achieved at the same time, i.e. we can draw *both* one red and one blue triangles among six vertices.
+- EXAMPLE 7 b
+  here
+  > We do not use the generalized pigeonhole principle to answer this question, because we want to make sure that there are three hearts, not just three cards of one suit.
+  it means the "pigeonhole principle" doesn't care about what hole the pigeon is in, so when specifying hole (i.e. "hearts" here), we can't use the principle.
+- > either $a_s < a_t$ or $a_s > a_t$
+  implies "either strictly increasing or strictly decreasing".
+- After all, the Pigeonhole Principle is based on chapter 1 contradiction proof, i.e. assuming not $at least$, then at most -> leading number contradiction.
 ### number theory
 - [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
@@ -3752,7 +3770,7 @@ $$
 ### 6.1
 - 2~12,18,22 (similar to 20),28~40,
   44,48~50,
-  54~62,66,72 (similar to one exercise in chapter 5, TODO find this specific exercise),
+  54~62,66,72 (similar to one exercise in chapter 5, TODO find this specific exercise),75
   76~78 skipped
 - [ ] 14 see the ans where we need care about $n<2$
 - [ ] 16 $4*26^3$
@@ -3835,6 +3853,88 @@ $$
   $3!$ is based on the division rule to exclude duplicate ones.
 - [ ] 70 similar to EXAMPLE 24
 - [x] 74 $2^n$ rows where each row has two possibilities, so $2^{2^n}$
+### 6.2
+- 2,6~12,13(similar to 12),14~18(18 similar to 16),24,34~36 including 35, skipped
+- [ ] 4 similar to EXAMPLE 7
+  > Note that the number of balls was irrelevant
+  it means "the number of balls" of specific color
+- [ ] 20 see the ans using contradiction.
+  this is one lemma used in EXAMPLE 13
+- [ ] 22
+  $5,7,10,15,17$ since $2$ substituting $5,7$ and $3$ substituting $10,15$ will decrease the number.
+  - see the ans for decreasing.
+- [ ] 25
+  to make less "person both of whose neighbors are boys", we will always make neighbors one boy and one girl.
+  Then $BBGGBBGG\ldots$, since $25$ is odd, so at last $BBGG\ldotsBG$, the last girl is "a person both of whose neighbors are boys".
+  - see the ans
+    - this can be generalized to $2(2n+1),n\ge 1$ people with 
+      $2n+1$ boys and girls,
+      then $n+1$ even/odd in $2n+1$ even/odd seats implies 2 consecutive. This can be checked by selecting the closest next non-consecutive even/odd seats which at most selects $n$.
+- [ ] 26
+  - also see [this](https://math.stackexchange.com/a/1986036/1059606)
+    - $S=A \cup B \cup C$ is trivial
+    - > So at most 5  problems have been solved by at most 2  girls
+      because if 6, then $2*6<21$ is contradiction.
+  - Also see [community by AOPS](https://artofproblemsolving.com/community/c6h17461p119191)
+    - TODO (the basic idea of the above is same as the book ans, so we can ignore it if understanding the book one)
+      > In this case it is clear that more than $21\times 5$ problems in A have been marked since $21\times 5 \times 2<21\times 11$
+      what does the above "$21\times 5 \times 2<21\times 11$" mean?
+    - The above one may be not well reviewed, so has many small typoerrors which influences reading.
+  - The book ans is same as [this one](https://math.stackexchange.com/a/1985833/1059606)
+- [ ] 27
+  ~~start from $a_1$, then find increasing sequence beginning from it.~~
+  this is $O(2^n*n)$, not efficient.
+  - here $OK$ has no influence on the flow, so it can be removed.
+  - $set\coloneqq set + 1$ and 
+    $set(j) = 1 $ implies this algorithm checks all possible number sets, obviously $2^n$ count.
+- [ ] 28 see the ans for one more elegant solution
+  - if similar to EXAMPLE 13
+    then A-(enemy)-B,C with B-(friend)-C
+    A-(friend)-D,E with D-(enemy)-E
+    this excludes 2 triple combinations
+    - Then the rest 4 pair relations:
+      C-D,B-D different from B-C, so enemy
+      similar for C-E different from C-D,D-E, so friend
+      B-E different from B-C,C-E, so enemy.
+    - But this solution is not systematic which is difficult to prove no 3 friends/enemies.
+  - see the ans
+    if to select 3 friends, then 3 are adjacent, contradiction.
+    if 3 enemies, then 3 disjoint, i.e. A-C-E, contradiction.
+- [ ] 29
+  see the ans notice here either at least 4 friends or less than 4 resulting in **6 enemies**.
+- [x] 30 similar to EXAMPLE 13 where both lack some cases. So 
+  if "either three mutual enemies or four mutual friends" in 10 friends, then either three mutual enemies or **five** mutual friends
+- [x] 31
+  $R(2,n)\ge n$ is trivial because we need n people being enemies **in one case**.
+  Then with $n$ people, either at least one friend ($2$ friends) or no friend ($n$ enemies)
+- [x] 32 symmetry.
+- [ ] 40 similar to EXAMPLE 9, $4+4*4=20$
+  if $19$, ~~then exist one case, ~~
+  then one printer $P$ is connected to at most $\lfloor\frac{19}{4}\rfloor=4$ computers $C_{1\sim 4}$, 
+  Then $C_{5\sim 8}$ can't access 
+  $P$, contradiction.
+- [ ] 42 see the ans where we need symmetry which is not directly shown in the exercise description.
+- [ ] 43 similar to EXAMPLE 10.
+  The key is increasing $a_i$ denoting the number of ~~games~~ matches played on or before the jth ~~day~~ hour ~~of the month.~~
+- [ ] 44 similar to above: a,b are true.
+  - see the ans
+    - if $n\le 24$, similar to a,b
+      if $24<n\le 74$, then at least similar to d, i.e. either $a_1,\ldots,a_{n+1}$ has one pair with difference of 
+      $n$ or $a_{n+1}\ge 1+2n$, then recursively, $a_{75}> 125$
+      if $n\ge 75$, then we can let $a_i=i,i=1,\ldots,75$ as the counterexample. (notice if we can let $a_0=0$, then 75 will be met for $a_{75}-a_0$)
+- [ ] 46 see the ans for one more elegant description.
+  - if not consecutive, either all odd or all even where each has 50 elements, contradiction.
+- [ ] 47 see [this](https://math.stackexchange.com/a/2302643/1059606) which only considers $\lfloor\ldots\rfloor$ where it shows always at least one $lx-\lfloor lx\rfloor\in(0,\frac{1}{n})$ enough to prove the theorem.
+  Then we don't need to split into $n$ is even or odd cases to help with negative number cases.
+- [ ] 48 this is just one contradiction proof which is based on chapter 1.
+- [ ] 49
+  - see the ans
+    - notice here $i_k,d_k$ meaning
+    - > if there is no increasing subsequence of length n + 1
+      it means no $i_k\ge (n+1)$, i.e. 
+      $i_k\le n$
+    - compared with the original THEOREM 3 proof where it proves $\neg (p\vee q)$ leads to contradiction,
+      here it proves $\neg p \to q$ which only excludes the situation where both $p,q$ are $F$.
 ## 8
 ### 8.1
 - [ ] 29
@@ -3850,7 +3950,8 @@ Redo 5.4-48
 # TODO after Computer Networking
 - 6.1 -> "1111111 is not available as the netid of a Class A network"
   also "hostids consisting of all 0s and all 1s are unavailable".
-- 
+# TODO after algorithm
+- [6.2-27](https://leetcode.cn/problems/longest-increasing-subsequence/description/?utm_source=LCUS&utm_medium=ip_redirect&utm_campaign=transfer2china)
 
 ---
 
