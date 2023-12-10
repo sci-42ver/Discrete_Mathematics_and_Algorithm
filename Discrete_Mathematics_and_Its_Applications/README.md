@@ -3998,15 +3998,58 @@ $$
       - B(1,2) similar to [the above](#beginning_step)
         since $4=1+2+1$ so we can't let A win less.
     - Notice here B(1,3),A(3,1) relation with B(0,3),A(3,1)
-      here one $W$ after 3 $L$ will be duplicate with B(0,3),A(3,1) where A has **one un-shadowed tick and one more shot than B**, then it is disallowed.
+      here one $W$ after 3 $L$ will be duplicate with B(0,3),A(3,1) where A has **one un-shadowed tick and one more shot than B**, then it is disallowed. <a id="shadow_move"></a>
       It can be **generalized** to the rest.
   - B win
     Notice since the order matters, so we can't just mirror the above "A win" case to here.
     - The above basic idea can still apply to here.
-    - Team A does not score goals
+    1. Team A does not score goals
       - here when A(0,3), B(0,3) can't lose more
-      - 
+      - Notice here
+        conversion from A(0,4),B(2,1) to A(0,4),B(2,2) should be similar to 
+        conversion from A(1,3),B(3,0) to A(1,3),B(3,1).
+    2. Team A scores 1 goal
+      - with A(1,3),B(3,1)
+        here we can let A win whichever goal without influencing the final result.
+    - similar to [above](#shadow_move), 
+      compare A(0,3),B(3,0) with A(1,3),B(3,0) where in the former case, A and B shot with the same count, then we can **precede** A with one tick.
+      It can be **generalized** to the rest.
+    - compare A(1,3),B(3,0) with A(1,3),B(3,1)
+      we can always **precede one cross** before B when make A temporarily fixed.
+      It can be **generalized** to the rest.
+    3. Team A scores 2 goals
+      - here
+        conversion from A(0,3),B(3,0) to A(1,3),B(3,0) where in the latter case when the last tick is put at last it will be duplicate with the former case isn't similar to 
+        conversion from A(1,3),B(3,0) to A(2,2),B(4,0) where in the latter case when one of the two ticks is put at last it won't be duplicate with the former case since the last one goal of A in A(1,3),B(3,0) is cross
+        - We should also differentiate the above conversion from A(1,3),B(3,0) to A(2,2),B(4,0) from the similarity between
+          conversion from A(1,3),B(3,1) to A(2,3),B(3,1) where where in the latter case when the last tick is put at last it will be duplicate with the former case. <a id="duplicate_when_ending_tick"></a>
+      - check duplicate situations with [this](#check_order)
+        A(2,2),B(4,0):check A when A is changed. Then when A is different, there is no need to check B.
+        A(2,3),B(3,1):check A when A is re-changed.
+        A(2,3),B(3,2):check B when B is changed based on the above change sequence.
+    - Obviously we should try from A(2,1) otherwise even if B all wins as A, it can't end early.
+      It can be **generalized** to the rest.
+    - We can just increase A lost goal count when fixing its win goal.
+      Then B should win more than A starting from $3$. More specifically, it should start from `A_win+A_left_round+1`
+      It can be **generalized** to the rest.
+    - Here when checking whether B can select all possible locations without fixing one, <a id="check_order"></a>
+      it *only* needs to check inside the *current* fixed A state possibilities, because it will always be different from other rest cases due to differences of A.
+      - But When checking A, it needs to check *other* A states. See [this](#duplicate_when_ending_tick).
+      It can be **generalized** to the rest.
+  - Draw
+    ~~Here when A with $i$ goals won, to make A win, then B must lose at sometime~~
+    This has been implicitly proven in the above due to `(A_score>B_round+B_score) or (B_score>A_round+A_score)`, 
+    so they can't have same ticks (scores) even after filling the left un-kicked goals of one side with ticks.
+    More specifically
+    > both teams must score the same amount of penalties at the end of the shoot-out.
+    has nothing in common with the above situations where A or B wins.
   - Also see [code simulation](./miscs_snippets/py_codes/6-4-48/first_round.py), i.e. [my answer](https://math.stackexchange.com/a/4823248/1059606)
+  - see the ans
+    - > with no more than 10 total additional kicks *after* the two rounds
+      notice what the problem says where it doesn't say during.
+    - for the non-ending round, either (W,W) or (L,L) pair for two teams.
+      for the ending round, either (W,L) or (L,W) ordered tuple for two teams.
+  
 ### 6.4
 - [ ] 35
 ## 8

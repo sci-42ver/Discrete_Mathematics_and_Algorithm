@@ -9,6 +9,16 @@ possibilities=0
 whether to include Draw/Tied situations when counting.
 """
 INCLUDE_TIE=False
+A_zero_win_B_finally_win=0
+
+def Round_To_BitLocation(bit):
+    return 9-bit
+def BitLocation_To_Round(bit):
+    return 9-bit
+A_win=0
+B_win=0
+A_two_win_B_finally_win=0
+
 """
 Here I traverse all possibilities with some skipped which may be not optimal.
 Look forward for the improvement. Thanks beforehand.
@@ -32,16 +42,19 @@ for i in range(0,2**10):
             """
             here we assign from the MSB to use "i//(2**left_rounds)" conveniently 
             """
-            A_score+=shot_list[9-j]
+            A_score+=shot_list[Round_To_BitLocation(j)]
             A_round-=1
         else:
-            B_score+=shot_list[9-j]
+            B_score+=shot_list[Round_To_BitLocation(j)]
             B_round-=1
         """
-        quote from the book solution:
-        > the penalty kick round (or “group”) is over once one team has clinched a victory.
-        i.e. one team A must win even if the other team B won the rest un-kicked round goals 
-        while A lost all the rest un-kicked.
+        1. quote from the book solution:
+            > the penalty kick round (or “group”) is over once one team has clinched a victory.
+            i.e. one team A must win even if the other team B won the rest un-kicked round goals 
+            while A lost all the rest un-kicked.
+        2. This implies that they can't have same ticks (scores) even after filling the left un-kicked goals of one side with ticks
+            So to calculate "draw" condition, we only need to care about:
+            > both teams must score the same amount of penalties at the end of the shoot-out.
         """
         if (A_score>B_round+B_score) or (B_score>A_round+A_score):
             break
@@ -57,4 +70,27 @@ for i in range(0,2**10):
             round_combination_duplicate_list[tmp]=True
     if (A_score!=B_score) or INCLUDE_TIE:
         possibilities+=1
+        # """
+        # check "Team B wins" with "Team A does not score goals"
+        # """
+        # if (i&(0b101010<<4)==0) and (A_score==0):
+        #     check_count_0x0x0xxxxx+=1
+        #     # https://note.nkmk.me/en/python-f-strings/ https://peps.python.org/pep-0498/
+        #     print(f"{i:#010b}",left_rounds,2**left_rounds,i//(2**left_rounds),i//(2**left_rounds)+2**left_rounds)
+        #     for j in range(0,10):
+        #         if i&(1<<Round_To_BitLocation(j))!=0:
+        #             if j%2==0:
+        #                 print(f"A win at {j+1} round")
+        #             else:
+        #                 print(f"B win at {j+1} round")
+        if A_score>B_score:
+            A_win+=1
+        elif A_score<B_score:
+            B_win+=1
+            if A_score==2:
+                A_two_win_B_finally_win+=1
+            if A_score==0:
+                A_zero_win_B_finally_win+=1
+print("check",A_zero_win_B_finally_win)
+print(A_win,B_win,A_two_win_B_finally_win)
 print(possibilities)
