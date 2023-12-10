@@ -4006,8 +4006,8 @@ $$
     1. Team A does not score goals
       - here when A(0,3), B(0,3) can't lose more
       - Notice here
-        conversion from A(0,4),B(2,1) to A(0,4),B(2,2) should be similar to 
-        conversion from A(1,3),B(3,0) to A(1,3),B(3,1).
+        the conversion from A(0,4),B(2,1) to A(0,4),B(2,2) should be similar to 
+        the conversion from A(1,3),B(3,0) to A(1,3),B(3,1).
     2. Team A scores 1 goal
       - with A(1,3),B(3,1)
         here we can let A win whichever goal without influencing the final result.
@@ -4018,11 +4018,10 @@ $$
       we can always **precede one cross** before B when make A temporarily fixed.
       It can be **generalized** to the rest.
     3. Team A scores 2 goals
-      - here
-        conversion from A(0,3),B(3,0) to A(1,3),B(3,0) where in the latter case when the last tick is put at last it will be duplicate with the former case isn't similar to 
-        conversion from A(1,3),B(3,0) to A(2,2),B(4,0) where in the latter case when one of the two ticks is put at last it won't be duplicate with the former case since the last one goal of A in A(1,3),B(3,0) is cross
-        - We should also differentiate the above conversion from A(1,3),B(3,0) to A(2,2),B(4,0) from the similarity between
-          conversion from A(1,3),B(3,1) to A(2,3),B(3,1) where where in the latter case when the last tick is put at last it will be duplicate with the former case. <a id="duplicate_when_ending_tick"></a>
+      - The conversion from A(0,3),B(3,0) to A(1,3),B(3,0) where in the latter case when the last tick is put at the last it will be duplicate with the former case **isn't similar to** 
+        the conversion from A(1,3),B(3,0) to A(2,2),B(4,0) where in the latter case when one of the two ticks is put at the last it won't be duplicate with the former case since the last one goal of A in A(1,3),B(3,0) is **lost (i.e. cross symbol)**
+        - We should also differentiate the above the conversion from A(1,3),B(3,0) to A(2,2),B(4,0) from the similarity between
+          the conversion from A(1,3),B(3,1) to A(2,3),B(3,1) where where in the latter case when the last tick is put at last it will be duplicate with the former case. <a id="duplicate_when_ending_tick"></a>
       - check duplicate situations with [this](#check_order)
         A(2,2),B(4,0):check A when A is changed. Then when A is different, there is no need to check B.
         A(2,3),B(3,1):check A when A is re-changed.

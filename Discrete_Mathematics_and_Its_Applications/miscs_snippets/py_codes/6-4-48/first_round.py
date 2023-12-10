@@ -74,7 +74,7 @@ for i in range(0,2**10):
         # check "Team B wins" with "Team A does not score goals"
         # """
         # if (i&(0b101010<<4)==0) and (A_score==0):
-        #     check_count_0x0x0xxxxx+=1
+        #     A_zero_win_B_finally_win+=1
         #     # https://note.nkmk.me/en/python-f-strings/ https://peps.python.org/pep-0498/
         #     print(f"{i:#010b}",left_rounds,2**left_rounds,i//(2**left_rounds),i//(2**left_rounds)+2**left_rounds)
         #     for j in range(0,10):
@@ -91,6 +91,5 @@ for i in range(0,2**10):
                 A_two_win_B_finally_win+=1
             if A_score==0:
                 A_zero_win_B_finally_win+=1
-print("check",A_zero_win_B_finally_win)
-print(A_win,B_win,A_two_win_B_finally_win)
+print(A_win,B_win,A_two_win_B_finally_win,A_zero_win_B_finally_win)
 print(possibilities)
