@@ -638,8 +638,12 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - > either $a_s < a_t$ or $a_s > a_t$
   implies "either strictly increasing or strictly decreasing".
 - After all, the Pigeonhole Principle is based on chapter 1 contradiction proof, i.e. assuming not $at least$, then at most -> leading number contradiction.
-### number theory
+### 6.3
 - [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
+- p457 
+  > a bijection between subsets of S with r elements and subsets with n − r elements
+  trivial due to each $n-r$ obviously has **only one** corresponding $r$
+  and $n-r$ must has one $r$ corresponded.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -3865,7 +3869,7 @@ $$
   - see the ans for decreasing.
 - [ ] 25
   to make less "person both of whose neighbors are boys", we will always make neighbors one boy and one girl.
-  Then $BBGGBBGG\ldots$, since $25$ is odd, so at last $BBGG\ldotsBG$, the last girl is "a person both of whose neighbors are boys".
+  Then $BBGGBBGG\ldots$, since $25$ is odd, so at last $BBGG\ldots BG$, the last girl is "a person both of whose neighbors are boys".
   - see the ans
     - this can be generalized to $2(2n+1),n\ge 1$ people with 
       $2n+1$ boys and girls,
@@ -3935,6 +3939,76 @@ $$
       $i_k\le n$
     - compared with the original THEOREM 3 proof where it proves $\neg (p\vee q)$ leads to contradiction,
       here it proves $\neg p \to q$ which only excludes the situation where both $p,q$ are $F$.
+### 6.3
+- 2,6~10,14~22,26~32,36~42 skipped
+- [x] 4 see [this](https://note.nkmk.me/python-math-factorial-permutations-combinations/) to use python to check calculation by `math.perm(5,3)` and `math.comb(5,3)`
+- [x] 12
+  1. $\binom{3}{12}$
+  The rest is similar
+- [ ] 24
+  $\overbrace{11}^{\text{first man}}*\Pi_{i=1\text{ denoting i th man after the first}}^{5}(11+i-2*i=11-i)$
+  - see the ans 
+    the above lacks $P_{10}^10$ 
+- [ ] 31
+  $\overbrace{98*96*4}^{\text{3 consecutive with one not consecutive added}}+\overbrace{97*7}^{\text{4 consecutive}}=38311$ ~~where $96$ corresponds to not consecutive 4 cases.~~
+  - this is wrong because it only cares about the consecutive 4 with one case, i.e. either $4$ after $123$ or $97$ before $98,99,100$, but not considers both cases like $1$ before or $5$ after $2,3,4$
+    it should be 
+    $\overbrace{96*95*4}^{\text{3 consecutive with one from 2 to 97 not consecutive added}}+\overbrace{2*96*4}^{\text{the former one where 3 consecutives terms start from 1 or 98}}+97*7$
+  - Also see [this](https://math.stackexchange.com/a/4291946/1059606) where $1,2,3,4$ can be only shared by 2 *consecutive* 3, i.e. $1,2,3$ or $2,3,4$.
+    - b $98*97*2−97$
+- [ ] 34
+  1. $C_{25}^5*P_{6}^6$ is wrong because it drops multiple $a$ cases.
+  2. $26^6-24^6$ is wrong because $\neg (p\wedge q)=(\neg p)\vee(\neg q)$
+  3. $P_{25}^5$ is wrong because it may drop $ab$.
+  4. it can be also calculated by $(5+\ldots+1)*P_{24}^4$ where when b selects the rightmost (6th) location, $a$ has 5 choices, etc.
+- [ ] 43 $\binom{r}{n}*\frac{P_r^r}{r}=\frac{n!}{r!(n-r)!}*\frac{r!}{r}=\frac{n!}{r(n-r)!}$
+  - Also see [this](https://math.stackexchange.com/a/4345118/1059606)
+    - > so we can apply this consideration sitting one of them and permute the rest
+      This is due to that the 1st one can be anywhere causing the same combination if rotation. So we fix it.
+    - notice it will divide by 2 more if considering [reflection symmetry](https://math.stackexchange.com/questions/3025778/circular-r-permutations-of-n#comment6239098_3025778) <a id="reflection_symmetry_table"></a>
+    - TODO what does this "relevant" mean?
+      > Notice that it will not be relevant to sit one person and rearrange the rest of them in a clockwise or counterclockwise orientation.
+      it means not "same"?
+- [ ] 44 see [above](#reflection_symmetry_table)
+- [ ] 46 see the ans noticing "two groups of two horses".
+- [ ] 47 see [this](https://math.stackexchange.com/a/1012416/1059606), notice here "the runner or runners who finish with **exactly one** runner ahead receive silver medals"
+  here $2^4-1$ is to exclude $0000$
+- [ ] 48 see [this](https://math.stackexchange.com/a/4345590/1059606)
+  - A win
+    Here we use $W$ to denote win.
+    1. Team B does not score goals, 1st figure, the rest label are similar for the corresponding figure. 
+      - Here we can start from B(0,1), obviously it can't end early <a id="beginning_step"></a>
+        then similar for B(0,2) (even with A(3,0), it still can't end early)
+        - Here B(0,3) becaue B(0,2) may have (3,2) ending, similar for (0,4).
+          A:(3,2) ~~can only contain 2 $L$ after 3 $W$ which is contained in A(2,2),B(0,4)~~ is impossible to be with B(0,3) since $3+2>0+3+1$ 
+        - A:(3,1) where 1 $L$ after 3 $W$ is contained in A(3,0),B(0,3)
+          So here we have only $C_{3}^2$
+      - B(0,4), then A should minus one win, so A(2,2), otherwise it will duplicate.
+        - When A(2,2),B(0,3), B may end with B(2,3), so we need one more, then B(0,4)
+    - Notice when B changes from B(0,3) to B(0,4)
+      - A should win ~~more or equally,~~ less, otherwise it will be duplicate.
+        Then if A(2,x), then $2+x=0+4\text{ or }0+4+1$
+        The rest is similar.
+      - A can't win less than $2$, because $1+4=5$ then it can't end early.
+      - It can be **generalized** to the rest.
+    - Notice here we can always try from the 1st try to the 2nd try based on the specific B state.
+      e.g. from A(3,0) to A(3,1) based on B(0,3).
+      It can be **generalized** to the rest.
+    2. Team B scores 1 goal
+      - B(1,2) similar to [the above](#beginning_step)
+        since $4=1+2+1$ so we can't let A win less.
+    - Notice here B(1,3),A(3,1) relation with B(0,3),A(3,1)
+      here one $W$ after 3 $L$ will be duplicate with B(0,3),A(3,1) where A has **one un-shadowed tick and one more shot than B**, then it is disallowed.
+      It can be **generalized** to the rest.
+  - B win
+    Notice since the order matters, so we can't just mirror the above "A win" case to here.
+    - The above basic idea can still apply to here.
+    - Team A does not score goals
+      - here when A(0,3), B(0,3) can't lose more
+      - 
+  - Also see [code simulation](./miscs_snippets/py_codes/6-4-48/first_round.py), i.e. [my answer](https://math.stackexchange.com/a/4823248/1059606)
+### 6.4
+- [ ] 35
 ## 8
 ### 8.1
 - [ ] 29
