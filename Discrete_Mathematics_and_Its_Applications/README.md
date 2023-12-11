@@ -806,6 +806,9 @@ I also read the asterisked ones.
   2. exercises are enough large to help the learning.
 - COMPUTER PROJECTS , COMPUTATIONS AND EXPLORATIONS and WRITING PROJECTS are a bit off the topic with the goal to learn the **maths** fundamental knowledge.
 - The following *skipped* ones are based on that after I thought of the exercise and checked the ans, the ans shows the same or similar to what I thought, so I didn't spend redundant time to record the more deeper understanding about the exercise.
+- ~~p22 table 1 exercise list: I only did the necessary ones needed at Pages Where Used.~~
+  See my green underlined contents in p22 table 1
+  How are these exercises related with underline used?
 ## 1
 ### 1.1
 - [x] 
@@ -817,6 +820,7 @@ I also read the asterisked ones.
 - [ ] a,b,c -> inclusive or
 - [x] 42 assume one pair is different, then can be proved easily.
   if they are all same, it is also easy to prove the equation holds.
+- [x] 43 trivial by thinking each case of $\wedge$.
 - [x] 44 because if not, then one pair of all true will make the statement false.
 - [ ] 45 $\underset{i=1}{{\overset{n-1}{\bigvee}}}\underset{j=i+1}{{\overset{n}{\bigvee}}}$
 - [ ] 52 yes
@@ -866,9 +870,13 @@ I also read the asterisked ones.
   50~52 are skipped.
   14,16 I only read the 1st one.
   20~37 I only read 20 because they are probably similar.
+- [x] 11 trivial by table.
 - [x] 19 $p=T,q=F$
   $p\to q$ is $F$
   then $F\to F$ is true
+  - assume not tautology, then $T\to F$
+    then $p=T$ and $q=F$ due to $\neg q$ is $T$
+    then contradiction due to that $p\to q$ is $F$.
 - [ ] 40 has no referenced symbols.
   TODO
   1. the ans doesn't show the compound proposition, also for the above self answer.
@@ -2201,7 +2209,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - Compared with the wikipedia [optimized one](https://en.wikipedia.org/wiki/Bubble_sort#Optimizing_bubble_sort)
     `newn` excludes the ordered ending sublist(i.e. the non-stopping sequence $A[newn]\ldots A[n]$)
     and `newn=1` implies all are ordered.
-- [ ] 47 
+- [ ] 47
   - see the ans
     since in ALGORITHM 5, it doesn't `break` the $\textbf{while }a_j>a_i$ when `j=i`, so $2,3,\ldots$
 - [ ] 48 $n$
@@ -4048,9 +4056,72 @@ $$
       notice what the problem says where it doesn't say during.
     - for the non-ending round, either (W,W) or (L,L) pair for two teams.
       for the ending round, either (W,L) or (L,W) ordered tuple for two teams.
-  
 ### 6.4
-- [ ] 35
+- 2~16,24,28,32,33 (similar to [selection_order](#selection_order)),34 (similar to [selection_two_categories](#selection_two_categories)),35,36 skipped
+- [x] 15
+  $\binom{100}{k}*x^{3k-100}*(-1)^k$, so $\binom{100}{\frac{100+j}{3}}*x^j*(-1)^{\frac{100+j}{3}},\text{when }\frac{100+j}{3}\in \mathbb{N}$
+- [ ] 18
+  we can use induction since $\binom{n}{i}=\binom{n-1}{i}+\binom{n-1}{i-1}$
+  - 2 $=$s are trivial.
+  - $n=1$ is trivial which is the basis step.
+  - Then when $k\le\lfloor\frac{n}{2}\rfloor$
+    when $n=2t,t\ge 1$, 
+    $$
+    \binom{n-1}{k-1}-\binom{n-1}{k+1}=\binom{2t-1}{k-1}-\binom{2t-1}{k+1}
+    \begin{cases}
+      >0\text{when }k=t\text{ since }\binom{2t-1}{t-1}=\binom{2t-1}{t}>\binom{2t-1}{t+1}
+      \Rightarrow \binom{2t}{t}>\binom{2t}{t+1}\\
+      <0\text{when }k<t\Rightarrow \binom{2t}{k}>\binom{2t}{k+1}\text{when }k<t=\lfloor \frac{n}{2}\rfloor
+    \end{cases}
+    $$
+    Then use the symmetry.
+    when $n=2t+1$,
+    $$
+    \binom{n-1}{k-1}-\binom{n-1}{k+1}=\binom{2t}{k-1}-\binom{2t}{k+1}
+    \begin{cases}
+      >0\text{when }k=t\text{ since }\binom{2t-1}{t-1}=\binom{2t-1}{t}>\binom{2t-1}{t+1}
+      \Rightarrow \binom{2t}{t}>\binom{2t}{t+1}\\
+      <0\text{when }k<t\Rightarrow \binom{2t}{k}>\binom{2t}{k+1}\text{when }k<t=\lfloor \frac{n}{2}\rfloor
+    \end{cases}
+    $$
+  - The above induction has too many cases and the range of $k+1$, etc, are not trivial to make them have meanings.
+  - see the ans
+    - here $k\ge 1$, then $n$ should begin from $2$ to make $k\le \frac{n}{2}$ -> "less".
+    - ~~$k-1\ge \frac{n}{2}$ then $\frac{k}{n-k+1}\ge \frac{\frac{n}{2}+1}{\frac{n}{2}}>1$~~
+- [ ] 20
+  - see the ans
+    - here we should minus some items.
+- [ ] 22,23 see the ans
+- [ ] 24 see the [figure](https://math.stackexchange.com/q/20749/1059606) for naming
+  - TODO a purely [combinatorial](https://math.stackexchange.com/q/20749/1059606) proof
+    but it seems unnecessary to use one combinatorial proof for every combinatorial problem, because we can always construct one which then adds too many overheads.
+- [ ] 26
+  we can think of it as selecting k-combinations and r-combination which is the superset of the former.
+  similar to 25, the selection order has 2 possibilities. <a id="selection_order"></a>
+- [ ] 30
+  - after hinted by the ans $RHS=\binom{2n}{n+1}$
+    then it can be seen as coefficient of $x^{n+1}$ in 
+    $(x+y)^{2n}$
+    so choose k in $n$ factors and then $n+1-k\le n\Rightarrow k\ge 1$ in the rest $n$
+    so $\sum(\binom{n}{k}+\binom{n}{n+1-k})=\sum(\binom{n}{k}+\binom{n}{n-(n+1-k)=k-1})$
+  - see the ans
+    - when selecting $n+1$ people, assume $m<n+1$ men are *selected*.
+      then there are $n-m$ men in the rest $n-1$ people, so $n-1$ people have $n-1-(n-m)=m-1$ women, **one less** than selected men. <a id="selection_two_categories"></a>
+- [ ] 31
+  - see the ans 
+    after fixing the last 1 by $k$ in $\sum_{k}$, 
+    then fix the 0s before the last 1 $\binom{n+k}{k}$ because we need 
+    $n$ 1s after fixing,
+    then the rest before the last 1 are automatically 1s and the rest are 0s.
+    - we can also fix the first 1 location $j$ with $1\le j\le n+1$ similarly.
+  - see the [figure](https://en.wikipedia.org/wiki/Hockey-stick_identity) for naming.
+- [ ] 43
+  a ($\binom{n+1}{n-1},n\ge 1$),b ($\binom{n+2}{n-1},n\ge 1$) are both one sloping line of the Pascal's triangle.
+  c (see the ans),d ($\binom{n}{\lfloor \frac{n}{2}\rfloor},n\ge 0$) are the middle line of the Pascal's triangle.
+  - see the ans for e,f
+## 7
+### 7.2
+- [ ] 15
 ## 8
 ### 8.1
 - [ ] 29
@@ -4058,9 +4129,14 @@ $$
 ## 9
 ### 9.6
 - [ ] 53
+## 10
+### 10.4
+- [ ] 59
 ## 11
 Redo 5.4-48
-### 11
+### 11.1
+- [ ] 15
+- [ ] 
 # TODO after abstract algebra
 - [this](#RSA_Cauchy_theorem)
 # TODO after Computer Networking
