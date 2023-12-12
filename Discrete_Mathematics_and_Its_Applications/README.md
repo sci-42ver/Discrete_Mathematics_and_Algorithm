@@ -639,11 +639,93 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   implies "either strictly increasing or strictly decreasing".
 - After all, the Pigeonhole Principle is based on chapter 1 contradiction proof, i.e. assuming not $at least$, then at most -> leading number contradiction.
 ### 6.3
-- [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
 - p457 
   > a bijection between subsets of S with r elements and subsets with n − r elements
   trivial due to each $n-r$ obviously has **only one** corresponding $r$
   and $n-r$ must has one $r$ corresponded.
+- "poker hand" is just one basic counting unit.
+### 6.5
+- [Combinations with repetitions](https://math.stackexchange.com/a/128064/1059606) allowed
+- example 6
+  select $m$ elements -> reorder them in the nondecreasing order which corresponds to **one unique sequence**.
+  since the reorder is done after selection, so selection is unordered.
+- > Then cards dealt to the *first player* *correspond to* the cards in the *positions* assigned to objects of the *first type* in the permutation
+  here "correspond" implies one-to-one from distribution of hands of 5 cards to permutations (i.e. the 2nd player, etc, can't be mapped to 1st). It also implies onto because the correspondance always holds so we can always find what to be mapped to the ith type.
+  - The above means
+    $a,b,c,d,e$ cards where order doesn't matter correspond to the $a,b,c,d,e$ location where order also doesn't matter. Here although indistinguishable items are *same*, their **locations are not**.
+  - More specifically
+    card -> location
+    player -> type (one player has many cards -> one type has many locations)
+  - It is also shown in the relation between example 7 and theorem 3 where both use the same form of products among $C(n_i,k_i)$
+- theorem 3 can be also seen as
+  first thinking of all distinguishable, then $n!$
+  then divide by duplicate situations, then $/\Pi n_i!$
+- EXAMPLE 9 think it as map tuple $(ball,bin)$ where bin can be duplicately shown.
+- Stirling numbers of the second kind formula proof
+  - [Cynthia_and_Chahat]
+    - here $k^n$ contain all cases including choosing $i,i=1,2,\ldots,k$ Ice Cream.
+      - similarly $\binom{k}{1}(k-1)^n$ contain all cases including choosing $i,i=1,2,\ldots,k-1$ Ice Cream.
+      - We can use [inclusion-exclusion principle](https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle) based on [**the number of elements excluded**](https://math.stackexchange.com/a/550504/1059606), i.e. $X_j$.
+        - one more elegant description where $f^{-1}(b)=\varnothing$ denotes exclusion from the range.
+    - [incl_excl_n]
+      - here just append $P(\bigcup_{i=1}^n E_i)$ with related elements of 
+        $P(E_{n+1})$ based on $n=2$ version of inclusion-exclusion principle.
+  - definition
+    > Equivalently, they count the number of different *equivalence relations* with precisely k *equivalence classes* that can be defined on an n element set
+    here 
+    *equivalence* class -> "*indistinguishable* boxes" in the book
+    - the above one is difficult to interpret $\genfrac\{\}{0pt}{}{n}{0}$ and 
+      $\genfrac\{\}{0pt}{}{0}{n}$
+      because n classes in 0 element set or 0 classes in n element set (intuitively there is at least one class).
+    - use [this](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Recurrence_relation) to
+      interpret $\genfrac\{\}{0pt}{}{0}{n},\genfrac\{\}{0pt}{}{n}{0}$
+      - > either *contains* the (n+1)-th object as a *singleton* or it does *not*
+        i.e. either $\genfrac\{\}{0pt}{}{n}{k-1}$ or 
+        $k\genfrac\{\}{0pt}{}{n}{k}$
+      - Then $\genfrac\{\}{0pt}{}{1}{1}=\genfrac\{\}{0pt}{}{0}{1}+\genfrac\{\}{0pt}{}{0}{0}$
+        - obviously here to split the rest 0 element into $k=1$ classes (i.e. 0 elements) ~~if not choosing the only one element~~, it is impossible, so $\genfrac\{\}{0pt}{}{0}{1}=0$ which can be generalized to $\genfrac\{\}{0pt}{}{0}{k},k>0$
+        - Then if choosing the only one element, then nothing more needs to be done, so $\genfrac\{\}{0pt}{}{0}{0}$ should be [Vacuous Product](https://proofwiki.org/wiki/Number_to_Power_of_Zero_Falling_is_One)
+          - here [$\Pi$](https://proofwiki.org/wiki/Definition:Continued_Product/Vacuous_Product) implies Vacuous Product should be 1.
+      - Similarly, ${n+1 \brace 1}=1*{n \brace 1}+{n \brace 0}$
+        Here selecting one element as the only one subset with leaving the rest in no class is impossible, 
+        so ${n \brace 0}=0$.
+      - Also let $n=k-1$ although it is disallowed, we can get ${k-1 \brace k}=0$. This is one [generalized one](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Table_of_values) <a id="k_minus_one_k"></a>
+    - The above *Recurrence* can be [related](https://proofwiki.org/wiki/Equivalence_of_Definitions_of_Stirling_Numbers_of_the_Second_Kind#Proof) with falling factorial powers definition
+      - [elegant one](https://math.stackexchange.com/a/2471031/1059606) corresponding to [Induction_Step](https://proofwiki.org/wiki/Equivalence_of_Definitions_of_Stirling_Numbers_of_the_Second_Kind#Induction_Step)
+        here step 1 is similar to [this](https://mathoverflow.net/a/413385) where both splits one term $x$ to make 2 more smaller terms.
+      - falling factorial can be also [related](https://math.stackexchange.com/a/3418042/1059606) with the original *combinatorial* definition and *permutation with repetition* with *order*.
+        so we use $m!$ in the link
+      - here we only needs to be based on $k=1$, so the above elegant one use $\sum_{k=1}^{n-1}$
+        $k=0,1$ are trivial.
+    - [exponential generating function](https://math.stackexchange.com/a/2308579/1059606)
+      - here $k=0$ is trivial where $LHS={0 \brace 0}*1$.
+      - based on [this](#k_minus_one_k)
+        $$
+        \text{let }F(k,t)=\sum_{n=k}^\infty {n\brace k}\frac{t^n}{n!}\\
+        \frac{\partial LHS}{\partial t}=\frac{\partial F(k,t)}{\partial t}\\
+        =\sum_{n=k}^\infty (k*{n-1\brace k}+{n-1\brace k-1})\frac{t^{n-1}}{(n-1)!}\\
+        \overset{{k-1\brace k}=0}{=}k*\sum_{n=k+1}({n-1\brace k}\frac{t^{n-1}}{(n-1)!})+F(k-1,t)\\
+        =k*F(k,t)+F(k-1,t)
+        $$
+        Then we solve this partial derivative equation.
+- Stirling numbers of the first kind
+  - compared with the second kind
+    It will reorder inside cycles self based on split into $k$ sets by ${n\brace k}$.
+  - It is trivial from Algebraic or Combinatorial to [Recurrence](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_first_kind#Recurrence_relation)
+    - > inserting the new object immediately *following* any of the $a_{i}$ already present.
+      because before $a_1$ or after $a_j$ are same.
+  - "combinatorial definition of the signless Stirling numbers of the first kind" [*relation*](https://math.stackexchange.com/questions/4824460/combinatorial-proof-for-stirling-number-of-1st-kind#comment10270394_4824743) with "the definition of Stirling numbers of the first kind".
+    This is same as the [answer_1](https://math.stackexchange.com/a/2704143/1059606) refered to
+    - [Flagpoles with flags](https://www.chegg.com/homework-help/questions-and-answers/exercise-3-n-distinct-flags-row-k-flagpoles-job-put-flags-poles-may-leave-poles-empty-also-q114469081)
+    - The key idea is that [Canonical cycle notation](https://en.wikipedia.org/wiki/Permutation#Canonical_cycle_notation) will "fix a certain order".
+      - how this notation works
+        [see](https://en.wikipedia.org/wiki/Permutation#Cycle_notation) $\sigma=265431$ and [this](https://en.wikipedia.org/wiki/Cyclic_permutation#Definition) which implies cyclic permutation.
+        - notice in [product of cycles](https://math.stackexchange.com/a/484959/1059606),
+          $(14)$ in $(1532)(14)\ldots$ means the number $1\to 4$ instead of index, i.e. after $(1532)$ we do at the 1st location $5\to 4$.
+      - So $(9\,5)(3\, 4)(2)(1\, 8\, 6\, 7)$ and $(5\,9)(3\, 4)(2)(8\, 6\, 7\, 1)$ can't exist.
+    - For answer_2, we can use the [code](./miscs_snippets/py_codes/Stirling_numbers_first_kind/simulation_one.py) to find the pattern as the [edit](https://math.stackexchange.com/q/4824460/1059606) says.
+  - TODO 
+    - the [relationship](https://math.stackexchange.com/a/49496/1059606) between Stirling numbers of the first and second kind
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -679,6 +761,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - [sum multiple-lines](https://tex.stackexchange.com/a/80461/308105)
 - [bmod -> binary mod](https://tex.stackexchange.com/a/42872/308105)
 - [big equal sign](https://tex.stackexchange.com/a/35406/308105) needs extra package or self define length `\mathrel{\mkern-3mu}`.
+- [Stirling number](https://tex.stackexchange.com/a/86064/308105) or use [wikipedia one](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Recurrence_relation)
 ## katex
 - available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
 - set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
@@ -4124,7 +4207,7 @@ $$
 - [ ] 15
 ## 8
 ### 8.1
-- [ ] 29
+- [ ] 29 corresponds to 6.1 example 7
   TODO why not $C_{m}^n$
 ## 9
 ### 9.6
@@ -4176,5 +4259,7 @@ Redo 5.4-48
 [AHajnal_058]:./papers/AHajnal_058.pdf
 [hedetniemi1988]:./papers/hedetniemi1988.pdf
 [meisters1975]:./papers/meisters1975.pdf
+[Cynthia_and_Chahat]:./papers/Cynthia_and_Chahat.pdf
+[incl_excl_n]:./papers/incl_excl_n.pdf
 
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
