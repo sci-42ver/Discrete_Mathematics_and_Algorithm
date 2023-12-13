@@ -650,23 +650,26 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   select $m$ elements -> reorder them in the nondecreasing order which corresponds to **one unique sequence**.
   since the reorder is done after selection, so selection is unordered.
 - > Then cards dealt to the *first player* *correspond to* the cards in the *positions* assigned to objects of the *first type* in the permutation
-  here "correspond" implies one-to-one from distribution of hands of 5 cards to permutations (i.e. the 2nd player, etc, can't be mapped to 1st). It also implies onto because the correspondance always holds so we can always find what to be mapped to the ith type.
+
+  here "correspond" implies one-to-one from distribution of hands of 5 cards to permutations ~~positions~~ (i.e. the 2nd player, etc, can't be mapped to 1st). It also implies onto because the correspondance always holds so we can always find what to be mapped to the ith type. More intuitively, $\text{let }(i,a_i)\text{ means } i\text{th card goes to }a_i\text{th player},\text{while it can be \textbf{also} interpreted as }i\text{th location goes to }a_i\text{th type}$. See exercise 50 map.
   - The above means
-    $a,b,c,d,e$ cards where order doesn't matter correspond to the $a,b,c,d,e$ location where order also doesn't matter. Here although indistinguishable items are *same*, their **locations are not**.
-  - More specifically
-    card -> location
-    player -> type (one player has many cards -> one type has many locations)
+    $a,b,c,d,e$ cards where the order doesn't matter correspond to the $a,b,c,d,e$ location where the order also doesn't matter. Here although indistinguishable items are *same*, their **locations are not**.
+    - More specifically
+      card -> location
+      player -> type (one player has many cards -> one type has many locations)
+    - Also [see](#comparison_6_5_theorem_3_with_4) and exercise 49,50 ans where 50 is similar to the above with the map corresponding to the above $\text{card/location}\to \text{player/type}$.
   - It is also shown in the relation between example 7 and theorem 3 where both use the same form of products among $C(n_i,k_i)$
 - theorem 3 can be also seen as
   first thinking of all distinguishable, then $n!$
   then divide by duplicate situations, then $/\Pi n_i!$
 - EXAMPLE 9 think it as map tuple $(ball,bin)$ where bin can be duplicately shown.
 - Stirling numbers of the second kind formula proof
-  - [Cynthia_and_Chahat]
-    - here $k^n$ contain all cases including choosing $i,i=1,2,\ldots,k$ Ice Cream.
-      - similarly $\binom{k}{1}(k-1)^n$ contain all cases including choosing $i,i=1,2,\ldots,k-1$ Ice Cream.
-      - We can use [inclusion-exclusion principle](https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle) based on [**the number of elements excluded**](https://math.stackexchange.com/a/550504/1059606), i.e. $X_j$.
-        - one more elegant description where $f^{-1}(b)=\varnothing$ denotes exclusion from the range.
+  - [Cynthia_and_Chahat] p9
+    - We can use [inclusion-exclusion principle](https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle) based on [**the number of elements excluded**](https://math.stackexchange.com/a/550504/1059606), i.e. $X_j$.
+      - here $k^n$ contain all cases ~~including choosing $i,i=1,2,\ldots,k$ Ice Cream.~~ not excluding any ice-cream.
+        - similarly $\binom{k}{1}(k-1)^n$ contain all cases ~~including choosing $i,i=1,2,\ldots,k-1$ Ice Cream.~~ excluding one specific ice-cream where we have $\binom{k}{1}$ choices to choose this excluded one.
+        - based on this exclusion process and sum/minus them, we will get one set which **doesn't exclude anything** at the end.
+      - one more [elegant description](https://math.stackexchange.com/a/436735/1059606) where $f^{-1}(b)=\varnothing$ denotes exclusion from the range.
     - [incl_excl_n]
       - here just append $P(\bigcup_{i=1}^n E_i)$ with related elements of 
         $P(E_{n+1})$ based on $n=2$ version of inclusion-exclusion principle.
@@ -724,6 +727,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
           $(14)$ in $(1532)(14)\ldots$ means the number $1\to 4$ instead of index, i.e. after $(1532)$ we do at the 1st location $5\to 4$.
       - So $(9\,5)(3\, 4)(2)(1\, 8\, 6\, 7)$ and $(5\,9)(3\, 4)(2)(8\, 6\, 7\, 1)$ can't exist.
     - For answer_2, we can use the [code](./miscs_snippets/py_codes/Stirling_numbers_first_kind/simulation_one.py) to find the pattern as the [edit](https://math.stackexchange.com/q/4824460/1059606) says.
+    - This [comment](https://math.stackexchange.com/questions/3878162/why-are-stirling-numbers-of-the-first-kind-related-to-the-number-of-permutations/3878213#comment8001109_3878213) may mean for rows like the 1st row $x+\overbrace{1+\dots+1}^{n-1\; times}$. Then it means choices of $x$ from $x+\overbrace{1+\dots+1}^{n-(n-k+1)=k-1\; times}$ to $x$. But this is not what the answer author means.
   - TODO 
     - the [relationship](https://math.stackexchange.com/a/49496/1059606) between Stirling numbers of the first and second kind
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
@@ -4202,6 +4206,129 @@ $$
   a ($\binom{n+1}{n-1},n\ge 1$),b ($\binom{n+2}{n-1},n\ge 1$) are both one sloping line of the Pascal's triangle.
   c (see the ans),d ($\binom{n}{\lfloor \frac{n}{2}\rfloor},n\ge 0$) are the middle line of the Pascal's triangle.
   - see the ans for e,f
+### 6.5
+- 2~6,
+  12~20,24,
+  28~36,
+  42~44,54,58,
+  64~68 skipped
+- [ ] 8 here unordered is implied.
+- [ ] 10
+  3. the problem doesn't say "with at least 2 kinds"
+    so $C_{24+6-1}^{24}-6$ is wrong.
+  4. similar to c, the problem doesn't say "with no more than 2 kinds"
+    so $6+C_{6}^2*(C_{24+2-1}^{24}-2)$. 
+    - The following is also ok.
+     ```python
+     import math
+     sum=0
+     for i in range(22,25):
+         sum+=math.comb(i+5-1,i)
+     sum
+     ```
+- [ ] 22 similar to 6.1-52,53 where it is also related with "consecutive".
+  But here we fix the number of $1$ indicating the working state with $0$ indicating the not working state.
+  While 6.1-52,53 don't fix them.
+- [ ] 26 here is based on "DISTINGUISHABLE OBJECTS AND DISTINGUISHABLE BOXES" where the **order** of DISTINGUISHABLE OBJECTS **inside** each box doesn't matter. So we need to divide by $1!2!\dots 5!$ <a id="distinguishable_objects_order_inside_distinguishable_boxes_is_indistinguishable"></a>
+  i.e.
+  > swap objects in the permutation without affecting the result
+- [ ] 38
+  here 14 distinguishable objects $1\sim 14$ are put into 2 boxes.
+  But here we have the number restriction of each type.
+- [ ] 40
+  - comparison between THEOREM 3 and THEOREM 4 <a id="comparison_6_5_theorem_3_with_4"></a>
+    from THEOREM 3 to THEOREM 4
+    1. > Then cards dealt to the first player correspond to the cards in the positions assigned to objects of the first type in the permutation
+       here $n_1!n_2!\dots n_k!$ in p450 implies differentiation among types 
+       $1\sim k$, then implying **distinguishable boxes**.
+       This can be seen from the similarity between proof of THEOREM 3 and EXAMPLE 8.
+       - in THEOREM 3, we **don't care about the order** among type $1\sim k$, so no $k!$.
+         Also in THEOREM 4, we **don't care about the order** among DISTINGUISHABLE BOXES.
+         So we can think as the following:
+           $$
+           \overbrace{x\dots x}^{10\; times}\vert\overbrace{x\dots x}^{10\; times}\vert\overbrace{x\dots x}^{10\; times}\vert\overbrace{x\dots x}^{10\; times}\\
+           \text{1. here x means one journal 2. here }\vert\text{ locations are \textbf{fixed}. Also it implies the \textbf{fixed order} among types from 1 to k=4 similar to THEOREM 3, here we can think of it as }1 \sim 4\text{ from left to right.}\\
+           \text{Then we first permutate among all 40}\Rightarrow 40!\\
+           \text{Then divide by overcount factor in each type}\Rightarrow /(10!)^4
+           $$
+    2. [this](#distinguishable_objects_order_inside_distinguishable_boxes_is_indistinguishable) shows "indistinguishable objects" relation with "distinguishable objects".
+- [ ] 46
+  b. here $C_{15}^12*12!$ will overcount because it *permutates across bookshelves*.
+- [x] 48
+  - It is similar to exercise 22
+    $$
+    \sum_{i=0}^5 x_i=12-5=7,x_i\ge 0\text{ beacuse we have chosen 5 books}\\
+    x_0+\sum_{i=1}^4 (x_i-1)+x_5=7-4=3,x_i
+    \begin{cases}
+      \ge 0,i=0,5\\
+      -1\ge 0,i=1\sim 4\\
+    \end{cases}
+    \text{ beacuse we no adjacent books among 5 books}\\
+    \text{Then }\binom{(5-0+1)+3-1}{3}
+    $$
+    - The basic idea is same as the ans
+- [x] 49 just see the THEOREM 3 proof.
+- [x] 50 See the above "here "correspond"" at the commit "02f48313ac0201d4d801003243531f152f922627" on "Dec 12 19:17:12 2023 +0800".
+  - see the ans
+$$
+\begin{align*}
+  &1,2,3,\dots,n\\
+  \text{are \textbf{bijectively} mapped to: }\qquad&a_1,a_2,a_3,\dots,a_n,a_i\in [1,k]\quad
+  a_i\text{ is \textbf{uniquely decided} by which box }i\text{ is in.}\\
+  \text{The rest see the ans}
+\end{align*}
+$$
+- [ ] 51
+  b. the **inverse function** proves one-to-one correspondence.
+- [ ] 52
+  $$
+  \overbrace{1}^{\text{1 box}}\\
+  +C_5^1+C_5^2 \quad\text{2 boxes where INDISTINGUISHABLE BOXES means no need to multiply by 2!}\\
+  +\frac{(C_5^3*C_2^1*C_1^1+C_5^2*C_3^2)}{2!}\quad\text{1. 3 boxes where we can put one at each first, then put the rest 2 which is INDISTINGUISHABLE OBJECTS (i.e. many 1s) AND INDISTINGUISHABLE BOXES. 2. divide 2! because 2 sets have the same size. Then }C_5^2,C_3^2\text{ have something in common}
+  $$
+  The above process can be seen as:
+  1. traverse set size $s$ possibilities.
+  2. for each $s$, choose one split $S$ of object size $n$ into $s$ parts $n_1,\dots,n_s$
+  3. do $C_n^{n_1}*C_{n-n_1}^{n_2}\dots C_{n_s}^{n_s}$
+  4. divide by $d_1\dots d_k$ where $d_i$ means ith duplicate number of sets with the same size.
+  in sum, $\sum_{s}\sum_{S}\frac{C_n^{n_1}*C_{n-n_1}^{n_2}\dots C_{n_s}^{n_s}}{d_1\dot d_2\dots d_k}$
+- [x] 56 this is done when 52.
+- [ ] 60
+  notice b,c differences.
+- [ ] 63 it is similar to 34 where the consecutive number is **fixed** while 22/48 are not.
+  See [this](https://math.stackexchange.com/a/1835974/1059606)
+  - $4*\frac{4^{\overline{7}}}{(2!)^4}$ is wrong (here use [rising factorial](https://en.wikipedia.org/wiki/Falling_and_rising_factorials) notation)
+    because here $4$ is to choose the intermediate number between two Xes which **cares about** the number type,
+    but $\frac{4^{\overline{7}}}{(2!)^4}$ doesn't care about 
+    where it only considers duplicate inside $aa$ or $bb$ but doesn't consider the duplicate like $XaabbX$ whne choosing $a$ or $b$ for the above $4$.
+    ```bash
+    1. select a first:
+    Xa   X
+    Xaa  X
+    Xaab X
+    XaabbX
+
+    Or duplicately by selecting b first:
+
+    X   bX
+    X  bbX
+    X abbX
+    XaabbX
+
+    2. /2! only cares about:
+    X aX
+    XaaX
+
+    with
+
+    Xa X
+    XaaX
+    ```
+    This duplicate is not trivial since it has different duplicate size like 4 for $aabb$ or 6 for $aabbcc$.
+    So this method is maybe too complex.
+    - For THEOREM 3, the above problem doesn't exist
+      because it can be seen as location selection of $aabbcc\dots XX$ one by one from left to right. Then divide by $2!$ sequentially due to overcount $aa,bb,cc$ instead of something like $aabb$.
+- [ ] 
 ## 7
 ### 7.2
 - [ ] 15
