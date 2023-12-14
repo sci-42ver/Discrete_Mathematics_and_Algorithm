@@ -414,6 +414,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   5. similar to the above
 - TODO 2.2
 ## 3
+- Based on ALGORITHM 3, we use "," to split parameters.
 ### 3.1
 - "Kitab al-jabr w’al muquabala" may be [arabic](https://en.wikipedia.org/wiki/Languages_of_Iraq)
 - TODO The Art of Computer Programming ([TAOCP](https://www-cs-faculty.stanford.edu/~knuth/taocp.html))
@@ -726,10 +727,31 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
         - notice in [product of cycles](https://math.stackexchange.com/a/484959/1059606),
           $(14)$ in $(1532)(14)\ldots$ means the number $1\to 4$ instead of index, i.e. after $(1532)$ we do at the 1st location $5\to 4$.
       - So $(9\,5)(3\, 4)(2)(1\, 8\, 6\, 7)$ and $(5\,9)(3\, 4)(2)(8\, 6\, 7\, 1)$ can't exist.
-    - For answer_2, we can use the [code](./miscs_snippets/py_codes/Stirling_numbers_first_kind/simulation_one.py) to find the pattern as the [edit](https://math.stackexchange.com/q/4824460/1059606) says.
+    - For answer_2, we can use the [stirling_numbers_first_kind_simulation] to find the pattern as the [edit](https://math.stackexchange.com/q/4824460/1059606) says.
     - This [comment](https://math.stackexchange.com/questions/3878162/why-are-stirling-numbers-of-the-first-kind-related-to-the-number-of-permutations/3878213#comment8001109_3878213) may mean for rows like the 1st row $x+\overbrace{1+\dots+1}^{n-1\; times}$. Then it means choices of $x$ from $x+\overbrace{1+\dots+1}^{n-(n-k+1)=k-1\; times}$ to $x$. But this is not what the answer author means.
   - TODO 
     - the [relationship](https://math.stackexchange.com/a/49496/1059606) between Stirling numbers of the first and second kind
+### 6.6
+- lexicographic (or dictionary) ordering is one type of canonical cycle notation.
+- > It is left for the reader to show that this produces the next larger r-combination in lexicographic order.
+  here "lexicographic order" implies that $a_i\le n-r+i$,
+  so "locate the last element ai in the sequence such that $a_i \neq n − r + i$." will ensure all later elements $a_k,k\ge i$ are their corresponding **largest in their possible** choices. So we can only add $a_i$ if increasing from right to left similar to the **carry** in the normal addition process. Then the carry and the **increasing order** needs $j-i$ in $a_j=a_i+1+j-i$.
+  - Also see exercise 11 which is same as the above.
+- > (The verification of this fact is left as an exercise for the reader.)
+  - Also see exercise 10
+  - Similar to comparison between normal numbers, we begin from right to left.
+    $a_{j+1}>a_{j+2}>\dots>a_n$ means they are **largest** using $a_{k},k=(j+1)\sim n$ since each digit from left to right is the largest possible one, so we can't rearrange them to get the next larger. This corresponds to exercise 10 ans
+    > the old permutation was the **last** one with $a_1 , a_2 , \lodts , a_{j−1} , a_j$ in those positions
+
+    $a_j<a_{j+1}$ means it can be enlarged.
+    - Then use the above process again with $a_j$
+      - ALGORITHM 1
+        here after "interchange $a_j$ and $a_k$", $a_j'=a_k,a_{k-1}>a_k>a_j=a_k'>a_{k+1}$, so the decreasing order of 
+        $a_{j+1}>a_{j+2}>\dots>a_{n-1}>a_n$ still holds.
+      - ~~so $a_j$ with $a_{k+1},\dots,a_n$ can't be enlarged due to $a_j>$~~
+        Since we need to find the next one adjacent number larger than original, it must be bigger than the original at $j$th digit, so we find the **smallest** $a_k>a_j$. Then to get the **smallest** next larger, we list increasingly from left to right for the rest digits. This corresponds to exercise 10 ans
+        > Furthermore the new permutation is the **first** one (in lexicographic order) with $a_1 , a_2 , \lodts , a_{j−1} , a_k$ in positions 1 to j
+        > Since $a_k$ was picked to be the **smallest number greater** than $a_j$ among $a_{j+1} , a_{j+2} , \ldots , a_n$, there can be no permutation between these two.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -4328,7 +4350,26 @@ $$
     So this method is maybe too complex.
     - For THEOREM 3, the above problem doesn't exist
       because it can be seen as location selection of $aabbcc\dots XX$ one by one from left to right. Then divide by $2!$ sequentially due to overcount $aa,bb,cc$ instead of something like $aabb$.
-- [ ] 
+### 6.6
+- 2~8,14~16 skipped
+- [ ] 10,11 see above
+- [ ] 12 see [main_tex]
+- [ ] 14
+  - "Cantor digits" is similar to the base form I used in [stirling_numbers_first_kind_simulation].
+    but here it drops the rightmost digit because it has only one possibility.
+    Similar to 2-base where each digit has the **same 2 possible choices** -> kth digit starting with 0 from right corresponds to $2^k$. Here since kth digit has (k+2) possibilities, so kth digit corresponds to $(k+1)!$.
+- [ ] 15
+  let $f$ be the map from permutation to "nonnegative integers less than n!."
+  - then obviously $a_{k-1}\le k-1$ due to "less than k" which corresponds to "$a_i$ ... not exceeding i". So *onto*. This implies $f$ is valid because unique map into "nonnegative integers less than n!." due to uniqueness of each $a_{k-1}$.
+  - $f^{-1}$ is done as the following:
+    - basis step: $a_1$ implies the relation between $2$ and $1$ where $a_1=0\to 12;\text{ and }a_1=1\to 21$
+    - induction step: Then based on $a_i,i\le k$ deciding **uniquely** all numbers $1\to (k+1)$,
+    $a_{k+1}$ also inserts **uniquely** $k+1$ into these $k+1$ numbers which has $k+2$ choices.
+    - The above is similar to the ans based on slot choice ~~where the ans maps $a_k$ to the location directly~~.
+- [ ] 17 traverse all numbers less than $n!$ do 
+  $a_k=(i/(k!))\%(k+1)$ same as [stirling_numbers_first_kind_simulation] then do as 15 shows.
+### supplementary
+- 
 ## 7
 ### 7.2
 - [ ] 15
@@ -4346,7 +4387,6 @@ $$
 Redo 5.4-48
 ### 11.1
 - [ ] 15
-- [ ] 
 # TODO after abstract algebra
 - [this](#RSA_Cauchy_theorem)
 # TODO after Computer Networking
@@ -4361,7 +4401,10 @@ Redo 5.4-48
 [SOLUTIONS_7th]:./discrete-structure-solution-student39s-solutions-guide_compress_7th.pdf
 [A_Guide_to_Writing_Proofs]:./A_Guide_to_Writing_Proofs.pdf
 [stirling]:./papers/stirling.pdf
+
+<!-- codes -->
 [miscs_ipynb]:./miscs_snippets/miscs.ipynb
+[stirling_numbers_first_kind_simulation]:./miscs_snippets/py_codes/Stirling_numbers_first_kind/stirling_numbers_first_kind_simulation.py
 
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
@@ -4390,3 +4433,6 @@ Redo 5.4-48
 [incl_excl_n]:./papers/incl_excl_n.pdf
 
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
+
+<!-- tex -->
+[main_tex]:./homework_tex/algorithm/main.tex

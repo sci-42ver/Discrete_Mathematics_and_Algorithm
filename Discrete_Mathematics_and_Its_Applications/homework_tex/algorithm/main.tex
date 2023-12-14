@@ -373,7 +373,7 @@ boxrule=0pt,boxsep=0pt,breakable}
         \While{$i\le n-1$}{
         \lIf{$d<a_{i+1}-a_i$}{$d=a_{i+1}-a_i$}
         }
-        \Return{d} \Comment{test}
+        \Return{d}
     \end{SpacingAlgorithm}
 
     \ModProcName{number of negative integers}
@@ -1492,6 +1492,7 @@ boxrule=0pt,boxsep=0pt,breakable}
         \item similar to the ans, better iterate among \(1\CondensedColon x_0-1\)
             after finding the first \(x\) which is \(x_0\).\\
             More specifically, remove the outer while loop.
+        \item $\textbf{while }(n+1)\cdot f\le x$ is to decide the $n$ and let $f=n!$.
     }
 
     % The Same in Binary https://www.cs.cornell.edu/~tomf/notes/cps104/twoscomp.html
@@ -1545,6 +1546,70 @@ boxrule=0pt,boxsep=0pt,breakable}
         \item better use \(\bmod\) to indicate "not divide"
         \item the ans stops when \(x=1\) although it is longer.
     \end{enumerate}
+\end{todolist}
+
+\section{6.6}
+\begin{todolist}[resume*,start=11]
+    \ModProcNameAndLabelSuffix{all r-permutations}{-6-6}
+    \mywrongitem \CapProcTargetName \AlgorithmRef\\
+    This is translated from the ans.
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+        \myproc{\ProcTargetName(\(S=\{a_1,a_2,\ldots,a_n\}: \text{a set of n elements}\))}{}
+        \(RComb_{s}\coloneqq \{a_1,a_2,\ldots,a_r\}\)\Comment{initial r-comb}
+        \(TmpPerm\coloneqq RComb_{s}\)\\
+        \(TmpComb\coloneqq RComb_{s}\)\\
+        \(P\coloneqq \varnothing\)\\
+        \While{\(TmpComb\neq \{a_{n-r+1},...,a_n\}\)}{
+            \While{\(TmpPerm\neq inverse(TmpComb)\)}{
+                \(\text{append }P\text{ with }TmpPerm\)\\
+                \tcc{"generate all the permutations of the elements in this combination"}
+                \(TmpPerm=NextPermutation(TmpPerm)\)
+            }
+            \tcc{"Using Algorithm 3, we generate all the r-combinations of the set with n elements."}
+            \(TmpComb=NextRCombination(TmpComb)\)\Comment{This implies the increasing order}
+            \(TmpPerm=TmpComb\)
+        }
+        \Return{\(P\)}
+    \end{SpacingAlgorithm}
+
+    \addtocounter{todolisti}{3}
+    \ModProcName{Cantor digits to permutation}
+    \mywrongitem \CapProcTargetName \AlgorithmRef
+    \begin{SpacingAlgorithm}{\CapProcTargetName}{\AlgLabel}
+        \myproc{\ProcTargetName(\(S=\{s_1,s_2,\ldots,s_n\}: \text{a set of n elements},i:\text{integer less than n!} \))}{}
+        \(\{a_i\}\)\Comment{Cantor digits}
+        \(T\coloneqq \{\overbrace{t_1,\dots,t_n}^{n\text{ times}}=\{\overbrace{1,\dots,1}^{n\text{ times}}\}\)\\
+        \(IndexList\coloneqq \varnothing\)\\
+        \(index\coloneqq 0\)\\
+        \ForRange{k}{1}{n-1}{
+            \(a_k=\lfloor\frac{i}{k!}\rfloor\bmod (k+1)\)
+        }
+        \ForRange{k}{1}{n-1}{
+            \tcc{1.break out of the loop if "len(IndexList)" equals 0}
+            \ForRange{j}{0}{len(IndexList)}{
+                \While(\tcc*[h]{correspond to $h\coloneqq n$}){\(n-a_{n-k}\le IndexList[j]\)}{
+                    \(a_{n-k}=a_{n-k}+1\)
+                }
+                \Else{
+                    \Break
+                }
+            }
+            \(index=n-a_{n-k}\)\\
+            \(t_{index}=s_{n-k+1}\)\\
+            \(\text{append }index\text{ to }IndexList\text{ and sort it in the increasing order.}\)
+        }
+        \(index=\{1,\dots,n\}\setminus IndexList\)\\
+        \(t_{index}=s_1\)
+    \end{SpacingAlgorithm}
+    \ecc{
+        \item $\textbf{while }p_h\neq 0$ will exclude already filled slots.\\
+            Then with $\textbf{for }j\coloneqq 1\textbf{ to }c$, it will implement $(n-i)-a_{n-i-1}$ as exercise 15 shows.\\
+            Then the correct location $h$ is decided.
+        \item it uses $c\coloneqq \dots$ to calculate $a_k$ at each iteration which \textbf{decreases space usage}.
+        \item $x/(n-k)!\Rightarrow k<n$, so we have one ending $h\dots$ to find the location for $s_1$.
+        \item The above code has \textbf{extra overheads} of sort based on the ans.\\
+            But it condenses many $h\coloneqq h-1$ inside $\textbf{for }j\coloneqq 1\textbf{ to }c$ into one $index=n-a_{n-k}$.
+    }
 \end{todolist}
 
 \end{document}
