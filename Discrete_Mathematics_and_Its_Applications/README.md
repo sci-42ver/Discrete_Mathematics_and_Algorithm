@@ -1,18 +1,4 @@
-I can solve the above problem by another generating function form: 
-$$
-a(x)=\sum_{i=0}^n a_i x^i\\
-xa(x)=\sum_{i=0}^n a_i x^{i+1}\\
-x^2a(x)=\sum_{i=0}^n a_i x^{i+2}\\
-(1-x-x^2)a(x)=a_0+(a_1-a_0)x=1+x\\
-a(x)=\frac{1+x}{1-x-x^2}
-$$
-the form is same as the above one. But how does these two become same? Based on $a_1=2,a_2=3$, what does the above coefficient $1$ in $x$ and $x^2$ mean? Since $x^2=x*x$, does "0" and "01" also has this relation? And what does the ending "removing the rightmost '0'" mean?
-
-@Henry Thanks for your comments. With your clarification help, I found my original generating function reference link may not fit in this specific problem. Then I refer to [this about Generating Function for recurrence](https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Combinatorics_(Morris)/02%3A_Enumeration/08%3A_Generating_Functions_and_Recursion/8.03%3A_Using_Generating_Functions_to_Solve_Recursively-Defined_Sequences).
-
-1. Yes. It seems these two generating functions are different. Since in my above equations which is based on the original answer link "Recurrence" part referenced in the question, I let $a_0=1$ and $a_1=2$ which corresponds to "0" and "1". Then $a_2=3$ corresponds to "10","01","00". Then could you say in detail how the above $x+x^2$ deals with length 3 maybe and $(x+x^2)^2$ deals with length 6 maybe (why can we multiple $x+x^2$ to get the corresponding coefficients $a_i$ here)? And why does $x$ and $x^2$ both has coefficient "1" when length 1 and length 2 have more than 1 related strings? Thanks beforehand.
-
-2. After expanding $\frac{1+x}{1-x-x^2}$, it is $1+2x+\ldots+8x^4$ which doesn't multiple $\frac{1}{x}$, so why does the answer emphasize that $\frac{1}{x}$ corresponds to "removing the rightmost '0'"?
+Please point out errors if any. Thanks beforehand.
 
 check p10 whether the ideas of each chapter are mastered.
 # outline
@@ -38,6 +24,9 @@ $ tree --noreport -fp
 # should use the absolute path.
 $ ln -s $(pwd)/latexindent_pl.yaml miscs_learning/latexindent_pl.yaml
 ```
+# similar exercises
+- 6-supplementary 32 with something in chapter 5.
+- 
 # TODO
 - [QA 164](https://highered.mheducation.com/sites/dl/free/125967651x/1106131/Advice_on_the_Writing_Projects.pdf)
 - how is the p20 list related with discrete mathematics?
@@ -61,13 +50,16 @@ $ ln -s $(pwd)/latexindent_pl.yaml miscs_learning/latexindent_pl.yaml
 # proof method arsenal by p136
 - see 1.7~8
 # contents
-## prologue
+## prologue and preface
 - some highlights are lost due to failure to save.
 - data networking [diff](https://www.geeksforgeeks.org/difference-between-network-and-internet/) the Internet
 - [formal languages](https://www.oreilly.com/radar/formal-informal-languages/) are more stuctured where [DALL-E](https://en.wikipedia.org/wiki/DALL-E#:~:text=The%20original%20DALL%C2%B7E%20was,3%20modified%20to%20generate%20images.) talks to the person.
   > the language you need to know to talk to DALL-E. Right now, it’s an informal language, not a formal language with a specification in *BNF* or some other metalanguage.
 
   BNF adds [much limitation](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form).
+- [one-pass algorithm](https://en.wikipedia.org/wiki/One-pass_algorithm#:~:text=In%20computing%2C%20a%20one%2Dpass,each%20step%20in%20the%20process.) means no extra space needed for input.
+  Also [see](https://stackoverflow.com/a/46304200/21294350)
+  > The while loop traverses the tree *multiple times*, so no, it is not one-pass.
 ## 1
 ### added after reviewing
 - modus ponens means by [**placing**](https://en.wikipedia.org/wiki/Modus_ponens) $P$, then $Q$
@@ -632,6 +624,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - based on [this](https://math.stackexchange.com/a/42631/1059606) (also see [more graphs](https://en.wikipedia.org/wiki/Theorem_on_friends_and_strangers))
   > either three mutual friends or three mutual enemies
   so here two cases of "either or" can be achieved at the same time, i.e. we can draw *both* one red and one blue triangles among six vertices.
+  More specifically, it means $p\vee q$ so $p,q=T$ can be contained. <a id="Ramsey_theory"></a>
 - EXAMPLE 7 b
   here
   > We do not use the generalized pigeonhole principle to answer this question, because we want to make sure that there are three hearts, not just three cards of one suit.
@@ -721,13 +714,13 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   - "combinatorial definition of the signless Stirling numbers of the first kind" [*relation*](https://math.stackexchange.com/questions/4824460/combinatorial-proof-for-stirling-number-of-1st-kind#comment10270394_4824743) with "the definition of Stirling numbers of the first kind".
     This is same as the [answer_1](https://math.stackexchange.com/a/2704143/1059606) refered to
     - [Flagpoles with flags](https://www.chegg.com/homework-help/questions-and-answers/exercise-3-n-distinct-flags-row-k-flagpoles-job-put-flags-poles-may-leave-poles-empty-also-q114469081)
-    - The key idea is that [Canonical cycle notation](https://en.wikipedia.org/wiki/Permutation#Canonical_cycle_notation) will "fix a certain order".
+    - The key idea is that [canonical cycle notation](https://en.wikipedia.org/wiki/Permutation#canonical_cycle_notation) will "fix a certain order".
       - how this notation works
         [see](https://en.wikipedia.org/wiki/Permutation#Cycle_notation) $\sigma=265431$ and [this](https://en.wikipedia.org/wiki/Cyclic_permutation#Definition) which implies cyclic permutation.
         - notice in [product of cycles](https://math.stackexchange.com/a/484959/1059606),
           $(14)$ in $(1532)(14)\ldots$ means the number $1\to 4$ instead of index, i.e. after $(1532)$ we do at the 1st location $5\to 4$.
       - So $(9\,5)(3\, 4)(2)(1\, 8\, 6\, 7)$ and $(5\,9)(3\, 4)(2)(8\, 6\, 7\, 1)$ can't exist.
-    - For answer_2, we can use the [stirling_numbers_first_kind_simulation] to find the pattern as the [edit](https://math.stackexchange.com/q/4824460/1059606) says.
+    - For answer_2, we can use the [stirling_numbers_first_kind_simulation] to find the pattern as the [edit][stirling_numbers_first_kind_proof] says.
     - This [comment](https://math.stackexchange.com/questions/3878162/why-are-stirling-numbers-of-the-first-kind-related-to-the-number-of-permutations/3878213#comment8001109_3878213) may mean for rows like the 1st row $x+\overbrace{1+\dots+1}^{n-1\; times}$. Then it means choices of $x$ from $x+\overbrace{1+\dots+1}^{n-(n-k+1)=k-1\; times}$ to $x$. But this is not what the answer author means.
   - TODO 
     - the [relationship](https://math.stackexchange.com/a/49496/1059606) between Stirling numbers of the first and second kind
@@ -3939,7 +3932,7 @@ xxxx1000 # here we exclude 000y(2 choices),1000 so minus 3
         ```
   - Also see [this recursion formula][consecutive_zeros_in_bit_strings]
     it is based on constructing with 
-    either the first $n-1$ bits have $000$ ($2a_{n-1}$) or not ($2^{n-4}-a_{n-4}$)
+    either the first $n-1$ bits have $000$ ($2a_{n-1}$) or not ($2^{n-4}-a_{n-4}$) <a id="recurrence_append"></a>
     the latter case is due to that we must append 0, so the last 3 of the first ${n-1}$ bits must be 
     $100$ where $00$ is to ensure $000$ after appending and $1$ is to ensure no $000$ in $a_{n-1}$.
     So we only needs to care about $a_{n-4}$ because 
@@ -4369,7 +4362,124 @@ $$
 - [ ] 17 traverse all numbers less than $n!$ do 
   $a_k=(i/(k!))\%(k+1)$ same as [stirling_numbers_first_kind_simulation] then do as 15 shows.
 ### supplementary
-- 
+- 2~6,
+  10~12,22,28,
+  38~40,46,49,52 skipped
+- [ ] 8
+  c. $999-8-8*9-8*9*9$ is also ok
+    $10^3-9^3$ where both include all zeroes and **leading zeroes**.
+  e. $2*10$ is wrong.
+- [x] 14 we can also calculate by $\lfloor\frac{550}{20}\rfloor+1$ due to $\lfloor\frac{k}{20}\rfloor+1=\lceil\frac{k+1}{20}\rceil$
+- [ ] 16,18,26,30 see the ans
+- [ ] 17 similar to 6.2.3 example 10
+- [ ] 20 here we doesn't think about one computer resend emails at each round. For example, at the 2nd round, both 100 infected and 1 self original can infect 100 more, so extra $100^2+100$ instead of $100^2$ are infected.
+- [ ] 24 see the ans for a combinatorial proof which again is based on order. See [this](#selection_order)
+- [x] 25 it can be also calculated by $\overbrace{2^n}^{\text{corresponds to }\varnothing}+\overbrace{2^{n-1}*\binom{n}{n-1}}^{\text{corresponds to }S_1,|S_1|=1}+\dots+\binom{n}{k}*2^k=\sum_{k=0}^{n}\binom{n}{k}*2^k*1^{n-k}=3^n$
+  - the hint is straightforward.
+    since $A\subseteq B\Rightarrow A\cap (S-B)=\varnothing\text{ similar for the rest 2 pairs}$
+    Then based on $A\cup (B-A) \cup (S-B)=S\quad\blacksquare$
+    Also see [this](https://gateoverflow.in/18496/tifr-cse-2010-part-a-question-18?show=18507#a18507) and [this](https://gateoverflow.in/357487/gate-cse-2021-set-2-question-50?show=396191#c396191)
+- [ ] 33
+  - see [this](https://math.stackexchange.com/a/49259/1059606) which is similar to one [exercise](#recurrence_append) before.
+    - here $e_n$ is constructed by appending $1$ based on the $n-1$ length bit string.
+      then it is obviously related with $e_{n-1},f_{n-1}$, 
+      but with $f_{n-1}$, it will end with $01$, so this case is excluded.
+      - The rest is similar.
+      - $a_n$ can be based on appending either $n-1$ has 2 then $n-1$ can be only ended with 0 -> $a_{n-1}$
+        or not -> then $n-1$ ending with 0 and we append $1$ to create one more $01$.
+        - $c_n$ is similar to $a_n$.
+          $e_n$ is also similar but has no $-1$ occurences, so $e_n=e_{n-1}$
+    - let $c_n=d_n-d_{n-1}\Rightarrow c_{n}-c_{n-1}=n-2$
+      then with $c_3=d_3-d_2=1-0=1\Rightarrow c_{n}=\frac{(1+n-2)(n-2)}{2}=\binom{n-1}{2}$
+      then $d_n-d_2=\sum_{t=3}^n c_t=\binom{2}{2}+\dots+\binom{n-1}{2}=\binom{3}{3}+\binom{3}{2}+\dots+\binom{n-1}{2}=\binom{n}{3}$
+      then $a_n-a_4=d_4+\dots+d_{n-1}\Rightarrow a_n=1+\binom{4}{3}+\dots+\binom{n-1}{3}=\binom{n}{4}$
+      then $b_n-b_4=1+\dots+\binom{n-1}{4}=\binom{n}{5}$
+  - Also see [this](https://math.stackexchange.com/a/1524107/1059606) similar to one exercise before.
+    where the last $(+-+-+)$ is based on "an extra 0 before the n bits" will precede 
+    $-$ with $+$, the rest is similar.
+    - similar to [this](https://math.stackexchange.com/a/49263/1059606)
+      where $l,m,p,q\geq 1$ corresponds to $(+-+)$
+- [ ] 34 see the ans
+  - notice "possible" in the exercise description.
+    so for "every collection of fewer than m(d) sets each contain-ing d elements", when $d=2$ and there are 2 sets $A,B$, if $A\cap B= \varnothing$ then we just assign each set with different colors and there is **no contradiction** when $A\cup B$. Then if $A\cap B=\{k\}$ we can assign 
+    $B-\{k\}=A-\{k\}$, then still **no contradiction**.
+    - contradiction condition:
+      take {1,2},{2,3},{1,3} for example.
+      ~~since {1,2},{2,3} must take 2 colors in each subset, so {A,B},{B,A} where A,B are R,B or B,R (R:Red,B:Blue). Then {1,3} will only have one color.~~
+      let 1->R,2->B
+      then {2,3} makes 3->R
+      {1,3} makes 3->B, then **contradiction** which is caused by one element is assigned **different colors by different sets**.
+  - Here "fewer than m(d)" implies if $m(d)=k$ fails then $m(d)>k$ also fails.
+    - Also if "every collection of $t$ sets" succeeds then "every collection of $t'$ sets 
+      ($t'<t$)" also succeeds where the latter is **subsets** of the former.
+  - > If 3 is red, then we can conclude that 5 is blue, 7 is red, 6 is blue, and 4 is blue, making the last set improperly colored
+    {2,5,7} -> 7 is red
+    {3,6,7} -> 6 is blue
+    {1,4,7} -> 4 is blue
+  - > This implies that 4 is red, hence 7 is blue, hence 5 and 6 are red, another contradiction
+    {2,3,4} -> 4 is red
+    {1,4,7} -> 7 is blue
+    {1,3,5},{1,2,6} -> 5 and 6 are red
+    - If 4 is blue, then {2, 3, 4} contradiction.
+      so no choices for 4.
+  - > Since having more elements in S at our disposable only makes it easier to 2-color the collection
+    see a) and "three sets are {1, 2}, {1, 3}, and {2, 3}" in b)
+  - > if a occurs in only four of the sets
+    - ~~then if "only" three~~
+      ~~there are four elements for the rest $3*3=9$ slots~~
+      ~~then there are $\lceil\frac{9}{4}\rceil=3$ duplicate elements $b$, i.e. $b$ in all 3 remaining sets.~~
+- [ ] 36 here fix one person is similar to canonical cycle notation.
+- [ ] 42 here $26*(2*\binom{3}{2}*10)$ is wrong because 
+  $10$ options may contain $1,2$ which may be duplicate with $\binom{3}{2}$.
+  Then $12x$ when $2*\binom{3}{2}$ and then 
+  $121$ when $10$ will be duplicate with $x21$ when $2*\binom{3}{2}$ and then 
+  $121$ when $10$.
+- [ ] 44 $6!*5!*\binom{8}{5}*12^{\overline{3}}$ is wrong because it first permutate 5 chosen and then the rest 3 which obviously will duplicate count something. For example,
+  $b1b2b3b4b5b$ -> $b16b27b38b4b5b$
+  will be duplicate with $b6b7b8b4b5b$ -> $b16b27b38b4b5b$
+  - we can first think boys and girls indistinguishable
+    then choose their combination with $\binom{9}{3}$ when having put 5 girls between each pair of boys and choose locations between boys for the rest 3.
+    Then $*6!*8!$.
+- [ ] 48 it is same as [stirling_numbers_first_kind_proof] answer_3 says and [this](https://math.stackexchange.com/questions/3554051/summation-of-signless-stirling-numbers-of-first-kind/3556107#comment7309651_3554051).
+  - Also see [algebraic proof](https://math.stackexchange.com/a/3556107/1059606) although not recommended.
+- [ ] 51
+  - see ans: the exercise description should be $2^n\vert (2n)!$ and 
+    [$2^n\not\vert n!$](https://math.stackexchange.com/a/1808676/1059606) (also [see](https://math.stackexchange.com/questions/1808670/prove-that-2n-does-not-divide-n#comment10276190_1808680))
+- [ ] 53
+  "GAAAG" -> "GAAAG"
+  "GGU" -> 
+  - see the ans
+    - "GAAAG" -> "x...xGAAAG"
+    - "GGU" -> "x...xGGUCCG"
+      the "GUCCG" -> "CCGGUCCG" -> "CCGGUCCGAAAG"
+- [ ] 54
+  "U, GAC, and GAC" -> 3 "U" + 3 "GAC"
+  "AC, UG, and ACG" -> 2 "ACG" + 2 "UG" (due to the above)
+  - see the ans where 12-link may have less than 12 links.
+- [ ] 55 based on 12
+  - we only change $NextPermutation()$ and use 56 combination.
+    $$
+    \textbf{while }a_j\ge a_{j+1}\\
+    \ldots\\
+    \textbf{while }a_j\ge a_{k}\\
+    $$
+  - see the ans
+    - here $n^r$ corresponds to n-base.
+- [ ] 56 hinted by the ans
+  - here should have $\binom{n+r-1}{r}$ iterations
+  - based on ALGORITHM 3
+    $$
+    \textbf{while }a_i=n\\
+    \ldots\\
+    a_j\coloneqq 1
+    $$
+    - the above $1$ is carelessly mistaken.
+- [ ] 57 see 6.2 example 12
+  - > at least R(m − 1, n) friends of Jerry or R(m, n − 1) enemies of Jerry among these people
+    it is based on split into $\ge R(m − 1, n)$ and 
+    $\le R(m, n − 1)-1$ or split into $\le R(m − 1, n)-1$ and $\ge R(m, n − 1)$.
+- [ ] 58
+  See [this](#Ramsey_theory) here we need to prove $\neg(p\vee q)=(\neg p)\wedge(\neg q)$
 ## 7
 ### 7.2
 - [ ] 15
@@ -4417,6 +4527,7 @@ Redo 5.4-48
 [comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one]:https://math.stackexchange.com/a/4804647/1059606
 [lower_bound_second_largest_element]:https://math.stackexchange.com/a/1672/1059606
 [consecutive_zeros_in_bit_strings]:https://math.stackexchange.com/a/178613/1059606
+[stirling_numbers_first_kind_proof]:https://math.stackexchange.com/q/4824460/1059606
 
 <!-- cs stackexchange -->
 [O_Theta_Omega_relation_with_limit]:https://cs.stackexchange.com/a/827/161388
