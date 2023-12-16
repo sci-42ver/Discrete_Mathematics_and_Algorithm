@@ -745,6 +745,9 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
         Since we need to find the next one adjacent number larger than original, it must be bigger than the original at $j$th digit, so we find the **smallest** $a_k>a_j$. Then to get the **smallest** next larger, we list increasingly from left to right for the rest digits. This corresponds to exercise 10 ans
         > Furthermore the new permutation is the **first** one (in lexicographic order) with $a_1 , a_2 , \lodts , a_{j−1} , a_k$ in positions 1 to j
         > Since $a_k$ was picked to be the **smallest number greater** than $a_j$ among $a_{j+1} , a_{j+2} , \ldots , a_n$, there can be no permutation between these two.
+## 7
+### 7.1
+- [Full house](https://en.wikipedia.org/wiki/List_of_poker_hands#Full_house) Also [see](https://zh.wikipedia.org/zh-cn/撲克牌型#牌型)
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -4481,8 +4484,59 @@ $$
 - [ ] 58
   See [this](#Ramsey_theory) here we need to prove $\neg(p\vee q)=(\neg p)\wedge(\neg q)$
 ## 7
+### 7.1
+- 2~8,
+  12~17,
+  20~26,
+  36~44 (40 similar to 38, 44 similar to one example) skipped.
+- [ ] 10 the problem says "the two of diamonds" to mean diamond number 2 instead of 2 cards with diamond.
+- [ ] 18 here may contain [royal flush](https://en.wikipedia.org/wiki/List_of_poker_hands#Straight_flush), so [$9+1$](https://en.wikipedia.org/wiki/Poker_probability#5-card_poker_hands) (see 17)
+- [ ] 19 see [this](https://math.stackexchange.com/a/1031863/1059606)
+  so $\binom{13}{5}*4^5-5148-10240+40$
+- [ ] 28
+  one method is based on 7 numbers has been chosen, then 11 numbers are chosen by the computer which decides the division process by either containing the 7 already chosen or not.
+  one method is the converse order, so either in the 11 chosen or not.
+- [ ] 30 notice here "(but not six)" means **exact** 5.
+- [ ] 32 here whether caring about the prize order or not is all ok.
+- [ ] 34 here the order matters.
+- [ ] 39
+  1. $\frac{4}{50429225}*\frac{1}{15}$
+  2. 
+```python
+import math
+def win_probability(numerator):
+  denominator=math.comb(70,5)*25*15
+  factor=math.gcd(numerator,denominator)
+  print(f"{numerator//factor}/{denominator//factor:,}")
+win_probability(math.comb(5,4)*math.comb(65,1)*6)
+```
+  3. the rest is same as before. `win_probability(math.comb(5,1)*math.comb(65,4)*1+936000*5)`
+  4. `win_probability(math.comb(5,1)*math.comb(65,4)*5+math.comb(65,5)*3)`
+- [ ] 41
+  - > which is doubled when the Power Play option is in effect regardless of the multiplier chosen
+    This should take effects both "more than 150,000,000" or not.
+```python
+import math
+denominator_factor=24+13+3+2
+def win_probability(numerator,denominator_factor):
+  denominator=math.comb(69,5)*26*denominator_factor
+  factor=math.gcd(numerator,denominator)
+  print(f"{numerator//factor}/{denominator//factor:,}")
+# both 1,2
+win_probability((1*25)*denominator_factor,denominator_factor)
+# 3
+denominator_factor=24+13+3+2+1
+win_probability((math.comb(5,4)*math.comb(64,1)*(26-1)+math.comb(5,3)*math.comb(64,2))*1,denominator_factor)
+# 4
+denominator_factor=24+13+3+2
+win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*13,denominator_factor)
+```
 ### 7.2
 - [ ] 15
+### 7.3
+- [ ] 15
+### supplementary
+- [ ] 3
 ## 8
 ### 8.1
 - [ ] 29 corresponds to 6.1 example 7
