@@ -748,6 +748,22 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 ## 7
 ### 7.1
 - [Full house](https://en.wikipedia.org/wiki/List_of_poker_hands#Full_house) Also [see](https://zh.wikipedia.org/zh-cn/撲克牌型#牌型)
+### 7.2
+- [such as days nine months after some holidays including New Year’s Eve](https://www.jpost.com/judaism/jewish-holidays/article-718814)
+- TODO 
+  - here
+    > The probability that a chip is good, but that it came from an untested batch
+    whether "from an untested batch" or not is both $0.9$. <a id="success_probability_whether_tested_or_not"></a>
+  - > a composite integer n passes Miller’s test for fewer than n/4 bases b
+    - why must fail
+      > the procedures used to decrypt messages will not produce the original encrypted message
+- theorem 3 is based on complementary set.
+  - theorem 4
+    - > we assume that it is equally likely for two people to be friends or enemies.
+      This has one implicit possibility $p_1<1$ which needs to be multiplied.
+      - so $p(\bigcup_{i=1}^{\binom{n}{k}} E_i) < 1$ should be $p(\bigcup_{i=1}^{\binom{n}{k}} E_i)*p_1 < 1$
+      - Also $p(E_i) = 2*(1/2)^{k(k−1)/2}$ overcounts.
+        so the real probability $p(\bigcup_{i=1}^{\binom{n}{k}} E_i)<\binom{n}{k}*2*(1/2)^{k(k−1)/2}$ instead of $\le$ although the final result is same.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -4532,11 +4548,47 @@ denominator_factor=24+13+3+2
 win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*13,denominator_factor)
 ```
 ### 7.2
-- [ ] 15
+- 1~6,14,15,
+  24~26,
+  30~36 skipped
+- [ ] 8 see the ans for c) and e).
+- [x] 10
+  f) $\frac{2*4^{\overline{23}}}{26!}=\frac{1}{3}$ is also ok
+- [ ] 12,16 see the ans
+- [ ] 18
+  b) $\frac{\binom{7}{n}}{7^n}$ is wrong.
+- [ ] 20 notice here is not $\frac{365^{\underline{k}}}{366^k}$.
+- [ ] 22 notice the assumption here.
+  - notice b) needs to be splitted into 2 cases.
+- [ ] 27 `P(F)=1-\frac{1}{2^n}\\` is wrong.
+  $$
+  P(E)=1-\frac{2}{2^n}\\
+  P(F)=\frac{1+n}{2^n}\\
+  P(E\cap F)=\frac{n}{2^n}\\
+  P(E\cap F)=P(E)*P(F)\Rightarrow n+1=2^{n-1}
+  $$
+- [ ] 28 notice $\binom{5}{3}$
+- [x] 37
+  - Every rearrangement of an absolutely convergent series converges to the same limit.
+    [proof](https://en.wikipedia.org/wiki/Absolute_convergence#Proof_of_the_theorem)
+    - Here `I_{\sigma ,\varepsilon }\subseteq \left\{S_{\sigma ,\varepsilon },S_{\sigma ,\varepsilon }+1,\ldots ,L_{\sigma ,\varepsilon }\right\}` should be `\sigma(I_{\sigma ,\varepsilon })\subseteq \left\{S_{\sigma ,\varepsilon },S_{\sigma ,\varepsilon }+1,\ldots ,L_{\sigma ,\varepsilon }\right\}`
+      because `I_{\sigma ,\varepsilon }` removes `\sigma ^{-1}\left(\left\{1,\ldots ,N_{\varepsilon }\right\}\right)` based on `I_{\sigma ,\varepsilon }&=\left\{1,\ldots ,N\right\}\setminus \sigma ^{-1}\left(\left\{1,\ldots ,N_{\varepsilon }\right\}\right)`
+      then `\sigma(I_{\sigma ,\varepsilon })=\{N_{\epsilon}+1,\dots,N\}` if onto map, if not then $\subseteq$
+    - This is same as [here](https://math.stackexchange.com/a/677291/1059606) where the 2nd inequality is based on Absolute convergence definition.
+      - then one counterexample is [this](https://math.stackexchange.com/a/2151436/1059606) where $\sum_{k=1}^n \frac{1}{n+k}>\frac{n}{2n}=\frac{1}{2}\not <\epsilon$
+    - The above is all learnt in calculus.
+- [ ] 38 see the ans
+- [x] 39
+  - here $\frac{m^{\underline{k}}}{k!}\sim O(\frac{m^k}{k!})$ which is polynomial while 
+    $(1-\frac{1}{2^k})^{m-k}\sim O(p^m),p=1-\frac{1}{2^k}$ is exponential.
+- [x] 40
+  - > the probability that we wrongly answer “false” will be about $1/2^k$ if the list is a random permutation
+    This means when the list is unsorted, we answer they are sorted, i.e. all $k$ are chosen ordered. Similar to [this](#success_probability_whether_tested_or_not)
 ### 7.3
 - [ ] 15
 ### supplementary
 - [ ] 3
+- [ ] 25
 ## 8
 ### 8.1
 - [ ] 29 corresponds to 6.1 example 7
