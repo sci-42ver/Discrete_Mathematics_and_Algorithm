@@ -764,6 +764,33 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
       - so $p(\bigcup_{i=1}^{\binom{n}{k}} E_i) < 1$ should be $p(\bigcup_{i=1}^{\binom{n}{k}} E_i)*p_1 < 1$
       - Also $p(E_i) = 2*(1/2)^{k(k−1)/2}$ overcounts.
         so the real probability $p(\bigcup_{i=1}^{\binom{n}{k}} E_i)<\binom{n}{k}*2*(1/2)^{k(k−1)/2}$ instead of $\le$ although the final result is same.
+### 7.3
+- > suppose we know the percentage of people who have a particular disease
+  we know $F=\{\text{people who have a particular disease}\}$, then we can know 
+  $P(\overline{F})$
+  > determine this probability, namely, the probability that a person has the disease given that this person tests positive for it
+  $E=\{\text{this person tests positive for it}\}$ and we want to know $P(F\vert E)$
+  > need to know the percentage of people who do not have the disease but test positive for it and the percentage of people who have the disease but test negative for it
+  i.e. we know $P(E\vert \overline{F})$ and 
+  $P(\overline{E}\vert F)$
+  Then we can know $P(E\vert F)=1-P(\overline{E}\vert F)$
+  - Then it becomes example 1.
+  - > the percentage of incoming e-mail messages that are spam.
+    we know $F=\{\text{incoming e-mail messages that are spam}\}$
+    - > the occurrence of words in the message
+      $E=\{\text{occurrence of words in the message}\}$ 
+      > We will see that we can determine the likelihood that an incoming e-mail message is spam using the occurrence of words in the message
+      and we want to know $P(F\vert E)$
+    - > the percentage of spam messages in which each of these words occurs, and the percentage of messages that are not spam in which each of these words occurs
+      we know $P(E\vert F)$ and 
+      $P(E\vert \overline{F})$
+    - Then it becomes example 1.
+- [asymptotic](https://math.stackexchange.com/a/1238615/1059606) series
+- Bayesian poisoning [type II error](https://en.wikipedia.org/wiki/Bayesian_poisoning) is based on [training](https://security.stackexchange.com/a/12592)
+  > By sending lots of correct words and a few words which are used in spam, like viagra, those words get a lower spam notification (*over time*).
+  > This means that *after a while* they can get real spam with links through to the filter.
+  So for EXAMPLE 4 in the book, $p(stock)$ will be low. Then 
+  $r=1-\frac{\Pi q_i}{\Pi q_i * \Pi p_i}$ will be low.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -4571,9 +4598,11 @@ win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*
 - [x] 37
   - Every rearrangement of an absolutely convergent series converges to the same limit.
     [proof](https://en.wikipedia.org/wiki/Absolute_convergence#Proof_of_the_theorem)
-    - Here `I_{\sigma ,\varepsilon }\subseteq \left\{S_{\sigma ,\varepsilon },S_{\sigma ,\varepsilon }+1,\ldots ,L_{\sigma ,\varepsilon }\right\}` should be `\sigma(I_{\sigma ,\varepsilon })\subseteq \left\{S_{\sigma ,\varepsilon },S_{\sigma ,\varepsilon }+1,\ldots ,L_{\sigma ,\varepsilon }\right\}`
-      because `I_{\sigma ,\varepsilon }` removes `\sigma ^{-1}\left(\left\{1,\ldots ,N_{\varepsilon }\right\}\right)` based on `I_{\sigma ,\varepsilon }&=\left\{1,\ldots ,N\right\}\setminus \sigma ^{-1}\left(\left\{1,\ldots ,N_{\varepsilon }\right\}\right)`
-      then `\sigma(I_{\sigma ,\varepsilon })=\{N_{\epsilon}+1,\dots,N\}` if onto map, if not then $\subseteq$
+    - Here $I_{\sigma ,\varepsilon }\subseteq \left\{S_{\sigma ,\varepsilon },S_{\sigma ,\varepsilon }+1,\ldots ,L_{\sigma ,\varepsilon }\right\}$ should be 
+      $\sigma(I_{\sigma ,\varepsilon })\subseteq \left\{S_{\sigma ,\varepsilon },S_{\sigma ,\varepsilon }+1,\ldots ,L_{\sigma ,\varepsilon }\right\}$
+      because $I_{\sigma ,\varepsilon }$ removes 
+      $\sigma ^{-1}\left(\left\{1,\ldots ,N_{\varepsilon }\right\}\right)$ based on $I_{\sigma ,\varepsilon }=\left\{1,\ldots ,N\right\}\setminus \sigma ^{-1}\left(\left\{1,\ldots ,N_{\varepsilon }\right\}\right)$
+      then $\sigma(I_{\sigma ,\varepsilon })=\{N_{\epsilon}+1,\dots,N\}$ if onto map, if not then $\subseteq$
     - This is same as [here](https://math.stackexchange.com/a/677291/1059606) where the 2nd inequality is based on Absolute convergence definition.
       - then one counterexample is [this](https://math.stackexchange.com/a/2151436/1059606) where $\sum_{k=1}^n \frac{1}{n+k}>\frac{n}{2n}=\frac{1}{2}\not <\epsilon$
     - The above is all learnt in calculus.
@@ -4585,7 +4614,52 @@ win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*
   - > the probability that we wrongly answer “false” will be about $1/2^k$ if the list is a random permutation
     This means when the list is unsorted, we answer they are sorted, i.e. all $k$ are chosen ordered. Similar to [this](#success_probability_whether_tested_or_not)
 ### 7.3
+- 2~14(8-b can be calculated by $0.9998*0.9999/(1-(0.999*1e-4+2*1e-4*0.9999))$, 10 similar to 8), 
+  16,17,20~23 skipped
 - [ ] 15
+  - see the ans
+    - b) where $i=k$ should be considered.
+    - c) based on b
+      $\frac{\frac{1}{3}*1}{\frac{1}{3}*(1+0+\frac{1}{2})}=\frac{2}{3}$
+  - po
+    here there are 2 cases: $i,j,k$ all different or $W=i$
+    when $W=i$, $P(W=i\vert M=k)=\frac{\frac{1}{3}*\frac{1}{2}}{\frac{1}{3}*\frac{3}{2}}=\frac{1}{3}<\frac{2}{3}$
+    - so for d)
+      it just means switch $p(W = j \vert M = k)$ is better than non-switch 
+      $p(W = i \vert M = k)$
+      And $p(W = k\vert M = k)$ is impossible.
+  - Also see [wikipedia](https://en.wikipedia.org/wiki/Monty_Hall_problem#Bayes'_theorem) where
+    - odds form is just derived from Bayes' theorem
+      $P(A_i\vert B)=\frac{P(B\vert A_i)*P(A_i)}{P(B)}$, since $P(B)$ is cancelled when division, 
+      $P(A_i)$ are contained in $O(A_i\colon A_{i+1}\colon \dots)$
+      so $\Lambda(A_i\colon A_{i+1}\colon \dots\vert B)$ only contains 
+      $P(B\vert A_i)$
+    - $B=\{\text{the host opens door }3\}$ and $A_i=\{\text{the car is behind door }i\}$
+    - > the odds against door 1 hiding the car were 2 : 1.
+      Richard Gill cares about only 2 cases where $2$ corresponds to "door 1" doesn't hide the car.
+      i.e.
+      > the information which door is opened by the host (door 2 or door 3?) *reveals no information* at all about whether or not the car is behind *door 1*
+      - > this is precisely what is alleged to be intuitively obvious by supporters of *simple solutions*
+        see the 3rd [image](https://en.wikipedia.org/wiki/Monty_Hall_problem#Simple_solutions)
+        - > 'the probability of door 1 was $\frac{1}{3}$ and *nothing can* change that ...' is automatically fishy: probabilities are expressions of our ignorance about the world, and new information can change the extent of our ignorance.
+          IMHO, in this specific case, $\frac{1}{3}$ is indeed unchanged.
+        - > $\frac{1}{3}$ must be the average probability that the car is behind door 1 given the host picked door 2 and given the host picked door 3 because these are the only two possibilities
+          - Notice the above is based on
+            > behind door 1, the door initially chosen by the player,
+            so the following $p_{12}$ can be 
+            $\frac{1}{2}$ and $p_{32}=1$.
+          - this corresponds ot the [paper](https://sci-hub.se/https://doi.org/10.1080/00031305.1991.10475821)
+          $\frac{\frac{p_{12}}{p_{12}+p_{22}+p_{32}}+\frac{p_{13}}{p_{13}+p_{23}+p_{33}}}{2}$
+          when $p_{12}=p=\frac{1}{2}$ the above becomes 
+          $\frac{1}{3}$.
+          - This also implies
+            > the choice facing the player is that between the door initially chosen, and the other door left closed by the host, the specific numbers on these doors are *irrelevant*.
+            i.e.
+            - > "obviously true, by symmetry"
+              TODO where is it shown in the [paper](https://sci-hub.se/https://www.jstor.org/stable/2685225)
+          - > But, these two probabilities are the same.
+            so the above probabilities of "the host picked door 2" and "the host picked door 3" don't matter.
+- [ ] 18 notice here the ratio between spam messages and non-spam is not $500\colon 200$ but $1\colon 1$
 ### supplementary
 - [ ] 3
 - [ ] 25
