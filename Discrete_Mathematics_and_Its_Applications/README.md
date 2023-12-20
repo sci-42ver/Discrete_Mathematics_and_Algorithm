@@ -791,6 +791,27 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   > This means that *after a while* they can get real spam with links through to the filter.
   So for EXAMPLE 4 in the book, $p(stock)$ will be low. Then 
   $r=1-\frac{\Pi q_i}{\Pi q_i * \Pi p_i}$ will be low.
+### 7.4
+- > the expectation is defined only when the infinite series in the definition is absolutely convergent
+  see [this](https://en.wikipedia.org/wiki/Expected_value#Random_variables_with_countably_many_outcomes) and [math_stackexchange](https://math.stackexchange.com/a/4116131/1059606) (TODO Lebesgue integral)
+- THEOREM 2
+  here "by Exercise 21 in Section 6.4" should be "by Exercise 25 in Section 6.4".
+- EXAMPLE 6
+  although as [this](https://math.stackexchange.com/q/2877418/1059606) says, $X_i$ are not independent where that $n-1$ people are [fixed](https://proofwiki.org/wiki/Closed_Form_for_Number_of_Derangements_on_Finite_Set) (from [this](https://proofwiki.org/wiki/Hat-Check_Problem)) will also fix the $n$th.
+  But based on [permutations count](https://math.stackexchange.com/a/4830206/1059606), we can easily get the expectation (Also see [this](https://math.stackexchange.com/questions/627913/question-on-the-hat-check-problem#comment5028877_628851) for why the order doesn't influence here)
+- THEOREM 5
+  here $\sum\limits_{r_2\in Y(S)}$ should have only one possible value.
+- COROLLARY 1 is just by definition 1.
+- > the Bienaym ́e-Chebyshev inequality, which provides a simple proof of the law of large numbers
+  see [this](https://en.wikipedia.org/wiki/Law_of_large_numbers#Proof_using_Chebyshev's_inequality_assuming_finite_variance)
+- TODO
+  > a generalization of Laplace’s least square method
+- Bienaym ́e’s [formula](https://en.wikipedia.org/wiki/Bienaym%C3%A9%27s_identity) for the variance of a sum of random variables
+- > tells us that $V (X_1) = V (X_2) = 35/12$.
+  due to $\frac{\sum\limits_{k=1}^6 k^2}{6}-(\frac{\sum\limits_{k=1}^6 k}{6})^2=\frac{6*7*13/6=91}{6}-\frac{49}{4}=\frac{91*2-3*49}{12}$
+  [$\sum n^2$](https://brilliant.org/wiki/sum-of-n-n2-or-n3/#sum-of-the-squares-of-the-first-n-positive-integers)
+- > he developed a new method for approximating the roots of equations
+  it seems to be [degree-3 approximation](https://www.engineeringletters.com/issues_v28/issue_4/EL_28_4_35.pdf) based on the Newton’s method with $x_{n+1}-x_n$ approximation from (6) to (7).
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -4205,7 +4226,7 @@ $$
     - for the non-ending round, either (W,W) or (L,L) pair for two teams.
       for the ending round, either (W,L) or (L,W) ordered tuple for two teams.
 ### 6.4
-- 2~16,24,28,32,33 (similar to [selection_order](#selection_order)),34 (similar to [selection_two_categories](#selection_two_categories)),35,36 skipped
+- 2~16,21,24,25,28,32,33 (similar to [selection_order](#selection_order)),34 (similar to [selection_two_categories](#selection_two_categories)),35,36 skipped
 - [x] 15
   $\binom{100}{k}*x^{3k-100}*(-1)^k$, so $\binom{100}{\frac{100+j}{3}}*x^j*(-1)^{\frac{100+j}{3}},\text{when }\frac{100+j}{3}\in \mathbb{N}$
 - [ ] 18
@@ -4660,9 +4681,70 @@ win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*
           - > But, these two probabilities are the same.
             so the above probabilities of "the host picked door 2" and "the host picked door 3" don't matter.
 - [ ] 18 notice here the ratio between spam messages and non-spam is not $500\colon 200$ but $1\colon 1$
+### 7.4
+- 4~10,
+  16~18,22,
+  26~28,
+  32,34~38,44 skipped
+- [ ] 2 see the ans where we doesn't need to use the basic formula $\frac{1}{2^10}*(\sum k*\binom{10}{k})$ to calculate.
+- [ ] 12,20,37 (where $\sum_{r\ge a}1$ scales both the range $r$ and the value $r/a$) see the ans
+- [x] 14 also by definition, the sum must be $1$.
+- [x] 15 better use the definition that when $(1-p)^{j-1}$, 
+  $X\ge j$
+- [ ] 24 $E(I_A)=1*p(A)+0*p(\overline{A})$
+  - better see the ans for how to write the proof canonically.
+- [ ] 30
+  - we can also expand $V(X),V(Y)$ directly and cancel out terms.
+  - see the ans
+    - the 3rd equal sign ~~should~~ can also be $(E(Y^2)-E(Y)^2)*E(X^2)+E(Y)^2 V(X)=E(Y^2)E(X^2)-E(Y)^2(E(X^2)-V(X))=E(Y^2)E(X^2)-E(Y)^2 E(X)^2$
+- [ ] 33
+  a. is trivial
+  b. here $X_3$ are identified as the Bernoulli random variables by its probabilities.
+    and $V(\sum X_i)$ is calculated by enumerating 
+    ($E((\sum X_i)^2)=2^2*\frac{1}{4}*3=3\Rightarrow V(\sum X_i)=3-\frac{3}{2}^2=\frac{3}{4}$)
+    instead of expanding out 
+    $E((\sum X_i)^2)=E(\sum X_i^2+\sum_{i\neq j} 2X_i X_j)$
+- [ ] 40
+  - see the ans
+    - notice $p(\text{not in the list})\neq n/[n(n+1)]$
+- [ ] 41
+  1. here the general case is probability may be not equal.
+    and 
+    > used by the bubble sort to put these integers into increasing order
+    since bubble sort will make the list with the increasing order at the end, so $X(P)$ is just the "comparisons used by the bubble sort".
+  d), see the ans
+- [ ] 42 
+  - TODO why is a) asked?
+  - See 5.4-52
+  - > the element being compared with at each round is put between the two sublists, so it is never compared with any other elements after that round is finished
+    i.e. every pair is compared only once.
+  - d) see the ans
+  - e)
+    $$
+    \begin{align*}
+      E(X)\overset{i=k-j+1}{=}&2\sum_{k=2}^n\sum_{i=2}^k\frac{1}{i}\\
+        \overset{\text{track appearance times of each }i}{=}&2\sum_{k=2}^n(\frac{n-k+i}{k})\\
+        =RHS
+    \end{align*}
+    $$
+  - f) is done with [calculus](https://en.wikipedia.org/wiki/Harmonic_number#Calculation) from [this](https://cs.stackexchange.com/a/30035/161388)
+    - here take $x=1$ in [$\int_{0}^x \sum_{k=0}^{n-1}x^k$](https://books.google.co.jp/books?id=sohHs7ExOsYC&pg=PA206&redir_esc=y#v=onepage&q&f=false), we will get the harmonic number
+    - it is also related with [Basel problem](https://en.wikipedia.org/wiki/Basel_problem)
+- [x] 43
+  $E(X)=\sum E(X_i)=n*\frac{1}{n}=1$
+  $E(X^2)=\overbrace{\sum E(X_i^2)}^{\text{same as }\sum E(X_i)}+2*\binom{n}{2}*\sum E(X_i*X_j)=1+2*\binom{n}{2}*\frac{1}{n(n-1)}=2$
+  More detailed see [here](https://math.stackexchange.com/a/3820273/1059606) which is same as the above calculation by me.
+- [x] 46 we can also $2E(i^2)+2E(ij)-2E(i)E(i+j)=2E(i^2)+2E(i)^2-4E(i)^2=\frac{7*13}{3}-\frac{49}{2}$
+- [ ] 48 see the ans
+  - here if we assume $m>n$
+    then $E(X)=\sum_{i=1}^{m} i*\frac{\binom{m-i+n-2}{n-2}}{\binom{m+n-1}{n-1}}=\sum_{i=1}^{m} i*\frac{m^{\underline{i}}*(n-1)}{(m+n+1)^{\underline{i+1}}}$
+    here the numerator $\binom{m-i+n-2}{n-2}$ has one less term than 
+    $\binom{m+n-1}{n-1}$ which causes $(m+n+1)^{\underline{i+1}}$ and 
+    $m^{\underline{i}}$
 ### supplementary
 - [ ] 3
 - [ ] 25
+- [ ] 29
 ## 8
 ### 8.1
 - [ ] 29 corresponds to 6.1 example 7
