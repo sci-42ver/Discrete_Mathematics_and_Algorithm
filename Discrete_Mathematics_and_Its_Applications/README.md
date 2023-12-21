@@ -1496,7 +1496,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     a. if $S\in S$ then we don't conform to the condition $x\notin x$, so should $S\notin S$
     b. similar to a.
   - based on p147 where the *property*, i.e. $x\notin x$ here, may "leads to paradoxes".
-- [ ] 51 $C_n^{i},i=1\sim n$ selection.
+- [ ] 51 $C_i^{n},i=1\sim n$ selection.
 ### 2.2
 - 2~4,
   22~24,
@@ -3200,7 +3200,7 @@ while 1:
   1. 18 is similar to 4.
   2. 36,37 similar to one example.
   3. 40,42,60(see the ans which can be also related with 43 because set can be described by proposition) need some basic lemmas to complete the proof (i.e. $n=2$).
-  4. 46 $C_{n}^3$
+  4. 46 $C_{3}^n$
   5. 47 trivial after hinted
 - 61 see the ans
 - [ ] 25
@@ -3667,7 +3667,7 @@ $$
     - it implies the worst case by the ans
     - TODO 
       - decision tree -> $\lceil\log{n+1}\rceil$
-      - b why not $C_{6}^{1}*C_{5}^{1}=30$ ways.
+      - b why not $C_{1}^{6}*C_{1}^{5}=30$ ways.
 - [ ] 50
   - by [this](https://en.wikipedia.org/wiki/Quicksort#Lomuto_partition_scheme)
     ```bash
@@ -3966,8 +3966,8 @@ $$
 - [ ] 26
   1. see the ans. Here it takes 3 or 4 times as also twice and also allows leading digit 0.
   2. here "exactly" excludes four 9s.
-- [x] 42 $C_{4}^3*C_{3}^1*4*3$
-- [x] 46 $C_{10}^4*\frac{4!}{4}$ is also ok.
+- [x] 42 $C_{3}^4*C_{1}^3*4*3$
+- [x] 46 $C_{4}^10*\frac{4!}{4}$ is also ok.
 - [ ] 52 see the ans this is similar to EXAMPLE 17.
 - [ ] 53 similar to above $2^5+2^4*(6-1)+2^4+2^3*(5-1)-(2+2)*2-5$
   here $-5$ is due to
@@ -4028,7 +4028,7 @@ $$
       i.e. get one with *four* bits corresponding to $x^4$ after lopping.
     - See this [summary](https://math.stackexchange.com/questions/4822021/how-to-use-generating-functions-to-solve-the-problem-number-of-bit-strings-of-l?noredirect=1#comment10262960_4822021) to verify understanding of the problem
       kw: stringing together, do not need that final 0
-- [ ] 68 it is just [$2*C_{7}^4$](https://math.stackexchange.com/a/581540/1059606) which is same as [this](http://mathcentral.uregina.ca/QQ/database/QQ.09.01/michelle1.html) where $\frac{7!}{4!3!}$ 
+- [ ] 68 it is just [$2*C_{4}^7$](https://math.stackexchange.com/a/581540/1059606) which is same as [this](http://mathcentral.uregina.ca/QQ/database/QQ.09.01/michelle1.html) where $\frac{7!}{4!3!}$ 
   means all 7 games are labelled differently ($7!$) 
   then $4!$ and 
   $3!$ is based on the division rule to exclude duplicate ones.
@@ -4134,10 +4134,10 @@ $$
   - Also see [this](https://math.stackexchange.com/a/4291946/1059606) where $1,2,3,4$ can be only shared by 2 *consecutive* 3, i.e. $1,2,3$ or $2,3,4$.
     - b $98*97*2−97$
 - [ ] 34
-  1. $C_{25}^5*P_{6}^6$ is wrong because it drops multiple $a$ cases.
+  1. $C_{5}^25*P_{6}^6$ is wrong because it drops multiple $a$ cases.
   2. $26^6-24^6$ is wrong because $\neg (p\wedge q)=(\neg p)\vee(\neg q)$
-  3. $P_{25}^5$ is wrong because it may drop $ab$.
-  4. it can be also calculated by $(5+\ldots+1)*P_{24}^4$ where when b selects the rightmost (6th) location, $a$ has 5 choices, etc.
+  3. $P_{5}^25$ is wrong because it may drop $ab$.
+  4. it can be also calculated by $(5+\ldots+1)*P_{4}^24$ where when b selects the rightmost (6th) location, $a$ has 5 choices, etc.
 - [ ] 43 $\binom{r}{n}*\frac{P_r^r}{r}=\frac{n!}{r!(n-r)!}*\frac{r!}{r}=\frac{n!}{r(n-r)!}$
   - Also see [this](https://math.stackexchange.com/a/4345118/1059606)
     - > so we can apply this consideration sitting one of them and permute the rest
@@ -4159,7 +4159,7 @@ $$
         - Here B(0,3) becaue B(0,2) may have (3,2) ending, similar for (0,4).
           A:(3,2) ~~can only contain 2 $L$ after 3 $W$ which is contained in A(2,2),B(0,4)~~ is impossible to be with B(0,3) since $3+2>0+3+1$ 
         - A:(3,1) where 1 $L$ after 3 $W$ is contained in A(3,0),B(0,3)
-          So here we have only $C_{3}^2$
+          So here we have only $C_{2}^3$
       - B(0,4), then A should minus one win, so A(2,2), otherwise it will duplicate.
         - When A(2,2),B(0,3), B may end with B(2,3), so we need one more, then B(0,4)
     - Notice when B changes from B(0,3) to B(0,4)
@@ -4297,9 +4297,9 @@ $$
 - [ ] 8 here unordered is implied.
 - [ ] 10
   3. the problem doesn't say "with at least 2 kinds"
-    so $C_{24+6-1}^{24}-6$ is wrong.
+    so $C_{24}^{24+6-1}-6$ is wrong.
   4. similar to c, the problem doesn't say "with no more than 2 kinds"
-    so $6+C_{6}^2*(C_{24+2-1}^{24}-2)$. 
+    so $6+C_{2}^6*(C_{24}^{24+2-1}-2)$. 
     - The following is also ok.
      ```python
      import math
@@ -4335,7 +4335,7 @@ $$
            $$
     2. [this](#distinguishable_objects_order_inside_distinguishable_boxes_is_indistinguishable) shows "indistinguishable objects" relation with "distinguishable objects".
 - [ ] 46
-  b. here $C_{15}^12*12!$ will overcount because it *permutates across bookshelves*.
+  b. here $C_{12}^15*12!$ will overcount because it *permutates across bookshelves*.
 - [x] 48
   - It is similar to exercise 22
     $$
@@ -4365,15 +4365,15 @@ $$
 - [ ] 52
   $$
   \overbrace{1}^{\text{1 box}}\\
-  +C_5^1+C_5^2 \quad\text{2 boxes where INDISTINGUISHABLE BOXES means no need to multiply by 2!}\\
-  +\frac{(C_5^3*C_2^1*C_1^1+C_5^2*C_3^2)}{2!}\quad\text{1. 3 boxes where we can put one at each first, then put the rest 2 which is INDISTINGUISHABLE OBJECTS (i.e. many 1s) AND INDISTINGUISHABLE BOXES. 2. divide 2! because 2 sets have the same size. Then }C_5^2,C_3^2\text{ have something in common}
+  +C_1^5+C_2^5 \quad\text{2 boxes where INDISTINGUISHABLE BOXES means no need to multiply by 2!}\\
+  +\frac{(C_3^5*C_1^2*C_1^1+C_2^5*C_2^3)}{2!}\quad\text{1. 3 boxes where we can put one at each first, then put the rest 2 which is INDISTINGUISHABLE OBJECTS (i.e. many 1s) AND INDISTINGUISHABLE BOXES. 2. divide 2! because 2 sets have the same size. Then }C_2^5,C_2^3\text{ have something in common}
   $$
   The above process can be seen as:
   1. traverse set size $s$ possibilities.
   2. for each $s$, choose one split $S$ of object size $n$ into $s$ parts $n_1,\dots,n_s$
-  3. do $C_n^{n_1}*C_{n-n_1}^{n_2}\dots C_{n_s}^{n_s}$
+  3. do $C_n_1^{n}*C_{n_2}^{n-n_1}\dots C_{n_s}^{n_s}$
   4. divide by $d_1\dots d_k$ where $d_i$ means ith duplicate number of sets with the same size.
-  in sum, $\sum_{s}\sum_{S}\frac{C_n^{n_1}*C_{n-n_1}^{n_2}\dots C_{n_s}^{n_s}}{d_1\dot d_2\dots d_k}$
+  in sum, $\sum_{s}\sum_{S}\frac{C_n_1^{n}*C_{n_2}^{n-n_1}\dots C_{n_s}^{n_s}}{d_1\dot d_2\dots d_k}$
 - [x] 56 this is done when 52.
 - [ ] 60
   notice b,c differences.
@@ -4576,7 +4576,7 @@ win_probability(math.comb(5,4)*math.comb(65,1)*6)
 ```
   3. the rest is same as before. `win_probability(math.comb(5,1)*math.comb(65,4)*1+936000*5)`
   4. `win_probability(math.comb(5,1)*math.comb(65,4)*5+math.comb(65,5)*3)`
-- [ ] 41
+- [ ] 41 <a id="lottery_pick"></a>
   - > which is doubled when the Power Play option is in effect regardless of the multiplier chosen
     This should take effects both "more than 150,000,000" or not.
 ```python
@@ -4742,13 +4742,63 @@ win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*
     $\binom{m+n-1}{n-1}$ which causes $(m+n+1)^{\underline{i+1}}$ and 
     $m^{\underline{i}}$
 ### supplementary
-- [ ] 3
+- 2,10,15,16~18 skipped
+- [ ] 3 similar to [this](#lottery_pick)
+```python
+import math
+denominator_factor=24+13+3+2
+first_five_amount=59
+sixth_amount=39
+def win_probability(numerator,denominator_factor):
+  denominator=math.comb(first_five_amount,5)*sixth_amount*denominator_factor
+  factor=math.gcd(numerator,denominator)
+  print(f"{numerator//factor}/{denominator//factor:,}")
+  return (numerator//factor,denominator//factor)
+# 1
+denominator_factor=1
+
+numerator=1
+win_probability(numerator,denominator_factor)
+# 2
+numerator=sixth_amount-1
+win_probability(numerator,denominator_factor)
+# 3
+first_group_size=5
+first_five_amount_rest=first_five_amount-first_group_size
+numerator=math.comb(first_group_size,3)*math.comb(first_five_amount_rest,first_group_size-3)+math.comb(first_group_size,4)*math.comb(first_five_amount_rest,first_group_size-4)*(sixth_amount-1)
+win_probability(numerator,denominator_factor)
+# 4
+sum_first_five=0
+for i in range(3):
+  sum_first_five+=math.comb(first_group_size,i)*math.comb(first_five_amount_rest,first_group_size-i)
+  print("sum_first_five",sum_first_five)
+numerator=sum_first_five*(sixth_amount-1)
+print(numerator)
+result=win_probability(numerator,denominator_factor)
+print(f"result: {result[1]-result[0]}/{result[1]:,}") # see https://gateoverflow.in/13425/powerball-different-integers-between-inclusive-integer-between?show=416671#c416671
+```
+- [ ] 4,14(notice the exercise says "not divisible") see the ans
+- [ ] 6 
+  - a) notice ["kind"](https://en.wikipedia.org/wiki/List_of_poker_hands#Five_of_a_kind) meaning
+  - b,c see the ans for the "pairs of each of two different kinds" meaning.
+  - g same as 7.1-17, we include the [ace-high straight](https://en.wikipedia.org/wiki/List_of_poker_hands#Straight).
+- [ ] 8
+  - for $k-\text{face}$ die, 
+    $V(X)=\frac{k(k+1)(2k+1)}{6}*\frac{1}{k}-(\frac{1+k}{2})^2=\frac{x^2-1}{12}$
+```python
+from sympy import *
+x, y, z = symbols('x y z')
+init_printing(use_unicode=True)
+simplify((x+1)*(2*x+1)/6-(1+x)**2/4)
+# https://stackoverflow.com/a/72190269/21294350 exercise 12
+simplify((x+1)*(2*x+1)/6-(1+x)**2/4).subs(x, 8)
+```
 - [ ] 25
 - [ ] 29
 ## 8
 ### 8.1
 - [ ] 29 corresponds to 6.1 example 7
-  TODO why not $C_{m}^n$
+  TODO why not $C_{n}^m$
 ## 9
 ### 9.6
 - [ ] 53
