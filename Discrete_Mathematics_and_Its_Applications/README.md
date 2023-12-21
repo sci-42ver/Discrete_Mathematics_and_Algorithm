@@ -4742,8 +4742,8 @@ win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*
     $\binom{m+n-1}{n-1}$ which causes $(m+n+1)^{\underline{i+1}}$ and 
     $m^{\underline{i}}$
 ### supplementary
-- 2,10,15,16~18 skipped
-- [ ] 3 similar to [this](#lottery_pick)
+- 2,10,15,16~20,24,26,32 skipped
+- [x] 3 similar to [this](#lottery_pick)
 ```python
 import math
 denominator_factor=24+13+3+2
@@ -4777,12 +4777,12 @@ print(numerator)
 result=win_probability(numerator,denominator_factor)
 print(f"result: {result[1]-result[0]}/{result[1]:,}") # see https://gateoverflow.in/13425/powerball-different-integers-between-inclusive-integer-between?show=416671#c416671
 ```
-- [ ] 4,14(notice the exercise says "not divisible") see the ans
+- [ ] 4, 14(notice the exercise says "not divisible"), 30, see the ans
 - [ ] 6 
   - a) notice ["kind"](https://en.wikipedia.org/wiki/List_of_poker_hands#Five_of_a_kind) meaning
   - b,c see the ans for the "pairs of each of two different kinds" meaning.
   - g same as 7.1-17, we include the [ace-high straight](https://en.wikipedia.org/wiki/List_of_poker_hands#Straight).
-- [ ] 8
+- [x] 8
   - for $k-\text{face}$ die, 
     $V(X)=\frac{k(k+1)(2k+1)}{6}*\frac{1}{k}-(\frac{1+k}{2})^2=\frac{x^2-1}{12}$
 ```python
@@ -4793,8 +4793,83 @@ simplify((x+1)*(2*x+1)/6-(1+x)**2/4)
 # https://stackoverflow.com/a/72190269/21294350 exercise 12
 simplify((x+1)*(2*x+1)/6-(1+x)**2/4).subs(x, 8)
 ```
+- [ ] 22
+  - see the ans
+    - notice c) assumption about $n$
+    - compared with 33, although d) is same as 33-d) <a id="7_supplementary_33"></a>
+      but here it says "have a ball land in an $i$th bin" which specifies which bin to put
+      while 33 says "until a new card is obtained" which doesn't specify.
+      Although these two are same because here we can also use something similar, i.e. "until a new bin is obtained".
+      - 33
+        - c) "until a new card is obtained" implies the "geometric distribution".
 - [ ] 25
-- [ ] 29
+  - a,e($\sum_{k=2}^n\binom{n}{k}$) see the ans
+  - [x] the rest is trivial
+- [ ] 27
+  - b
+    - $P(B\vert \overline{M})=\frac{\overbrace{\frac{1}{2}}^{\text{choose one boy and one girl}}*\overbrace{\frac{1}{2}}^{\text{choose one boy from 2 children}}}{\frac{3}{4}}$
+    then $P(B)=\frac{1}{4}+\frac{1}{4}=\frac{1}{2}$
+    - > considering the probability of the gender of the *second* child
+      implies
+      > Mr. Smith chose his walking companion at *random from his two* children
+      ~~doesn't apply here.~~
+    - > The problem is unambiguous, because we cannot interpret the problem in more than one way (where some ways could lead to different results)
+      here ["4 outcomes"](https://askfilo.com/user-question-answers-algebra-2/a-solve-this-puzzle-in-two-different-ways-first-answer-the-35383434303737) implies the "also know" only adds to "Then, ...".
+      - From [paper][Bar_Hillel_Falk]
+        > Obviously, *at least one* of these two lines of reasoning must be fallacious
+        and "3. Analysis of the problems"
+        here the conditional probability only applies to "Then, ..."
+    - [wikipedia](https://en.wikipedia.org/wiki/Boy_or_girl_paradox#Variants_of_the_question) 
+      > If so, as combination BB has *twice* the probability of either BG or GB of having resulted in the boy walking companion (and combination GG has zero probability, ruling it out), the *union* of events BG and GB becomes *equiprobable* with event BB
+      - From [paper][Bar_Hillel_Falk]
+        > Discovering that he has at least one boy rules out the event GG
+        is wrong for deciding the denominator which should be $\frac{1}{2}$.
+        > which viewed the three remaining family types as *equiprobable*, they are seen not to be
+      - So with c), if we find the above inequality relation, we can still get the ans $\frac{1}{2}$
+- [ ] 28
+  - [wikipedia](https://en.wikipedia.org/wiki/Boy_or_girl_paradox#Information_about_the_child)
+    - > which is the answer expected when one child is sampled (e.g. the oldest child is a boy) and is thus removed from the pool of possible children
+      This is also said in [Bar_Hillel_Falk]
+    - > as more and more details about the boy child are given (for instance: born on January 1)
+      i.e. $\epsilon$ less.
+    - > the chance the other child was a girl was $\frac{2}{3}$, when it was not known that the boy was born on Tuesday
+      this doesn't specify the condition for $\frac{2}{3}$. but it is at least one case listed for 
+      $\frac{1}{3}$ in wikipedia.
+    - > This is a very different procedure
+      intuitively the former doesn't impose any restriction, so all steps are independent, then $\frac{1}{2}$.
+    - > It seems that quite irrelevant information was introduced, yet the probability of the sex of the other child has changed dramatically from what it was before
+      because it is based on the conditional probability.
+    - > six out of seven families with two boys would be counted in two groups ... doubling, in every group, the probability of a boy-boy combination.
+      - TODO why six?
+      - so "boy-boy" grows from $\frac{1}{3}$ to 
+        something like $\frac{13}{27}$.
+    - > is it really plausible that the family with at least one boy born on a Tuesday was produced by choosing just one of such families at *random*?
+      it corresponds to
+      > *poll* of readers
+    - the above $\frac{13}{27}$ corresponds to "Adjusted F-Scenario" where we also care about the day of week by the girl due to symmetry in the [Ruma_Falk_paper](https://sci-hub.se/https://doi.org/10.1080/13546783.2011.613690).
+  - ~~> whether Mr. Smith specifically mentioned his son because he was born on a Tuesday~~
+    ~~corresponds to the above wikipedia "at least".~~
+    > randomly chose a child and reported its gender and birth day of the week
+    corresponds to not having condition $B_T$ in wikipedia.
+    no denominator $P(B_T)$.
+  - see the ans
+    - "27" see [Ruma_Falk_paper]
+- [x] 29 simplification to $V(aX)$ is more straightforward.
+- [ ] 33 [see](#7_supplementary_33)
+- [ ] 34
+  - c) similar to one example, here binominal distribution is not easy to use due to dependency.
+- [ ] 36
+  - after hinted, here $1 \le r(n − j + 1) \le n − j + 1$ instead of $1 ≤r(n − j + 1) ≤n + 1$
+    so with induction, we use 2 step to get all permutation
+    1. select the $n$th term which is done by $r(n)$
+    2. then the rest $n-1$ by induction hypothesis.
+  - see the ans
+    - it shows one-to-one correspondance by finding the inverse of $f:Pr \to P$ where $Pr=\{r(k)\},1\le k\le n$.
+      so equally likely.
+      - Here it first shows the domain size of $f^{-1}$ is same as 
+        the domain size of $f$.
+        Otherwise, even if $f^{-1}$ exists, it *can't get all the permutations* as its range.
+- 
 ## 8
 ### 8.1
 - [ ] 29 corresponds to 6.1 example 7
@@ -4854,6 +4929,7 @@ Redo 5.4-48
 [meisters1975]:./papers/meisters1975.pdf
 [Cynthia_and_Chahat]:./papers/Cynthia_and_Chahat.pdf
 [incl_excl_n]:./papers/incl_excl_n.pdf
+[Bar_Hillel_Falk]:https://sci-hub.se/https://doi.org/10.1016/0010-0277(82)90021-X
 
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
 
