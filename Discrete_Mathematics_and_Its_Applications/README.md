@@ -1,6 +1,8 @@
 Please point out errors if any. Thanks beforehand.
 
-check p10 whether the ideas of each chapter are mastered.
+check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
+
+If someone wants to know why we can't pay n-1 pesos and then 1 pesos (The others are similar) after the above enumeration based on "if the order in which the coins and bills are paid matters" (This is my confusion when I met with this problem, searched and got here), it is that this has been contained in "pay $i$ pesos coin , then $n-i$ pesos" when $n-i=1$ and the later related iteration.
 # outline
 much of chapter 2,5,6 have been learned before.
 # [online resources](https://highered.mheducation.com/sites/125967651x/student_view0/web_resources_guide.html) from [this](https://highered.mheducation.com/sites/125967651x/information_center_view0/)
@@ -812,6 +814,79 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   [$\sum n^2$](https://brilliant.org/wiki/sum-of-n-n2-or-n3/#sum-of-the-squares-of-the-first-n-positive-integers)
 - > he developed a new method for approximating the roots of equations
   it seems to be [degree-3 approximation](https://www.engineeringletters.com/issues_v28/issue_4/EL_28_4_35.pdf) based on the Newton’s method with $x_{n+1}-x_n$ approximation from (6) to (7).
+## 8
+### introduction
+- > How many bit strings of length n do not contain two consecutive zeros?
+  see [this](#no_two_consecutive_1s)
+- > Many other kinds of counting problems *cannot be solved* using the techniques discussed in Chapter 6
+  - > How many ways are there to assign seven jobs to three employees so that each employee is assigned at least one job? 
+    TODO this can be done by bars and stars in section 6.5 $\binom{3-1}{(7-4)+3-1}$
+- > though there can be recursive definitions that are not recurrence relations because they take *no numbers* or formulas, but *other objects*.
+  the above is from [diff](https://qr.ae/pKaSy1) between recurrence relation and recursive definition.
+  see [this](https://en.wikipedia.org/wiki/Recursion#Formal_definitions) for examples.
+### 8.1
+- > a sequence is called a solution of a recurrence relation
+  So a recurrence relation can have [multiple solutions](https://math.stackexchange.com/questions/285134/can-a-recurrence-relation-have-more-than-one-exact-solution#comment10285188_285134).
+  - [This](https://math.stackexchange.com/a/285139/1059606)
+    - degree of [homogeneity](https://en.wikipedia.org/wiki/Homogeneous_function) should be 1
+    - > the solutions form a two dimensional vector space
+      this is based on the [map](https://math.stackexchange.com/a/3299728/1059606) $f:(T(0),T(1))\to (c_1,c_2)$
+      here we need to exclude the condition that $(c_1,c_2)$ are all on one line.
+      - ["isomorphism", i.e. "one-to-one correspondence",](https://www.britannica.com/science/isomorphism-mathematics#:~:text=isomorphism%2C%20in%20modern%20algebra%2C%20a,each%20natural%20number%20by%202.) is due to linear.
+        For here, it is due to the inverse of the relation matrix exists.
+        $$
+        \begin{bmatrix*}
+          1&1\\
+          r_1&r_2
+        \end{bmatrix*}^{-1}
+        $$
+- EXAMPLE 2 same as [wikipedia](https://en.wikipedia.org/wiki/Tower_of_Hanoi#Logical_analysis_of_the_recursive_solution)
+  - > as long as a disk is never placed on top of a smaller disk
+    The following is got before reading the book related contents:
+    obviously we must move the above $n-1$ out before moving the $n$th to the bottom of one of the other rods, then based on the above [assumption, i.e. the wikipedia's 3rd](https://en.wikipedia.org/wiki/Tower_of_Hanoi#Origins) and the induction hypothesis, we at least need $H_{n-1}$.
+    Then $1$ step to move $n$th.
+    Then similarly another $H_{n-1}$ to move back above the $n$th.
+  - > have already moved the n − 1 smaller disks onto a peg 
+    not 2 because we need one spare to place the largest after $n-1$ above ones have been moved.
+- > we will perhaps somewhat impertinently call it the “presumed optimal” algorithm for this puzzle
+  the above is from [St94](https://www.cs.wm.edu/~pkstoc/boca.pdf) where the optimal solution may be invalid for the ["Frame–Stewart algorithm"](https://en.wikipedia.org/wiki/Tower_of_Hanoi#Frame%E2%80%93Stewart_algorithm) <a id="Frame_Stewart"></a>
+- > dissecting a polygon into triangles using non-intersecting diagonals
+  see [paper][a000108_11]
+  - First argument
+    - here $r=1$ one polygon corresponding to $r+1$ will disappear
+    - here RHS is done by
+      1. select one origin point.
+      2. "Fix a side" which has $n-2$ possibilities based on the origin point.
+      3. dissect "two polygons"
+  - Second argument
+    - $(n-3)\times 2$ is due to "one dissection" has $n-3$ diagonals, then based on "direction", $(n-3)\times 2$
+    - it is based on choosing the "directional diagonal".
+      - Then RHS 
+        - $n$ is due to selecting diagonal for $D_{r+1}D_{n-r+1}$ by choosing two points with 
+          $r-1$ points between clockwise
+  - induction
+    - $\frac{(2r-4)!}{(r-1)!(r-2)!}\overset{\text{cancel out }(r-2)!}{=}2^{r-2}*\frac{(2r-4-1)!!}{(r-1)!}$
+      - for the rest 
+        $D_n=2^{n-2}*\frac{(2n-5)!!}{(n-1)!}=2^{n-2}*(2*(-2)^{n-2})*\frac{\frac{1}{2}*\overbrace{(-n+\frac{5}{2})^{\overline{n-2}}}^{n-2\text{ terms}}}{(n-1)!}=2^{n-2}*(2*(-2)^{n-2})*\binom{\frac{1}{2}}{n-1}$ (Notice here is $-n+\frac{5}{2}$ instead of the paper $-n-\frac{5}{2}$)
+        $D_{i+2}D_{r-i}=2^{r+2-2*2=r-2}*(2^2*(-2)^{r+2-2*2=r-2})*\binom{\frac{1}{2}}{i+1}*\binom{\frac{1}{2}}{r-i-1}$
+    - Here we use [General Binomial Theorem](https://proofwiki.org/wiki/Binomial_Theorem/General_Binomial_Theorem/Proof_1) (see the related [question](https://math.stackexchange.com/q/4832012/1059606))
+      - better see [proof 3](https://proofwiki.org/wiki/Binomial_Theorem/General_Binomial_Theorem#Proof_3)
+      - Then we can get the relation between $\binom{\frac{1}{2}}{i+1}*\binom{\frac{1}{2}}{r-i-1}$ and 
+        $(1+x)^{\frac{1}{2}}$
+    - $D_{r+1}=4^{r-1}*2*(-1)^{(r-1)+(r-1)}*\frac{(\frac{1}{2})*(\frac{1}{2})^{\overline{r-1}}}{r!}\overset{\text{cancel }2^{r-1}, 2}{=}2^{r-1}\frac{(2r-3)!!}{r!}$
+  - (4)
+    - here we will get $D_{n}=\frac{2^{n-2}(2n-5)!!}{(n-1)!}$ <a id="a000108_11_4"></a>
+      which is same as the second to last equality in "... as required"
+  - $\frac{-1}{2}(1-4x)^{\frac{1}{2}}$
+    coefficient of $x^{n-1}$ is
+    $(-1)^n\binom{\frac{1}{2}}{n-1}4^{n-1}*\frac{1}{2}=(-1)^{n+(n-2)}\frac{\frac{1}{2}*(\frac{1}{2})^{\overline{n-2}}}{(n-1)!}4^{n-1}*\frac{1}{2}=\frac{2^{n-1}}{2}\frac{(2(n-3)+1)!!}{(n-1)!}$ which is same as the [above](#a000108_11_4).
+- EXAMPLE 6
+  - > exponential worst-case complexity
+    at least $O(2^n)$ because 
+    $max (w_j + T (p( j)), T ( j − 1))$ will have two sub-calculations for *each* $T(j)$.
+  - > the maximum total attendance is found using the optimal solutions of the overlapping subproblems
+    here "overlapping" is due to $T (p( j))$ may overlap among different 
+    $T(j)$.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -845,6 +920,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - frac in [big](https://tex.stackexchange.com/a/103358/308105) ceil
 - mod [without](https://tex.stackexchange.com/a/169946/308105) leading space
 - [sum multiple-lines](https://tex.stackexchange.com/a/80461/308105)
+  - [product](https://tex.stackexchange.com/a/32827/308105)
 - [bmod -> binary mod](https://tex.stackexchange.com/a/42872/308105)
 - [big equal sign](https://tex.stackexchange.com/a/35406/308105) needs extra package or self define length `\mathrel{\mkern-3mu}`.
 - [Stirling number](https://tex.stackexchange.com/a/86064/308105) or use [wikipedia one](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Recurrence_relation)
@@ -3814,10 +3890,11 @@ $$
     So just think as plane $n$ is fixed, then "the previous $n−1$ planes" interset with plane $n$,
     > any three of these planes have exactly one point in common
     this implis no plane pairs are parallel, then every plane will interset with plane n with one lines,
-    so it becomes **$n-1$ lines**,
+    so it becomes **$n-1$ lines**, <a id="R_3_divided_by_planes"></a>
     then "three of these planes have exactly one point" becomes "two of these lines have exactly one point"
     This exactly means that $n-1$ lines split the plane $n$ into $R_2(n−1)$ regions.
     - [similarly](https://math.stackexchange.com/questions/339750/greatest-number-of-regions-we-can-get-when-dividing-with-lines-and-circles#comment4097420_339853) for $\mathbb{R}^4$ although it is not easy T visualize.
+    - Here the formula for $R_3(n)$ can be got with the induction.
   - The above is same as the ans
 - [ ] 51 see [this](https://math.stackexchange.com/a/1965091/1059606)
   - it should be $t\sqrt{2}-t=(t-s)\sqrt{2}>0$
@@ -3969,7 +4046,7 @@ $$
 - [x] 42 $C_{3}^4*C_{1}^3*4*3$
 - [x] 46 $C_{4}^10*\frac{4!}{4}$ is also ok.
 - [ ] 52 see the ans this is similar to EXAMPLE 17.
-- [ ] 53 similar to above $2^5+2^4*(6-1)+2^4+2^3*(5-1)-(2+2)*2-5$
+- [ ] 53 similar to above [$2^5+2^4*(6-1)+2^4+2^3*(5-1)-(2+2)*2-5=147$](https://math.stackexchange.com/questions/922659/number-of-binary-strings-of-length-8-that-contain-either-three-consecutive-0s-or#comment1904792_922692) (i.e. `2**5+2**4*(6-1)+2**4+2**3*(5-1)-(2+2)*2-5` in python)
   here $-5$ is due to
 ```bash
 000yy
@@ -4007,7 +4084,7 @@ xxxx1000 # here we exclude 000y(2 choices),1000 so minus 3
   - TODO [Goulden Jackson method](https://math.stackexchange.com/questions/4170314/find-a-recurrence-relation-for-the-number-of-bit-strings-of-length-n-by-goulde)
 - [ ] 64 see the ans
 - [ ] 66
-  see [this](https://math.stackexchange.com/a/3358299/1059606) (~~TODO~~ ~~generating function~~) which is similar to [consecutive_zeros_in_bit_strings]
+  see [this](https://math.stackexchange.com/a/3358299/1059606) (here "Recurrence": "length $n−1$ followed by '0'" obviously meet the requirement and for length $n−1$ followed by '1', length $n−1$ must end with '0' which corresponds to "length $n−2$ followed by '01'". Also see 8.1-example 3) (~~TODO~~ ~~generating function~~) which is similar to [consecutive_zeros_in_bit_strings] <a id="no_two_consecutive_1s"></a>
   so in this exercise case 
 $$
 a_i=2^i,i=0,1,2\\
@@ -4015,6 +4092,11 @@ a_n=a_{n-1}+a_{n-2}+a_{n-3},n\ge 3\quad\text{here we append 1 for n-1,10 for n-2
 $$
   - [generating function](https://math.stackexchange.com/questions/4822021/how-to-use-generating-functions-to-solve-the-problem-number-of-bit-strings-of-l?noredirect=1#comment10263914_4822021)
     See this [code](./miscs_snippets/py_codes/usage.py) for calculation of taylor expansion coefficients.
+    - [This "Using 0 and 01 ... lop"](https://math.stackexchange.com/questions/4822021/how-to-use-generating-functions-to-solve-the-problem-number-of-bit-strings-of-l?noredirect=1&lq=1#comment10263823_4822021) is same as the "Recurrence"
+      which starts with $n=2$ where $a_{n-2}$ corresponds to 
+      $\varnothing$ and $a_{n-1}$ corresponds to 
+      $1$ where the [complementary $0$](https://math.stackexchange.com/questions/4822021/how-to-use-generating-functions-to-solve-the-problem-number-of-bit-strings-of-l?noredirect=1&lq=1#comment10263914_4822021) is contained in $a_{n-2}$ appended with 
+      $0$.
     - here $(x+x^2)^k$ means
       we can concatenate multiple $0,01$ together.
       e.g. $(x+x^2)^2$ has $2x^3$ corresponding to $0|10$ and $10|1$ both having length 3 (here $|$ is one delimiter for denotation)
@@ -4846,7 +4928,7 @@ simplify((x+1)*(2*x+1)/6-(1+x)**2/4).subs(x, 8)
     - > is it really plausible that the family with at least one boy born on a Tuesday was produced by choosing just one of such families at *random*?
       it corresponds to
       > *poll* of readers
-    - the above $\frac{13}{27}$ corresponds to "Adjusted F-Scenario" where we also care about the day of week by the girl due to symmetry in the [Ruma_Falk_paper](https://sci-hub.se/https://doi.org/10.1080/13546783.2011.613690).
+    - the above $\frac{13}{27}$ corresponds to "Adjusted F-Scenario" where we also care about the day of week by the girl due to symmetry in the [Ruma_Falk_paper].
   - ~~> whether Mr. Smith specifically mentioned his son because he was born on a Tuesday~~
     ~~corresponds to the above wikipedia "at least".~~
     > randomly chose a child and reported its gender and birth day of the week
@@ -4869,11 +4951,198 @@ simplify((x+1)*(2*x+1)/6-(1+x)**2/4).subs(x, 8)
       - Here it first shows the domain size of $f^{-1}$ is same as 
         the domain size of $f$.
         Otherwise, even if $f^{-1}$ exists, it *can't get all the permutations* as its range.
-- 
 ## 8
 ### 8.1
+- 1(trivial),14,20,26,30,46, skipped
+- [ ] 2 notice the initial condition.
+- [ ] 4
+  - [generating function](https://math.stackexchange.com/a/210411/1059606)
+    since $a_n$ with $x^n$ corresponds to $n$ dollars
+    so $x^2$ corresponds to $2$ dollars.
+    Then 
+    $f(x)=\underbrace{(1+x+x^2+\ldots)}_{\$1\text{ coins}}\underbrace{(1+x+x^2+\ldots)}_{\$1\text{ bills}}\underbrace{(1+x^2+x^4+\ldots)}_{\$2\text{ bills}}\underbrace{(1+x^5+x^{10}+\ldots)}_{\$5\text{ bills}}\;,$ is just based on combination to get the related $a_n$.
+  - see the ans.
+    Notice the [problems related with "order"](https://math.stackexchange.com/questions/604977/recurrence-relation-question#comment10287403_604977)
+- [x] 6
+  > we notice that we can derive the second form from the first (or vice versa) algebraically (for example, $s_4 = 2s_3 = s_3 + s_3 = s_3 + s_2 + s_2 = s_3 + s_2 + s_1$ )
+  here is from the first to the second.
+  - derive the second form from the first
+    $s_n=s_{n-1}+\overbrace{s_{n-1}+\dots+s_1}^{s_{n-1}}=2s_{n-1}$
+  - > (otherwise, our argument is invalid, because the first and last terms are the same).
+    because $1$ must be contained and can't be "replaced by an $n$", so $s_2$ needs special manipulation.
+- [ ] 8
+  - same as [this](https://math.stackexchange.com/a/4821956/1059606)
+  - Also see [this](#recurrence_append)
+- [ ] 10
+  - see the ans for the method without recurrence.
+  - Also [see](https://math.stackexchange.com/a/881061/1059606)
+  - Notice 
+    $$
+    a_n=\overbrace{a_{n-1}}^{\overbrace{XX\dots X}^{n-1\text{ times}}\vert 0}+\overbrace{2^{n-2}}^{\overbrace{xx\dots x}^{n-2\text{ times}}\vert 01}+\overbrace{a_{n-2}}^{\overbrace{XX\dots X}^{n-2\text{ times}}\vert 11}\\
+    \text{where }xx\dots x\text{ means any string and }XX\dots X\text{ means string containing the string 01}
+    $$ 
+    is wrong because ~~the latter 2 cases overlap~~ the 3rd case can be also 
+    $\overbrace{xx\dots x}^{n-3\text{ times}}\vert 0$ ending with 0.
+  - Detailed see [OEIS](https://math.stackexchange.com/questions/881005/find-the-recurrence-relation-for-the-number-of-bit-strings-that-contain-the-stri#comment9151512_881005)
+- [ ] 12
+  - > since there is one way to climb no stairs (do nothing)
+    see the ans. This corresponds to $a_3=a_0+a_3$.
+- [ ] 15 [see](https://math.stackexchange.com/questions/1322767/find-a-recurrence-relation-for-the-number-of-ternary-strings-of-length-n-that-do#comment10287498_1322767)
+- [ ] 16
+  - Here $a_n=a_{n-1}+2a_{n-2}+\dots+2a_0+3^{n-1}-1$ is also with the [closed form](https://en.wikipedia.org/wiki/Closed-form_expression)
+  - Also see [the related solution](https://math.stackexchange.com/a/3872147/1059606)
+- [ ] 17
+  - hinted by exercise 18
+    $\frac{a_n}{3}=\frac{2a_{n-1}}{3}$
+- [ ] 18 see the ans
+- [ ] 22 $2a_{n-1}$ is wrong.
+  - see the ans
+- [ ] 23
+  - See [this](#R_3_divided_by_planes)
+- [x] 24
+  - > See also Exercise 35 in Section 6.4
+    The problem process can be seen as selecting *locations* of even number of 0s, i.e. *the subset* of all locations.
+- [ ] 28
+  - more generally, ~~$f_n=kf_{n-k}+(k-1)f_{n-k-1}$~~
+    $f_n=f_kf_{n-k+1}+f_{k-1}f_{n-k}$
+    by induction $i=k+1$, $f_n\overset{\text{IH}}{=}f_kf_{n-k-1}+(f_k+f_{k-1})f_{n-k}=\overbrace{f_if_{n-i+1}}^{\text{the latter term}}+f_{i-1}f_{n-i}$ (IH means inductive hypothesis as the book convention)
 - [ ] 29 corresponds to 6.1 example 7
-  TODO why not $C_{n}^m$
+  - TODO why not $\binom{m}{n}*n!$
+    - Because it is the [total function](https://www.statisticshowto.com/total-function/).
+  - Notice it is related with the ["Stirling number of the second kind"](https://math.stackexchange.com/a/2866444/1059606)
+  - see the ans
+- [ ] 32
+  - since the largest is always at the bottom,
+    so we can use $a_{n-1}$ steps.
+    - similar to EXAMPLE 2, the 1st $a_{n-1}$ steps are necessary to move the 
+      $n$th (Here can't move to the 2nd peg because it will **disallow the $n$th to move**.)
+      - similarly, the 2nd $a_{n-1}$ steps also can't be to the 2nd peg to **allow the $n$th to move**.
+      - the 3rd $a_{n-1}$ steps are trivial to finish the final goal.
+      - Here is based on the *goal peg* to calculate the *least* steps needed.
+  - notice here $a_{n-1}$ is to move to the 3rd peg instead of the 2nd.
+  - d) can be based on the $n$th disk location (i.e. the above intermediate $1$s) and iteratively $n-1$th in $a_{n-1}$ location, etc, to prove the "distinct" property.
+    - see the ans which directly use "$a_{n-1}$ is the *least*" property to prove.
+- [ ] 33~36 see the ans
+  - 36 inductive uses $2n$ and $2n+1$ which obviously contain all possible terms.
+- [ ] 38~45
+  - better see explanation of [wikipedia](#Frame_Stewart)
+    - > move the stack of the n − k smallest disks from peg 1 to peg 2
+      corresponds to
+      > other than the start or destination pegs
+    - > using the three-peg algorithm
+      corresponds to the $T(n-k,r-1)$ at the 2nd step 
+      (notice $r-1$).
+    - > recursively move the smallest n − k disks to peg 4, using all four pegs.
+      here although 4 are available
+      but to decrease steps used, maybe some pegs are not used.
+  - [ ] 38
+    - here not all to peg 2 for disk 1,2 based on the above "other than".
+  - [ ] 39 see the ans
+  - [ ] 40
+    - [stewart1941] which is referred to in the paper from [wikipedia](https://en.wikipedia.org/wiki/Tower_of_Hanoi#cite_note-19)
+      - > In addition, they proved that if n is equal to the triangular number $t_k$, then the optimizing choice for i is in fact i = k, while if $t_{k−1} < n < t_k$
+        TODO where is the proof in the above reference [stewart1941] which is referred in wikipedia paper [12] and [18]?
+    - > Next move the stack of the k largest disks from peg 1 to peg 4, using the three-peg algorithm from the Tower of Hanoi puzzle
+      it means $2^{k}-1$ moves by EXAMPLE 2.
+    - based on 38, b) will first use 5 moves to move 3 disks to one peg.
+  - [ ] 41
+    - trivial based on 40.
+    - see the ans which says why Frame’s algorithm works for the last $R(n-k)$.
+  - [ ] 42
+    - > If $n −1 \neq k(k −1)/2$ , then this same value of k applies to n −1 as well;
+      ~~it should be if $n\neq (k-1)(k-2)/2+1\Rightarrow n-1\neq (k-1)(k-2)/2$, then $n$ and $n-1$ share the same $k$~~
+      it means $n\neq k(k −1)/2+1$
+    - here, $2(R(n-k)-R(n-k-1))$ should use the inductive hypothesis instead of iterative method that 
+      $2^2(R(n-k-(k-1))-R(n-k-1-(k-2)))$ which is one case that $n-k-(k-1)\neq (k-1)(k-2)/2+1$.
+  - [ ] 43
+    - trivial based on 42
+      where $t_{k-1}\sim t_k$ has $k$ values, so $k2^{k-1}$ if all are taken.
+      - Then since $t_{k-1}+1,\dots,t_k$ each one accounts for $2^{k-1}$
+        so $n$ with $k2^{k-1}$ overcounts
+        $t_k-n$ numbers of $2^{k-1}$.
+  - [ ] 44
+    - > Since the Frame–Stewart algorithm solves the puzzle, the number of moves it uses, R(n) , is an upper bound to the number of moves needed to solve the puzzle.
+      "solves" means possible -> "upper bound" although maybe not The Least Upper Bound.
+    ```python
+    for n in range(30):
+        k=1
+        while n>k*(k+1)/2:
+            k+=1
+        t_k=k*(k+1)/2
+        sum=0
+        for i in range(1,k+1):
+            sum+=i*2**(i-1)
+        sum-=(t_k-n)*2**(k-1)
+        print(f"R({n}):{sum:.0f} with k:{k} t_k:{t_k:.0f}")
+    ```
+    here the book ans is wrong from $R(22)$ to the end which can be verified by the difference between adjacent terms.
+  - [ ] 45 see the ans
+    - notice here we [can't differentiate](https://math.stackexchange.com/a/279489/1059606) w.r.t. $i$ because it is discrete.
+      It is different from [series w.r.t. $x$](https://web.ma.utexas.edu/users/m408s/CurrentWeb/LM11-9-4.php) which is continuous.
+      - Similar to [this](https://math.stackexchange.com/a/129306/1059606)
+        - generally, $S(t)=\sum_{k=1}^n k^m t^k$
+          we can get $(1-t)S(t)=\sum_{k=0}^{n-1} [((k+1)^m-k^m) t^{k+1}]- n^m t^{n+1}$
+          the $((k+1)^m-k^m)$ will become more complex.
+        - For this problem,
+          let $S(k)=\sum_{i=1}^{k} i2^{i-1}$
+          then $(1-2)S(k)=\sum_{i=1}^{k} 2^{i-1} -k\cdot 2^{k}\Rightarrow S(k)=(k-1)2^k+1=(k+1)2^k-2^{k+1}+1$ 
+    - $k<\sqrt{2n+\frac{1}{4}}+\frac{1}{2}\xRightarrow{\sqrt{2n+\frac{1}{4}}<\sqrt{2n}+\frac{1}{2}\text{ got by square both sides}}k<\sqrt{2n}+1$
+    - $(1+\sqrt{2n}+1)2^{1+\sqrt{2n}}=(4+2\sqrt{2n})2^{\sqrt{2n}}<6\sqrt{2}\cdot\sqrt{n}2^{\sqrt{2n}}$ here is based on $n\to \infty$ implied by $O(\dots)$
+- [ ] 50
+  - we can also use iterative method that $\triangledown^k a_{n-1}=\triangledown^k a_{n}-\triangledown^{k+1} a_{n}$ although more complex.
+    Then based on $a_{n-k-1}=a_{n-k}-\triangledown a_{n-k}$,
+    So to make 
+    $\triangledown a_{n-k}$ as the polynomial of $\sum t_m\triangledown^m a_{n}$, we need 
+    $k$ iterative raise of $m$ in $\triangledown^m a_{n}$, i.e. we need at most 
+    $\triangledown^{1+k} a_{n}$ based on raising $1$ by $k$ to $1+k$.
+- [ ] 53
+  - add bookkeeping at $T(j)\coloneqq max(w_j+T(p(j)),T(j-1))$
+  - notice here must $for j\coloneqq 1 to n$ to make $T(p(j))$ work.
+- [ ] 54 see [codes](./miscs_snippets/py_codes/8-1-53/max_attendee.py)
+- [ ] 56
+  - c) based on $M(1)=a_1$, then calculate all later $M(k),k=2,\dots,n$, then the max is $max_{k=1}^n(M(k))$
+  - e) similar to one example, if saving the $M(k)$ values, then each 
+    $M(k)$ has only one addition due to $M(k-1)+a_k$ and one comparison $max(M(k-1)+a_k,a_{k})$.
+    then $n-1$ totally, then 
+    $max_{k=1}^n(M(k))$ has another $n-1$ comparisons.
+    so addition: $n-1$ and comparison: $2(n-1)$.
+  - Notice here the Dynamic programming is just [recursive **nested**](https://en.wikipedia.org/wiki/Dynamic_programming#History) algorithm. Compared with ["Divide and conquer"](https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm#Divide_and_conquer) which has no overlap, i.e. the result *can't be easily reused*/nested, so we needs **conquer**.
+  - see the ans
+    - c)
+      > the starting point of the string of numbers ending at position k that achieves the maximum sum
+      since "the starting point" is shared by many $M(k)$. Then to construct 
+      $M(k)$, we can just list all strings starting same as $M(k)$ and list their ending numbers in the order by the index of 
+      $M(k)$.
+    - IMHO c) in the ans only does the part to get $max_{1\le j\le k \le n} \sum_{i=j}^k a_i$
+    - e) is more quick to prove $O()$ without getting the exact operation number.
+- [ ] 57
+  - b) if not optimal and use way $K$, then we must be able to use the optimal way to be better.
+    - The above is wrong because it doesn't show the relation with the *whole operation number*. see the ans
+  - d) notice here it is wrong to direct be based on the c) formula pattern.
+    ```python
+    for i:=1~n:
+      M(i,i)=0
+    for i:=1~n:
+      for j:= i+1~n:
+        M(i,j)=infinite
+        for k:=i~j-1:
+          if M(i,k)+ M(k + 1, j ) +m_i m_{k+1} m_{j+1}<M(i,j):
+            M(i,j)=M(i,k)+ M(k + 1, j ) +m_i m_{k+1} m_{j+1}
+    ```
+    because the `M(k + 1, j )` will has no defined value when `i` is fixed while `j` and `k` becomes bigger, then the recurrence relation *can't apply*.
+    - see the ans
+      - here `d` controls the `k-i` range in `M(i,k)`.
+      - error fix
+        - $min \coloneqq 0$ should be $min \coloneqq +\infty$
+        - `for k:=i to i+d` should be `for k:=i to i+d-1` to ensure the validity of `M(k+1,i+d)`.
+          i.e. `k<j` in c).
+      - the at each iteration of `d`
+        `M(i,i+d)` will get all `M(,)` with difference `d`
+        and `M(i,k)` and `M(k+1,i+d)` will only uses `M(,)` with difference *less than* `d`.
+        So `M(i,k)` and `M(k+1,i+d)` are *always valid*.
+      - 
+### supplementary
+- [ ] 17
 ## 9
 ### 9.6
 - [ ] 53
@@ -4930,6 +5199,9 @@ Redo 5.4-48
 [Cynthia_and_Chahat]:./papers/Cynthia_and_Chahat.pdf
 [incl_excl_n]:./papers/incl_excl_n.pdf
 [Bar_Hillel_Falk]:https://sci-hub.se/https://doi.org/10.1016/0010-0277(82)90021-X
+[Ruma_Falk_paper]:https://sci-hub.se/https://doi.org/10.1080/13546783.2011.613690
+[a000108_11]:./papers/a000108_11.pdf
+[stewart1941]:./papers/stewart1941.pdf
 
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
 
