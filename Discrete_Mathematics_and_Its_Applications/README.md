@@ -887,6 +887,12 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   - > the maximum total attendance is found using the optimal solutions of the overlapping subproblems
     here "overlapping" is due to $T (p( j))$ may overlap among different 
     $T(j)$.
+### 8.2
+- [Homogeneous recurrence relation](https://math.unm.edu/~jvassil/Recurrence%20Relations.pdf) is similar to [Nonhomogeneous differential Equation](https://math.libretexts.org/Bookshelves/Calculus/Calculus_(OpenStax)/17%3A_Second-Order_Differential_Equations/17.02%3A_Nonhomogeneous_Linear_Equations)
+  Also see this [more intuitive](https://calcworkshop.com/combinatorics/recurrence-relation/)
+- > We know that {$a_n$} and {$\alpha_1 r_1^n + \alpha_2 r_2^n$ } are both solutions of the recurrence relation $a_n= c_1 a^{n−1} + c_2 a^{n−2}$  and both satisfy the initial conditions when n = 0 and n = 1
+  This is due to both conform to "the recurrence relation" with $\alpha_1 r_1^n + \alpha_2 r_2^n$ proved in the "if" case.
+  Then [based on induction](https://math.stackexchange.com/questions/3916854/how-to-prove-uniqueness-of-a-solution-to-a-recurrence-relation#comment8077968_3916854), they are same.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -5140,7 +5146,107 @@ simplify((x+1)*(2*x+1)/6-(1+x)**2/4).subs(x, 8)
         `M(i,i+d)` will get all `M(,)` with difference `d`
         and `M(i,k)` and `M(k+1,i+d)` will only uses `M(,)` with difference *less than* `d`.
         So `M(i,k)` and `M(k+1,i+d)` are *always valid*.
-      - 
+### 8.2
+- 4,8,12~14,
+  18~22,
+  26~39,
+  41,42,46 skipped
+- [ ] 2 see the ans for b).
+- [ ] 6 notice here $a_0=1$ to make "require 2 microseconds" available for $a_2$.
+- [x] 10
+  $$
+  \text{if case where }(r_0-k)^2=0\Rightarrow c_1=2k,c_2=-k^2,r_0=k\\
+  \begin{align*}
+    c_1 a_{n-1}+c_2 a_{n-2}&=c_1[\alpha_1 r_0^{n-1}+\alpha_2 (n-1)r_0^{n-1}]+c_2[\alpha_1 r_0^{n-2}+\alpha_2 (n-2)r_0^{n-2}]\\
+    &=r_0^{n-2}[(c_2\alpha_1+c_1\alpha_1 r=\alpha_1 r_0^2)+c_1\alpha_2(n-1)r_0+c_2\alpha_2(n-2)]\\
+    &=\alpha_1 r_0^n+r_0^{n-2}[\alpha_2 n(c_1r_0+c_2=k^2)-\alpha_2 (c_1+2c_2=0)]\\
+    &=\alpha_1 r_0^n+\alpha_2 n r_0^n
+  \end{align*}\\
+  \text{only if case which is same as THEOREM 1 proof}\\
+  \text{it is to solve the values of }\alpha_{1,2}\\
+  a_0=\alpha_1\\
+  a_1=(\alpha_1+\alpha_2)r_0\\
+  \text{then based on induction.}
+  $$
+- [x] 12
+```python
+from sympy import *
+x, y, z = symbols('x y z')
+init_printing(use_unicode=True)
+# 12
+factor(x**3 - 2*x**2 -x+2)
+# 14
+factor(x**4 - 5*x**2+4)
+# 18
+factor(x**3-6*x**2+12*x-8)
+```
+- [x] 16
+  - focus on each $r_i$ separately
+    then both sides divide by $r_i^{n-k}$, we can get the equality.
+- [ ] 24
+  - different from EXAMPLE 11, here we can't use $C\cdot 2^n$
+    - Because $2$ is the characteristic root of $a_n=2a_{n-1}$. 
+- [ ] 40 
+  - I got $a_n-b_n=2a_{n-1}$. The rest see the ans
+- [x] 41
+  - $f_{-1}=1$
+    then $a_0,a_1$ comply with $a_n=s f_{n-1}+t f_n$.
+  - since $f_n$ meets the recurrence relation equation,
+    then the linear combination of $f_n$, i.e. $a_n$, also meets.
+  - ~~see the ans which doesn't say about $a_0$.~~
+    see the ans. Here the problem only cares about "all positive integers n".
+- [x] 44
+  - Based on the [Laplace expansion](https://en.wikipedia.org/wiki/Determinant#Laplace_expansion), first expand based on the 1st row, then the 1st column of the resulting matrix.
+    $2A_{n-1}-A_{n-2}$
+- [ ] 48
+  - [x] a) both sides multiply $\frac{f(1)\dots f(n-1)g(n+1)}{g(1)\dots g(n+1)}=Q(n)$.
+  - [ ] b) see the ans
+    since $f,g,h(n)$ are all unknown.
+- [ ] 49
+  - $Q(n)=\frac{6}{(n+1)^{\overline{3}}}$
+```python
+apart(6*x/((x+1)*(x+2)*(x+3)))
+# got. Notice here may cancel out many terms when telescoping.
+    9       12      3  
+- ───── + ───── - ─────
+  x + 3   x + 2   x + 1
+```
+  - $\sum_{i=1}^n Q(i)h(i)=\overbrace{-\frac{3}{2}-\frac{3}{3}}^{-\frac{3}{i+1}} \overbrace{+\frac{12}{3}+\frac{12}{n+2}}^{+\frac{12}{n+2}} \overbrace{-\frac{9}{n+2}-\frac{9}{n+3}}^{-\frac{9}{n+3}}$
+  - Then both numerators and denominators multiply $g(n)g(n-1)=(n+2)(n+3)$
+    $a_n=\frac{(C+\frac{3}{2})(n+2)(n+3)+3(n+3)-9(n+2)=C_1(n+2)(n+3)-6n-9}{6}$
+    $a_0=1\Rightarrow \frac{6C_1-9}{6}=1\Rightarrow C_1=\frac{5}{2}$
+    Then [`print_latex(simplify((Rational(5,2)*(x**2+5*x+6)-6*x-9)/6))` by keeping the fraction](https://stackoverflow.com/a/45651175/21294350) (better use [`print_latex`](https://stackoverflow.com/a/67119358/21294350)) -> $\frac{5 x^{2}}{12} + \frac{13 x}{12} + 1$
+- [x] 50
+  - Here we only cares about the worst case, so I didn't try to prove the recurrence relation about the average number.
+  - $C_n=n+1+\frac{2}{n}C_{n-1}+\frac{2}{n}(C_{n-1}-n)\frac{n-1}{2}=\frac{n+1}{n}C_{n-1}+2\Rightarrow (C_n-2)n=(n+1)C_{n-1}$ (here to use the inductive hypothesis at the 1st equality sign, $n$ should start from $2$)
+- [ ] 51
+  - See this [proof](https://math.stackexchange.com/questions/1418063/solution-of-recurrence-relation-for-roots-having-multiplicity-ge-1#comment10290196_1420007)
+- [ ] 52 Also [see](https://math.stackexchange.com/a/4833399/1059606)
+  - [prerequisite "Derivation Hints for the Main Theorem"](https://staff.cdms.westernsydney.edu.au/cgi-bin/cgiwrap/zhuhan/dmath/dm_readall.cgi?page=22) which also proves 51
+    - here $\lambda$ is constant
+      so $\lambda^{n+1}[\binom{i}{1}n^{i-1}+\dots+\binom{i}{i}]=\lambda^{n}[\lambda(\binom{i}{1}n^{i-1}+\dots+\binom{i}{i})]$
+    - based on the binominal theorem and combination choices, it is ok to calculate $(\triangle -\lambda)^k$ as one whole or one by one from right to left with $(\triangle -\lambda)^k n^i\lambda^n$, also for $P_s$.
+  - From [this](https://staff.cdms.westernsydney.edu.au/cgi-bin/cgiwrap/zhuhan/dmath/dm_readall.cgi?page=24) it means same as the book
+    >  the factor $n^m$ ensures that the proposed particular solution will not already be a solution of the associated linear homogeneous recurrence relation
+    - $f(\mu)\neq 0$:
+      $f(\triangle)P_k(\mu)=(c_m\triangle^m+\dots+c_0)P_k(\mu)$: ~~think of the largest order $k$.~~
+      Since $\triangle$ only changes $n$ to $n+1$. No order is changed.
+      - > derive a set of exactly (k+1) linear equations
+        i.e. let $n=1,2,\dots,f(k+1)$.
+      - Compared with $f(\triangle)$ when 
+        $\mu=\lambda_k,M=m_k$
+        then based on factorization (i.e. the above prerequisite), $f(\triangle)P_{M-1}(\mu)=\{0\}$ 
+        (here $\varnothing$ is impossible).
+        Then **if** $k<M$, then it is **not the particular solution** but is the solution to the homogeneous part.
+        So $M+k$ can **ensure** $M+k>M$.
+- [x] 53
+  $$
+  a_k=a_{k-1}+k\\
+  a_k=\alpha 2^k+ck+d\\
+  ck+d=2[c(k-1)+d]+k\Rightarrow (c+1)k+(d-2c)=0\Rightarrow c=-1,d=-2\\
+  a_0=\log{6}\Rightarrow \alpha-2=\log{6}\Rightarrow a_k=(\log{6}+2) 2^k-k-2\\
+  T(n)=T(2^k)=2^{(\log{6}+2) 2^k-k-2}=2^{n\log{6}+2n-2-\log{n}}=\frac{6^n\cdot 4^{n-1}}{n}
+  $$
 ### supplementary
 - [ ] 17
 ## 9
