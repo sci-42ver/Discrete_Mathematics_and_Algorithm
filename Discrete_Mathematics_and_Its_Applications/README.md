@@ -893,6 +893,30 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - > We know that {$a_n$} and {$\alpha_1 r_1^n + \alpha_2 r_2^n$ } are both solutions of the recurrence relation $a_n= c_1 a^{n−1} + c_2 a^{n−2}$  and both satisfy the initial conditions when n = 0 and n = 1
   This is due to both conform to "the recurrence relation" with $\alpha_1 r_1^n + \alpha_2 r_2^n$ proved in the "if" case.
   Then [based on induction](https://math.stackexchange.com/questions/3916854/how-to-prove-uniqueness-of-a-solution-to-a-recurrence-relation#comment8077968_3916854), they are same.
+### 8.3
+- > reduces the problem of the multiplication of two integers to three multiplications of pairs of integers with half as many bits
+  see [this "Being Clever"](https://www.cs.cmu.edu/~cburch/pgss99/lecture/0721-divide.html)
+  - Based on "IN Multiply(10, 5)" case
+    here 
+    > Let aL and aR be left and right halves of a.
+    > Let bL and bR be left and right halves of b.
+    should be both based on $n$.
+  - See example 4.
+- example 1: 2 -> $i<j$ and $x>a_m$
+- example 3: $n$ is due to LEMMA 1 in section 5.4.
+- > Each of the additions, subtractions, and shifts uses a constant multiple of n-bit operations,
+  maybe based on $2n$ like in $2^n$.
+- EXAMPLE 12
+  - > This selection is a task that can be done with O(n) comparisons
+    based on selection of the split point.
+  - > at most eight points
+    it is based on $d=min(d_L,d_R)$.
+    - notice here 7 points may be larger than the practical.
+    - why not use the circle instead of the rectangle?
+  - $f(n)$ is the number used to find the largest.
+  - sort ($2O(n\log{n})$) -> choose the split line (2 subsets) $O(n)$ by comparing the size of the subset with the half of the *current total* set
+    at each step of $O(\log{n})$ steps 
+    and then $f(n)=O(n\log{n})$.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -5247,6 +5271,79 @@ apart(6*x/((x+1)*(x+2)*(x+3)))
   a_0=\log{6}\Rightarrow \alpha-2=\log{6}\Rightarrow a_k=(\log{6}+2) 2^k-k-2\\
   T(n)=T(2^k)=2^{(\log{6}+2) 2^k-k-2}=2^{n\log{6}+2n-2-\log{n}}=\frac{6^n\cdot 4^{n-1}}{n}
   $$
+### 8.3
+- 10~14,22 skipped
+- [x] 2
+  - by Theorem 1, $f(n)=2n-2$.
+- [ ] 4 see the ans
+  - here it does same as $ab = (2^{2n} + 2^n)A_1B_1 + 2^n(A_1 − A_0)(B_0 − B_1) + (2^n + 1)A_0B_0$
+    where it first $(2^{2n} + 2^n)A_1B_1+(2^n + 1)A_0B_0$
+    then it only calculate the multiplication of *positive* numbers $(A_1 − A_0)(B_0 − B_1)$.
+- [x] 6
+```python
+from sympy import *
+import math
+x, y, z = symbols('x y z')
+init_printing(use_unicode=True)
+def neq_power_recurrence(a,b,c,d,f_1,calc,value=0):
+    C_1=b**d*c/(b**d-a)
+    C_2=f_1-C_1
+    eq=C_1*x**d+C_2*x**(math.log(a,b))
+    if not calc:
+      pprint(eq)
+    else:
+      print(eq.subs(x,value))
+    # pprint(C_1*x**d+C_2*x,f"log_{b}({a})")
+# 34
+neq_power_recurrence(5,4,6,1,1,False)
+# 36
+neq_power_recurrence(8,2,1,2,1,False)
+# 6
+neq_power_recurrence(7,2,15/4,2,1,True,32)
+# 8
+for i in [2,8,64,1024]:
+  neq_power_recurrence(2,2,3,0,5,True,i)
+```
+- [ ] 18
+  - see the ans
+    - > This requires at most 12n additional comparisons for a list of length 2n
+      TODO here "comparisons" mean that comparison between the 2 names of each vote through $2n$ votes for each of $6$ candidates?
+      then each comparison means comparison of 2 names.
+- [ ] 20 see the ans which is based on the worst case.
+- [ ] 23
+  - a.
+    - here should $j:=i to n$
+    - here we should not 
+      ```python
+      for j := i to n
+        sum=0
+        for k:=i to j
+          sum:=sum + a_j
+      ```
+      This will duplicate calculating many sums.
+      and sum becomes $O(n^3)$ based on 2 loops 
+      , i.e. $\sum_{i=1}^n\sum_{j=i}^n (j-i)$.
+  - c also see the [code](./miscs_snippets/py_codes/8-3-23/max_consecutive.py)
+  - e. is based on the worst case.
+    $C(n) = 2C(n/2)+n+2$ because one sum implies one comparison and 2 comparisons are needed for "the largest of this sum and the two answers obtained recursively".
+  - f
+    here for $C(n) = 2C(n/2)+n+2$, we can only care about $C(n) = 2C(n/2)+n$ for $O()$.
+- [ ] 29~33
+  - [ ] 29
+    - notice here is not $\sum_{j=0}^{k-1}a^j c(n)^d$, but $\sum_{j=0}^{k-1}a^j c(n/b^j)^d$.
+  - [ ] 30 trivial based on 29.
+  - [ ] 31
+    - similar to 29,
+      $$
+      \begin{align*}
+        f(n)&=n^{\log_{b}^{a}}f(1)+cn^d\sum_{j=0}^{k-1}\frac{a}{b^d}^j\\
+        &=n^{\log_{b}^{a}}f(1)+cn^d\frac{1-\frac{a^k}{b^{kd}=n^d}}{1-\frac{a}{b^d}}\\
+        &=n^{\log_{b}^{a}}f(1)+cn^d(\frac{b^d}{b^d-a})-c(a^k=n^{\log_{b}^{a}})(\frac{b^d}{b^d-a})\\
+        &=n^{\log_{b}^{a}}[f(1)+c\frac{b^d}{a-b^d}]+n^d(c\frac{b^d}{b^d-a})
+      \end{align*}
+      $$
+  - [ ] 32,33 trivial based on 31.
+- [ ] 34~37
 ### supplementary
 - [ ] 17
 ## 9
