@@ -5321,7 +5321,7 @@ for i in [2,8,64,1024]:
           sum:=sum + a_j
       ```
       This will duplicate calculating many sums.
-      and sum becomes $O(n^3)$ based on 2 loops 
+      and sum becomes $O(n^3)$ based on 2 loops
       , i.e. $\sum_{i=1}^n\sum_{j=i}^n (j-i)$.
   - c also see the [code](./miscs_snippets/py_codes/8-3-23/max_consecutive.py)
   - e. is based on the worst case.
