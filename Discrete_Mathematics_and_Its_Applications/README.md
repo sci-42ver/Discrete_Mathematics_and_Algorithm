@@ -5285,24 +5285,31 @@ from sympy import *
 import math
 x, y, z = symbols('x y z')
 init_printing(use_unicode=True)
-def neq_power_recurrence(a,b,c,d,f_1,calc,value=0):
-    C_1=b**d*c/(b**d-a)
-    C_2=f_1-C_1
-    eq=C_1*x**d+C_2*x**(math.log(a,b))
-    if not calc:
-      pprint(eq)
+def power_recurrence(a,b,c,d,f_1,calc,value=0):
+    equal=a==b**d
+    if not equal:
+      C_1=b**d*c/(b**d-a)
+      C_2=f_1-C_1
+      eq=C_1*x**d+C_2*x**(math.log(a,b))
+      if not calc:
+        pprint(eq)
+      else:
+        print(eq.subs(x,value))
+      # pprint(C_1*x**d+C_2*x,f"log_{b}({a})")
     else:
-      print(eq.subs(x,value))
-    # pprint(C_1*x**d+C_2*x,f"log_{b}({a})")
+      eq=f_1*x**d+c*x**d*log(x)
+      pprint(eq)
 # 34
-neq_power_recurrence(5,4,6,1,1,False)
+power_recurrence(5,4,6,1,1,False)
 # 36
-neq_power_recurrence(8,2,1,2,1,False)
+power_recurrence(8,2,1,2,1,False)
 # 6
-neq_power_recurrence(7,2,15/4,2,1,True,32)
+power_recurrence(7,2,15/4,2,1,True,32)
 # 8
 for i in [2,8,64,1024]:
-  neq_power_recurrence(2,2,3,0,5,True,i)
+  power_recurrence(2,2,3,0,5,True,i)
+# 28.c
+power_recurrence(1,Rational(4,3),2,0,0,False)
 ```
 - [ ] 18
   - see the ans
@@ -5339,6 +5346,14 @@ for i in [2,8,64,1024]:
     - based on
       > except that the coefficient 7 is replaced by 1.
       it means it only considers the 2d x d box which may be wrong.
+- [ ] 28
+  - a. see the ans for why $+1$
+  - b. see the ans ~~where the subset not included in the question is eliminated.~~
+    - > if the answers are first “no” and then “yes,”
+      since maybe one lie.
+      Then if both no, then it is in D, 
+      if both yes, then it is in A, because $A\cap B \cap C=\varnothing \Rightarrow (A\cup B)\cap (A\cup C)=A$.
+  - e. the [paper](https://sci-hub.se/https://doi.org/10.1016/0097-3165(87)90065-3) is not based on conquer. So I skip it.
 - [ ] 29~33
   - [ ] 29
     - notice here is not $\sum_{j=0}^{k-1}a^j c(n)^d$, but $\sum_{j=0}^{k-1}a^j c(n/b^j)^d$.
