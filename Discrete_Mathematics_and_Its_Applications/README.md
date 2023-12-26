@@ -5328,6 +5328,17 @@ for i in [2,8,64,1024]:
     $C(n) = 2C(n/2)+n+2$ because one sum implies one comparison and 2 comparisons are needed for "the largest of this sum and the two answers obtained recursively".
   - f
     here for $C(n) = 2C(n/2)+n+2$, we can only care about $C(n) = 2C(n/2)+n$ for $O()$.
+- [ ] 24~25 see the [code](./miscs_snippets/py_codes/8-3-25/closest_pair.py) which is done before having done 26.
+- [ ] 26 see the ans
+- [ ] 27
+  - change the rectangle to sqaure which centers around the point to be compared.
+  - > consider just two boxes of size d × d
+    ~~because for the 2d x 2d square, each point in one d x d box only has to be compared with the adjacent ones, for the diagonal one, its distance is same as the adjacent~~
+    this may be wrong. For example, let (0,0) center, $d=2$, then if the square having $(-2,-2)-(2,2)$ as its diagonal only covers 
+    $(1,1),(-1,1),(-0.5,-0.5)$ then the diagonal box needs to be considered.
+    - based on
+      > except that the coefficient 7 is replaced by 1.
+      it means it only considers the 2d x d box which may be wrong.
 - [ ] 29~33
   - [ ] 29
     - notice here is not $\sum_{j=0}^{k-1}a^j c(n)^d$, but $\sum_{j=0}^{k-1}a^j c(n/b^j)^d$.
