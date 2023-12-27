@@ -917,6 +917,58 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   - sort ($2O(n\log{n})$) -> choose the split line (2 subsets) $O(n)$ by comparing the size of the subset with the half of the *current total* set
     at each step of $O(\log{n})$ steps 
     and then $f(n)=O(n\log{n})$.
+### 8.4
+- > Because the powers of x are only place holders for the terms of the sequence in a generating function, we do not need to worry that G(1) is undefined
+  Based on [this](https://www.math.cmu.edu/~ploh/docs/math/2011-228/mit-ocw-generating-func.pdf), it means we normally doesn't assign one value to $x$.
+  - So we can always care about only the convergent series.
+    > However, when formal power series are convergent, valid operations carry over to their use as formal power series.
+    and think $x^i$ as one term instead of one number
+    > by picking a term in the first sum $x^{e_1}$ , a term in the second sum $x^{e_2}$ , and a term in the third sum $x^{e_3}$
+- > Theorem 1 is valid only for power series that *converge* in an interval, as all series considered in this section do
+  TODO why only valid for convergent series?
+- table 1 [$\ln(1+x)$](https://math.stackexchange.com/a/878376/1059606)
+- example 10 is similar to [this](https://math.stackexchange.com/q/4822021/1059606)
+  - > Furthermore, a computer algebra system can be used to do such computations
+```python
+from sympy import *
+import math
+x, y, z,a = symbols('x y z a')
+init_printing(use_unicode=True)
+
+range_list=[(2,5),(3,6),(4,7)]
+product=1
+for Range in range_list:
+    factor=0
+    for i in range(Range[0],Range[1]+1):
+        factor+=x**i
+    product*=factor
+p = Poly(product, x)
+# https://stackoverflow.com/a/60549033/21294350
+{x**m[0]:p.coeff_monomial(m) for m in p.monoms()}
+# https://stackoverflow.com/a/24127329/21294350
+p.coeffs()
+# example 11
+sum=0
+for i in range(2,5):
+  sum+=x**i
+def coeffs(poly):
+  print({x**m[0]:poly.coeff_monomial(m) for m in poly.monoms()})
+coeffs(Poly(sum**3,x))
+# example 12
+base=x+x**2+x**5
+sum=0
+for i in range(0,8):
+  sum+=base**i
+coeffs(Poly(sum,x))
+```
+- > This example shows that the binomial theorem, which can be proved by mathematical induction
+  See [this](https://en.wikipedia.org/wiki/Binomial_theorem#Inductive_proof)
+  Here $j+k\neq n+1$ should be impossible because there are $n+1$ terms.
+- EXAMPLE 14
+  here $1+x+x^2+\cdots$ will automatically drop terms after $x^r$ when we only cares about the coefficient of $x^r$.
+- EXAMPLE 15 
+  based on chapter 6, it is $C((r-n)+(n-1),r-n)$
+- EXAMPLE 17 `apart((1-9*x)/((1-8*x)*(1-10*x)))` in python.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -5229,7 +5281,7 @@ factor(x**3-6*x**2+12*x-8)
 - [ ] 49
   - $Q(n)=\frac{6}{(n+1)^{\overline{3}}}$
 ```python
-apart(6*x/((x+1)*(x+2)*(x+3)))
+apart(6*x/((x+1)*(x+2)*(x+3))) # Partial fraction decomposition https://mattpap.github.io/scipy-2011-tutorial/html/partfrac.html
 # got. Notice here may cancel out many terms when telescoping.
     9       12      3  
 - ───── + ───── - ─────
@@ -5369,7 +5421,143 @@ power_recurrence(1,Rational(4,3),2,0,0,False)
       \end{align*}
       $$
   - [ ] 32,33 trivial based on 31.
-- [ ] 34~37
+- [ ] 34~37 trivial.
+### 8.4
+- > This could also be confirmed by having Maple multiply out (“expand”) the original expression (truncating the last factor at x3 )
+  I use `sympy` also based on truncation.
+- 2,12~16(better factor out $x^k$ before expanding),20~ skipped
+- [ ] 4
+  c, see the ans
+- [ ] 6 The main idea is to connect to the already known forms.
+  - c. $(\frac{1}{1-x})'=\frac{1}{(1-x)^2}$
+    here $\sum n x^n$ is more complex.
+  - e see the ans
+- [ ] 8
+  - g. 
+    $$
+    \begin{align*}
+      x*\sum_{n=0}^{\infty}(-x-x^2)^n&=x*\sum_{n=0}^{\infty}(-1)^n*x^n*(1+x)^n\\
+      &=x*\sum_{n=0}^{\infty}(-1)^n*x^n*\sum_{k=0}^n\binom{n}{k}x^k\\
+      &=\sum_{n=0}^{\infty}\sum_{k=0}^n\binom{n}{k}*(-1)^n*x^{n+k+1}\\
+      a_n&=\sum_{\substack{k\le m\\k+m+1=n}}\binom{m}{k}*(-1)^m\\
+      &\overset{\text{when }n=3k}{=}\sum_{m=\lceil\frac{n-1}{2}\rceil}^{n-1}\binom{m}{n-m-1}(-1)^m
+    \end{align*}
+    $$
+    the above is probably true, because for $n=3$, $\binom{1}{1}*(-1)+\binom{2}{0}*1=0$
+    and $n=6$, $\binom{5}{0}*(-1)+\binom{4}{1}*(1)+\binom{3}{2}*(-1)=0$
+- [x] 10
+  - c. $x^{6\sim 8}$ can be got by one way each from 
+    $(x^3+x^5+x^6)(x^3+x^4)$
+    so $3$.
+- [x] 18 $(x^3+\cdots+x^10)(1+\dots+x^100)^2=\frac{1}{(1-x)^2}(x^3+\cdots+x^10)$
+  so $\sum_{k=4}^11 \binom{k+1}{1}=\frac{17*8}{2}$
+- [ ] 24 it can be $\frac{(1-x^5)^2}{(1-x)^4}$ then removing 
+  $x^5$ above due to only caring about $x^2$, $\frac{1}{(1-x)^4}$, then 
+  $\binom{k+3}{3},k=2$
+- [ ] 26
+```python
+from sympy import *
+import math
+x, y, z,a = symbols('x y z a')
+init_printing(use_unicode=True)
+
+base_list=[2,7,13,32]
+product=1
+target_cents=49
+for base in base_list:
+    factor=0
+    x_base=x**base
+    max_exp=target_cents//base+1
+    for i in range(max_exp+1):
+        factor+=x_base**i
+    product*=factor
+def get_coeff(eq,exp):
+  p = Poly(eq, x)
+  # https://stackoverflow.com/a/60549033/21294350
+  pprint({x**m[0]:p.coeff_monomial(m) for m in p.monoms() if m[0]==exp})
+get_coeff(product,target_cents)
+
+# b
+factor=0
+for base in base_list:
+  x_base=x**base
+  factor+=x_base
+product=0
+for i in range(target_cents//base_list[0]+1):
+  product+=factor**i
+get_coeff(product,target_cents)
+
+# 28
+factor=0
+for base in range(1,7):
+  x_base=x**base
+  factor+=x_base
+product=0
+target_exp=8
+for i in range(target_exp+1):
+  product+=factor**i
+get_coeff(product,target_exp)
+
+# 30
+base_list=[0.01,0.05,0.1,0.25]
+target_exp=int(1/base_list[0])
+base_list=[int(base/base_list[0]) for base in base_list]
+"""
+1. https://stackoverflow.com/a/72235224/21294350 here 1//0.1 will not be 10 because 0.1 as one float is not exactly 0.1.
+"""
+max_exp_list=[10]+[int(target_exp/exp) for exp in base_list[1:]]
+def thirty_main():
+   product=1
+   for base,exp in zip(base_list,max_exp_list):
+     factor=0
+     for i in range(exp+1):
+       x_base=(x**base)**i
+       factor+=x_base
+     product*=factor
+   get_coeff(product,target_exp)
+# 30.a
+thirty_main()
+max_exp_list=[10,10]+[int(target_exp/exp) for exp in base_list[2:]]
+# 30.b
+thirty_main()
+# 30.c
+max_cnt=10
+max_exp_list=[min(int(target_exp/exp),max_cnt) for exp in base_list]
+product=1
+for base,exp in zip(base_list,max_exp_list):
+  factor=0
+  for i in range(exp+1):
+    x_base=(x**base)**i*y**i
+    factor+=x_base
+  product*=factor
+get_coeff(product,target_exp)
+
+eq=product
+exp=target_exp
+p = Poly(eq, x)
+# https://stackoverflow.com/a/60549033/21294350
+coeff_based_on_y={x**m[0]:p.coeff_monomial(m) for m in p.monoms() if m[0]==exp}[x**exp]
+p=Poly(coeff_based_on_y,y)
+coeff_sum=sum([p.coeff_monomial(m) for m in p.monoms() if m[0]<=max_cnt])
+print(coeff_sum)
+```
+- [ ] 30 c. see the ans
+- [ ] 32
+  - c. start from $a_2$ instead of $a_0$
+  - f. $a_k=\sum_{i=0}^k a_ia_{k-i}$
+- [ ] 38 by sympy `apart((4+8*x+1/(1-2*x)-1-2*x)/(1-x-2*x**2))`
+```python
+# https://stackoverflow.com/a/59425650/21294350
+# TODO return order meaning https://docs.sympy.org/latest/modules/series/formal.html#sympy.series.formal.rational_algorithm. ln(1+x) Maclaurin series https://socratic.org/questions/how-do-you-find-the-maclaurin-series-of-f-x-ln-1-x
+from sympy.abc import x, n
+from sympy.series.formal import rational_algorithm
+f = apart((4+8*x+1/(1-2*x)-1-2*x)/(1-x-2*x**2))
+func_n, independent_term, order = rational_algorithm(f, x, n, full=True)
+pprint(func_n)
+a_0=4
+a_1=12
+func_n.subs(n,2)==a_1+a_0*2+2**2
+```
 ### supplementary
 - [ ] 17
 ## 9
@@ -5382,6 +5570,9 @@ power_recurrence(1,Rational(4,3),2,0,0,False)
 Redo 5.4-48
 ### 11.1
 - [ ] 15
+# miscs with sympy usage
+- use `apart` for the Partial fraction decomposition
+- use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
 # TODO after abstract algebra
 - [this](#RSA_Cauchy_theorem)
 # TODO after Computer Networking
