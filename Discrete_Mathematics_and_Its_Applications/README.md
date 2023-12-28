@@ -1,8 +1,6 @@
 Please point out errors if any. Thanks beforehand.
 
 check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
-
-If someone wants to know why we can't pay n-1 pesos and then 1 pesos (The others are similar) after the above enumeration based on "if the order in which the coins and bills are paid matters" (This is my confusion when I met with this problem, searched and got here), it is that this has been contained in "pay $i$ pesos coin , then $n-i$ pesos" when $n-i=1$ and the later related iteration.
 # outline
 much of chapter 2,5,6 have been learned before.
 # [online resources](https://highered.mheducation.com/sites/125967651x/student_view0/web_resources_guide.html) from [this](https://highered.mheducation.com/sites/125967651x/information_center_view0/)
@@ -969,6 +967,8 @@ coeffs(Poly(sum,x))
 - EXAMPLE 15 
   based on chapter 6, it is $C((r-n)+(n-1),r-n)$
 - EXAMPLE 17 `apart((1-9*x)/((1-8*x)*(1-10*x)))` in python.
+- > by not assuming that the variable X denotes any numerical value
+  ["formal power series"](https://en.wikipedia.org/wiki/Formal_power_series#Introduction) is just what the generating function assumes.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -5425,36 +5425,42 @@ power_recurrence(1,Rational(4,3),2,0,0,False)
 ### 8.4
 - > This could also be confirmed by having Maple multiply out (“expand”) the original expression (truncating the last factor at x3 )
   I use `sympy` also based on truncation.
-- 2,12~16(better factor out $x^k$ before expanding),20~ skipped
+- 2,12~16(better factor out $x^k$ before expanding),
+  20~22,
+  34~36,42,54 skipped
 - [ ] 4
   c, see the ans
 - [ ] 6 The main idea is to connect to the already known forms.
   - c. $(\frac{1}{1-x})'=\frac{1}{(1-x)^2}$
     here $\sum n x^n$ is more complex.
   - e see the ans
-- [ ] 8
+- [ ] 8 see the ans
   - g. 
     $$
     \begin{align*}
-      x*\sum_{n=0}^{\infty}(-x-x^2)^n&=x*\sum_{n=0}^{\infty}(-1)^n*x^n*(1+x)^n\\
-      &=x*\sum_{n=0}^{\infty}(-1)^n*x^n*\sum_{k=0}^n\binom{n}{k}x^k\\
-      &=\sum_{n=0}^{\infty}\sum_{k=0}^n\binom{n}{k}*(-1)^n*x^{n+k+1}\\
-      a_n&=\sum_{\substack{k\le m\\k+m+1=n}}\binom{m}{k}*(-1)^m\\
-      &\overset{\text{when }n=3k}{=}\sum_{m=\lceil\frac{n-1}{2}\rceil}^{n-1}\binom{m}{n-m-1}(-1)^m
+      \frac{x}{1+x+x^2}&=x\cdot \sum_{n=0}^{\infty}(-x-x^2)^n\\
+      &=x\cdot \sum_{n=0}^{\infty}(-1)^n\cdot x^n\cdot (1+x)^n\\
+      &=x\cdot \sum_{n=0}^{\infty}(-1)^n\cdot x^n\cdot \sum_{k=0}^n\binom{n}{k}x^k\\
+      &=\sum_{n=0}^{\infty}\sum_{k=0}^n\binom{n}{k}\cdot (-1)^n\cdot x^{n+k+1}\\
+    \end{align*}\\
+    \text{Then}\\
+    \begin{align*}
+      a_n&=\sum_{\substack{0\le k\le m\\k+m+1=n}}\binom{m}{k}\cdot (-1)^m\\
+      &=\sum_{m=\lceil\frac{n-1}{2}\rceil}^{n-1}\binom{m}{n-m-1}(-1)^m
     \end{align*}
     $$
-    the above is probably true, because for $n=3$, $\binom{1}{1}*(-1)+\binom{2}{0}*1=0$
-    and $n=6$, $\binom{5}{0}*(-1)+\binom{4}{1}*(1)+\binom{3}{2}*(-1)=0$
+    the above is ~~probably~~ [true](https://math.stackexchange.com/a/4834850/1059606), because for $n=3$, $\binom{1}{1}\cdot (-1)+\binom{2}{0}\cdot 1=0$
+    and $n=6$, $\binom{5}{0}\cdot (-1)+\binom{4}{1}\cdot (1)+\binom{3}{2}\cdot (-1)=0$ (Also see the [paper][Alternating_Sums_A_Method_to_DIE])
 - [x] 10
-  - c. $x^{6\sim 8}$ can be got by one way each from 
+  - c. $x^{6\sim 8}$ can be got by *one way* each from 
     $(x^3+x^5+x^6)(x^3+x^4)$
     so $3$.
 - [x] 18 $(x^3+\cdots+x^10)(1+\dots+x^100)^2=\frac{1}{(1-x)^2}(x^3+\cdots+x^10)$
   so $\sum_{k=4}^11 \binom{k+1}{1}=\frac{17*8}{2}$
-- [ ] 24 it can be $\frac{(1-x^5)^2}{(1-x)^4}$ then removing 
+- [x] 24 it can be $\frac{(1-x^5)^2}{(1-x)^4}$ then removing 
   $x^5$ above due to only caring about $x^2$, $\frac{1}{(1-x)^4}$, then 
   $\binom{k+3}{3},k=2$
-- [ ] 26
+- [x] 26
 ```python
 from sympy import *
 import math
@@ -5542,10 +5548,11 @@ coeff_sum=sum([p.coeff_monomial(m) for m in p.monoms() if m[0]<=max_cnt])
 print(coeff_sum)
 ```
 - [ ] 30 c. see the ans
-- [ ] 32
-  - c. start from $a_2$ instead of $a_0$
+- [ ] 32 see the ans
+  - c. start from $a_2$ *instead of* $a_0$
   - f. $a_k=\sum_{i=0}^k a_ia_{k-i}$
-- [ ] 38 by sympy `apart((4+8*x+1/(1-2*x)-1-2*x)/(1-x-2*x**2))`
+- [ ] 38 see the ans for the simplification of $xG(x),x^2G(x)$
+by sympy `apart((4+8*x+1/(1-2*x)-1-2*x)/(1-x-2*x**2))`
 ```python
 # https://stackoverflow.com/a/59425650/21294350
 # TODO return order meaning https://docs.sympy.org/latest/modules/series/formal.html#sympy.series.formal.rational_algorithm. ln(1+x) Maclaurin series https://socratic.org/questions/how-do-you-find-the-maclaurin-series-of-f-x-ln-1-x
@@ -5558,6 +5565,90 @@ a_0=4
 a_1=12
 func_n.subs(n,2)==a_1+a_0*2+2**2
 ```
+- [x] 40
+```python
+# https://stackoverflow.com/a/66888680/21294350 and hinted by the ans
+from sympy import *
+import math
+x,z,a,n = symbols('x z a n')
+y = Function('y')
+init_printing(use_unicode=True)
+
+rsolve(y(n) - 2*y(n-1)-3*y(n-2)-4**n-6, y(n), [20,60])
+
+# or similar to 38
+from sympy.series.formal import rational_algorithm
+a_0=20
+a_1=60
+f = apart((a_0+a_1*x-a_0*2*x+x**2*(16/(1-4*x)+6/(1-x)))/(1-2*x-3*x**2))
+func_n, independent_term, order = rational_algorithm(f, x, n, full=True)
+pprint(func_n)
+```
+- [ ] 43
+  - a) 
+    $xG(x)^2=\sum_{m=0}^{\infty}\sum_{k=0}^{m}C_kC_{m-k}x^{m+1}\overset{m'=m+1}{=}\sum_{m'=1}^{\infty}\sum_{k=0}^{m'-1}C_kC_{m'-1-k}x^{m'}$
+    the ans is more intuitive which use substitute $m'=m+1$ first.
+    - See [this](https://math.stackexchange.com/a/3138900/1059606) which emphasises checking the low-order terms
+      and 
+      - [this](https://math.stackexchange.com/a/2779486/1059606) which solves this problem directly by expansion.
+      - [this](https://math.stackexchange.com/a/1556063/1059606) checks $C_0$.
+        means
+        > leads to a division by zero.
+        implies division of one number by zero.
+  - b see the ans
+  - c $C_n=\frac{(2n)!}{n!\cdot n!\cdot (n+1)}=\frac{2^{n-1}\cdot 2(2n+1)!!}{(n+1)!}\overset{(2n+1)\cdots 3\cdot 2\cdot 1\ge (n+1)\cdots 3\cdot 2\cdot 1}{\ge}2^{n-1}$
+- [x] 44 here we can generalize the combination for $\binom{n-1}{n}$ and 
+  [$\binom{n-1}{-1}$](https://math.stackexchange.com/a/527843/1059606)
+- [ ] 46
+  - see [this](https://math.stackexchange.com/a/2432719/1059606) where is starts from $n=1$ due to $0^2=0$ (`simplify(diff(diff(1/(1-x))*x)*x)` in sympy)
+    and [this](https://math.stackexchange.com/a/2433357/1059606) starts from $n=2$ where when $n=1$ only $\binom{n+1}{2}$ has the positive value.
+```python
+f=simplify(diff(diff(1/(1-x))*x)*x/(1-x))
+func_n, independent_term, order = rational_algorithm(f, x, n, full=True)
+simplify(func_n)
+```
+- [x] 47 trivial where e is not offered by the ans.
+  - e $\frac{\sum_{n=0}^{\infty}\frac{x^{n+1}}{(n+1)!}}{x}=\frac{e^x-1}{x}$
+- [ ] 48 obviously many methods used here can be also used in the ordinary generating function.
+  - c
+    > This could also be done using calculus
+    $(e^x)'=\sum_{n=0}^{\frac{n}{n!}x^{n-1}}=e^x\Rightarrow xe^x\sum_{n=0}^{\frac{n}{n!}x^{n}}$
+  - e see the ans 
+    notice here integral has $-1$.
+- [ ] 50 f,g see the ans
+- [ ] 52
+  - a)
+    $b_{n+1}=2b_n+a_n+d_n=b_n+(4^n-c_n)$
+  - c) first get $a,b,c$ then $d$ at each step.
+  - see the ans
+    - b) notice $a_0=1$
+```python
+f=(1+x*x*2/(1-4*x))/(1-x*2)
+func_n, independent_term, order = rational_algorithm(f, x, n, full=True)
+pprint(simplify(func_n))
+print(f"a_0={simplify(func_n).subs(n,0)+independent_term}") # notice here n=0 needs special manipulation.
+```
+- [ ] 56,57 see the ans
+- [ ] 58
+  - [Hardy_Ramanujan_Asymptotic_Partition_function] p13 (Also see the highlights in [Hardy_Ramanujan_Asymptotic_Partition_function_orig])
+    - Here $(1-x)f(x)$ is not used
+    - > Now suppose that ...
+      $$
+      G(x)=\frac{1}{(1-x)(1-x^2)\dots}\\
+      \sum_{n=1}^{\infty} p(n-1)x^n=xG(x)\\
+      G(x)=\sum_{n=0}^{\infty} p(n)x^n=(p(0)=0)+\sum_{n=1}^{\infty} p(n)x^n\\
+      (1-x)G(x)=0+\sum_{n=1}^{\infty} (p(n)-p(n-1))x^n=\frac{1}{(1-x^2)\dots}
+      $$
+    - $a_n=p(n)-p(n-1)>0$ because $n$ can be *at least* partitioned as $1+(n-1)$
+    - $vx^{v-1}(1-x)<1-x^v$ can be got from $f(x)=x^v$, then $f'(x)<\frac{1-f(x)}{1-x},x\to 1^{-}$
+    - $\log(p(n))=\log(\sum(p(n)-p(n-1)))=\log(\sum a_n)$
+    - [$\sum(\frac{1}{v^2})$](https://en.wikipedia.org/wiki/Basel_problem#Euler's_approach)
+    - The [theorem C p321](http://ramanujan.sirinudi.org/Volumes/published/ram34.pdf) may be out of what this book wants to teach too much.
+      > The simplest and most interesting cases of Theorems A and B are those in which
+    - See [this](https://math.stackexchange.com/a/4834919/1059606) for $\sum_{2}^{\infty}\log \frac{1}{1-x^{\mu}}=\sum_{1}^{\infty}\frac{1}{\nu}\frac{x^{2\nu}}{1-x^{\nu}}$
+      where 1st equality is due to [this](https://www.wolframalpha.com/input?i=taylor+series+expansion+of+-ln%281-x%29) and based on the generating function, we can assume $|x|<1$.
+  - Here $\log p(n)\sim C\sqrt{n}\Rightarrow \log p(n)=\Theta(\sqrt{n})\Rightarrow \log p(n)=O(\sqrt{n})$ 
+  obviously [$f(n)>0$](https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations)
 ### supplementary
 - [ ] 17
 ## 9
@@ -5622,6 +5713,9 @@ Redo 5.4-48
 [Ruma_Falk_paper]:https://sci-hub.se/https://doi.org/10.1080/13546783.2011.613690
 [a000108_11]:./papers/a000108_11.pdf
 [stewart1941]:./papers/stewart1941.pdf
+[Hardy_Ramanujan_Asymptotic_Partition_function]:./papers/ram36.pdf
+[Hardy_Ramanujan_Asymptotic_Partition_function_orig]:./papers/ram36_orig.pdf
+[Alternating_Sums_A_Method_to_DIE]:./papers/Alternating_Sums_A_Method_to_DIE.pdf
 
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
 
