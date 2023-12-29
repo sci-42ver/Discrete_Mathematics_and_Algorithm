@@ -666,7 +666,14 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
       - one more [elegant description](https://math.stackexchange.com/a/436735/1059606) where $f^{-1}(b)=\varnothing$ denotes exclusion from the range.
     - [incl_excl_n]
       - here just append $P(\bigcup_{i=1}^n E_i)$ with related elements of 
-        $P(E_{n+1})$ based on $n=2$ version of inclusion-exclusion principle.
+        $P(E_{n+1})$ **based on $n=2$** version of inclusion-exclusion principle.
+      - Also see the book p606 proof which is directly based on combinatorial view.
+        - and the book 8.5-24 is same as the above paper where it uses n terms $A_i,\dots,A_{n-1},A_n\cup A_{n+1}$ <a id="inclusion_exclusion_mathematical_induction"></a>
+          while here it uses 2 terms first $\bigcup_{i=1}^n A_i,A_{n+1}$
+          - It uses basis at the end
+            $\sum |A_{i_1}\cap\cdots\cap A_{i_m}\cap A_{n}|+\sum |A_{i_1}\cap\cdots\cap A_{i_m}\cap A_{n+1}|$ contributes to $\binom{n+1}{m+1}$
+            and $\sum |A_{i_1}\cap\cdots\cap A_{i_m}\cap A_{n}\cap A_{n+1}|$ contributes to $\binom{n+1}{m+2}$
+            and the sign depends on the sign of $\sum |(A_{i_1}\cap\cdots\cap A_{i_m})\cap (A_{n}\cup A_{n+1})|$
   - definition
     > Equivalently, they count the number of different *equivalence relations* with precisely k *equivalence classes* that can be defined on an n element set
     here 
@@ -969,6 +976,9 @@ coeffs(Poly(sum,x))
 - EXAMPLE 17 `apart((1-9*x)/((1-8*x)*(1-10*x)))` in python.
 - > by not assuming that the variable X denotes any numerical value
   ["formal power series"](https://en.wikipedia.org/wiki/Formal_power_series#Introduction) is just what the generating function assumes.
+### 8.5
+- > There are terms in this formula for the number of elements in the intersection of every nonempty subset of the collection of the n sets. Hence, there are $2^n − 1$ terms in this formula
+  Here excludes $\varnothing$, so $-1$.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -5703,7 +5713,11 @@ expected_value_and_variance_from_probability_generating_function(f,subs_list)
 - [ ] 61
   - $p^m\sum_{n=0}^{\infty}\binom{n+m-1}{n}(qx)^n$ 
     based on table 1, we can get $p^m*(1-qx)^{-m}$ by the map 
-    $(n,k)\to(m,n)$ 
+    $(n,k)\to(m,n)$
+### 8.5
+- 2~12,16~30 skipped
+- [ ] 14 see the ans
+- [ ] 24 [see](#inclusion_exclusion_mathematical_induction)
 ### supplementary
 - [ ] 17
 ## 9
