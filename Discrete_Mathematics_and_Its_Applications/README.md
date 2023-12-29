@@ -5427,7 +5427,7 @@ power_recurrence(1,Rational(4,3),2,0,0,False)
   I use `sympy` also based on truncation.
 - 2,12~16(better factor out $x^k$ before expanding),
   20~22,
-  34~36,42,54 skipped
+  34~36,42,54,59(trivial),62 skipped
 - [ ] 4
   c, see the ans
 - [ ] 6 The main idea is to connect to the already known forms.
@@ -5451,6 +5451,23 @@ power_recurrence(1,Rational(4,3),2,0,0,False)
     $$
     the above is ~~probably~~ [true](https://math.stackexchange.com/a/4834850/1059606), because for $n=3$, $\binom{1}{1}\cdot (-1)+\binom{2}{0}\cdot 1=0$
     and $n=6$, $\binom{5}{0}\cdot (-1)+\binom{4}{1}\cdot (1)+\binom{3}{2}\cdot (-1)=0$ (Also see the [paper][Alternating_Sums_A_Method_to_DIE])
+    - Also see [this](https://math.stackexchange.com/a/4835151/1059606) method
+      - partial fraction decomposition just let $\frac{a}{x-w_1}-\frac{b}{x-w_2}$ and solve with 
+        $a,b$
+```python
+from sympy import *
+import math
+m,x,z,a,n = symbols('m x z a n',complex=True)
+init_printing(use_unicode=True)
+
+# do with the specific values https://stackoverflow.com/a/64107725/21294350
+apart(x/(1+x+x**2),full=True).doit()
+# more general
+a,b,w_1,w_2 = symbols('a b w_1 w_2',complex=True)
+f=a/(x-w_1)-b/(x-w_2)-x/((x-w_1)*(x-w_2))
+# https://stackoverflow.com/q/54003390/21294350
+solve(f, [a,b], dict = True)
+```
 - [x] 10
   - c. $x^{6\sim 8}$ can be got by *one way* each from 
     $(x^3+x^5+x^6)(x^3+x^4)$
@@ -5649,6 +5666,44 @@ print(f"a_0={simplify(func_n).subs(n,0)+independent_term}") # notice here n=0 ne
       where 1st equality is due to [this](https://www.wolframalpha.com/input?i=taylor+series+expansion+of+-ln%281-x%29) and based on the generating function, we can assume $|x|<1$.
   - Here $\log p(n)\sim C\sqrt{n}\Rightarrow \log p(n)=\Theta(\sqrt{n})\Rightarrow \log p(n)=O(\sqrt{n})$ 
   obviously [$f(n)>0$](https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations)
+- [ ] 60
+  - compare with the [Probability mass function](https://en.wikipedia.org/wiki/Probability_mass_function#Formal_definition)
+```python
+p,q,m=symbols('p q m')
+f=p*x/(1-((1-p)*x))
+pprint(simplify(diff(f,x)).subs(1-p,q))
+pprint(simplify(diff(f,x,2)).subs(1-p,q))
+first_diff=simplify(diff(p*x/(1-((1-p)*x)),x).subs(x,1))
+pprint(first_diff)
+simplify(simplify(diff(p*x/(1-((1-p)*x)),x,2).subs(x,1))+first_diff-first_diff**2)
+
+import pprint as pp
+def expected_value_and_variance_from_probability_generating_function(f,subs_list:list[tuple]):
+  expected_value=simplify(diff(f,x).subs(x,1))
+  variance=simplify(simplify(diff(f,x,2).subs(x,1))+expected_value-expected_value**2)
+  print("f'(x)=")
+  pprint(diff(f,x))
+  print("f''(x)=")
+  pprint(diff(f,x,2))
+  for subs in subs_list:
+    # expected_value=expected_value.subs(subs[0],subs[1])
+    # variance=variance.subs(subs[0],subs[1])
+    [expected_value,variance] = [simplify(target_variable.subs(subs[0],subs[1])) for target_variable in [expected_value,variance]]
+  print(f"expected_value:{pp.pformat(expected_value)}")
+  print(f"variance:{pp.pformat(variance)}\n")
+f=p*x/(1-(q*x))
+# subs_list=[(1-p,q),(1-q,p)] # this will suppress some simplification.
+q=1-p # this will generate the most simplified form.
+subs_list=[]
+expected_value_and_variance_from_probability_generating_function(f,subs_list)
+# 61
+f=p**m/(1-(q*x))**m
+expected_value_and_variance_from_probability_generating_function(f,subs_list)
+```
+- [ ] 61
+  - $p^m\sum_{n=0}^{\infty}\binom{n+m-1}{n}(qx)^n$ 
+    based on table 1, we can get $p^m*(1-qx)^{-m}$ by the map 
+    $(n,k)\to(m,n)$ 
 ### supplementary
 - [ ] 17
 ## 9
