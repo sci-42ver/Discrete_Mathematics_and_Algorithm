@@ -659,7 +659,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - EXAMPLE 9 think it as map tuple $(ball,bin)$ where bin can be duplicately shown.
 - Stirling numbers of the second kind formula proof
   - [Cynthia_and_Chahat] p9
-    - We can use [inclusion-exclusion principle](https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle) based on [**the number of elements excluded**](https://math.stackexchange.com/a/550504/1059606), i.e. $X_j$.
+    - We can use [inclusion-exclusion principle](https://en.wikipedia.org/wiki/Inclusion%E2%80%93exclusion_principle) based on [**the number of elements excluded**](https://math.stackexchange.com/a/550504/1059606) which is same as what [wikipedia](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Explicit_formula) says, i.e. $X_j$. <a id="Stirling_number_second_kind_inclusion_exclusion"></a>
       - here $k^n$ contain all cases ~~including choosing $i,i=1,2,\ldots,k$ Ice Cream.~~ not excluding any ice-cream.
         - similarly $\binom{k}{1}(k-1)^n$ contain all cases ~~including choosing $i,i=1,2,\ldots,k-1$ Ice Cream.~~ excluding one specific ice-cream where we have $\binom{k}{1}$ choices to choose this excluded one.
         - based on this exclusion process and sum/minus them, we will get one set which **doesn't exclude anything** at the end.
@@ -804,7 +804,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - THEOREM 2
   here "by Exercise 21 in Section 6.4" should be "by Exercise 25 in Section 6.4".
 - EXAMPLE 6
-  although as [this](https://math.stackexchange.com/q/2877418/1059606) says, $X_i$ are not independent where that $n-1$ people are [fixed](https://proofwiki.org/wiki/Closed_Form_for_Number_of_Derangements_on_Finite_Set) (from [this](https://proofwiki.org/wiki/Hat-Check_Problem)) will also fix the $n$th.
+  although as [this](https://math.stackexchange.com/q/2877418/1059606) says, $X_i$ are not independent where that $n-1$ people are [fixed](https://proofwiki.org/wiki/Closed_Form_for_Number_of_Derangements_on_Finite_Set) (this link about cases about "fix" is from [this link](https://proofwiki.org/wiki/Hat-Check_Problem) 2. here $D_n=n!-W=n!+\sum_{p=1}^n (-1)^p\frac{n!}{p!}=n!\sum_{p=0}^n (-1)^p\frac{}{p!}$) will also fix the $n$th. <a id="hat_check_Inclusion_Exclusion"></a>
   But based on [permutations count](https://math.stackexchange.com/a/4830206/1059606), we can easily get the expectation (Also see [this](https://math.stackexchange.com/questions/627913/question-on-the-hat-check-problem#comment5028877_628851) for why the order doesn't influence here)
 - THEOREM 5
   here $\sum\limits_{r_2\in Y(S)}$ should have only one possible value.
@@ -979,6 +979,17 @@ coeffs(Poly(sum,x))
 ### 8.5
 - > There are terms in this formula for the number of elements in the intersection of every nonempty subset of the collection of the n sets. Hence, there are $2^n − 1$ terms in this formula
   Here excludes $\varnothing$, so $-1$.
+### 8.6
+- > The well-known hatcheck problem can be solved using the principle of inclusion–exclusion
+  see [this](#hat_check_Inclusion_Exclusion)
+- > Many problems can be solved by counting the number of onto functions from one finite set to another
+  see [this](#8_1_29)
+- > we can use this principle to find the number of primes less than a positive integer
+  see one exercise before 8.5-12.
+- > In fact, this probability can be shown to be **within $1/(n + 1)!$** of $e^{−1}$.
+  see [this](https://math.stackexchange.com/a/4835979/1059606) and "within" [meaning](https://math.stackexchange.com/questions/4835888/the-range-of-the-probability-of-the-derangement-for-n-people?noredirect=1#comment10297015_4835888).
+  Also see Method 3 in this [detailed](https://math.stackexchange.com/a/83472/1059606)
+- Probability that [exactly k](https://math.stackexchange.com/a/3850293/1059606) of N people matched their hats
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -5102,6 +5113,7 @@ simplify((x+1)*(2*x+1)/6-(1+x)**2/4).subs(x, 8)
   - TODO why not $\binom{m}{n}*n!$
     - Because it is the [total function](https://www.statisticshowto.com/total-function/).
   - Notice it is related with the ["Stirling number of the second kind"](https://math.stackexchange.com/a/2866444/1059606)
+    - [inclusion-exclusion](https://math.stackexchange.com/a/2866213/1059606) and [this](#Stirling_number_second_kind_inclusion_exclusion) <a id="8_1_29"></a>
   - see the ans
 - [ ] 32
   - since the largest is always at the bottom,
@@ -5718,6 +5730,41 @@ expected_value_and_variance_from_probability_generating_function(f,subs_list)
 - 2~12,16~30 skipped
 - [ ] 14 see the ans
 - [ ] 24 [see](#inclusion_exclusion_mathematical_induction)
+### 8.6
+- 2,8 skipped
+- [ ] 4 see the ans
+  notice here $\ge 4$ when complementing $\le 3$.
+```python
+import itertools
+import math
+
+variable_constraints = [i+1 for i in [3,4,5,8]]
+constraint_size=len(variable_constraints)
+rhs=17
+Sum=0
+for L in range(len(variable_constraints) + 1):
+  for subset in itertools.combinations(variable_constraints, L):
+    if sum(subset)<=rhs:
+      rest_rhs=rhs-sum(subset)
+      Sum+=(-1)**(L)*math.comb(constraint_size+rest_rhs-1,rest_rhs)
+print(Sum)
+```
+- [ ] 6 see the ans
+- [ ] 10
+  - compared with EXAMPLE 3 where *in each type, each element is indistinguishable* although between types they are distinguishable (i.e. not all are indistinguishable).
+    So $\binom{8}{3}\cdot 3!\cdot\binom{5+2-1}{5}$ is wrong where 
+    $\binom{8}{3}\cdot 3!=P_{3}^{8}$ is because **all** balls are indistinguishable because it will overcount.
+    For example, $1|2|3\to 145|267|38$ is same as $4|6|8\to 145|267|38$
+- [ ] 12
+  here we can find one long recurrence relation
+  $D_n=\overbrace{(n-1)}^{\text{1st has }n-1\text{choices. Here assume choose }i\text{ th}}\{\overbrace{D_{n-2}}^{i\text{ th chooses the 1st}}+\overbrace{n-2[D_{n-3}+n-3(\ldots\cdot((D_1=0)+1))]}^{\text{use the same process as the 1st for the rest}}\}$ with $D_2=1$
+  Then here we get $3[D_2+2\cdot(D_1+1)]=3\cdot[1+2\cdot(0+1)]=9$ choices.
+  - Notice the above recurrence has depth of $n$ which can't be programmed at all.
+    So we need one more [elegant](https://math.stackexchange.com/a/203908/1059606) with depth 2 (Also see [this](https://math.stackexchange.com/q/2779841/1059606)).
+    - Also see [paper](https://math.stackexchange.com/questions/2760771/how-do-i-prove-the-number-of-derangements-formula-nd-n-1-1n-intuitiv#comment5695169_2760771) which also shows $D_n=nD_{n-1}+(-1)^n$ same as this [paper](https://math.stackexchange.com/questions/2760771/how-do-i-prove-the-number-of-derangements-formula-nd-n-1-1n-intuitiv#comment5694888_2760771)
+      - TODO combinatorial proof of them.
+        - The [Algebraic](https://math.stackexchange.com/a/2780056/1059606) one is trivial
+- [ ] 14
 ### supplementary
 - [ ] 17
 ## 9
