@@ -5731,7 +5731,7 @@ expected_value_and_variance_from_probability_generating_function(f,subs_list)
 - [ ] 14 see the ans
 - [ ] 24 [see](#inclusion_exclusion_mathematical_induction)
 ### 8.6
-- 2,8 skipped
+- 2,8,14,22,26,27 skipped
 - [ ] 4 see the ans
   notice here $\ge 4$ when complementing $\le 3$.
 ```python
@@ -5764,12 +5764,42 @@ print(Sum)
     - Also see [paper](https://math.stackexchange.com/questions/2760771/how-do-i-prove-the-number-of-derangements-formula-nd-n-1-1n-intuitiv#comment5695169_2760771) which also shows $D_n=nD_{n-1}+(-1)^n$ same as this [paper](https://math.stackexchange.com/questions/2760771/how-do-i-prove-the-number-of-derangements-formula-nd-n-1-1n-intuitiv#comment5694888_2760771)
       - TODO combinatorial proof of them.
         - The [Algebraic](https://math.stackexchange.com/a/2780056/1059606) one is trivial
-  - See the [code](./miscs_snippets/py_codes/8-6-8/derangement.py)
+  - See the [derangement_code]
     - How to debug:
       1. firstly, not use the debugger. But like what the book says, based on the *basis step*, check whether the program is right.
       2. notice the variable *type consistency*
       3. notice the program order like the insertion order.
-- [ ] 14
+- [ ] 16 see the ans
+  notice we need to multiply $n!$.
+- [ ] 17 see the ans
+  see the [code](./miscs_snippets/py_codes/8-6-17/no_even_digit_orig_pos.py)
+- [x] 18 see [derangement_code]
+  - Here $D_0=1$ means [nothing done p227](https://www.ms.uky.edu/~sohum/putnam/enu_comb_stanley.pdf) ([reference](https://en.wikipedia.org/wiki/Derangement#cite_note-EC1-6))similar to the [Vacuous Product](https://proofwiki.org/wiki/Definition:Continued_Product/Vacuous_Product) which corresponds to $D_2=D_1+D_0$.
+```bash
+1. D_{n-1}
+# fix one map
+1
+k 
+# then the rest
+2 ... k ...
+p(2) ... p(k)!=1 ... # this exclude the D_{n-2} case.
+2. D_{n-2}
+1 ... k ...
+k ... 1 ...
+```
+- [x] 19 also by induction $D_{n-1}=(n-1)D_{n-2}+(-1)^{n-1},n\ge 2\Rightarrow (n-1)D_{n-2}=D_{n-1}+(-1)^n$ Then use $D_n=(n-1)(D_{n-1}+D_{n-2})$
+  - see the ans
+    - here based on induction, it is $(−1)^{n-2}(D_2-2D_1)$
+  - Also [see](https://math.stackexchange.com/a/2780056/1059606)
+- [x] 20
+  - here since $n$ is not constant, we can't use the formula directly in section 8.2
+  - based on induction $\sum_{i=0}^{n}(-1)^{n-i}n^{\underline{i}}$
+    (here at the final step $n!(D_0+(-1)^1)$, so both $(-1)^0\cdot n^{\underline{n}}$ and $(-1)^1\cdot n^{\underline{n-1}}$ are possible)
+- [x] 23 based on binomial theorem
+  $n\prod_{i=1}^m (1-\frac{1}{p_i})$
+- [x] 24 same as [this idea](https://math.stackexchange.com/a/3785289/1059606)
+- [x] 25 is a bit different from 26 because the former excludes cases like cases starting with $1,2,3$
+  it is $(D_3)^2=4$
 ### supplementary
 - [ ] 17
 ## 9
@@ -5803,6 +5833,7 @@ Redo 5.4-48
 <!-- codes -->
 [miscs_ipynb]:./miscs_snippets/miscs.ipynb
 [stirling_numbers_first_kind_simulation]:./miscs_snippets/py_codes/Stirling_numbers_first_kind/stirling_numbers_first_kind_simulation.py
+[derangement_code]:./miscs_snippets/py_codes/8-6-8/derangement.py
 
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
