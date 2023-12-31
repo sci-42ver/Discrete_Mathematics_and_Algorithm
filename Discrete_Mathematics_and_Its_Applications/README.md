@@ -5764,6 +5764,11 @@ print(Sum)
     - Also see [paper](https://math.stackexchange.com/questions/2760771/how-do-i-prove-the-number-of-derangements-formula-nd-n-1-1n-intuitiv#comment5695169_2760771) which also shows $D_n=nD_{n-1}+(-1)^n$ same as this [paper](https://math.stackexchange.com/questions/2760771/how-do-i-prove-the-number-of-derangements-formula-nd-n-1-1n-intuitiv#comment5694888_2760771)
       - TODO combinatorial proof of them.
         - The [Algebraic](https://math.stackexchange.com/a/2780056/1059606) one is trivial
+  - See the [code](./miscs_snippets/py_codes/8-6-8/derangement.py)
+    - How to debug:
+      1. firstly, not use the debugger. But like what the book says, based on the *basis step*, check whether the program is right.
+      2. notice the variable *type consistency*
+      3. notice the program order like the insertion order.
 - [ ] 14
 ### supplementary
 - [ ] 17
