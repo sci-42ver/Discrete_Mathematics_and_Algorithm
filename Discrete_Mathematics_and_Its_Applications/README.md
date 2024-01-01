@@ -5055,6 +5055,17 @@ simplify((x+1)*(2*x+1)/6-(1+x)**2/4).subs(x, 8)
         the domain size of $f$.
         Otherwise, even if $f^{-1}$ exists, it *can't get all the permutations* as its range.
 ## 8
+- > How many ways are there to assign seven jobs to three employees so that each employee is assigned at least one job?
+  it is in Review Questions where
+  > How can you count the number of ways to assign m jobs to n employees so that each employee is assigned at least one job?
+  $$
+  F(m,n)=
+  \begin{cases}
+    0,m<n\\
+    n!\cdot S(m,n),m\ge n
+  \end{cases}
+  $$
+  This is similar to [this][assign_different_jobs_to_different_employees].
 ### 8.1
 - 1(trivial),14,20,26,30,46, skipped
 - [ ] 2 notice the initial condition.
@@ -5320,7 +5331,7 @@ apart(6*x/((x+1)*(x+2)*(x+3))) # Partial fraction decomposition https://mattpap.
 - [ ] 51
   - See this [proof](https://math.stackexchange.com/questions/1418063/solution-of-recurrence-relation-for-roots-having-multiplicity-ge-1#comment10290196_1420007)
 - [ ] 52 Also [see](https://math.stackexchange.com/a/4833399/1059606)
-  - [prerequisite "Derivation Hints for the Main Theorem"](https://staff.cdms.westernsydney.edu.au/cgi-bin/cgiwrap/zhuhan/dmath/dm_readall.cgi?page=22) which also proves 51
+  - [prerequisite "Derivation Hints for the Main Theorem"][Derivation_linear_constant_coefficient_recurrence_relation] which also proves 51
     - here $\lambda$ is constant
       so $\lambda^{n+1}[\binom{i}{1}n^{i-1}+\dots+\binom{i}{i}]=\lambda^{n}[\lambda(\binom{i}{1}n^{i-1}+\dots+\binom{i}{i})]$
     - based on the binominal theorem and combination choices, it is ok to calculate $(\triangle -\lambda)^k$ as one whole or one by one from right to left with $(\triangle -\lambda)^k n^i\lambda^n$, also for $P_s$.
@@ -5353,16 +5364,16 @@ apart(6*x/((x+1)*(x+2)*(x+3))) # Partial fraction decomposition https://mattpap.
   - here it does same as $ab = (2^{2n} + 2^n)A_1B_1 + 2^n(A_1 − A_0)(B_0 − B_1) + (2^n + 1)A_0B_0$
     where it first $(2^{2n} + 2^n)A_1B_1+(2^n + 1)A_0B_0$
     then it only calculate the multiplication of *positive* numbers $(A_1 − A_0)(B_0 − B_1)$.
-- [x] 6
+- [x] 6 <a id="master_theorem"></a>
 ```python
 from sympy import *
 import math
 x, y, z = symbols('x y z')
 init_printing(use_unicode=True)
-def power_recurrence(a,b,c,d,f_1,calc,value=0):
+def power_recurrence(a,b,c,d,f_1,calc:bool,value=0):
     equal=a==b**d
     if not equal:
-      C_1=b**d*c/(b**d-a)
+      C_1=b**d*Rational(c,(b**d-a))
       C_2=f_1-C_1
       eq=C_1*x**d+C_2*x**(math.log(a,b))
       if not calc:
@@ -5384,6 +5395,8 @@ for i in [2,8,64,1024]:
   power_recurrence(2,2,3,0,5,True,i)
 # 28.c
 power_recurrence(1,Rational(4,3),2,0,0,False)
+# supplementary 20
+power_recurrence(3,5,2,4,1,False)
 ```
 - [ ] 18
   - see the ans
@@ -5801,7 +5814,164 @@ k ... 1 ...
 - [x] 25 is a bit different from 26 because the former excludes cases like cases starting with $1,2,3$
   it is $(D_3)^2=4$
 ### supplementary
-- [ ] 17
+- 2~12,16,25(trivial),26,31,32~36 skipped
+- Here since the most is based on the recurrence, I didn't write all corresponding programs.
+  And the right way is to write the pseudocode and prove its correctness instead of writing the program and spending much time debugging which even with test maybe still some trivial errors are omitted.
+  - here 22,24 only has divide without conquer.
+    See [this](https://stackoverflow.com/questions/8850447/why-is-binary-search-a-divide-and-conquer-algorithm#comment39286287_8850447) from [this](https://www.reddit.com/r/algorithms/comments/14pndtv/comment/jqiwk5k/?utm_source=share&utm_medium=web2x&context=3) "decrease and conquer" is only divide with the only single subproblem. Then *conquer* only occurs [once](https://stackoverflow.com/questions/8850447/why-is-binary-search-a-divide-and-conquer-algorithm#comment11054614_8850447)
+- [ ] 13
+  - See [this](https://math.stackexchange.com/a/1051789/1059606)
+    - Then if we want to solve with $\{a_n\}$ directly.
+      based on $x_n,y_n,z_n$ recurrence relations, $a_n$ contains $0\sim 3$ month-old rabbits after reproduction.
+      Then $a_n$ should be at least $a_{n-1}-f_4$ where $f_4$ means rabbits 4 years old in $a_{n-1}$ at the $a_n$ step.
+$$
+\begin{align*}
+  a_{n-1}:\\
+  0,&1,&&2\\
+  \downarrow\\
+  1,&2,&&3\\
+a_{n-3}\text{ after reproduction}:\\
+&&&3,4,5\\
+a_{n-2}\text{ after reproduction}:\\
+&2,&&3,4\\
+\end{align*}\\
+\text{Here we want to calcluate based on the index }\\
+(f_1+f_2)+\overbrace{f_2+f_3}^{\text{newborn}}=a_{n-1}-f_3+a_{n-2}-f_4\\
+\text{here if not using }f_i\text{, it is difficult to calculate them based on }a_i\text{ because it will probably have one \textbf{long} recurrence relation sequence.}
+$$
+- [ ] 14
+  - > If the weights are real numbers ... then no efficient algorithm is known for solving the knapsack problem. Indeed, the problem is NP-complete
+    See [this](https://qr.ae/pKSbqq)
+    Here if real, then the bit length may be very long, so "no efficient".
+    But if `int`, then $64$-bit may be very large which is enough. However, for double, some small digits after the decimal point can't be denoted.
+    - The key idea is that the definition of [**"input size"**](https://www.quora.com/What-is-the-meaning-of-pseudo-polynomial-time-complexity-I-saw-that-Knapsack-runs-in-pseudo-polynomial-time-I-read-about-this-here-Pseudo-polynomial-time-but-I-am-not-able-to-follow-I-want-to-understand-the-concept/answer/Nishanth-Dikkala) from [this](https://stackoverflow.com/questions/3907545/how-to-understand-the-knapsack-problem-is-np-complete#comment48148457_3907545) <a id="Pseudo_polynomial"></a>
+      so if it is $\log(N)$, then 
+      $O(N)$ will becomes $O(2^{\log(N)})$ which is exponential not polynomial.
+    - Also see this [example](https://stackoverflow.com/a/27718369/21294350)
+      > but as you double the size of W, it does not mean W=16, but the length will be twice longer:
+      where `int` length twice longer will be multiply $2^{orig_len}$
+      but for `double`, it may have exponent plus something like $2^{orig_len}$ then multiply 
+      $2^{2^{orig_len}}$
+```python
+# c
+"""
+1. Here num is max_index of the list W.
+2. weight > 0
+"""
+def M(num,weight,W):
+  if num==0:
+    if W[num]>weight:
+      return 0
+    else:
+      return W[num]
+  pop(W[num])
+  if W[num]>weight:
+    return M(num − 1, weight,W)
+  else:
+    new_weight=weight-W[num]
+    return max(M(num − 1, weight,W),W[num]+M(num − 1, new_weight,W))
+```
+   - see the ans
+    - c
+      - compared with the above codes
+        1. > they can be discarded before we start
+        2. it begins from $M(1,w)$
+          but it is not possible for the code although *after the nest*, it will calculate $M(1,w)$ first.
+    - d is same as what I thought that based on iterative $M(j,w)-M(j-1,w)==0$.
+- [ ] 15
+  - [longest common subsequence (LCS)](https://en.wikipedia.org/wiki/Longest_common_subsequence#:~:text=A%20longest%20common%20subsequence%20(LCS,positions%20within%20the%20original%20sequences.) is used in `diff`
+    It doesn't have the constraint of *continuity*.
+    - Then all is trivial.
+      - Notice here $c_p\neq a_m$ and $c_p\neq b_n$ may both occur
+        then 2 items are excluded, so becomes $L(i − 1, j − 1)$.
+- [ ] 17 see the ans
+  - notice here we init $L(i, 0)$ and 
+    $L(0, j)$ firstly.
+    - since $i,j$ both increase, $L(i-1, j-1)$, etc, will always be valid.
+- [ ] 18 see the ans
+  Here in the ans it may be stored in global variable (because it calculates at the small step values firstly. If stored in the stack, it will probably *not be shared*.) similar to 14 where it uses the **stack** to store the recursive results.
+  - Use `L(i, j) = L(i − 1, j − 1) + 1` to find the element
+    and use `max (L(i, j −1), L (i − 1, j ))` to exclude elements and decrease the list size to finish the algorithm. (See 15 "2 items are excluded")
+- [x] 20 see [this](#master_theorem)
+- [ ] 22 see the ans
+  - notice here $+2$ because two halves may *share* the largest number.
+  - here should have initial case $f(1)$ instead of 
+    only $f(2)$ because 
+    $f(3)$ will be splitted into $f(1),f(2)$
+  - > This algorithm could be made slightly more efficient by having the base cases be n = 2 and n = 3 , rather than n = 1
+    This is similar to the [derangement_code].
+- [ ] 24
+```python
+# this one may be wrong
+# Here we doesn't need the assumption in ans d.
+def unimodal(start,end,List):
+  if end-start==1:
+    return index(max(List[start],List[end]))
+  mid=(start+end)//2 # >= (start+start+2)//2 >= start+1
+  if List[mid]>List[start] and List[mid]>List[end]:
+    m=index(max(unimodal(start,mid,List),unimodal(mid,end,List)))
+  elif (List[mid]<List[start] and List[mid]<List[end]) or List[mid]==List[end] or (mid!=start and List[mid]==List[start]):
+    print("not find")
+  # the rest is in the range (List[start],List[end]) or (List[end],List[start])
+  elif List[start]<List[end] and List[mid]<List[end]:
+    m=unimodal(mid,end,List)
+  elif List[start]>List[end] and List[mid]>List[end]:
+    m=unimodal(start,mid,List)
+```
+  - see the ans
+    - d. Here is based on the assumption that this sequence is *already one unimodal sequence*. Otherwise, it will always *drop the check of the strict increase/decrease* of one whole half which will incur errors if this sequence is not one unimodal sequence.
+      - If not having this assumption, then probably $n$ complexity because we obviously *at least* need check every terms to ensure the strictly increase/decrease and it is *possible* by traversing the sequence.
+      - It should be $a_m=max(a_i,a_j),j=i+1$ and $a_m=max(a_i,a_{\frac{i+j}{2}}a_j),j=i+2$
+- [x] 28 is same as [Derivation_linear_constant_coefficient_recurrence_relation].
+- [ ] 38
+  - Since "less than", we should let $M=1,000,000-1$.
+- [ ] $\binom{4+3-1}{4-1}\cdot 4!$ is wrong where permutation should be inside each employee instead of all employees.
+```python
+# https://rosettacode.org/wiki/Stirling_numbers_of_the_second_kind#Python
+computed = {}
+
+def sterling2(n, k):
+	key = str(n) + "," + str(k)
+
+	if key in computed.keys():
+		return computed[key]
+	if n == k == 0:
+		return 1
+	if (n > 0 and k == 0):
+		return 0
+	if n == k:
+		return 1
+	if k > n:
+		return 0
+	result = k * sterling2(n - 1, k) + sterling2(n - 1, k - 1)
+	computed[key] = result
+	return result
+
+Sum=0
+n=4
+"""
+firstly `sterling2(n, k)` splits based on "DISTINGUISHABLE OBJECTS AND INDISTINGUISHABLE BOXES"
+then `math.perm(3,k)` to let it be "DISTINGUISHABLE BOXES".
+
+hinted by [assign_different_jobs_to_different_employees] from https://gateoverflow.in/222551/kenneth-rosen-edition-6th-exercise-6-question-11-page-no-457?show=222593#a222593
+"""
+for k in range(1,3+1):
+  Sum+=math.perm(3,k)*sterling2(n, k)
+print(Sum)
+```
+  - Here $3^4$  has no overcount because $(1,1,2,3)$ (here the 
+    $i$th number $k$ means 
+    $i$th job is assigned to $k$th employee) is only counted once.
+- [ ] 42 similar to one exercise before
+  $a_{n}=\sum_{i=1}^4 a_{n-i},a_i=2^i,i=0\sim 3$
+  Use `f=lambda n: 2**n if n>=0 and n<=3 else sum([f(n-i) for i in range(1,4+1)])` to calculate `f(6)`
+```python
+0...
+10...
+110...
+1110...
+```
+  - The ans use inclusion-exclusion principle.
 ## 9
 ### 9.6
 - [ ] 53
@@ -5822,6 +5992,7 @@ Redo 5.4-48
   also "hostids consisting of all 0s and all 1s are unavailable".
 # TODO after algorithm
 - [6.2-27](https://leetcode.cn/problems/longest-increasing-subsequence/description/?utm_source=LCUS&utm_medium=ip_redirect&utm_campaign=transfer2china)
+- Why is [this](#Pseudo_polynomial) based on the length of the input instead of the value?
 
 ---
 
@@ -5833,7 +6004,7 @@ Redo 5.4-48
 <!-- codes -->
 [miscs_ipynb]:./miscs_snippets/miscs.ipynb
 [stirling_numbers_first_kind_simulation]:./miscs_snippets/py_codes/Stirling_numbers_first_kind/stirling_numbers_first_kind_simulation.py
-[derangement_code]:./miscs_snippets/py_codes/8-6-8/derangement.py
+[derangement_code]:./miscs_snippets/py_codes/8-6-12/derangement.py
 
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
@@ -5847,6 +6018,9 @@ Redo 5.4-48
 [lower_bound_second_largest_element]:https://math.stackexchange.com/a/1672/1059606
 [consecutive_zeros_in_bit_strings]:https://math.stackexchange.com/a/178613/1059606
 [stirling_numbers_first_kind_proof]:https://math.stackexchange.com/q/4824460/1059606
+
+<!-- gateoverflow -->
+[assign_different_jobs_to_different_employees]:https://gateoverflow.in/79804/permutation-combo?show=80049#a80049
 
 <!-- cs stackexchange -->
 [O_Theta_Omega_relation_with_limit]:https://cs.stackexchange.com/a/827/161388
