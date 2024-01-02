@@ -990,6 +990,41 @@ coeffs(Poly(sum,x))
   see [this](https://math.stackexchange.com/a/4835979/1059606) and "within" [meaning](https://math.stackexchange.com/questions/4835888/the-range-of-the-probability-of-the-derangement-for-n-people?noredirect=1#comment10297015_4835888).
   Also see Method 3 in this [detailed](https://math.stackexchange.com/a/83472/1059606)
 - Probability that [exactly k](https://math.stackexchange.com/a/3850293/1059606) of N people matched their hats
+## 9
+### introduction
+- >  in some computer languages, only the first 31 characters of the name of a variable matter
+  This is used in [C](https://cplusplus.com/forum/beginner/273069/#msg1177623)
+### 9.1
+- Here example 1~4 has set(s) where it assumes the relation is based on set(s).
+- [antisymmetric](https://en.wikipedia.org/wiki/Antisymmetric_relation) is ${\displaystyle {\text{if }}\,aRb\,{\text{ with }}\,a\neq b\,{\text{ then }}\,bRa\,{\text{ must not hold}},}$
+  With symmetric ${\displaystyle {\text{if }}\,aRb\,{\text{ with }}\,a\neq b\,{\text{ then }}\,bRa\,{\text{ must hold}},}$ 
+  (Here $a=b$ case is trivial where $aRb\Rightarrow bRa$ must hold.)
+  - Here can be seen as $A\wedge \neg B\to \neg C$ is equivalent to $A\wedge C\to B$ where $A$ can be seen as one hypothesis then the rest is contrapositive.
+    Here the latter is more convenient to prove. 
+- notice in EXAMPLE 11 -> EXAMPLE 5, $R_4$ is both symmetric and antisymmetric.
+- example 7 some pairs are symmetric while some not, so not symmetric nor antisymmetric.
+- > The reader should verify that R5 and R6 are transitive
+```python
+R_5=[(1, 1), (1, 2), (1, 3), (1, 4), (2, 2), (2, 3), (2, 4), (3, 3), (3, 4), (4, 4)]
+def check(pair_seq:list[tuple[int]]):
+  for pair in pair_seq:
+      if pair[0]!=pair[1]:
+          second_pairs=[second_pair for second_pair in pair_seq if second_pair[0]==pair[1] and second_pair[0]!=second_pair[1]]
+          for second_pair in second_pairs:
+              target_pair=(pair[0],second_pair[1])
+              if target_pair not in pair_seq:
+                  print("err")
+              else:
+                  print(target_pair,"from",pair,second_pair)
+check(R_5)
+R_6=[(3,4)]
+check(R_6)
+R_1=[(1, 1), (1, 2), (2, 1), (2, 2), (3, 4), (4, 1), (4, 4)]
+check(R_1)
+```
+- $S\circ R$ starts from $R$ then $S$.
+  so $(a,b)\in R,(b,c)\in S\Rightarrow (a,c)\in S\circ R$
+- TODO Is $R^n\circ R=R\circ R^n$? Then howwto prove if yes? <a id="power_relation_associativity"></a>
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -5651,6 +5686,7 @@ pprint(func_n)
   - c $C_n=\frac{(2n)!}{n!\cdot n!\cdot (n+1)}=\frac{2^{n-1}\cdot 2(2n+1)!!}{(n+1)!}\overset{(2n+1)\cdots 3\cdot 2\cdot 1\ge (n+1)\cdots 3\cdot 2\cdot 1}{\ge}2^{n-1}$
 - [x] 44 here we can generalize the combination for $\binom{n-1}{n}$ and 
   [$\binom{n-1}{-1}$](https://math.stackexchange.com/a/527843/1059606)
+- [x] 45 trivial based on the hint.
 - [ ] 46
   - see [this](https://math.stackexchange.com/a/2432719/1059606) where is starts from $n=1$ due to $0^2=0$ (`simplify(diff(diff(1/(1-x))*x)*x)` in sympy)
     and [this](https://math.stackexchange.com/a/2433357/1059606) starts from $n=2$ where when $n=1$ only $\binom{n+1}{2}$ has the positive value.
@@ -5973,6 +6009,112 @@ print(Sum)
 ```
   - The ans use inclusion-exclusion principle.
 ## 9
+### 9.1
+- 2,8,12~18,22~34,40,44 skipped
+- example 8,12
+- [x] 4
+  - Here I only cares about antisymmetric which is somewhat more difficult to prove than others.
+    - a) is antisymmetric
+      while the others having "and/as" aren't.
+  - IMHO here should be "if" instead of "if and only if".
+- [ ] 6
+  - same as 4,
+    a,b,c,e,f,h) are symmetric but not antisymmetric
+    d) is neither symmetric nor antisymmetric
+    g) is antisymmetric but not symmetric
+  - see the ans
+    - see d) about antisymmetric.
+- [x] 10
+  - a) combine $xRy\to yRx$ and $xRy\wedge yRx\to y=x$ together
+    we get $y=x$ from $xRy$
+    so either $\{(x,x),\dots\}$ when $xRy$ is True 
+    or $\varnothing$ when $xRy$ is False.
+  - b)
+    just mix. Then $\{(1,1),(1,2),(2,1),(3,1)\}$
+    so $(3,1)$ is the counterexample of symmetric
+    and $(1,2)$ is the counterexample of antisymmetric
+- [x] 20
+  - since b,c,d) all have "and", they are not asymmetric.
+- [ ] 36 see the ans
+  - notice here c) is $R^2$ although only based on $a<b>c$ we can't decide the $a,c$ relation
+    but $b$ can be **arbitrarily** chosen.
+- [ ] 38 see the ans
+  $R^2\subseteq R_6$
+- [ ] 42 see the ans
+  - b) notice here should consider negative and $0$
+  - here $\{(0,b)\}\not\subset R_1$ while $\{(0,b)\}\subset R_2$
+    So $R_1-R_2$ and $R_2-R_1$ don't need to consider $\{(0,b)\}$. (only considered when both sets *share* something)
+- [ ] 46 see the [code][check_relations]
+  - see the ans notice reflexive means **"every"**
+- [ ] 48
+  - c) we can also think as $n-1$ choices with the first element
+    and $n$ for the 2nd.
+  - see the ans
+    e) here we can't use $A=\{(\not a,\not b)\}, B=\{(a,\not b)\},C=\{(x,\not b)\}\Rightarrow A\cup B=C$ (here $x$ can be any element of the $n$ elements)
+    because $A$ only has subsets which *only contains* $(\not a,\not b)$ 
+    and $B$ only $(a,\not b)$
+    they *all drops one type of case*, i.e. $\{(\not a,\not b),\dots,(a,\not b),\dots\}$
+    this can be checked $2^{(n-1)^2}+2^{n-1}<2^{(n-1)n}$, i.e. $2^{n-1}+1<2^n$
+    - Notice here $A=\{(\not a,\not b)\}$ is not same as b)
+      Here it excludes "has a as its first element *or* b as its second element"
+      instead of only one $(a,b)$
+    - ~~Also $A'=\{\text{no ordered pair has a as its first element}\}$~~
+      ~~$B'=\{\text{no ordered pair has b as its second element}\}$~~
+      ~~$C'=\{\text{no ordered pair has a as its first element and b as its second element}\}$~~
+      ~~Then $2\cdot 2^{n(n-1)}-$~~
+    - Based on the above we should use inclusion-exclusion for relations
+      instead of subsets of relations.
+    - As the above shows we have $n-1$ for each element, so $(n-1)^2$.
+- [ ] 49
+  - a) $2^{\frac{n^2-n}{2}+n}$ since each $\{(a,b),(b,a)\},a\neq b$ must occur at the same time
+  - b) same as a)
+  - c) hinted by b) $3^{\binom{n}{2}}$
+  - d) $2^{n^2-n}$ after removing all $(a,a)$
+  - e) since all $(a,a)$ must be contained. so $1$
+    then based on a) $2^{\frac{n^2-n}{2}}\cdot 1$
+  - f) obviously $(a,b),a\neq b$ doesn't influence "neither reflexive nor irreflexive", so $2^{n^2-n}$
+    then we need exclude "reflexive" and "irreflexive", i.e. contain all $(a,a)$ or contain none.
+    so $2^n-2$.
+    then $2^{n^2-n}\cdot (2^n-2)=2^{n^2}-2\cdot 2^{n^2-n}$
+  - see the ans
+    - b) see [this](https://math.stackexchange.com/a/503992/1059606)
+      which uses subset denotation by $0-1$
+      then $(a,a)$ can be $0,1$
+      while $(a,b),(b,a)$ may be $(0,0),(0,1),(1,0)$, so $3$.
+- [x] 50
+  - a) $2$ trivially
+  - See [check_relations]
+- [ ] 52 
+  a,c,d,e) are True.
+  - see the ans
+    - b) is also True (I forgot how I made mistakes with this)
+- [x] 54
+  - by the [matrix](https://en.wikipedia.org/wiki/Converse_relation#Examples)
+    it means $(a,b)\cap (b,a)=0 \forall a\neq b$
+    then if and only if is trivial based on this
+- [ ] 56
+  only if: since "reflexive" $R$ contains all $(a,a)$
+  then $\overline{R}$ excludes all $(a,a)$, so "irreflexive"
+  if: similar
+  - see the ans for one more elegant description.
+- [x] 58 see the [code](./miscs_snippets/py_codes/9-1-58/relation_power.py)
+- [ ] 60
+  - see the ans
+    This proves [this](#power_relation_associativity)
+    $$
+    \text{let }(a,b)\in T,(b,c)\in S,(c,d)\in R\\
+    (R\circ S)\circ T=\{(b,d)\}\circ T=\{(a,d)\}\\
+    R\circ(S\circ T)=R\circ\{(a,c)\}=\{(a,d)\}
+    $$
+  - the rest see the ans
+- [ ] 62
+  See [check_relations] `transitive` it use $O(n^2)$ for each subset
+  then totally $O(n^2\cdot 2^{n^2})$
+  - see the ans
+    - the above should be $O(n^2(n^2+n\cdot n^2))=O(n^5)$ for each subset
+    - the ans should be $O(n^3\cdot 3n^2)$ 
+      if caring about *traverse* of the list for whether $R(x,y)$ is in if *also using the brute force search*.
+      Which corresponds to the code `in L`.
 ### 9.6
 - [ ] 53
 ## 10
@@ -6005,6 +6147,7 @@ Redo 5.4-48
 [miscs_ipynb]:./miscs_snippets/miscs.ipynb
 [stirling_numbers_first_kind_simulation]:./miscs_snippets/py_codes/Stirling_numbers_first_kind/stirling_numbers_first_kind_simulation.py
 [derangement_code]:./miscs_snippets/py_codes/8-6-12/derangement.py
+[check_relations]:./miscs_snippets/py_codes/9-1-46/check_relations.py
 
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
