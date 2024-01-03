@@ -1024,7 +1024,7 @@ check(R_1)
 ```
 - $S\circ R$ starts from $R$ then $S$.
   so $(a,b)\in R,(b,c)\in S\Rightarrow (a,c)\in S\circ R$
-- TODO Is $R^n\circ R=R\circ R^n$? Then howwto prove if yes? <a id="power_relation_associativity"></a>
+- TODO Is $R^n\circ R=R\circ R^n$? Then how to prove if yes? <a id="power_relation_associativity"></a>
 ### 9.2
 - TODO
   How is `FROM Teaching_assignments, Class_schedule` related with join?
@@ -1032,6 +1032,10 @@ check(R_1)
   TODO why not let this be $J$ instead of $I$?
 - > Support can be beneficial for finding the connection between *products* in comparison to the *whole* dataset, whereas confidence looks at the connection between one or more *items and another item*
   why define [Support and Confidence](https://en.wikipedia.org/wiki/Association_rule_learning#Support)?
+### 9.3
+- in FIGURE 2, the diagonal can be 0 or 1.
+- EXAMPLE 5 says the usage of the Boolean product.
+- 
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -1069,6 +1073,8 @@ check(R_1)
 - [bmod -> binary mod](https://tex.stackexchange.com/a/42872/308105)
 - [big equal sign](https://tex.stackexchange.com/a/35406/308105) needs extra package or self define length `\mathrel{\mkern-3mu}`.
 - [Stirling number](https://tex.stackexchange.com/a/86064/308105) or use [wikipedia one](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Recurrence_relation)
+## doc
+- [1](https://latexref.xyz)
 ## katex
 - available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
 - set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
@@ -6135,6 +6141,99 @@ print(Sum)
     then the latter contain more than $P_{i_1 ,i_2 ,...,i_m}(R \cap S)$
 - [x] 41
   - similar to [3_choices_for_each_element]
+### 9.3
+- 2~6(1. notice here 6 is asymmetric instead of antisymmetric),
+  12~32(14 has some test codes) skipped
+- [ ] 8
+  - transitive see the ans, the rest is trivial.
+    ```python
+    # https://stackoverflow.com/a/45159105/21294350 from https://stackoverflow.com/a/64448213/21294350
+    first,second=[[1,0,0,1,0,0],[0,1,1,1,0,0]], [[0,1],[1,1],[1,0],[1,0],[1,1],[0,1]]
+    from itertools import starmap
+    from operator import mul
+    # https://stackoverflow.com/a/1790532/21294350
+    import operator
+    from functools import *
+    def my_or(a_list):
+      # here set init with 0 to not influence further "or" operation
+      return reduce(operator.or_, a_list, 0)
+    my_or([1,0,1])
+    # diff from map is how they manipulate with args https://www.educative.io/answers/what-is-the-itertoolsstarmap-method-in-python 
+    def Boolean_product(mat_1,mat_2):
+      return [[my_or(starmap(mul, zip(row, col))) for col in zip(*mat_2)] for row in mat_1]
+    # https://stackoverflow.com/a/534866/21294350
+    def one_dim_minus_list(row_1,row_2):
+      return [a_i - b_i for a_i, b_i in zip(row_1, row_2)]
+    # mat_1<=mat_2?
+    def check_less_equal(mat_1,mat_2):
+      minus_mat=[one_dim_minus_list(row_1, row_2) for row_1, row_2 in zip(mat_1,mat_2)]
+      # or use `any` https://stackoverflow.com/a/40514152/21294350
+      for row_index,row in enumerate(minus_mat):
+        for col_index,elem in enumerate(row):
+          if elem==1:
+            print(f"not transitive for ({row_index+1},{col_index+1})")
+    Mat_list=[[[1,1,0,1],[1,0,1,0],[0,1,1,1],[1,0,1,1]],
+      [[1,1,1,0],[0,1,0,0],[0,0,1,1],[1,0,0,1]],
+      [[0,1,0,1],[1,0,1,0],[0,1,0,1],[1,0,1,0]]]
+    for Index,Mat in enumerate(Mat_list):
+      print(f"check {Index}")
+      check_less_equal(Boolean_product(Mat,Mat),Mat)
+    # directly use the book data
+    Data_str_list=["""1 1 0 1 
+    1 0 1 0 
+    0 1 1 1 
+    1 0 1 1""","""1 1 1 0 
+    0 1 0 0 
+    0 0 1 1 
+    1 0 0 1""","""0 1 0 1 
+    1 0 1 0 
+    0 1 0 1 
+    1 0 1 0"""]
+    def str_lists_to_mat(Str_list,row_size):
+      Data_lists=[re.split(' [\\n]*',Str) for Str in Str_list]
+      Data_lists=[[int(elem) for elem in data_list] for data_list in Data_lists]
+      Mat_list=[[data_list[i:i+row_size] for i in range(0, len(data_list), row_size)] for data_list in Data_lists]
+      return Mat_list
+    row_size=4
+    Mat_list=str_lists_to_mat(Data_str_list,row_size)
+    # use numpy
+    import numpy
+    def nested_list_to_mat(nested_list:list[list]):
+      return numpy.array([numpy.array(xi) for xi in nested_list])
+    for Index,Mat in enumerate(Mat_list):
+      print(f"check {Index}")
+      minus_mat=nested_list_to_mat(Boolean_product(Mat,Mat))-nested_list_to_mat(Mat)
+      if any(1 in sl for sl in minus_mat):
+        print("not transitive")
+    # 14
+    # R_1,R_2
+    Data_str_list=["""0 1 0 
+    1 1 1 
+    1 0 0""","""0 1 0 
+    0 1 1 
+    1 1 1"""]
+    Data_lists=str_lists_to_mat(Data_str_list,3)
+    # 14.c)
+    print(nested_list_to_mat(Boolean_product(Data_lists[0],Data_lists[1])))
+    # 14.d)
+    print(nested_list_to_mat(Boolean_product(Data_lists[0],Data_lists[0])))
+    ```
+- [x] 10
+  - see the ans
+    - a) we can also think as $a\le b$ make the *order* of the pair *fixed*, so $\binom{1000}{2}$
+    - d) or $1000+999+\cdots+1$
+- [ ] 34
+  - split into $(a,b)$ with $a=b$ and $a\neq b$ 2 cases.
+    then $(a,b)\to (b,a)$.
+    $(a,a)\to \neg (a,a)$ and vice versa.
+  - see the ans to combine 2 cases above.
+- [x] 35
+  - by EXAMPLE 9 in 2.6 Matrices,
+    $M_{R^{n}}=M_{R^{n-1}\circ R}=M_{R^{n-1}}\odot M_R\overset{IH}{=}M_{R}^{[n-1]}\odot M_R\overset{\text{EXAMPLE 9 in 2.6}}{=}M_{R}^{[n]}$
+    - see the ans
+      As [this](#power_relation_associativity) shows, the corresponding matrix order is also associative. $M_{R^{n-1}}\odot M_R=M_R\odot M_{R^{n-1}}$
+- [x] 36
+  - symmetric difference = union - intersection
 ### 9.6
 - [ ] 53
 ## 10
