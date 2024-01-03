@@ -1025,6 +1025,13 @@ check(R_1)
 - $S\circ R$ starts from $R$ then $S$.
   so $(a,b)\in R,(b,c)\in S\Rightarrow (a,c)\in S\circ R$
 - TODO Is $R^n\circ R=R\circ R^n$? Then howwto prove if yes? <a id="power_relation_associativity"></a>
+### 9.2
+- TODO
+  How is `FROM Teaching_assignments, Class_schedule` related with join?
+- > Such algorithms first find *frequent* itemsets and then turn their attention to finding all the association rules with *high confidence* from the frequent itemsets that have been found.
+  TODO why not let this be $J$ instead of $I$?
+- > Support can be beneficial for finding the connection between *products* in comparison to the *whole* dataset, whereas confidence looks at the connection between one or more *items and another item*
+  why define [Support and Confidence](https://en.wikipedia.org/wiki/Association_rule_learning#Support)?
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -6077,7 +6084,7 @@ print(Sum)
     so $2^n-2$.
     then $2^{n^2-n}\cdot (2^n-2)=2^{n^2}-2\cdot 2^{n^2-n}$
   - see the ans
-    - b) see [this](https://math.stackexchange.com/a/503992/1059606)
+    - b) see [this][3_choices_for_each_element]
       which uses subset denotation by $0-1$
       then $(a,a)$ can be $0,1$
       while $(a,b),(b,a)$ may be $(0,0),(0,1),(1,0)$, so $3$.
@@ -6115,6 +6122,19 @@ print(Sum)
     - the ans should be $O(n^3\cdot 3n^2)$ 
       if caring about *traverse* of the list for whether $R(x,y)$ is in if *also using the brute force search*.
       Which corresponds to the code `in L`.
+### 9.2
+- 4,6,10~24,
+  28~40 skipped
+- [x] 2 $\binom{4}{3}+\binom{4}{2}\cdot 2$
+- [x] 8
+  - > this could possibly not happen, although it is perhaps less likely than in part (b)
+    this means c) is "less likely" to "not happen" than b)
+    i.e. more likely to happen than b)
+- [x] 26
+  - Here if $R \cap S$ share less than $P_{i_1 ,i_2 ,...,i_m} (R) \cap P_{i_1 ,i_2 ,...,i_m} (S)$
+    then the latter contain more than $P_{i_1 ,i_2 ,...,i_m}(R \cap S)$
+- [x] 41
+  - similar to [3_choices_for_each_element]
 ### 9.6
 - [ ] 53
 ## 10
@@ -6161,6 +6181,7 @@ Redo 5.4-48
 [lower_bound_second_largest_element]:https://math.stackexchange.com/a/1672/1059606
 [consecutive_zeros_in_bit_strings]:https://math.stackexchange.com/a/178613/1059606
 [stirling_numbers_first_kind_proof]:https://math.stackexchange.com/q/4824460/1059606
+[3_choices_for_each_element]:https://math.stackexchange.com/a/503992/1059606
 
 <!-- gateoverflow -->
 [assign_different_jobs_to_different_employees]:https://gateoverflow.in/79804/permutation-combo?show=80049#a80049
