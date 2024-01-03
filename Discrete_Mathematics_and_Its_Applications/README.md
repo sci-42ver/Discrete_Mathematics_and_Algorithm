@@ -990,6 +990,8 @@ coeffs(Poly(sum,x))
   see [this](https://math.stackexchange.com/a/4835979/1059606) and "within" [meaning](https://math.stackexchange.com/questions/4835888/the-range-of-the-probability-of-the-derangement-for-n-people?noredirect=1#comment10297015_4835888).
   Also see Method 3 in this [detailed](https://math.stackexchange.com/a/83472/1059606)
 - Probability that [exactly k](https://math.stackexchange.com/a/3850293/1059606) of N people matched their hats
+- > The proof of this result is left as an exercise for the reader
+  It is in exercise 27.
 ## 9
 ### introduction
 - >  in some computer languages, only the first 31 characters of the name of a variable matter
@@ -1035,7 +1037,50 @@ check(R_1)
 ### 9.3
 - in FIGURE 2, the diagonal can be 0 or 1.
 - EXAMPLE 5 says the usage of the Boolean product.
-- 
+### 9.4
+- For transitive closure, we only need to think about $(a,b),a\neq b$ because $(a,a)$ will always *do nothing* when composite.
+- Here $R\cup \triangle$ *only adds necessary* pairs for reflexive closure.
+  similarly, $R\cup R^{-1}$ also *only adds necessary* ones.
+  So *minimal* and with *the related property*
+  Then "contain" is ensured by $\cup$
+  So the following 3 conditions are met.
+  > Because this relation *contains R, is reflexive, and is contained within every* reflexive relation that contains R, it is called the reflexive closure of R
+- > The only ordered pairs not in $R^{\ast}$ are those containing states that are not connected to the continental United States
+  TODO here 
+  > contains (a, b) if state a and state b have a common border.
+  doesn't exclude $(a,b)$ where $a,b$ not have $n$ borders distant based on $R^n$.
+  so it can contain " states that are not connected to the continental United States".
+- > If (a, b) ∈ R∗ and (b, c) ∈ R∗, then there are paths from a to b and from b to c in R. We obtain a path from a to c by starting with the path from a to b and following it with the path from b to c. Hence, (a, c) ∈ R∗
+  More specifically, $(a,b)\in R^{m}$ and $(b,c)\in R^{n}$
+  so $(a,c)\in R^{m+n}\in R^{\ast}$ as [this](#power_relation_associativity) shows.
+- > Because S is transitive, $S^n$ also is transitive
+  [It](https://math.stackexchange.com/a/1701431/1059606) uses $R^n\subseteq R$
+  - $R\subseteq S\Rightarrow R^k\subseteq S^k$ is trivial based on the definition of $\subseteq$.
+    or more specially, $R^k=(f(S))^k$ where $f(S)$ only removes something from $S$
+    Then $S^k=R^k+(\overline{R})^k+M$ where $M$ takes both $R,\overline{R}$ 
+    for the composite operation after excluding $R^k\cup (\overline{R})^k$
+    and $\overline{R}=S-R$
+- > Suppose that a = b and that m > n, so that m ≥ n + 1 ... among the m vertices x0, x1, … , xm−1
+  change this to $m > n-1$ 
+  we can get the case $a\neq b$
+  because here when $m=n$, there are $m+1=n+1$ vertex including $a,b$, then "the pigeonhole principle".
+- > if and only if there is a path between these vertices in Ri, for some positive integer i with i ≤n
+  if is trivial
+  only if is from Lemma 1.
+- [join matrix](https://math.stackexchange.com/a/2835565/1059606)
+- > We now have paths from d to a, namely, d, c, a, and from d to d, namely, d, c, d
+  here we only needs to check distance-1 case because the case
+  > has only v1 = a, v2 = b
+  has been contained in the before cases, e.g. after the before conditions, one path $(k_1,k_2)$ from 
+  $(k_1,v_1),(v_1,k_2)$ is generated.
+  Then for the path $k_1'-v_1-v_2-k_2'$ or $k_1'-v_1-Seq(k_i)-v_2-k_2'$
+  it *only needs to add* $v_1-v_2-k_2'$ and 
+  $Seq(k_i)_{end}-v_2-k_2'$ because the rest is *already generated*.
+  - This is shown in Figure 4 after I thought of the above.
+- EXAMPLE 8 Also see the [Warshall_code]
+  - $W_n$ for $n\time n$ matrix doesn't always generate all-row-equal matrix.
+    For example, diagonal matrix. 
+- Here in Lemma 2, "if and only if" is by definition of $W_k$.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -1205,6 +1250,15 @@ I also read the asterisked ones.
 - ~~p22 table 1 exercise list: I only did the necessary ones needed at Pages Where Used.~~
   See my green underlined contents in p22 table 1
   How are these exercises related with underline used?
+- 2.3-p159
+  > Proofs of the other properties are left as exercises
+  2.2-p136
+  > The proofs of the remaining identities will be left as exercises
+  - 5.5-p397
+    > The details will be left as an exercise for the reader
+    It is same as the book outline $p\{S_1\}q\dots$.
+  - Some other "left as (an) exercise(s)" are contained in this note
+  - The above is skipped because of similarity with the other exercises and triviality.
 ## 1
 ### 1.1
 - [x] 
@@ -6024,7 +6078,11 @@ print(Sum)
 ## 9
 ### 9.1
 - 2,8,12~18,22~34,40,44 skipped
-- example 8,12
+- example 
+  - 8
+    - trivial
+  - 12
+    - $a=k_1\cdot k_2\cdot a,k_1,k_2\in \mathbf{N^+}\xRightarrow{a\neq 0} k_1\cdot k_2=1\Rightarrow k_1,k_2=1$
 - [x] 4
   - Here I only cares about antisymmetric which is somewhat more difficult to prove than others.
     - a) is antisymmetric
@@ -6154,6 +6212,7 @@ print(Sum)
     # https://stackoverflow.com/a/1790532/21294350
     import operator
     from functools import *
+    import re
     def my_or(a_list):
       # here set init with 0 to not influence further "or" operation
       return reduce(operator.or_, a_list, 0)
@@ -6234,6 +6293,10 @@ print(Sum)
       As [this](#power_relation_associativity) shows, the corresponding matrix order is also associative. $M_{R^{n-1}}\odot M_R=M_R\odot M_{R^{n-1}}$
 - [x] 36
   - symmetric difference = union - intersection
+### 9.4
+- [ ] 15
+- [ ] 35
+- [ ] lemma 1
 ### 9.6
 - [ ] 53
 ## 10
@@ -6267,6 +6330,7 @@ Redo 5.4-48
 [stirling_numbers_first_kind_simulation]:./miscs_snippets/py_codes/Stirling_numbers_first_kind/stirling_numbers_first_kind_simulation.py
 [derangement_code]:./miscs_snippets/py_codes/8-6-12/derangement.py
 [check_relations]:./miscs_snippets/py_codes/9-1-46/check_relations.py
+[Warshall_code]:./miscs_snippets/py_codes/9_4_Warshall/Warshall.py
 
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
