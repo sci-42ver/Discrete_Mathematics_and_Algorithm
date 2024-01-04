@@ -1038,7 +1038,7 @@ check(R_1)
 - in FIGURE 2, the diagonal can be 0 or 1.
 - EXAMPLE 5 says the usage of the Boolean product.
 ### 9.4
-- For transitive closure, we only need to think about $(a,b),a\neq b$ because $(a,a)$ will always *do nothing* when composite.
+- For transitive closure, we only need to think about $(a,b),a\neq b$ because $(a,a)$ will always *do nothing* when composite. <a id="transitive_reflexive"></a>
 - Here $R\cup \triangle$ *only adds necessary* pairs for reflexive closure.
   similarly, $R\cup R^{-1}$ also *only adds necessary* ones.
   So *minimal* and with *the related property*
@@ -1081,6 +1081,9 @@ check(R_1)
   - $W_n$ for $n\time n$ matrix doesn't always generate all-row-equal matrix.
     For example, diagonal matrix. 
 - Here in Lemma 2, "if and only if" is by definition of $W_k$.
+- Compare Algorithm 1 with Algorithm 2
+  the former has $i:= 2 to n$ which function similar to $k := 1 to n$
+  While the former does $2n-1$ ($n$ multiplication and $n-1$ addition) for each entry of $n^2$ entries of the matrix and the latter only has $2$. This is the key difference.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -6294,9 +6297,37 @@ print(Sum)
 - [x] 36
   - symmetric difference = union - intersection
 ### 9.4
-- [ ] 15
+- 2~12,15,16,22~30,34 skipped
+- [ ] 14
+  - "intersection" implies minimal
+    "with property P that contain R" implies the other 2 conditions.
+  - also see the ans by 2 sides of $\subseteq$
+- [ ] 18 see [Warshall_code]
+- [ ] 20
+  - here a) can be no stop or exactly one stop based on c).
+- [ ] 32
+  - TODO Is the following right?
+    If using ALGORITHM 1, then the iteration number $i$ when $B[j,k]$ *firstly* becomes 1 can decide the the length because 
+    $M^{[n]}$ only contains path of length $l\le n$
+    so "*firstly* becomes 1" implies $i-1\gt l\le i\Rightarrow l=i$
+    - Or more specifically, based on the definition of boolean product of matrices
+      $[M\odot M]_{jk},shape(M)=(N,N)$ contains *all possible* $N$ tuples of $(M_{j t_i},M_{t_i k})$, i.e. it contains all possible length-2 paths.
+      Then based on *induction* $[M^{[n]}\odot M]_{jk},shape(M)=(N,N)$ contains *all possible* 
+      $N^{n-1}\cdot N=N^n$ tuples where $M_{j t_i}$ is length-$n-1$
+      $M_{t_i k})$ is length-$1$.
+      The above is *similar to FIGURE 4* where here the induction is based on the length instead of interior vertex count.
+  - see the ans
+    - it just uses weighed graph where $\infty$ can be any consistent weigh $w>1$ IMHO.
 - [ ] 35
-- [ ] lemma 1
+  - b) see the ans
+    here minimal can't be met because their *intersection* may not have the property $P$.
+- [ ] 36
+  - based on [this](#transitive_reflexive)
+    "the reflexive closure of the transitive closure of R" must be transitive.
+  - As the book says
+    > Adding these pairs does not produce a transitive relation, because the resulting relation contains (3, 1) and (1, 4) but does not contain (3, 4)
+    addition due to "the symmetric closure" may destroy the "transitive closure".
+    - see the ans for examples.
 ### 9.6
 - [ ] 53
 ## 10
