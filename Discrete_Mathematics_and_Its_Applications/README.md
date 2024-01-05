@@ -207,7 +207,7 @@ $ ln -s $(pwd)/latexindent_pl.yaml miscs_learning/latexindent_pl.yaml
   Kissing Problem seems to associate with [traverse problem](https://www3.cs.stonybrook.edu/~bender/newpub/2012-BenderBoCh-fun-kissing.pdf) but this doesn't relate with the [spheres](https://en.wikipedia.org/wiki/Kissing_number#One_dimension)
 ### 2.5
 - p204 
-  $a_n=f(n)\Rightarrow (f(n)\to a_n,\text{one-to-one from }\mathbf{Z^+})\wedge (f^{-1}(a_n)=n,\text{due to the \textbf{unique} index})$
+  $a_n=f(n)\Rightarrow (f(n)\to a_n,\text{one-to-one from }\mathbb{Z^+})\wedge (f^{-1}(a_n)=n,\text{due to the \textbf{unique} index})$
 - [Calculus of variations](https://en.wikipedia.org/wiki/Calculus_of_variations#Euler%E2%80%93Lagrange_equation)
   here "variations" are "small changes in functions and functionals". More intuitively, it means $\delta y(x)$ which means the difference for the **entire** function instead of at one specific point, see [profoundphysics](https://profoundphysics.com/calculus-of-variations-for-beginners/).
   - > Generally, a valid functional that takes in a full function and returns just a *single* number can be obtained by writing the functional as a *definite integral*.
@@ -275,6 +275,11 @@ $ ln -s $(pwd)/latexindent_pl.yaml miscs_learning/latexindent_pl.yaml
       - > He first removed a countably infinite subset from each of these sets so that there is a *bijection* between the remaining *uncountable* sets
 
         here assume that uncountable infinite can biject to each other.
+- Here we compare [Cantor_diagonal_argument_string] with ["rational numbers are countable"](https://www.homeschoolmath.net/teaching/rational-numbers-countable.php) <a id="rational_countable_real_uncountable"></a>
+  if use the latter for the former, then it will be stuck at the string set $s_1$ if it is the digit which starts with one single zero, so it *can't* prove $\mathbb{R}$ is countable.
+  
+  If use the former for the latter, due to finite or [infinite **repeat** (the key is $\mod 7$ has finite results, so repeat)](https://math.stackexchange.com/a/1131628/1059606), we can't use the construction method because it *may generate one irrational*. (If taking something like $\overline{01}$ in account, then all can be seen as finite, the construction method can work but it can only generate finite 
+  $s_i$ then, so countable) (This seems to be said somewhere in this note).
 - > It can be shown that the smallest infinite cardinal numbers form an infinite *sequence*
 
   [see](https://en.wikipedia.org/wiki/Continuum_hypothesis#Cardinality_of_infinite_sets)
@@ -345,8 +350,8 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
     $\forall x\in A\to x\in B\Rightarrow A\subseteq B$
   2. trivial by $M=0\to\ldots$
   3. $y=(x+y)-x$ is trivial
-    it is to prove based on assumption $\forall x\in\mathbf{Z}$
-    then $\forall y\notin\mathbf{Z}\Rightarrow x+y\notin \mathbf{Z}$, this contraposition is same as before.
+    it is to prove based on assumption $\forall x\in\mathbb{Z}$
+    then $\forall y\notin\mathbb{Z}\Rightarrow x+y\notin \mathbb{Z}$, this contraposition is same as before.
   4. similar to 3 
     transform to $x\in A(x\in B\to x\in A\cap B)$
 - Example 5 in Section 1.7 shows vacuously true proposition is featured of the negative premise, so $\varnothing \subseteq A \cap \overline{B}$ should be **trivially** true where the conclusion is true regardless of the premise.
@@ -519,7 +524,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 
   based on [this](https://math.stackexchange.com/a/2034684/1059606)
   we prove $(ap)\mod m$ is bijective. ~~Based on this [description](https://math.stackexchange.com/q/4817093/1059606) of the comment,~~
-  ~~since both the domain and the codomain are $\mathbf{Z}_m$, so onto is equivalent to one-to-one, then in turn equivalent to bijective, so it is enough to prove only injective.~~
+  ~~since both the domain and the codomain are $\mathbb{Z}_m$, so onto is equivalent to one-to-one, then in turn equivalent to bijective, so it is enough to prove only injective.~~
   ~~Then by contradiction, $ap_1\equiv ap_2\pmod m,p_1\neq p_2\Rightarrow a(p_1-p_2)\equiv 0\pmod m\xRightarrow{p_1-p_2\nmid m}a\equiv $~~
   See [this](https://math.stackexchange.com/review/suggested-edits/2044757)
   $$
@@ -1084,6 +1089,28 @@ check(R_1)
 - Compare Algorithm 1 with Algorithm 2
   the former has $i:= 2 to n$ which function similar to $k := 1 to n$
   While the former does $2n-1$ ($n$ multiplication and $n-1$ addition) for each entry of $n^2$ entries of the matrix and the latter only has $2$. This is the key difference.
+### 9.5
+- If thinking of "equivalence relation" as "class"
+  then it will imply "reflexive, symmetric, and transitive".
+  Why "reflexive, symmetric, and transitive" $\to$ "equivalence"
+  is related with [abstract-algebra](https://math.stackexchange.com/a/3299949/1059606) or is based on function
+  > A relation $R$ on a set $A$ is an equivalence relation if and only if there is a function
+- EXAMPLE 3 shares $a-b$ with EXAMPLE 2, so their proofs are similar.
+- > The proof that $[b] \subseteq [a]$ is similar; it is left as an exercise for the reader.
+  just swap $a$ and $b$.
+- > it follows that these equivalence classes are either equal or disjoint,
+  because $A\leftrightarrow B\Rightarrow \neg A\leftrightarrow \neg B$ where A,B corresponds to $i),ii)$
+- > an index set is a set whose members label, or index, the elements of a set.
+  It just have another set which only needs one bigger cardinality (["surjective"](https://en.wikipedia.org/wiki/Index_set#)) as [index](https://en.wikipedia.org/wiki/Index_set#Examples)
+  > Any countably infinite set can be (injectively) indexed by the set of natural numbers $\mathbb {N}$.
+- > We have seen that the equivalence classes of an equivalence relation on a set form a parti-tion of the set
+  because $a\not R b\Rightarrow ([a]_{R},[b]_{R}\neq \varnothing) \wedge ([a]_{R}\cap [b]_{R}=\varnothing) \wedge (\bigcup_{a\in A}[a]_R=A)$.
+  It also shows
+  > by the definition of R, these are the subsets of S in the partition
+  - Then
+    > To see this, assume that {Ai ∣ i ∈ I} is a partition on S. Let R be the relation on S consisting of the pairs (x, y)
+    is to show "Partition" $\to$ "equivalence relation".
+    The books shows "subset" $\to$ "equivalence relation"
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -1121,6 +1148,7 @@ check(R_1)
 - [bmod -> binary mod](https://tex.stackexchange.com/a/42872/308105)
 - [big equal sign](https://tex.stackexchange.com/a/35406/308105) needs extra package or self define length `\mathrel{\mkern-3mu}`.
 - [Stirling number](https://tex.stackexchange.com/a/86064/308105) or use [wikipedia one](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Recurrence_relation)
+- Roman number by [plain Tex](https://tex.stackexchange.com/a/23491/308105) `\romannumeral #1`.
 ## doc
 - [1](https://latexref.xyz)
 ## katex
@@ -1284,7 +1312,7 @@ I also read the asterisked ones.
   modification after reading the answer
   a) so 99th is true
   b) if "at least n" is true, then true for all $i<=n$ (i.e. n false and $100-n$ true -> $100-n=n$ -> $n=50$)
-  c) see b), $99-n=n$ is impossible for $n\in\mathbf{Z}$
+  c) see b), $99-n=n$ is impossible for $n\in\mathbb{Z}$
 ### 1.2
 - 2,6~8,12 skipped because similar to 10,
   14 just based on keywords
@@ -1536,14 +1564,14 @@ Most of them are similar to proofs in the junior/senior high school.
   here $n=a^2,n+2=b^2$
   then $2=(a+b)(a-b)$
   $a+b=2\\ a-b=1$ 
-  so $a=\frac{3}{2},b=\frac{1}{2}\Rightarrow a,b\notin \mathbf{Z}$, 
+  so $a=\frac{3}{2},b=\frac{1}{2}\Rightarrow a,b\notin \mathbb{Z}$, 
   obviously $F$
   - Also see ans where use the *consecutive* square to prove.
 - [ ] 12
   similar to 8
   [irrational numbers latex](https://texblog.org/2007/08/27/number-sets-prime-natural-integer-rational-real-and-complex-in-latex/)
-  $\frac{p}{q}*k=\frac{m}{n},k\in \mathbf{I}$
-  then $k=\frac{mq}{pn}\in \mathbf{Q}$ (why [Q for rational](https://math.libretexts.org/Bookshelves/Analysis/Real_Analysis_(Boman_and_Rogers)/01%3A_Numbers_-_Real_(%E2%84%9D)_and_Rational_(%E2%84%9A)/1.01%3A_Real_and_Rational_Numbers#:~:text=The%20set%20of%20rational%20numbers%20is%20denoted%20Q%20for%20quotients,Figure%201.1.)) -> contradiction.
+  $\frac{p}{q}*k=\frac{m}{n},k\in \mathbb{I}$
+  then $k=\frac{mq}{pn}\in \mathbb{Q}$ (why [Q for rational](https://math.libretexts.org/Bookshelves/Analysis/Real_Analysis_(Boman_and_Rogers)/01%3A_Numbers_-_Real_(%E2%84%9D)_and_Rational_(%E2%84%9A)/1.01%3A_Real_and_Rational_Numbers#:~:text=The%20set%20of%20rational%20numbers%20is%20denoted%20Q%20for%20quotients,Figure%201.1.)) -> contradiction.
   - See ans notice the nonzero to ensure validity of division by $p$.
 - [x] 14,34 direct proof.
 - [x] 16,18,41 proof by contradiction.
@@ -1559,7 +1587,7 @@ Most of them are similar to proofs in the junior/senior high school.
 - [x] 30
   if is easy
   only if: $(m-n)(m+n)=0$
-- [x] 32 just use $\equiv$ based on axioms with the $\mathbf{R}$
+- [x] 32 just use $\equiv$ based on axioms with the $\mathbb{R}$
 - [x] 36 (5) is wrong.
 - [x] 38 4->1->2->3 chain, then use $\leftrightarrow$ to $3\to4$
   - ans not use chain is also ok
@@ -2010,7 +2038,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [x] 70
   a,b similar to the methods to scale/move function along the axis learned in the senior high school.
   c,d draw original function and then transform it to splitted straight lines
-  e $\forall k\in\mathbf{N},\frac{x}{2}=k\Rightarrow f(x)=k^2\\\frac{x}{2}\in(k,k+1)\Rightarrow f(x)=k(k+1)$
+  e $\forall k\in\mathbb{N},\frac{x}{2}=k\Rightarrow f(x)=k^2\\\frac{x}{2}\in(k,k+1)\Rightarrow f(x)=k(k+1)$
   f similar to e
   g based on one example before, $f(x)=2\lceil\frac{x}{2}\rceil$ then similar to b
 - [ ] 72
@@ -2021,7 +2049,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       > when an argument's premises *assume* the truth of the *conclusion*
     - based on [this](https://math.stackexchange.com/a/1234668/1059606) which is got in the QA recommendation when [asking](https://math.stackexchange.com/questions/ask) the question "Why does the proof of inverse function need the both ordering, i.e. $f\circ f^{-1}$?" but not after appending "and $f^{-1}\circ f$", 
       both $(f\circ g)\circ (g^{-1}\circ f^{-1})$ and $(g^{-1}\circ f^{-1})\circ (f\circ g)$ are needed to be proven because 
-      $(f^{-1}\circ f)(x)=x$ while $(f\circ f^{-1})(1)=2$ (the above example can be generalized to $\mathbf{R}$ domain with added $f^{-1}(x)=x-1,x\neq 1$).
+      $(f^{-1}\circ f)(x)=x$ while $(f\circ f^{-1})(1)=2$ (the above example can be generalized to $\mathbb{R}$ domain with added $f^{-1}(x)=x-1,x\neq 1$).
   - use [associative property](https://math.stackexchange.com/a/1267985/1059606) same as the ans
     - the ans uses the nested function property.
 - [x] 74 by contradiction
@@ -2139,7 +2167,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   a. $\sum_{i=1}^{3}(2i-3)=2*6-9=3$
     hinted by the ans (notice the $2i$ instead of $i$)
 - [ ] 38
-  - this method can be generalized with induction for all $\sum_{k=1}^{n}k^n,n\in\mathbf{N}$
+  - this method can be generalized with induction for all $\sum_{k=1}^{n}k^n,n\in\mathbb{N}$
 - [ ] 43
   $\text{let }\lfloor\sqrt{m}\rfloor=t,\sum=1*3+2*5+\ldots+(t-1)*(2*(t-1)+1)+t*(m-(t-1)^2)$
   then hinted by the ans, $\sum_{k=1}^{t-1}(2k^2+k)+t*(m-(t-1)^2)\blacksquare$
@@ -2200,7 +2228,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   the above three move processes are similar to how the **turing machine** works by step-by-step running.
   - the ans maps all to the even number
 - [x] 10 
-  $B=\mathbf{R}$
+  $B=\mathbb{R}$
   a. $A-B=\{"a"\}$
   the rest are similar.
 - [x] 12
@@ -2217,12 +2245,12 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 20 just use the one-to-one correspondence chain
   - see the ans for the more formal description.
 - [ ] 22 [$|A|\ge |B|$](#onto_compare_cardinality) and 
-  ~~countable of A -> $|A|\in \mathbf{N}$~~
-  - see the ans countable infinite won't imply $|A|\in \mathbf{N}$
-    but map $\mathbf{Z^+}\to A$ (see this as indexing one infinite series)
-    - it uses onto from $\mathbf{Z^+}$ to the target, so the target size must be
-      $\le\mathbf{Z^+}$ -> countable.
-  - ~~TODO similar to mapping $\mathbf{Z^+}\to B$, is mine solution right?~~
+  ~~countable of A -> $|A|\in \mathbb{N}$~~
+  - see the ans countable infinite won't imply $|A|\in \mathbb{N}$
+    but map $\mathbb{Z^+}\to A$ (see this as indexing one infinite series)
+    - it uses onto from $\mathbb{Z^+}$ to the target, so the target size must be
+      $\le\mathbb{Z^+}$ -> countable.
+  - ~~TODO similar to mapping $\mathbb{Z^+}\to B$, is mine solution right?~~
     see the p203 definition, "has the same cardinality as the set of positive integers" means that we must show explicity **equal**
     - also [see][comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one]
       > When working with infinite sets there is very little reason to think that any coherent notion of "size" exists in the first place.
@@ -2230,27 +2258,27 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       comparing two countable infinite sets $A,B$ by $|A|\ge |B|$ is no use.
   - see p204 here more strictly $g$ is one-to-one correspondence, but onto is enough to construct the sequence.
 - [ ] 24
-  suppose $\exists A,|A|\le |\mathbf{Z^+}|\text{ by one-to-one}$ then how to prove 
-  $|A|\neq |\mathbf{Z^+}|$?
+  suppose $\exists A,|A|\le |\mathbb{Z^+}|\text{ by one-to-one}$ then how to prove 
+  $|A|\neq |\mathbb{Z^+}|$?
   - see the ans
     - the problem needs to prove impossibility of $<$ instead of possibility of $<$
-      so maybe should prove $|A|= |\mathbf{Z^+}|$ 
+      so maybe should prove $|A|= |\mathbb{Z^+}|$ 
       (since $<$ is excluded) or 
-      $|A|> |\mathbf{Z^+}|$
-    - after being hinted, use $\mathbf{Z^+}$ to index (one-to-one map)
-      $A$, then $|\mathbf{Z^+}|\le|A|$
+      $|A|> |\mathbb{Z^+}|$
+    - after being hinted, use $\mathbb{Z^+}$ to index (one-to-one map)
+      $A$, then $|\mathbb{Z^+}|\le|A|$
       - This is same as $g(n) = f^{−1}(m) =k\in A,\text{here k is unknown}$
-        - where "$n^{th}$ smallest element" sequence means injective and the infinite length of the sequence means [surjective](https://en.wikipedia.org/wiki/Bijection,_injection_and_surjection), so bijection -> $|A|=|\mathbf{Z^+}|$
-    - the key idea is the indexed sequence by $\mathbf{Z^+}$
+        - where "$n^{th}$ smallest element" sequence means injective and the infinite length of the sequence means [surjective](https://en.wikipedia.org/wiki/Bijection,_injection_and_surjection), so bijection -> $|A|=|\mathbb{Z^+}|$
+    - the key idea is the indexed sequence by $\mathbb{Z^+}$
 - [ ] 25
   just similar to index with positive numbers
   $K\to S$ is one-to-one due to "where *no two* elements of S have the same label"
-  then $\mathbf{Z^+} \to K$ is also one-to-one for the same reason $\blacksquare$.
+  then $\mathbb{Z^+} \to K$ is also one-to-one for the same reason $\blacksquare$.
   - see the ans
     - the a finite string of keyboard characters $K$ is not finite but infinite countable due to **maybe infinite length**.
       countable because for each length-$k$ we can list $24^k$ which is finite -> infinite series/sequence -> countable.
 - [ ] 26 
-  ~~by using key "0~9" and "." which are "a finite list characters" to construct "a finite string of keyboard characters", then one-to-one map to $\mathbf{R}$~~
+  ~~by using key "0~9" and "." which are "a finite list characters" to construct "a finite string of keyboard characters", then one-to-one map to $\mathbb{R}$~~
   above is not always one "finite string".
   - hint has finished the proof by chaning the above strikethroughed ones to the context of "0~9" and "/".
     - see the ans "negative" -> "-"
@@ -2267,7 +2295,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   compared with here, [Cantor_diagonal_argument_string] can always add one new element by **appending digit "1"** to $s$ to differentiate with all the rest due to the property of infinity.
   - the ans just use $\underset{i=1}{\overset{n}{\bigcup}} S_i,|S_i|=2^i$
 - [ ] 30 
-  similar to 28 $S={(a,b,c)|a\neq 0}\subset \mathbf{Z^+}\times\mathbf{Z^+}\times\mathbf{Z^+}$ is ~~finite~~ countable.
+  similar to 28 $S={(a,b,c)|a\neq 0}\subset \mathbb{Z^+}\times\mathbb{Z^+}\times\mathbb{Z^+}$ is ~~finite~~ countable.
   then for each $(a,b,c)$, max 2 solutions construct the solution set
   $T={x_1,x_2}$
   - so a union of $|S|$ number of 
@@ -2278,9 +2306,9 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   onto:
   $$
   \begin{align*}
-    \text{1. let } m+n=2t+1,t\in\mathbf{N}&\Rightarrow m\in(0,2t+1)\\
+    \text{1. let } m+n=2t+1,t\in\mathbb{N}&\Rightarrow m\in(0,2t+1)\\
     f(m,n)=t(2t-1)+m\in(2t^2-t,2t^2+t+1)&\Rightarrow f(m,n)\in[2t^2-t+1,2t^2+t]\\
-    \text{2. let } m+n=2t+2,t\in\mathbf{N}&\Rightarrow m\in(0,2t+2)\\
+    \text{2. let } m+n=2t+2,t\in\mathbb{N}&\Rightarrow m\in(0,2t+2)\\
     f(m,n)=t(2t+1)+m\in(2t^2+t,2t^2+3t+2)&\Rightarrow f(m,n)\in[2t^2+t+1,2t^2+3t+1]\\
     \text{3. since when }m+n=2(t+1)+1&\Rightarrow f(m,n)\in[(t+1)(2(t+1)-1)+1,(t+1)(2(t+1)+1)]\\
     &\Rightarrow f(m,n)\in[2t^2+3t+2,2t^2+5t+3]\\
@@ -2295,16 +2323,16 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     better use the other two cases that 
     1. both nonnegative.
     2. both negative.
-    ~~here $(3n + 1)^2$ is monotonically increasing for $\mathbf{Z}\to\mathbf{Z^+}$, i.e. one-to-one.~~
-  - $\mathbf{Q}\times\mathbf{Q}\to\mathbf{Q}$ is obvious by using the one-to-one map $S=\mathbf{Q}\to\mathbf{Z^+}$ which is obtained from the index due to the countability of 
-    $\mathbf{Q}$
+    ~~here $(3n + 1)^2$ is monotonically increasing for $\mathbb{Z}\to\mathbb{Z^+}$, i.e. one-to-one.~~
+  - $\mathbb{Q}\times\mathbb{Q}\to\mathbb{Q}$ is obvious by using the one-to-one map $S=\mathbb{Q}\to\mathbb{Z^+}$ which is obtained from the index due to the countability of 
+    $\mathbb{Q}$
     then the composite $S\times S$ is also one-to-one
     - TODO [this](https://mathoverflow.net/a/228288) offers one explicit equation, referenced in [this](https://math.stackexchange.com/questions/1061115/on-the-problem-of-polynomial-bijection-from-mathbb-q-times-mathbb-q-to-math#comment2159965_1061115) stating that the bijection is much nontrivial.
       - > That problem has a negative solution: *no algorithm* can take a polynomial and determine whether it has integer roots.
         > The *undergraduate*-level references for this seem *limited*. Most papers on H10Q approach it differently, via Diophantine definitions of the integers in the rationals, so they motivate this problem but don't help to solve it.
 - [ ] 34
   - [x] a. $f(x)=\frac{1}{2}(\frac{1}{x}-\frac{1}{1-x})\Rightarrow f'(x)=\frac{1}{2}(-\frac{1}{x^2}-\frac{1}{(1-x)^2})$, so one-to-one
-     then use $\lim$ to prove onto, i.e. codomain is $\mathbf{R}$.
+     then use $\lim$ to prove onto, i.e. codomain is $\mathbb{R}$.
   - [ ] b. use above $f(x)$ and 
     $g(x)=\frac{2}{\pi}*arctan(x)$
     - see the ans whose codomain is the subset of $(0,1)$
@@ -2321,7 +2349,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - the rest see the above link and [this](#binary_string_0_1) for the binary string set to $(0,1)$.
 - [ ] 36
   - the wikipedia proof is similar to the ans after "There is one technical point here"
-  - then $S={x|x\in(0,1)}|,\aleph_0\overset{\text{exercise 35 due to "cannot appear"}}{\lt}\mathcal{P}(\mathbf{Z^+})| \xlongequal{\text{exercise 36}}|S|\xlongequal{\text{exercise 34}} |R|$
+  - then $S={x|x\in(0,1)}|,\aleph_0\overset{\text{exercise 35 due to "cannot appear"}}{\lt}\mathcal{P}(\mathbb{Z^+})| \xlongequal{\text{exercise 36}}|S|\xlongequal{\text{exercise 34}} |R|$
   - the ans
     - > We can encode subsets of the set of positive integers as strings of, say, 5’s and 6’s
       similar to 35 0/1
@@ -2349,7 +2377,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   > associating to the real number $0.d_1 d_2 \ldots d_n \ldots$ the function f with $f (n) = d_n$
   this map $(0,1)\to f$ is one-to-one trivially ~~even for binary decimal representations $0.1\overline{0}$ and $0.0\overline{1}$~~
   - it must be onto to the *subset* $S$ of the set of all functions $T$.
-  - then $|\mathbf{R}|=|S|<|T|$ so T is uncountable.
+  - then $|\mathbb{R}|=|S|<|T|$ so T is uncountable.
   - as the ans said, here must forbid one of $0.1\overline{0}$ and 
     $0.0\overline{1}$
     since $0.1\overline{0}=0.0\overline{1}\Rightarrow f(0.1\overline{0})\neq f(0.0\overline{1})$ contradict with the function inherent property that each preimage has one **unique** image.
@@ -2381,7 +2409,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   2. first split into ending or not
     then not ones is splitted into definite or not.
     ending ones trivially end with $A$ or $B$
-    For infinitely not ending, think as $f:a_i\to b_i+1,g:b_i+1\to a_i+1,i\in \mathbf{N}$, then one infinite sequence is constructed.
+    For infinitely not ending, think as $f:a_i\to b_i+1,g:b_i+1\to a_i+1,i\in \mathbb{N}$, then one infinite sequence is constructed.
     - the ans
       > if there is a b ∈ B with g(b) = a
       implies loop possibility (type 1)
@@ -2460,10 +2488,10 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   32~34 skipped
 - [ ] 17 b after hinted
   here $\sum_{q}b_{qi}a_{jq}$ is based on $B=[b_{ji}]$
-  $[\sum_{q}a_{jq}b_{qi}]=[c_{ji}]\xlongequal{\mathbf{AB}=[c_{ij}]}(\mathbf{AB})^t$
-- [ ] 18 notice both sides or use the $\mathbf{A}^{-1}$ definition.
-- [ ] 30 notice $\mathbf{A}\wedge\mathbf{B}$ or 
-  $\mathbf{A}\vee\mathbf{B}$ don't need $\mathbf{A,B}$ to be the square.
+  $[\sum_{q}a_{jq}b_{qi}]=[c_{ji}]\xlongequal{\mathbb{AB}=[c_{ij}]}(\mathbb{AB})^t$
+- [ ] 18 notice both sides or use the $\mathbb{A}^{-1}$ definition.
+- [ ] 30 notice $\mathbb{A}\wedge\mathbb{B}$ or 
+  $\mathbb{A}\vee\mathbb{B}$ don't need $\mathbb{A,B}$ to be the square.
 ### Supplementary
 - 4,38 skipped
   the following without "see the ans" and the tick default to need to see the ans, e.g. 10.
@@ -2560,7 +2588,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   to make $\frac{t}{m}$ to round up *another* one based on $\lfloor\frac{t}{m}\rfloor$, we need at least $\frac{1}{m}\gt\frac{\epsilon}{m}$, then it is impossible. $\blacksquare$
 - [ ] 27
   similar to 20
-  $\text{let }x=n+\epsilon,\epsilon\in[0,1),m\epsilon\in[k,k+1),\text{where }k\in\mathbf{N}\wedge k\in[0,m-1]$
+  $\text{let }x=n+\epsilon,\epsilon\in[0,1),m\epsilon\in[k,k+1),\text{where }k\in\mathbb{N}\wedge k\in[0,m-1]$
   left side: $mn+k$
   right side: $\text{to let }\lfloor x+\frac{i}{m}\rfloor=\lfloor \frac{mn+m\epsilon+i}{m}\rfloor\text{ round up based on} n$
   we need $m\epsilon+i\ge m\Rightarrow k+i\ge m,i\ge m-k$, since $i$ stop at $n-1$ so there are $k$ right terms rounding up.$\blacksquare$
@@ -2595,8 +2623,8 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 32
   since by [this](https://mathspace.co/textbooks/syllabuses/Syllabus-999/topics/Topic-19889/subtopics/Subtopic-263668/#:~:text=An%20irrational%20number%20is%20a,nor%20recurring%20are%20irrational%20numbers.), 
   so "A non-terminating, non-repeating decimal" is irrational, then by [Cantor_diagonal_argument_string] $\blacksquare$
-  - notice [$\mathbf{R}=\mathbf{Q}\cup\mathbf{P}$](https://math.stackexchange.com/a/1435320/1059606), irrational [symbol](https://byjus.com/maths/irrational-numbers/#:~:text=Generally%2C%20the%20symbol%20used%20to,the%20real%20and%20rational%20number.)
-  - see the ans $\mathbf{Q}$ is countable.
+  - notice [$\mathbb{R}=\mathbb{Q}\cup\mathbb{P}$](https://math.stackexchange.com/a/1435320/1059606), irrational [symbol](https://byjus.com/maths/irrational-numbers/#:~:text=Generally%2C%20the%20symbol%20used%20to,the%20real%20and%20rational%20number.)
+  - see the ans $\mathbb{Q}$ is countable.
 - [ ] 34 
   since the count of subsets with size $i$ is $|\mathbin{Z^+}|^i$
   - the above $|\mathbin{Z^+}|=\aleph_0$ so $|\mathbin{Z^+}|^i$ has no real meanings, see [comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one].
@@ -2609,7 +2637,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   then the injection chain proves the theorem $\blacksquare$.
   - > do not end with an infinite string of 9s
     see 2.5-38 just forbid this pattern.
-- [x] 36 $\text{since }\forall x=a+bi\in\mathbf{C},f:x\to(a,b)\text{ is one-to-one correspondence}\Rightarrow|\mathbf{C}|=|\mathbf{R}\times\mathbf{R}|\text{ with the 35 conclusion}\blacksquare$
+- [x] 36 $\text{since }\forall x=a+bi\in\mathbb{C},f:x\to(a,b)\text{ is one-to-one correspondence}\Rightarrow|\mathbb{C}|=|\mathbb{R}\times\mathbb{R}|\text{ with the 35 conclusion}\blacksquare$
 ## 3
 ### 3.1
 - 4~34 see the [pdf](https://www.overleaf.com/read/fbychkzpsrff#459790).
@@ -2733,7 +2761,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 72
   TODO Since [not all](https://en.wikipedia.org/wiki/NP_(complexity)) decision problems are solvable, how does the ans prove?
 ### 3.2
-- 2~6,10~18,24,28~34,38~40,44~48,52~56,60~66,70,74,76 skipped
+- 2~6,10~17(trivial),18,24,28~34,38~40,44~48,52~56,60~66,70,74,76 skipped
 - [x] 8 just use the limit and check it to avoid some cases like the oscillation limit.
   1. 4
   2. 5
@@ -2778,8 +2806,12 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
       \text{and }&C=c+\epsilon,k=m\text{ for }O\text{ if }c\neq \infty
       \end{align*}
       $$
-      - Notice $o$ is [different](https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann.E2.80.93Landau_notations) from $O$.
+      - Notice $o$ is [different][Big_O_Notation] from $O$.
         TODO here it doesn't take absolute everywhere as the book does.
+        - Here wikipedia assumes [$g(x)>0,x\to \infty$](https://en.wikipedia.org/wiki/Big_O_notation#Formal_definition) which is also implied by $|\cdots|<kg(n)$
+          > for all large enough values of $x$
+          Then the book $\Omega$ corresponds to "Big Omega in ~~number theory~~complexity theory" in wikipedia.
+          - [TODO prove](https://math.stackexchange.com/questions/4124155/asymptotic-analysis-difference-between-big-o-and-big-omega-limits#comment10305874_4124231) the equivalence between 2 definitions for $\Omega$ of the Hardy-Littlewood definition. <a id="sup_Hardy_Littlewood"></a>
 - [ ] 58 based on [O_Theta_Omega_relation_with_limit], it is trivial.
   - see the ans, it needs to recursively calculate the limit.
   - so $o\Rightarrow O\text{ but }O\nRightarrow o$
@@ -3060,13 +3092,13 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   4. Identity elements is trivial
   5. Additive inverses is trivial
   - see the ans
-    - Based on $\mathbf{Z}$.
+    - Based on $\mathbb{Z}$.
 - [x] 49 see the above
 - [ ] 50
   $LHS=(a*(b+c-mk))\bmod m=(a*b+a*c)\bmod m
   \xRightarrow{\text{COROLLARY 2 with 3 modular arithmetic operations}}RHS$
   - see the ans
-    - convert all into range $\mathbf{Z}$
+    - convert all into range $\mathbb{Z}$
 - [ ] 53
   both not one-to-one
   $f$ onto while $g$ doesn't.
@@ -3253,7 +3285,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   $$
 - [ ] 28
   ~~Use general functional $f:S(n\text{ modular equations})\to T(n\text{-tuple})$~~
-  ~~obviously this is one-to-one from the Chinese remainder theorem. If not, then $\exists k,t\in \mathbf{Z}_{m},k\neq t\xRightarrow{\text{based on the equation system}}k\equiv t\pmod m$~~
+  ~~obviously this is one-to-one from the Chinese remainder theorem. If not, then $\exists k,t\in \mathbb{Z}_{m},k\neq t\xRightarrow{\text{based on the equation system}}k\equiv t\pmod m$~~
   ~~onto is also trivial by just doing the ~~
   if not unique, i.e. there are two n-tuples corresponding to $a$, then $\exists m_i,a\equiv t_1,t_2\pmod m_i$ contradiction.
   - see the ans
@@ -3412,7 +3444,7 @@ print(string.ascii_uppercase[index],index,max)
   \xRightarrow{p\nmid }
   $$
   - see the ans
-    - it uses $(a-b)\in\mathbf{Z}\Rightarrow\frac{k}{p}\in\mathbf{Z}$ $\blacksquare$
+    - it uses $(a-b)\in\mathbb{Z}\Rightarrow\frac{k}{p}\in\mathbb{Z}$ $\blacksquare$
     - $e\nmid m\Rightarrow e\nmid\frac{m}{d}$
 - [ ] 6,10,14~16,19,20~22,32,40 see the ans
 - [ ] 18 direct proof: n,1 are enough to show prime.
@@ -3837,10 +3869,10 @@ $$
   - see the ans
 - [ ] 30
   1. basis: $(a,a)$ are in.
-    recursive: $(a,a*k),k\in\mathbf{N}_+$
+    recursive: $(a,a*k),k\in\mathbb{N}_+$
   - see the ans
     - a
-      since $\mathbf{Z}^+$, so $0+1$ should be excluded.
+      since $\mathbb{Z}^+$, so $0+1$ should be excluded.
     - b
       - the above basis is not concrete to one specific number.
     - c similar to a
@@ -5806,7 +5838,7 @@ print(f"a_0={simplify(func_n).subs(n,0)+independent_term}") # notice here n=0 ne
     - See [this](https://math.stackexchange.com/a/4834919/1059606) for $\sum_{2}^{\infty}\log \frac{1}{1-x^{\mu}}=\sum_{1}^{\infty}\frac{1}{\nu}\frac{x^{2\nu}}{1-x^{\nu}}$
       where 1st equality is due to [this](https://www.wolframalpha.com/input?i=taylor+series+expansion+of+-ln%281-x%29) and based on the generating function, we can assume $|x|<1$.
   - Here $\log p(n)\sim C\sqrt{n}\Rightarrow \log p(n)=\Theta(\sqrt{n})\Rightarrow \log p(n)=O(\sqrt{n})$ 
-  obviously [$f(n)>0$](https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations)
+  obviously [$f(n)>0$][Big_O_Notation]
 - [ ] 60
   - compare with the [Probability mass function](https://en.wikipedia.org/wiki/Probability_mass_function#Formal_definition)
 ```python
@@ -6085,7 +6117,7 @@ print(Sum)
   - 8
     - trivial
   - 12
-    - $a=k_1\cdot k_2\cdot a,k_1,k_2\in \mathbf{N^+}\xRightarrow{a\neq 0} k_1\cdot k_2=1\Rightarrow k_1,k_2=1$
+    - $a=k_1\cdot k_2\cdot a,k_1,k_2\in \mathbb{N^+}\xRightarrow{a\neq 0} k_1\cdot k_2=1\Rightarrow k_1,k_2=1$
 - [x] 4
   - Here I only cares about antisymmetric which is somewhat more difficult to prove than others.
     - a) is antisymmetric
@@ -6207,79 +6239,7 @@ print(Sum)
   12~32(14 has some test codes) skipped
 - [ ] 8
   - transitive see the ans, the rest is trivial.
-    ```python
-    # https://stackoverflow.com/a/45159105/21294350 from https://stackoverflow.com/a/64448213/21294350
-    first,second=[[1,0,0,1,0,0],[0,1,1,1,0,0]], [[0,1],[1,1],[1,0],[1,0],[1,1],[0,1]]
-    from itertools import starmap
-    from operator import mul
-    # https://stackoverflow.com/a/1790532/21294350
-    import operator
-    from functools import *
-    import re
-    def my_or(a_list):
-      # here set init with 0 to not influence further "or" operation
-      return reduce(operator.or_, a_list, 0)
-    my_or([1,0,1])
-    # diff from map is how they manipulate with args https://www.educative.io/answers/what-is-the-itertoolsstarmap-method-in-python 
-    def Boolean_product(mat_1,mat_2):
-      return [[my_or(starmap(mul, zip(row, col))) for col in zip(*mat_2)] for row in mat_1]
-    # https://stackoverflow.com/a/534866/21294350
-    def one_dim_minus_list(row_1,row_2):
-      return [a_i - b_i for a_i, b_i in zip(row_1, row_2)]
-    # mat_1<=mat_2?
-    def check_less_equal(mat_1,mat_2):
-      minus_mat=[one_dim_minus_list(row_1, row_2) for row_1, row_2 in zip(mat_1,mat_2)]
-      # or use `any` https://stackoverflow.com/a/40514152/21294350
-      for row_index,row in enumerate(minus_mat):
-        for col_index,elem in enumerate(row):
-          if elem==1:
-            print(f"not transitive for ({row_index+1},{col_index+1})")
-    Mat_list=[[[1,1,0,1],[1,0,1,0],[0,1,1,1],[1,0,1,1]],
-      [[1,1,1,0],[0,1,0,0],[0,0,1,1],[1,0,0,1]],
-      [[0,1,0,1],[1,0,1,0],[0,1,0,1],[1,0,1,0]]]
-    for Index,Mat in enumerate(Mat_list):
-      print(f"check {Index}")
-      check_less_equal(Boolean_product(Mat,Mat),Mat)
-    # directly use the book data
-    Data_str_list=["""1 1 0 1 
-    1 0 1 0 
-    0 1 1 1 
-    1 0 1 1""","""1 1 1 0 
-    0 1 0 0 
-    0 0 1 1 
-    1 0 0 1""","""0 1 0 1 
-    1 0 1 0 
-    0 1 0 1 
-    1 0 1 0"""]
-    def str_lists_to_mat(Str_list,row_size):
-      Data_lists=[re.split(' [\\n]*',Str) for Str in Str_list]
-      Data_lists=[[int(elem) for elem in data_list] for data_list in Data_lists]
-      Mat_list=[[data_list[i:i+row_size] for i in range(0, len(data_list), row_size)] for data_list in Data_lists]
-      return Mat_list
-    row_size=4
-    Mat_list=str_lists_to_mat(Data_str_list,row_size)
-    # use numpy
-    import numpy
-    def nested_list_to_mat(nested_list:list[list]):
-      return numpy.array([numpy.array(xi) for xi in nested_list])
-    for Index,Mat in enumerate(Mat_list):
-      print(f"check {Index}")
-      minus_mat=nested_list_to_mat(Boolean_product(Mat,Mat))-nested_list_to_mat(Mat)
-      if any(1 in sl for sl in minus_mat):
-        print("not transitive")
-    # 14
-    # R_1,R_2
-    Data_str_list=["""0 1 0 
-    1 1 1 
-    1 0 0""","""0 1 0 
-    0 1 1 
-    1 1 1"""]
-    Data_lists=str_lists_to_mat(Data_str_list,3)
-    # 14.c)
-    print(nested_list_to_mat(Boolean_product(Data_lists[0],Data_lists[1])))
-    # 14.d)
-    print(nested_list_to_mat(Boolean_product(Data_lists[0],Data_lists[0])))
-    ```
+  - See the [code][transitive_realtion_check]
 - [x] 10
   - see the ans
     - a) we can also think as $a\le b$ make the *order* of the pair *fixed*, so $\binom{1000}{2}$
@@ -6328,6 +6288,168 @@ print(Sum)
     > Adding these pairs does not produce a transitive relation, because the resulting relation contains (3, 1) and (1, 4) but does not contain (3, 4)
     addition due to "the symmetric closure" may destroy the "transitive closure".
     - see the ans for examples.
+### 9.5
+- 6,
+  14~20(similar to 12),
+  22,26,30~38,42,
+  46~ skipped
+- [ ] 2
+  - see the ans
+    - here "a ..." is at issue.
+- [ ] 3
+  - based on exercise 9 where $h$ here is $f$ there,
+    a) think as $h:f(x)\to f(1)$
+    b) see the ans $f(0)=g(0),g(1)=k(1)$
+    The rest is trivial
+- [ ] 4 see the ans where the 3rd is congruence.
+- [ ] 8
+  - > If f is a bijection from S to T , then f−1 is a bijection from T to S, so R is symmetric
+    See [this](https://math.stackexchange.com/a/1515642/1059606)
+  - see the ans for the detailed proof
+  - $\mathbb{Z}$ is [countable](https://math.stackexchange.com/a/3463563/1059606)
+    - [$\mathbb{Q}$](https://math.stackexchange.com/a/333289/1059606) which is based on prime factorization or the book one
+    - $\mathbb{R}$ [uncountable](#rational_countable_real_uncountable). [Also for](https://math.stackexchange.com/a/733/1059606) [$\mathbb{I}$](https://math.stackexchange.com/a/450528/1059606)
+    - [$\mathbb{P}\subset \mathbb{N}$](https://en.wikipedia.org/wiki/Prime_number#Definition_and_examples)
+- [ ] 9
+  - here $=$ implies the equivalence relation.
+    This is same as the ans of 18
+    > “a and b are equivalent if they have the *same whatever*” is an equivalence relation
+  - b) see the ans 
+    here $[a]=\{f^{-1}(f(a))\}$ where 
+    $f^{-1}$ is one-to-mul function which is not one function strictly speaking.
+- [ ] 10
+  - see the ans
+    - > such that (x, y) ∈ R if and only if f (x) = f (y)
+      here "if and only if" is only defined inside "such that ..."
+    - $f$ is just $R$.
+      then it becomes $xRy\leftrightarrow [x]=[y]$ which is already proved in THEOREM 1. 
+- [ ] 12 see the ans
+- [x] 24 see [transitive_realtion_check]
+  - it should contain many submatrix which is **all ones**. <a id="submat_transitive"></a>
+
+    Here prove it *based on the assumption of Equivalence Relation*.
+    since one row imply the relation of one element with others, let it be row [$r_{i\cdot}$](https://math.stackexchange.com/a/2741774/1059606)
+    then if $r_{ij}=1$
+    then for $r_{j\cdot}$, it should be **same** as 
+    $r_{i\cdot}$ because elements $e_j R e_{i}$, then by transitivity, 
+    $\forall k,r_{ik}=1\Rightarrow e_{j} R e_{k}$.
+- [x] 28
+  - for d) we can think it like the plane pencil.
+- [ ] 40 b) see the ans where all fractions are equivalent to the corresponding [Irreducible fraction](https://en.wikipedia.org/wiki/Rational_number#Irreducible_fraction).
+- [x] 44
+  - a,c,d) are.
+    b,e) are not
+- [ ] 52
+  - > $R_n$ refers to the family of equivalence relations defined in Example 5
+    [family](https://math.stackexchange.com/questions/3786044/partition-and-equivalence-relations-classes#comment7798229_3786044) means "collection of distinct"
+  - see the ans the proof should be $x\in [y]_{R_4}\Rightarrow x\in [y]_{R_3}$
+- [ ] 54 
+  - ~~it is the definition of "refinement".~~ (This is wrong.)
+    > A partition P1 is called a refinement of the partition P2 if every set in P1 is a subset of one of the sets in P2
+    This means $[a]_{R_1}\in [a]_{R_2} \forall a\in A$ where A is the set related with partition $P_1$.
+  - see the ans for detailed proof.
+- [ ] 56
+  - only a)
+  - see the ans
+    - a) based on the [submat](#submat_transitive) proof, (0,2)x(0,2) and (3,3)x(3,3) submat with 2 (0,1)x(0,1) submats will becomes
+      ```python
+      1110
+      1110
+      1111
+      0011
+      ```
+      the the 3rd and 4th rows don't meet the requirements.
+      i.e. for example $e_3 R_2 e_3, e_3 R_1 e_1\nRightarrow e_4 (R_2\cup R_1) e_1$ (This is trivial to see since $R_2\cup R_1$ only $\cup$ relations but not do transitive operation based on them).
+    - b) since the intersection of submats must be the submat. So it is True.
+      strict proof:
+      $$
+      \text{let arbitrary }(a,b),(b,c) \in R_1 \cap R_2\text{ on the set }A\\
+      \begin{cases}
+        \text{trivial because they share }(x,x)\forall x\in A &\qquad \text{reflexive}\\
+        ((a,b)\in R_1)\wedge((a,b)\in R_2)\Rightarrow ((b,a)\in R_1)\wedge((b,a)\in R_2)
+        \Rightarrow (b,a)\in R_1 \cap R_2 &\qquad \text{symmetric}\\
+        \text{substitute }(a,b)\text{ with }(a,b),(b,c)\text{ in proof w.r.t. symmetric}\Rightarrow (a,c) \in R_1 \cap R_2 &\qquad \text{transitive}
+      \end{cases}
+      $$
+    - c) use the same examples as a)
+        $$
+        \begin{bmatrix}
+          0&0&1&0\\      
+          0&0&1&0\\
+          1&1&0&0\\
+          0&0&0&0
+        \end{bmatrix}
+        \cup
+        \begin{bmatrix}
+          0&0&0&0\\      
+          0&0&0&0\\
+          0&0&0&1\\
+          0&0&1&0
+        \end{bmatrix}=\begin{bmatrix}
+          0&0&1&0\\      
+          0&0&1&0\\
+          1&1&0&1\\
+          0&0&1&0
+        \end{bmatrix}
+        $$
+      - Also see the ans which is trivial. 
+- [ ] 58 compare it with 6.4-exercise-42 where the elements must be distinct.
+  - b) $1+3\cdot 2+3$
+  - here corresponds to [$D_3$](https://en.wikipedia.org/wiki/Dihedral_group)
+  - TODO generalize this to n-bead counting by combinatorics.
+  - > The composition of any two of these operations is again one of these operations
+    by [table](https://en.wikipedia.org/wiki/Dihedral_group#Group_structure) or [linear algebra](https://en.wikipedia.org/wiki/Rotations_and_reflections_in_two_dimensions#Mathematical_expression)
+    > And transitivity follows from the group table
+    i.e. product table / Cayley table shown in the above link.
+  - Similar to 59
+    here relatiton is the sequence of rotation or reflection operations.
+    So
+    > Each operation has an inverse
+    i.e. let $a,b$ be bracelets of the same class, inverse is just swap the locations of $a,b$ in $a R b$.
+  - > This would not be the case if there were four or more beads, however. For example, in a 4-bead bracelet with two reds and two whites, the bracelet in which the red beads are *adjacent* is not equivalent to the one in which they are not.
+    See 59
+  - a) is same as 59 a)
+    - > The $0^o$ rotation plays the role of the identity
+      corresponds to
+      > R is reflexive because any coloring can be obtained from itself via a *360-degree* rotation
+    - the rest is done by enumeration in 58 while by all map into reflections in 59.
+- [ ] 59
+  - b) $\overbrace{2}^{2R,2B}+\overbrace{2}^{\text{swap }R,B}\cdot(\overbrace{1}^{4B}+\overbrace{1}^{3B,1R})$
+  - see the ans
+    - here Reflection mat with [$y=mx+c$](https://math.stackexchange.com/a/3865554/1059606)
+      let $l_1,l_2$ be the lines parallel to $AB$ including $P',P$ respectively and $NN',N'\in l_2$ perpendicular to x-axis
+      then $\vec{N'N}=(0,mx-y+c)$
+      then let $NM_1\perp l_2,M_1\in l_2$ and $M_1M_2\perp NN',M_2\in NN'$
+      then $\vec{N'N}=(0,\frac{mx-y+c}{1+m^2})$ this corresponds to $\vec{PP'}_y/2$
+      so $2\cdot \vec{N'N}=\vec{PP'}_y\Rightarrow 2\cdot \frac{mx-y+c}{1+m^2}=\frac{y'-y}{1}$
+
+      We can let $m=tan\theta,\theta\in (0,\frac{\pi}{2})$ to think of the above graph
+      - Here Reflection matrix without $c$ can be also got from [eigen](https://math.stackexchange.com/a/1137744/1059606) ([check](./miscs_snippets/py_codes/9-5-58/reflection.py)) or by [direct calculation](https://math.stackexchange.com/a/525112/1059606)
+    - > each rotation is the composition of two reflections
+      - proof 
+        - [1](https://math.stackexchange.com/a/566333/1059606) <a id="abstract_algebra_2"></a>
+          TODO reflexive axes
+          - Maybe similar to [this](https://en.wikipedia.org/wiki/Rotations_and_reflections_in_two_dimensions#Process) [i.e.](https://math.stackexchange.com/a/487109/1059606)
+            Assume $L_2$ is at the counterclockwise direction of $L_1$.
+            (The following allows angle to be negative which means the opposite direction of the positive one). Assume $\angle POL_1=\alpha>0$ (This means $L_1$ is at the counterclockwise direction of $P$) then $\angle L_2OP'=\alpha-\theta$
+            Then $\angle P''OL_1=\alpha-2\cdot \theta$. So $\angle POP''=2\cdot \theta$
+        - Also [see](https://math.stackexchange.com/questions/2804893/show-that-the-composition-of-two-reflection-is-a-rotation#comment10305692_2804910)
+    - > in the opposite order
+      it can be also easily by conversing the order of rotation and reflection.
+    - The above b) only shows class number
+      - Here $\binom{4}{i},i\neq 2$ is in one class respectively.
+        $\binom{4}{2}$ is splitted by adjacent same or not.
+- [ ] 60
+  - by [this][Big_O_Notation]
+    $k_1=k_2=1,f=g$ -> reflexive
+    $k_{1,2}>0$ so symmetric.
+    $(k_{i}=k_{i1}\cdot k_{i2}) \wedge (n_{0}=max(n_{0i})), i=1,2$ -> transitive
+  - see the ans
+    - transitive is same as the proof in Exercise 17 of Section 3.2.
+    - b) doesn't need to be polynomial.
+      - > Another way ...
+        just uses the definition of $\Theta$.
+- [ ] 
 ### 9.6
 - [ ] 53
 ## 10
@@ -6342,6 +6464,10 @@ Redo 5.4-48
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
 # TODO after abstract algebra
 - [this](#RSA_Cauchy_theorem)
+- [this](#abstract_algebra_2)
+- dihedral group in 9.5-58
+# TODO after mathematical analysis
+- [This](#sup_Hardy_Littlewood) due to it may probably [introduce the supremum](https://math.stackexchange.com/q/4173249/1059606)
 # TODO after Computer Networking
 - 6.1 -> "1111111 is not available as the netid of a Class A network"
   also "hostids consisting of all 0s and all 1s are unavailable".
@@ -6362,6 +6488,7 @@ Redo 5.4-48
 [derangement_code]:./miscs_snippets/py_codes/8-6-12/derangement.py
 [check_relations]:./miscs_snippets/py_codes/9-1-46/check_relations.py
 [Warshall_code]:./miscs_snippets/py_codes/9_4_Warshall/Warshall.py
+[transitive_realtion_check]:./miscs_snippets/py_codes/9-3-8/transitive.py
 
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
@@ -6369,6 +6496,7 @@ Redo 5.4-48
 <!-- wikipedia -->
 [Cantor_diagonal_argument_string]:https://en.wikipedia.org/wiki/Cantor's_diagonal_argument#Uncountable_set
 [Schröder_Bernstein_theorem]:https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem#Proof
+[Big_O_Notation]:https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations
 
 <!-- math stackexchange -->
 [comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one]:https://math.stackexchange.com/a/4804647/1059606
