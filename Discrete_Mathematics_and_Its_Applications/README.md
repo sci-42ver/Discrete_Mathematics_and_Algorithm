@@ -6063,52 +6063,19 @@ def unimodal(start,end,List):
 - [x] 28 is same as [Derivation_linear_constant_coefficient_recurrence_relation].
 - [ ] 38
   - Since "less than", we should let $M=1,000,000-1$.
-- [ ] $\binom{4+3-1}{4-1}\cdot 4!$ is wrong where permutation should be inside each employee instead of all employees.
-```python
-# https://rosettacode.org/wiki/Stirling_numbers_of_the_second_kind#Python
-computed = {}
-
-def sterling2(n, k):
-	key = str(n) + "," + str(k)
-
-	if key in computed.keys():
-		return computed[key]
-	if n == k == 0:
-		return 1
-	if (n > 0 and k == 0):
-		return 0
-	if n == k:
-		return 1
-	if k > n:
-		return 0
-	result = k * sterling2(n - 1, k) + sterling2(n - 1, k - 1)
-	computed[key] = result
-	return result
-
-Sum=0
-n=4
-"""
-firstly `sterling2(n, k)` splits based on "DISTINGUISHABLE OBJECTS AND INDISTINGUISHABLE BOXES"
-then `math.perm(3,k)` to let it be "DISTINGUISHABLE BOXES".
-
-hinted by [assign_different_jobs_to_different_employees] from https://gateoverflow.in/222551/kenneth-rosen-edition-6th-exercise-6-question-11-page-no-457?show=222593#a222593
-"""
-for k in range(1,3+1):
-  Sum+=math.perm(3,k)*sterling2(n, k)
-print(Sum)
-```
+- [ ] 40 $\binom{4+3-1}{4-1}\cdot 4!$ is wrong where permutation should be inside each employee instead of all employees. See the code [Stirling_second_kind_code]
   - Here $3^4$  has no overcount because $(1,1,2,3)$ (here the 
     $i$th number $k$ means 
     $i$th job is assigned to $k$th employee) is only counted once.
 - [ ] 42 similar to one exercise before
   $a_{n}=\sum_{i=1}^4 a_{n-i},a_i=2^i,i=0\sim 3$
   Use `f=lambda n: 2**n if n>=0 and n<=3 else sum([f(n-i) for i in range(1,4+1)])` to calculate `f(6)`
-```python
-0...
-10...
-110...
-1110...
-```
+  $$
+  0\ldots\\
+  10\ldots\\
+  110\ldots\\
+  1110\ldots\\
+  $$
   - The ans use inclusion-exclusion principle.
 ## 9
 ### 9.1
@@ -6292,7 +6259,7 @@ print(Sum)
 - 6,
   14~20(similar to 12),
   22,26,30~38,42,
-  46~ skipped
+  46~50,68 skipped
 - [ ] 2
   - see the ans
     - here "a ..." is at issue.
@@ -6325,7 +6292,7 @@ print(Sum)
       then it becomes $xRy\leftrightarrow [x]=[y]$ which is already proved in THEOREM 1. 
 - [ ] 12 see the ans
 - [x] 24 see [transitive_realtion_check]
-  - it should contain many submatrix which is **all ones**. <a id="submat_transitive"></a>
+  - it should contain many submatrix which is **all ones**. <a id="submat_equivalence_relation"></a>
 
     Here prove it *based on the assumption of Equivalence Relation*.
     since one row imply the relation of one element with others, let it be row [$r_{i\cdot}$](https://math.stackexchange.com/a/2741774/1059606)
@@ -6333,6 +6300,7 @@ print(Sum)
     then for $r_{j\cdot}$, it should be **same** as 
     $r_{i\cdot}$ because elements $e_j R e_{i}$, then by transitivity, 
     $\forall k,r_{ik}=1\Rightarrow e_{j} R e_{k}$.
+    - As 9.5-62 says, this submatrix is just the **partition**.
 - [x] 28
   - for d) we can think it like the plane pencil.
 - [ ] 40 b) see the ans where all fractions are equivalent to the corresponding [Irreducible fraction](https://en.wikipedia.org/wiki/Rational_number#Irreducible_fraction).
@@ -6351,7 +6319,7 @@ print(Sum)
 - [ ] 56
   - only a)
   - see the ans
-    - a) based on the [submat](#submat_transitive) proof, (0,2)x(0,2) and (3,3)x(3,3) submat with 2 (0,1)x(0,1) submats will becomes
+    - a) based on the [submat_equivalence_relation] proof, (0,2)x(0,2) and (3,3)x(3,3) submat with 2 (0,1)x(0,1) submats will becomes
       ```python
       1110
       1110
@@ -6449,7 +6417,25 @@ print(Sum)
     - b) doesn't need to be polynomial.
       - > Another way ...
         just uses the definition of $\Theta$.
-- [ ] 
+- [ ] 62
+  - by [submat_equivalence_relation] The following $211$ means submatrix size sequence which can be reordered.
+    $\overbrace{1}^{1111}+\overbrace{3}^{211}+\overbrace{1}^{22}+\overbrace{2}^{31}+\overbrace{1}^4$
+  - see the ans
+    - the above is wrong because the submatrix can be formed by disjoint parts like $(0,2)$ and 
+      $(1,3)$ for 4x4 mat.
+    - Then it is just the Stirling numbers of the second kind. See [Stirling_second_kind_code]
+- [x] 63
+  - Here the order matters.
+    > the transitive closure of the symmetric closure of the reflexive closure
+    the symmetric closure won't break reflexive because of only adding relations.
+    similarly for "transitive".
+- [x] 64
+  - different from 63, symmetric will break "transitive". For example, $\{(a,b),(a,c)\}\xrightarrow{\text{reflexive closure by adding} (a,a)}\cdots\xrightarrow{\text{symmetric closure}}\{(a,b),(a,c),(b,a),\cdots\}.\text{ But }(b,c)\notin \{(a,b),(a,c),(b,a),\cdots\}$
+    This is similar to one exercise before.
+- [x] 66
+  - By THEOREM 1 (i) and (ii) equivalence (i.e. one-to-one correspondence) and (iii) disjoint property.
+    Here (i) -> relations (ii) -> partition.
+    Then relation $R$ and partition $P$ also have the one-to-one correspondence property.
 ### 9.6
 - [ ] 53
 ## 10
@@ -6477,6 +6463,10 @@ Redo 5.4-48
 
 ---
 
+<!-- note inner link -->
+[submat_equivalence_relation]:#submat_equivalence_relation
+
+<!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
 [SOLUTIONS_7th]:./discrete-structure-solution-student39s-solutions-guide_compress_7th.pdf
 [A_Guide_to_Writing_Proofs]:./A_Guide_to_Writing_Proofs.pdf
@@ -6489,6 +6479,7 @@ Redo 5.4-48
 [check_relations]:./miscs_snippets/py_codes/9-1-46/check_relations.py
 [Warshall_code]:./miscs_snippets/py_codes/9_4_Warshall/Warshall.py
 [transitive_realtion_check]:./miscs_snippets/py_codes/9-3-8/transitive.py
+[Stirling_second_kind_code]:./miscs_snippets/py_codes/8_supplementary_40_Stirling_second_kind/Stirling_second_kind.py
 
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
