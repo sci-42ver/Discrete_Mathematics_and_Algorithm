@@ -1044,6 +1044,10 @@ check(R_1)
 - EXAMPLE 5 says the usage of the Boolean product.
 ### 9.4
 - For transitive closure, we only need to think about $(a,b),a\neq b$ because $(a,a)$ will always *do nothing* when composite. <a id="transitive_reflexive"></a>
+  - This is also shown in 9.6-exercise-2 ans
+    > the nonreflexive pairs will not introduce any violations of antisymmetry.
+    and 9.6-exercise-8 ans
+    > The only pairs that might present problems with transitivity are the nondiagonal pairs
 - Here $R\cup \triangle$ *only adds necessary* pairs for reflexive closure.
   similarly, $R\cup R^{-1}$ also *only adds necessary* ones.
   So *minimal* and with *the related property*
@@ -1093,7 +1097,7 @@ check(R_1)
 - If thinking of "equivalence relation" as "class"
   then it will imply "reflexive, symmetric, and transitive".
   Why "reflexive, symmetric, and transitive" $\to$ "equivalence"
-  is related with [abstract-algebra](https://math.stackexchange.com/a/3299949/1059606) or is based on function
+  is related with [abstract-algebra](https://math.stackexchange.com/a/3299949/1059606) or is based on function <a name="equivalence_relation_definition"></a>
   > A relation $R$ on a set $A$ is an equivalence relation if and only if there is a function
 - EXAMPLE 3 shares $a-b$ with EXAMPLE 2, so their proofs are similar.
 - > The proof that $[b] \subseteq [a]$ is similar; it is left as an exercise for the reader.
@@ -1111,6 +1115,48 @@ check(R_1)
     > To see this, assume that {Ai ∣ i ∈ I} is a partition on S. Let R be the relation on S consisting of the pairs (x, y)
     is to show "Partition" $\to$ "equivalence relation".
     The books shows "subset" $\to$ "equivalence relation"
+### 9.6
+- > When we add all of the pairs of the form (x, x) to these relations, we obtain a relation that is reflexive, antisymmetric, and transitive
+  i.e. if not $=$ just 
+  $<$, it is asymmetric and the rest is same.
+- > We do *not need a basis step* in a proof using the principle of well-ordered induction because if x0 is the least element of a well-ordered set, the inductive step tells us that P(x0) is true.
+  i.e. the inductive step *includes* the basis step.
+  > This follows because there are no elements $x \in S$ with $x \prec x_0$, so we know (using a vacuousproof) that P(x) is true for all $x \in S$ with $x \prec x_0$
+  THEOREM 1 says $\forall x \prec y,P(x)=True\Rightarrow P(y)=True$
+  since $\not\exist x\prec y$, the predicate is False, and $F\to T$ is [tautology](https://en.wikipedia.org/wiki/Tautology_(logic)#:~:text=In%20mathematical%20logic%2C%20a%20tautology,y%20or%20x%E2%89%A0y%22.), so $P(y)=True$
+- > The verification of this is left as an exercise.
+  Here I assume it is same as [wikipedia definition](https://math.stackexchange.com/a/165425/1059606) ([link](https://en.wikipedia.org/wiki/Lexicographic_order#Cartesian_products)) (~~What "Added" wants to say: [preorder](https://en.wikipedia.org/wiki/Preorder) can be either symmetric or antisymmetric~~)
+  Here antisymmetric is trivial.
+  - TODO what does "Added" mean for preorder.
+- example 13 is processed by *adding one* element each time.
+  example 12 is processed by multiplying the same multiplier each time. But it is not always this case as shown in example 14.
+- example 18: we can find the bound by **traverse along the lines** beginning from *all* elements of the set.
+  - $\{a,b,c\}$: 
+    - upper bound: obviously we only needs to care about $\{b,c\}$
+      then we find $e$ and transitively $\{f,j,h\}$
+      For $\{d,g\}$ we can't include 
+      $c$.
+    - lower bound is trivial.
+  - $\{h,j\}$
+    - lower bound: similarly $f$ and transitively ...
+    - upper bound: trivial
+  - $\{a,c,d,f\}$ , i.e. $\{f\}$
+- >  every pair of elements has both a least upper bound and a greatest lower bound,
+  ~~it must contain *all* elements of the set~~
+  ~~TODO So it is to say all elements *share* a least upper bound and a greatest lower bound~~
+- Based on [this](https://math.stackexchange.com/a/2067965/1059606), it needs to find the exact least upper bound and greatest lower bound, so there may be no simple solution for EXAMPLE 21.
+  The counterexample in FIGURE 8 (b) is that it has 4 pairs for $b\sim e$ but $d,e$ are incomparable.
+- > The least upper bound and greatest lower bound of these two integers are the least common multiple and the greatest common divisor of these integers, respectively, as the reader should verify
+  to find The least upper bound, we first find the upper bound for $(a,b)$
+  then obvious they are $\{k\vert k=i\cdot lcm(a,b),i\in \mathbb{N^+}\}$
+  then take the least.
+  similarly the lower bounds are $\{k\vert k\vert gcd(a,b),k\in \mathbb{N^+}\}$
+  - Similarly EXAMPLE 24 is done by $\cap,\cup$ definition.
+- > A total ordering $\preccurlyeq$ is said to be compatible with the partial ordering R
+  it can be seen as that $\preccurlyeq$ can be constructed from $R$
+  Notice here $R\subset \preccurlyeq$ (See example 26 where the original one contain 3 chains $(1,2,4,12),(1,2,4,20),(1,5,20)$)
+- > $(A − \{a_1\}, \preccurlyeq)$ is also a poset
+  it is just $\subset$ the original $(A,\preccurlyeq)$
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -6249,7 +6295,7 @@ def unimodal(start,end,List):
   - b) see the ans
     here minimal can't be met because their *intersection* may not have the property $P$.
 - [ ] 36
-  - based on [this](#transitive_reflexive)
+  - based on [transitive_reflexive]
     "the reflexive closure of the transitive closure of R" must be transitive.
   - As the book says
     > Adding these pairs does not produce a transitive relation, because the resulting relation contains (3, 1) and (1, 4) but does not contain (3, 4)
@@ -6437,6 +6483,45 @@ def unimodal(start,end,List):
     Here (i) -> relations (ii) -> partition.
     Then relation $R$ and partition $P$ also have the one-to-one correspondence property.
 ### 9.6
+- 2 (Also see [transitive_reflexive]),14~20,
+  24(1. inclusion -> $\subseteq$. 2. Notice Hasse diagram doesn't remove any element in the set)~26,
+  28([Proper Divisor](https://mathworld.wolfram.com/ProperDivisor.html#:~:text=A%20positive%20proper%20divisor%20is,but%206%20itself%20is%20not.) means *less* than similar to [proper fraction](https://mathworld.wolfram.com/ProperFraction.html)),
+  30(by just appending one element to $C_1$ or adding $1$ to $A_1$. calculated by `import math;sum([math.comb(3,k)*(3-k) for k in range(3+1)])*4+8*3` in `python`),
+  34, skipped
+- [ ] 4
+  - see the ans
+    - a) although $no shorter$ seems to be $\ge$ which is the partial ordering
+      but maybe $a=b,a\neq b$ -> not antisymmetric.
+- [x] 6
+  - a) is both equivalence relation and the partial ordering.
+- [x] 8
+  - a) similar to [submat_equivalence_relation]
+    $M_{ij}=1\Rightarrow M_{i\cdot}\ge M_{j\cdot}$
+    Then $M_{21}=1$ but $M_{23}<M_{13}$, so not transitive.
+- [x] 10 b->d doesn't exist.
+- [ ] 12 (just converse the order of each relation. Trivially proof is also the converse version)
+  - detailed see the ans.
+- [x] 22 
+  - a) see the ans 
+    here the ans may be wrong. It shouldn't include $(4,6)$
+- [ ] 31 construct many sub-chains
+  - hint:
+    from covering relation to closure: reflexive transitive closure is trivially antisymmetric by the covering relation
+    from closure to covering relation: closure -> contain the covering relation
+  - see the ans for the detailed proof
+    - it uses $\text{closure }\subseteq (\preccurlyeq)$ and converse to prove equivalence.
+      - Here "sequence" is based on "transitive".
+    - The above "from closure to covering relation" should prove why "a finite poset is closure".
+- [x] 32
+  1. [Maximal Element](https://mathworld.wolfram.com/MaximalElement.html) for partial ordering 
+    Also see [this](https://en.wikipedia.org/wiki/Partially_ordered_set#Extrema) for the Upper and lower bounds where it [defaults that](https://en.wikipedia.org/wiki/Partially_ordered_set#Notation) the relation is $\preccurlyeq$.
+  2. e) i.e. find $upper_bound(d,c)$ then 
+    $upper_bound(k)$
+  3. The rest is trivial.
+- [x] 36 see FIGURE 6
+  - see the ans
+    - b) here $\preccurlyeq$ is $\ge$
+      then $1$ is the **last** element in the sequence of $a\ge \cdots\ge 1$, so Maximal
 - [ ] 53
 ## 10
 ### 10.4
@@ -6451,6 +6536,8 @@ Redo 5.4-48
 # TODO after abstract algebra
 - [this](#RSA_Cauchy_theorem)
 - [this](#abstract_algebra_2)
+- [equivalence_relation_definition]
+  - Also questions for the partial ordering.
 - dihedral group in 9.5-58
 # TODO after mathematical analysis
 - [This](#sup_Hardy_Littlewood) due to it may probably [introduce the supremum](https://math.stackexchange.com/q/4173249/1059606)
@@ -6465,6 +6552,8 @@ Redo 5.4-48
 
 <!-- note inner link -->
 [submat_equivalence_relation]:#submat_equivalence_relation
+[equivalence_relation_definition]:#equivalence_relation_definition
+[transitive_reflexive]:#transitive_reflexive
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
