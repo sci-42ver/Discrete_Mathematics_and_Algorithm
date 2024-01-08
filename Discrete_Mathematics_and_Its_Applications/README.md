@@ -1173,6 +1173,7 @@ check(R_1)
 - > $(A − \{a_1\}, \preccurlyeq)$ is also a poset
   it is just $\subset$ the original $(A,\preccurlyeq)$
 - [GLB,LUB](https://en.wikipedia.org/wiki/Infimum_and_supremum) abbr
+- Topological Sorting is same as [what this QA says](https://math.stackexchange.com/a/574892/1059606)
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -6503,7 +6504,9 @@ def unimodal(start,end,List):
   24(1. inclusion -> $\subseteq$. 2. Notice Hasse diagram doesn't remove any element in the set)~26,
   28([Proper Divisor](https://mathworld.wolfram.com/ProperDivisor.html#:~:text=A%20positive%20proper%20divisor%20is,but%206%20itself%20is%20not.) means *less* than similar to [proper fraction](https://mathworld.wolfram.com/ProperFraction.html)),
   30(by just appending one element to $C_1$ or adding $1$ to $A_1$. calculated by `import math;sum([math.comb(3,k)*(3-k) for k in range(3+1)])*4+8*3` in `python`),
-  34,42(similar to 40)~44,50 skipped
+  34,42(similar to 40)~44,
+  50~52,53(total ordering is implied by the definition of the lexicographic order),
+  56,62~64 skipped
 - [ ] 4
   - see the ans
     - a) although $no shorter$ seems to be $\ge$ which is the partial ordering
@@ -6610,8 +6613,21 @@ def unimodal(start,end,List):
 - [x] 49 similar to 48, here we are based on $\subseteq$
   - > The greatest lower bound of the partitions P1 and P2 is the partition P whose subsets are the nonempty sets of the form $T_1 \cap T_2$ where $T_1 \in P_1$ and $T_2 \in P_2$
     based on the refinement, it just means $GLB(T_1,T_2)=Refined_one(T_1,T_2)$
-- [ ] $\subseteq$
-- [ ] 53
+- [ ] 54
+  - see the ans
+    - notice d) is $\ge$.
+- [ ] 58
+  - due the *finite* alphabet -> neither well-founded nor dense
+  - see the ans
+    - It is to find the counterexample.
+    - > there is no element between a and aa in this order
+      to make $a$ bigger,
+      1. next letter, so $b$, but $b\succ aa$
+      2. length longer, then $ax$, $ax\prec aa\Rightarrow x=a$
+        $axy$ is impossible because $x=a\Rightarrow axy\succ aa$ or $x\succ a\Rightarrow ax\succ aa\Rightarrow axy\succ aa$
+- [ ] 60 see the ans where it shows it is same as the proof of LEMMA 1.
+- [x] 66
+  - $\overbrace{F\prec F\prec R\prec E}^{\text{the trivial minimal set}}\overbrace{\prec Exterior painting\prec Exterior fixtures}^{\text{one distinct straight line path}}\overbrace{\prec Plumbing \prec Wiring}^{\text{one convergent point from 2 paths}}\overbrace{\prec Flooring \prec Wall-board}^{\text{similar to the former}}\overbrace{\prec Carpeting}^{\text{one distinct path}}\overbrace{\prec Interior painting\prec Interior fixtures\prec Completion}^{\text{one straight line}}$
 ## 10
 ### 10.4
 - [ ] 59
