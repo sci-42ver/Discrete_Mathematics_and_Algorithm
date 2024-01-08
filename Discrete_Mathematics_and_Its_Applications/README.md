@@ -1,8 +1,23 @@
 Please point out errors if any. Thanks beforehand.
 
 check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
+
+To help future readers understand this problem. 1. The meet 1.1 "The first is perfectly clear as we constructed $z$ by refining $P_1$", this is because $a_i\cap b_i \subseteq a_i,b_i$ which is the definition of refinement.
+
+1.2 By this [comment](https://math.stackexchange.com/questions/2516124/is-this-poset-a-lattice-where-are-is-the-refinement-of-the-partitions-of-s#comment5196221_2516124), we also need to prove this construction is one partition. Take arbitrary 2 sets from each partition $\{a_1,a_2\}$ and $\{b_1,b_2\}$, then based on the disjoint property of the partition, the intersections of the Cartesian product of them are disjoint, for example $((a_1\cap b_1)\cap(a_2\cap b_1))\subseteq (a_1 \cap a_2=\varnothing)=\varnothing$
 # outline
 much of chapter 2,5,6 have been learned before.
+- By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
+  2 months to learn this book may be hard because 1k+ pages of the book Although this says [1 month](https://qr.ae/pKx8wQ)
+  > In the 3 months of class ... only covered up to chapter 6
+  [Or](https://qr.ae/pKx8gm) which says Knuth is more detailed about this topic which is same as [mathoverflow](https://mathoverflow.net/a/103694) says
+  > If you’re a fast reader you can probably get through this book with minimal effort on the exercises in *a few weeks* ... If you take it seriously, and you’re *not already familiar* with any of the contents, there’s easily *more than six months* of work here. Number of hours isn’t a useful metric.
+  > In a more demanding textbook, these problems would show up early in the list of exercises, with *no asterisks attached* ... I originally wrote that this book provides over a year of work, but after sampling the exercises I reduced it to half of that, with the caveat that *more demanding* books would give you much better understanding.
+  - > (normally they are kinda *duplicates of the even* numbered ones anyway).
+- [review by someone](https://www.lesswrong.com/posts/TKguxsjPjXhjQGAqM/book-review-discrete-mathematics-and-its-applications-miri#What_should_I_read_)
+- homework is shown in [UC-berkeley](https://math.berkeley.edu/~ribet/55/spring_13/) which only includes part of the book homework.
+## courses in some universities using this book
+- [ucsd](https://cseweb.ucsd.edu/classes/sp16/cse20-ac/HW8_Sp16.pdf) uses self-designed homework.
 # [online resources](https://highered.mheducation.com/sites/125967651x/student_view0/web_resources_guide.html) from [this](https://highered.mheducation.com/sites/125967651x/information_center_view0/)
 - Discrete Mathematics and Its Applications [Student’s Solutions Guide](https://www.academia.edu/36410920/Students_Solutions_Guide) pdf with the unavailable version.
 - [test bank](https://www.stuvia.com/en-us/doc/2018491/discrete-mathematics-and-its-applications-8th-edition-rosen-test-bank.pdf)
@@ -1125,7 +1140,7 @@ check(R_1)
   THEOREM 1 says $\forall x \prec y,P(x)=True\Rightarrow P(y)=True$
   since $\not\exist x\prec y$, the predicate is False, and $F\to T$ is [tautology](https://en.wikipedia.org/wiki/Tautology_(logic)#:~:text=In%20mathematical%20logic%2C%20a%20tautology,y%20or%20x%E2%89%A0y%22.), so $P(y)=True$
 - > The verification of this is left as an exercise.
-  Here I assume it is same as [wikipedia definition](https://math.stackexchange.com/a/165425/1059606) ([link](https://en.wikipedia.org/wiki/Lexicographic_order#Cartesian_products)) (~~What "Added" wants to say: [preorder](https://en.wikipedia.org/wiki/Preorder) can be either symmetric or antisymmetric~~)
+  Here I assume lexicographic order is same as [wikipedia definition][Lexicographical_order] ([link](https://en.wikipedia.org/wiki/Lexicographic_order#Cartesian_products)) (~~What "Added" wants to say: [preorder](https://en.wikipedia.org/wiki/Preorder) can be either symmetric or antisymmetric~~) <a name="lexicographic_order_partial_order_proof"></a>
   Here antisymmetric is trivial.
   - TODO what does "Added" mean for preorder.
 - example 13 is processed by *adding one* element each time.
@@ -1157,6 +1172,7 @@ check(R_1)
   Notice here $R\subset \preccurlyeq$ (See example 26 where the original one contain 3 chains $(1,2,4,12),(1,2,4,20),(1,5,20)$)
 - > $(A − \{a_1\}, \preccurlyeq)$ is also a poset
   it is just $\subset$ the original $(A,\preccurlyeq)$
+- [GLB,LUB](https://en.wikipedia.org/wiki/Infimum_and_supremum) abbr
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -6487,7 +6503,7 @@ def unimodal(start,end,List):
   24(1. inclusion -> $\subseteq$. 2. Notice Hasse diagram doesn't remove any element in the set)~26,
   28([Proper Divisor](https://mathworld.wolfram.com/ProperDivisor.html#:~:text=A%20positive%20proper%20divisor%20is,but%206%20itself%20is%20not.) means *less* than similar to [proper fraction](https://mathworld.wolfram.com/ProperFraction.html)),
   30(by just appending one element to $C_1$ or adding $1$ to $A_1$. calculated by `import math;sum([math.comb(3,k)*(3-k) for k in range(3+1)])*4+8*3` in `python`),
-  34, skipped
+  34,42(similar to 40)~44,50 skipped
 - [ ] 4
   - see the ans
     - a) although $no shorter$ seems to be $\ge$ which is the partial ordering
@@ -6522,6 +6538,79 @@ def unimodal(start,end,List):
   - see the ans
     - b) here $\preccurlyeq$ is $\ge$
       then $1$ is the **last** element in the sequence of $a\ge \cdots\ge 1$, so Maximal
+      This is same as what 44 ans says
+      > since here “greater” really means “less”!
+- [ ] 38 similar to [lexicographic_order_partial_order_proof]
+  we define $\preccurlyeq$ by modifying EXAMPLE 10 definition $m < n$ to $m\le n$
+  - Also see this [QA](https://math.stackexchange.com/q/4840174/1059606)
+    - > Then $a_1 \ldots a_l \preccurlyeq b_1 \ldots b_l \preccurlyeq c_1 \ldots c_l,a_1 \ldots a_l = c_1 \ldots c_l\Rightarrow a_1 \ldots a_l = b_1 \ldots b_l = c_1 \ldots c_l$
+      is similar to 9.6-49 answer
+      > which implies that $T = T′$ because 
+        $T \subseteq T′ \subseteq T′′$.
+  - see the ans
+    - > Now if $a_1 \ldots a_l < b_1 \ldots b_l < c_1 \ldots c_l$, then clearly a1 ...am < c1 ...cp
+      1. here if $l=n<m,p$
+         then by lexicographic order definition, $a_1 \ldots a_l < c_1 \ldots c_l \xRightarrow{s\ge n} a_1 \ldots a_s < c_1 \ldots c_s$
+      2. If $l=min(m,p)$ then 
+        $a\preccurlyeq c$ trivially holds.
+    - Here $m \le p$ should be $m<p$
+      > If l = t, then m < n and m ≤ p
+      here $l=min(m,n)=t=m$ so $l=min(m,n,p)\le p$
+      Then the exclusion of $=$ is due to: 
+      $p\le m<n\Rightarrow p\le n$ which will make $b_1 \ldots b_n<c_1 \ldots c_p$ only has the possibility of $b_1 \ldots b_r < c_1 \ldots c_r$. So we need excluding $p<m<n$
+    - > In the former case, if r > l, then since p > m we have a1 ...am < c1 ...cp
+      here ~~we~~ ~~may not need $p>m$ since $r>l, b_1 \ldots b_r < c_1 \ldots c_r \Rightarrow b_1 \ldots b_l < c_1 \ldots c_l$. Then based on the assumption $a_1 \ldots a_l = b_1 \ldots b_l$, we get $a_1 \ldots a_l < c_1 \ldots c_l$ which is what we want to prove.~~
+      1. $r=min(n,p)>l\Rightarrow p>l=t=m$
+      2. we may have $b_1 \ldots b_l = c_1 \ldots c_l$, so we need $p>m$.
+      ~~we don't need $p>m$, since $r>l$ then $p>l$~~
+    - TODO Since $m<n<p$ it is impossible for $r=l$ since $r\ge n,p >m=l$
+    - > In the latter case, $a_1 \ldots a_s = c_1 \ldots c_s$
+      here $s=l=m$
+    - > If l < t, then we must have b1 ...bl < c1 ...cl
+      since $l=min(t,r)<t\Rightarrow l=r$
+      Then by $b_1 \ldots b_n < c_1 \ldots c_p$ we can get $b_1 \ldots b_r < c_1 \ldots c_r$, i.e. $b_1 \ldots b_l < c_1 \ldots c_l$
+      ~~1. $r=n\Rightarrow n<t\Rightarrow t=m,n<m\Rightarrow p\le n<m$~~
+    - In summary it splits cases based on $len(\{c_i\})=p$ (although not strictly) if assuming 
+      $a_1 \ldots a_l = b_1 \ldots b_l$ -> $m<n$
+      - $p<m$ ~~-> $l=min(t,p)<t$~~ corresponds to the ans $l<t$
+        here $p\ge m$ can't exist. Since $l<t\Rightarrow l\neq m,n \Rightarrow l=p\le m,n$ (Here we only take in account $<$)
+        ~~Assume $p\ge m$ then based on the above, ~~
+      - $p=m\Rightarrow t=r\Rightarrow r=t=l$
+      - ~~$m<p<n$~~
+    - Here
+      $$
+      \text{assume } b_1 \ldots b_l = c_1 \ldots c_l\\
+      t = min(m,n) , r = min(n,p) , s = min(m,p) ,l = min(m,n,p)\Rightarrow r,t\le l\\
+      \begin{cases}
+        1.\; l=r(\text{correspond to the original answer }l<t)\Rightarrow n<p,m\ge (r=n) \Rightarrow r=n \Rightarrow t=n=r=l\\
+        \Rightarrow
+          a_1 \ldots a_t<b_1 \ldots b_t\\
+          \Rightarrow
+          \begin{cases}
+          t=l(\text{similar to the original ans "if r = l, then ..."})&\Rightarrow a_1 \ldots a_l<b_1 \ldots b_l \Rightarrow a_1 \ldots a_l<c_1 \ldots c_l \Rightarrow a_1 \ldots a_m = c_1 \ldots c_p\\
+          t<l(\text{impossible})&
+          \end{cases}\\
+        2.\; l=min(m,r)<r(\text{correspond to }l=t \text{ but }r=l\text{ there is included in case 1})\\
+        \Rightarrow (l=t) \wedge (p,n>m)
+        \begin{cases}
+          a_1 \ldots a_t<b_1 \ldots b_t &\Rightarrow a_1 \ldots a_l< c_1 \ldots c_l\Rightarrow a_1 \ldots a_m = c_1 \ldots c_p\\
+          a_1 \ldots a_t=b_1 \ldots b_t,m<n &\Rightarrow a_1 \ldots a_l = c_1 \ldots c_l\Rightarrow a_1 \ldots a_m = c_1 \ldots c_p \text{ due to }p>m
+        \end{cases}
+      \end{cases}
+      $$
+- [ ] 40
+  - ~~a) it can also be proved by contradiction for ~~
+    here $a\preccurlyeq a$ is possible so no contradiction.
+  - see the ans
+- [ ] 46
+  - $(S,R^{-1})$ is the converse version of $(S,R)$
+  - better explicitly saying the existence of LUB and GLB
+    see the ans
+- [ ] 48 see the ans for the strict proof of the least upper bound and greatest lower bound.
+- [x] 49 similar to 48, here we are based on $\subseteq$
+  - > The greatest lower bound of the partitions P1 and P2 is the partition P whose subsets are the nonempty sets of the form $T_1 \cap T_2$ where $T_1 \in P_1$ and $T_2 \in P_2$
+    based on the refinement, it just means $GLB(T_1,T_2)=Refined_one(T_1,T_2)$
+- [ ] $\subseteq$
 - [ ] 53
 ## 10
 ### 10.4
@@ -6539,6 +6628,9 @@ Redo 5.4-48
 - [equivalence_relation_definition]
   - Also questions for the partial ordering.
 - dihedral group in 9.5-58
+- semigroup and [Semilattice](https://proofwiki.org/wiki/Definition:Semilattice) about lattice in 9.6
+# TODO after set theory or order theory
+- [This](https://math.stackexchange.com/a/3896116/1059606) related with 9.6-38.
 # TODO after mathematical analysis
 - [This](#sup_Hardy_Littlewood) due to it may probably [introduce the supremum](https://math.stackexchange.com/q/4173249/1059606)
 # TODO after Computer Networking
@@ -6554,6 +6646,7 @@ Redo 5.4-48
 [submat_equivalence_relation]:#submat_equivalence_relation
 [equivalence_relation_definition]:#equivalence_relation_definition
 [transitive_reflexive]:#transitive_reflexive
+[lexicographic_order_partial_order_proof]:#lexicographic_order_partial_order_proof
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
@@ -6584,6 +6677,7 @@ Redo 5.4-48
 [consecutive_zeros_in_bit_strings]:https://math.stackexchange.com/a/178613/1059606
 [stirling_numbers_first_kind_proof]:https://math.stackexchange.com/q/4824460/1059606
 [3_choices_for_each_element]:https://math.stackexchange.com/a/503992/1059606
+[Lexicographical_order]:https://math.stackexchange.com/a/165425/1059606
 
 <!-- gateoverflow -->
 [assign_different_jobs_to_different_employees]:https://gateoverflow.in/79804/permutation-combo?show=80049#a80049
