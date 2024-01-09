@@ -54,7 +54,9 @@ Q:
 
 1. Thanks for the comment by amrsa. My assumption is wrong which is one low-level error.
 
-2. Then based on the above [QA_1][1], it has proved the GLB. But for LUB, it seems to only exclude one case but not show the exact form. Here I offer my understanding of the book and fill the details omitted by the book.
+2. The above construction of LUB is same as the construction of the [path][4] which is related with the connectivity relation. $R^{\ast}$ is also implied in the following recursive process.
+
+3. Then based on the above [QA_1][1], it has proved the GLB. But for LUB, it seems to only exclude one case but not show the exact form. Here I offer my understanding of the book and fill the details omitted by the book.
 
    The following uses $P'=P_1\vee P_2$ to denote the constructed LUB.
    1. It is a partition ([equivalence conditions to prove that one family of sets is partition](https://en.wikipedia.org/wiki/Partition_of_a_set#Definition_and_notation)).
@@ -79,10 +81,12 @@ Q:
          - Then take this process of $A_i$ **recursively** for $A_i\setminus B_i,B_i\setminus A_i$.
            Since this is exactly the process of construction of the "sequence $x = x_0, x_1, x_2, \ldots , x_n = y$", we get $\exists C_i\in P', A_i,B_i\subseteq C_i\Rightarrow C_i\subseteq D_i$
        
-       Then based on 1,2 where we will also implicitly traverse $P_2$ although only assume $\forall A_i\in P_1$, we get $\forall C_i\in P',\exists D_i\in w,C_i\subseteq D_i\Rightarrow P'\preccurlyeq w$.
+       Recursive process: Then based on 1,2 where we will also implicitly traverse $P_2$ although only assume $\forall A_i\in P_1$, we get $\forall C_i\in P',\exists D_i\in w,C_i\subseteq D_i\Rightarrow P'\preccurlyeq w$.
     
     Please point out errors if any. Thanks beforehand.
+
 
   [1]: https://math.stackexchange.com/a/937481/1059606
   [2]: https://en.wikipedia.org/wiki/Partition_refinement
   [3]: https://math.stackexchange.com/questions/2516124/is-this-poset-a-lattice-where-are-is-the-refinement-of-the-partitions-of-s#comment5196221_2516124
+  [4]: https://math24.net/closures-relations.html

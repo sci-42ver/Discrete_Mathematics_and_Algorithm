@@ -115,6 +115,14 @@ $ ln -s $(pwd)/latexindent_pl.yaml miscs_learning/latexindent_pl.yaml
 - p122 limits the cases by 2 steps in the "EXAMPLE 5".
   1. to the final digit
   2. to the symmetric property.
+- EXAMPLE 12
+  - > There are two possibilities, this is the first move of a winning strategy for the first player, or the second player can make a move that is the first move of a winning strategy for the second player
+    i.e. either the 1st win or the 2nd.
+    Then
+    > instead of eating just the cookie in the bottom right corner, the first player could have made the same move that the second player made as the first move of a winning strategy
+    the 1st can use the strategy of the 2nd to replace the 2nd, then win.
+    - > , the proof is a nonconstructive existence proof. In fact, no one has been able to describe a winning strategy for Chomp that applies for all rectangular grids by describing the moves that the first player should follow
+      i.e. the detailed what to do is not known. So *only prove existence*.
 - example 14 is one special backward using $\leftrightarrow$.
 - p134 FIGURE 7 color line by line which can allow right triominoes cover three colors.
   - here "without loss of generality" is [based on the *same* location after rotation](https://people.math.osu.edu/shapiro.6/tiling.pdf).
@@ -305,7 +313,7 @@ $ ln -s $(pwd)/latexindent_pl.yaml miscs_learning/latexindent_pl.yaml
 - Continuum hypothesis is [not proven at present](https://en.wikipedia.org/wiki/Hilbert%27s_problems#Table_of_problems).
 - Here from p203 definition 2, the "onto" to $|A|\ge |B|$ is not direct
   proof see [this](https://math.stackexchange.com/a/286800/1059606) and my [rejected edit](https://math.stackexchange.com/review/suggested-edits/2036195) <a id="onto_compare_cardinality"></a>
-  - the 1st part of the proof is same as [this](http://www.randomservices.org/random/foundations/Functions.html#aoc) which referenced [here "duality"](https://math.libretexts.org/Courses/Monroe_Community_College/MTH_220_Discrete_Math/Appendices/A.1%3A_Cardinality-additional_info#:~:text=A%E2%89%88C.-,A%20one%2Dto%2Done%20function%20f%20from%20A%20onto%20B,the%20same%20number%20of%20elements.)
+  - the 1st part of the proof is same as [this][duality_onto_with_one_to_one] which referenced [here "duality"](https://math.libretexts.org/Courses/Monroe_Community_College/MTH_220_Discrete_Math/Appendices/A.1%3A_Cardinality-additional_info#:~:text=A%E2%89%88C.-,A%20one%2Dto%2Done%20function%20f%20from%20A%20onto%20B,the%20same%20number%20of%20elements.)
 ## [A_Guide_to_Writing_Proofs]
 I read it after chapter 1,2 but when I read it I thought I should read it while reading chapter 1,2 although that may be with many obstacles if not having all knowledge from the chapter 1,2.
 - maths [argument](https://bridges.education.uconn.edu/wp-content/uploads/sites/753/2016/03/ARP_Grade3_Fractional-Parts-of-Candy-Bars-Packet-Overview.pdf)
@@ -1174,6 +1182,24 @@ check(R_1)
   it is just $\subset$ the original $(A,\preccurlyeq)$
 - [GLB,LUB](https://en.wikipedia.org/wiki/Infimum_and_supremum) abbr
 - Topological Sorting is same as [what this QA says](https://math.stackexchange.com/a/574892/1059606)
+- Definition 4
+  why here we must have "every nonempty subset of S has a least element"
+  because it needs to exclude the [infinite](https://math.stackexchange.com/a/1258854/1059606) case (Also [see](https://math.stackexchange.com/a/277170/1059606))
+  - > And even more so, your argument if you look closely, should work for maximal
+    means although the theorem *highlights minimal*, maximal also works.
+  - [TODO](https://math.stackexchange.com/questions/3570899/every-not-empty-finite-subset-of-a-totally-ordered-set-has-a-maximum-and-minimum#comment10311443_3571343)
+  - compared with [well-founded](https://math.stackexchange.com/questions/116642/is-well-founded-the-same-as-well-ordered#comment271123_116642) <a name="well_founded_diff_well_ordered"></a>
+    The [ans](https://math.stackexchange.com/a/116647/1059606) (1. TODO example meaning. 2. Here $\sqsubset$ is just one [self-defined symbol](https://math.stackexchange.com/a/1569507/1059606))
+    > "Well-ordered" means linearly-ordered and well-founded.
+    means same as [wikipedia](https://en.wikipedia.org/wiki/Well-founded_relation#)
+    > In order theory, a partial order is called well-founded if the corresponding strict order is a well-founded relation. *If* the order is a total order then it is called a well-order.
+- [minimal element for the preorder][wikipedia_minimal_element]
+  - here by [this](https://math.stackexchange.com/a/3177655/1059606)
+    the possible [symmetric property](https://en.wikipedia.org/wiki/Preorder#) of preorder
+    there may be $x\prec y, y\prec x$
+    then it is not easy to say the [*strict order*](https://mathworld.wolfram.com/StrictOrder.html) (adding [connected](https://en.wikipedia.org/wiki/Total_order#Strict_and_non-strict_total_orders) it becomes the total order) (because not Asymmetric) between them which is used for partial order.
+    > his means that there does not exist any element $s\in S$ such that ${\displaystyle m\leq s}$ and ${\displaystyle m\neq s.}$
+    so we think of **both** $x,y$ are minimal.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -6346,7 +6372,7 @@ def unimodal(start,end,List):
     > “a and b are equivalent if they have the *same whatever*” is an equivalence relation
   - b) see the ans 
     here $[a]=\{f^{-1}(f(a))\}$ where 
-    $f^{-1}$ is one-to-mul function which is not one function strictly speaking.
+    $f^{-1}$ is one-to-mul ~~function which is not one function strictly speaking.~~ [relation](https://qr.ae/pKxqjx)
 - [ ] 10
   - see the ans
     - > such that (x, y) ∈ R if and only if f (x) = f (y)
@@ -6605,6 +6631,9 @@ def unimodal(start,end,List):
   - ~~a) it can also be proved by contradiction for ~~
     here $a\preccurlyeq a$ is possible so no contradiction.
   - see the ans
+- [ ] 45
+  - see the ans 
+    Simmialr to [finite_chain_maximum_minimum]
 - [ ] 46
   - $(S,R^{-1})$ is the converse version of $(S,R)$
   - better explicitly saying the existence of LUB and GLB
@@ -6612,7 +6641,9 @@ def unimodal(start,end,List):
 - [ ] 48 see the ans for the strict proof of the least upper bound and greatest lower bound.
 - [x] 49 similar to 48, here we are based on $\subseteq$
   - > The greatest lower bound of the partitions P1 and P2 is the partition P whose subsets are the nonempty sets of the form $T_1 \cap T_2$ where $T_1 \in P_1$ and $T_2 \in P_2$
-    based on the refinement, it just means $GLB(T_1,T_2)=Refined_one(T_1,T_2)$
+    ~~based on the refinement, it just means $GLB(T_1,T_2)=Refined_one(T_1,T_2)$~~
+    See [this][refinement_lattice]
+- [ ] 51 see 45 or supplementary 42
 - [ ] 54
   - see the ans
     - notice d) is $\ge$.
@@ -6628,6 +6659,308 @@ def unimodal(start,end,List):
 - [ ] 60 see the ans where it shows it is same as the proof of LEMMA 1.
 - [x] 66
   - $\overbrace{F\prec F\prec R\prec E}^{\text{the trivial minimal set}}\overbrace{\prec Exterior painting\prec Exterior fixtures}^{\text{one distinct straight line path}}\overbrace{\prec Plumbing \prec Wiring}^{\text{one convergent point from 2 paths}}\overbrace{\prec Flooring \prec Wall-board}^{\text{similar to the former}}\overbrace{\prec Carpeting}^{\text{one distinct path}}\overbrace{\prec Interior painting\prec Interior fixtures\prec Completion}^{\text{one straight line}}$
+### supplementary
+- 6~8,22,30,36(~~although the ANS exercise reference is wrong.~~),44 skipped
+- [x] 2
+  - Let $S$ be reflexive set, $f(T)$ is the symmetric corresponding relations of 
+    $T$
+  - a) $T=\{(a,b),(b,c)\}$, then 
+    $T\cup S\cup f(T)$
+  - b) $T=\{(a,b)\}$
+    $T\cup f(T)\cup \{(a,a),(b,b)\}$
+  - c) $T$ of a)
+  - d) $T=\{(a,b),(b,a),(b,c)\}$, then by the transitive property, append 
+    $(a,c)$
+    so $T\cup S$
+  - e) this has the least restriction, so easily $\{(a,a),(a,b),(b,a),(b,c)\}$ 
+- [ ] 4 see the ans for the detailed proof
+- [ ] 10
+  - only if:
+    - symmetric: let $c=b$
+    - transitive: $cRa,aRa\Rightarrow aRc$
+  - if:
+    - $aRc\xRightarrow{\text{symmetric}}cRa$
+  - see the ans
+    - we can use the conclusion of "symmetric" when "transitive"
+- [ ] 12
+  since [the Natural join](https://en.wikipedia.org/wiki/Relational_algebra#Natural_join_(%E2%8B%88)) implies subset, so yes.
+  - see the ans
+- [ ] 14 b) is related with [refinement_lattice].
+- [ ] 16 
+  - a) "call ~~recursively~~ transitively", i.e. if $P$ calls $Q$, $Q$ calls $R$, then we think that $P$ calls $R$.
+  - the rest is trivial
+- [ ] 18 trivial by definition
+- [ ] 19 
+  - similar to 9.4-32, change $\infty$ to $x\in\mathbb{N^+},x>1$
+    and change $min$ to $max$.
+  - see the ans
+    - it should init to $-1$ to indicate *no* path
+    - the above lacks loop which will cause infinite long.
+    - notice here $k$ can be $i,j$ *if possible*.
+- [ ] 20
+  - see the ans notice here c) is "have been"
+- [x] 21 This is exactly [${5 \brace 3}$](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Table_of_values)
+- [x] 24 [See](https://math.stackexchange.com/a/4840776/1059606)
+  - "smallest" because we can't remove something.
+  - This is similar to one exercise 9.5-63 before based on "the transitive closure of the symmetric closure of the reflexive closure"
+- [ ] 26 the partial ordering has been proved in [refinement_lattice].
+  - see the ans
+    - It uses one-to-one correspondence to another partial ordering.
+- [ ] 28 see the ans 
+  It is just find one sub-total-ordering.
+- [ ] 29 see the ans
+  It is to find the max subset which corresponds to *only one level*. 
+  - Also see 30 which I did after writing the above line
+- [ ] 32
+  - trivially, it can be partitioned into chains,
+    *assume* it can be partitioned into $k$ chains which is the *minimal* chain number. (This can be got from $R^{\ast}$ by constructing one sequence. It is similar to constructing one partition.)
+    Then we can construct one antichain by choosing one from each chain. (This is same as the wikipedia $A_0\cap C_i\neq \varnothing$)
+    And by the pigeonhole principle, $k$ can't be larger for the antichain.
+    - This is wrong based on [Dilworth_theorem_proof_combination]
+      because it needs to prove from "the largest number of elements in an antichain" to "partitioned into k chains" instead of the converse version.
+  - [wikipedia](https://en.wikipedia.org/wiki/Dilworth%27s_theorem#Inductive_proof) same as [Dilworth_theorem_proof_combination] (similar to the [graph_theory] book proof p68) where the latter proof 2 has the exact same description as this exercise (Also same as the brilliant wiki).
+    - > Clearly, $A_0\cap C_i\neq \varnothing$
+      This is based on the hypothesis.
+    - ~~TODO Here $x_i$ may be unique.~~
+      > For $i=1,2,\ldots,k$, let $x_i$ be the maximal element in $C_i$ that belongs to *an* antichain of size $k$ in $P'$
+      Here it doesn't mean $x_i\in A_0$
+    - > since $x_i \not\ge y$
+      this is due to *disjoint* chains
+      TODO Then we can *directly* get $x_i \not\ge x_j$
+    - Compared with [Dilworth_theorem_proof_combination]
+      - > By interchanging the roles of i and j in this argument we also
+        complement the proof there
+      - > Then by the choice of $x_{i}$, $P\setminus K$ does not have an antichain of size $k$
+        > since $A \setminus \{x_i \}$ is an antichain
+        says in more details.
+      - > since a is maximal in P
+        so only $a\ge x_i$ is possible. Since it is already excluded, so $a$ has *no relation*.
+      - [Duality](https://en.wikipedia.org/wiki/Dilworth%27s_theorem#Dual_of_Dilworth's_theorem_(Mirsky's_theorem)) Notice here partition corresponds to [brilliant_wiki_Dilworth_Theorem_antichain_ge_chain] "cover" (Here I refer to the more detailed brilliant wiki for the proof)
+        - > Note that if $f(s)=f(t)$, then s and t cannot be comparable (why?).
+          WLOG, suppose $s\prec t$
+          then we can append the chain corresponding to $s$ with $t$, so it can be larger -> contradiction.
+        - here $f^{-1}(n)$ is one one-to-mul ~~function~~ relation.
+        - Notice here ~~"The size of a maximal chain"~~
+          > The size of a maximal chain in S equals the size of a minimal antichain cover of S.
+          better use "largest chain" as wikipedia because we can have multiple ["maximal chain"](https://proofwiki.org/wiki/Definition:Maximal_Chain), e.g. if some element is incomparable, then the maximal chain including it only has one element.
+          - Then 
+            > the size of a maximal chain whose largest element is s
+            can have
+            > then the sets $f^{-1}(1),f^{-1}(2),\ldots,f^{-1}(d)$ form an antichain cover of S
+            - Here cover because the chain size is $1\sim d$.
+          - TODO ["How to get one maximal chain based on one finite saturated chain"](https://math.stackexchange.com/questions/4840957/how-to-get-one-maximal-chain-based-on-one-finite-saturated-chain)
+            Also [see](https://math.stackexchange.com/questions/4449496/are-all-incomparable-elements-in-a-set-considered-both-maximal-and-minimal#comment9317813_4449496) and [a finite chain always has a smallest and largest element][finite_chain_maximum_minimum]
+        - > It is not immediately obvious that these sets are all nonempty (though they are), but this shows that there is an antichain cover of size at most d
+          since maybe $\exists f^{-1}(i),i=1\sim d, f^{-1}(i)=\varnothing$, so "at most"
+          Then based on "equals the size", they can't be $\varnothing$.
+        - > as the horizontal "strips" of the Hasse diagram
+          This is just similar to the strip in Dilworth's one (strip is one delimiter and connector)
+          - > It is straightforward to check that the two Hasse diagrams in the above examples are constructed in that way.
+            i.e. all elements at level k are incomparable. This is as as this textbook.
+    - Its [reference_1][galvin]
+      main idea is 
+      > We have to show that P either contains an (n + 1)-element antichain, or else is the union of n chains
+      - Also see [Dilworth_theorem_proof_combination]
+      - It assumes 
+        > he width of P is the *maximum* cardinality of an antichain in P. According to a celebrated theorem of Dilworth [2], the *width* of P is also equal to the *minimum* number of chains needed to cover P
+      - > If $A \cap \{a\}$ is an antichain, we are done
+        i.e. $a$ is incomparable to all the others
+        Then $n+1$ *chains* and *antichains*.
+      - > P. Let a be a maximal element of P
+        so 
+        > Otherwise, we have $a > a_i$ for some i
+      - > there are no n-element antichains in P\ K,
+        because $\{x\in C_i\}$ has been removed.
+      - In summary
+        Based on the above assumption, It proves possible equality of "width" and chain size.
+        It uses the induction for $P\setminus \{a\}$
+        then 2 cases for $a$ by proving *chain size based on antichain size*.
+        1. $A \cap \{a\}$ -> antichain, so $a \not R x_i,i=1\sim n \Rightarrow a\not R c_i,c_i\in C_i$
+          Based on this disjoint property, we get the chain $C_1,\ldots,C_n,a$
+        2. $\{a\} \cup \{x\in C_i\}$ 
+          This is done by removing one chain (implicitly one element in $A$)
+          Then use the induction where $m=n-1$.
+    - [graph_theory] proof
+      [maximal chain](https://math.stackexchange.com/a/3444596/1059606)
+      **One side**
+      - > Since no two elements of an antichain can belong to the same chain, we need at least as many chains as the minimal size of an antichain
+        it should be "maximal size of an antichain" $k$
+        since it is possible for $k$ elements incomparable, so they should be in disjoint chains.
+        It is same as [brilliant_wiki_Dilworth_Theorem_chain_ge_antichain]
+      **Another side**
+      Basic idea: 
+        > If every antichain in a (finite) partially ordered set P has at most m elements then P is the union of m chains
+
+        Here it proves the $k$ can be achieved, so by the inherent property of $min$, $k\ge$ "min chain size".
+      - > since the maximal element of C does not belong to $S^-$ and the minimal element of C does not belong to $S^+$
+        ~~Since $S^-=\{x\in P\vert x\le a_i\text{ for some }i\}$~~
+        ~~it should be "minimal element ... not belong to $S^-$"~~
+      - > For in that case the chains C;- and ct can be *strung together* to give a single chain
+        ~~it can't be larger because by induction, it can only be ~~
+      - In summary, compared with reference_1, it removes one more general thing a [maximal chain](https://proofwiki.org/wiki/Definition:Maximal_Chain) $C$ (So $C\cup \{x\}$ is not one chain) instead of one *maximal element*.
+        ~~And its induction is based on antichain size $|P|$ instead of $P$ size [$n(P)$](https://en.wikipedia.org/wiki/Cardinality) which is shown in the brilliant wiki "So now suppose that the largest antichain".~~
+        Then 
+        1. $|P|<m$ directly induction.
+        2. $|P|=m$ 
+          - **TODO** by reference_1 "removing one chain", it seems impossible.
+            This is also shown in [Dilworth_theorem_proof_combination] 
+            > Now assume that ...
+          - The key is to string $S^+,S^-$
+            then $a_i< x\le a_j$ will lead to contradiction by transitivity.
+            So based on
+            > The proof will be completed if we show that a; is the maximal element of C;- and the minimal element of ct.
+            finished.
+          - Here we will construct $m+1$ chains, so $\ge min$.
+        - [brilliant_wiki_Dilworth_Theorem_antichain_ge_chain] is similar but removing $\{m,M\}$ where the induction is based on $d$ (No reference here, so I didn't read it detailedly.) 
+          (Since it removes elements, so it is similar to reference_1)
+          - Since 
+            > $m\le z$ for all comparable $z$
+            ,so
+            > $m\notin S^+$
+          - ~~Here $C_{a}^{-}\cup \{a\}\cup C_{a}^{+}$ is more appropriate than [Dilworth_theorem_proof_combination].~~
+          - Key sentences
+            1. > it can't be larger because T is a subset of S
+            2. > picture the Hasse diagram for S where the *largest antichain* consists of a *horizontal strip*. Take everything below the strip and everything above the strip, use *induction to cover these by chains*, and then link the chains together by *connecting them across the strip*.
+          - [brilliant_wiki_Erdős_Szekeres_Theorem]
+            The exact [definition](https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Szekeres_theorem#) uses "distinct real numbers"
+            So
+            > an antichain is a decreasing subsequence.
+            assume $i\neq j, a_i<a_j\text{ or }a_i>a_j$
+            - > the set has at most rs elements, which is impossible 
+              It implies [Pigeonhole principle](https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Szekeres_theorem#Pigeonhole_principle)
+    - ~~Notice reference_1 and the [graph_theory] don't prove "The *minimal* number m of disjoint chains"， so it is only half as~~ [Dilworth_theorem_proof_combination]
+      - The first part same as [graph_theory] and [brilliant_wiki_Dilworth_Theorem_antichain_ge_chain]
+        IMHO, This is one is the most detailed among these 3 versions (But better also view other 2 versions roughly).
+        - Its [reference](https://core.ac.uk/download/pdf/82310575.pdf)
+        - Notice here $C=\{0,1\}$ may [only have one element](https://math.stackexchange.com/q/1137771/1059606)
+        - > has at most M−1 elements, ...
+          so $m\le M-1+\overbrace{1}^{C}\Rightarrow m\le M$
+        - Notice here $P^+,P^-$ is based on $P$ instead of $P\setminus C$.
+          So $P^+ \cup P^- =P$
+        - Here I give a summary of this method
+          $$
+          \begin{cases}
+            m\ge M, \text{ trivial}\\
+            m\le M
+            \begin{cases}
+              \text{all incomparable}:\text{ trivial}\\
+              \text{some are comparable}:\text{ based on conditions of }Anti_chain_size(P\setminus C)
+              \begin{cases}
+                \le M-1,\qquad\text{IH}\\
+                =M\quad\text{see brilliant Key sentences}\\
+                >M\quad\text{see brilliant Key sentences}
+              \end{cases}
+            \end{cases}
+          \end{cases}
+          $$
+      - The second part
+        It proves chains can be $k\le r$ although the quote uses "partitioned into r chains".
+        - > It is not difficult to see that A={a1,…,ak} is an antichain in P′
+          It may be more easily by
+          > By the *induction hypothesis*, P′ is the union of k disjoint chains C1,…,Ck
+          This just means P' can't be into *less chains* than $k$. So $\forall (a_1,\ldots,a_k)\in C_1\times \ldots\times C_k$ (Here we use the Cartesian product) $(a_1,\ldots,a_k)$ is one antichain.
+          - ~~Otherwise, if $A_i,A_j=A$ then $x=a_i$~~
+            ~~Then **"hence by transitivity" can't be used**.~~
+            Based on the assumption $a_i<a_j$ (Here based on the partial ordering, better $a_i=a_j$), $(A_i\neq A_j)\neq A\Rightarrow x\neq a_i$
+        - > If $A\cup \{a\}$ is an antichain in P , then $k\le r−1$
+          because $k$ corresponds to $A$
+          $r$ is the *largest* antichain size of $P$, so $r\ge k+1$ where $k+1$ corresponds to one possibility $A\cup \{a\}$
+        - > there are no k-element antichains
+          otherwise $(P\setminus K)\cup \{x\in C_i:x\le a_i\}=P'$ will have 
+          $k+1$ antichains -> contradiction.
+- [ ] 33
+  - See 32 same as [brilliant_wiki_Erdős_Szekeres_Theorem]
+  - see the ans
+    - but there all real numbers can be compared, so it is one total ordering
+    while here it is only one partial ordering.
+    - To prove $A\vee B$
+      It proves $\neg B\Rightarrow A$.
+- [x] 34
+  - [Well-founded](https://en.wikipedia.org/wiki/Well-founded_relation#:~:text=In%20mathematics%2C%20a%20binary%20relation,not%20have%20s%20R%20m.)
+    > every non-empty subset $S \subseteq X$ has a minimal element with respect to R
+    this is same as the book exercise definition 
+    > A poset $(R, \preccurlyeq)$ is well-founded if there is no infinite decreasing sequence of elements in the poset, that is, elements $x_1, x_2, \ldots , x_n$ such that $\cdots \prec x_n \prec \cdots \prec x_2 \prec x_1$.
+    because minimal ensures the leftmost $\cdots$ can't exist.
+  - by [this](https://math.stackexchange.com/a/2792079/1059606)
+    > $\forall x(\forall y(y \prec x \to P(y)) \to P(x))$.
+    means $\forall x((\forall y(y \prec x \to P(y))) \to P(x))$ which is also implied in chapter 1.
+    - Also see 35 ans
+  - This has been shown in the book [well_founded_diff_well_ordered]
+    so this one is *more general*.
+    since $y \prec x=F\Rightarrow (\forall y(y \prec x \to P(y)))=T\Rightarrow P(x)=T$
+- [ ] 35
+  - The finiteness of "well-founded" means "A has a least element a" same as 9.6 THEOREM 1 proof. Then the rest is same.
+    - see the ans
+      this is wrong because "least" is implied by total ordering in "WELL-ORDERED" which is not the case for "well-founded".
+  - see the ans
+    - It use contradiction that 
+    - > This means that there is some x2 with $x_2 \prec x_1$ such that $P(x_2)$ is not true
+      - Here $x_2 \prec x_1$ must exist due to
+        Assume $x_2$ doesn't exist, then $x_1$ is [minimal element "not greater than any other element"][wikipedia_minimal_element] for $\preccurlyeq$, based on 34, it must be true -> contradiction.
+      - Then if no $P(x_2)$ is not true.
+        Then $P(x_1)$ is true, again contradiction.
+- [ ] 37 different from [this](https://math.stackexchange.com/a/3671382/1059606)
+  - see the ans
+    here it mainly use $R^{-1}$ to construct the *duality of transitivity*.
+- [ ] 38
+  - reflexive and transitive are trivial
+  - antisymmetric
+    assume $C\neq D,cRd,dRc\Rightarrow dR^{-1}c,cR^{-1}d\Rightarrow c(R\cap R^{-1})d$
+    which is contradiction because C and D are equivalence classes of $R\cap R^{-1}$ 
+    (here the exercise $R$ may be wrong), i.e. Let $T=R\cap R^{-1},c \not{T}d$.
+  - see the ans
+    - the above $d R c$ needs to be proved.
+      - Here $d (R\cap R^{-1}) d'\Rightarrow d R d'$
+- [x] 39 Here I only proves a,c which is used in 40.
+  - a) trivial by definition of glb,lub
+  - c) let $x\wedge (x\vee y)=k$
+    then $(k\prec x) \wedge (k\prec (x\vee y))$
+    then $k$ at most be $x$
+    tested by $x$, with lub definition, $x\prec (x\vee y)$.
+
+    the other one is similar.
+- [ ] 40
+  $x \wedge y=x\Rightarrow x\prec y\Rightarrow ub(x,y)=y\Rightarrow lub(x,y)=y$
+  the other side is similar.
+  - see the ans which uses some already proved conclusion.
+- [ ] 42
+  - By *recursively* calculating glb
+    then we will finally get one element $k_1$. Then conversely, $k_1\preccurlyeq x,\forall x\in L$
+    Then dual for the other.
+  - see the ans
+    - The above is similar to induction.
+- [ ] 43
+  - See [this][not_distributive_lattice]
+    > I check if distributive law ...
+- [ ] 46
+  - based on [not_distributive_lattice]
+    $b$ has 2 complements
+    we add $0\prec c$, then $c$ has no complement.
+  - see the ans
+    - The above is wrong.
+      $lub(c,x)$ may not exist.
+    - similar to [this](https://math.stackexchange.com/a/509690/1059606)
+      ```
+        1
+        |
+        c
+       /|\
+      a | |
+      | | |
+      b d e
+       \|/
+        0
+      ```
+- [ ] 48
+  - still [not_distributive_lattice]
+    we finally $a=a\vee c$ which may not hold.
+  - see the ans for the strict proof
+- [x] 50
+  - This is trivial by the hint.
+    Also for the following:
+    - > Actually all finite games have a winning strategy for one player or the other;
+  - > This is a contradiction, because it is impossible for both players to have a winning strategy
+    because it contradicts with the assumption "the first player does not have a winning strategy".
 ## 10
 ### 10.4
 - [ ] 59
@@ -6645,6 +6978,15 @@ Redo 5.4-48
   - Also questions for the partial ordering.
 - dihedral group in 9.5-58
 - semigroup and [Semilattice](https://proofwiki.org/wiki/Definition:Semilattice) about lattice in 9.6
+- [Duality](https://en.wikipedia.org/wiki/Duality_(mathematics)) relation with [Involution](https://en.wikipedia.org/wiki/Involution_(mathematics)), i.e. [bijection](https://math.stackexchange.com/questions/4834752/provide-a-closed-formula-based-on-the-generating-function-fracx1xx2#comment10294429_4834850).
+  > but also indicates that the precise meaning of duality may vary from case to case.
+  so it may be difficult to give one exact definition for all cases.
+
+  We can just think it as the meaning of *pair*.
+  - By [duality_onto_with_one_to_one]
+    here the 2nd $g$ *may be not same* as the 1st $f$ where it may not map the rest *all to $x_0$*
+    But the proof process is very similar.
+- [This](https://math.stackexchange.com/q/3383113/1059606) related with 9-supplementary-43 and isomorphic. (example from [wikipedia](https://en.wikipedia.org/wiki/Distributive_lattice))
 # TODO after set theory or order theory
 - [This](https://math.stackexchange.com/a/3896116/1059606) related with 9.6-38.
 # TODO after mathematical analysis
@@ -6663,6 +7005,7 @@ Redo 5.4-48
 [equivalence_relation_definition]:#equivalence_relation_definition
 [transitive_reflexive]:#transitive_reflexive
 [lexicographic_order_partial_order_proof]:#lexicographic_order_partial_order_proof
+[well_founded_diff_well_ordered]:#well_founded_diff_well_ordered
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
@@ -6686,6 +7029,12 @@ Redo 5.4-48
 [Cantor_diagonal_argument_string]:https://en.wikipedia.org/wiki/Cantor's_diagonal_argument#Uncountable_set
 [Schröder_Bernstein_theorem]:https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem#Proof
 [Big_O_Notation]:https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations
+[wikipedia_minimal_element]:https://en.wikipedia.org/wiki/Maximal_and_minimal_elements#Definition
+
+<!-- brilliant wiki -->
+[brilliant_wiki_Dilworth_Theorem_antichain_ge_chain]:https://brilliant.org/wiki/dilworths-theorem/#proof-of-dilworths-theorem
+[brilliant_wiki_Dilworth_Theorem_chain_ge_antichain]:https://brilliant.org/wiki/dilworths-theorem/#statement-of-dilworths-theorem-and-mirskys-theorem
+[brilliant_wiki_Erdős_Szekeres_Theorem]:https://brilliant.org/wiki/dilworths-theorem/#applications
 
 <!-- math stackexchange -->
 [comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one]:https://math.stackexchange.com/a/4804647/1059606
@@ -6694,6 +7043,9 @@ Redo 5.4-48
 [stirling_numbers_first_kind_proof]:https://math.stackexchange.com/q/4824460/1059606
 [3_choices_for_each_element]:https://math.stackexchange.com/a/503992/1059606
 [Lexicographical_order]:https://math.stackexchange.com/a/165425/1059606
+[refinement_lattice]:https://math.stackexchange.com/q/4840241/1059606
+[finite_chain_maximum_minimum]:https://math.stackexchange.com/a/3571343/1059606
+[not_distributive_lattice]:https://math.stackexchange.com/questions/3198879/boolean-algebra-demonstrate-that-the-pentagon-lattice-is-non-distributive
 
 <!-- gateoverflow -->
 [assign_different_jobs_to_different_employees]:https://gateoverflow.in/79804/permutation-combo?show=80049#a80049
@@ -6718,7 +7070,14 @@ Redo 5.4-48
 [Hardy_Ramanujan_Asymptotic_Partition_function]:./papers/ram36.pdf
 [Hardy_Ramanujan_Asymptotic_Partition_function_orig]:./papers/ram36_orig.pdf
 [Alternating_Sums_A_Method_to_DIE]:./papers/Alternating_Sums_A_Method_to_DIE.pdf
+[graph_theory]:./papers/graph_theory.pdf
+[galvin]:./papers/galvin1994.pdf
 
+<!-- other misc links -->
+[Dilworth_theorem_proof_combination]:https://web.vu.lt/mif/s.jukna/EC_Book_2nd/dilworth.html
+[duality_onto_with_one_to_one]:http://www.randomservices.org/random/foundations/Functions.html#aoc
+
+<!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
 
 <!-- tex -->
