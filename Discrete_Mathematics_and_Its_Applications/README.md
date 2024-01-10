@@ -1200,6 +1200,19 @@ check(R_1)
     then it is not easy to say the [*strict order*](https://mathworld.wolfram.com/StrictOrder.html) (adding [connected](https://en.wikipedia.org/wiki/Total_order#Strict_and_non-strict_total_orders) it becomes the total order) (because not Asymmetric) between them which is used for partial order.
     > his means that there does not exist any element $s\in S$ such that ${\displaystyle m\leq s}$ and ${\displaystyle m\neq s.}$
     so we think of **both** $x,y$ are minimal.
+## 10
+### 10.1
+- > We can distinguish between two chemical compounds with the same molecular formula but different structures using graphs
+  See [this](https://www.toppr.com/ask/question/compounds-having-the-same-molecular-formula-but-different-structures-are-called/)
+- > we will show how graphs are used to represent the competition of different species in an ecological niche
+  here one niche is characterized by [one species](https://www.khanacademy.org/science/ap-biology/ecology-ap/community-ecology/a/niches-competition)
+- ~~TODO~~
+  > Each edge has *either one* or two vertices associated with it
+  ~~How only one?~~
+  [loop](https://math.stackexchange.com/a/3259936/1059606) is with only one vertex
+- why Directed multigraph can contain loops while Multigraph doesn't in table 1
+  See [this](https://www.reddit.com/r/learnmath/comments/qv20qa/comment/hktvjxp/?utm_source=share&utm_medium=web2x&context=3) where the terminology depends on the context.
+
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -6962,6 +6975,29 @@ def unimodal(start,end,List):
   - > This is a contradiction, because it is impossible for both players to have a winning strategy
     because it contradicts with the assumption "the first player does not have a winning strategy".
 ## 10
+### 10.1
+- 4~26 skipped
+- [x] 2
+  - a) Simple graph
+  - b) Multigraph
+- [ ] 28
+  - It should be "tails" based on 26.
+- [ ] 30
+  - see the ans
+    - based on practicality, no multiple edges.
+    - > if there is a train going from u to v *without stopping*
+
+      This assumption is one must otherwise we can construct one *[path_in_order_theory] loop*.
+- [ ] 32
+  - TODO this is one special simple graph.
+- [ ] 35
+  - see the ans
+    - I missed $S_3\to S_6$ although I included $S_{1,2,5}\to S_6$
+- [ ] 36 
+  - just add the time to each edge which can be seen as 2-tuple.
+  - see the ans for the formal definition
+- [ ] 38
+  - see the ans we need labels
 ### 10.4
 - [ ] 59
 ## 11
@@ -7076,6 +7112,7 @@ Redo 5.4-48
 <!-- other misc links -->
 [Dilworth_theorem_proof_combination]:https://web.vu.lt/mif/s.jukna/EC_Book_2nd/dilworth.html
 [duality_onto_with_one_to_one]:http://www.randomservices.org/random/foundations/Functions.html#aoc
+[path_in_order_theory]:https://math24.net/closures-relations.html
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
