@@ -497,9 +497,17 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   >  P (all problems *solvable*, deterministically, in polynomial time) is contained in NP (problems where solutions can be *verified* in polynomial time)
   - [NP-complete](https://en.wikipedia.org/wiki/NP-completeness#Formal_definition) is ~~one *class* of problems which are combined together~~ one problem can be reduced from **all** NP, 
     e.g. the Boolean satisfiability problem by [Cook–Levin theorem (TODO strict proof)](https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem#Proof), "thus equivalent to the P versus NP problem" (i.e. $P\overset{?}{=\mathrel{\mkern-3mu}=}NP$).
-    > *Every* problem in NP is *reducible* to $\scriptstyle C$ in polynomial time
+    > *Every* problem in NP is *reducible* to $\scriptstyle C$ in *polynomial* time
     implies
     > if *any* of these problems can be *solved* by a polynomial worst-case time algorithm, then *all* problems in the class NP can be *solved* by polynomial worst-case time algorithms
+    - [P](https://en.wikipedia.org/wiki/P_versus_NP_problem#Context) definition 
+      kw: solved
+      - TODO 
+        why NP -> "whose solution can be *found* in polynomial time on a *non-deterministic* machine"
+    - better see the [graph](https://en.wikipedia.org/wiki/P_versus_NP_problem#NP-completeness)
+      where NP-hard cares about "reducible"
+      and NP cares about "solve", i.e. "solved on a deterministic sequential machine" with "polynomial" time.
+      Since NP doesn't explicitly say it can't be "solved on a deterministic sequential machine" with "polynomial" time, so $P\subseteq NP$.
 ## 4
 ### 4.1
 - Also see [csapp_doc] "modular_overflow" for relations between modular arithmetic and 2's complement.
@@ -1273,6 +1281,24 @@ check(R_1)
       The maximum matching will use all <a name="alternating_path_Hall_Marriage_Theorem"></a>
       - Maybe see [this](https://math.stackexchange.com/a/414539/1059606)
 - [graph union](https://mathworld.wolfram.com/GraphUnion.html)
+### 10.3
+- [represent](https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_(CSR,_CRS_or_Yale_format)) sparse matrix
+  here $0$ in `COL_INDEX` corresponds to `V`.
+- example 10
+  1. > each of these four vertices in H is adjacent to another vertex of degree two in H, which is not true for a in G
+    they must be same if isomorphic because the one-to-one correspondence between vertices.
+  2. > subgraphs of G and H made up of vertices of degree three
+    similarly for the same reason as the above.
+- example 11
+  here $f (u_3) = v_4, f (u_4) = v_5$ is dual/one-to-one correspondence to $ f (u_1) = v_6$ and $f (u_2) = v_3$
+  obviously due to symmetry the order of $(u_3,u_1)$ and 
+  $(u_4,u_2)$ doesn't matter.
+  - > the adjacency matrix of H with the rows and columns labeled by the images of the corresponding vertices in G
+    It should be first getting $H$ with the default ordering $v_1\sim v_6$ and then moving the entries to use the ordering $v_6,v_3,\ldots,v_2$.
+- > Even though no polynomial-time algorithms have been found for solving this problem, it can be solved by linear average-case time complexity algorithms
+  TODO so even if $O(n^k),k\in \mathbb{N}$ is not possible, 
+  [$O(n)$](https://en.wikipedia.org/wiki/Time_complexity#Linear_time) is possible.
+- Here we only care about [Isomorphism of simple graphs](https://math.stackexchange.com/questions/3201645/expanding-definition-of-simple-graph-isomorphism-to-include-multigraphs#comment6590030_3202725)
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -7194,6 +7220,92 @@ print(subgraph_of_complete_graph(4))
     similarly $n=n_1$
   - see the ans
     - The above assumes complete graph but it is not always this case.
+### 10.3
+- 2~26,
+  30,34,
+  38~40,
+  44~46,
+  50~54,
+   skipped
+- [ ] 28
+  - a) see the ans
+  - b) 
+    > so the number of edges will be a significant fraction of |V |2 ; the graph is dense
+    here is only one rough guess.
+- [ ] 32
+  - see the ans
+    - here degree is not same as the sum
+- [ ] 36 see the ans for e) which uses the construction method for the n-cube.
+- [ ] 37
+  - a) each row has $n-1$ ones.
+  - b) same as 36
+  - c) see the ans: notice the sub-identity matrix.
+  - d) TODO maybe should be like [this](https://www.overleaf.com/read/fgwkndckjhrg#2659a9)
+- [ ] 42
+  - see the ans
+    Here although it seems that the degree-4 vertices $u_4,u_2$ on the left is adjacent while on the right the degree-4 vertices $v_5,v_3$ are *not* which have $v_1$ between them.
+    But on the right $v_5,v_3$ *are adjacent* based on the edge $v_5 v_3$.
+
+    Or more specifically, move $u_1$ to the right of $u_2 u_4$, we can get the right graph.
+- [ ] 48
+  - see the ans
+    although each consists of degree-5 vertices, they are not isomorphic.
+    - left complement: $V_{C_4}=\{\{u_i\vert i=2k,k=1\sim 4\},\{u_i\vert i=2k-1,k=1\sim 4\}\}$
+      right just $8\to (8+3)\mod 8=3\to 3+3=6\to 1\to 4\to 7\to 2\to 5\to 8$, so only one cycle
+    - > Since the complements are not isomorphic, the graphs are also not isomorphic
+      This is because their union is all possible edges which must be isomorphic
+      so if one subset is not isomorphic (i.e. different edges), then also for its complement.
+      - Same as 50 ans
+- [ ] 49
+  - since one-to-one correspondence function $f$ is an equiva-lence relation.
+  - see the ans
+    - the above is a bit wrong
+      better say that implies an equiva-lence relation or that $f$ ensures symmetric and transitive
+- [x] 56 since $\frac{v(v-1)}{4}\not\in \mathbb{N},v\equiv 2,3\pmod 4$
+- [ ] 58
+  - See [this](https://math.stackexchange.com/a/1484987/1059606) which is related with [Number of subgraphs in one complete graph](https://math.stackexchange.com/a/472464/1059606)
+    [asymptotically](https://mathoverflow.net/a/57478) with "no nice formula".
+  - > If there are three edges, then the edges may form a triangle, a star, or a path, giving us 3 possibilities
+    To strict prove only 3
+    1. 2 vertices chosen: impossible
+    2. 3 vertices chosen: $\binom{3}{2}=3$ so only one choice
+    3. 4 vertices chosen: here there are 2 vertices duplicate
+      so 
+      1. adjacent 2 distinct vertices
+        by symmetry, arbitrarily choose 2 adjacent distinct vertices, draw the 1st edge between them
+        then draw the rest 2 by connecting one of the rest 2 vertices (not duplicately chosen because we need reach 4 vertices) and one of the already chosen (not duplicately chosen because there are only 2 degree-2 vertices).
+      2. not adjacent 2 distinct vertices
+        it is impossible
+        let $v_1$ be the first duplicate vertex
+        then 2 edges $v_1 v_2,v_1 v_4$ incident with $v_1$ are chosen
+        
+        - Then let $v_3$ be the 2nd not adjacent vertex
+          But if choosing $v_3 v_{2/4}$ then 
+          $v_3$ is not degree-2
+          and ~~if $v_3 v_{1}$ then ~~ $v_3 v_{1}$ is excluded by the assumption.
+          ~~$v_1$ is degree-3~~.
+      3. not distinct vertices
+        this is trivial because one vertex is at most degree-3 if only 4 vertices totally.
+  - > Since graphs with four, five, or six edges are just complements of graphs with two, one, or no edges (respectively), the number of isomorphism classes must be the same as for these earlier cases
+    see 50.
+- [ ] 60
+  - I tried using the edge category by distance between endpoints, but it may be not easy to proceed then.
+  - see the ans
+    - It is based on the graph type (i.e. the total isomorphism)
+    - > one connected component
+      connected means [path](https://www.baeldung.com/cs/graph-connected-components)
+      it can have [cycle](https://qr.ae/pKmpiu)
+      - > a path of length four, a path of length three with an edge incident to one of the middle vertices on the path, and a star
+        let "connect back without isomorphism and duplicate with the former cases" be (*).
+
+        Think of it as starting from "a path of length four"
+        then remove one edge and (*)
+        and then remove 2 edges from the original and do the same as (*).
+
+        the above removal are all the removal of edges *not splitting* the path.
+        TODO why this type of removal will traverse all possible cases.
+- [ ] 
+- [ ] 78
 ### 10.4
 - [ ] 59
 - [ ] 63
