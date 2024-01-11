@@ -1212,7 +1212,67 @@ check(R_1)
   [loop](https://math.stackexchange.com/a/3259936/1059606) is with only one vertex
 - why Directed multigraph can contain loops while Multigraph doesn't in table 1
   See [this](https://www.reddit.com/r/learnmath/comments/qv20qa/comment/hktvjxp/?utm_source=share&utm_medium=web2x&context=3) where the terminology depends on the context.
-
+### 10.2
+- $K_3$ see example 5.
+- EXAMPLE 11
+  here $a$ can be only with $c,d$ but then $b,e,f$ are connected -> contradiction.
+- Theorem 4 is same as finding 2 disjoint subsets ~~...~~
+  So we can use iterative coloring to prove. See example 12.
+- > However, this is impossible because there are only two employees, Xuan and Ziegler, who have been trained for at least one of the three jobs of requirements, implementation, and testing.
+  better interpretation:
+  Washington and Ybarra only have architecture.
+  - Using Hall's Marriage Theorem,
+    Washington and Ybarra only has one corresponding neighbor, so $(|N(A)|=1) < (|A|=2)$
+- In this book, bipartite graph defaults to be a [simple graph](https://math.stackexchange.com/q/3709826/1059606).
+  > so I would assume they *only* care about bipartite graphs in the context of simple graphs
+  - So 
+    > We delete v and w and all edges incident to them from H
+    is only one edge
+  - [multigraph](https://mathoverflow.net/q/95011) is possible
+- Theorem 5
+  - > the inductive hypothesis tells us there is a complete matching from W1 − { v} to W2 − { w}
+    This is due to
+    > the vertices in every subset of j elements from W1 are adjacent to at least j + 1 elements of W2
+    Since we only remove $\{w\}$, so still 
+    at least $j$ elements of $W_2$. So $|N(A)|\ge |A|$ is met.
+  - case (ii) obviously can be used multiple times until it can't be used.
+  - $k\le k+1-j$ should be $k\le k-j$
+  - [Combinatorial form](https://en.wikipedia.org/wiki/Hall%27s_marriage_theorem#Statement)
+    - injective function implies complete matching.
+      - TODO why [here](https://en.wikipedia.org/wiki/Transversal_(combinatorics)) use bijection
+    - > the total unique elements they contain is at least as large as the number of sets in the group.
+      See [example 2](https://en.wikipedia.org/wiki/Hall%27s_marriage_theorem#Examples)
+    - > obtained by choosing a distinct element from each set in ${\mathcal {F}}$
+      i.e. distinct inside the transversal.
+    - [relation](https://en.wikipedia.org/wiki/Hall%27s_marriage_theorem#Equivalence_of_the_combinatorial_formulation_and_the_graph-theoretic_formulation)
+      - > An ${\mathcal {F}}$-*perfect* matching in this graph defines a system of *unique* representatives for ${\mathcal {F}}$
+      - kw: neighborhoods of the vertices
+    - TODO infinite.
+- > Hall’s marriage theorem is an example of a theorem where *obvious* necessary conditions are sufficient *too*.
+  since it is not always this case, so I skip the [paper](https://www.cs.utep.edu/vladik/2019/tr19-75.pdf) trying to show this.
+- Parallel processing implies why we use divide and conquer.
+- > has the same vertex set V as G ... $E − \{e\}$
+  TODO here it assumes $e$ is not one disjoint edge 
+- > merges u and w into a new single vertex w
+  should be "u and v"
+- [maximal matching](https://en.wikipedia.org/wiki/Matching_%28graph_theory%29#Definitions) is one matching which *can't be added with one edge* to construct one new matching.
+  - [bipartite perfect/complete matching](https://cs.stackexchange.com/a/50411/161388) is not totally same as perfect matching.
+    same as [this](https://discrete.openmathbooks.org/more/mdm/sec_matchings.html)
+    - > which will mean that every vertex in A is incident to an edge in the matching.
+- Hall's Marriage Theorem alternative proof
+  - only if / [Necessity](https://en.wikipedia.org/wiki/Hall%27s_marriage_theorem#Necessity) same as the book
+  - Sufficiency
+    Better see the [baeldung blog](https://www.baeldung.com/cs/augmenting-path) for the alternating path.
+    - > whether each of its edges belongs to M or not.
+      IMHO, it should be whether each points of the edge belongs to M or not.
+      It corresponds to $cc'\to cd'$
+    - > let u be any unmatched vertex in X
+      here only need one $u$ although maybe many unmatched vertices.
+    - TODO this seems to be wrong and it doesn't have any reference.
+      because alternating path doesn't always exist which contains this maximum matching (e.g. $(x_i,y_i),1\le i\le |X|-1/|Y|$ and one isolated vertex $x_{|X|}$). 
+      The maximum matching will use all <a name="alternating_path_Hall_Marriage_Theorem"></a>
+      - Maybe see [this](https://math.stackexchange.com/a/414539/1059606)
+- [graph union](https://mathworld.wolfram.com/GraphUnion.html)
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -1253,6 +1313,9 @@ check(R_1)
 - Roman number by [plain Tex](https://tex.stackexchange.com/a/23491/308105) `\romannumeral #1`.
 ## doc
 - [1](https://latexref.xyz)
+- font ["LaTeX Font Catalogue"](https://tug.org/FontCatalogue/mathfonts.html) from [this](https://tex.stackexchange.com/a/58124/308105)
+- symbols using [deTeXify or others](https://tex.stackexchange.com/a/21/308105)
+  notice [usage](https://tex.stackexchange.com/questions/14/how-to-look-up-a-symbol-or-identify-a-letter-from-a-math-alphabet-or-other-chara#comment1630644_14)
 ## katex
 - available [packages](https://github.com/KaTeX/KaTeX/wiki/Package-Emulation)
 - set latex arrow with [specific length](https://tex.stackexchange.com/questions/269935/arrows-of-arbitrary-length#comment647948_269935) by `\newcommand{\myrightarrow}[1]{{\overset{#1}{\xRightarrow{\hspace{3cm}}}}}`
@@ -6998,8 +7061,142 @@ def unimodal(start,end,List):
   - see the ans for the formal definition
 - [ ] 38
   - see the ans we need labels
+### 10.2
+- 2~18,
+  22~24(22 can move $a$ to the side of $e,d$ to better view the *complete* bipartite graph, 24 similar),
+  36~40,
+  54~66,
+  70,74,75
+  skipped
+- [x] 20
+  - $Q_4$ see example 17.
+- [ ] 26
+  - see the ans
+    - $W_1$ is impossible
+      Also $C_2$
+    - > since we can take one part to be every other vertex
+      Assume 2 parts $A,B$. Then one for A one for B alternately for this cycle.
+    - d) see the strict proof.
+- [ ] 28
+  - see the ans
+    Notice here we use bipartite complete matching
+- [ ] 30
+  - > as well as from the men to the women
+    compared with 28, here the number of men is bigger than that of women, so not a complete matching, but a maximum matching.
+- [ ] 31
+  - see the ans
+    - > suppose that a man is willing to marry a woman if and only if she is willing to marry him.
+      implies
+      > with an edge between a man and a woman if they are *willing to marry each other*
+    - ~~Here $N(S)\equiv k$ because 2 exactly k~~
+    - Here it uses "edges" to connect $N(S),S$
+- [ ] 32
+  - Is not it just the pigeonhole principle where $2n$ days for $2n$ players we can select distinct player every day.
+  - see the ans
+    - here should be $2n-1$ days
+    - The above doesn't use the assumption (i.e. $N(A)=P$)
+      > Every player has exactly one match with every other player
+      so if every day only *one same pair* has the match, then it is impossible to select distinct.
+- [ ] 33
+  - here if all people wants the same prizes, then contradiction.
+    - So it seems that $2m$ must be all selected, then it is trivial that all $m$ people select without the overlap.
+  - see the ans
+    - here we should use the assumption
+      > there are 2m prizes that every winner wants,
+      where $N(A)=V_2$ is same as 32
+- [ ] 34
+  1. we show this number can be reached
+    - Assume $A$ is the corresponding subset $\max_{A\subseteq V_1} def(A)$
+      we can find the complete matching $(V_1-A,V_2-N(A))$
+      if not, assume $K\subseteq V_1-A$ has $N(K),|N(K)|<|K|$ 
+      (Notice $N(K)\cap N(A)$ can $\neq \varnothing$ which is the worse case than $N(K)\cap N(A)=\varnothing$, so we only think of the better case. Here better case means $|A+K|-|N(A+K)|$ will be *smaller*)
+      then assuming $$N(K)\cap N(A)=\varnothing$, 
+      we can find $A+K$ which has $|A+K|-|N(A+K)|= (|A|-|N(A)|)+(|K|-N(K))>|A|-|N(A)|$ -> contradiction.
+      - so plus $|N(A)|$ we can find one bigger matching which has size 
+        $|V_1-A|+|N(A)|=(|V_1|-|A|)+|N(A)|=|V_1|-\max_{A\subseteq V_1} def(A)$
+  2. we show this is the maximum. TODO
+    If there is one bigger matching $M$.
+    based on the 1 process, we can find $A'=V_1^{(M)}-V_1^{(M_c)}$ where 
+    $M_c$ corresponds to the complete matching.
+    then $|A'|-|N(A')|=(|V_1^{(M)}|-|V_1^{(M_c)}|)$
+    - by drawing the graph,
+      ```
+      V_1: ******************|*************+---
+      V_2: ******************|*************+
+      ```
+      here the vertexes before `+` are $|V_1|-\max_{A\subseteq V_1} def(A)$ in 1
+      then $|A'|-|N(A')|=\overbrace{3}^{3\;-}<|A|− |N(A)|(\overbrace{4}^{\text{plus one }+})$
+      Then how to get the contradiction?
+  - see the ans
+    - it splits $V_1$ into 2 parts as the above step 1 to prove the above step 2.
+      i.e. for $A$, it can only have $min(|A|,|N(A)|)$ edges in one matching.
+    - > Then the condition in Hall’s theorem holds in G′, so G′ has a matching that touches all the vertices of V1
+      Here $\forall A_i\in V_1,A_i\neq A\Rightarrow |A_i|-|N(A_i)|\le d$
+      Then after
+      > adding d new vertices to V2 and joining all of them to all the vertices of V1
+      Let $|A_i'|-|N(A_i')|$ be the changed version.
+      Then $|A_i'|=|A_i|$ but 
+      $|N(A_i')|=|N(A_i)|+d$
+      then $|A_i'|-|N(A_i')|\le 0$ so the Hall’s theorem hold.
+- [x] 42 see the ans for the graph
+- [ ] 44 see the ans
+- [ ] 46
+  - see the ans
+    - here $u\neq w,x\neq v_1$
+      so after
+      > edges ux and v1w are removed and edges xw and v1u are added
+      no loops are generated
+      - Also since "edge v1u is not present" and "edge xw is not present"
+      - So still simple graph.
+- [x] 47
+  - only if is same as 46
+    we can get the induced graph by removing $v_1$
+  - if is just the converse process
+  - see the ans~~: the above corresponds to the last sentence in the ans.~~ which mean the same.
+- [ ] 48
+```python
+# d_list=[d_1,...,d_n]
+def graphic_sequence(d_list,n):
+  # base
+  if n==2 and d_1==d_2 and d_1==1:
+    return True
+  else
+    d_list=sort(d_2-1,...,d_n) # this is one pseudo function
+    return graphic_sequence(d_list,n-1)
+```
+  - see the ans
+    - add `n< d_1+1` to ensure the existence of `d_2-1,...,d_n`
+    - add "deleting all 0’s" to converge earlier.
+- [ ] 50,52
+```python
+# https://math.stackexchange.com/questions/3346882/number-of-sub-graphs-of-a-complete-graph#comment10314589_3353435
+import math
+def subgraph_of_complete_graph(n):
+  sum=0
+  for k in range(1,n+1):
+      sum+=math.comb(n,k)*2**(math.comb(k,2))
+  return sum
+print(subgraph_of_complete_graph(2))
+print(subgraph_of_complete_graph(3))
+print(subgraph_of_complete_graph(4))
+```
+- [ ] 68
+  - see the ans
+    - ~~we can also check after each coloring iteration among newly colored ones *and* between newly and already colored. Although this may have more overheads. But it will decrease iteration number somewhat.~~
+    - > color all the vertices adjacent to blue vertices red
+      > If we ever are in the position of trying to color a vertex with the color *opposite* to the color it *already* has
+      each coloring step implies the inherent check.
+      So at each step it ensures one subgraph which is one bipartite.
+    - > If the process terminates (successfully) before all the vertices have been colore
+      has more than one disjoint subgraphs.
+- [ ] 72
+  - we can also use for $V_1$, $n=n_2$
+    similarly $n=n_1$
+  - see the ans
+    - The above assumes complete graph but it is not always this case.
 ### 10.4
 - [ ] 59
+- [ ] 63
 ## 11
 Redo 5.4-48
 ### 11.1
@@ -7007,6 +7204,8 @@ Redo 5.4-48
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
+# TODO after graph theory
+- [alternating_path_Hall_Marriage_Theorem]
 # TODO after abstract algebra
 - [this](#RSA_Cauchy_theorem)
 - [this](#abstract_algebra_2)
