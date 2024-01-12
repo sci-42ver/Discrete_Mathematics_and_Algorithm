@@ -7226,7 +7226,8 @@ print(subgraph_of_complete_graph(4))
   38~40,
   44~46,
   50~54,
-   skipped
+  66~68,
+  75,76,78($n^2$ pairs more specifically) skipped
 - [ ] 28
   - a) see the ans
   - b) 
@@ -7304,7 +7305,34 @@ print(subgraph_of_complete_graph(4))
 
         the above removal are all the removal of edges *not splitting* the path.
         TODO why this type of removal will traverse all possible cases.
-- [ ] 
+- [ ] 61 See [this](https://math.stackexchange.com/a/4843160/1059606)
+  - If loops are allowed, then [this][2_regular_graph_with_fixed_number_vertices] [connects](https://math.stackexchange.com/a/2742838/1059606) it with the partition of the number.
+- [ ] 62
+  - a 2-regular graph is cyclic or not?
+    [proof](https://math.stackexchange.com/a/917051/1059606)
+    - [connected graph](https://mathworld.wolfram.com/ConnectedGraph.html)
+    - [this one](https://qr.ae/pKmFeQ) only uses the degree based on k-regular. So it is not better.
+  - based on [2_regular_graph_with_fixed_number_vertices],
+    we can't have 1 (to exclude loops) and 2 (to exclude parallel edges) in the partition of $7$
+    so $7$ or $3+4$.
+- [ ] 64
+  - If they can be transformed to each other by the **column swap**, i.e. changing the edge order.
+    then they are same.
+    - See [this][check_isomorphism_by_matrix]
+- [ ] 70
+  - just map between vertices with the same in-degree and out-degree. See [check_isomorphism_by_matrix] which is also shown in 72 ans.
+- [ ] 72
+  - see the ans
+- [ ] 74
+  - compared with 58,
+    a) $2+1$ due to direction
+  - see the ans
+    - based on TABLE 1 on p676, the ans assumes Directed *multigraph* instead of the Simple directed graph.
+    - The [book](https://users.metu.edu.tr/aldoks/341/Book%201%20(Harary).pdf) just enumerates these simple graphs in p236.
+    - digraph defaults to be [simple](https://doc.sagemath.org/html/en/reference/graphs/sage/graphs/digraph.html#methods)
+  - See [this](https://math.stackexchange.com/a/354183/1059606) where this corresponds to the above book.
+    > If I was pressed to find these numbers, I'd get my *computer* to find them by:
+  - TODO counting method [1](https://math.stackexchange.com/a/3852701/1059606) and [2](https://math.stackexchange.com/questions/354062/how-many-nonisomorphic-directed-simple-graphs-are-there-with-n-vertices-when#comment10316336_3051861)
 - [ ] 78
 ### 10.4
 - [ ] 59
@@ -7318,6 +7346,7 @@ Redo 5.4-48
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
 # TODO after graph theory
 - [alternating_path_Hall_Marriage_Theorem]
+- [this](https://math.stackexchange.com/questions/2490502/counting-techniques-to-find-all-nonisomorphic-graphs-with-six-vertices-all-havi#comment9806829_2490933)
 # TODO after abstract algebra
 - [this](#RSA_Cauchy_theorem)
 - [this](#abstract_algebra_2)
@@ -7334,6 +7363,8 @@ Redo 5.4-48
     here the 2nd $g$ *may be not same* as the 1st $f$ where it may not map the rest *all to $x_0$*
     But the proof process is very similar.
 - [This](https://math.stackexchange.com/q/3383113/1059606) related with 9-supplementary-43 and isomorphic. (example from [wikipedia](https://en.wikipedia.org/wiki/Distributive_lattice))
+- [chain vs cycle](https://en.wikipedia.org/wiki/Chain_(algebraic_topology)) [Also](https://math.stackexchange.com/a/3554072/1059606)
+- Burnside's lemma. See 10.3-74.
 # TODO after set theory or order theory
 - [This](https://math.stackexchange.com/a/3896116/1059606) related with 9.6-38.
 # TODO after mathematical analysis
@@ -7393,6 +7424,8 @@ Redo 5.4-48
 [refinement_lattice]:https://math.stackexchange.com/q/4840241/1059606
 [finite_chain_maximum_minimum]:https://math.stackexchange.com/a/3571343/1059606
 [not_distributive_lattice]:https://math.stackexchange.com/questions/3198879/boolean-algebra-demonstrate-that-the-pentagon-lattice-is-non-distributive
+[2_regular_graph_with_fixed_number_vertices]:https://math.stackexchange.com/a/2490901/1059606
+[check_isomorphism_by_matrix]:https://math.stackexchange.com/questions/3899990/matrix-representation-of-graph-to-determine-if-two-graphs-are-isomorphic#comment10316280_3900007
 
 <!-- gateoverflow -->
 [assign_different_jobs_to_different_employees]:https://gateoverflow.in/79804/permutation-combo?show=80049#a80049
