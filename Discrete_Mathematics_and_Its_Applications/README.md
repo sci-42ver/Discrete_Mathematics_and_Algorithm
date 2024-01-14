@@ -1306,7 +1306,7 @@ check(R_1)
   or more specifically, think it as 2 3-cycles which is connected inside and with $c$ connecting these 2 cycles plus 2 edges to be connected to cycles.
   - $G_2$ is one path plus one circuit.
 - ~~TODO~~ Theorem 1 proof is same as one proof before where also removes some vertices away.
-  i.e. p632 lemma 1.
+  i.e. p632 lemma 1. <a name="graph_link_with_relation"></a>
 - > A graph G that is not connected has two or more connected components that are *disjoint* and have G as their union
   - "two or more connected components"
     the worse case is that all are disjoint vertices.
@@ -1328,7 +1328,7 @@ check(R_1)
   This can be more specific [$\le min_degree$](https://math.stackexchange.com/a/453732/1059606) with $v$ [isolated as one component](https://math.stackexchange.com/a/2516637/1059606).
 - the minimum number of edges in a connected graph with 'n' vertices is (n-1)?
   [proof](https://qr.ae/pKmgtv) also see the comment.
-- [proof](https://math.stackexchange.com/a/4843376/1059606) of $\lambda(G)\le \delta(G)$
+- [proof][comparison_edge_connectivity_vertex_connectivity] of $\lambda(G)\le \delta(G)$
   - TODO
     > There's one for each edge, so there are $e_c$ total.
     why must be exactly $e_c$? What if many edges incur *2 new endpoints*?
@@ -7402,7 +7402,9 @@ print(subgraph_of_complete_graph(4))
   - TODO counting method [1](https://math.stackexchange.com/a/3852701/1059606) and [2](https://math.stackexchange.com/questions/354062/how-many-nonisomorphic-directed-simple-graphs-are-there-with-n-vertices-when#comment10316336_3051861)
 - [ ] 78
 ### 10.4
-- 2~12,16,34, skipped
+- 2~12,16,34,42,43,
+  56~58,
+  60,62, skipped
 - [x] 4
   - there are 2 big paths
 - [ ] 14
@@ -7511,11 +7513,116 @@ print(subgraph_of_complete_graph(4))
       > Thus e appears twice in the circuit, so the circuit is *not simple*
       ~~i.e. $u,v$ multiedge is considered as one circuit.~~
       maybe [$u-v-k-u-v$](https://math.stackexchange.com/questions/4354945/non-simple-circuit#comment9091250_4354945)
+- [ ] 40
+  - 7: $d/b$ because one $C_3$ -> $bcd$
+  - 8: $d$ (isolated) with one other due to $C_3$
+  - 9: $e$ and one other same as 8
+- [ ] 44 see the ans
+  - > Since there are only a *finite number of possibilities* for the distribution of the ni’s , the arrangement we give must in fact yield the maximum
+    TODO how to get this relation?
+    Isn't "maximum" because $(a+ 1)^2 + (b−1)^2 −a^2 −b^2 = 2(a−b) + 2 \ge 2$?
+  - Here should be $\frac{(\sum(n_i^2))-n}{2}$
+- [ ] 45
+  - To make $K_n$ disconnected,
+    it has at most $\binom{n}{2}-(n-1)=\frac{(n-1)(n-2)}{2}$
+    - so if more than $\binom{n}{2}-(n-1)=\frac{(n-1)(n-2)}{2}$, then to make it disconnected, all deleted edges are incident to the same vertex, But based on the above, it can't disconnect.
+  - see the ans
+    - The above is wrong because it can't ensure 2 components with one component being isolated must be the largest.
+    - based on 44
+      to have more edges based on the fixed number of vertices, we have *only one* component.
+      so
+      > The most edges G could have is C(k, 2) + C(n - k, 2)
+- [x] 46
+  - all entries beside the diagonal blocks are zeroes.
+  - see the ans
+    - ~~more specifically, diagonal "ones" blocks~~
+- [ ] 48
+  - c) This is $K_{m-1,n}$ or $K_{m,n-1}$
+  - d) can be also based on symmetry
+    so we only need to care about one specific vertex
+- [ ] 50 
+  - a) $\kappa(G)=1(b),\lambda(G)=2(\text{due to 2 }C_3)$
+  - b) $\kappa(G)=1(c),\lambda(G)=3(\text{due to 2 }K_4)$
+  - c) Here by symmetry, only check $b,e,f$ where all can't disconnect.
+    - see the ans
+  - d) by symmetry
+    - removing one of $a,b,c$ can't disconnect
+    - removing $a$, then by symmetry one of $b,d,e$ still can't disconnect
+    - removing 3 vertices
+      by symmetry when $a,b$ chosen, any one of the rest still can't disconnect (only check whether the rest have one path or others to connect them without drawing the graph after edges are removed)
+    - $b,c,d,f$ will isolate $a$ hinted by $\min_{v\in V}\deg(v)$
 - [ ] 51
+  - "only if" is trivial.
+  - see the ans
+    - Here disconnect means [at least 2 vertices](https://mathworld.wolfram.com/DisconnectedGraph.html#:~:text=A%20graph%20is%20said%20to,has%20those%20nodes%20as%20endpoints.)
+    - 
+- [ ] 52
+  - a) "if" is trivial.
+    - "only if" by exercise 51, this means "it is *impossible* to remove vertices to disconnect G"
+  - b) "if" is trivial 
+    because think of the easiest way, to be splitted into 2 components with $V_1,V_2$ vertices, we at least need to remove $|V_1|\cdot |V_2|$ which has the minimum 
+    $n-1$.
+  - see the ans
+    - > According to the discussion following Example 7
+      i.e. VERTEX CONNECTIVITY discussion in p718
+    - b) "only if" can be got from $\min_{v\in V}\deg(v)\ge n-1\Rightarrow K_n$.
+- [ ] 54
+  - see the ans
 - [ ] 55
+  - see the ans and [comparison_edge_connectivity_vertex_connectivity]
+  - obviously "a smallest edge cut" will construct 2 connected components
+    if more than 2, then some edges can be not removed to construct only 2 connected components leading to the contradiction with "smallest".
 - [ ] 59
-- [ ] 61
+  - see the ans
+    - "do not contain the same set of edges" doesn't say "every edge is different"
+    - > Otherwise we can suppose that x0 = y0, x1 = y1, ..., xi = yi , but $x_{i+1} \neq y_{i+1}$.
+      This means
+      > $x_0x_1=y_0y_1,x_1x_2=y_1y_2,\ldots,\text{but }x_{i}x_{i+1}\neq y_{i}y_{i+1}$
+    - > since no edge among the xks or the yl s can be repeated (P1 and P2 are simple by hypothesis) and no edge among the xks can equal one of the edges yl that we used, since we abandoned P2 for P1 as soon as we hit P1
+      firstly along the common path, then unique for $P_2$ and then unique for $P_1$.
+- [x] 61
+  - This is same as [graph_link_with_relation]
 - [ ] 63
+  - "only if" is same as 24.
+  - "if"
+    for "circuits with an even number of edges", we can label *alternatively* vertices along the circuit into 2 parts, so bipartite.
+    for vertices with no circuits. Since here allows multiedges, this means these vertices are isolated. Then we can arbitrarily put these vertices into either part.
+  - see the ans
+    - The above doesn't show explicit methods of which label to start.
+      Although it is similar to
+      > Let v be a vertex of the graph, and let A be the set of all vertices to which there is a path of *odd* length starting at v, and let B be the set of all vertices to which there is a path of *even* length starting at v
+- [ ] 64
+  - see the ans
+    - b) is largely "restricted" to exclude multiedges and *duplicate* moves.
+    - e) 1,3,4,7th edge use the toll.
+- [ ] 65 see the ans
+  - If using the same method like 64
+    This may be one huge graph
+    because
+    1. Here anyone can be on the boat instead of the necessity to have the "farmer"
+    2. the boat doesn't need to be with the farmer
+      so $(H_1W_1H_2W_2<b>,\varnothing)\to (H_2W_2,H_1W_1<b>)\to (H_1H_2W_2<b>,W_1)$
+      or $(H_1W_1H_2W_2<b>,\varnothing)\to (H_1H_2W_2,W_1<b>)$
+    3. Here the *tree* is better to get the shortest path. Also see the following uni link where obviously it doesn't show the whole tree.
+  - The following doesn't have many relations with the graph theory.
+    - The [wikipedia](https://en.wikipedia.org/wiki/Missionaries_and_cannibals_problem#The_problem) uses 3 couples 
+      > there cannot be both women and men present on a bank with *women outnumbering men*
+      But it only ensures
+      > any solution to the jealous husbands problem will also *become a solution to the missionaries* and cannibals problem
+      but not vice versa
+      because when equal number of women and men, $H_1H_2W_2W_3$ will also contradict with the requirements. This is also shown in 
+      > In this case we may neglect the *individual identities* of the missionaries and cannibals
+      - Notice the possible restriction
+        > *only one man can get out* of the boat at a time
+        and
+        > If a woman in the boat at the shore (but not on the shore) counts as being by herself
+      - I skipped the reference [4](./papers/From_China_to_Paris_Jealous_Husbands.pdf) (only give one solution without the explanation) and [5](https://sci-hub.se/https://doi.org/10.1145/144052.144106) (not using graph theory)
+    - [This uni link](https://www.cs.uni.edu/~wallingf/teaching/cs3530/sessions/session23.html) one give one generalization for $n$-couple based on the recursive algorithm
+      This seems to not ensure the shortest.
+    - [geeksforgeeks](https://www.geeksforgeeks.org/puzzle-couples-crossing-river/) doesn't show how to think of this problem detailedly.
+    - [This](https://aperiodical.com/2016/11/a-more-equitable-statement-of-the-jealous-husbands-puzzle/) only shows related problems but doesn't give one solution, similar to [this](https://www.math.utoronto.ca/barbeau/puzzles.pdf)
+    - [This](https://sci-hub.se/https://doi.org/10.2307/3619658) has *islands*, not same as this exercise.
+- [ ] 66 see the ans
 ## 11
 Redo 5.4-48
 ### 11.1
@@ -7563,6 +7670,7 @@ Redo 5.4-48
 [transitive_reflexive]:#transitive_reflexive
 [lexicographic_order_partial_order_proof]:#lexicographic_order_partial_order_proof
 [well_founded_diff_well_ordered]:#well_founded_diff_well_ordered
+[graph_link_with_relation]:#graph_link_with_relation
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
@@ -7606,6 +7714,7 @@ Redo 5.4-48
 [not_distributive_lattice]:https://math.stackexchange.com/questions/3198879/boolean-algebra-demonstrate-that-the-pentagon-lattice-is-non-distributive
 [2_regular_graph_with_fixed_number_vertices]:https://math.stackexchange.com/a/2490901/1059606
 [check_isomorphism_by_matrix]:https://math.stackexchange.com/questions/3899990/matrix-representation-of-graph-to-determine-if-two-graphs-are-isomorphic#comment10316280_3900007
+[comparison_edge_connectivity_vertex_connectivity]:https://math.stackexchange.com/a/4843376/1059606
 
 <!-- gateoverflow -->
 [assign_different_jobs_to_different_employees]:https://gateoverflow.in/79804/permutation-combo?show=80049#a80049
