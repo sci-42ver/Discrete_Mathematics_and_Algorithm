@@ -1299,6 +1299,73 @@ check(R_1)
   TODO so even if $O(n^k),k\in \mathbb{N}$ is not possible, 
   [$O(n)$](https://en.wikipedia.org/wiki/Time_complexity#Linear_time) is possible.
 - Here we only care about [Isomorphism of simple graphs](https://math.stackexchange.com/questions/3201645/expanding-definition-of-simple-graph-isomorphism-to-include-multigraphs#comment6590030_3202725)
+### 10.4
+- Here definition 2 is mostly same as p652 definition in chapter 9
+  Here it highlights something as well with kw: no multiple edges, called simple.
+- EXAMPLE 4 $G_1$ is trivial
+  or more specifically, think it as 2 3-cycles which is connected inside and with $c$ connecting these 2 cycles plus 2 edges to be connected to cycles.
+  - $G_2$ is one path plus one circuit.
+- ~~TODO~~ Theorem 1 proof is same as one proof before where also removes some vertices away.
+  i.e. p632 lemma 1.
+- > A graph G that is not connected has two or more connected components that are *disjoint* and have G as their union
+  - "two or more connected components"
+    the worse case is that all are disjoint vertices.
+  - if not "disjoint", then we can combine them.
+  - "disjoint" implies union.
+- EXAMPLE 7
+  > The cut vertices of $G_1$ are b, c, and e
+  here they are somewhat inner vertices.
+  > The cut edges are {a, b} and {c, e}
+  they are edges similar to degree-1.
+- [nonseparable](https://mathworld.wolfram.com/SeparableGraph.html)
+- EXAMPLE 8
+  - here $G_5$ is one graph with 2 complete subgraphs $K_4$ and there are 2 edges $bc,gf$ to connect them, so *removing one vertex is impossible* to cut
+    - notice this graph is symmetric after 180 Degree Rotation
+      so we only need to care about one side, i.e. one $K_4$
+      - to cut it with 2 vertices, $b,g$ are more suitable.
+        but $fh$ will connect then, so *removing 2 vertices is impossible* to cut.
+- > $0 \le \lambda(G) \le n − 1$.
+  This can be more specific [$\le min_degree$](https://math.stackexchange.com/a/453732/1059606) with $v$ [isolated as one component](https://math.stackexchange.com/a/2516637/1059606).
+- the minimum number of edges in a connected graph with 'n' vertices is (n-1)?
+  [proof](https://qr.ae/pKmgtv) also see the comment.
+- [proof](https://math.stackexchange.com/a/4843376/1059606) of $\lambda(G)\le \delta(G)$
+  - TODO
+    > There's one for each edge, so there are $e_c$ total.
+    why must be exactly $e_c$? What if many edges incur *2 new endpoints*?
+- EXAMPLE 9
+  - $G_2$ here it is composed of ~~2 ~~ 1 complete graph $K_3$ and one cycle $C_4$, so $\lambda(G)\neq 1$
+    similarly for $G_3$.
+  - we can use [$\lambda(G)\le \min \deg(v)$](https://math.stackexchange.com/a/1744562/1059606)
+  - > The reader should verify that the removal of no two edges disconnects $G_4$
+    - obviously if 2 edges are from the rightmost $K_4$, it can't disconnect
+      similarly for one edge is from $K_4$ (this will be reduced to $G_3$ somewhat)
+    - So we choose edges not from $K_4$.
+      there are 6 edges related with $b,g$.
+      - if not choosing $af$, then $a$ can connect to $c\sim f$
+        so to disconnect, we must choose $ab,ag$ to disconnect from $a$, but that will still connect by $bc,gf$.
+      - if choosing $af$, still reduced to $G_3$ somewhat
+  - > Finally, the reader should verify that $\lambda(G_5) = 3$, because the removal of any two of its edges does not disconnect
+    - similarly we can choose 2 edges from 2 $K_4$ because that would not even make these $K_4$ disconnected.
+    - Then if choosing one edge from 2 $K_4$ and one outside 2 $K_4$, the 2 edges must be incident with one same endpoint. Obviously not possible to disconnect.
+    - So we choose edges not from 2 $K_4$.
+      - similarly choosing $bd,hf$ -> not disconnect
+      - by symmetry, one from $bd$ or $hf$,
+        obviously one more edge can't disconnect $\{b,g\}$ from 
+        $\{c,f\}$
+      - nothing from $bd$ and $hf$
+        $\binom{3}{2}$ choices to choose 2 edges from $bc,cg,gf$. They all don't disconnect.
+  - TODO use one program to check.
+- EXAMPLE 10
+  - there is one big cycle for the left
+  - $a$ out-degree is 0, so not strong.
+    based on the cycle, weakly connected.
+- "strongly connected components" just finds the in-degree out-degree sequence.
+- > H has a simple circuit of length three,
+  there are $\binom{6}{3}$ choices
+  we can find $H$ has a simple circuit of length *five*, then there are $\binom{6}{5}$ which is less.
+- > show that f is an isomorphism
+  i.e. [preserves the "edge structure"](https://en.wikipedia.org/wiki/Isomorphism#Applications)
+- THEOREM 2 is same as p632 THEOREM 2.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -7335,7 +7402,119 @@ print(subgraph_of_complete_graph(4))
   - TODO counting method [1](https://math.stackexchange.com/a/3852701/1059606) and [2](https://math.stackexchange.com/questions/354062/how-many-nonisomorphic-directed-simple-graphs-are-there-with-n-vertices-when#comment10316336_3051861)
 - [ ] 78
 ### 10.4
+- 2~12,16,34, skipped
+- [x] 4
+  - there are 2 big paths
+- [ ] 14
+  - we exclude all vertices whose in-degree or out-degree are 0.
+    so a) $a\to e\to b$
+    b) we firstly exclude $f$ and edges incident with $f$
+      then $a$ becomes out-degree 0, so remove $a$
+      then $b$
+      so only one triangle is left.
+    c) after removing $e$
+      there are ~~3~~ 2 $C_4$ connected by $bc,gh$,
+      so $2+\overbrace{1}^{\text{2 cycles connected by bc,gh}}$
+      ~~so $\sum_{i=1}^3 \binom{3}{i}$ choices.~~
+  - see the ans
+    - here the single-vertex connected component should be considered.
+    - > The collection of strongly connected components forms a partition of the set of vertices of G
+      - for c) the 2 small cycles can be connected, so they are *not component*
+        so only 1
+      - [partition](https://en.wikipedia.org/wiki/Strongly_connected_component#Definitions):
+        1. since single vertex are included, so no empty
+        2. cover $V(G)$ same as 1.
+        3. disjoint because otherwise they can connected, so merged into one. <a name="connected_component_partition"></a>
+        - This is [same](https://en.wikipedia.org/wiki/Component_(graph_theory)) as the proof for 
+          > The components of any graph partition its vertices into disjoint sets
+- [ ] 17
+  - see the [above](#connected_component_partition)
+- [ ] 18 see the ans
+- [ ] 20
+  - see the ans
+    - it uses subgraph,
+      we can also use the path based on the whole graph
+      $u_1\to u_4\to u_3\to u_2\to u_6\to u_5\to u_8\to u_7$ (with degree sequence $32233322$)
+      But for the right, either $323\ldots$ or $332\ldots$ are possible.
+- [ ] 22
+  - see the ans
+    - > $u_1\leftrightarrow v_2$ and $u_8\leftrightarrow v_6$
+      due to symmetry
+    - > $u_2\leftrightarrow v_1$ and $u_3\leftrightarrow v_3$
+      this is due to $v_3,v_1$ are symmetric.
+    - > $u_5\leftrightarrow v_8$
+      is due to $(u_5,u_2,u_4)\leftrightarrow (v_8,v_1,v_4)$ here 
+      $v_8$ are the only vertex adjacent to both $v_1,v_4$ except for $v_3$
+    - > $u_6\leftrightarrow v_7$
+      $(u_8,u_5)\leftrightarrow (v_6,v_8)$
+      same as the last point, only $v_7$ is possible.
+- [x] 24
+  - > Adjacent vertices are in different parts, so every path between them must have odd length. Therefore there are no paths of length 2
+    because each edge will bring the point to *the other part*.
+  - see the [code][counting_path]
+- [x] 26 see [counting_path]
+- [ ] 28
+  - Also [see](https://www.quora.com/How-do-I-prove-that-the-minimum-number-of-edges-in-a-connected-graph-with-n-vertices-is-n-1/answer/Abhijith-N-Raj-1?comment_id=385204198&comment_type=2)
+  - The book one is similar to [this](https://math.stackexchange.com/a/237136/1059606) where "smallest possible number" corresponds to here "a connected graph with n + 1 vertices and fewer than n edges" (This is shown in the note).
+    - [This](https://math.stackexchange.com/questions/237134/prove-by-induction-that-every-connected-undirected-graph-with-n-vertices-has-at#comment525143_237136) shows the book [explicit counterexample](https://math.stackexchange.com/questions/237134/prove-by-induction-that-every-connected-undirected-graph-with-n-vertices-has-at#comment525194_237136) is not one must.
+  - [general](https://math.stackexchange.com/a/457104/1059606)
+    - > so G has at least v−(e−1)−1=v−e components as was to be shown.
+      Think of the worst case,
+      here adding one edge at most combines 2 components,
+      so the minimum is one less.
+      Also [see](https://math.stackexchange.com/questions/457042/prove-that-a-connected-graph-with-n-vertices-has-at-least-n-1-edges#comment9596258_457104)
+- [ ] 30
+  - see the ans
+    - here obviously $V(H)\ge 2$
+    - The key idea is to use the connected component.
+- [ ] 32
+  - 2 $K_3$ connected with $cd$
+    so $cd$
+  - see the ans
+    - here is asking the cut vertices.
+      so $c,d$
+- [ ] 35
+  - "cut vertex" -> "not pendant"
+    if "pendent", then it can't be one cut vertex -> contradiction.
+    - Also proved by "pendant" -> "not cut vertex"
+  - "not pendant" -> "cut vertex"
+    since removing one edge $e$ incident with $v$ can disconnect leading to $v$ not isolated 
+    then removing all edges also disconnect.
+  - see the ans
+    - > If an endpoint of a cut edge is not pendant, the connected component it is in after the removal of the cut edge *contains more than just this vertex*
+      So removing $v$ will at least leave some isolated vertices which is one connected component after disconnection.
+- [x] 36
+  - "if" is trivial because $u,v$ are disconnected
+  - "only if" is similar
+    because "cut vertex" implies $\exists u,v$ where $u,v$ are disconnected.
+    Then "every path between u and v passes through c"
+- [ ] 37
+  - The key idea is
+    > Either s or t (or both) is a cut vertex
+    which excludes both $s,t$ are not cut vertices.
+    - Then 
+      > Let w belong to the connected component that does *not contain t of the graph*
+      implies
+      > every path from w to t contains s,
+      which causes contradiction
+      - So the above means
+        $s,t$ must be not cut vertices when $d(s,t)$ is maximum.
+- [ ] 38
+  - "only if" is trivial by proving "imple circuit" -> "not cut edge"
+    because $u,v$ is still connected due to the circuit.
+  - "if"
+    then adjacent $u,v$ has only one path which is their incident edge,
+    so disconnected.
+  - see the ans
+    which all uses cut edge as the condition which is different from the above.
+    - it considers
+      > Thus e appears twice in the circuit, so the circuit is *not simple*
+      ~~i.e. $u,v$ multiedge is considered as one circuit.~~
+      maybe [$u-v-k-u-v$](https://math.stackexchange.com/questions/4354945/non-simple-circuit#comment9091250_4354945)
+- [ ] 51
+- [ ] 55
 - [ ] 59
+- [ ] 61
 - [ ] 63
 ## 11
 Redo 5.4-48
@@ -7399,6 +7578,7 @@ Redo 5.4-48
 [Warshall_code]:./miscs_snippets/py_codes/9_4_Warshall/Warshall.py
 [transitive_realtion_check]:./miscs_snippets/py_codes/9-3-8/transitive.py
 [Stirling_second_kind_code]:./miscs_snippets/py_codes/8_supplementary_40_Stirling_second_kind/Stirling_second_kind.py
+[counting_path]:./miscs_snippets/py_codes/10_4_counting_path/counting_path.py
 
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
