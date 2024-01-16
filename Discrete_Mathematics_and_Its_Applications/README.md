@@ -2,9 +2,15 @@ Please point out errors if any. Thanks beforehand.
 
 check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
 
-To help future readers understand this problem. 1. The meet 1.1 "The first is perfectly clear as we constructed $z$ by refining $P_1$", this is because $a_i\cap b_i \subseteq a_i,b_i$ which is the definition of refinement.
+1. The above property 1,2 are implied in this [QA answer](https://math.stackexchange.com/a/2442781/1059606). 2. property 3 is that if the Hamilton circuit $G$ includes one circuit $W$ inside, then the vertex $G−W\cap W$ (here $G−W$ only removes edges of $W$ ) will be passed at least twice, leading to the contradiction. This is similar to the [EULER CIRCUIT finding method](https://math.unm.edu/~loring/links/discrete_f05/euler.pdf) where we finds many cycles which each cycle *shares one vertex* with another. Please point out errors if any. Thanks beforehand.
 
-1.2 By this [comment](https://math.stackexchange.com/questions/2516124/is-this-poset-a-lattice-where-are-is-the-refinement-of-the-partitions-of-s#comment5196221_2516124), we also need to prove this construction is one partition. Take arbitrary 2 sets from each partition $\{a_1,a_2\}$ and $\{b_1,b_2\}$, then based on the disjoint property of the partition, the intersections of the Cartesian product of them are disjoint, for example $((a_1\cap b_1)\cap(a_2\cap b_1))\subseteq (a_1 \cap a_2=\varnothing)=\varnothing$
+The above property 1,3 can be combined into ["Any graph with a cut-vertex can't have a Hamiltonian cycle"](https://math.stackexchange.com/questions/1958873/hamiltonian-cycle-need-assistance#comment4021120_1958873). 1. The cut-vertex of property 1 is the other endpoint $v$ of the edge incident with the degree-one vertex $w$ ($v$ can't have degree-one, otherwise the graph won't be connected which has one connected component $G'=(V=\{v,w\},E=\{vw\})$) 2. The cut-vertex of property 3 is the intersection vertex $G−W\cap W$ if these 2 cycles $G-W,W$ only has this vertex shared.
+
+The property 3 can be also thought as the following: If we only keep the Hamilton circuit, then all vertices have degree 2. Then with this smaller circuit in the Hamilton circuit, we start from one vertex in it because we can arbitrarily start at any vertex in the circuit. Then we must pass along it to **use all edges for the circuit when degree 2**, causing some vertices **not passed** after returning to the start vertex and not able to proceed further. (This is similar to 10.5-exercise 34 in Discrete Mathematics and Its Applications 8th by Kenneth Rosen which I did after reading this QA.)
+
+Since you ask for "**graph theory** - consisting of edges and vertices", this [one](https://csacademy.com/app/graph_editor) fits in your need without redundant functions, which is similar to Erel Segal-Halevi's answer.
+
+Or more directly, the property 3 means a smaller circuit will access the start vertex twice, therefore "A Hamilton circuit cannot contain a smaller circuit within it". Hope these comments can help newbies for graph theory like me (at least when I wrote these comments).
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -1209,6 +1215,7 @@ check(R_1)
     > his means that there does not exist any element $s\in S$ such that ${\displaystyle m\leq s}$ and ${\displaystyle m\neq s.}$
     so we think of **both** $x,y$ are minimal.
 ## 10
+[graph visualizer](https://math.stackexchange.com/questions/13841/online-tool-for-making-graphs-vertices-and-edges#comment10322484_13841)
 ### 10.1
 - > We can distinguish between two chemical compounds with the same molecular formula but different structures using graphs
   See [this](https://www.toppr.com/ask/question/compounds-having-the-same-molecular-formula-but-different-structures-are-called/)
@@ -1366,6 +1373,87 @@ check(R_1)
 - > show that f is an isomorphism
   i.e. [preserves the "edge structure"](https://en.wikipedia.org/wiki/Isomorphism#Applications)
 - THEOREM 2 is same as p632 THEOREM 2.
+### 10.5
+- by [this][find_euler_circuit_undirected_path]
+  - ~~TODO relation~~ See the book theorem 1
+    > Buried in that proof is a description of an algorithm for finding such a circuit.
+  - Then
+    For EXAMPLE 1, $G_{2,3}$ can't "find a random cycle using *unmarked* edges" at the 2nd step
+  - For path, 
+    - see [this][Fleury_Algorithm] p65
+      The key is to keep each *subgraph* after each step still has one Euler path
+      - > If there are 2 odd vertices, start at one of them
+        ~~IMHO Here we can also start from ~~
+        ~~TODO~~ ~~[proof][Fleury_Algorithm_proof]~~
+        - See the book theorem 2 <a name="find_euler_path_based_on_circuit"></a>
+          > Consider the larger graph made up of the original graph with the addition of an edge {a, b}.
+          because there must one cycle including them after adding the edge.
+          So after *removing the added* edge, we can't return back if starting from the vertex in *other cycles* different from the cycle including the added edge.
+
+          ~~Notice it only means the paths constructed by theorem 1,2 will fail if not starting from odd vertices, but it *doesn't exclude other paths*.~~ See [unique_start_euler_path]
+          - Also see this [alternative][find_euler_path_undirected_path]
+            ~~TODO~~ which is same as the book theorem 2
+            > add the missing edge
+      - ~~TODO why~~ p49 "BA is a bridge"?
+        maybe because if ending at $A$, then $A$ will be disconnected with the rest.
+      - Then for $G_3$ (Here we only needs to exclude "even-even" edge when 2-odd which will increase 2 odd vertices leading to 4 odd vertices)
+        we start from $a$ with 2-odd-$(a,b)$
+        to $b$ then with 0-odd
+        to $e$ (2-odd-$(e,b)$)
+        to $d$ 2-odd-$(d,b)$
+        to $c$ 2-odd-$(c,b)$
+        to $a$ 2-odd-$(a,b)$
+        to $d$ 2-odd-$(d,b)$
+        to $b$ finished.
+- ~~TODO~~ prove [conditions for the directed graph](https://www.geeksforgeeks.org/euler-circuit-directed-graph/) to have the Euler Circuit. Also [this](https://www.topcoder.com/thrive/articles/eulerian-path-and-circuit-in-graphs) for Euler path.
+  - $H_1$ has $a$ with in-degree 0, so no Euler path.
+- THEOREM 1
+  - NECESSARY CONDITIONS
+    it splits edges into 3 cases:
+    1. start (add 1 degree)
+    2. end (add 1 degree)
+    3. pass-through (add 2 degrees)
+  - SUFFICIENT CONDITIONS
+    Same as [find_euler_circuit_undirected_path]
+    based on the assumption that the graph is *connected* (then with even degrees, it means "the degree must be at least two"), we can *splice* the graph by many cycles which always use *even* degrees
+
+    Here many cycles are constructed by the algorithm 1 "while H has edges".
+  - Notice here any even number of cycles can't share one edge
+    basis step: 2 distinct cycles share edge $vw$
+      then $v,w$ has degree 3
+    for 3 distinct cycles, then 2 cycles can be combined into one.
+    The rest is similar.
+- > Hence, it has an Euler path that must have b and d as its endpoints
+  Obviously the EULER circuit is *unique* which can be started from anywhere. (we can split the vertex with degree greater than 2 into distinct vertices all with degree 2, then the circuit become one *simple cycle*.) <a name="unique_start_euler_path"></a>
+  Then after removing one edge, the euler path can be *only* started from the endpoint of the removed edge.
+- > Euler circuits and paths are applied is in the layout of circuits
+  TODO how apply?
+  maybe [isomorphism](https://www.cs.wm.edu/~tadavis/cs243/ch10s.pdf) but that needs the *type* of EULER circuit [same](https://math.stackexchange.com/a/2762272/1059606)
+- Although Hamiltonian cycle/path has [necessary conditions](https://math.stackexchange.com/a/3449552/1059606) (obviously have because it just means the properties of the Hamiltonian cycle/path), it is difficult to *find* due to [NP-complete](https://math.stackexchange.com/questions/4431330/what-is-the-necessary-and-sufficient-condition-for-a-graph-to-be-a-hamiltonian-c#comment9276260_4431330) one.
+  - TODO undirected [to directed](https://math.stackexchange.com/a/81565/1059606).
+- EXAMPLE 5
+  - $G_2$ can use $b,c,d$ as one Hamilton sub-circuit which obviously *can't be less*, but to include $a$, $ab$ needs to included twice.
+  - Here $G_3$
+    - Hamilton path
+      - we can use [this method][check_Hamilton_path] same as [this](https://math.stackexchange.com/q/1958887/1059606) 1,2 by *removing edges* which is similar to the main ideas of the euler path
+      - since here we have 3 degree-1 vertex, we can't have one path connecting them, so no Hamilton path.
+    - Hamilton circuit
+      - We can also use the [cut-vertex][cut_vertex_Hamilton_circuit] to prove no Hamilton circuit exists
+        because the cut-vertex $y$ will be passed "at least twice"
+        Assume one Hamilton circuit exists and 2 connected components after the split are $V_{1,2}$, then we can start from *arbitrary* vertex 
+        $v\in V_1$ due to the *circuit* property, then from $v$ to $w\in V_2$, we need to pass $y$ one time, then back from $w$ to $v$, we still need to pass $y$ one time (Here the must pass of $y$ is due to the cut vertex)
+      - The above is same as the [ans](https://math.stackexchange.com/a/1959036/1059606) which I read after the comment
+        kw: at least twice, *any* vertex as the starting and ending vertex
+      - We can use [other properties](https://math.stackexchange.com/questions/1958887/proving-a-graph-has-no-hamiltonian-cycle#comment10320937_1958887) which is same as what the book says.in p735.
+        - Also see their [relations](https://math.stackexchange.com/questions/1958887/proving-a-graph-has-no-hamiltonian-cycle#comment10322413_1958887) with [cut_vertex_Hamilton_circuit].
+- The Icosian Game [relation](https://en.wikipedia.org/wiki/Icosian_calculus#Informal_definition) with the *noncommutative* algebra
+  here $\lambda=\iota \kappa$ means $BC\xrightarrow{\kappa} DC\xrightarrow{\iota} CD$
+  and $\kappa \iota$ means $BC\xrightarrow{\iota} CB\xrightarrow{\kappa} ZB$
+  - > Two travellers set off visiting 4 *neighbouring towns. One returns home* and the other continues to travel around the world trying to visit all the remaining cities *once* only.
+    [Travellers Dodecahedron](https://www.puzzlemuseum.com/month/picm02/200207icosian.htm)
+    maybe some cities excluded.
+- > Dirac’s theorem can be proved as a corollary to Ore’s theorem because the conditions of Dirac’s theorem imply those of Ore’s theorem.
+  i.e. Dirac’s $\subset$ Ore’s
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -7623,6 +7711,159 @@ print(subgraph_of_complete_graph(4))
     - [This](https://aperiodical.com/2016/11/a-more-equitable-statement-of-the-jealous-husbands-puzzle/) only shows related problems but doesn't give one solution, similar to [this](https://www.math.utoronto.ca/barbeau/puzzles.pdf)
     - [This](https://sci-hub.se/https://doi.org/10.2307/3619658) has *islands*, not same as this exercise.
 - [ ] 66 see the ans
+### 10.5
+- 2,6~10,14,17(similar to theorem 2),
+  20~26,
+  32~42(40 similar to EXAMPLE 5 $G_3$),50,
+  54~58,
+  60, skipped
+- [ ] 4
+  - use one cycle $fbcef$
+    and then $faebad(c-f)$ where the last 
+    $cf$ is added to form all even degrees.
+- [ ] 12
+  - By [unique_start_euler_path]
+    > To find the Euler path (not a cycle), let's do this: if  $V1$  and  $V2$  are two vertices of odd degree, then just add an edge  $(V1, V2)$ , in the resulting graph we find the Euler cycle (it will obviously exist), and then remove the "fictitious" edge  $(V1, V2)$  from the answer.
+    We just 
+    ```python
+    add (V1, V2)
+    while H has edges
+    ...
+    remove (V1, V2)
+    ```
+  - see the ans
+    - We need to check `if not (all even degree):` before `add` and `remove`
+      and in this case "an arbitrarily chosen vertex" should be "odd-degree vertex in the original graph"
+    - TODO 
+      > Thereafter we follow Algorithm 1 *exactly*
+      may be wrong.
+      Also see [find_euler_path_based_on_circuit] and exercise 17.
+- [ ] 16
+  - "only if"
+    "weakly connected" is trivial
+    "in-degree and out-degree of each vertex are equal" same as the proof for Multigraph.
+  - "if" same as the proof for Multigraph.
+- [ ] 18
+  similar to the Multigraph exercise
+  we use the cycles first $abdca,cdbc$. By splicing them, we get $abd(cdbc)a$ (here $()$ means splicing)
+  then append the $ad$, finished.
+- [ ] 28
+  - see the ans notice $K_{1,1}$
+- [ ] 30
+  - See [cut_vertex_Hamilton_circuit]
+- [ ] 41 see the ans
+  - > It is not hard to see that if there is to be a Hamilton path, exactly one of the inside corner vertices must be an end, and that this is impossible
+    Obviously one end vertex needs to be at the outside cycle, otherwise the circuit will omit all other vertices similar to 34.
+    Similarly one end is at the inside cycle.
+    To connect these 2 almost-cycles, the edge like $bj$ needs to be included.
+    
+    More specifically, the process is as the following:
+    1. By symmetry, choose $c$ as the end vertex.
+      and by symmetry, choose $bc$ to be omitted,
+      then $ch$ must be included
+    2. The rest 3 vertices at the outside add 6 edges which constructs 1 almost-cycle with $ch$.
+    3. Here after $chgfedab$, we must choose $bj$ because $bc$ already excluded.
+    4. Here 
+      - choose $jp$, by symmetry of the inside cycle, we choose $pq$
+        then $k,l$ *can't be included both*.
+      - by symmetry, choose $ji$ and then $jk$ exclusion means $k$ is the other end vertex.
+        So similar to the point 3, we got to $k$ at the end *without including $p$*
+- [x] 44
+  - a~c) obviously by the cycle
+- [ ] 46 see the ans
+  - > By symmetry, it makes no difference which vertex we delete, so assume that it is vertex j.
+    It should be "makes no difference which vertex" of the outside/inside cycle
+    - Then for the outside, assume that $e$ is removed.
+      $(gbaf)(idch)(j)g$ where the last $g$ is to go back to the start and $()$ is to mark the related group.
+  - The 1st premature circuit is got from 4 degree-2 vertices.
+    - The 2nd is similar from 3 degree-2 vertices $j,b,c$.
+- [ ] 48 see the ans
+- [x] 49
+  - by removing the correspond 2 edges of $Q_n$
+    the add 2 edges connecting the corresponding 2 vertices from each $Q_n$
+    Then the circuit for $Q_{n+1}$ is constructed.
+  - see the ans
+    - The above added 2 edges correspond to $0_{c_k}\to 1_{c_k},1_{c_1}\to 0_{c_1}$ in the ans.
+- [ ] 52
+  - Since the subgraph is always connected,
+    so if it can recursively go back to the start vertex,
+    then the circuit is formed.
+  - see the ans
+    Here [Fleury_Algorithm_proof] is the most detailed, so the other 2 can be skipped if understanding this one.
+    - the [book][Graph_Theory_with_Applications]
+      - > the terminus Vn must be of degree zero in Gn • It follows that Vn = Vo
+        - "must be of degree zero" because no edges are left to choose from.
+        - since $\deg(v_0)=2k,k\in\mathbb{N^+}$
+          so if $v_n\neq v_0$ then in $G_n$, $\deg(v_0)=2m-1,m<k\Rightarrow \deg(v_0)\neq 0$
+      - > Let m be the *largest* integer such that $v_m \in S$ and $v_{m+1} \in \overline{S}$. Since Wn terminates in $S$
+        here the "largest" means $\not\exists v_k \in S,k\ge m$ based on "terminate" in $S$ (otherwise $v_k$ should be the *largest*)
+      - > unless there is no alternative, $e_{i+1}$ is not a cut edge of
+        notice here $e_{i+1}$ can be the cut edge
+        for example, in the $C_3$, the 2nd and the 3rd must disconnect one vertex each.
+      - > e must also b.e a cut edge of G m
+        because otherwise $e_m$ will not be chosen.
+      - by p17 $G_m[S]$ means the *induced* subgraph.
+      - > em+l is the only edge of [S, 5] in Gm
+        because $\deg(v_i)=0,i\ge m+1$ when $G_n$
+        so none of them are connected to $v_m$.
+      - > hence of Gm[S]
+        ~~TODO here should be because the endpoints of $e$ are both "positive degree in $G_n$".~~
+        Here means "a cut edge" of the induced subgraph if "a cut edge" of the whole graph
+      - > every vertex in Gm[S] is of even degree.
+        Here it is also saying about $G_n[S]$.
+        Then $G_n[S]$ is just 
+        $G-\{e_{1\sim n}\}$ which obviously have all *even*-degree vertices because $G$ is *even* and the closed trail removes *2* degrees from each point passed.
+        - > An even graph has no cut edge
+          See [this][even_graph_no_cut_edge]
+      - In summary, it proves
+        1. closed trail -> circuit. (Similar to the proof of the euler circuit in the Rosen book)
+        2. no "positive degrees in $G_n$", so traverse all edges.
+    - I also found one [proof][Fleury_Algorithm_proof] which is same as the above because the book is written by the same pair of people.
+      - I first read the [textbook][graph_theory_graduate_textbook] p96
+        - by p69 ~~$\partial(X)$ means edge cut which will disconnect the graph.~~
+          ~~so $\partial(X)\neq \varnothing$ means connected.~~
+          > An edge cut $\partial(v)$ associated with a single vertex v is a trivial edge cut; this is simply the set of *all links incident* with v. If there are no loops incident with v, it follows that $|\partial(v)| = d(v)$
+          This means *degree* if $X$ is one "single vertex".
+        - by p59 here $F[X]$ is same as [Graph_Theory_with_Applications]
+        - Although even graph has [multiple](https://math.stackexchange.com/questions/2907258/graph-theory-properties-of-even-graph#comment6008657_2907258) definitions
+          by p66 it defines
+          > A graph in which each vertex has even degree is called an even raph
+        - Theorem 2.10 is more general than [even_graph_no_cut_edge]
+      - [Fleury_Algorithm_proof]
+        1. proves trail
+        2. closed trail
+        3. contradiction to prove "includes all edges".
+        - Here $c(F)$ means "The number of components" by [graph_theory_graduate_textbook] 40
+        - > graph F must have included edge e and edge e must be a cut edge of F
+          here $F$ should not be the terminated graph because it includes $e$ and $y\notin X$
+          > Let X be the set of vertices of *positive* degree in subgraph F at the stage when the algorithm terminates.
+        - The key of 3
+          > But this violates the algorithm since it will *not add cut edge e* to W since *non-cut edge e'* is available for inclusion in W
+          where "cut edge e" is due to "$\partial_F(X)=\varnothing$"
+          and "non-cut edge" ~~is due to $e$ is chosen as the last, so after $e$ is removed, all the rest is not cut-edge.~~ is due to "not a cut edge of $F \setminus e$", so also not one for one bigger [parent graph](https://docs.dgl.ai/en/0.2.x/generated/dgl.subgraph.DGLSubGraph.parent_nid.html) $G$.
+- [ ] 59
+  - TODO re-check after drawing the graph.
+- [ ] 61
+  - see the ans
+    - > Without loss of generality, assume the path starts 1–10, 10–16, 16–7.
+      Here only one edge of 4 based on "a pair of diagonally opposite corners" can be removed [because](https://python.plainenglish.io/where-chess-programming-and-math-meet-the-knights-tour-aac623abda09)
+      > Since there are *two pairs* of these, the path must start at a corner square and end at an adjacent corner square.
+      - > This movement needs the help of one of the two remaining middle squares
+        <!-- $$
+        \begin{aligned}
+        &&1&&2&&3&&4\\
+        &&5&&6&&7&&8\\
+        &&9&&10&&11&&12\\
+        &&13&&14&&15&&16\\
+        \end{aligned}
+        $$ -->
+        ~~Assume the above labeling~~
+        ~~then assume $1\to 10\to 16\to 7$~~
+        Because if not using, then the circuit will be generated like $2-8-15-9-2$.
+    - TODO ["4xm" case](https://math.stackexchange.com/questions/2195746/knights-tour-on-a-4-x-m-board#comment4518180_2195762)
+    - The main process can be seen [here](https://www.overleaf.com/read/nwtjtmjnxxtn#2223d5)
+- [ ] 65
+- [ ] 
 ## 11
 Redo 5.4-48
 ### 11.1
@@ -7671,6 +7912,8 @@ Redo 5.4-48
 [lexicographic_order_partial_order_proof]:#lexicographic_order_partial_order_proof
 [well_founded_diff_well_ordered]:#well_founded_diff_well_ordered
 [graph_link_with_relation]:#graph_link_with_relation
+[unique_start_euler_path]:#unique_start_euler_path
+[find_euler_path_based_on_circuit]:#find_euler_path_based_on_circuit
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
@@ -7715,6 +7958,8 @@ Redo 5.4-48
 [2_regular_graph_with_fixed_number_vertices]:https://math.stackexchange.com/a/2490901/1059606
 [check_isomorphism_by_matrix]:https://math.stackexchange.com/questions/3899990/matrix-representation-of-graph-to-determine-if-two-graphs-are-isomorphic#comment10316280_3900007
 [comparison_edge_connectivity_vertex_connectivity]:https://math.stackexchange.com/a/4843376/1059606
+[cut_vertex_Hamilton_circuit]:https://math.stackexchange.com/questions/1958873/hamiltonian-cycle-need-assistance#comment4021120_1958873
+[check_Hamilton_path]:https://math.stackexchange.com/a/2442781/1059606
 
 <!-- gateoverflow -->
 [assign_different_jobs_to_different_employees]:https://gateoverflow.in/79804/permutation-combo?show=80049#a80049
@@ -7730,8 +7975,6 @@ Redo 5.4-48
 [AHajnal_058]:./papers/AHajnal_058.pdf
 [hedetniemi1988]:./papers/hedetniemi1988.pdf
 [meisters1975]:./papers/meisters1975.pdf
-[Cynthia_and_Chahat]:./papers/Cynthia_and_Chahat.pdf
-[incl_excl_n]:./papers/incl_excl_n.pdf
 [Bar_Hillel_Falk]:https://sci-hub.se/https://doi.org/10.1016/0010-0277(82)90021-X
 [Ruma_Falk_paper]:https://sci-hub.se/https://doi.org/10.1080/13546783.2011.613690
 [a000108_11]:./papers/a000108_11.pdf
@@ -7741,14 +7984,27 @@ Redo 5.4-48
 [Alternating_Sums_A_Method_to_DIE]:./papers/Alternating_Sums_A_Method_to_DIE.pdf
 [graph_theory]:./papers/graph_theory.pdf
 [galvin]:./papers/galvin1994.pdf
+[Cynthia_and_Chahat]:./papers/Cynthia_and_Chahat.pdf
 
 <!-- other misc links -->
 [Dilworth_theorem_proof_combination]:https://web.vu.lt/mif/s.jukna/EC_Book_2nd/dilworth.html
 [duality_onto_with_one_to_one]:http://www.randomservices.org/random/foundations/Functions.html#aoc
 [path_in_order_theory]:https://math24.net/closures-relations.html
+[find_euler_path_undirected_path]:https://cp-algorithms.com/graph/euler_path.html#:~:text=To%20find%20the%20Eulerian%20path%20%2F%20Eulerian%20cycle%20we%20can%20use,then%20remove%20the%20extra%20edge.
+
+<!-- lectures -->
+[Fleury_Algorithm_proof]:./lectures/Proofs_BM_GT_3_3.pdf
+[even_graph_no_cut_edge]:https://www.people.vcu.edu/~rhammack/Math591/Homework/M591Hw3.pdf
+[find_euler_circuit_undirected_path]:https://math.unm.edu/~loring/links/discrete_f05/euler.pdf
+[Fleury_Algorithm]:https://jlmartin.ku.edu/courses/math105-F11/Lectures/chapter5-part2.pdf
+[incl_excl_n]:./lectures/incl_excl_n.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
 
 <!-- tex -->
 [main_tex]:./homework_tex/algorithm/main.tex
+
+<!-- textbook -->
+[Graph_Theory_with_Applications]:./other_related_maths_book/BondyMurtyGTWA.pdf
+[graph_theory_graduate_textbook]:./other_related_maths_book/graph_theory.pdf
