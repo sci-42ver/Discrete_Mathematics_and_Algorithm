@@ -7889,7 +7889,64 @@ Breakpoint 1 at /home/czg_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathe
 ```
   - Also see [chapter_10_5_tex_code]
 - [ ] 65
-- [ ] 
+  - a) maybe just $K_n$?
+  - d) is trivial
+  - e,f) see the ans
+  - see the ans
+    - a)
+      - > we have obtained a (necessarily noncomplete) graph H
+        We can start from one vertex $v$ which $\deg(v)<n-2$, then even at the last step $v$ is added with one edge, we still have $\deg(v)<n-1$, so not complete.
+        - If none of $v$ has $\deg(v)<n-2$, then by Ore’s the-orem, it has one Hamilton circuit.
+      - "adding missing edges" implies we can *reach all* vertices so that "a Hamilton path" and then one Hamilton circuit.
+    - c) see the ans 
+      here it uses the assumption.
+    - In summary
+      the key idea is c) which *uses the condition* and e).
+    - Here the state $H$ is just the *last step* before $G$ can have a Hamilton circuit.
+      Then it shows $H$ must *already have one Hamilton circuit* which is transformed from one Hamilton path.
+- [ ] 66
+  - only if is trivial
+  - see the ans
+    - > Then parts (c)–(f) of Exercise 65, with v1 = u and vn = v, show that G has a Hamilton circuit
+      here c) is trivial
+      d) is based on "nonadjacent vertices"
+      e) is based on c).
+      f) is based on e).
+- [ ] 67
+  - see the ans
+    - > if either both bc and cd were in H, or both gh and hi were in H
+      it should be "both bc and hi" and "both gh and cd"
+    - > Because of the 120◦ rotational symmetry of the figure, it then follows that dl and gk are in H as well.
+      because otherwise it will become the case "$aj\not\in H$".
+    - > It is clearly now impossible to include all three of the vertices i, j, and k in the Hamilton circuit
+      - It should be "j,k and l"
+      - because if existing, ~~then we can start from $j$ WLOG,~~
+        ~~then there is no way to go back to $j$.~~
+        then $jk,kl,lj$ can be only chosen one.
+        then one vertex of $j,k,l$ will have only one edge incident, so no circuit.
+- [ ] 68
+  - because remove 3 edges at one time (i.e. $C_3$)
+    then $C\cdot\lceil\frac{n}{3}\rceil$ where $\lceil\frac{n}{3}\rceil$ is the loop count.
+  - see the ans
+    - It has more granularity
+      - > All this takes O(m) time
+        means the time for the "subcircuit"
+        because at most removing $m$ edges.
+        - This have done all before the 1st iteration of "while H has edges" which finds the 1st circuit.
+        - TODO this may be wrong
+          because the time will be less when most of edges are removed.
+      - > For the while loop, finding a vertex at which to begin the subcircuit can be done in O(1) time by consulting the queue,
+        i.e. check the adjacency list related with the vertices in the last `circuit`
+        the 1st non-empty vertex is the begin vertex.
+        - more specifically, $O(len(V(circuit)))$
+      - > Furthermore, finding all the subcircuits takes at most O(m) time in total, because each edge is used only once in the entire process
+        ~~TODO this may be wrong~~
+        ~~because based on no loops in Multigraph, the above shows $\lceil\frac{m}{3}\rceil$ iterations, then multiplying by $O(m)$ in each step, we get ~~
+        ~~$O(m^2)$~~
+        - Maybe removing one edge uses $O(1)$ time because it is just checking one adjacency list of one vertex.
+          then removing $m$ edges uses $O(m)$
+          - This is implied by
+            > because each edge is used only once in the entire process
 ## 11
 Redo 5.4-48
 ### 11.1
