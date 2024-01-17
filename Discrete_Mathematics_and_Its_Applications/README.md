@@ -7860,8 +7860,34 @@ print(subgraph_of_complete_graph(4))
         ~~Assume the above labeling~~
         ~~then assume $1\to 10\to 16\to 7$~~
         Because if not using, then the circuit will be generated like $2-8-15-9-2$.
-    - TODO ["4xm" case](https://math.stackexchange.com/questions/2195746/knights-tour-on-a-4-x-m-board#comment4518180_2195762)
-    - The main process can be seen [here](https://www.overleaf.com/read/nwtjtmjnxxtn#2223d5)
+    - TODO ["4xm" case][4xm_knight_tour]
+    - The main process can be seen [here][chapter_10_5_tex_code]
+- [ ] 62
+  - similar to [4xm_knight_tour], we can color so that bipartite.
+  - see the ans which gives one strict proof
+- [ ] 64
+  - By the [code](./miscs_snippets/py_codes/10_5_64/8x8_knight_tour.ipynb)
+    the `14` is wrong because
+```bash
+$ python -m pdb 8x8_knight_tour.py
+<function save_history at 0x7f433b5814e0>
+> /home/czg_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathematics_and_Its_Applications/miscs_snippets/py_codes/10_5_64/8x8_knight_tour.py(1)<module>()
+-> import matplotlib.pyplot as plt
+(Pdb) break 122
+Breakpoint 1 at /home/czg_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathematics_and_Its_Applications/miscs_snippets/py_codes/10_5_64/8x8_knight_tour.py:122
+(Pdb) c
+> /home/czg_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathematics_and_Its_Applications/miscs_snippets/py_codes/10_5_64/8x8_knight_tour.py(122)<module>()
+-> for edge in hamilton_circuit.edges:
+(Pdb) p degree(index(3,dim_2-3,dim_1)-1,adj_mat,hamilton_circuit)
+6
+(Pdb) candidate_list(adj_mat,index(3,dim_2-3,dim_1)-1,hamilton_circuit)
+[26, 28, 33, 37, 49, 53]
+(Pdb) p degree(index(0,dim_2-2,dim_1)-1,adj_mat,hamilton_circuit)
+2
+(Pdb) candidate_list(adj_mat,index(0,dim_2-2,dim_1)-1,hamilton_circuit)
+[33, 42]
+```
+  - Also see [chapter_10_5_tex_code]
 - [ ] 65
 - [ ] 
 ## 11
@@ -7902,6 +7928,9 @@ Redo 5.4-48
 # TODO after algorithm
 - [6.2-27](https://leetcode.cn/problems/longest-increasing-subsequence/description/?utm_source=LCUS&utm_medium=ip_redirect&utm_campaign=transfer2china)
 - Why is [this](#Pseudo_polynomial) based on the length of the input instead of the value?
+# TODO after compiler
+- [This](https://stackoverflow.com/a/575337/21294350) related with naming and binding in 10_5_64 code.
+
 
 ---
 
@@ -7960,6 +7989,7 @@ Redo 5.4-48
 [comparison_edge_connectivity_vertex_connectivity]:https://math.stackexchange.com/a/4843376/1059606
 [cut_vertex_Hamilton_circuit]:https://math.stackexchange.com/questions/1958873/hamiltonian-cycle-need-assistance#comment4021120_1958873
 [check_Hamilton_path]:https://math.stackexchange.com/a/2442781/1059606
+[4xm_knight_tour]:https://math.stackexchange.com/questions/2195746/knights-tour-on-a-4-x-m-board#comment4518180_2195762
 
 <!-- gateoverflow -->
 [assign_different_jobs_to_different_employees]:https://gateoverflow.in/79804/permutation-combo?show=80049#a80049
@@ -8004,6 +8034,7 @@ Redo 5.4-48
 
 <!-- tex -->
 [main_tex]:./homework_tex/algorithm/main.tex
+[chapter_10_5_tex_code]:https://www.overleaf.com/read/nwtjtmjnxxtn#2223d5
 
 <!-- textbook -->
 [Graph_Theory_with_Applications]:./other_related_maths_book/BondyMurtyGTWA.pdf
