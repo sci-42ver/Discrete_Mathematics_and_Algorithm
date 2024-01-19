@@ -1454,6 +1454,49 @@ check(R_1)
     maybe some cities excluded.
 - > Dirac’s theorem can be proved as a corollary to Ore’s theorem because the conditions of Dirac’s theorem imply those of Ore’s theorem.
   i.e. Dirac’s $\subset$ Ore’s
+### 10.6
+- > has no interior vertices other than a
+  based on p657, $a$ is not one interior vertex.
+- ALGORITHM 1
+  the key is "updates the labels of vertices" which are the minimal distance ~~using~~ staring from vertices in $S$.
+  Then "u := a vertex not in S with L(u) minimal" based on the *greedy* algorithm.
+  - here basis step (i) is vacuously true because nothing is in $S$.
+  - Here "At the kth iteration" should be *before* the $k$th iteration.
+    This is implied by
+    > From the inductive hypothesis we see that the vertices *in* S *before* the (k + 1)st iteration are labeled with the length of a shortest path from a.
+  - > so the length of a shortest path from a to a vertex other than a is $\infty$
+    This is because
+    > contains only (besides the vertex itself) vertices in S
+    and
+    > before any iterations are carried out
+    so the label has not been updated, so all $\infty$
+  - > because Lk (v) is the length of a shortest path from a to v containing only vertices in S *after* the kth iteration
+    Then $L_k(v)$ corresponds to 
+    $|S|=k$
+    and $L_k(v)$ corresponds to 
+    $v\not\in S$ and the path $a=s_1,\ldots,s_m,v,m\le k$
+  - > There is a path with length less than Lk (v) from a to u containing only vertices of S. This contradicts the choice of v
+    i.e. there is one path $a=s_1,\ldots,s_m,u,u_1,\ldots,u_i,v,m\le k$ which has less length where $u_1\sim u_i$ may not exist.
+    Then $a=s_1,\ldots,s_m,u$ has less length,
+    we should choose $u$ instead of $v$.
+    - The contradiction is based on
+      > u := a vertex not in S with L(u) minimal
+    - > v must be labeled with the length of a shortest path to it from a
+      The above proves this key idea where "shortest path" is based on *all possible paths*.
+  - > A shortest path from a to u containing only elements of S
+    based on the algorithm construction
+    here it doesn't mean containing *all* of $S$.
+  - > then by the inductive hypothesis its length is Lk (u)
+    Here $L_k()$ only considers 
+    vertices in $S$, so although maybe some path $a=s_1,\ldots,s_m,w,w_1,\ldots,w_i,u$ is shorter than 
+    $a=s_1,\ldots,s_m',u$, we don't consider it.
+    - This is just what (ii) states.
+  - > then it must be made up of a path from a to v of shortest possible length containing elements of S other than v, followed by the edge from v to u.
+    because if $v$ is not the last vertex before $u$,
+    then the path must be $a=s_1,\ldots,s_m,v,s_{m+1},\ldots,s_{m+k},u$ which is longer than ~~original path $a=s_1,\ldots,s_m,v,u$ when $v$ is the last vertex~~ directly from $S$ to $u$ which at least removes $s_m,v$ and $v,s_{m+1}$.
+- here should be "2(n − 1) comparisons" and "n − 1 additions".
+- > the weighted graph satisfies the triangle inequality
+  see [this](https://math.stackexchange.com/questions/4723437/why-is-the-triangle-inequality-in-a-weighted-graph-always-satisfied-why-is-this#comment10008188_4723437)
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -7219,6 +7262,8 @@ def unimodal(start,end,List):
   - > This is a contradiction, because it is impossible for both players to have a winning strategy
     because it contradicts with the assumption "the first player does not have a winning strategy".
 ## 10
+- For graphs in 10.4-26, 9.4-16, many graphs in 10.6 exercises, we can use opencv to [recognize](https://hub.packtpub.com/opencv-detecting-edges-lines-shapes/) the graph and generate the related matrices and other data structures.
+  - Also maybe the schedule table in 8.1-FIGURE 5.
 ### 10.1
 - 4~26 skipped
 - [x] 2
@@ -7947,6 +7992,80 @@ Breakpoint 1 at /home/czg_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathe
           then removing $m$ edges uses $O(m)$
           - This is implied by
             > because each edge is used only once in the entire process
+### 10.6
+- 8~14,18,23,26, skipped
+- [ ] 2~6,16
+  - see the [code](./miscs_snippets/py_codes/10_6_Dijkstra/Dijkstra.py)
+- [ ] 19 see the ans
+- [ ] 20 
+  - Here it allows duplicate passes of one same vertex.
+    Because it considers longest so not necessary to remove the loop.
+    - But based on "simple", it should not allow revisit of the same vertex, so "Bellman-Ford" also [doesn't function](https://stackoverflow.com/a/63571123/21294350) (Here also fail due to the negative cycle).
+      Then it can be [reduced from the Hamiltonian Path problem][longest_simple_path_NP_hard] which takes only [part of all vertices](https://cs.stackexchange.com/a/10734/161388). <a name="Hamiltonian_Path_NP_hard"></a>
+      - Then since NP-hard has [no efficient algorithm](https://cs.stackexchange.com/a/139832/161388), so I skip it.
+    - Floyd Warshall Algorithm which is just the Warshall’s Algorithm also doesn't function due to maybe not *simple*.
+      - But if we think of the street cleaning as the 19 ans says, then allowing "duplicate passes of one same vertex" is reasonable.
+      - Still the [negative cycles](https://stackoverflow.com/a/53436752/21294350) when negated make this method fail.
+        for example with the targets $u\to w$
+        at some iteration to add $a$, we update with $u\to a\to w$, $u\to a\to b$ and $b\to a\to w$ because we want the *longest*.
+        then if $b$ after some time, then maybe $(u\to a\to )b( \to a\to w)$ which is longer.
+        (Notice the above is impossible for shortest because $u\to a\to w$ is shorter.)
+  - Here "Dijkstra’s Algorithm to find the longest" by using negative version is [impossible](https://stackoverflow.com/questions/8027180/dijkstra-for-longest-path-in-a-dag#comment137189941_73817049)
+    Since it [doesn't have one optimal substructure](https://stackoverflow.com/a/40843559/21294350) which can be also seen the proof of (i) in p748 where "There is a path with length less than Lk(v) from a to u containing only vertices of S." *won't hold* because minus negative will be bigger instead of less (Also [see](https://stackoverflow.com/a/13159425/21294350) and [this](https://stackoverflow.com/a/22891500/21294350) which also compares with Floyd Warshall where "not negative weight cycles").
+    - But if its *original* weights are negative,
+      then we [can use the positive version](https://stackoverflow.com/questions/8027180/dijkstra-for-longest-path-in-a-dag#comment105193455_40843559) and use the Dijkstra’s Algorithm to calculate the shortest when positive which is just the longest when negative
+    - As the above shows, [Bellman-Ford](https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/#) which has code implementation considers the negative weight condition.
+      - $N-1$ because one path without the **revisit** "with N vertices can have at most N-1 edges".
+      - > It is important to note that during the N-1 relaxations, we presumed that each vertex is traversed only once. However, the reduction of distance during the N’th relaxation indicates revisiting a vertex.
+        notice here maybe more than one loop (i.e. more than one vertices revisited)
+        But $N$ ensures at least one vertex is revisited.
+      - If allowing the negative cycle,
+        since this may occur at any iteration, so it will go to infinite negative.
+        To avoid it, we need to remove visited edges. But the visited edges are different for different path, so we need to think *separately about each path*. So it is similar to brute force.
+  - In summary, "Bellman-Ford" and "Floyd Warshall" can't be used here due to the negative cycle.
+    And "Dijkstra’s" can't be used due to "not optimal substructure".
+- [x] 22
+  - based on induction at the $i$th step
+    all distance are based on with interior vertices $v_{1\sim i}$ which either including 
+    $v_i$ or not.
+    - The above is just FIGURE 4 in p636.
+- [ ] 24 see the above "optimal substructure".
+- [ ] 28
+  - > since each edge appears in six paths (and sure enough, 17,580 = 6 ·2930 )
+    This is just the conditions where when we select $S$ fixed,
+    then WLOG assume another $N$ is adjacent, then either $SNxxx$ ($SxxxN$ excluded due to already $/2$ by reversing the order). So $3!=6$
+- [ ] 30
+  - > equal to the minimum total weight of a path from u to v
+    this just constructs one equivalence relation as Floyd-Warshall Algorithm does.
+  - > It is now clear that finding the circuit of minimum total weight in G′ that visits each vertex exactly once is equivalent to finding the circuit of minimum total weight in G that visits each vertex at least once
+    assume there is one circuit $v_1,\ldots,v_i,v_{i_1},v_{i_2},\ldots,v_{i_k},v_{i+1},\ldots,v_n$ in G where $i_{1\sim k}\in \{v_{1\sim i}\}$, then 
+    $v_i,v_{i_1},v_{i_2},\ldots,v_{i_k},v_{i+1}$ must be shortest between $v_i,v_{i+1}$, otherwise contradiction with "*minimum* total weight".
+    Then all paths visiting duplicate vertices which has been visited so far like $v_i,v_{i_1},v_{i_2},\ldots,v_{i_k},v_{i+1}$ can be combined into 
+    $v_{i},v_{i+1}$ by $G'$.
+- [ ] 31
+  - > with no simple circuits
+    Then isn't it [longest_simple_path_NP_hard]?
+  - see the ans
+    - Here "in a weighted directed graph with no simple circuits" means " directed *acyclic* graph"
+    - DAG must have one Topological sorting
+      [proof](http://www.cs.emory.edu/~cheung/Courses/253/Syllabus/Graph/DAG.html)
+      - > there is some vertex that does not have any incoming edges
+        if all have, then we can start from arbitrary vertex and back to its incoming vertex
+        then since with the finite vertices, it will must back to one vertex which has been visited before.
+        Then leading to the circuit which is contradiction.
+      - notice here maybe more than 1 "vertices that does not have any incoming edges".
+    - The ans is same as this [one](https://www.geeksforgeeks.org/find-longest-path-directed-acyclic-graph/#) where `dist[u]` must be the maximum when it is visited at the outside loop because it has *traversed all* edges to $u$.
+      except:
+      1. Here it mainly targets backwards by `P( j) + w( j, i)` over all j < i.
+      2. Use `C(i)` to track the path.
+    - the ans
+      - > `P(i) = 0` if there are no such values of j.
+        is the initial step.
+      - The key is
+        1. > let P(i) be the maximum of P( j) + w( j, i)
+          traverse all possibilities to choose the best.
+        2. it has [optimal substructure](https://blogs.asarkar.com/assets/docs/algorithms-curated/Longest%20Path%20in%20a%20DAG%20-%20Khan.pdf) where [Relax](https://www.baeldung.com/cs/dijkstra-edge-relaxation) means update the distance.
+          This is because by the *ordering* we can just split the path into subpath and combine them. This is *intuitive*.
 ## 11
 Redo 5.4-48
 ### 11.1
@@ -8047,6 +8166,9 @@ Redo 5.4-48
 [cut_vertex_Hamilton_circuit]:https://math.stackexchange.com/questions/1958873/hamiltonian-cycle-need-assistance#comment4021120_1958873
 [check_Hamilton_path]:https://math.stackexchange.com/a/2442781/1059606
 [4xm_knight_tour]:https://math.stackexchange.com/questions/2195746/knights-tour-on-a-4-x-m-board#comment4518180_2195762
+
+<!-- stack overflow -->
+[longest_simple_path_NP_hard]:https://stackoverflow.com/a/53399638/21294350
 
 <!-- gateoverflow -->
 [assign_different_jobs_to_different_employees]:https://gateoverflow.in/79804/permutation-combo?show=80049#a80049

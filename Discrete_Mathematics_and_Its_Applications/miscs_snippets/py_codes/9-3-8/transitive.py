@@ -1,5 +1,4 @@
 # https://stackoverflow.com/a/45159105/21294350 from https://stackoverflow.com/a/64448213/21294350
-first,second=[[1,0,0,1,0,0],[0,1,1,1,0,0]], [[0,1],[1,1],[1,0],[1,0],[1,1],[0,1]]
 from itertools import starmap
 from operator import mul
 # https://stackoverflow.com/a/1790532/21294350
