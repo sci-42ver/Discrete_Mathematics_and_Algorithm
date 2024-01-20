@@ -1497,6 +1497,150 @@ check(R_1)
 - here should be "2(n − 1) comparisons" and "n − 1 additions".
 - > the weighted graph satisfies the triangle inequality
   see [this](https://math.stackexchange.com/questions/4723437/why-is-the-triangle-inequality-in-a-weighted-graph-always-satisfied-why-is-this#comment10008188_4723437)
+### 10.7
+- EXAMPLE 3
+  - > These four edges form a closed curve that splits the plane into two regions, R1 and R2
+    This subgragh must exist due to the planar graph property.
+  - > then the edge between v6 and v3 cannot be drawn without a crossing
+    because must cross the square.
+    - > then the edge between v2 and v6 cannot be drawn without a crossing
+      similarly must cross the quadrangle $v_{4352}$.
+- "simple" in THEOREM 1 excludes the loops.
+  Also see the proof of COROLLARY 1.
+- COROLLARY 1
+  - > When an edge occurs twice on the boundary (so that it is traced out twice when the boundary is traced out)
+    it may be based on the circuit around the boundary. so 
+    $g-f-\ldots-f-g$ where $f-g$ is counted twice.
+  - [connected_planar_simple_graph]
+    Then
+    > The degree of each region is at least three
+    > note that the degree of the unbounded region is at least three 
+    ~~maybe wrong because possible graph by 3 vertices $\cdot-\cdot-\cdot$~~
+    See this for [the case $\cdot-\cdot-\cdot$](https://math.stackexchange.com/a/2414907/1059606)
+    - > The degree of each region is at least three.
+      either has the visible boundary
+      then when the worst case, with 3 vertices it has degree 3.
+      or not visible, i.e. unbounded
+      > the degree of the unbounded region is at least three because there are at least three vertices in the graph
+      This is the above $\cdot-\cdot-\cdot$.
+    - > Because the graphs discussed here are simple graphs, no multiple edges that could produce regions of degree two, or loops that could produce regions of degree one, are permitted
+      here
+      1. "degree one" -> one edge ~~-> either connected (degree 1) or unconnected (degree 2). But both is impossible where the former is due to loop is not allowed while the latter is due to the degree unmatch.~~ impossible because $v\ge 3$ which indicates $e\ge 2$ by [connected_planar_simple_graph].
+      2. "degree 2" -> two edges which must be unconnected. Based on the above, $\deg(R)=4$
+      3. "degree 3" -> 3 edges (based on the above 1,2 edges are all excluded)
+        3 possibilities in [connected_planar_simple_graph], i.e. 3-2,4-1,4-2 where 3-2 means row-3 and column-2. The latter 2 are unbounded one so $\deg(R)=6$
+      4. Then 
+        > there are no circuits of length three implies that the degree of a region must be *at least four*
+- [Homeomorphism](https://en.wikipedia.org/wiki/Homeomorphism_(graph_theory)) which is related with the subdivision is different from [homomorphism](https://math.stackexchange.com/a/183142/1059606) which maps between vertices and *preserves edges* ([wikipedia](https://en.wikipedia.org/wiki/Graph_homomorphism#Definitions)).
+- Kuratowski Theorem [proof][Kuratowski]
+  - Figure 4
+    > then create a cycle including both u and v by tracing around the exterior of the picture
+    we can just replace one part of $C$ by part of $P$ where both are adjacent to $w$ and the latter also contains $v$.
+  - > a graph is planar if and only if each of its blocks (*maximal 2-connected* subgraphs) is planar.
+    See [this](https://math.stackexchange.com/a/840292/1059606)
+    - [block p10](https://www.math.cmu.edu/~af1p/Teaching/GT/CH3.pdf)
+    - [outer face](https://web.archive.org/web/20230519055753/http://cgm.cs.mcgill.ca/~athens/cs507/Projects/2004/Andrew-King/507planar.html)
+    - > we draw this final block with the intersection point on the outer face, and similarly G' with the same intersection point on the outer face (this is *always possible*)
+      [See](https://math.stackexchange.com/a/2026067/1059606) which is based on the stereographic projection.
+      > make sure that you take N to be inside of a face that has u on its boundary
+    - kw:
+      1. > if they share two vertices, then the union of the two blocks must be two-connected, contradicting maximality
+      ~~2. > we seek to remove a single block which intersects with only one othe~~
+        ~~This is ensure we can remove such a block. See [this](https://mathworld.wolfram.com/Block.html) where the $\cdot-\cdot$ in the left graph can't be removed~~
+    - Claim 3
+      See [this][Xuyifan_Kuratowski]
+      - Lemma 4.7
+        - > Mi is $H_i \cap \{u, v\}$
+          This implies
+          > Since {u, v} and the edge uv are the only part Mi ’s share, we can merge the planar embeddings of Mi ’s and get a planar embedding of G + uv
+        - Here If $uv\in E(G)$
+          Then
+          1. > with the addition of a new edge uv
+            is necessary.
+            - if $uv\not\in E(G)$, we just have 
+              $G + uv$ as the following shows
+          2. > get a planar embedding of G + uv (G ∪ {uv}),
+            becomes directly $G$
+            - if $uv\not\in E(G)$, see the above.
+          3. > $\epsilon(Mj ) < \epsilon(G)$
+            is trivial.
+            - if $uv\not\in E(G)$, then based on 
+              $\kappa(G)=2$, at least one $M_p$ has one edge with each of $u,v$, which is one more than $uv$.
+              So still $\epsilon(Mj ) < \epsilon(G)$
+          4. > we combine Mj − uv with Mp − uv where p 6= j, 1 ≤ p ≤ k 
+            This means "the addition of a new edge uv" make all $M_i,1\le i\le k$ have $uv$
+          5. > When we combine this path with Mj −uv, we get a subdivision of K5 or K3,3
+            This is the key idea which *replaces* $uv$ in $M_j$ with the path $w_{1\sim k}$ in $M_p$ due to "connected". 
+            "replace" implies subdivision.
+      - Lemma 4.8
+        - > Since G is 2-connected, there exists another path connecting u, v, which does not contain the edge uv
+          ~~based on "2-connected", $G-\{u\}$ is still connected.~~
+          ~~then~~ 
+          This is [same](https://www.whitman.edu/mathematics/cgt_online/book/section05.07.html) as Lemma 3 in [Kuratowski]
+        - > Show that if minimal nonplanar graphs without any subdivision of K5 or K3,3 as subgraphs did exist, they would be 3-connected and simple.
+          simple is because can remove loops and multi-edge keeping only one to construct one smaller nonplanar graph.
+          So "minimal" implies "simple".
+      - Lemma 4.9
+        - > Clearly $\mu(G)\ge 4$
+          This can be relaxed to $\mu(G)\ge 5$
+          because $\mu(G)=3,4$ are the worst when $K_{3,4}$ which is planar.
+        - > a P3 avoiding v between c and u
+          i.e. avoiding $v$ and $b$.
+          Here only needs to ensure the $P_i$ connecting $v,w$ in the cycle like $v,w,a,b$ *doesn't pass $a,b$*.
+        - > u-P1-c-P2-v-P3-d-P4-u.
+          here $u,v$ must be inserted one vertex between
+          then for example $u-P1-c$ where removing $v,d$ will must remove $uv$ so that $G-uv$ removing $v,d$ is same as $G$ removing $v,d$.
+          - i.e. Here we must remove *one vertex including $u,v$*.
+      - Theorem 4.10
+        - > if G − uv does not contain any bridge of C0, then it is clear that with the addition of edge uv, the graph is still planar,
+          This means no other edges, implied by the following
+          > Now how do you *divide* the remaining edges into the "pieces" of G that still need to be embedded? These are the bridges.
+        - > if an outer bridge of C0 has more than 2 vertices of attachment, we can always find a new cycle that contains parts of the outer bridge and has more edges in its interior.
+          ~~let these vertices of attachment be ~~ There must be 2 among "more than 2 vertices" in the "same arc $uv$"
+          then by 
+          > not all vertices of attachment lie on the same arc uv
+          i.e. if they are inside the same arc, then we can replace $vw$ in the cycle by the outer bridge
+          But if they are not inside the same, then $vw$ must pass $u$ or $v$, so they can't be replaced.
+        - > Also, if the size of an outer bridge is more than one, there exists a vertex that is not on C0 in the bridge. Then the two vertices of attachment form a 2-vertex cut of both G − uv and G
+          i.e. isolate the vertex which is "a vertex that is not on C0 in the bridge".
+        - overlap [meaning](https://www.math.arizona.edu/~glickenstein/math443f08/notes11.pdf)
+          >  Two bridges avoid one another if the vertices of attachment of one bridge lie *entirely in one segment* of the other bridge. Otherwise they overlap
+          for example, skew is one example of overlap.
+        - > Overlapping bridges of a cycle in a connected graph are either skew or else equivalent 3-bridges.
+          here "3-bridge" is [explicitly stated](https://faculty.etsu.edu/gardnerr/5340/Beamer-Bondy-Murty-GT/Proofs-BM-GT-10-4.pdf) because
+          > If $k \ge 4$, then B and B 0 are skew
+          there is no 4 vertices to choose, so impossible to be skew.
+        - > Let G be a plane graph containing cycle C. The inner bridge of C avoid one another, and the outer bridges of C avoid one another.
+          [TODO](https://faculty.etsu.edu/gardnerr/5340/Beamer-Bondy-Murty-GT/Proofs-BM-GT-10-4.pdf)
+        - > If all bridges of C0 are inner (outer) bridges, then we can draw the edge uv in the exterior (interior) of C0 and achieve a planar embedding of G
+          This is based on the assumption $G-uv$ is planar, then adding $uv$ at the different side must not cause the crossing, so still planar.
+        - > We consider 4 cases in terms of the relative position of B1 and B2. Without loss of generality, we assume that u, x2, v, x1 lie on the cycle in a clockwise order
+          trivially, $u,v$ can be drawn arbitrarily first,
+          then since the label of $x_2,x_1$ is arbitrary and based on the overlap,
+          we can put one point between $u,v$ at the different sides and label like $x_2,x_1$.
+        - TODO
+          - ~~why Case (1) and (2) don't consider $x_1,y_1,v,y_2$ and ?~~
+            because overlap between $y_1 y_2$ and $x_1 x_2$.
+          - Notice here cycle may have many vertices which implies subdivision.
+          - why Case (3) and (4) can't be only one vertex duplicate?
+          - [This](https://math.stackexchange.com/q/4848046/1059606)
+          - > We know that *B2 overlaps* the arc uv, and is skew to B1
+            B1 overlaps with B2 -> skew.
+        - Summary:
+          1. proves the cycle $C_0$ of $G − uv$ existence
+            - > G − uv is 2-connected
+              Lemma 4.9. using "3-connected" property Lemma 4.7
+              - Lemma 4.7 proof
+                "G is not planar" -> $M_j$ nonplanar
+                Use it to construct one "subdivision of K5 or K3,3," -> contradiction.
+            - > By Lemma 4.8, there are at least two internally-disjoint paths between u and v
+              Use the induction for $u-w$ with the cycle and 2-connected for the path $P$ from $u$ to $v$.
+              Which is shown in Lemma 3 in [Kuratowski]
+          2. Based on "contain" we check the *subgraph* which is also shown in the statement of THEOREM 2 in the book.
+          3. Based on "the most edges in Int(C0)." -> "2 vertices of attachment" and "overlap the arc uv."
+            "3-connected" -> "the size 1"
+            Notice here is for outer bridges.
+          4. 4 cases.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -8066,6 +8210,53 @@ Breakpoint 1 at /home/czg_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathe
           traverse all possibilities to choose the best.
         2. it has [optimal substructure](https://blogs.asarkar.com/assets/docs/algorithms-curated/Longest%20Path%20in%20a%20DAG%20-%20Khan.pdf) where [Relax](https://www.baeldung.com/cs/dijkstra-edge-relaxation) means update the distance.
           This is because by the *ordering* we can just split the path into subpath and combine them. This is *intuitive*.
+### 10.7
+- 2~6,11,
+  12~14,16,22~26 skipped
+- [ ] 8 see the ans
+- [x] 10
+  - obviously, $v_3$ then can be only at the bottom-right of $v_2$ or at the top-left of $v_1$.
+    then by symmetry, choose the bottom-right of $v_2$
+    then $R_1$ is splitted into $R_{11}$ which is inside 
+    $v_{4253}$ and $R_{12}$ otherwise.
+
+    Then we have the map $\{R_2:v_3,R_{11}:v_1,R_{12}:v_2\}$ where 
+    if $v_6$ is in $R_2$, then $v_6,v_3$ will cross, and the others are similar.
+- [ ] 15 just algebraic calculation.
+  - see the ans
+- [ ] 17
+  - ~~> the degree of the unbounded region is at least 4~~
+    ~~This is based on $v \ge 3$~~
+    ~~See [connected_planar_simple_graph] where $k$ edges in the unbounded region is degree $2k$.~~
+  - see the ans
+    - The above is wrong because maybe $C_5$ which has degree 5.
+    - COROLLARY 1
+      - here *at least 2 edges* because one edge at most connects 2 vertices.
+        Then one edge contributes 1 (in one cycle) or 2 (not in one cycle) degrees.
+        so 2~4 for 2 edges where 2 is the cycle (i.e. multiedge), 3 is one edge and one loop and 4 is similar. (But all is disallowed)
+      - So at least 3 edges with the loop causing degree 3.
+    - Corollary 3
+      - similar to the above 4~5 is impossible because 1 or 2 vertices can't be one cycle when 3 edges.
+      - 4 edges
+        similarly 4($C_4$),5($C_3$ and one edge),8 are possible.
+    - Here
+      > no simple circuits of length 4 or less
+      so the above all is impossible
+      then for 5 edges, at least degree 5 ($C_5$).
+    - ~~Or~~ see [this](https://math.stackexchange.com/a/4848127/1059606) which I posted as one answer.
+      ~~we only needs to care about the smallest degree with the same edge number~~
+- [ ] 18
+  - $r=e-v+2k$ based on $r_i=e_i-v_i+2$ is wrong
+    because the unbounded region is counted duplicately.
+  - see the ans
+    - The above should minus $k-1$ due to "counted duplicately".
+- [ ] 20 see the ans
+  - Or $fd$ doesn't exist.
+- [ ] 27
+  - We can use COROLLARY 1 to restrict the range based on [this](https://math.stackexchange.com/a/3016505/1059606)
+    - a) $e\le 3v-6$ where $v=5$ so $e\le 9$ while $e_{K_5}=10$, so $1$.
+    - b) 15->
+- [ ] 28
 ## 11
 Redo 5.4-48
 ### 11.1
@@ -8201,12 +8392,17 @@ Redo 5.4-48
 [path_in_order_theory]:https://math24.net/closures-relations.html
 [find_euler_path_undirected_path]:https://cp-algorithms.com/graph/euler_path.html#:~:text=To%20find%20the%20Eulerian%20path%20%2F%20Eulerian%20cycle%20we%20can%20use,then%20remove%20the%20extra%20edge.
 
+<!-- wolfram -->
+[connected_planar_simple_graph]:https://mathworld.wolfram.com/PlanarConnectedGraph.html
+
 <!-- lectures -->
 [Fleury_Algorithm_proof]:./lectures/Proofs_BM_GT_3_3.pdf
 [even_graph_no_cut_edge]:https://www.people.vcu.edu/~rhammack/Math591/Homework/M591Hw3.pdf
 [find_euler_circuit_undirected_path]:https://math.unm.edu/~loring/links/discrete_f05/euler.pdf
 [Fleury_Algorithm]:https://jlmartin.ku.edu/courses/math105-F11/Lectures/chapter5-part2.pdf
 [incl_excl_n]:./lectures/incl_excl_n.pdf
+[Kuratowski]:./lectures/Kuratowski.pdf
+[Xuyifan_Kuratowski]:./papers/Xu,Yifan.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
