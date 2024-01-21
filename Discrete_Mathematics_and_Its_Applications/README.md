@@ -8212,7 +8212,8 @@ Breakpoint 1 at /home/czg_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathe
           This is because by the *ordering* we can just split the path into subpath and combine them. This is *intuitive*.
 ### 10.7
 - 2~6,11,
-  12~14,16,22~26 skipped
+  12~14,16,
+  22~26,34,35(these 2 similar to 32,33) skipped
 - [ ] 8 see the ans
 - [x] 10
   - obviously, $v_3$ then can be only at the bottom-right of $v_2$ or at the top-left of $v_1$.
@@ -8252,11 +8253,74 @@ Breakpoint 1 at /home/czg_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathe
     - The above should minus $k-1$ due to "counted duplicately".
 - [ ] 20 see the ans
   - Or $fd$ doesn't exist.
-- [ ] 27
+- [ ] 27 see the ans
   - We can use COROLLARY 1 to restrict the range based on [this](https://math.stackexchange.com/a/3016505/1059606)
     - a) $e\le 3v-6$ where $v=5$ so $e\le 9$ while $e_{K_5}=10$, so $1$.
-    - b) 15->
-- [ ] 28
+      example for 1 see [this](https://alexispenamth350.wordpress.com/2012/10/03/the-crossing-nu/)
+    - b) 15->12 so 3 See [this p2](http://people.qc.cuny.edu/faculty/christopher.hanusa/courses/634sp12/Documents/634sp12ch9-2.pdf)
+    - c) 21->15 so 6, but failed.
+      one possible case for 9 see [this](https://math.stackexchange.com/a/369781/1059606)
+    - Similarly we use COROLLARY 3 for $K_{m,n}$
+      - d) 12->10 (2) 
+        example for 2 see [this](https://www.math.ru.nl/OpenGraphProblems/Wouter/RichterThomassen.pdf)
+      - e) 16->12 (4)
+        [This](https://arxiv.org/pdf/1404.1222.pdf) just uses the theorem
+      - f) 25->16 (9)
+  - Based on [this](https://mathworld.wolfram.com/GraphCrossingNumber.html) "NP-complete problem", it may be difficult to prove the crossing number of the complete graph and the complete bipartite graph.
+- [ ] 28 see the ans
+  - Here to form the 3-cycle, all in the inside or outside is both impossible because for example for $f$ only $f-i,f-h$ inside but no $i-h$ and for $a$ only $a-e,a-b$ inside but no $e-b$.
+  - $e=15,v=10$ here $e\le 2v-4$ is no use.
+  - [proof by cut-the-knot](https://www.cut-the-knot.org/do_you_know/CrossingNumber.shtml#:~:text=Among%20the%20six%20incarnations%20of,with%20one%20or%20zero%20crossings.) of $\ge 2$
+    - $2q\ge gr$ here uses one edge will contribute to 2 degrees in total
+      and the smallest cycle is the smallest degree of the region (for example $C_3$ with one edge has degree 3 inside and 5 outside of the cycle, i.e. [connected_planar_simple_graph] figure row_4-col_3)
+      Then based on this
+    - girth equal to 5 see [this](https://math.stackexchange.com/questions/4052160/prove-that-petersen-graph-has-no-cycles-less-than-or-equal-to-4#comment10330122_4052197) although this [one](https://math.stackexchange.com/a/1464559/1059606) and the cut-the-knot I didn't understand.
+    - Notice here $c-2\ge 0$, which may influence the inequity sign.
+```python
+from sympy import *
+init_printing(use_unicode=True)
+f,c,e,v,E,k = symbols('f c e v E k')
+f=(2+e-v)
+e=(E-k)
+print(simplify(solve((2+E-k-v)*c<2*(E-k),k))) # this can't simplify to the final step
+```
+- [x] 29
+  - This is one special case of [Zarankiewicz's Conjecture](https://mathworld.wolfram.com/ZarankiewiczsConjecture.html)
+  - we can also iterate from $(0,1)$ to $(0,\frac{n}{2})$
+    then for $(0,1)$ no intersections
+    for $(0,i)$ it has 
+    $(i-1)\cdot (\overbrace{m-2}^{(\pm 1,0)}+\overbrace{m-4}^{(\pm 2,0)}+\cdots+\overbrace{0}^{(\pm \frac{m}{2},0)})$
+    Then $2\cdot \sum_{i=1}^{\frac{m}{2}-1}i \cdot \frac{(m-2)\frac{m}{2}}{2}=\frac{(m-2)m}{4}\frac{(n-2)n}{4}$
+- [ ] 30
+  - see the ans
+- [ ] 31 see the ans
+  - Still similar to 27, it is [difficult][wolfram_GraphThickness] to calculate.
+  - So I use this [lower bound](https://math.stackexchange.com/q/2553376/1059606) and example split I didn't take time to find.
+    this is more flexible than [this][wolfram_GraphThickness] exact form. From the [paper](https://core.ac.uk/download/pdf/82563356.pdf), the exception for 9,10 may be not strictly proved.
+```python
+complete_graph_edge=lambda x:x*(x-1)/2
+thickness_lower_bound=lambda v:complete_graph_edge(v)/(3*v-6)
+for i in range(5,8): print(thickness_lower_bound(i))
+# all bigger than 1
+
+bipartite_edge=lambda x,y:x*y
+thickness_lower_bound_bipartite=lambda x,y:bipartite_edge(x,y)/(3*(x+y)-6)
+for i,j in [(3,4),(4,4),(5,5)]: print(thickness_lower_bound_bipartite(i,j))
+# only 5,5 bigger than 1
+
+# Since the subgraphs of complete bipartite graph can't have a circuit of 3. so we can use e<=2v-4
+# This is also shown in [wolfram_GraphThickness] "The thickness of a complete bipartite graph"
+bipartite_edge=lambda x,y:x*y
+thickness_lower_bound_bipartite=lambda x,y:bipartite_edge(x,y)/(2*(x+y)-4)
+for i,j in [(3,4),(4,4),(5,5)]: print(thickness_lower_bound_bipartite(i,j))
+```
+- [ ] 32 see the ans
+- [ ] 33 see the ans
+  - > The formula is valid for n ≤ 4.
+    Because they are plannar so $\lfloor\frac{n+7}{6}\rfloor=1$
+  - $C(n, 2)/(3n − 6)=\frac{n(n-1)}{6(n-2)}=\frac{n}{6}+\frac{n}{6(n-2)}$
+    Then $\lceil\frac{n+1+\epsilon}{6}\rceil=\lfloor\frac{n+7}{6}\rfloor,\epsilon\in (0,1)$
+- [ ] 36,37 see the ans they are both symmetric.
 ## 11
 Redo 5.4-48
 ### 11.1
@@ -8394,6 +8458,7 @@ Redo 5.4-48
 
 <!-- wolfram -->
 [connected_planar_simple_graph]:https://mathworld.wolfram.com/PlanarConnectedGraph.html
+[wolfram_GraphThickness]:https://mathworld.wolfram.com/GraphThickness.html
 
 <!-- lectures -->
 [Fleury_Algorithm_proof]:./lectures/Proofs_BM_GT_3_3.pdf
