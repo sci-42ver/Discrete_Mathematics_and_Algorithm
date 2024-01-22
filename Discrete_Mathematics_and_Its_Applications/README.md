@@ -1641,6 +1641,21 @@ check(R_1)
             "3-connected" -> "the size 1"
             Notice here is for outer bridges.
           4. 4 cases.
+### 10.8
+- > We will assume that all regions in a map are connected. This eliminates any problems presented by such geographical entities as Michigan
+  i.e. [2 peninsulas connected](https://en.wikipedia.org/wiki/Geography_of_Michigan).
+- > For instance, for the map shown on the left in Figure 1, four colors suffice, but three colors are not enough. (The reader should check this.) In the map on the right in Figure 1, three colors are sufficient (but two are not).
+  - the left
+    because B ~~only~~ has 3 adjacent regions and D is adjacent to A.
+    then C-E, (F,G)-(A,B) where - means same color sequence.
+  - the right
+    C,D,E must be different
+    then E-A,B-D
+- The key ideas of example 5~7
+  are they can't use one same identy which can be represented as one color
+  1. example 5: time
+  2. 6: channel
+  3. 7: register
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -4259,6 +4274,8 @@ while 1:
   - when k + 1 is even, just multiply 2 for each factor in $\frac{k + 1}{2}$
     when odd, just plus one with the factors of even $k$.
 - [ ] 13 this question is weird ...
+- [ ] 17
+  - > The statement is true for n = 4, because there is only one diagonal, leaving two triangles with the desired property
 - [ ] 18 see the ans which splits into two smaller polygons as one example does.
   > (otherwise, the region containing $v_{m+n−1}$ would not be a triangle)
   more intuitively, the region contain the side $v_{m+n−2}v_{m+n−1}$ will not be a triangle.
@@ -4323,6 +4340,8 @@ $$
       This is $n=3$
   - b
     the case $n=5$ needs to be respectively manipulated where for the triangle we doesn't choose $uv$
+- [ ] 23 used by 10.8-46
+  - See 17 first.
 - [ ] 24
   - > because then Alice and Ted would form an unstable pair
     is similar to 3.1-67
@@ -8321,6 +8340,98 @@ for i,j in [(3,4),(4,4),(5,5)]: print(thickness_lower_bound_bipartite(i,j))
   - $C(n, 2)/(3n − 6)=\frac{n(n-1)}{6(n-2)}=\frac{n}{6}+\frac{n}{6(n-2)}$
     Then $\lceil\frac{n+1+\epsilon}{6}\rceil=\lfloor\frac{n+7}{6}\rfloor,\epsilon\in (0,1)$
 - [ ] 36,37 see the ans they are both symmetric.
+### 10.8
+- 2~8,16(duplicate with EXAMPLE 4)~24,28,32~34,38,40,42,43 skipped
+- [ ] 10 can be tracked based on degree-3 when 4 colors and check at the end ~~for all vertices~~ whether the same color for adjacent vertices.
+  - clockwise from $h$: B,R,O,G,O (where Blue,Red,Orange,Grenn)
+    then g:R/G -> f:GB/RB -> d:GB/B -> 
+    i must be different from f,d,i
+    then we can have clockwise from $h$: B,R,O,G,O,G,B,G,R
+    here 
+    1. B:h,e
+    2. R:i,g
+    3. O:a,c
+    4. G:b,d,f
+- [ ] 12
+  - 10: Here aihb and bihc shares also $b,i$
+    - If only to change one vertex color,
+      if removing $i$, h,f,c make $i$ still the fourth color.
+      if removing $b$, c,g,e make $d$ still the fourth color.
+      They are both more complex than $h$.
+- [ ] 14
+  - See [this](https://distributedmuseum.illinois.edu/exhibit/four-color-theorem/#:~:text=A%20map%20of%20the%20United,Nevada)%20with%20only%20three%20colors.) where considers $C_5$.
+- [ ] 26 see the ans
+- [ ] 30
+  - see the ans
+    - This algorithm doesn't track based on adjacency matrix, maybe having many time overheads.
+      So each color it has `for i := 1 to n` instead of excluding vertices after each coloring.
+    - After **trying** assigning one color 
+      it will check contradiction based on `for j := 1 to n`
+- [ ] 31
+  - > Successively as- sign color 2 to vertices in the list that have not already been colored
+    this may be better adjacent to $n$ vertices already colored when we are to assign color $n+1$.
+    This can ensure we must have this color.
+  - see the ans
+    - The above still can't be optimal
+      See [this](https://www.cs.cornell.edu/courses/cs3110/2012sp/recitations/rec21-graphs/rec21.html) "A greedy algorithm for finding a non-optimal coloring"
+      here the coloring **order** matters where the right exclues 6 vertices maybe unnecessarily after coloring 1,2 as numbered.
+- [ ] 36 see the ans
+  - g) here we can add one color when adding one edge to differentiate.
+    This is different from $K_n$ because when **targeted** at one specific vertex, we **at least** have $kn$ colors.
+    Also $K_{m,n}$ which targeted at one edge is enough.
+    - This is similar to d)
+    - Here the union of 1,4th in the coloring sequence must at most have 5 (here it is obvious because we adds only one color at the 3rd step which already uses 2 colors in the 1st).
+    - > they must have six different colors, so eight colors would be required in all.
+      Here is because only 5 colors are left, so we must add one new.
+- [ ] 37
+  - a) use 36-c) so 6
+  - b) same as a) but here after $W_4$, if only add one color, 3 colors can't be sufficient for $a-g$.
+  - c) the $K_3$ causes already 9. This is sufficient similar to the shape of a).
+  - d) similar to c) assign 9 colors for $b,d,e$
+    then assume $c,f$ adds $k$ colors
+    then we need 6 different colors for $a,g$
+    obviously these new colors can be crossingly assigned to $a,g$ (e.g. c:45Y, f:12X, then a can have X and g can have Y).
+    When $k$ added, we have $3+k=6$ so $k=3$
+    Then $12$.
+  - see the ans
+    - b) based on a) 6 colors is impossible
+      for 7, here $1X$ can be also $2X$ and others are changed correspondingly WLOG. then the 2rd 34 is one must. Then similarly $5X$ can be $6X$.
+      ```
+        12  34
+          56
+      ->
+        12  34
+      5X  56  62
+        34  1X
+      ```
+    - d)
+      Based on [this](https://math.stackexchange.com/a/2915593/1059606) we should use $C_5$ instead of $K_3$ to color more vertices.
+      WLOG, let $b,e,g,f,c$ clockwise assigned the colors in 36-g).
+      then d must have 3 new colors because $b,e,f,c$ will use all 5 colors.
+      so $8+3=11$
+- [ ] 41 see the ans
+  - > then in the component containing a we can interchange these two colors
+    > G′ will still be properly colored.
+    "still properly colored" because when we change vertices with color azure to chartreuse, we **only** needs to ensure it won't be adjacent to chartreuse, but since "interchange", it is ensured and due to component no other vertices need to be cared about.
+  - > with b in one of them and m in the other
+    Here I assume this cycle is similar to the circle shape.
+    here b must be inside of the region, otherwise based on clockwise, $vb$ must cross $ac$
+    ~~based on clockwise, m must be outside~~.
+    - Also see [this](https://math.stackexchange.com/q/2418524/1059606)
+      if the $vc$ line is curved to the left such that $vd$ is on the right of $vc$. Then $BD$ is possible.
+
+      But here maybe we should recolor interchange $C,D$ and others are changed correspondingly. Then $BC$ is impossible which corresponds to $m$ (i.e. C) must be outside.
+      Also see this [comment](https://math.stackexchange.com/questions/2418524/5-color-theorem-proof#comment8974142_2418535)
+  - > If we now interchange blue and magenta on all the vertices in the same region as b, we will still have a proper coloring of G
+    obviously vertices inside the region can't have edges with vertices outside the region.
+- [ ] 44,45 see the ans
+  - > The sets of locations from which the tips of different prongs are visible are disjoint
+    this means to see each tip, we need at least one guard each.
+- [ ] 46
+  - obviously each triangle has one red
+    then all red will cover all triangles, then the polygon, so it is sufficient to use only red colors.
+  - see the ans
+    - see the proof why 3 colors are enough and possible.
 ## 11
 Redo 5.4-48
 ### 11.1
