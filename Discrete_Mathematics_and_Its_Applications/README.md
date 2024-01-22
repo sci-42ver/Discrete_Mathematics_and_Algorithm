@@ -8432,6 +8432,43 @@ for i,j in [(3,4),(4,4),(5,5)]: print(thickness_lower_bound_bipartite(i,j))
     then all red will cover all triangles, then the polygon, so it is sufficient to use only red colors.
   - see the ans
     - see the proof why 3 colors are enough and possible.
+### supplementary
+- 4(also can be checked by $C_4$),6,7,14,18 skipped
+- [ ] 2
+  - one vertex: 1
+  - 2 vertices: 2 with edge or not
+  - 3 vertices: 4 $0\sim 3$ edges
+- [ ] 5
+  - check the 2 $C_4$
+    ~~Then $v_\{5\sim 8\}$ correspond to ~~
+    ~~$u_\{8,2,4,6\}$~~
+    then $u_8,u_6$ both adjacent with $u_7$
+    so when $u_8,u_6\to v_5,v_7$ $u_7\to v_4$
+    then let $u_2,u_4\to v_6.v_8$
+    which causes $u_3\to v_2$.
+    then $v_1\to u_1$ and $v_3\to u_5$
+    - Obviously the above process considers 2 cycles first then 4 groups of 2 edges.
+- [ ] 8
+  - a) for simple graph, this is duplicate of one former exercise.
+- [ ] 10 b) uses the one-to-one correspondence.
+- [ ] 12
+  - ~~Here $|\bigcup_{i\in I}S_i|\ge |I|$ only cares about the whole set ~~
+    ~~$S$ instead of subsets~~
+    - ~~basis step: $|S_i|\ge |i|=1$ is trivial~~
+    - ~~inductive step: $|\bigcup_{i\in I_k\cup \{k+1\}}S_i|\ge |\bigcup_{i\in I_k}S_i|+1\ge k+1$~~
+    - ~~So all subsets met the condition of the Hall’s marriage theorem.~~
+- [ ] 16 see the ans
+  - a) Here $6$ considers the path direction based on $P(7,3)$.
+    so $6$ for each triangle.
+  - f) 
+    > can start with an edge of the cycle and then go to the center ( n ·2 of this type)
+    > start at the center ( n ·2 of this type)
+    these 2 should be combined because "start with an edge of the cycle" we can have 2 directions
+    then each has only one spoke to choose.
+    Then the whole direction has also 2 possibilities. So $4n$
+- [ ] 20
+  - Here is the definition of [maximal clique](https://en.wikipedia.org/wiki/Clique_(graph_theory)#Definitions).
+  - See the [code](./miscs_snippets/py_codes/10_supplementary_20_BronKerbosch1/BronKerbosch1.py)
 ## 11
 Redo 5.4-48
 ### 11.1
