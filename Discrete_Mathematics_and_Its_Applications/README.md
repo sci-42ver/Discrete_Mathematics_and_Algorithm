@@ -2,15 +2,11 @@ Please point out errors if any. Thanks beforehand.
 
 check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
 
-1. The above property 1,2 are implied in this [QA answer](https://math.stackexchange.com/a/2442781/1059606). 2. property 3 is that if the Hamilton circuit $G$ includes one circuit $W$ inside, then the vertex $G−W\cap W$ (here $G−W$ only removes edges of $W$ ) will be passed at least twice, leading to the contradiction. This is similar to the [EULER CIRCUIT finding method](https://math.unm.edu/~loring/links/discrete_f05/euler.pdf) where we finds many cycles which each cycle *shares one vertex* with another. Please point out errors if any. Thanks beforehand.
+To be more specific of the step 2, here the maximum number of edges from 2 components plus 1 due to the bridge is $f(n,k)=\frac{k \left(k - 1\right)}{2} + \frac{\left(- k + n\right) \left(- k + n - 1\right)}{2} + 1$. It has the maximum when $k=n-1$ or $1$ (Here $k=n$ is impossible because of the bridge). Then $f(n,n-1)=\frac{\left(n - 2\right) \left(n - 1\right)}{2} + 1$ and $g(n)=f(n,n-1)-\frac{n^{2}-3 n + 6}{2}=-1$.
 
-The above property 1,3 can be combined into ["Any graph with a cut-vertex can't have a Hamiltonian cycle"](https://math.stackexchange.com/questions/1958873/hamiltonian-cycle-need-assistance#comment4021120_1958873). 1. The cut-vertex of property 1 is the other endpoint $v$ of the edge incident with the degree-one vertex $w$ ($v$ can't have degree-one, otherwise the graph won't be connected which has one connected component $G'=(V=\{v,w\},E=\{vw\})$) 2. The cut-vertex of property 3 is the intersection vertex $G−W\cap W$ if these 2 cycles $G-W,W$ only has this vertex shared.
+This means the edges of the disconnected graph $E(G') \le f(n,n-1)$ is impossible to get from "any graphs with $\frac{n^{2}-3 n + 6}{2}$ edges with one bridge", which also implying more than one bridges.
 
-The property 3 can be also thought as the following: If we only keep the Hamilton circuit, then all vertices have degree 2. Then with this smaller circuit in the Hamilton circuit, we start from one vertex in it because we can arbitrarily start at any vertex in the circuit. Then we must pass along it to **use all edges for the circuit when degree 2**, causing some vertices **not passed** after returning to the start vertex and not able to proceed further. (This is similar to 10.5-exercise 34 in Discrete Mathematics and Its Applications 8th by Kenneth Rosen which I did after reading this QA.)
-
-Since you ask for "**graph theory** - consisting of edges and vertices", this [one](https://csacademy.com/app/graph_editor) fits in your need without redundant functions, which is similar to Erel Segal-Halevi's answer.
-
-Or more directly, the property 3 means a smaller circuit will access the start vertex twice, therefore "A Hamilton circuit cannot contain a smaller circuit within it". Hope these comments can help newbies for graph theory like me (at least when I wrote these comments).
+2. For the step 1, the maximum edge number of disconnected graph with $n$ vertices can be got by removing edges from the complete graph $K_n$. To disconnect one vertex, we at least need to remove $n-1$ edges which is the above $f(n,n-1)$. By the above proof, it is impossible to get from "any graphs with $\frac{n^{2}-3 n + 6}{2}$ edges with one bridge", so the graph can't be disconnected. Please point out errors if any. Thanks beforehand.
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -8433,12 +8429,12 @@ for i,j in [(3,4),(4,4),(5,5)]: print(thickness_lower_bound_bipartite(i,j))
   - see the ans
     - see the proof why 3 colors are enough and possible.
 ### supplementary
-- 4(also can be checked by $C_4$),6,7,14,18 skipped
-- [ ] 2
+- 4(also can be checked by $C_4$),6,7,14,18,22,38,39 skipped
+- [x] 2
   - one vertex: 1
   - 2 vertices: 2 with edge or not
   - 3 vertices: 4 $0\sim 3$ edges
-- [ ] 5
+- [ ] 5 see the ans
   - check the 2 $C_4$
     ~~Then $v_\{5\sim 8\}$ correspond to ~~
     ~~$u_\{8,2,4,6\}$~~
@@ -8448,10 +8444,11 @@ for i,j in [(3,4),(4,4),(5,5)]: print(thickness_lower_bound_bipartite(i,j))
     which causes $u_3\to v_2$.
     then $v_1\to u_1$ and $v_3\to u_5$
     - Obviously the above process considers 2 cycles first then 4 groups of 2 edges.
-- [ ] 8
+- [x] 8
   - a) for simple graph, this is duplicate of one former exercise.
-- [ ] 10 b) uses the one-to-one correspondence.
-- [ ] 12
+- [ ] 10 b) see the ans 
+  uses the one-to-one correspondence although we can also use exclusion by numeration.
+- [x] 12
   - ~~Here $|\bigcup_{i\in I}S_i|\ge |I|$ only cares about the whole set ~~
     ~~$S$ instead of subsets~~
     - ~~basis step: $|S_i|\ge |i|=1$ is trivial~~
@@ -8466,7 +8463,7 @@ for i,j in [(3,4),(4,4),(5,5)]: print(thickness_lower_bound_bipartite(i,j))
     these 2 should be combined because "start with an edge of the cycle" we can have 2 directions
     then each has only one spoke to choose.
     Then the whole direction has also 2 possibilities. So $4n$
-- [ ] 20
+- [ ] 20 see the ans
   - Here is the definition of [maximal clique](https://en.wikipedia.org/wiki/Clique_(graph_theory)#Definitions).
   - See the [code](./miscs_snippets/py_codes/10_supplementary_20_BronKerbosch1/BronKerbosch1.py)
     - Here `X` is to avoid find cliques inside of the maximal clique.
@@ -8491,6 +8488,77 @@ P_cap [] []
 # 2. Here X contains already visited vertices, so if it is not empty, maybe the subclique has been visited.
 one maximal clique a-e-f
 ```
+- [x] 24
+  - see the [code](./miscs_snippets/py_codes/10_supplementary_22/minimum_dominating_set.py)
+- [x] 26
+  - this is same as the [queen in the chess](https://herculeschess.com/how-does-the-queen-move-in-chess/#:~:text=The%20Queen%20can%20move%20any,is%20out%20of%20the%20game.).
+- [x] 27
+  - This is not ["n queen problem"](https://www.geeksforgeeks.org/n-queen-problem-backtracking-3/)
+  - Based on this [paper](https://dspace.library.uvic.ca/bitstream/handle/1828/8634/Bird_William_PhD_2017.pdf?sequence=3&isAllowed=y) from [OEIS](https://oeis.org/A075458) from [wolfram](https://mathworld.wolfram.com/QueensProblem.html)
+    It just use the algorithm for the "Dominating Set".
+    > described an algorithm for finding a minimum dominating set of a graph on n vertices in O(1.8021n ) time and exponential space
+  - Also see [this](https://askfilo.com/user-question-answers-algebra-2/a-simple-graph-can-be-used-to-determine-the-minimum-number-35383434373830) although the answer is not totally right.
+  - By the [code](./miscs_snippets/py_codes/10_supplementary_22/minimum_dominating_set.py)
+    we find 
+    ```
+    [(1, 1)]
+    [(0, 0), (2, 2)]
+    [(0, 0), (1, 1), (3, 3)]
+    ```
+    - Here 5x5 case is similar to 4x4 where (3,3) function same as (2,2)
+    - 4x4 (2,2) only skips the 0th row and column.
+- [x] 28
+  - Here the map of the $(V(G_1)\cap V(G_2))\to V(H_1)$ may be not same as 
+    $(V(G_1)\cap V(G_2))\to V(H_2)$
+    Then $|V(G_1\cap G_2)|<|V(H_1\cap H_2)|$ is possible.
+- [ ] 30 see the ans notice the diagonal.
+- [ ] 32
+  - I didn't have time to systematically find the algorithm to solve each sub-problems.
+    So just [brute-force](https://qr.ae/pK60sj).
+    ~~Then only (1,8),(2,4),(2,8),(4,4),(4,8),(8,8) are connected.~~
+  - TODO [counting nonisomorphic simple ~~connected~~ graphs](https://qr.ae/pK60bs)
+  - see the ans
+    - c) see [this](https://math.stackexchange.com/questions/3677100/are-all-the-subgraphs-of-k5-planar#comment10333226_3677100), we can also draw the [greatest planar](https://math.stackexchange.com/a/3677103/1059606) subgraph $G'$ which implies subgraphs of 
+    $G'$ are planar.
+- [ ] 34
+  - we can also use the mapping to prove.
+  - see the ans
+    - it uses already proved theorems.
+- [ ] 36
+  - We can use the [Robin's Theorem](https://sci-hub.se/https://doi.org/10.2307/2303897) (I don't have time to prove all theorems I met but not referred in the book)
+    see the ans
+    - by the paper 
+      > we see that the necessity of the condition is **clear**
+      or just trying draw assuming $cd$ one direction, the "only if" by contrapositive proposition which from "disconnected after the removal of any arc" to "not orientable"
+      because "disconnected" -> only one path between $c$ and $d$, i.e. $cd$ -> adding the orientation to the path, only one orientation between $c$ and $d$.
+      - For 35,36, the "necessity" which is same as exercise 39 is enough to prove "not orientable".
+  - Also see one [more general example](https://math.stackexchange.com/a/2613909/1059606).
+```python
+from sympy import Interval, Symbol, S, sin, cos, pi, maximum,minimum
+n = Symbol('n')
+k = Symbol('k')
+max_edges=lambda x:x*(x-1)/2
+f = max_edges(k)+max_edges(n-k)+1
+from sympy import solve
+stationary_point = solve([f.diff(k)], [k], dict=True)[0][k]
+import sympy
+sympy.simplify(f.subs(k,n/2))
+from sympy.calculus.util import *
+from sympy import oo
+ivl = Interval(3,oo)
+max_k_when_bridge=n-1
+target_func=(n**2-3*n+6)/2
+if maximum(sympy.simplify(f.subs(k,max_k_when_bridge)-f.subs(k,stationary_point)),n,ivl)>0:
+  max_edges=f.subs(k,max_k_when_bridge)
+else:
+  max_edges=f.subs(k,stationary_point)
+Diff=sympy.simplify(max_edges-target_func)
+print_latex(f)
+print_latex(max_edges)
+print_latex(target_func)
+minimum(Diff,n,ivl)
+```
+- [ ] 
 ## 11
 Redo 5.4-48
 ### 11.1
