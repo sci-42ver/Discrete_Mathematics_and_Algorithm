@@ -8469,6 +8469,28 @@ for i,j in [(3,4),(4,4),(5,5)]: print(thickness_lower_bound_bipartite(i,j))
 - [ ] 20
   - Here is the definition of [maximal clique](https://en.wikipedia.org/wiki/Clique_(graph_theory)#Definitions).
   - See the [code](./miscs_snippets/py_codes/10_supplementary_20_BronKerbosch1/BronKerbosch1.py)
+    - Here `X` is to avoid find cliques inside of the maximal clique.
+```bash
+# when `Debug=True`
+$ python BronKerbosch1.py | less
+P_cap ['b', 'c', 'e', 'f'] []
+...
+one maximal clique a-b-c-e
+...
+after removing b, P: ['c', 'e', 'f']
+P_cap ['e'] ['b']
+P_cap [] ['b']
+# Here 'b' can survive, so it means it is adjacent with all of "a,c,e". 
+# This means it is not maximal.
+['b'] [] ['a', 'c', 'e']
+...
+after removing c, P: ['e', 'f']
+P_cap ['f'] ['b', 'c']
+P_cap [] []
+# 1. Similar to the above, "a,e,f" can't be more maximal since X=[].
+# 2. Here X contains already visited vertices, so if it is not empty, maybe the subclique has been visited.
+one maximal clique a-e-f
+```
 ## 11
 Redo 5.4-48
 ### 11.1
