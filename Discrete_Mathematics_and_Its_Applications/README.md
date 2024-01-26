@@ -1652,6 +1652,18 @@ check(R_1)
   1. example 5: time
   2. 6: channel
   3. 7: register
+## 11
+### 11.1
+- THEOREM 1 proof
+  - We can also use the [leaf node](https://math.stackexchange.com/a/1334024/1059606)
+    or the **sub**-cycle as the book says (Exercise 59 of Section 10.4) or the above link.
+- > the reader should show that such a vertex is unique
+  otherwise one cycle is constructed.
+- Theorem 2 is similar to [QA link referred in this QA](https://math.stackexchange.com/q/4849754/1059606)
+- > Also, when (i) and (iii) hold, then (ii) must also hold, 
+  This is due to that to keep the connectivity, the 1st can connect 2 vertices, while the rest can at most connect one more each. So $n-1$.
+  > and when (ii) and (iii) hold, (i) must also hold.
+- [complete "same"](https://en.wikipedia.org/wiki/M-ary_tree#Types_of_m-ary_trees) is stronger than balanced ["n/n-1" p15](https://w3.cs.jmu.edu/spragunr/CS228/lectures/trees/trees.pdf).
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -8628,6 +8640,7 @@ minimum(Diff,n,ivl)
 Redo 5.4-48
 ### 11.1
 - [ ] 15
+- [ ] THEOREM 4 proof
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
