@@ -1328,7 +1328,7 @@ check(R_1)
       - to cut it with 2 vertices, $b,g$ are more suitable.
         but $fh$ will connect then, so *removing 2 vertices is impossible* to cut.
 - > $0 \le \lambda(G) \le n − 1$.
-  This can be more specific [$\le min_degree$](https://math.stackexchange.com/a/453732/1059606) with $v$ [isolated as one component](https://math.stackexchange.com/a/2516637/1059606).
+  This can be more specific [$\le min_degree$][vertex_connectivity_less_than_minimum_degree] with $v$ [isolated as one component](https://math.stackexchange.com/a/2516637/1059606).
 - the minimum number of edges in a connected graph with 'n' vertices is (n-1)?
   [proof](https://qr.ae/pKmgtv) also see the comment.
 - [proof][comparison_edge_connectivity_vertex_connectivity] of $\lambda(G)\le \delta(G)$
@@ -7858,6 +7858,9 @@ print(subgraph_of_complete_graph(4))
     - > According to the discussion following Example 7
       i.e. VERTEX CONNECTIVITY discussion in p718
     - b) "only if" can be got from $\min_{v\in V}\deg(v)\ge n-1\Rightarrow K_n$.
+- [x] 53 used by 10-supplementary-46
+  - similar to $K_n$ to disconnect one vertex, we need $\min\deg v$, this is $\lambda(G)$
+  - Also vertex connectivity needs to remove one subset of the two.
 - [ ] 54
   - see the ans
 - [ ] 55
@@ -8429,7 +8432,7 @@ for i,j in [(3,4),(4,4),(5,5)]: print(thickness_lower_bound_bipartite(i,j))
   - see the ans
     - see the proof why 3 colors are enough and possible.
 ### supplementary
-- 4(also can be checked by $C_4$),6,7,14,18,22,38,39 skipped
+- 4(also can be checked by $C_4$),6,7,14,18,22,38,39,40,49,50,58,62 skipped
 - [x] 2
   - one vertex: 1
   - 2 vertices: 2 with edge or not
@@ -8558,7 +8561,69 @@ print_latex(max_edges)
 print_latex(target_func)
 minimum(Diff,n,ivl)
 ```
-- [ ] 
+- [ ] 42 see the ans
+  - > Otherwise, there must exist a smallest i such that (vi,v) and (v,vi+1) are edges of G
+    if not existing, then all must be $(v_{i},v)$ or 
+    $(v,v_{i})$
+- [ ] 44 see the ans
+  - See [vertex_connectivity_less_than_minimum_degree]
+- [x] 46 
+  - a) $\kappa(G)=2=\min_{v\in V}\deg v=2n/n$ is trivial
+    then by the [Inequality](https://math.stackexchange.com/a/1441429/1059606), we are finished.
+  - b) similar to a) $\kappa(G)=(n-1)=\min_{v\in V}\deg v=\frac{2\cdot\frac{n(n-1)}{2}}{n}$
+  - c) trivially $\kappa(G)=r=\min_{v\in V}\deg v=\frac{2r^2}{2r}=r$
+- [ ] 47 see the ans
+  - the [skeleton](https://www.researchgate.net/figure/The-1-skeleton-of-the-triangular-prism-has-a-unique-3-colouring-up-to-isomorphism-shown_fig5_365291391) of a triangular prism
+    1. based on symmetry, removing one vertex has 2 possibilities. They can't disconnect.
+    2. removing 2, all inner and all outer are both impossible.
+      one inner and one outer (adjacent or not) are also impossible.
+      The above 4 possibilities based on symmetry are excluded.
+    3. removing 3 which is $\min\deg v$ must be possible.
+- [ ] 48
+  - see the ans
+    - we need to prove "each path is nonempty."
+- [ ] 51 see the ans
+  - [NP-hard](https://en.wikipedia.org/wiki/Graph_bandwidth#Computing_the_bandwidth), so just use the enumeration method.
+  - a) since all are connected, so $n-1=4$
+  - b) it just means the choice of the $v$ which is $K_1$ part
+    obviously when $v=a_2,a_3$, it has the answer $2$.
+  - c,d) See the [code](./miscs_snippets/py_codes/10_supplementary_51/bandwidth.py)
+  - e) I just use the [result](https://en.wikipedia.org/wiki/Hypercube_graph#Other_properties)
+- [ ] 52
+  - see the ans
+    - b) notice here radius can be same as the diameter
+- [ ] 53
+  - a)
+    - > Thus, v cannot be a or b
+      because $ua$ has length 1 and $ub$ has $ua-ab$ length 2, both not greater than 3. 
+    - > Either u or v, or both, is not in the set {a, b}
+      if both in, then distance is $2$ not greater than 3.
+      - Here "u not in the set {a, b}" -> "assume {a, u} $\in$ E" -> "v cannot be a or b"
+        So "both not in the set {a, b}" is necessary.
+        - Then since for both, " Either {a, u} or {b, u} belongs to E" or corresponding $v$
+          so "this gives a path of length less than or equal to 3 from u to v in G, a contradiction"
+  - b)
+    - The main problem is that the above "u-a-b-v" length 3 is allowed in G here, not leading to the contradiction.
+      ~~So we need to find another method to solve the problem.~~
+      So here we need to more specific by showing this case won't make $\overline{G}$ failure.
+- [ ] 54
+  - trivially, Euler circuit can be applied to the multigraph.
+  - > Suppose that we follow the given circuit through the multigraph, but *instead* of using edges more than once, we put in a new parallel edge whenever needed
+    This is the key idea. This is similar to 48.
+    ~~We should not be totally similar to 48 where after the removal we can't know "at least m edges more than once" easily.~~
+- [ ] 56 see the ans
+  - ~~By [this](https://stackoverflow.com/questions/4971850/which-algorithm-can-i-use-to-find-the-next-to-shortest-path-in-a-graph#comment7392944_4972027) counterexample allowing the loop~~, the ans ~~[may be wrong](https://stackoverflow.com/questions/4971850/which-algorithm-can-i-use-to-find-the-next-to-shortest-path-in-a-graph#comment137297375_4972027)~~ is based on that the path has at least one edge difference with each other.
+    - > If G - E is not connected, continue for next edge
+      If disconnected, there must not be one path connecting the start vertex and the ending vertex because no path to substitute the cut edge.
+  - [This one](https://stackoverflow.com/questions/4971850/which-algorithm-can-i-use-to-find-the-next-to-shortest-path-in-a-graph#comment137297470_4975663) TODO.
+- [ ] 59 see the ans
+  - See [this](https://math.stackexchange.com/a/128665/1059606) which doesn't need the restriction of $11$.
+- [ ] 60 see the ans
+  - c) see this [proof](https://math.stackexchange.com/a/1922797/1059606) of "$Q_n$ is bipartite" based on parity which is referred to in one of former exercises.
+- [ ] 64
+  - see the ans c,f)
+- [ ] 66
+  - see the ans
 ## 11
 Redo 5.4-48
 ### 11.1
@@ -8659,6 +8724,7 @@ Redo 5.4-48
 [cut_vertex_Hamilton_circuit]:https://math.stackexchange.com/questions/1958873/hamiltonian-cycle-need-assistance#comment4021120_1958873
 [check_Hamilton_path]:https://math.stackexchange.com/a/2442781/1059606
 [4xm_knight_tour]:https://math.stackexchange.com/questions/2195746/knights-tour-on-a-4-x-m-board#comment4518180_2195762
+[vertex_connectivity_less_than_minimum_degree]:https://math.stackexchange.com/a/453732/1059606
 
 <!-- stack overflow -->
 [longest_simple_path_NP_hard]:https://stackoverflow.com/a/53399638/21294350
