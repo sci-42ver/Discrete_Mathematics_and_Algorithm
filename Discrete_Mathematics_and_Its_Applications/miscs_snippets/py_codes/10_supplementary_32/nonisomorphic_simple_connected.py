@@ -121,10 +121,15 @@ def graph_n(n,check_cycle=False):
     graphs=connected_graphs
 
     if check_cycle:
+        Use_theorem_edge_number=True
         tree_graphs=[]
         for graph in graphs:
-            if not isCyclic(graph,len(graph.nodes)):
-                tree_graphs.append(graph)
+            if not Use_theorem_edge_number:
+                if not isCyclic(graph,len(graph.nodes)):
+                    tree_graphs.append(graph)
+            else:
+                if len(graph.edges())==len(graph.nodes())-1:
+                    tree_graphs.append(graph)
         graphs=tree_graphs
 
 
@@ -139,8 +144,14 @@ def graph_n(n,check_cycle=False):
                                         pos=pos ) 
     
     plt.show()
-# graph_n(5)
-# basis step https://math.stackexchange.com/q/4849754/1059606
-# graph_n(3)
+ONLY_TREE=True
+if not ONLY_TREE:
+    graph_n(5)
+    # basis step https://math.stackexchange.com/q/4849754/1059606
+    graph_n(3)
 # 11.1-12
 graph_n(4,True)
+# 11.1-13
+graph_n(5,True)
+# 11.1-38
+graph_n(3,True)

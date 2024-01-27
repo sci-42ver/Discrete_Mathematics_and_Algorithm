@@ -8535,6 +8535,7 @@ one maximal clique a-e-f
   - see the ans
     - c) see [this](https://math.stackexchange.com/questions/3677100/are-all-the-subgraphs-of-k5-planar#comment10333226_3677100), we can also draw the [greatest planar](https://math.stackexchange.com/a/3677103/1059606) subgraph $G'$ which implies subgraphs of 
     $G'$ are planar.
+    - [nonisomorphic_simple_connected]
 - [ ] 34
   - we can also use the mapping to prove.
   - see the ans
@@ -8624,7 +8625,7 @@ minimum(Diff,n,ivl)
     This is the key idea. This is similar to 48.
     ~~We should not be totally similar to 48 where after the removal we can't know "at least m edges more than once" easily.~~
 - [ ] 56 see the ans
-  - ~~By [this](https://stackoverflow.com/questions/4971850/which-algorithm-can-i-use-to-find-the-next-to-shortest-path-in-a-graph#comment7392944_4972027) counterexample allowing the loop~~, the ans ~~[may be wrong](https://stackoverflow.com/questions/4971850/which-algorithm-can-i-use-to-find-the-next-to-shortest-path-in-a-graph#comment137297375_4972027)~~ is based on that the path has at least one edge difference with each other.
+  - ~~By [this](https://stackoverflow.com/questions/4971850/which-algorithm-can-i-use-to-find-the-next-to-shortest-path-in-a-graph#comment7392944_4972027) counterexample allowing the loop~~, the ans [~~may be wrong~~ similar to this link](https://stackoverflow.com/questions/4971850/which-algorithm-can-i-use-to-find-the-next-to-shortest-path-in-a-graph#comment137297375_4972027) is based on that the path has at least one edge difference with each other.
     - > If G - E is not connected, continue for next edge
       If disconnected, there must not be one path connecting the start vertex and the ending vertex because no path to substitute the cut edge.
   - [This one](https://stackoverflow.com/questions/4971850/which-algorithm-can-i-use-to-find-the-next-to-shortest-path-in-a-graph#comment137297470_4975663) TODO.
@@ -8639,10 +8640,78 @@ minimum(Diff,n,ivl)
 ## 11
 Redo 5.4-48
 ### 11.1
-- 2~10 skipped
-- [ ] 
-- [ ] 15
-- [ ] THEOREM 4 proof
+- 2~10,
+  18~22,
+  28,30(This is same as 26-b) $m^{h-1}-1+m,h=4$ which is the worst case),
+  32~36,
+  42~46 skipped
+- [ ] 12
+  - see the code [nonisomorphic_simple_connected]
+    TODO DFS proof
+  - see the ans
+    - We can also see the middle 2 as variants of the length-3 path and the other 2 corresponding to the asterisk graph.
+- [ ] 13
+  - see the code [nonisomorphic_simple_connected]
+    a) then 3
+    b) $(5-4+1)+(5-2+1)+\lceil\frac{5}{2}\rceil=2+4+3=9$
+  - Also [see](https://math.stackexchange.com/a/2682799/1059606)
+- [ ] 14 see the ans
+  - > as well as the fact that if there is a path from a vertex u to another vertex v , then there is a simple path from u to v by Theorem 1 in Section 10.4.
+    Since 
+    > Let {x, y} be an *edge* of T
+    it must be simple, we don't need "Theorem 1 in Section 10.4".
+  - The converse step is same as one exercise before which is that 2 related paths constitute one loop.
+  - > If not, then T has a simple circuit
+    Here the exercise assumes "connected" is one common condition.
+- [ ] 15 see the ans
+  - a)
+    - > If G is not a tree, it contains, by Exercise 14, an edge whose removal produces a graph G′ , which is still connected
+      Same as 14, it assumes "connected".
+    - > Repeat this procedure until the result is a tree
+      i.e. make all cycles disappear.
+- [ ] 16,24 see the ans
+- [ ] 25
+  - similar to 24, $83/(m-1)\in\mathbb{N}\Rightarrow m=2,84$ both are impossible to be with "height 3".
+- [ ] 26
+  - a)
+    - $i\in \mathbb{N}\Rightarrow n=mi+1\in \mathbb{N}$
+      So we only need to care about $i$
+    - > we can get as few as 4(m −1) + 1 leaves by putting only one internal vertex at each such level
+      This is based on THEOREM 4 (ii) with $i=4$ due to the height.
+      - This is the *lower bound* of the "internal vertices".
+  - b)
+    - see the ans
+- [x] 38
+  - see [nonisomorphic_simple_connected]
+    - a)
+      - only 1 when unlabeled
+        then we only need to choose for the middle. So $\binom{3}{1}=3$
+    - b)
+      - similar to a)
+        when it is the path, we select 2 numbers for the middle and the rest are put in order.
+        so $4*3=12$
+        when asterisk, we select for the degree-4 vertex, so $4$.
+  - TODO proof of the generalized theorem
+    [1](https://arxiv.org/pdf/0908.2324.pdf#:~:text=There%20are%20exactly%20nn%E2%88%922,set%20V1v1%2C%20v2%20...) [2](https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Applied_Combinatorics_(Keller_and_Trotter)/05%3A_Graph_Theory/5.06%3A_Counting_Labeled_Trees)
+- [x] 40
+  - if not choosing $e$, then it must contain one subtree which is the proper superset of $d-b-\{a,c\}$ and
+    $f-\{g,h-\{i,j,k\}\}$
+    So it must has one greater "eccentricity".
+- [ ] 43
+  - choose the middle vertex/vertices of the longest simple path.
+  - see the ans
+    - > Clearly, this path cannot contain both u and v or else there would be a simple circuit
+      ~~This may mean .~~
+      we can think of the path as one vertex string, then $c-\ldots-u-\overbrace{\ldots}^{\text{This can't pass c due to the properties of the path, so causing the circuit}}-v-\ldots-w$
+      - "or else" may be "otherwise"
+    - > In fact, this path from c to w leaves P and does not return to P once it, possibly, follows part of P toward either u or v
+      Just draw it. It will cause one circuit if return.
+    - Based on "vertex string", we just check the *common vertices* between $c-\ldots-w$ and $u-\ldots_1-c-\ldots_2-v$
+      trivially, $c-\ldots-w$ can share with only one of $u-\ldots_1-c$ and $c-\ldots_2-v$ based on the above point.
+      So we can
+      > Without loss of generality, assume this path does not follow P toward u
+- [ ] 48 see the ans
+  - $n-N(h)=2^h-1\Rightarrow h= \log(n-N(h)+1)\le \log(2n-N(h))\le \log(2n)$
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -8708,6 +8777,7 @@ Redo 5.4-48
 [transitive_realtion_check]:./miscs_snippets/py_codes/9-3-8/transitive.py
 [Stirling_second_kind_code]:./miscs_snippets/py_codes/8_supplementary_40_Stirling_second_kind/Stirling_second_kind.py
 [counting_path]:./miscs_snippets/py_codes/10_4_counting_path/counting_path.py
+[nonisomorphic_simple_connected]:./miscs_snippets/py_codes/10_supplementary_32/nonisomorphic_simple_connected.py
 
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
