@@ -8639,6 +8639,8 @@ minimum(Diff,n,ivl)
 ## 11
 Redo 5.4-48
 ### 11.1
+- 2~10 skipped
+- [ ] 
 - [ ] 15
 - [ ] THEOREM 4 proof
 # miscs with sympy usage
