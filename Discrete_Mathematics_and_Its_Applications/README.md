@@ -1664,6 +1664,39 @@ check(R_1)
   This is due to that to keep the connectivity, the 1st can connect 2 vertices, while the rest can at most connect one more each. So $n-1$.
   > and when (ii) and (iii) hold, (i) must also hold.
 - [complete "same"](https://en.wikipedia.org/wiki/M-ary_tree#Types_of_m-ary_trees) is stronger than balanced ["n/n-1" p15](https://w3.cs.jmu.edu/spragunr/CS228/lectures/trees/trees.pdf).
+### 11.2
+- ALGORITHM 1
+  - > If x equals the key of v, then the algorithm has found the location of x and terminates
+    This implies $v\neq null$ and $label(v) = x$, obviously implying `root of T = null`.
+    So it skips `if` and directly terminates.
+  - `root of T = null` is the init step
+  - for `while` there are 3 possibilities
+    1. `v=null`, then no `label(v)` (to insert)
+    2. $v\neq null$ and $label(v) \neq x$ (continue the `while` loop)
+    3. $v\neq null$ and $label(v) = x$ (find one)
+  - `v is null or label(v) \neq x` may be ~~wrong~~ not strictly right.
+    because it contains
+    1. `v is not null and label(v) \neq x` which is impossible due to the `while` loop
+    2. `v is null and label(v) \neq x`
+    3. `v is null and label(v) = x` impossible due to invalidity of `label(null)`
+- > need only note that by Exercise 74 in Section 3.2 we know that ⌈log n!⌉is Θ(n log n)
+  See [this](https://stackoverflow.com/a/2095472/21294350)
+  where $\frac{n}{2}\cdot\log(\frac{n}{2})=\frac{1}{2}\cdot (n\cdot (\log(n)-1))\ge \frac{1}{2}\cdot (n\cdot (\log(n)-\frac{\log(n)}{2})),(\frac{\log(n)}{2}\gt 1)\ge \frac{1}{2}^2\cdot (n\cdot \log(n))$
+- > We obtain the following estimate when we let N = n!
+  Here $n!$ is the leaf number.
+  Obviously sorting decision tree is A full 2-ary tree because each decision must generate 2 childs (Here we can take the situation $a=b$ into either case).
+  so based on 11.1 THEOREM 4 (iii), we should use vertex number $2\cdot l-1=2n!-1$
+  trivially, $g(n)=\Omega (\log(2n!-1))\Rightarrow g(n)\ge k\log(2n!-1),n>n_0\Rightarrow g(n)\ge k\log(2n!-n!=n!),n>n_0\Rightarrow g(n)=\Omega (\log(n!))$
+- Definition 1
+  - > the value of an internal vertex at an *even* level is the *maximum* of the values of its children
+    because even -> first player to choose -> maximum
+  - THEOREM 3 just pass "the payoff to the first player" from the bottom up.
+    - > By extending the proof of Theorem 3, it can be shown that the minmax strategy is the optimal strategy for both players
+      ~~i.e. from top to the bottom~~
+      [This](https://stackoverflow.com/a/23041360/21294350) is really similar because minmax will ensure "the payoff to the first player" to be max when it is the first player's turn.
+      - > maximize his profit.
+        Here at each step the player always choose *the best for himself*. So optimal which at least maximize the current player's payoff.
+      - optimal strategy [definition](https://socialsci.libretexts.org/Bookshelves/Economics/The_Economics_of_Food_and_Agricultural_Markets_(Barkley)/06%3A_Game_Theory/6.01%3A_Game_Theory_Introduction)
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -8712,6 +8745,185 @@ Redo 5.4-48
       > Without loss of generality, assume this path does not follow P toward u
 - [ ] 48 see the ans
   - $n-N(h)=2^h-1\Rightarrow h= \log(n-N(h)+1)\le \log(2n-N(h))\le \log(2n)$
+### 11.2
+- 2~6,14,20~24, skipped
+- [x] 8
+  - we can use 2-ary tree with equal or unequal 2 cases.
+  - see the ans
+    - balance or not means it is just the 2-ary tree.
+      i.e. lighter one doesn't mean it is counterfeit which is not same as example 3.
+    - > We can put one, two, or three coins in each pan for the first weighing (no other arrangement will yield any information at all)
+      obviously we need to have 2 pans with same number of coins.
+      if four, it must be unequal so we don't do that.
+    - Notice here the decision is inclusion or exclusion instead of selecting one part of two.
+      - See 7
+        > Begin by weighing coin 1 against coin 2. If they *balance*, weigh coin 1 against coin 3.
+        trivially, here only 3,4 are possible to be counterfeit.
+        > If coin 1 and coin 2 are not the same weight, again weigh coin 1 against coin 3
+        here only 1,2
+        - Notice the above what to compare at the 2nd step may have more than 1 choices.
+- [x] 9 see the ans
+  - similar to FIGURE 3,
+    > If equal, apply Example 3 to coins 1, 2, 7, 8, 9, 10, 11, and 12.
+    "7, 8, 9, 10, 11, and 12" is enough.
+  - Based on the ans, it assumes *only* one is lighter than others which is same as the example 3.
+- [x] 10
+  - same as 8, $\log(4)=2$ to "determine whether there is a counterfeit coin" and 1 more for "whether it is lighter or heavier than the others".
+    My thoughts are same as [this](https://qr.ae/pKEhmF) and more [generalized](https://qr.ae/pKEhqK) one although they don't offer why this will always give the *optimal* result with one extra weight to get the info about lighter or heavier.
+  - see the ans
+    - > three for each of the other two outcomes of the first weighing
+      one is lighter, one is heavier or equal.
+      - > If the pans balance, then we know that there is no counterfeit, and subsequent weighings add no information. 
+        then totally 7, so "the first weighing involves two coins per pan" is impossible.
+    - > If the scale does not balance, then we have not solved the problem
+      This is to show 2 steps are not enough.
+- [ ] 12 see the ans. Here assumes using binary tree has "the least number of comparisons".
+  - > again relabel all four of these elements if necessary to have b < d
+    i.e. if $d<b$, $c<d<b,a<b$ which has the same form as when $b<d$
+  - > namely either that it is less than the largest among a, b, d, and e, or that it is less than the second largest.
+    i.e. either $d$ is the largest or the "second largest."
+- [ ] 16
+  - we can also use $1+2+\cdots+2^{k-1}=2^k-1$ although it is more complex than the ans.
+- [ ] 18
+  - by figure (b), we need $(h-1)\cdot (n-1)$ to sort the rest 
+    $n-1$ elements
+    then plus the $n-1$ for the 1st element, we need $h(n-1)\ge \log(n)(n-1)\ge \log(n)\frac{n}{2}$
+  - see the ans
+    - Here we first have $f(n)\le 2n$ elements
+      then (17 assumes full and balanced and complete, so $k-1=h-1$)
+      we have $(f(n)-1)\cdot \log(n)\ge \log(n)(n-1)$
+    - The above lacks the step of $f(n)$
+- [ ] 26
+```
+# First
+ /\
+a /\
+ b /\
+  c /\
+   d  e
+# Second
+    /\
+   /  \
+  /    \
+ /\    /\
+b  c  /\ a
+     d  e
+```
+- [ ] 28
+  - see the ans
+    - Here `((N − 1) mod (m − 1)) + 1` is to remove 0
+    ```python
+    m=10
+    for i in range(1,100):
+        first=i%(m-1)
+        second=(i-1)%(m-1)+1
+        if first!=second:
+            print(first,second,i)
+    ```
+    - Based on the [paper][huffman_1952_minimum_redundancy_codes] as [wikipedia](https://en.wikipedia.org/wiki/Huffman_coding#n-ary_Huffman_coding) "This approach was considered by Huffman in his original paper." shows
+      - "0-probability place holders" may be just $-\infty$ in the former exercise.
+        > If the number of source words is *congruent to 1* modulo n−1, then the set of source words will form a proper Huffman tree.
+        - It is related with the above $\mod (m-1)$
+          - > Therefore, mo (which, of course, is *at least two* and no more than D) must be of such a value that (N-n0)/(D-1) is an integer
+            so when $N=D\Rightarrow n_0=1<2$ we should do nothing at the init step.
+            Then
+            > whose children from left to right are these k vertices in order by weight (from greatest to smallest), with labels 0 through k −1 on the edges to these children 
+            does nothing when $n_0=1$ because no children.
+            - This is to make the tree *almost full*, also see 32.
+          - It just *reverse back* from the final step to get
+            > then $(N_1-1)/(D-1)$ must be an integer
+    - TODO [arithmetic coding](https://en.wikipedia.org/wiki/Huffman_coding#Optimality)
+- [x] 29
+```
+  /|\
+ / | \
+A  E /|\
+    / | \
+   T  |  Z
+     / \
+    N   R
+```
+  - see the ans
+    - It uses $2,1,0$ and $0,1$ from left to right for 3-ary and 2-ary each.
+- [ ] 30
+  - see the ans
+    - Here we may not send odd number of characters using b).
+- [ ] 32 see the ans
+  - > then we can obtain a code that is at least as efficient by interchanging the symbols on some of the leaves to make a and b siblings at the bottom-most level (since moving a more frequently occurring symbol closer to the root can only help)
+    WLOG, assume $p_a>p_b$
+    then by the ALGORITHM 2, $a$ should be at the left of $b$
+    Assume the bottom level $(c,d),p_c>p_d$ where c,d can't be both a,b.
+    Then before interchange $a,c$ has length $len(a,c)=m p_a+n p_c,m<n$
+    after interchange $len'(a,c)=m p_c+n p_a$
+    then $len(a,c)-len'(a,c)=(m-n)(p_a-p_c)\ge 0,p_a\le p_c$
+    so the interchange make the code more efficient.
+    - The above interchange trivially can be used in the *generalized* one.
+  - Here trivially $H_k$ and $H_k'$ has the same symbols with the same possibilities including 
+    $(c,p_a+p_b)$
+- [ ] 34
+  - see the ans
+    - > Note that if the cited reference was to a square vertex rather than a circle vertex, then the outcome is reversed
+      This is because $+1$ when square just means the following steps will make the **current** player win,
+      So it is changed to circle it means it will make the player corresponding to the circle win, so $-1$, which is reversed.
+  - Also [see](https://www.overleaf.com/read/jswdgrdzsgfk#cea6e4)
+- [ ] 36
+  - > a player will *never want to move to a situation* with two piles, one of which has one stone, nor to a single pile with more than one stone.
+    1. Assume player 1 moves to "a single pile with more than one stone"
+      then player 2 can make player 1 lose by having only 1 left.
+    2. the former is similar, player 2 can remove one pile and have only 1 left.
+    - Then 22 must make player 2 lose
+      1. combine -> 4
+      2. 21
+      3. 2
+      All 3 cases are among the above 2, so they make player 2 lose.
+      So 22 has value 1.
+      Then the rest don't need to look at.
+    - The level 1 omits 41,21,
+      the level 2 omits 31,11,21 (for 211) and ...
+- [ ] 38
+  - a) trivially center $X$ will help both $X$, so will win
+  - b) it will must mark $(2,1)$($(2,3)$)
+    then circle will block $X$ at $(3,1)$,
+    Use this process again for $(2,3)$($(2,1)$)
+  - c) similar to a) $(2,3)$
+  - d) trivially $X$ must mark $(1,3)$
+    then circle $(1,2)$
+    then cross $(3,2)$
+    Then circle can't win at either left location, similar for cross.
+  - see the ans
+    - The above b) is wrong
+      - > as long as the second player makes his third and fourth moves in the first and third columns
+        if $(2,1),(2,3)$ then 2nd win
+        otherwise, at least one is in the 3rd row,
+        so *all rows* are occupied by the 2nd player
+        diagonals are also occupied by the 2nd player
+        So if "the first and third columns" are also occupied by the 2nd player plus the 2nd column already occupied, then the 1st player can't win.
+- [ ] 39
+  - By induction, the 2nd player can always make 2 piles with the same number
+    then at the end, it will be reduced to $(2,2)$ 
+    (because $(1,n)$ is not perferred by player 1)
+    Then the player 1 will always cause the situations in exercise 36, so player 1 loses.
+  - see the ans
+    - > If first player takes *all* the stones from one of the piles, then second player takes all but one stone from the remaining pile and wins. If first player takes all *but one* stone from one of the piles, then second player takes all the stones from the other pile and wins
+      > if first player takes *two* stones from a pile, then second player takes one stone from the remaining pile and wins. If first player takes *one* stone from a pile, then second player takes two stones from the other pile and wins.
+      These 2 have been said in 36.
+    - The above is more specific with $(2,2)$ although the ans just use the strong induction for 
+      $(j,j),j\ge 2$
+- [ ] 40
+  - if either is 1, then trivially by exercise 36, player 1 wins
+    two piles are $(m,n),m,n\ge 2$
+    1. ~~$(2,2)$ remove one pile~~ impossible due to "different numbers of stones".
+    2. $(m,n),m,n\ge 2$ but $m,n$ are not both 2
+      then remove stones leaving $$
+  - see the ans
+    - it is based on 39.
+- [ ] 42
+  - see the ans
+    1. > the actual number of moves is the sum of the *distinct* pile sizes
+    2. > a position with just *one pile has one fewer* move
+- [ ] 44
+  - see the ans
+    it just *pass the payoff up* by the recursive procedure.
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -8838,6 +9050,7 @@ Redo 5.4-48
 [graph_theory]:./papers/graph_theory.pdf
 [galvin]:./papers/galvin1994.pdf
 [Cynthia_and_Chahat]:./papers/Cynthia_and_Chahat.pdf
+[huffman_1952_minimum_redundancy_codes]:./papers/huffman_1952_minimum-redundancy-codes.pdf
 
 <!-- other misc links -->
 [Dilworth_theorem_proof_combination]:https://web.vu.lt/mif/s.jukna/EC_Book_2nd/dilworth.html
