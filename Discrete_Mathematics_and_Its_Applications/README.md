@@ -434,7 +434,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   3. $\exists n=m$
   4. trivial with the algebra arithmetic.
   5. similar to the above
-- TODO 2.2
+- ~~TODO 2.2~~
 ## 3
 - Based on ALGORITHM 3, we use "," to split parameters.
 ### 3.1
@@ -1697,6 +1697,32 @@ check(R_1)
       - > maximize his profit.
         Here at each step the player always choose *the best for himself*. So optimal which at least maximize the current player's payoff.
       - optimal strategy [definition](https://socialsci.libretexts.org/Bookshelves/Economics/The_Economics_of_Food_and_Agricultural_Markets_(Barkley)/06%3A_Game_Theory/6.01%3A_Game_Theory_Introduction)
+### 11.3
+- Universal Address Systems is same as lexicographic order in p653.
+- > each internal vertex the second time
+  This implies the leftmost subtree has been traversed
+  > listing a vertex the last time it is passed on the way back up to its parent
+  all subtrees have been traversed.
+  > list the vertices in preorder by listing each vertex the first time this curve passes it
+  always root first.
+  - The [online](http://www2.hawaii.edu/~takebaya/ics211/module8/objective2.html) one also doesn't give one detailed explanation.
+- > An inorder traversal of a binary search tree, discussed in Section 11.2, visits the vertices in ascending order of their key values
+  See [this](https://www.codecademy.com/resources/docs/general/binary-search-tree/inorder-traversal)
+- > An expression in prefix notation (where each operation has a specified number of operands), is unambiguous, so no parentheses are needed in such an expression. The verification of this is left as an exercise for the reader.
+  Here all operators are 2-ary operators
+  Then based on
+  > Both the preorder traversal and the postorder traversal encode the structure of an ordered rooted tree when the number of children of each vertex is specified.
+  we can *encode* the tree.
+  - The above means same as the contents after example 6 which I read after the above "verification".
+  - > Because prefix and postfix expressions are unambiguous and because they can be evaluated easily *without scanning back and forth*, they are used extensively in computer science
+    Based on FIGURE 11, the main reason is that in "prefix and postfix", the operator *range* is well defined.
+    This is similar to the above.
+- > The steps used to evaluate this expression by working right to left, and performing operations using the operands on the right,
+  EXAMPLE 7 prefix:
+  "working right to left" because leaves (operands) are on the right and we must leave the top root (i.e. the leftmost) at the end.
+- > An inorder traversal of the binary tree representing an expression produces the original expression with the elements and operations in the same order as they originally occurred, ex-cept for unary operations, which instead immediately follow their operands
+  "ex-cept for unary operations" mean not one at the left and one at the right of the operator
+  but all after the operator.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -6370,7 +6396,7 @@ pprint(func_n)
   - a) 
     $xG(x)^2=\sum_{m=0}^{\infty}\sum_{k=0}^{m}C_kC_{m-k}x^{m+1}\overset{m'=m+1}{=}\sum_{m'=1}^{\infty}\sum_{k=0}^{m'-1}C_kC_{m'-1-k}x^{m'}$
     the ans is more intuitive which use substitute $m'=m+1$ first.
-    - See [this](https://math.stackexchange.com/a/3138900/1059606) which emphasises checking the low-order terms
+    - See [this](https://math.stackexchange.com/a/3138900/1059606) which emphasises checking the low-order terms although it doesn't solve the same problem as this exercise.
       and 
       - [this](https://math.stackexchange.com/a/2779486/1059606) which solves this problem directly by expansion.
       - [this](https://math.stackexchange.com/a/1556063/1059606) checks $C_0$.
@@ -8924,6 +8950,69 @@ A  E /|\
 - [ ] 44
   - see the ans
     it just *pass the payoff up* by the recursive procedure.
+### 11.3
+- 2~18(similar to 16),
+  22~24,28~29,30~34 skipped.
+- [ ] 20 see the ans
+  - since there is no symmetric method for this counting, so I didn't dig into the counting for $3,4,5$.
+- [ ] 21
+  - similar to 20 
+    the following is based on choosing the delimeter one by one. 
+    - By symmetry we can also count by $2\cdot(2+5)$
+    $$
+    A\cap (\cdots)
+    \begin{cases}
+      B-(\cdots)
+      \begin{cases}
+        A\cap(B-A)\\
+        (A\cap B)-A  
+      \end{cases}\\
+      (B-A)\cdots
+      \begin{cases}
+        (B-A)\cap (B-A)
+      \end{cases}\\
+      (B-A\cap B)-A
+      \begin{cases}
+        (B-A)\cap B\\
+        B-(A\cap B)
+      \end{cases}
+    \end{cases}\\
+    (A\cap B)-(A\cap B-A)
+    \begin{cases}
+      (A \cap B)\\
+      A\cap(B-A)
+    \end{cases}\\
+    (A\cap B-A)\cap(B-A)
+    \begin{cases}
+      (A\cap B)-A\\
+      A\cap(B-A)
+    \end{cases}\\
+    (A\cap B-A\cap B)-A
+    \begin{cases}
+      A\cap(B-A\cap B)
+      \begin{cases}
+        (B-A)\cap B\\
+        B-(A\cap B)
+      \end{cases}\\
+      (A\cap B)-(A\cap B)\\
+      (A\cap B-A)\cap B
+      \begin{cases}
+        (A\cap B)-A\\
+        A\cap (B-A)
+      \end{cases}\\
+    \end{cases}
+    $$
+  - See [this](https://math.stackexchange.com/a/2329865/1059606), so we can just use the formula in p556.
+- [ ] 26
+  - just as what example 7 does,
+    we combine operands and operators together based on the specified number. 
+  - > we can recognize the first leaf as the first vertex with no children
+    more specifically, i.e. with no children which is one operator.
+  - > The result is the preorder and child counts of a tree with one fewer vertex.
+    preorder because we remove one *leftmost leaf*.
+  - compared with FIGURE 11, all vertices have 2 children there, but we can't decide the tree form.
+- [x] 27 similar to 26
+- [ ] 30
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
