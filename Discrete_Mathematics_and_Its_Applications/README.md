@@ -2,11 +2,13 @@ Please point out errors if any. Thanks beforehand.
 
 check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
 
-To be more specific of the step 2, here the maximum number of edges from 2 components plus 1 due to the bridge is $f(n,k)=\frac{k \left(k - 1\right)}{2} + \frac{\left(- k + n\right) \left(- k + n - 1\right)}{2} + 1$. It has the maximum when $k=n-1$ or $1$ (Here $k=n$ is impossible because of the bridge). Then $f(n,n-1)=\frac{\left(n - 2\right) \left(n - 1\right)}{2} + 1$ and $g(n)=f(n,n-1)-\frac{n^{2}-3 n + 6}{2}=-1$.
+3. What does "asymptotically equal to "asymptotically equal to "$\Theta(k)$" if we consider $k$ to be a function of the input size $n$." mean? I think $k=g(n)$ has no relation with $\Theta(k)$. Then maybe "This means the running time is proportial to $k$ or, in other words, asymptotically equal to "$\Theta(k)$". *And* we can also consider $k$ to be a function of the input size $n$" is better. 4. I edited the answer with some trivial understanding points based on "to avoid exploring redundant paths". Feel free to review them to show whether they are right.
 
-This means the edges of the disconnected graph $E(G') \le f(n,n-1)$ is impossible to get from "any graphs with $\frac{n^{2}-3 n + 6}{2}$ edges with one bridge", which also implying more than one bridges.
+1. More specifically, "pre-order" is the [visiting order by DFS](https://en.wikipedia.org/wiki/Depth-first_search#Vertex_orderings) where "This is a compact and natural way of describing the progress of the search" is shown in the [example](https://en.wikipedia.org/wiki/Depth-first_search#Example). 2. BFS uses [level-order search](https://en.wikipedia.org/wiki/Tree_traversal#Breadth-first_search) because searching level by level (i.e. depth by depth).
 
-2. For the step 1, the maximum edge number of disconnected graph with $n$ vertices can be got by removing edges from the complete graph $K_n$. To disconnect one vertex, we at least need to remove $n-1$ edges which is the above $f(n,n-1)$. By the above proof, it is impossible to get from "any graphs with $\frac{n^{2}-3 n + 6}{2}$ edges with one bridge", so the graph can't be disconnected. Please point out errors if any. Thanks beforehand.
+Thanks for the detailed explanation of the asymptotic notation. 3. Based on your explanation of the difference between "proportional" and "asymptotic" (i.e. whether $A,B$ are *functions* of $n$). Here since $k,|N_x|$ are both functions of $n$ and based on your explanation of proportional, let running time be $R(n)$, then we have $R(n)\in (c_1 \cdot f(n),(c_3+c_4)\cdot f(n))$ which implies $R(n)=\Theta(f(n))$ by $\Theta$ [definition](https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations).
+
+Similarly space complexity $S(n)=\Theta(f(n))$ (we can also say $f(n)=\Theta(S(n))$ by doing division in the inequity). Then by the transitivity of $\Theta$, we have $R(n)=\Theta(S(n))$. Is my understanding right?
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -1723,6 +1725,207 @@ check(R_1)
 - > An inorder traversal of the binary tree representing an expression produces the original expression with the elements and operations in the same order as they originally occurred, ex-cept for unary operations, which instead immediately follow their operands
   "ex-cept for unary operations" mean not one at the left and one at the right of the operator
   but all after the operator.
+- p837 
+  > There are easy ways to list the vertices of an ordered rooted tree in preorder, inorder, and postorder
+  can be seen intuitively [here](https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search).
+  - ~~red is first met because left-to-right searching order.~~
+    See the comments like "Visit the current node (in the figure: position red)." which shows the correspondence between the book and wikipedia and also proves the relation between 3 orders and the walk (walk along the path in the figure to get why the above properties hold.)
+- > Both the preorder traversal and the postorder traversal encode the structure of an ordered rooted tree *when the number of children of each vertex is specified*
+  if not specified, we can use [other conditions](https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search) to construct -> [this](https://cs.stackexchange.com/a/441/161388)
+  Notice here we have *no operators* but just operands.
+  - > No one sequentialisation according to pre-, in- or post-order describes the underlying tree uniquely.
+    in-order alone is shown in the book or we [don't know what to choose for `[x]`](https://cs.stackexchange.com/q/439/161388).
+    pre-order, post-order is due to
+    ~~> can be either the left child or the right child.~~
+    ~~So ~~ we don't know where to end `(post r)` or others similarly.
+    - > even if we assume pairwise distinct keys/labels.
+      TODO IMHO it can as the book says.
+  - Notice
+    > First, I'll assume that all elements are distinct.
+    otherwise the algorithm to check for $x_2=y_i$, etc, fails.
+  - Here pre-order traversal with post-order traversal is done by mapping (one-to-one correspondence) between each other.
+  - Here $O(n^2)$ may assume using the naive searching algorithm.
+    while $O(n\lg(n))$ assume for each 
+    $x_i$ searching for $y_j=x_i$ takes $O(\lg(n))$ time.
+    - Since maybe level $n-1$ for n vertices. So we may have $n$ iterations and each iteration uses some time to search.
+      ```python
+      def order([x_1,...,x_n],[y_n,...,y_1]):
+        if len([x_1,...,x_n])==1:
+          return [x_1,...,x_n]
+        j=search(x_1,[y_n,...,y_1]) # {get left-subtree and right-subtree}
+        L=order([x_2,...,x_{j-1}],[y_{i-1},...,y_2])+order([x_j,...,x_{n}],[y_{n},...,y_i]) # left appended with right
+      ```
+  - > Post-order plus in-order is of course symmetric.
+    i.e. similar to the pre-order one plus in-order.
+    Similarly they are based on mapping.
+### 11.4
+- [Multicast](https://www.geeksforgeeks.org/difference-between-unicast-and-multicast/) is just mul-to-mul
+- DFS
+  - > All other edges of the graph must connect a vertex to an ancestor or descendant of this vertex in the tree.
+    i.e. form one loop.
+  - > we examine each edge at most twice to determine whether to add this edge
+    i.e. once for each endpoint.
+  - > Because the graph has a finite number of edges and is connected, this process ends with the production of a spanning tree
+    1. trivially all vertices are visited -> spanning
+    2. backtracking -> connected
+    3. it must have $n-1$ edges based on this process because except for the 1st edge leading from the root, all the rest must add one *new vertex* based on "visited" -> tree with the plus of "connected"
+    - > Each vertex that *ends a path* at a stage of the algorithm will be a *leaf* in the rooted tree, and each vertex where a path is constructed starting at this vertex will be an internal vertex
+      "ends a path" -> no child -> leaf
+  - [backtracking](https://en.wikipedia.org/wiki/Depth-first_search#Vertex_orderings)
+    > Note that *repeat* visits in the form of backtracking to a node
+    is generalized from [this](https://en.wikipedia.org/wiki/Backtracking#)
+    - > incrementally builds candidates to the solutions, and abandons a candidate ("backtracks") as soon as it determines that the candidate *cannot possibly be completed to a valid* solution.
+      i.e. when having one path which can't be extended (completed) to include all vertices (valid)
+      It *abandons* this path by dropping the leaf and going backwards.
+      > Any *partial* solution that contains two mutually attacking queens can be abandoned.
+      - This is same as 11.4.4 says.
+      - > Backtracking can be applied only for problems which admit the concept of a "partial candidate solution" and a relatively *quick test of whether it can possibly be completed* to a valid solution.
+        > The backtracking algorithm enumerates a set of *partial* candidates that, in principle, could be completed in various ways to give all the possible solutions to the given problem.
+      - > If it cannot, the whole sub-tree rooted at c is *skipped (pruned)*. Otherwise, the algorithm (1) checks whether c itself is a valid solution, and if so reports it to the user; and (2) recursively *enumerates all sub-trees* of c.
+        i.e. either prune subtrees or not (leaf trivially).
+  - > For example, it can be used to find paths and circuits in a graph
+    - [path](https://www.geeksforgeeks.org/print-the-path-between-any-two-nodes-of-a-tree-dfs/) which shows DFS very clearly using `vis` and `del stack[-1]` to update the stack.
+    - cycle in undirected. See [nonisomorphic_simple_connected]
+      - Here `# Recur for all the vertices # adjacent to this vertex ... parent != i`
+        checks the following ""DFS" with no back edges".
+        - Here by combining the tree edges and the single back edge, we can get one **simple** cirucit, although it is not shortest as [this example](https://stackoverflow.com/a/20847998/21294350) shows.
+          - ~~Also see [this](https://stackoverflow.com/a/77927343/21294350)~~ ~~which implies DFS can get one simple circuit where the shortest implies ~~.
+      - `if(self.isCyclicUtil(i, visited, v)):` just *passes back* the result based on the recursive algorithm.
+      - [comparison](https://stackoverflow.com/a/19115118/21294350) with the ~~above~~ directed.
+        > An undirected graph has a cycle *if and only if* a depth-first search (DFS) finds an edge that points to an already-visited vertex (a back edge)
+        "if" is trivial. <a name="DFS_checking_cycle_proof"></a>
+        "only if" is due to that ["DFS" with no back edges is one spanning tree](https://cs.stackexchange.com/questions/11438/why-does-dfs-only-yield-tree-and-back-edges-on-undirected-connected-graphs#comment316453_11552). So its corresponding undirected graph is one tree which implies no cycle.
+    - cycle in [directed](https://www.geeksforgeeks.org/detect-cycle-in-a-graph/)
+      - As [this](https://stackoverflow.com/questions/19113189/detecting-cycles-in-a-graph-using-dfs-2-different-approaches-and-whats-the-dif#comment137343260_19115118) said, it just adds `recStack[v] = False` `recStack = [False] * (self.V + 1)`, etc.
+  - cross edge can't exist in an undirected graph
+    - [1](https://stackoverflow.com/a/28942405/21294350)
+      here case 1 just means in the DFS process of $u$ we meet $v$
+      case 2 means $u$ has been backtracked, so based on $(u,v)$ it must contain 
+      $v$ before when meeting $u$ instead of currently
+      - Here case 2 may fail in directed graph,
+        so based on [this](https://cs.stackexchange.com/a/11552/161388)
+        > It might help to think of why the can occur in directed graphs
+      - By [this](https://cs.stackexchange.com/a/95534/161388), white path directly proves this
+        - [white path][lec_14]
+          - Here when $d(u)$, 
+            $u$ is not colored [gray](https://www.clear.rice.edu/comp314/lec/week3/Depth-First.htm)
+          - >  before finishing w:
+            because 
+            > ww’ be the first edge on this path
+          - [Parenthesis Theorem][lec_13]
+            Here $d(u)<d(v)<f(u)<f(v)$ is impossible because of the process of DFS
+            i.e. discover later must means finish (backtrack) earlier 
+            - > By parenthesis theorem, w’ is also a descendant of u, contradiction.
+              so intersection and one part of $d(u) < d(w’)$ are enough to get the "descendant" relation.
+        - Then here just choose arbitrary edge $uv$ to prove it is either a tree edge or a back edge.
+          then $uv$ becomes one "white path".
+      - Also see the book 11.4.5 a spanning *forest* implying the cross edge in the weakly connected directed graph.
+- BFS
+  - > The procedure ends because there are only a finite number of edges in the graph.
+    "a finite number of" vertices may be better because that is our ending target.
+  - > add each edge incident to this vertex to the tree as long as it does not produce a simple circuit.
+    based on the above $n+1$ similar to DFS, we ensure it is one tree.
+    - It is similar to one *star graph*.
+  - > we see that we examine each edge at most twice to determine whether we should add this edge and its endpoint not already in the tree
+    This is because "for each neighbor w of v" is bidirectional.
+  - both [DFS (similar to the star graph)](https://www.geeksforgeeks.org/connected-components-in-an-undirected-graph/) and [BFS similar to DFS with `for each vertex w adjacent to x` adding all vertices and then calling the next sub-procedure](https://courses.washington.edu/css343/zander/NotesProbs/graphBFS.pdf) can be used to "determine the connected components of a graph" because each component has one spanning tree which is the *minimal* connected subgraph of $n$ vertices.
+    - Also see [this proof][lecture10_notes] which is based on the *level* (i.e. recursive depth).
+  - > find the path with the fewest edges between two vertices in a graph
+    - why DFS [can't](https://qr.ae/pKj7Qr)
+      > DFS can explore a long path *before* it finds a shorter path
+      - > Performing a topological sort of a directed acyclic graph (DAG).
+        See [this](https://www.geeksforgeeks.org/topological-sorting/)
+        here `stack.append(v)` will only be done after `self.topologicalSortUtil(i, visited, stack)` for all adjacent vertices (in the directed graph, i.e. ~~parents~~ children) or `visited[i] == True` which implies `topologicalSortUtil(self, v, visited, stack)` have already been done. Then *all children are appended before itself*, so ensuring the Topological Sorting.
+        - [defaultdict](https://www.geeksforgeeks.org/defaultdict-in-python/) can have `list` as the type of "value"
+      - the modification to [update the weight](https://stackoverflow.com/questions/54198910/cant-we-find-shortest-path-by-dfsmodified-dfs-in-an-unweighted-graph-and-if#comment137344391_54199609) is obviously more complex to find the shortest path.
+    - [BFS](https://www.geeksforgeeks.org/shortest-path-unweighted-graph/) to find the shortest is trivial
+      It just find len-$1,2,3,\cdots,n$ until find one with the target destination `if (adj[u][i] == dest):`.
+      - `for i in range(len(adj[u])): ... ` with no BFS sub-calls implies BFS.
+      - It is just [Dijkstra](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Pseudocode) where `for each neighbor v of u still in Q:` "each" implies BFS having the [~~star~~ radial graph][BFS_radial]. <a name="Dijkstra_BFS"></a>
+        - But `min` in `u <- vertex in Q with min dist[u]` implies its traversal order is not totally same as BFS when in one **weighed** graph.
+          - Also `prev[v] ← u` means the tree may be modified in progress while BFS won't do that by assigning one **new** parent if already assigning one parent to one node.
+            But as [this comment](https://stackoverflow.com/questions/8379785/how-does-a-breadth-first-search-work-when-looking-for-shortest-path#comment27820665_8379892) says, for *unweighted* the parent [can't be changed](https://stackoverflow.com/questions/8379785/how-does-a-breadth-first-search-work-when-looking-for-shortest-path#comment137378028_8379892).
+            - kw
+              parent (i.e. `pred` in the geeksforgeeks code), **double** as marking them "discovered"
+- > The choice for which to use often depends on implementation details, such as the data structures used
+  see [this](https://stackoverflow.com/a/2626251/21294350) by [this](https://stackoverflow.com/questions/3332947/what-are-the-practical-factors-to-consider-when-choosing-between-depth-first-sea#comment26027586_3332947) where "stack" is implied by "backtrack" and "queue" is implied by breadth.
+  - Also see the [space complexity](https://cs.stackexchange.com/a/328/161388) which implies the data structure.
+    - BFS
+      - Here "$O(b^d)$ space" for BFS is due to ~~at each level $k<d$ we must *keep all queues* because maybe we need to continue to level $k+1$ if not found in level $k$.~~
+        See [Artificial_Intelligence_A_Modern_Approach_3rd] Figure 3.12 where the white circles are the FIFO queue.
+      - why $b^d$ is [preferred](https://cs.stackexchange.com/a/64450/161388)
+        > we're going to visit looks *sorta like a tree*: each vertex has on average about b edges leading out of it.
+        - [proof](https://stackoverflow.com/questions/15489329/breadth-first-search-branching-factor#comment118834780_15489507)
+          - > Since in the worst case breadth-first search has to consider all paths to all possible nodes
+            the *unique* path to each node implies $b^k$ multiplied by 1.
+          - > the number of nodes at the deepest level
+            All these is same as [Artificial_Intelligence_A_Modern_Approach_3rd]
+        - [Artificial_Intelligence_A_Modern_Approach_3rd]
+          - > If the algorithm were to apply the goal test to nodes when selected for expansion, *rather than when generated*,
+            This means first expansion then test, so having overheads.
+            ~~> which is that the goal test is applied to each node when it is *generated rather than* when it is selected for expansion.~~
+            ~~Here I think $O(b^{d+1})$ corresponds to "generated" because the last level has no expansion but they are generated, so it will add ~~
+            ~~$$~~
+          - > $b+b^2+b^3+\cdots+b^d=O(b^d)$
+            This is due to $\frac{b(b^d-1)}{b-1}<b^d-1<b^d$ although we can trivially get $O(b^{d+1})$.
+          - > There will be O(bd−1) nodes in the explored set and O(bd) nodes in the frontier
+            "explored set" has at most $b+b^2+b^3+\cdots+b^{d-1}=O(b^{d-1})$ by the figure 3.12.
+            "frontier" has at most $b^d=O(b^d)$.
+          - > As for space complexity: for any kind of graph search, which stores every expanded node in the explored set, the space complexity is always *within a factor of b* of the time complexity
+            See [this][Graph_space_complexity_vs_time_complexity]
+            - Notice this sentence is not shown in [4th edition](./other_books/Artificial.Intelligence.A.Modern.Approach.4th.Edition.Peter.Norvig.Stuart.Russell.pdf).
+            - in the [chat](https://chat.stackexchange.com/?tab=site&sort=people&host=cs.stackexchange.com)
+              - [1](https://chat.stackexchange.com/transcript/message/65094178#65094178) means same as "add the node on the other end of $e$ **not in $N_x$** to $N_x$"
+              - [2](https://chat.stackexchange.com/transcript/message/65094172#65094172) is wrong based on [this](https://cs.stackexchange.com/questions/165308/prove-the-relation-between-space-complexity-and-time-complexity-of-the-graph-sea/165324#comment343617_165324)
+                > You seems to think "expand the chosen node" as one inner loop contributing to the time complexity with at most iteration number b by "does the following repeatedly ..." *instead of thinking of the outer loop as one minimal unit* (this is what I thought before which may be wrong after rethoughts)
+            - [this](https://cs.stackexchange.com/review/suggested-edits/104060)
+              > by thinking of how edges are got from nodes.
+              shows how $k\leq |N_x|\cdot b$ are got. This is *the main part to prove*.
+              - The rest is [added with improvement](https://cs.stackexchange.com/posts/165324/timeline#history_5c5dd7b2-b744-40f4-bb97-46812b233c86).
+    - DFS
+      - "$O(h)$ space" for DFS is due to stack, similarly for [IDDFS](https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search#Proof_2)
+      - > A non-recursive implementation of DFS
+        ~~may be~~ is similar to BFS as wikipedia says due to [all adjacent vertices are pushed](https://en.wikipedia.org/wiki/Depth-first_search#Pseudocode) `for all edges from v to w in G.adjacentEdges(v) do `
+        this is why $O(|E|)=O(bd)$ as the [top label](https://en.wikipedia.org/wiki/Depth-first_search#) says.
+        - Also see [this](https://stackoverflow.com/a/36480122/21294350)
+          > you can know which sibling to explore next.
+          This implies no adjacency list available. This [comment](https://stackoverflow.com/questions/36479640/time-space-complexity-of-depth-first-search#comment69260697_36480122) shows this
+        - Also see this [more detailed](https://cs.stackexchange.com/a/68371/161388)
+    - [IDDFS](https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search#Algorithm_for_directed_graphs)
+      - it just call DFS for *each depth* (Iterative deepening) by `DLS(root, depth)`
+        1. `remaining` will be false when $any_remaining \leftarrow false$ and `foreach child of node do` has no child. More specifically, i.e. `DLS(leaf,1)` in `DLS(root, h+1)` -> ... -> `DLS(leaf,1)`.
+        2. $found, remaining \leftarrow DLS(child, depth−1)$ checks the subtree.
+        - So Time complexity [proof](https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search#Time_complexity) $(d+1-k)b^{k}$ where 
+          $b^k$ is the vertex number at level $k$
+          and $(d+1-k)$ is because each vertex is called with $DLS(v,i),i=0,\ldots,d-k$ which corresponds to $DLS(root,i),i=k,\ldots,d$
+          - Also see the reference
+        - notice here $b$ is one constant which is *not influenced by the vertex number*.
+    - TODO [$\Theta(V+E)$](https://stackoverflow.com/questions/2626198/graphs-data-structure-dfs-vs-bfs#comment15686876_2626251)
+- > One way to search systematically for a solution is to use a decision tree, where each internal vertex represents a decision and each leaf a possible solution.
+  The reason why Backtracking works is due to it is based on the decision tree which is **exhaustive** trivially.
+  Then DFS/Backtracking must find one **path** to the solution because DFS will construct the spanning tree which lists **all possibilities/vertices** including the solution.
+- FIGURE 12
+  - Here is using ["left and right diagonals"](https://www.geeksforgeeks.org/printing-solutions-n-queen-problem/) as `# Check upper diagonal on left side` shows which the left elements due to the strictly increasing `col` by `j = j - 1`.
+    Or as the book says which I omits carelessly when first reading
+    > a diagonal consists of all positions (i, j) with i + j = m for some m, or i − j = m for some m
+    - `any placement` implies `or res`
+    - `result` saves the list of column indices for each row.
+    - `board[i][col] = 0` may be done after the ~~print~~ solution save `result.append(v)` in the leaf node.
+  - Here due to symmetry, only 1,2nd row are considered.
+- > it can also be used to find the strongly connected components of a directed graph
+  It just uses DFS for the [both directions](https://www.geeksforgeeks.org/strongly-connected-components/).
+  - `(n + 1)`,`len(adj) + 1` because the index starts from `1` instead of `0`
+  - notice here `vis` will be changed in the recursive call
+    so when backtracked, it won't access the other direction of the cycle if possible.
+    See [scc] with `Use_vis_cp=True`
+  - > . It can be used to determine whether a directed graph has a circuit, it can be used to carry out a topological sort of a graph,
+    these have been said before.
+- > web crawlers have limits to the depth they search in depth-first search.
+  i.e. IDDFS
+- EXAMPLE 6 can't use BFS because we color one by one instead of [by level][BFS_level_order].
+  - Here `a red` must be one [unary node](https://www.cs.cmu.edu/afs/cs/academic/class/15499-s09/www/scribe/lec11/lec11.pdf) followed by `a red, b blue` because we can color one edge arbitrarily.
+  - Here we just check the coloring with the **already colored** nodes, which is enough, because the edge is *bidirectional* so if contradiction we can find that when coloring the latter colored one.
+- decision-tree related problems can always be solved by backtracking.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -4970,7 +5173,7 @@ $$
     - See this [summary](https://math.stackexchange.com/questions/4822021/how-to-use-generating-functions-to-solve-the-problem-number-of-bit-strings-of-l?noredirect=1#comment10262960_4822021) to verify understanding of the problem
       kw: stringing together, do not need that final 0
 - [ ] 68 it is just [$2*C_{4}^7$](https://math.stackexchange.com/a/581540/1059606) which is same as [this](http://mathcentral.uregina.ca/QQ/database/QQ.09.01/michelle1.html) where $\frac{7!}{4!3!}$ 
-  means all 7 games are labelled differently ($7!$) 
+  means all 7 games are labeled differently ($7!$) 
   then $4!$ and 
   $3!$ is based on the division rule to exclude duplicate ones.
 - [ ] 70 similar to EXAMPLE 24
@@ -7827,6 +8030,9 @@ print(subgraph_of_complete_graph(4))
       Think of the worst case,
       here adding one edge at most combines 2 components,
       so the minimum is one less.
+      - > at most one component more than
+        > so $G$ has at least $v-(e-1)-1=v-e$ components as was to be shown
+        here "at least" corresponds to the worst where 2 components are combined into 1 by $ab$.
       Also [see](https://math.stackexchange.com/questions/457042/prove-that-a-connected-graph-with-n-vertices-has-at-least-n-1-edges#comment9596258_457104)
 - [ ] 30
   - see the ans
@@ -8706,7 +8912,7 @@ Redo 5.4-48
   42~46 skipped
 - [ ] 12
   - see the code [nonisomorphic_simple_connected]
-    TODO DFS proof
+    ~~TODO DFS proof~~ [See](#DFS_checking_cycle_proof) and [this](https://stackoverflow.com/a/66074045/21294350)
   - see the ans
     - We can also see the middle 2 as variants of the length-3 path and the other 2 corresponding to the asterisk graph.
 - [ ] 13
@@ -8728,6 +8934,10 @@ Redo 5.4-48
       Same as 14, it assumes "connected".
     - > Repeat this procedure until the result is a tree
       i.e. make all cycles disappear.
+    - Also see this [proof](https://math.stackexchange.com/a/834901/1059606)
+      > which is impossible as a connected graph on n vertices must at least have n - 1 edges.
+      ~~because one edge except the 1st (add 2 new vertices) will at most add one vertex to have one vertex already added to keep the connectivity which is said somewhere in this note.~~
+      See 10.4-28.
 - [ ] 16,24 see the ans
 - [ ] 25
   - similar to 24, $83/(m-1)\in\mathbb{N}\Rightarrow m=2,84$ both are impossible to be with "height 3".
@@ -8750,8 +8960,38 @@ Redo 5.4-48
         when it is the path, we select 2 numbers for the middle and the rest are put in order.
         so $4*3=12$
         when asterisk, we select for the degree-4 vertex, so $4$.
-  - TODO proof of the generalized theorem
+  - TODO proof of the generalized theorem Cayley's formula
     [1](https://arxiv.org/pdf/0908.2324.pdf#:~:text=There%20are%20exactly%20nn%E2%88%922,set%20V1v1%2C%20v2%20...) [2](https://math.libretexts.org/Bookshelves/Combinatorics_and_Discrete_Mathematics/Applied_Combinatorics_(Keller_and_Trotter)/05%3A_Graph_Theory/5.06%3A_Counting_Labeled_Trees)
+    - Better using [Kirchhoff's theorem](https://en.wikipedia.org/wiki/Kirchhoff%27s_theorem#Cayley's_formula)
+      [induction proof p654 as wikipedia shows][the_nature_of_computation]
+      - Notice it [only applies for the undirected graph](https://arxiv.org/pdf/1904.12221.pdf)
+      - [Empty product](https://math.stackexchange.com/a/1762542/1059606) (i.e. Vacuous Product) implies "the determinant of the 0x0 matrix equals 1"
+      - 13.3 [see this p6](https://www.csie.ntu.edu.tw/~kmchao/tree07spr/counting.pdf)
+        Here $G\setminus e$ corresponds to "the number of spanning trees of G that contain e" because we can just reverse the contract of 2 vertices and it still be one spanning tree which contains the $e$ constructed by the reverse.
+      - > Thus the vector consisting of all 1s is an eigenvector with eigenvalue zero, and L has determinant zero
+        can be [generalized "eigenvectors of the Laplacian matrix associated with eigenvalue zero"](https://simonensemble.github.io/pluto_nbs/graph_connected_components.jl.html) to $C$ connected components where $1/\sqrt{|V_c|}$ can be anything to denote the "equal temperature".
+        - The above shows the algebraic multiplicity of eigenvalue 0 is *at least* $C$
+          TODO strict proof for [exactly](https://math.uchicago.edu/~may/REU2013/REUPapers/Marsden.pdf) $C$
+          - The above $G_c$ corresponds to the block $A_r$ in Theorem 3.9.
+      - in (13.4) we get the right by hypothesis and derive the left by the definition of the determinant.
+      - application to [prove Cayley formula](https://math.stackexchange.com/a/1252851/1059606)
+        - $\gamma _{A}(\lambda )\leq \mu _{A}(\lambda )$ [proof](https://math.stackexchange.com/a/458200/1059606) which is from this when I [prepares for the graduate_entrance_exam](https://bitbucket.org/czg980/graduate_entrance_exam_simplified/src/4c6a0d7d21c9f78af8f037fde20b271f90dfe88a/textbooks/review/linear%20algebra/README.md?at=master#README.md-158,281,391:393,396)
+          - Also [see](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors#Algebraic_multiplicity)
+            - Due to the $R^n$ dimensional space property, we can find one "orthonormal set" to form ["an orthonormal basis"](https://en.wikipedia.org/wiki/Orthogonal_matrix#Matrix_properties), then we have $V^T V=I$.
+            - > we get a matrix whose top left block is the diagonal matrix
+              this can be seen as $[{\displaystyle {\boldsymbol {v}}_{1},\,\ldots ,\,{\boldsymbol {v}}_{\gamma _{A}(\lambda )}}]^T A [{\displaystyle {\boldsymbol {v}}_{1},\,\ldots ,\,{\boldsymbol {v}}_{\gamma _{A}(\lambda )}}]$
+      - Notice when generalized to multigraph (here I skips the loop although in 639 it contains that)
+        Then $G-e$ is same as before (also for loops. Matrix also stays same.)
+        $G\cdot e$ also works by contraction because all the other edges among multi edges are excluded due to $e$. ($L_{G\cdot e}$ (0,0) entry should minus all multi edges although it doesn't influence the $T(G\cdot e)$ calculation.)
+      - > The cofactor matrix of a laplacian matrix has all of its entries equal to each other
+        [this](https://math.stackexchange.com/questions/4143714/find-cofactor-matrix-of-a-certain-matrix#comment10346567_4143719)
+        - > $adj(Q)$ is symmetric
+          if $Q=Q^T$, then $C_{ij}^T=C_ji\Rightarrow |C_{ij}|=|C_{ji}|,j\neq i$ (here means matrix).
+        - [See][algebraic_graph_theory]
+      - TODO cofactor [->](https://en.wikipedia.org/wiki/Kirchhoff%27s_theorem#) ${\displaystyle t(G)={\frac {1}{n}}\lambda _{1}\lambda _{2}\cdots \lambda _{n-1}\,.}$.
+      - code implementation by geeksforgeeks may be [carelessly wrong](https://discuss.geeksforgeeks.org/comment/aca684bf-5367-4296-b306-caedb84f8f5c/gfg).
+      - Trivially, here we doesn't think about isomorphism (e.g. for $K_3$ it should have $1$ tree when unlabeled by A000055. But here removing one edge $e=ac$ (2 edges in $G-e=\{ab,bc\}$) 
+        or not (~~1 edge~~ 2 multiedge in $G\cdot e=\{a'b,a'b\}$. Here I use the edge set) will both have valid contribution to the tree number count). We can think it as we label all nodes first then we choose edges.
 - [x] 40
   - if not choosing $e$, then it must contain one subtree which is the proper superset of $d-b-\{a,c\}$ and
     $f-\{g,h-\{i,j,k\}\}$
@@ -9013,6 +9253,126 @@ A  E /|\
   - compared with FIGURE 11, all vertices have 2 children there, but we can't decide the tree form.
 - [x] 27 similar to 26
 - [ ] 30
+### 11.4
+- 2,6~8,
+  16,20,26(where 9 is 2 $C_4$)~28,32 skipped
+- [x] 4
+  - trivially here DFS or BFS is better to construct the spanning tree.
+- [x] 10
+  - here $ab,ef$ are cut edges
+    Then we can only choose among the middle 4 edges.
+    But any 2 (either adjacent or not) of the middle 4 are cut edge pairs.
+    So we can only choose one among the middle 4 edges.
+- [ ] 11
+  - d) similar to 10 "any 2 (either adjacent or not) of the middle 4 are cut edge pairs"
+    so $5$ when removing any one edge.
+  - see "Kirchhoff's theorem" and the corresponding [code](./miscs_snippets/py_codes/11_4_spanning_tree_labeled/Kirchhoff.py) for systematic calculation.
+- [ ] 12 see the ans
+  - Since [no exact formula](https://math.stackexchange.com/a/396530/1059606) although maybe some complex [recurrence formula](https://www.researchgate.net/post/What_is_the_number_of_possible_non-isomorphic_trees_for_any_node/5e7b2d02842a473ee35a4176/citation/download) ([i.e.](https://qr.ae/pKQX03)) which needs the help of another somewhat complex sequence, we still just use the brute-force by computer. See [nonisomorphic_simple_connected]
+    - It corresponds to [A000055](https://oeis.org/A000055) which has no root.
+    - Back to 11.1-38,
+      It corresponds to ["the number of spanning trees in a complete graph"](https://oeis.org/A000272) because here we think each vertex is different (i.e. labeled).
+    - Here "nonisomorphic spanning trees" means "nonisomorphic unrooted trees" as 11.1-12,13 where "nonisomorphic" -> unlabeled.
+- [x] 14
+  $\overbrace{a-b-c}^{\text{trivially by the alphabetical order}}-\overbrace{h}^{\text{the only possibility}-\overbrace{g}^{\text{alphabetical}}-\overbrace{l}^{\text{the only possibility}}}$
+  then alphabetically h-i-d-e-f
+  only possibility f-k-j-n
+- [ ] 18 see the ans
+  - d)
+    - > the result will always be the same (up to isomorphism)
+      starting vertex WLOG can be arbitrary.
+      - > From one of them we fan out to two more
+        by symmetry this can be also arbitrary.
+      - > pick up one more vertex from another neighbor
+        i.e. choose either 3 or 4 to fan.
+        in this case either can be transformed to the other by flipping by 1-7 line (i.e. the $45^o$ line) while keeping 5-2,2-6.
+        - choosing 5-8 or 6-8 is similar.
+- [ ] 22
+  - by recurrence, breadth-first
+    expand root $r$ to one node which is in one $Q_{n-1}^{(1)}$ 
+    (let it be $v$) and the rest $S(v)$ are in the other 
+    $Q_{n-1}^{(2)}$ .
+    Then by symmetry we expand $v$ next and get $Ex(v)$.
+    Then we expand the rest $S(v)$. But due to the mirror, they can't be expanded to 
+    $Q_{n-1}^{(1)}$
+    Then we expand $Ex(v)$ similar to 
+    $S(v)$.
+    Recursively, we get 2 tree $T_{n-1}$ 
+    corresponding to $Q_{n-1}$ with their roots being 
+    $r$ and $v$.
+  - depth-first
+    By induction, assume $Q_n$ corresponds to one path
+    Then $Q_{n+1}$ can be one path which is first constructed for one 
+    $Q_{n}^{(1)}$
+    and then due to mirror, we have *one edge* to get to $Q_{n-1}^{(2)}$.
+    by induction hypothesis, it is also one path.
+  - see the ans
+    - > can be obtained by changing one 0 that has no 1’s following it to a 1 .
+      i.e. $10...$ is the "he root of a copy of $T_n$".
+      Then all nodes $01...$ or $001...$ can't be expanded to $11...$ or $101...$ which is another $Q_n$.
+      Then recursively do it because $Q_n$ is also constructed recursively. (More specifically, $0100...$ can go to $01100...$ which can be seen as they are in done in $Q_{n-1}$ by omitting the leading $0$ but $00100...$ can't)
+      - This means same as the above
+    - > However, if “bad” choices are made, then the path might run into a dead end before visiting all the vertices,
+      e.g. in 18 ans, 1-3-5-8-6-2 will make all neighbors of 2 (1,5,6) have been visited, so "a dead end".
+- [x] 24
+  - we can also use the preorder (i.e. DFS) or others of the spanning tree.
+    Since BFS has the root first, so it is not inorder and postorder and also [not preorder](https://stackoverflow.com/questions/55243105/breadth-first-search-traversal-vs-pre-order-traversal-vs-depth-first-search-trav#comment97220653_55243795)
+- [ ] 25
+  - As [BFS_radial] says, if there is one shorter path, it must be searched earlier, leading to the contradiction. (Here is based on "unweighed").
+  - see the ans
+    - > By the inductive hypothesis, u′ is at level l in the breadth-first spanning tree
+      because it has "length" $l$, otherwise "a shortest path from v to u" can be shorter (u' has lenght $< l$) or doesn't include u' (u' has lenght $> l$)
+    - > although the edge connecting u′ and u is not necessarily added
+      i.e. maybe added before by other adjacent vertex of $u$ at level $l+1$.
+- [ ] 30
+  - a) it is one type of decision tree.
+- [ ] 34
+  - Assuming connecting $u,v$ with level difference $\ge 2$ and $u$ is shallower.
+    then `dist(root,v)\le dist(root,u)+1`
+    But the level of $v$ implies `dist(root,v)\ge dist(root,u)+2` as 25 shows, contradiction.
+  - see the ans
+    - > the algorithm processed u before it processed v
+      so `level(u)<=level(v)` based on WLOG (~~`=` when they are added by different parents~~) and 47 visiting order implying the level order.
+      - > the parent p of v must have already been processed before u
+        otherwise $uv$ will be added.
+        - Here rephrase by comparison expression.
+          Then `level(p)<=level(u)`
+          - Also by assumption, `level(p)=level(v)-1`
+            Then Q.E.D.
+  - This shows [back edges are impossible in BFS](https://stackoverflow.com/questions/20847463/finding-length-of-shortest-cycle-in-undirected-graph#comment31283237_20847998).
+- [ ] 36
+  - similar to [nonisomorphic_simple_connected],
+    add nodes by level and check whether back edges occur by `parent != i`.
+  - see the ans
+    - ~~Here `w` can't be the ancestor of `v` when `w` is not the parent of `v` by ~~
+      by 34, when `w` is not the parent of `v` ("at levels that differ by 1") and trivially not same as `v` ("at the same level")
+      then `w` can't be the ancestor of `v`, so *"simple"* circuit when "followed by the path from the root to w traversed backward"
+      - "simple" can be also implied by 
+    - See [this](https://stackoverflow.com/a/40456213/21294350) which can find the shortest cycle.
+      Also see [this](https://stackoverflow.com/a/77927343/21294350)
+      - If finding one shortest cycle with 2 nodes. See [this](https://www.geeksforgeeks.org/find-any-simple-cycle-in-an-undirected-unweighted-graph/)
+        we can first to prove its existence by DFS (notice it may be not the shortest, see [this](https://stackoverflow.com/a/20847998/21294350) which implies `A,B` has one cycle but the found `A-1...` is longer than `A-B-C-D`)
+        Then use BFS for "the shortest path".
+        - `ok = True;` is weird. Maybe `False` better.
+        - `q.pop(0);` implies FIFO queue.
+        - kw
+          `# Ignoring the direct edge`.
+- [ ] 43
+- [ ] 47 (i.e. 25) used by 34
+  - Here visiting order is based on [frontier][Graph_space_complexity_vs_time_complexity].
+  - If directly proved by the BFS process, this is more trivial because they are added to the tree when *first* visited and the tree is updated by [*level*][BFS_level_order] (1. This is just the rephrase of "visits vertices in order of their level" 2. so "We must show that v is at the lowest (bottom-most, i.e., numerically greatest) level of the tree" in the ans) different from DFS.
+    - Maybe this is informal as 34 says.
+  - see the ans
+    - > Therefore, u must have been processed before w
+      because
+      > Then w is at a lower level than u
+      - > therefore v would have joined the waiting list
+        because by 
+        > The last vertex to be visited during breadth-first search of this tree, say v, is the one that was *added last* to the list of vertices waiting to be processed. It was added when *its parent, say u, was being processed.*
+        *only* $u$ in $T$ can add $v$, same for $T'$ after removing 
+        $v$.
+        Then $v$ will be at the same level as $w$ which is before $x$ contradicting with "added last".
+- [ ] 51
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -9044,9 +9404,13 @@ A  E /|\
 # TODO after Computer Networking
 - 6.1 -> "1111111 is not available as the netid of a Class A network"
   also "hostids consisting of all 0s and all 1s are unavailable".
+- 11.4 IP Multicasting
+  why it can't have the loop.
 # TODO after algorithm
 - [6.2-27](https://leetcode.cn/problems/longest-increasing-subsequence/description/?utm_source=LCUS&utm_medium=ip_redirect&utm_campaign=transfer2china)
 - Why is [this](#Pseudo_polynomial) based on the length of the input instead of the value?
+- [This](https://stackoverflow.com/q/33590974/21294350) related with [scc]
+  CRLS gives the detailed proof.
 # TODO after compiler
 - [This](https://stackoverflow.com/a/575337/21294350) related with naming and binding in 10_5_64 code.
 
@@ -9079,6 +9443,7 @@ A  E /|\
 [Stirling_second_kind_code]:./miscs_snippets/py_codes/8_supplementary_40_Stirling_second_kind/Stirling_second_kind.py
 [counting_path]:./miscs_snippets/py_codes/10_4_counting_path/counting_path.py
 [nonisomorphic_simple_connected]:./miscs_snippets/py_codes/10_supplementary_32/nonisomorphic_simple_connected.py
+[scc]:./miscs_snippets/py_codes/11_4_DFS_Strongly_Connected_Component/scc.py
 
 <!-- exercise help pdf -->
 [2_3_37]:./latex_misc_pdfs/Discrete_Mathematics_and_Its_Applications_2_3_37.pdf
@@ -9114,12 +9479,15 @@ A  E /|\
 
 <!-- stack overflow -->
 [longest_simple_path_NP_hard]:https://stackoverflow.com/a/53399638/21294350
+[BFS_radial]:https://stackoverflow.com/questions/8379785/how-does-a-breadth-first-search-work-when-looking-for-shortest-path#comment47336949_8379892
+[BFS_level_order]:https://stackoverflow.com/questions/55243105/breadth-first-search-traversal-vs-pre-order-traversal-vs-depth-first-search-trav#comment137378786_55243795
 
 <!-- gateoverflow -->
 [assign_different_jobs_to_different_employees]:https://gateoverflow.in/79804/permutation-combo?show=80049#a80049
 
 <!-- cs stackexchange -->
 [O_Theta_Omega_relation_with_limit]:https://cs.stackexchange.com/a/827/161388
+[Graph_space_complexity_vs_time_complexity]:https://cs.stackexchange.com/a/165324/161388
 
 <!-- paper or lectures -->
 [second_largest_element_Adversary]:https://www.cse.unsw.edu.au/~cs2011/lect/2711_Adversary.pdf
@@ -9159,6 +9527,9 @@ A  E /|\
 [incl_excl_n]:./lectures/incl_excl_n.pdf
 [Kuratowski]:./lectures/Kuratowski.pdf
 [Xuyifan_Kuratowski]:./papers/Xu,Yifan.pdf
+[lec_13]:./papers/Lecture-13.pdf
+[lec_14]:./papers/Lecture-14.pdf
+[lecture10_notes]:./papers/lecture10-notes.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
@@ -9170,3 +9541,6 @@ A  E /|\
 <!-- textbook -->
 [Graph_Theory_with_Applications]:./other_related_maths_book/BondyMurtyGTWA.pdf
 [graph_theory_graduate_textbook]:./other_related_maths_book/graph_theory.pdf
+[Artificial_Intelligence_A_Modern_Approach_3rd]:./other_books/Artificial_Intelligence_A_Modern_Approach_3rd.pdf
+[the_nature_of_computation]:./other_books/the-nature-of-computation-1nbsped-0199233217-9780199233212_compress.pdf
+[algebraic_graph_theory]:./other_books/algebraic_graph_theory.pdf

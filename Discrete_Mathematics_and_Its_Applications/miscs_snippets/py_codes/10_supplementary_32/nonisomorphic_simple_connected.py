@@ -153,5 +153,5 @@ if not ONLY_TREE:
 graph_n(4,True)
 # 11.1-13
 graph_n(5,True)
-# 11.1-38
+# 11.1-11 (38 is labelled instead of unlabelled)
 graph_n(3,True)
