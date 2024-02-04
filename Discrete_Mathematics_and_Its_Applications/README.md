@@ -9,6 +9,32 @@ check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
 Thanks for the detailed explanation of the asymptotic notation. 3. Based on your explanation of the difference between "proportional" and "asymptotic" (i.e. whether $A,B$ are *functions* of $n$). Here since $k,|N_x|$ are both functions of $n$ and based on your explanation of proportional, let running time be $R(n)$, then we have $R(n)\in (c_1 \cdot f(n),(c_3+c_4)\cdot f(n))$ which implies $R(n)=\Theta(f(n))$ by $\Theta$ [definition](https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations).
 
 Similarly space complexity $S(n)=\Theta(f(n))$ (we can also say $f(n)=\Theta(S(n))$ by doing division in the inequity). Then by the transitivity of $\Theta$, we have $R(n)=\Theta(S(n))$. Is my understanding right?
+
+1. One clarification: For the above comment bullet point 3, I assume $k=f(n)$ which is different from what the answer does. (Sorry for mixing the notation mistakenly. To be consistent with my comments before. I keep using $R(n)$) 2. Here by "proportional", we have $S(n)\ge c_1\frac{f(n)}{b}+c_2$ and $c_3 \frac{f(n)}{b}+\frac{c_4}{b}\ge \frac{R(n)}{b}$. Then how to get $S(n)\ge \frac{R(n)}{b}$? IMHO, in this *specific context* "does a constant amount of operations in between the exploration of two edges", we can assume $R(n)=c_1 k+c_2,(c_{1,2}>1)$ and $S(n)\ge d_1 \frac{k}{b},d_1>1$.
+
+Then $S(n)\ge d_1\cdot \frac{R(n)-c_2}{b c_1}$. This also seems to fail to get $S(n)\ge \frac{R(n)}{b}$. But since the book uses the $O$ notation, we can use $\Omega$. So the book means $S(n)=\Omega(\frac{R(n)}{b})$ (although here $\frac{1}{b}$ inside $\Omega(\ldots)$ is not appropriate in some way.) which can be got by $S(n)\ge d_1\cdot \frac{R(n)-c_2}{b c_1}$. Can we think in this way?
+
+The above newly added comment is due to that I rethought the question for a short while when in leisure and maybe I spent *too much time on connecting* the answer with the original pseudocode. I have understood $k\leq |N_x|\cdot b$ when saying "I understand the question now." but *haven't paid much attention to* "the space complexity is proportional to $f(n)/b$ or larger, where $f(n)$ denotes the running time of the algorithm" in your answer. So after some rethoughts, I have the above newly added small question. Hope you can clarify that.
+
+Adding one correct comment after deleting wrong comments [seems to not send notifications for deleted comments](https://meta.stackexchange.com/a/351013/1355014) although based on timing only *recently* deleted ones won't send notifications and old ones may have been notified and marked as read. Editing comments may probably [not cause duplicate notifications](https://meta.stackexchange.com/questions/396510/will-edited-comments-to-one-post-notify-the-poster-multiple-times#comment1326256_396510). If many similar notifications have been in your inbox, sorry for that.
+
+Sorry. My thoughts inside **above newly added comments** may probably **in a mess**. Based on "we cannot derive an exact relation between space and time complexity of the algorithm from this formula.", you mean that we can't derive $S(n)\ge \frac{R(n)}{b}$ actually although we can get $S(n)=\Theta(R(n))$ and trivially these 2 facts don't conflict. As you said, we can say "the space complexity is proportional to $f(n)/b$ or larger".
+
+This is because that when $R(n)\in [c_1 k+c_2,c_3 k+c_4]$ and $S(n)\in [d_1 |N_x|+d_2,d_3 |N_x|+d_4]\; (*)$. Then we can think $|N_x|$ as something "$k/b$ or larger" (let $|N_x|=h(k/b)$). 
+
+Then $k/b \in [\frac{R(n)-c_2}{bc_1},\frac{R(n)-c_4}{bc_3}]\; (**)$. Based on this, we can say "the space complexity is proportional to $f(n)/b$ or larger". This is because when substituting $(**)$ into $(*)$ based on "$k/b$ or larger" $S(n)\in [d_1 h(\frac{R(n)-c_2}{bc_1})+d_2,d_3 h(\frac{R(n)-c_2}{bc_1})+d_4]\; (***)$. Due to "larger", here we only focus on the *lower bound* based on $h(k/b)\ge k/b$, then $S(n)\ge d_1 \frac{R(n)-c_2}{bc_1}+d_2$.
+
+Here the constant term $d_2-\frac{d_1 c_2}{bc_1}<0$ is possible. (If so, then we can say "the space complexity is proportional to $f(n)/b$ or larger".). So in your definition of "proportional" $c_2,c_4$ can be **any constant** which may be more appropriate (IMHO **linear** means same as "proportional", so the constant doesn't need to be positive). Is it that case for $c_2,c_4$ and then based on $(***)$ we have "the space complexity is proportional to $f(n)/b$ or larger" (In the above I use $R(n)$ to indicate $f(n)$ in the answer)?
+
+Sorry for saying maybe many redundant things (Hope those after the sentence "My thoughts inside above newly added comments may probably in a mess" are clear which asks *one small question*) which may have already messed your inbox. I *deleted them* to make the comment sequence less messed up when [they can't be moved into the chat](https://meta.stackexchange.com/questions/396517/newly-added-comments-cant-be-imported-to-the-old-chat-room-after-some-comments?noredirect=1#comment1326308_396517).
+
+Here case 2 maybe should be `u` is the **descendant** of `v`. Because maybe we can choose one root and reach `v` first. Then `v` is chosen to branch `w` (*not choosing `(u,v)` first*) which will reach `u` before `v` reaches `u` (then `u` is one *already discovered* node for `v`). In this case, `u` is the descendant of `v`. 
+
+*To prove that*, assume the subtree `T1` rooted at `u` doesn't have `v` as the ancestor (based on the visiting order of `u,v` and the DFS visiting order [implies preorder](https://en.wikipedia.org/wiki/Depth-first_search#Vertex_orderings), `T1` must be at the left subtree from root compared with `v`). Then at some point when constructing `T1`, we must encounter the case 1 because at that point `v` has not been visited before based on the subtree relative location from root.
+
+Then based on ["forward and back edges are the same thing" in undirected graphs](https://cs.stackexchange.com/a/11552/161388), we finish the proof. (For case 2, we can also prove as the following. Since `v` is "was discovered and not "closed" yet", similar to case 1, we have `v` is "indeed a parent of" `u`.)
+
+~~More specifically, "But that's impossible considering you just discovered v, and there is an edge (u,v)." means `u` will have added `v` by `(u,v)`, so we won't have the case "not one of your 'parents'". Then again "u is indeed a parent of v".~~
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -1662,6 +1688,8 @@ check(R_1)
 - > the reader should show that such a vertex is unique
   otherwise one cycle is constructed.
 - Theorem 2 is similar to [QA link referred in this QA](https://math.stackexchange.com/q/4849754/1059606)
+  - Notice it is possible for ["all cut edges"][tree_imply_all_cut_edge_i_e_no_circuit]
+  - "a leaf of T" -> "the diameter of $G$"
 - > Also, when (i) and (iii) hold, then (ii) must also hold, 
   This is due to that to keep the connectivity, the 1st can connect 2 vertices, while the rest can at most connect one more each. So $n-1$.
   > and when (ii) and (iii) hold, (i) must also hold.
@@ -1727,11 +1755,11 @@ check(R_1)
   but all after the operator.
 - p837 
   > There are easy ways to list the vertices of an ordered rooted tree in preorder, inorder, and postorder
-  can be seen intuitively [here](https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search).
+  can be seen intuitively [here][Depth_first_traversal_3_colors].
   - ~~red is first met because left-to-right searching order.~~
     See the comments like "Visit the current node (in the figure: position red)." which shows the correspondence between the book and wikipedia and also proves the relation between 3 orders and the walk (walk along the path in the figure to get why the above properties hold.)
 - > Both the preorder traversal and the postorder traversal encode the structure of an ordered rooted tree *when the number of children of each vertex is specified*
-  if not specified, we can use [other conditions](https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search) to construct -> [this](https://cs.stackexchange.com/a/441/161388)
+  if not specified, we can use [other conditions][Depth_first_traversal_3_colors] to construct -> [this](https://cs.stackexchange.com/a/441/161388)
   Notice here we have *no operators* but just operands.
   - > No one sequentialisation according to pre-, in- or post-order describes the underlying tree uniquely.
     in-order alone is shown in the book or we [don't know what to choose for `[x]`](https://cs.stackexchange.com/q/439/161388).
@@ -1798,12 +1826,12 @@ check(R_1)
     - cycle in [directed](https://www.geeksforgeeks.org/detect-cycle-in-a-graph/)
       - As [this](https://stackoverflow.com/questions/19113189/detecting-cycles-in-a-graph-using-dfs-2-different-approaches-and-whats-the-dif#comment137343260_19115118) said, it just adds `recStack[v] = False` `recStack = [False] * (self.V + 1)`, etc.
   - cross edge can't exist in an undirected graph
-    - [1](https://stackoverflow.com/a/28942405/21294350)
+    - [1][DFS_no_cross_edge]
       here case 1 just means in the DFS process of $u$ we meet $v$
       case 2 means $u$ has been backtracked, so based on $(u,v)$ it must contain 
       $v$ before when meeting $u$ instead of currently
-      - Here case 2 may fail in directed graph,
-        so based on [this](https://cs.stackexchange.com/a/11552/161388)
+      - Here case 2 may fail in directed graph because maybe we only have v->u but not u->v and then we can't reach v when rooted at u.
+        so based on [this][DFS_only_2_types_edges]
         > It might help to think of why the can occur in directed graphs
       - By [this](https://cs.stackexchange.com/a/95534/161388), white path directly proves this
         - [white path][lec_14]
@@ -1882,6 +1910,11 @@ check(R_1)
               > by thinking of how edges are got from nodes.
               shows how $k\leq |N_x|\cdot b$ are got. This is *the main part to prove*.
               - The rest is [added with improvement](https://cs.stackexchange.com/posts/165324/timeline#history_5c5dd7b2-b744-40f4-bb97-46812b233c86).
+              - Notice $S(n)\ge \frac{1}{b}\cdot R(n)$ doesn't conflict with 
+                $S(n)=\Theta(R(n))$ when 
+                $b$ is one constant.
+              - Based on this we can **only** get one proportional relation but [not exactly something like $S(n) \ge R(n)/b$](https://chat.stackexchange.com/transcript/message/65108003#65108003)
+                The proof for "proportional" is also there (read beginning from the small question "Is it that case ...").
     - DFS
       - "$O(h)$ space" for DFS is due to stack, similarly for [IDDFS](https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search#Proof_2)
       - > A non-recursive implementation of DFS
@@ -7444,6 +7477,10 @@ def unimodal(start,end,List):
 - [ ] 29 see the ans
   It is to find the max subset which corresponds to *only one level*. 
   - Also see 30 which I did after writing the above line
+- [ ] 31 
+  - I didn't do this exercise
+    but the term "maximal chain" is met when I was reading ~~chapter 10.~~ something
+    See [this related QA](https://math.stackexchange.com/q/4840957/1059606)
 - [ ] 32
   - trivially, it can be partitioned into chains,
     *assume* it can be partitioned into $k$ chains which is the *minimal* chain number. (This can be got from $R^{\ast}$ by constructing one sequence. It is similar to constructing one partition.)
@@ -8801,6 +8838,7 @@ one maximal clique a-e-f
     - c) see [this](https://math.stackexchange.com/questions/3677100/are-all-the-subgraphs-of-k5-planar#comment10333226_3677100), we can also draw the [greatest planar](https://math.stackexchange.com/a/3677103/1059606) subgraph $G'$ which implies subgraphs of 
     $G'$ are planar.
     - [nonisomorphic_simple_connected]
+  - a) also [See](https://math.stackexchange.com/q/4849754/1059606)
 - [ ] 34
   - we can also use the mapping to prove.
   - see the ans
@@ -9255,7 +9293,7 @@ A  E /|\
 - [ ] 30
 ### 11.4
 - 2,6~8,
-  16,20,26(where 9 is 2 $C_4$)~28,32 skipped
+  16,20,26(where 9 is 2 $C_4$)~28,32,40~42(just think of doing $n$ times of find one spanning tree when one forest has $n$ trees) skipped
 - [x] 4
   - trivially here DFS or BFS is better to construct the spanning tree.
 - [x] 10
@@ -9357,7 +9395,65 @@ A  E /|\
         - `q.pop(0);` implies FIFO queue.
         - kw
           `# Ignoring the direct edge`.
+- [ ] 38
+  - BFS and DFS both have the following structure.
+    ```
+    root- n-1 leafs
+        |
+        - node - n-1 leafs
+    ```
+  - see the ans
+    - It uses 2 colors to prove bipartite.
+      And based on spanning tree traversing all vertices and we also checking all adjacent edges for all vertices, 
+      So we will color considering **all edges** and vertices. If 2 color possible, then bipartite.
 - [ ] 43
+  - See [DFS_no_cross_edge] and see the ans
+    - Notice here `(u,v)` is `(v,u)` in the above link.
+    - Here it assumes u is *being processed* WLOG because we are considering "edge uv".
+    - > because we are not finished processing u yet
+      corresponds to
+      > not "closed" yet
+    - > On the other hand, if the processing of v had already begun *before we started processing u*
+      ~~This is not case 2 in the above link~~
+      This is the case 1 because the vertex being processed (i.e. `v` in SO) has the discovered node as the ancestor (i.e. "u is indeed a parent of v" in SO).
+    - > v must appear in the subtree rooted at u (and hence, must be a descendant of u)
+      Here it means v is in the subtree *rooted at one child* of u before u reaching v by uv.
+      based on "~~we are processing vertex u~~ we are not finished processing u yet" (i.e. "not "closed" yet" -> "basically traversing a subtree which has u as a root" in SO although these `u` doesn't mean the vertex when considering the visiting order.).
+      ~~corresponds to~~
+      ~~> u was discovered and closed already.~~
+      - This is case 2 (not ~~2.2 which is one deleted comment~~ case 1) in SO because `v` (i.e. the descendant) must be closed when visited ~~the second time~~ by `u` otherwise we can't backtrack to `u`.
+    - > It must be that we had *not* finished processing v
+      i.e. case ~~2.2~~ 1 ~~(if finished, then case 2.1. Rephrased for this exercise, `v` doesn't have `u` as te)~~ (i.e. the node being processed is the descendant)
+      See [DFS_no_cross_edge_improvement] where excludes the case where "we *had finished* processing v" "before we started processing u", i.e. v is closed before processing u so "u doesn't have v as the ancestor".
+    - **Notice** since SO is based on whether *closing* while here is based on the *visiting order* to be splitted into cases.
+      So they have different ~~conditions~~ prerequisites to use for proving, which caused case 2 more difficult in SO and case 2 here more difficult.
+      - case 2 here is implied by the split condition, i.e. whether "closed already", in SO.
+        More specifically, in SO it implies "not "closed"" -> "had not finished processing v".
+      - case 2 in SO can be [proved just as the book does](https://stackoverflow.com/questions/28942262/dfs-in-an-undirected-graph-can-it-have-cross-edges/28942405#comment137389358_28942405).
+  - Here the exercise [combines forward and back edges together][DFS_only_2_types_edges].
+- [ ] 44
+  - at least for edges incident with one degree-1 vertex.
+  - see the ans
+    - The above is one special case for cut edge.
+    - > If the edge is a cut edge, then it provides the unique simple path between its endpoints
+      if not unique, then not one "cut edge", contradiction.
+      - iff part is proved in 10.4-38 and [this][tree_imply_all_cut_edge_i_e_no_circuit]
+      - > Therefore it must be in every spanning tree for the graph
+        because we need to ensure *connectivity*.
+      - > then it can be removed without disconnecting the graph
+        i.e. in one circuit similar to the above proof
+    - This is based on the process of removing edges to construct one spanning tree.
+    - Here [$\neg\text{in every spanning tree}=\text{not in some}$](https://math.stackexchange.com/a/1651713/1059606)
+- [ ] 46
+  - see the ans
+    - Here it connects the path with the depth in DFS, then the number of ancestors.
+    - We can improve this bound
+      when adding backedges to the spanning tree
+      we count the number of ancestors for each vertex with one tree edge or back edge incident with both vertices from bottom to top (This can consider **both** tree edge and back edge),
+      then we can't limit `k-1` more because we don't know the structure of the tree.
+      But the root must have 0, so we can lower the upper bound to `(k-1)(n-1)` (If we can know the number of level-1 vertices, we can proceed one step more)
+  - If we let *all* leaves with depth `k-1` (This trivially scales too much for the upper bound when `n` **leaves**)
+    then backedges seems to be difficult to be considered then.
 - [ ] 47 (i.e. 25) used by 34
   - Here visiting order is based on [frontier][Graph_space_complexity_vs_time_complexity].
   - If directly proved by the BFS process, this is more trivial because they are added to the tree when *first* visited and the tree is updated by [*level*][BFS_level_order] (1. This is just the rephrase of "visits vertices in order of their level" 2. so "We must show that v is at the lowest (bottom-most, i.e., numerically greatest) level of the tree" in the ans) different from DFS.
@@ -9413,7 +9509,8 @@ A  E /|\
   CRLS gives the detailed proof.
 # TODO after compiler
 - [This](https://stackoverflow.com/a/575337/21294350) related with naming and binding in 10_5_64 code.
-
+# TODO after complexity book
+- [This](https://cs.stackexchange.com/questions/165101/how-can-the-approximation-algorithm-of-one-np-complete-problem-be-used-to-prove#comment342996_165101)
 
 ---
 
@@ -9453,6 +9550,7 @@ A  E /|\
 [Schröder_Bernstein_theorem]:https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem#Proof
 [Big_O_Notation]:https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations
 [wikipedia_minimal_element]:https://en.wikipedia.org/wiki/Maximal_and_minimal_elements#Definition
+[Depth_first_traversal_3_colors]:https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search
 
 <!-- brilliant wiki -->
 [brilliant_wiki_Dilworth_Theorem_antichain_ge_chain]:https://brilliant.org/wiki/dilworths-theorem/#proof-of-dilworths-theorem
@@ -9481,6 +9579,8 @@ A  E /|\
 [longest_simple_path_NP_hard]:https://stackoverflow.com/a/53399638/21294350
 [BFS_radial]:https://stackoverflow.com/questions/8379785/how-does-a-breadth-first-search-work-when-looking-for-shortest-path#comment47336949_8379892
 [BFS_level_order]:https://stackoverflow.com/questions/55243105/breadth-first-search-traversal-vs-pre-order-traversal-vs-depth-first-search-trav#comment137378786_55243795
+[DFS_no_cross_edge]:https://stackoverflow.com/a/28942405/21294350
+[DFS_no_cross_edge_improvement]:https://stackoverflow.com/questions/28942262/dfs-in-an-undirected-graph-can-it-have-cross-edges/28942405#comment137389481_28942405
 
 <!-- gateoverflow -->
 [assign_different_jobs_to_different_employees]:https://gateoverflow.in/79804/permutation-combo?show=80049#a80049
@@ -9488,6 +9588,7 @@ A  E /|\
 <!-- cs stackexchange -->
 [O_Theta_Omega_relation_with_limit]:https://cs.stackexchange.com/a/827/161388
 [Graph_space_complexity_vs_time_complexity]:https://cs.stackexchange.com/a/165324/161388
+[DFS_only_2_types_edges]:https://cs.stackexchange.com/a/11552/161388
 
 <!-- paper or lectures -->
 [second_largest_element_Adversary]:https://www.cse.unsw.edu.au/~cs2011/lect/2711_Adversary.pdf
@@ -9530,6 +9631,7 @@ A  E /|\
 [lec_13]:./papers/Lecture-13.pdf
 [lec_14]:./papers/Lecture-14.pdf
 [lecture10_notes]:./papers/lecture10-notes.pdf
+[tree_imply_all_cut_edge_i_e_no_circuit]:https://web.math.ucsb.edu/~padraic/ucsb_2013_14/math137a_w2014/math137a_w2014_lecture3.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
