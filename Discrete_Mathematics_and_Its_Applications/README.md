@@ -1825,7 +1825,7 @@ check(R_1)
         > An undirected graph has a cycle *if and only if* a depth-first search (DFS) finds an edge that points to an already-visited vertex (a back edge)
         "if" is trivial. <a name="DFS_checking_cycle_proof"></a>
         "only if" is due to that ["DFS" with no back edges is one spanning tree](https://cs.stackexchange.com/questions/11438/why-does-dfs-only-yield-tree-and-back-edges-on-undirected-connected-graphs#comment316453_11552). So its corresponding undirected graph is one tree which implies no cycle.
-    - cycle in [directed](https://www.geeksforgeeks.org/detect-cycle-in-a-graph/)
+    - cycle in [directed][Detect_cycle_Directed_Graph]
       - As [this](https://stackoverflow.com/questions/19113189/detecting-cycles-in-a-graph-using-dfs-2-different-approaches-and-whats-the-dif#comment137343260_19115118) said, it just adds `recStack[v] = False` `recStack = [False] * (self.V + 1)`, etc.
       - Here the `visited` is not stack so it will construct one maximal possible tree similar to the spanning tree (i.e. it will reach the most possible vertices *without duplication*)
         - See the [code](./miscs_snippets/py_codes/11_4_61/geeksforgeeks_cycle_directed.py) which shows the code can detect the cycle when there are multiple cycles.
@@ -1866,7 +1866,7 @@ check(R_1)
               - not "reach vertices not in the cycle"
             - not in
               - can reach the circuit then follow the proof of (*)
-              - can't reach (only this we may not find the cycle)
+              - can't reach (only this we ~~may not~~ won't find ~~the~~ this cycle)
           4. The above shows we can follow the circuit where when back to the starting point of this cycle we have one back edge.
   - cross edge can't exist in an undirected graph
     - [1][DFS_no_cross_edge]
@@ -1876,13 +1876,18 @@ check(R_1)
       - Here case 2 may fail in directed graph because maybe we only have v->u but not u->v and then we can't reach v when rooted at u.
         so based on [this][DFS_only_2_types_edges]
         > It might help to think of why the can occur in directed graphs
-      - By [this](https://cs.stackexchange.com/a/95534/161388), white path directly proves this
+      - By [this](https://cs.stackexchange.com/a/95534/161388) (here the path in the "white path theorem" becomes one single edge), white path directly proves this
         - [white path][lec_14]
           - Here when $d(u)$, 
-            $u$ is not colored [gray](https://www.clear.rice.edu/comp314/lec/week3/Depth-First.htm)
-          - >  before finishing w:
+            $u$ is not colored [gray][white_path_3_colors]
+            - based on `color[u] = black` is always done the last after `for each v adjacent to u`, it just means having *traversed all children*.
+          - > before finishing w:
             because 
-            > ww’ be the first edge on this path
+            ~~> ww’ be the first edge on this path where w is descendant of u but w’ is not.~~
+            if after finishing $w$, then when $d(w')$ we should have been discovered 
+            $w'$ *first when $w\to w'$* -> contradiction.
+          - > discover w’ after starting u
+            This is same as [this][u_first_in_the_white_path]
           - [Parenthesis Theorem][lec_13]
             Here $d(u)<d(v)<f(u)<f(v)$ is impossible because of the process of DFS
             i.e. discover later must means finish (backtrack) earlier 
@@ -9638,6 +9643,53 @@ A  E /|\
   - "if" part is trivial
   - based on 59 and [this](https://stackoverflow.com/questions/67343170/output-a-spanning-tree-given-a-directed-graph#comment137397264_77649096), maybe no spanning tree exists (i.e. Arborescence when directed)
     - ["only if"][directed_graph_detecting_cycle_proof]
+  - see the ans
+    - > vertex vk must have been visited before the processing of v1 is completed.
+      this should be "$v_1$ ... $v_k$" based on "v1 is the first vertex visited"
+    - This proof is more elegant than [directed_graph_detecting_cycle_proof] because it doesn't ~~need~~ prove the path from $v_1$ to $v_k$ in the tree to be in the target cycle. It only shows the existence O the backedge which is just what the code in geeksforgeeks does by `recStack[neighbour] == True`.
+    - > Therefore v1 is an ancestor of vk in the tree
+      $v_1$ has 3 types of choices for its first child (similarly also for the rest childs) (*):
+      1. $v_k$ if possible (i.e. there is one edge $v_1\to v_k$).
+        This proves the "ancestor" relation.
+      2. branch out to other vertices not in the path ~~when at $v_i,i=1,\cdots,k-1$~~
+         1. this branch can reach $v_k$ -> proves the "ancestor" relation.
+         2. can't.
+            - we will reach $v_i,i=2,\cdots,k-1$
+              Then we can do the process (*) again.
+            - no $v_i,i=2,\cdots,k-1$ is reached.
+              Then we backtracks.
+      - The above proof is a bit stuck.
+        See [this](https://www.cse.cuhk.edu.hk/~taoyf/course/comp3506/ex/ex11-sol.pdf) which is same as [lec_14] without using the "parenthesis theorem" transforming the following case enumeration problem to one algebraic problem for the another proof based on [white_path_3_colors].
+        - > Let v' be the *first* vertex on π—in the order from u to v—that is not a descendant of u. 
+          This is one more strong assumption which directly have *many descendants* while the above doesn't than the above enumeration of cases to construct the recursive check.
+          - Also the *color cases* are more easy to analyse than the above.
+            e.g. in the book we assume $v_2$ is not one descendant, then when $v_1$ is gray, we reach $v_2$ in the process `for each u adjacent to v`. Based on the 3 color cases proved in the following, we conclude that $v_2$ is the descendant of $v_1$.
+        - > Consider the moment before u' turns black. As u' is a descendant of u in the DFS forest, we know that u is in the stack currently
+          - it implies u' is gray. 
+            **Notice** the assumption moment which means the [subtree](https://math.stackexchange.com/a/4294404/1059606) of u' is to be finished.
+          - i.e. u is gray (i.e. in the stack). (white: then ~~either~~ u' gray before processing u which implies u' is the ancestor of u ~~or black which implies u can't visit u' further then can't be the ancestor of u'~~. black: u has constructed all descendants, so u' can't be its descendant)
+            because only u is gray we are constructing its descendants.
+        - > which is a contradiction of the fact that u' is turning black
+          i.e. u' is gray which is constructing its descendant.
+          then v' is the descendant of u', transitively of u.
+        - > On the other hand, if v' is either gray or black, it means that v must have been pushed into the stack while u still remains in the stack
+          - "v' black while u gray" trivial.
+          - "v' gray while u gray"
+            > Suppose that when a vertex u is discovered, there is still a white path from u to a vertex v
+            so u must become gray first. <a name="u_first_in_the_white_path"></a>
+            So v' is the descendant of u
+        - Connected with the book,
+          > suppose that G contains a circuit v1, v2, . . . , vk, v1 , and without loss of generality, assume that v1 is the *first* vertex visited in the depth-first search process.
+          this implies $v_1, v_2,\ldots, v_k$ is one white path.
+- [ ] 61 
+  - See [Detect_cycle_Directed_Graph] where "can't reach (only this we ~~may not~~ won't find ~~the~~ this cycle)" means in 60 "assume that v1 is the first vertex *visited*" can't be met.
+  - >  not yet seen (the initial situation), seen (i.e., put into T) but not yet finished (i.e., visit(v) has not yet terminated), or finished (i.e., visit(v) has terminated).
+    `T` corresponds to `recStack`.
+    1. initial -> `visited=False`
+    2. `visited[v] = True; recStack[v] = True`
+      related with
+      > whether the status of v is “seen.”
+    3. `visited[v] = True; recStack[v] = False`
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -9694,6 +9746,7 @@ A  E /|\
 [find_euler_path_based_on_circuit]:#find_euler_path_based_on_circuit
 [cycle_branch_out_WITH_proof_after_reaching_cycle]:#cycle_branch_out_WITH_proof_after_reaching_cycle
 [directed_graph_detecting_cycle_proof]:#directed_graph_detecting_cycle_proof
+[u_first_in_the_white_path]:#u_first_in_the_white_path
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
@@ -9789,6 +9842,7 @@ A  E /|\
 [find_euler_path_undirected_path]:https://cp-algorithms.com/graph/euler_path.html#:~:text=To%20find%20the%20Eulerian%20path%20%2F%20Eulerian%20cycle%20we%20can%20use,then%20remove%20the%20extra%20edge.
 [cut_edge_2_components]:https://sharmaeklavya2.github.io/theoremdep/nodes/graph-theory/deleting-bridge-gives-2-components.html
 
+
 <!-- wolfram -->
 [connected_planar_simple_graph]:https://mathworld.wolfram.com/PlanarConnectedGraph.html
 [wolfram_GraphThickness]:https://mathworld.wolfram.com/GraphThickness.html
@@ -9805,6 +9859,7 @@ A  E /|\
 [lec_14]:./papers/Lecture-14.pdf
 [lecture10_notes]:./papers/lecture10-notes.pdf
 [tree_imply_all_cut_edge_i_e_no_circuit]:https://web.math.ucsb.edu/~padraic/ucsb_2013_14/math137a_w2014/math137a_w2014_lecture3.pdf
+[white_path_3_colors]:https://www.clear.rice.edu/comp314/lec/week3/Depth-First.htm
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
@@ -9819,3 +9874,6 @@ A  E /|\
 [Artificial_Intelligence_A_Modern_Approach_3rd]:./other_books/Artificial_Intelligence_A_Modern_Approach_3rd.pdf
 [the_nature_of_computation]:./other_books/the-nature-of-computation-1nbsped-0199233217-9780199233212_compress.pdf
 [algebraic_graph_theory]:./other_books/algebraic_graph_theory.pdf
+
+<!-- geeksforgeeks -->
+[Detect_cycle_Directed_Graph]:https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
