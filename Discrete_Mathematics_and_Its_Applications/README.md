@@ -6,35 +6,7 @@ check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
 
 1. More specifically, "pre-order" is the [visiting order by DFS](https://en.wikipedia.org/wiki/Depth-first_search#Vertex_orderings) where "This is a compact and natural way of describing the progress of the search" is shown in the [example](https://en.wikipedia.org/wiki/Depth-first_search#Example). 2. BFS uses [level-order search](https://en.wikipedia.org/wiki/Tree_traversal#Breadth-first_search) because searching level by level (i.e. depth by depth).
 
-Thanks for the detailed explanation of the asymptotic notation. 3. Based on your explanation of the difference between "proportional" and "asymptotic" (i.e. whether $A,B$ are *functions* of $n$). Here since $k,|N_x|$ are both functions of $n$ and based on your explanation of proportional, let running time be $R(n)$, then we have $R(n)\in (c_1 \cdot f(n),(c_3+c_4)\cdot f(n))$ which implies $R(n)=\Theta(f(n))$ by $\Theta$ [definition](https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations).
-
-Similarly space complexity $S(n)=\Theta(f(n))$ (we can also say $f(n)=\Theta(S(n))$ by doing division in the inequity). Then by the transitivity of $\Theta$, we have $R(n)=\Theta(S(n))$. Is my understanding right?
-
-1. One clarification: For the above comment bullet point 3, I assume $k=f(n)$ which is different from what the answer does. (Sorry for mixing the notation mistakenly. To be consistent with my comments before. I keep using $R(n)$) 2. Here by "proportional", we have $S(n)\ge c_1\frac{f(n)}{b}+c_2$ and $c_3 \frac{f(n)}{b}+\frac{c_4}{b}\ge \frac{R(n)}{b}$. Then how to get $S(n)\ge \frac{R(n)}{b}$? IMHO, in this *specific context* "does a constant amount of operations in between the exploration of two edges", we can assume $R(n)=c_1 k+c_2,(c_{1,2}>1)$ and $S(n)\ge d_1 \frac{k}{b},d_1>1$.
-
-Then $S(n)\ge d_1\cdot \frac{R(n)-c_2}{b c_1}$. This also seems to fail to get $S(n)\ge \frac{R(n)}{b}$. But since the book uses the $O$ notation, we can use $\Omega$. So the book means $S(n)=\Omega(\frac{R(n)}{b})$ (although here $\frac{1}{b}$ inside $\Omega(\ldots)$ is not appropriate in some way.) which can be got by $S(n)\ge d_1\cdot \frac{R(n)-c_2}{b c_1}$. Can we think in this way?
-
-The above newly added comment is due to that I rethought the question for a short while when in leisure and maybe I spent *too much time on connecting* the answer with the original pseudocode. I have understood $k\leq |N_x|\cdot b$ when saying "I understand the question now." but *haven't paid much attention to* "the space complexity is proportional to $f(n)/b$ or larger, where $f(n)$ denotes the running time of the algorithm" in your answer. So after some rethoughts, I have the above newly added small question. Hope you can clarify that.
-
-Adding one correct comment after deleting wrong comments [seems to not send notifications for deleted comments](https://meta.stackexchange.com/a/351013/1355014) although based on timing only *recently* deleted ones won't send notifications and old ones may have been notified and marked as read. Editing comments may probably [not cause duplicate notifications](https://meta.stackexchange.com/questions/396510/will-edited-comments-to-one-post-notify-the-poster-multiple-times#comment1326256_396510). If many similar notifications have been in your inbox, sorry for that.
-
-Sorry. My thoughts inside **above newly added comments** may probably **in a mess**. Based on "we cannot derive an exact relation between space and time complexity of the algorithm from this formula.", you mean that we can't derive $S(n)\ge \frac{R(n)}{b}$ actually although we can get $S(n)=\Theta(R(n))$ and trivially these 2 facts don't conflict. As you said, we can say "the space complexity is proportional to $f(n)/b$ or larger".
-
-This is because that when $R(n)\in [c_1 k+c_2,c_3 k+c_4]$ and $S(n)\in [d_1 |N_x|+d_2,d_3 |N_x|+d_4]\; (*)$. Then we can think $|N_x|$ as something "$k/b$ or larger" (let $|N_x|=h(k/b)$). 
-
-Then $k/b \in [\frac{R(n)-c_2}{bc_1},\frac{R(n)-c_4}{bc_3}]\; (**)$. Based on this, we can say "the space complexity is proportional to $f(n)/b$ or larger". This is because when substituting $(**)$ into $(*)$ based on "$k/b$ or larger" $S(n)\in [d_1 h(\frac{R(n)-c_2}{bc_1})+d_2,d_3 h(\frac{R(n)-c_2}{bc_1})+d_4]\; (***)$. Due to "larger", here we only focus on the *lower bound* based on $h(k/b)\ge k/b$, then $S(n)\ge d_1 \frac{R(n)-c_2}{bc_1}+d_2$.
-
-Here the constant term $d_2-\frac{d_1 c_2}{bc_1}<0$ is possible. (If so, then we can say "the space complexity is proportional to $f(n)/b$ or larger".). So in your definition of "proportional" $c_2,c_4$ can be **any constant** which may be more appropriate (IMHO **linear** means same as "proportional", so the constant doesn't need to be positive). Is it that case for $c_2,c_4$ and then based on $(***)$ we have "the space complexity is proportional to $f(n)/b$ or larger" (In the above I use $R(n)$ to indicate $f(n)$ in the answer)?
-
-Sorry for saying maybe many redundant things (Hope those after the sentence "My thoughts inside above newly added comments may probably in a mess" are clear which asks *one small question*) which may have already messed your inbox. I *deleted them* to make the comment sequence less messed up when [they can't be moved into the chat](https://meta.stackexchange.com/questions/396517/newly-added-comments-cant-be-imported-to-the-old-chat-room-after-some-comments?noredirect=1#comment1326308_396517).
-
-Here case 2 maybe should be `u` is the **descendant** of `v`. Because maybe we can choose one root and reach `v` first. Then `v` is chosen to branch `w` (*not choosing `(u,v)` first*) which will reach `u` before `v` reaches `u` (then `u` is one *already discovered* node for `v`). In this case, `u` is the descendant of `v`. 
-
-*To prove that*, assume the subtree `T1` rooted at `u` doesn't have `v` as the ancestor (based on the visiting order of `u,v` and the DFS visiting order [implies preorder](https://en.wikipedia.org/wiki/Depth-first_search#Vertex_orderings), `T1` must be at the left subtree from root compared with `v`). Then at some point when constructing `T1`, we must encounter the case 1 because at that point `v` has not been visited before based on the subtree relative location from root.
-
-Then based on ["forward and back edges are the same thing" in undirected graphs](https://cs.stackexchange.com/a/11552/161388), we finish the proof. (For case 2, we can also prove as the following. Since `v` is "was discovered and not "closed" yet", similar to case 1, we have `v` is "indeed a parent of" `u`.)
-
-~~More specifically, "But that's impossible considering you just discovered v, and there is an edge (u,v)." means `u` will have added `v` by `(u,v)`, so we won't have the case "not one of your 'parents'". Then again "u is indeed a parent of v".~~
+BTW, "exactly one path" implies only one cycle is created after adding one edge because 1. trivially this cycle must contain $e$ otherwise the original graph is not one tree. 2. $e$ can be only concatenated with the path $p(v_1,v_2)$ in the original graph to construct one cycle. This is also shown in [this QA](https://math.stackexchange.com/a/420543/1059606).
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -1789,6 +1761,9 @@ check(R_1)
     i.e. similar to the pre-order one plus in-order.
     Similarly they are based on mapping.
 ### 11.4
+- > At least five roads must be plowed to ensure that there is a path between any two towns
+  See 10.4-28.
+- THEOREM 1 is also shown in the second to last paragraph in [this link](https://math.stackexchange.com/a/136265/1059606) ~~although it doesn't say "spanning"~~
 - [Multicast](https://www.geeksforgeeks.org/difference-between-unicast-and-multicast/) is just mul-to-mul
 - DFS
   - > All other edges of the graph must connect a vertex to an ancestor or descendant of this vertex in the tree.
@@ -2007,6 +1982,54 @@ check(R_1)
   - Here `a red` must be one [unary node](https://www.cs.cmu.edu/afs/cs/academic/class/15499-s09/www/scribe/lec11/lec11.pdf) followed by `a red, b blue` because we can color one edge arbitrarily.
   - Here we just check the coloring with the **already colored** nodes, which is enough, because the edge is *bidirectional* so if contradiction we can find that when coloring the latter colored one.
 - decision-tree related problems can always be solved by backtracking.
+### 11.5
+- ALGORITHM 1
+  - Here after the process, we have 1. no circuits, so "no simple circuits" 2. "n-1 edges".
+    To use 11.1.3 THEOREM 2, we need "n vertices", i.e. each added edge adds *one more new vertex* when initially 1 vertex.
+    - Prove each graph after the iteration is connected.
+      - inductive step:
+        Since "an edge of minimum weight incident to a vertex in T", then when T is connected, $T+(u,v),u\in V(T)$ is connected because 
+        $v$ can be connected with the rest using $u$ as the medium (then all vertex pairs are connected) when $v\notin V(T)$
+        when $v\in V(T)$, this is one trivial case.
+      - basis step: one edge is trivial.
+    - Based on "connected", old vertex will cause the circuit -> contradiction.
+- > We solve this problem by finding a *minimum spanning tree* in the graph in Figure 1
+  the minimum connected graph must be "a minimum spanning tree".
+  If not, then it must contain one subgraph which is a spanning tree (See 11.4) with the smaller sum of weights.
+- example 1 can't contain the $\$1000$ path.
+- Prim’s algorithm proof
+  - here $k=0$ is possible.
+  - Since $S$ is one tree as the above "ALGORITHM 1" contents shows,
+    $S_k,k=1,\cdots,n-1$ must exist.
+  - > By starting at an endpoint of ek+1 that is also an endpoint of one of the edges e1, … , ek,
+    by the algorithm process, this endpoint must exist.
+  - > (it is a tree because it has no simple circuits
+    because ~~connected () and~~ $n-1$ edges.
+    and based on
+    > This simple circuit must contain ek+1
+    this (~~although maybe more than one~~) [only one][one_cycle_when_tree_plus_one_edge] circuit is removed, so "no simple circuits".
+    Then since vertex number doesn't change, we can use 11.1.3 THEOREM 2.
+  - The main idea is to *construct one new* spanning tree from one assumed.
+  - [One alternative proof][primsproof]
+    - >  so let {a, b} be the first edge on this path with one endpoint (a) inside W
+      this must exist because $x,y$ are one in W one not.
+    - > Prim’s algorithm will select {a, b} at this step
+      i.e. select one edge connecting one vertex in W to one not in.
+    - [prefix](https://www.ime.usp.br/~pf/algorithms/chapters/footnotes/math.html)
+      in this context it can also not "contain the first term". Then $W=\{x\}$.
+    - So the book proof may should use $\{a,b\}$ here and contents before "so let {a, b}" in [primsproof] are same as the book corresponding ones (although the contents after may overlap partly).
+      - > we can find an edge e not in Sk+1 that has an endpoint that is also an endpoint of one of the edges e1, e2, … , ek.
+        as [primsproof] shows, we can find one counterexample:
+        maybe "{a, b}" is in $S_{k+1}$, then continue we may find one edge 
+        $e$ has no endpoints in $W$.
+        Here "maybe "{a, b}" is in $S_{k+1}$" is due to this edge weight may be the *minimal* at one stage after.
+    - > Prim’s algorithm hasn’t selected edge {a, b} yet
+      because $a\in W, b\notin W$ while selected edge $w=(u,v),\{u,v\}\subseteq W$
+- ~~> Kruskal’s algorithm can be carried out using O(m log m) operations and Prim’s algorithm can be carried out using O(m log n) operations.~~
+  ~~By CRLS, they are same with "O(m log n)".~~
+  > it is preferable to use Kruskal’s algorithm for graphs that are sparse,
+  But it is shown in CRLS both in 3rd and 4th exercise 23-2 that we can improve only for Prim’s further.
+- 
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -8108,6 +8131,7 @@ print(subgraph_of_complete_graph(4))
 - [x] 26 see [counting_path]
 - [ ] 28
   - Also [see](https://www.quora.com/How-do-I-prove-that-the-minimum-number-of-edges-in-a-connected-graph-with-n-vertices-is-n-1/answer/Abhijith-N-Raj-1?comment_id=385204198&comment_type=2)
+    - Also see [this](https://qr.ae/pKdkCa) which seems to not shown when first reading [this](https://qr.ae/pKdkgK).
   - The book one is similar to [this](https://math.stackexchange.com/a/237136/1059606) where "smallest possible number" corresponds to here "a connected graph with n + 1 vertices and fewer than n edges" (This is shown in the note).
     - [This](https://math.stackexchange.com/questions/237134/prove-by-induction-that-every-connected-undirected-graph-with-n-vertices-has-at#comment525143_237136) shows the book [explicit counterexample](https://math.stackexchange.com/questions/237134/prove-by-induction-that-every-connected-undirected-graph-with-n-vertices-has-at#comment525194_237136) is not one must.
   - [general](https://math.stackexchange.com/a/457104/1059606)
@@ -9600,7 +9624,9 @@ A  E /|\
       but doesn't know how to choose $e_2$ from these edges.
   - see the ans
     - > Then T2 ∪ {e1} contains a simple circuit C containing e1. 
-      See [this](https://math.stackexchange.com/a/2783785/1059606) which is [based on 11.1 theorem 1](https://math.stackexchange.com/questions/2783749/adding-an-edge-to-a-tree-creates-a-cycle-is-my-proof-correct#comment10350833_2783785).
+      See [this](https://math.stackexchange.com/a/2783785/1059606) which is [based on 11.1 theorem 1](https://math.stackexchange.com/questions/2783749/adding-an-edge-to-a-tree-creates-a-cycle-is-my-proof-correct#comment10350833_2783785). <a name="one_cycle_when_tree_plus_one_edge"></a>
+      - The added edge function as one edge in the created circuits,
+        since in the original graph, "Any two vertices in a tree are connected by exactly one path", so only one cycle is created by concatenating $e$ and the unique $p(v_1,v_2)$.
     - > The graph T1 − {e1} has two connected components
       - See [this][cut_edge_2_components]
         - The 1st paragraph is trivial due to 2 paths -> 1 circle as the reference in 11.1 theorem 1 says.
@@ -9690,6 +9716,9 @@ A  E /|\
       related with
       > whether the status of v is “seen.”
     3. `visited[v] = True; recStack[v] = False`
+### 11.5
+- [ ] 9
+- [ ] 32 proves "Kruskal’s algorithm"
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -9747,6 +9776,7 @@ A  E /|\
 [cycle_branch_out_WITH_proof_after_reaching_cycle]:#cycle_branch_out_WITH_proof_after_reaching_cycle
 [directed_graph_detecting_cycle_proof]:#directed_graph_detecting_cycle_proof
 [u_first_in_the_white_path]:#u_first_in_the_white_path
+[one_cycle_when_tree_plus_one_edge]:#one_cycle_when_tree_plus_one_edge
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
@@ -9855,11 +9885,12 @@ A  E /|\
 [incl_excl_n]:./lectures/incl_excl_n.pdf
 [Kuratowski]:./lectures/Kuratowski.pdf
 [Xuyifan_Kuratowski]:./papers/Xu,Yifan.pdf
-[lec_13]:./papers/Lecture-13.pdf
-[lec_14]:./papers/Lecture-14.pdf
-[lecture10_notes]:./papers/lecture10-notes.pdf
+[lec_13]:./lectures/Lecture-13.pdf
+[lec_14]:./lectures/Lecture-14.pdf
+[lecture10_notes]:./lectures/lecture10-notes.pdf
 [tree_imply_all_cut_edge_i_e_no_circuit]:https://web.math.ucsb.edu/~padraic/ucsb_2013_14/math137a_w2014/math137a_w2014_lecture3.pdf
 [white_path_3_colors]:https://www.clear.rice.edu/comp314/lec/week3/Depth-First.htm
+[primsproof]:./lectures/primsproof.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
