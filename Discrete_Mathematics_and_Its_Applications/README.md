@@ -1,4 +1,4 @@
-Please point out errors if any. Thanks beforehand.
+Please point out errors if any. Thanks in advance.
 
 check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
 
@@ -1239,7 +1239,9 @@ check(R_1)
     > his means that there does not exist any element $s\in S$ such that ${\displaystyle m\leq s}$ and ${\displaystyle m\neq s.}$
     so we think of **both** $x,y$ are minimal.
 ## 10
-[graph visualizer](https://math.stackexchange.com/questions/13841/online-tool-for-making-graphs-vertices-and-edges#comment10322484_13841)
+- [graph visualizer](https://math.stackexchange.com/questions/13841/online-tool-for-making-graphs-vertices-and-edges#comment10322484_13841)
+- [List all possible graphs](https://math.stackexchange.com/a/2783775/1059606) with one specific property list.
+  - Here number of Vertices can be only set to [one range](https://houseofgraphs.org/result-graphs)
 ### 10.1
 - > We can distinguish between two chemical compounds with the same molecular formula but different structures using graphs
   See [this](https://www.toppr.com/ask/question/compounds-having-the-same-molecular-formula-but-different-structures-are-called/)
@@ -1799,7 +1801,7 @@ check(R_1)
     3. it must have $n-1$ edges based on this process because except for the 1st edge leading from the root, all the rest must add one *new vertex* based on "visited" -> tree with the plus of "connected"
     - > Each vertex that *ends a path* at a stage of the algorithm will be a *leaf* in the rooted tree, and each vertex where a path is constructed starting at this vertex will be an internal vertex
       "ends a path" -> no child -> leaf
-  - [backtracking](https://en.wikipedia.org/wiki/Depth-first_search#Vertex_orderings)
+  - [backtracking][backtracking_AND_DFS_imply_preorder]
     > Note that *repeat* visits in the form of backtracking to a node
     is generalized from [this](https://en.wikipedia.org/wiki/Backtracking#)
     - > incrementally builds candidates to the solutions, and abandons a candidate ("backtracks") as soon as it determines that the candidate *cannot possibly be completed to a valid* solution.
@@ -1825,6 +1827,47 @@ check(R_1)
         "only if" is due to that ["DFS" with no back edges is one spanning tree](https://cs.stackexchange.com/questions/11438/why-does-dfs-only-yield-tree-and-back-edges-on-undirected-connected-graphs#comment316453_11552). So its corresponding undirected graph is one tree which implies no cycle.
     - cycle in [directed](https://www.geeksforgeeks.org/detect-cycle-in-a-graph/)
       - As [this](https://stackoverflow.com/questions/19113189/detecting-cycles-in-a-graph-using-dfs-2-different-approaches-and-whats-the-dif#comment137343260_19115118) said, it just adds `recStack[v] = False` `recStack = [False] * (self.V + 1)`, etc.
+      - Here the `visited` is not stack so it will construct one maximal possible tree similar to the spanning tree (i.e. it will reach the most possible vertices *without duplication*)
+        - See the [code](./miscs_snippets/py_codes/11_4_61/geeksforgeeks_cycle_directed.py) which shows the code can detect the cycle when there are multiple cycles.
+        - > So, we can conclude that a cycle exists. We can also find the cycle if we have traversed to vertex 2 from 0 itself in this same way.
+          This is the "smaller" cycle in the following proof.
+        - > So if 0 is checked first, we will get the answer that there is a cycle present.
+          > On the other hand, if vertex 3 is checked first, then 3 will be marked in visited[] and recStack[].
+          based on DFS is based on the stack, "vertex 3 is checked first" won't influence us to construct the circuit because it has *no intersection with the cycle* and then can't construct one cycle variant similar to the above "smaller" cycle (e.g. for $root\to 2\to 3\to root,2\to 4\to 3$, if we have $root\to 2\to 4$ first, then we have one bigger cycle reached before the smaller cycle).
+          - Here either the subtree (trivially we assume this subtree has no cycles because if we find one cycle, then based on `return True` in `isCyclicUtil`, we will *end earlier*) of the branch point $v$ has no intersection (then it will be backtracked and we can continue following the cycle because of no intersection) or has. <a name="cycle_branch_out_WITH_proof_after_reaching_cycle"></a>
+            For the latter case there are 2 possibilities:
+            1. as the above example, intersection $w$ hasn't been visited.
+            2. have been:
+              Then we find one cycle shares $w\to v$ with the original one.
+            - The above is the proof part after reaching the cycle.
+        - > It is based on the idea that there is a cycle in a graph only if there is a back edge
+          Proof: <a name="directed_graph_detecting_cycle_proof"></a>
+          1. Notice this can only find the cycle *including* the root.
+            e.g. when we have the in-degree-0 vertex $v$ as the root in $a\to b\to c\to a,a\to v$, we can't even proceed, let alone finding the cycle $a\to b\to c\to a$.
+             ~~1. Assume we have one cycle $C:root,a,b,c,\cdots,v,root$~~
+               - ~~Then assume $x$ is the first vertex have already been visited and we can't proceed further.~~ (This is one wrong proof)
+                 Then trivially we can substitute the path $root\to x$ which may contains many inner vertices by path $p(x)$ 
+                 which visits $x$ the first time.
+                 Then we find one new cycle $p(x),next(x),\cdots,root$
+                 - Use the above process recursively until no vertices in the cycle have been visited before.
+                   Since these new paths to substitute the old paths are *inside the tree*, the new cycle is also contained in the tree.
+          2. If the root can reach one vertex inside the cycle, then by 1.1, we can also find the cycle.
+            If it can reach multiple vertices, we let the *first* vertex be $v$.
+            Then when we reach $v$, we must be able to proceed until back to the root which constructs one cycle.
+            - Then for the above 1.1 we can prove more elegantly by using "*first*".
+              - The above proof is wrong because ~~it doesn't consider the branch point case, i.e.~~ we *may not follow $C$ at all*.
+              - Assume we reach $C$ first by $w$ which *may not adjacent to $root$*.
+                1. adjacent to $root$ (based on the directio, it has *only one* choice), then we can construct the *whole* $C$
+                2. not adjacent. Then $C$ contains one *smaller* cycle which is $root,w,next(w),\cdots,root$.
+                - This proof also has defects, because we may branch out inside the cycle as [cycle_branch_out_WITH_proof_after_reaching_cycle] shows which also shows one correct proof.
+          3. In summary the cases are
+            - root is in the circuit (*)
+              - we may reach vertices not in the cycle while constructing the cycle
+              - not "reach vertices not in the cycle"
+            - not in
+              - can reach the circuit then follow the proof of (*)
+              - can't reach (only this we may not find the cycle)
+          4. The above shows we can follow the circuit where when back to the starting point of this cycle we have one back edge.
   - cross edge can't exist in an undirected graph
     - [1][DFS_no_cross_edge]
       here case 1 just means in the DFS process of $u$ we meet $v$
@@ -9293,7 +9336,8 @@ A  E /|\
 - [ ] 30
 ### 11.4
 - 2,6~8,
-  16,20,26(where 9 is 2 $C_4$)~28,32,40~42(just think of doing $n$ times of find one spanning tree when one forest has $n$ trees) skipped
+  16,20,26(where 9 is 2 $C_4$)~28,32,
+  40~42(just think of doing $n$ times of find one spanning tree when one forest has $n$ trees),56,59(same as 58) skipped
 - [x] 4
   - trivially here DFS or BFS is better to construct the spanning tree.
 - [x] 10
@@ -9366,8 +9410,25 @@ A  E /|\
   - a) it is one type of decision tree.
 - [ ] 34
   - Assuming connecting $u,v$ with level difference $\ge 2$ and $u$ is shallower.
-    then `dist(root,v)\le dist(root,u)+1`
+    And by radial structure `dist(root,v)\le dist(root,u)+1`.
     But the level of $v$ implies `dist(root,v)\ge dist(root,u)+2` as 25 shows, contradiction.
+    - ~~This just means by radial structure,~~
+      ~~if there is one edge between u and v~~
+      ~~WLOG, u is visited first before v is visited, then v must be added by uv so level has difference 1.~~
+    - > at the same level
+      ```
+        n
+      / | \
+      u v ...
+      ```
+      > at levels that differ by 1
+      ```
+          n
+        / | \
+      ... v ...
+      /
+      u
+      ```
   - see the ans
     - > the algorithm processed u before it processed v
       so `level(u)<=level(v)` based on WLOG (~~`=` when they are added by different parents~~) and 47 visiting order implying the level order.
@@ -9377,6 +9438,11 @@ A  E /|\
           Then `level(p)<=level(u)`
           - Also by assumption, `level(p)=level(v)-1`
             Then Q.E.D.
+    - > First notice that the order in which vertices are put into (and therefore taken out of) the list L is level-order
+      i.e. the vertices are taken by group which are at *the same level*
+      and the relative order at the same level depends on the sorting order for this level.
+      See ALGORITHM 2 for the `L` meaning.
+      - More specifically, we can see the orderr is from top to bottom and *stops at each level* where we then traverse from left to right.
   - This shows [back edges are impossible in BFS](https://stackoverflow.com/questions/20847463/finding-length-of-shortest-cycle-in-undirected-graph#comment31283237_20847998).
 - [ ] 36
   - similar to [nonisomorphic_simple_connected],
@@ -9468,7 +9534,110 @@ A  E /|\
         *only* $u$ in $T$ can add $v$, same for $T'$ after removing 
         $v$.
         Then $v$ will be at the same level as $w$ which is before $x$ contradicting with "added last".
+- [ ] 48
+  - based on [backtracking_AND_DFS_imply_preorder]
+    DFS trivially use the [NLR](https://en.wikipedia.org/wiki/Tree_traversal#Pre-order,_NLR) *visiting order* where L is first expanded.
+  - see the ans
+    - > adding the statements “ m := m + 1 ” and “assign m to vertex v ” as the first line of procedure visit
+      implies index starts from 1 as the exercise shows.
+    - > if a vertex’s sibling has a smaller number, then it must have already been visited
+      This is implied by the *strictly increasing* `m := m + 1` when calling `visit`.
+- [ ] 50
+  - This is same as 34.
+  - see the ans
+    - The proof before
+      > so this directed edge goes from a vertex at one level to a vertex either at the same level or one level below
+      are mostly same.
+      - Here we assumes $u\to v$ is one directed edge.
+        Then it is either one forward edge / cross edge when "processed u before it processed v" or back edge / cross edge when "processed v before it processed u".
 - [ ] 51
+  - This is just enumeration for all sub-cases when not the tree edge.
+    1. between the ancestor and the descendant
+    2. [not case 1 -> cross edge](https://en.wikipedia.org/wiki/Depth-first_search#Output_of_a_depth-first_search)
+      - "connecting a vertex to a vertex in a previously *unvisited* subtree." -> tree edge
+        see the ans
+        > it must be the case that its head v had already been visited
+        excludes this case.
+  - see the ans
+    - [tail](https://math.stackexchange.com/questions/1707407/what-is-the-correct-term-for-the-destination-tail-vertex-of-a-directed-edge#comment3484741_1707407)
+    - It shows how the 3 possibilities are available more strictly instead of just the above *theorical* proof by thinking of the subsets of the set consisting of all possibilities.
+    - Also see 43 for the first 2 possibilities.
+- [ ] 52
+  - This just means [postorder](https://en.wikipedia.org/wiki/Tree_traversal#Post-order,_LRN) by "when the algorithm is *totally* finished with this vertex"
+  - see the ans
+    - similar to 48
+    - > the children have increasing numbers from left to right
+      so we need to assume
+      > assuming that each *new* child added to the tree comes to the *right* of its siblings already in the tree
+- [ ] 54
+  Notice 53~56 I assume all graphs are connected since they doesn't use the term "spanning forest".
+  - distance is $D(T_1,T_2)=|E(T_1)\setminus E(T_2)|+|E(T_2)\setminus E(T_1)|$
+    then we are to prove $D(T_1,T_3)\le D(T_1,T_2)+D(T_2,T_3)$
+    This is just to prove $|E(T_1)\setminus E(T_3)|\le |E(T_1)\setminus E(T_2)|+|E(T_2)\setminus E(T_3)|$
+    By the veen diagram, $LHS=\overbrace{(E(T_1)\setminus E(T_3))\setminus E(T_2)}^{g(T_1,T_3)}+\overbrace{(E(T_1)\setminus E(T_3))\cap E(T_2)}^{f(T_1,T_3)}$
+    and $RHS=\overbrace{(E(T_1)\setminus E(T_3))\setminus E(T_2)}^{\text{corresponds to }|E(T_1)\setminus E(T_2)|}+f(T_1,T_2)+\overbrace{E(T_2)\cap (E(T_1)\setminus E(T_3))}^{\text{corresponds to }|E(T_2)\setminus E(T_3)|}+g(T_2,T_3)$
+    So we get $LHS\le RHS$
+  - see the ans
+    - It uses the total edge number of one tree is *fixed*.
+      So
+      > Suppose that T1 contains a edges that are not in T2 , so that the distance between T1 and T2 is 2a
+    - > Now at worst the only edges that are in T1 and not in T3 are those a + b edges that are in T1 and not in T2 , or in T1 and T2 but not in T3 .
+      LHS are those "in T1 and not in T3" either in T2 or not.
+      this just means $b$ edges in "T2 but not in T3" are *all* in T1 and $a$ edges "in T1 and not in T2" are *all* not in T3 (so it will cause two zeroes in the veen diagram).
+      - we can connect it with the above veen diagram. [See](https://www.overleaf.com/read/zjrkgqwhhkhw#086ace)
+- [ ] 55
+  - Based on the construction process of spanning trees (Notice since it is done by *making all circuits disappear* to make one more condition met when already connected, it must be able to list all spanning trees by choosing which edge to remove),
+    $E(T_2)\setminus E(T_1)\subset E(G)\setminus E(T_1)$ where the latter are edges removed to erase all *circuits* which constructs the spanning tree.
+
+    Then when $e_1$ is removed (by exercise 44, $e_1$ is not one cut edge), then we must ~~add~~ have one edge *sequence* $S(e_1)$ which has one edge 
+    $w\in E(G)\setminus E(T_1)$ (if all in $E(T_1)$ then plus $e_1$ we have one circuit, so we must have one not in $E(T_1)$)
+    - Here I only shows *at least* one edge $w$
+      but doesn't know how to choose $e_2$ from these edges.
+  - see the ans
+    - > Then T2 ∪ {e1} contains a simple circuit C containing e1. 
+      See [this](https://math.stackexchange.com/a/2783785/1059606) which is [based on 11.1 theorem 1](https://math.stackexchange.com/questions/2783749/adding-an-edge-to-a-tree-creates-a-cycle-is-my-proof-correct#comment10350833_2783785).
+    - > The graph T1 − {e1} has two connected components
+      - See [this][cut_edge_2_components]
+        - The 1st paragraph is trivial due to 2 paths -> 1 circle as the reference in 11.1 theorem 1 says.
+        - > Therefore, all vertices in $V_1$ are connected to each other in $G'$.
+          because we can use `u` as the medium to connect all vertices like `w`.
+        - Based on logic, $(V_1\cup V_2=V)\wedge (V_1\cap V_2=\varnothing)$
+        - Here we use path definition [not implying distinct](https://en.wikipedia.org/wiki/Path_(graph_theory)#Walk,_trail,_and_path) (i.e. walk) as the book 10.4 definition 1
+        - > This is a contradiction
+          because $u$ and $v$ are already disconnected.
+        - This shows *explicitly* for the 2 components.
+      - We can also prove this [more easily](https://qr.ae/pKdIbP)
+        > adding an edge may connect two of them but it can't do anything for the third.
+        so if 3 or more after the removal, there must be 2 or more components in the original, contradiction.
+    - > $T2 \cup {e1}−{e2}$ is a tree, because e2 was on C.
+      trivially $T2 \cup {e1}$ has only circuits having 
+      $e_1$ (if not having, then remove $e_1$, we won't remove all circuit.)
+      Also only 1 this type of circuit, otherwise we will have one circuit $C_1-\{e_1\}+C_2-\{e_1\}$ left.
+      Then $T2 \cup {e1}−{e2}$ will remove this *only* circuit, so one spanning tree (trivially still connected for all vertices).
+    - > Travel C from u in the direction opposite to e1 until you come to the first vertex in the same component as v
+      ~~For $C\subset E(T_2)$, it either in ~~
+      ~~$E(T_2)\cap E(T_1)$ or $E(T_2)\setminus E(T_1)$~~
+      This is the process to choose $e_2$
+      1. $e_2\in C\subset E(T_2)$
+      2. Using the symbols in [cut_edge_2_components],
+        $e_2=(a,b),a\in V_1,b\in V_2$
+        Then this edge can connect two components trivially.
+        - Since we start from $u$ we must encounter $k\in V_1$ in the former process.
+          And since the endpoint has $v$, we must have one such $e_2$ (in the worst case when inner vertices are in $V_1$, at least we have $e_2=(pred(v),v)$).
+      - Notice this process doesn't need the used *edges* in $C$ "until you come to the first vertex" to be also in $E(T_1)$, it only needs used vertices are in $V_1$.
+  - IMHO this problem can't be easily use "dually" to prove "T2 remains a spanning tree if e2 is removed from it and e1 is added to it" when having already proved "T1 remains a spanning tree if e1 is removed from it and e2 is added to it" although it is truly dual.
+    More specifically, we got $f(e_1,T_1,T_2)=e_2$ when having $e_1$ be the condition.
+    If we just prove by dual, we can only show there is one $f(e_2,T_2,T_1)$ with the swap property with 
+    $e_2$. But we *can't show $f(e_2,T_2,T_1)=e_1$ easily* because the symmetric property.
+- [ ] 58
+  - > Certainly there is a directed path *from the root to every other vertex*, since we only deleted edges that allowed us to reach vertices we could already reach.
+    - Here we [only needs "weakly connected"](https://math.stackexchange.com/questions/1356193/how-to-define-a-directed-spanning-tree#comment10351049_1360491) when directed graph.
+    - "Euler circuit" trivially covers all vertices.
+  - removing "previously visited" implies no something like backedges -> no "a simple circuit".
+- [ ] 60
+  - "if" part is trivial
+  - based on 59 and [this](https://stackoverflow.com/questions/67343170/output-a-spanning-tree-given-a-directed-graph#comment137397264_77649096), maybe no spanning tree exists (i.e. Arborescence when directed)
+    - ["only if"][directed_graph_detecting_cycle_proof]
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -9523,6 +9692,8 @@ A  E /|\
 [graph_link_with_relation]:#graph_link_with_relation
 [unique_start_euler_path]:#unique_start_euler_path
 [find_euler_path_based_on_circuit]:#find_euler_path_based_on_circuit
+[cycle_branch_out_WITH_proof_after_reaching_cycle]:#cycle_branch_out_WITH_proof_after_reaching_cycle
+[directed_graph_detecting_cycle_proof]:#directed_graph_detecting_cycle_proof
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
@@ -9551,6 +9722,7 @@ A  E /|\
 [Big_O_Notation]:https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations
 [wikipedia_minimal_element]:https://en.wikipedia.org/wiki/Maximal_and_minimal_elements#Definition
 [Depth_first_traversal_3_colors]:https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search
+[backtracking_AND_DFS_imply_preorder]:https://en.wikipedia.org/wiki/Depth-first_search#Vertex_orderings
 
 <!-- brilliant wiki -->
 [brilliant_wiki_Dilworth_Theorem_antichain_ge_chain]:https://brilliant.org/wiki/dilworths-theorem/#proof-of-dilworths-theorem
@@ -9615,6 +9787,7 @@ A  E /|\
 [duality_onto_with_one_to_one]:http://www.randomservices.org/random/foundations/Functions.html#aoc
 [path_in_order_theory]:https://math24.net/closures-relations.html
 [find_euler_path_undirected_path]:https://cp-algorithms.com/graph/euler_path.html#:~:text=To%20find%20the%20Eulerian%20path%20%2F%20Eulerian%20cycle%20we%20can%20use,then%20remove%20the%20extra%20edge.
+[cut_edge_2_components]:https://sharmaeklavya2.github.io/theoremdep/nodes/graph-theory/deleting-bridge-gives-2-components.html
 
 <!-- wolfram -->
 [connected_planar_simple_graph]:https://mathworld.wolfram.com/PlanarConnectedGraph.html
