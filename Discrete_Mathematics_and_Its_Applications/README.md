@@ -7,6 +7,8 @@ check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
 1. More specifically, "pre-order" is the [visiting order by DFS](https://en.wikipedia.org/wiki/Depth-first_search#Vertex_orderings) where "This is a compact and natural way of describing the progress of the search" is shown in the [example](https://en.wikipedia.org/wiki/Depth-first_search#Example). 2. BFS uses [level-order search](https://en.wikipedia.org/wiki/Tree_traversal#Breadth-first_search) because searching level by level (i.e. depth by depth).
 
 BTW, "exactly one path" implies only one cycle is created after adding one edge because 1. trivially this cycle must contain $e$ otherwise the original graph is not one tree. 2. $e$ can be only concatenated with the path $p(v_1,v_2)$ in the original graph to construct one cycle. This is also shown in [this QA](https://math.stackexchange.com/a/420543/1059606).
+
+As [wikipedia](https://en.wikipedia.org/wiki/Path_(graph_theory)#Walk,_trail,_and_path) shows, whether path can "pass the same vertex" depends on the definition. IMHO in the daily life problem, the graph is probably one *simple graph* because it seems weird to loop at one middle point when we want to get to one destination (no loop) and only considers one candidate path between each vertex (not one multigraph). Then the case in Guy's example is impossible.
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -1213,7 +1215,8 @@ check(R_1)
 ## 10
 - [graph visualizer](https://math.stackexchange.com/questions/13841/online-tool-for-making-graphs-vertices-and-edges#comment10322484_13841)
 - [List all possible graphs](https://math.stackexchange.com/a/2783775/1059606) with one specific property list.
-  - Here number of Vertices can be only set to [one range](https://houseofgraphs.org/result-graphs)
+  - Here ~~number of Vertices can be only set to~~ [one range](https://houseofgraphs.org/result-graphs)
+    - Here default to be simple graphs.
 ### 10.1
 - > We can distinguish between two chemical compounds with the same molecular formula but different structures using graphs
   See [this](https://www.toppr.com/ask/question/compounds-having-the-same-molecular-formula-but-different-structures-are-called/)
@@ -1985,14 +1988,16 @@ check(R_1)
 ### 11.5
 - ALGORITHM 1
   - Here after the process, we have 1. no circuits, so "no simple circuits" 2. "n-1 edges".
-    To use 11.1.3 THEOREM 2, we need "n vertices", i.e. each added edge adds *one more new vertex* when initially 1 vertex.
-    - Prove each graph after the iteration is connected.
+    "n vertices" is trivial because we haven't added vertices and vertex number keeps $n$.
+    Then we prove "connected" by 11.1.3 THEOREM 2.
+    ~~To use 11.1.3 THEOREM 2, we need "n vertices", i.e. each added edge adds *one more new vertex* when initially 1 vertex.~~
+    ~~- Prove each graph after the iteration is connected.~~ (Ignore the following.)
       - inductive step:
         Since "an edge of minimum weight incident to a vertex in T", then when T is connected, $T+(u,v),u\in V(T)$ is connected because 
         $v$ can be connected with the rest using $u$ as the medium (then all vertex pairs are connected) when $v\notin V(T)$
         when $v\in V(T)$, this is one trivial case.
       - basis step: one edge is trivial.
-    - Based on "connected", old vertex will cause the circuit -> contradiction.
+    ~~- Based on "connected", old vertex will cause the circuit -> contradiction.~~
 - > We solve this problem by finding a *minimum spanning tree* in the graph in Figure 1
   the minimum connected graph must be "a minimum spanning tree".
   If not, then it must contain one subgraph which is a spanning tree (See 11.4) with the smaller sum of weights.
@@ -2018,18 +2023,27 @@ check(R_1)
     - [prefix](https://www.ime.usp.br/~pf/algorithms/chapters/footnotes/math.html)
       in this context it can also not "contain the first term". Then $W=\{x\}$.
     - So the book proof may should use $\{a,b\}$ here and contents before "so let {a, b}" in [primsproof] are same as the book corresponding ones (although the contents after may overlap partly).
-      - > we can find an edge e not in Sk+1 that has an endpoint that is also an endpoint of one of the edges e1, e2, … , ek.
+      - > we can find an edge e *not in Sk+1* that has an endpoint that is *also an endpoint* of one of the edges e1, e2, … , ek.
         as [primsproof] shows, we can find one counterexample:
         maybe "{a, b}" is in $S_{k+1}$, then continue we may find one edge 
         $e$ has no endpoints in $W$.
         Here "maybe "{a, b}" is in $S_{k+1}$" is due to this edge weight may be the *minimal* at one stage after.
+        - In [primsproof], it *only needs "also an endpoint"* instead of 2 conditions as the above shows which is one weaker condition which can be easily met based on "this must exist because $x,y$" above. <a name="Prim_find_incident_edge"></a>
+        - ~~**Notice** we can modify the book proof to get the **3rd** proof which is almost same as Kruskal’s in exercise 32.~~
+          ~~Here we *only* need "there must be an edge in the simple circuit that does *not belong to* Sk+1" (i.e. "an edge e not in Sk+1")~~
+          then $T-\{e\}+\{e_{k+1}\}$ is still one spanning tree with ~~the~~ one ~~maybe *smaller* weight sum (case 1 in [primsproof] and excludes case 3 in [primsproof])~~ (Since Prim's only ensure the smallest weight among edges *incident* with already added vertices, we can't directly say "smaller") and including one more 
+          $e_i,i=1\sim n-1$ (case 2 in [primsproof]), contradiction. <a name="MST_scratch"></a>
+          - **Notice**
+            > Let T be a *minimum spanning tree* of G containing the edges e1, e2, … , ek, where k is the *maximum* integer
+
+            *doesn't need the "incident" requirement*.
+            - This also *implies* we can derive Kruskal’s without the stronger conditions in Prim’s, although the [original paper](https://sci-hub.hkvisa.net/10.1090/S0002-9939-1956-0078686-7) doesn't mention it by something like "Prim" or "incident".
     - > Prim’s algorithm hasn’t selected edge {a, b} yet
       because $a\in W, b\notin W$ while selected edge $w=(u,v),\{u,v\}\subseteq W$
 - ~~> Kruskal’s algorithm can be carried out using O(m log m) operations and Prim’s algorithm can be carried out using O(m log n) operations.~~
   ~~By CRLS, they are same with "O(m log n)".~~
   > it is preferable to use Kruskal’s algorithm for graphs that are sparse,
   But it is shown in CRLS both in 3rd and 4th exercise 23-2 that we can improve only for Prim’s further.
-- 
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -8999,8 +9013,8 @@ minimum(Diff,n,ivl)
   - > Suppose that we follow the given circuit through the multigraph, but *instead* of using edges more than once, we put in a new parallel edge whenever needed
     This is the key idea. This is similar to 48.
     ~~We should not be totally similar to 48 where after the removal we can't know "at least m edges more than once" easily.~~
-- [ ] 56 see the ans
-  - ~~By [this](https://stackoverflow.com/questions/4971850/which-algorithm-can-i-use-to-find-the-next-to-shortest-path-in-a-graph#comment7392944_4972027) counterexample allowing the loop~~, the ans [~~may be wrong~~ similar to this link](https://stackoverflow.com/questions/4971850/which-algorithm-can-i-use-to-find-the-next-to-shortest-path-in-a-graph#comment137297375_4972027) is based on that the path has at least one edge difference with each other.
+- [ ] 56 see the ans <a name="second_shortest_path"></a>
+  - ~~By [this](https://stackoverflow.com/questions/4971850/which-algorithm-can-i-use-to-find-the-next-to-shortest-path-in-a-graph#comment7392944_4972027) counterexample allowing the loop~~, the ans [~~may be wrong~~ similar to this link](https://stackoverflow.com/a/4972027/21294350) is based on that the path has *at least one* edge difference with each other.
     - > If G - E is not connected, continue for next edge
       If disconnected, there must not be one path connecting the start vertex and the ending vertex because no path to substitute the cut edge.
   - [This one](https://stackoverflow.com/questions/4971850/which-algorithm-can-i-use-to-find-the-next-to-shortest-path-in-a-graph#comment137297470_4975663) TODO.
@@ -9717,8 +9731,150 @@ A  E /|\
       > whether the status of v is “seen.”
     3. `visited[v] = True; recStack[v] = False`
 ### 11.5
+- 2~8,14~16,22(same as 20) skipped
 - [ ] 9
+  - all weights same.
+  - see the ans
+    - a graph with 1 edge is impossible here because we have only one choice and we must choose this edge.
+    - 2 edges: since connected we have only [one choice](https://houseofgraphs.org/graphs/32234) by [houseofgraphs_search] with "Number of Edges between 2 and 2" and "Connected"
+      again to connect them we must choose these 2 edges.
+    - 3 edges with [houseofgraphs_search] "Number of Edges = 3,Number of Vertices between 1 and 3,Connected" -> [only one](https://houseofgraphs.org/graphs/1374)
+- [ ] 10
+  - Prim’s will stop when no incident edges to choose (i.e. one component has been finished).
+    Then choose one arbitrary un-visited vertex and apply the algorithm again.
+  - Kruskal’s won't be influenced by components. Let $G(n)$ be the edge sequence chosen by without choosing the component first.
+    - This is same as choosing component first and choose *smallest edge sequence* inside it. Let the edge sequence chosen by this method be $C(n)$
+      ~~Because at the last, we are choosing $n-i$ edges ($i$ is the component count number) with *no circuits*.~~
+      - Because for $G(n)$,
+        trivially we can only select $n_i-1$ for $i$th component where $\sum n_i=n$ (If more than this, choose $n_i-1$ among these edges. Trivially it still has no circuits. Then based on 11.1 THEOREM 2, it is one tree. Then adding edges to this tree will construct circuits, contradiction).
+        
+        Assume for the $i$th component, we have chosen $v\in G_i(n),v\notin C_i(n)$ 
+        (Here the subcript $i$ means it is the edge sequence in the $i$th component).
+        Then trivially we must have selected the edge $w\in C_i(n)$ instead of 
+        $v$ because it has one *smaller* weight by the process corresponding to $C_i(n)$, contradiction.
+- [ ] 12
+  - just change minimum to maximum in the corresponding locations of the algorithm.
+    - Proof also just change minimum to maximum, which is enough, because the main part *doesn't depend on the "minimum" condition*.
+      ~~See the [scratch][MST_scratch].~~ See 32.
+- [x] 17
+  - Similar to [second_shortest_path],
+    edge number for the "spanning tree" are same, so there is "at least one edge difference".
+- [x] 18
+  - Assume there is one tree $T$ with no such "an edge with *smallest* weight", let it be $(u,v)$.
+    then based on tree, $T$ has one path $p(u,v)$ which is not 
+    $(u,v)$.
+    then choose one edge $w$ in $p(u,v)$
+    $T-\{w\}+\{(u,v)\}$ has one *smaller* weight sum with no circuit and $n-1$ edges -> tree, contradiction.
+- [x] 20
+  - Just use Kruskal’s algorithm
+    where $e_1$ is fixed.
+    Then the proof should be
+    > with e1, e2, … , ek as its edges *$k\ge 1$*
+    and the rest are same because in the inductive proof we don't care about the properties of $e_1$.
+- [ ] 24
+  - > Thus the circuit can be thought of as the sequence e1 , T1 , e2 , T2 , . . . , er , Tr , e1 
+    it should be $p(T_1)$ which is the path in 
+    $T_1$ connecting $e_{1,2}$
+    - At the start, $T_1$ is just the single vertex which is [also one tree](https://cs.stackexchange.com/a/40335/161388) (TODO how "[disjoint union](https://en.wikipedia.org/wiki/Disjoint_union) of trees" works for (1)) because it is [connected](https://mathworld.wolfram.com/ConnectedGraph.html#:~:text=A%20connected%20graph%20is%20graph,is%20said%20to%20be%20disconnected.) and has no circuits.
+  - > However, let e be the shortest edge (after tie-breaking) among {e1, e2, . . . , er}. Then the tree at both of its ends necessarily picked e to add to the tree, a contradiction.
+    The *key* part is that the *ordering* of edges is [*asymmetric*](https://qr.ae/pKddbZ) think it similar to $<$.
+    So each tree has one [deterministic](https://en.wikipedia.org/wiki/Nondeterministic_Turing_machine) choice (e.g. we can't have 2 smallest edges for 2 trees and each tree select one of them without overlapping)
+- [ ] 26
+  - Here the spanning tree must be constructed at one stage immediately before going to the next iteration of the `while` loop.
+    - If not, this means we have $n-1$ edges when adding some edges among $e_i$ but not finished. (Here since no circuits by 24, we already has one tree.)
+      Then continuing adding edges, we will have circuits, contradicting with 24.
+- [ ] 27 see 26.
+  - hinted by the ans: we also need to prove minimum based on 26.
+    - Similar to the proof of Prim's,
+      let the edge added be $e_{11},\cdots,e_{1 i_1},\cdots,e_{m1},\cdots,e_{m i_m}$ where 
+      $m$ are the stage count (i.e. iteration to run the `while` loop in 26).
+      Then let $T$ be the spanning tree corresponding to maximum edge number $k$ sharing $e_{11},\cdots,e_{1 i_1},\cdots,e_{b c}$
+      Then use the same process to construct $T'$ having edges until 
+      $e_{b i_b}$ or $e_{b+1 i_{b+1}}$ when $c=i_b$
+      
+      Then we need to *prove* the weight sum of the sequence $e_{t 1},\cdots,e_{t i_t},\text{where }t=b,b+1$.smaller than the substituted edge sequence $w_{1},\cdots,w_{t i_t}$
+      Let the forest $G$ be edge sequence $e_{11},\cdots,e_{1 i_1},\cdots,e_{b-1 i_{b-1}}$ when $c\neq i_b$ 
+      ($=b$ is similar.)
+      Then $w_i$ and $e_{t m}$ must be edge connecting between trees (otherwise when connecting inside the tree, we will cause one circuit)
+  - see the ans
+    - Here $e$ should be assumed the first edge added among $S-T$ to ensure
+      > where prior to that stage *all* edges in S are also in T
+    - >  Find an edge e′ ∈ S − T and an edge e′′ ∈ T − S on this circuit and “adjacent” when viewing the trees of this stage as “supervertices.”
+      it should be $e\in S-T$
+      and let this edge be choosed by tree $T_m$ at this stage *by the algorithm*.
+      trivially $T_m$ must have one edge incident with the rest vertices by connectivity. ~~This edge must be incident to one vertex $w\notin T_m$ (because no circuits), let the edge be $(w,v_{T_m})$~~
+      ~~- Notice here $(w,v_{T_m})$ can be in ~~
+        ~~$S$~~ (The strike-throughed contents may be a bit unnecessarily complex)
+      - > viewing the trees of this stage as “supervertices.”
+        At *"this stage" before adding $e$*
+        trivially, S,T have edges in common which will construct one *forest* and each tree can be viewed as one vertex by contraction.
+        > Find an edge e′ ∈ S − T
+        Then let $e\in S-T$ connects $u,v$ (where $u,v$ are the tree vertices and $u=T_m$),
+        > an edge e′′ ∈ T ... “adjacent”
+        since T doesn't have $e$, we must have one edge $w=e''$ incident with $u$ (otherwise $u$ will one *disconnected vertex*)
+        > an edge e′′ ∈ T ... on this circuit
+        1. $w=(u,v)$ then by [this](#multi_edge_circuit), we have $w$ in circuit
+        2. $w=(u,k),k\neq v$
+          by connectivity, there is one edge $a=(k,v)$
+          then the circuit is constructed by $w,a,e$ and the related paths inside each tree.
+        - > an edge e′′ ∈ T − S
+          Since $e\in S$ and we see $(e,w),w\in T$ will must cause one circuit based on these *shared* paths (notice the above $a$ and the paths inside the tree may differ but that doesn't influence the *existence of circuits*).
+          so $w\notin S$.
+      - > “adjacent”
+        we have
+        > Then by the algorithm, w(e′ ) ≤ w(e′′)
+      - > an edge e′ ∈ S − T and an edge e′′ ∈ T − S
+        is to ensure
+        > closer to S
+        and the validity of
+        > T − {e′′}∪{e′}
+      - ~~"an edge $e'' \in T − S$ on this circuit"~~
+        1. it must be in $T$ because we are caring about $T+\{e\}$
+        2. this circuit can't be in a tree $S$
+        So there is one $e'' \in T − S$
+      - "“supervertices" is implied by the contraction in [Boruvka_proof]
+  - [Boruvka_proof] in [this](https://www-student.cse.buffalo.edu/~atri/cse331/fall16/recitations/Recitation10.pdf)
+    - > finally, eliminate the self-loops and multiple edges created by these contractions.
+      This is impossible
+      1. self-loop -> one unmarked edge $w$ connecting vertices $a,b$ in the tree with one path $p(a,b)$
+        Then $w+p(a,b)$ is one circuit
+      2. multiple edges <a name="multi_edge_circuit"></a>
+        choose 2 be $a_1,b_1$ and $a_2,b_2$
+        Then similar to 1, we have $p(a_i,b_i),\text{where }i=1,2$ (Here $a_1=a_2$ is possible, also for $b_{1,2}$)
+      - So the above edges can't exist to construct one spanning *tree*
+    - Lemma: ~~3.2~~ (which seems to prove complexity which I dropped because the basic idea is same for calculating complexity of all algorithms and I don't have time to check for each algorithm), 3.3 are same which means ["*acyclic* undirected graph"](https://en.wikipedia.org/wiki/Tree_(graph_theory))
+    - "a Boruvka phase" i.e. `while` loop in 26
+    - Lemma: 3.1
+      here $(v,u)$ should be in the circuit including 
+      $(v,w)$ otherwise we may disconnect the tree if $v$ has degree more than 2.
+    - based on the above "must be edge connecting between trees ..." which implies
+      > eliminate the self-loops
+      we can [contract edges](https://en.wikipedia.org/wiki/Edge_contraction) making each tree as one vertex which simplifies the graph greatly.
+      - More specifically, at each stage, we add edges to *connect trees* aiming to construct *one* spanning tree.
+        Think of the following sequence: <a name="MST_construction_process"></a>
+        1. original graph G, we must include contracted edges by lemma 3.1 for MST.
+        2. "must be edge connecting between trees ..." -> we can contract as one vertex, i.e. tree.
+        3. Use lemma 3.1 again, i.e. back to step 1. By 26, at the end we have one tree. By lemma 3.1， it is MST.
+      - > In a contraction, *only the minimum weight* edge needs to be retained out of any set of multiple edges.
+        This is implied by lemma 3.1.
+    - > Each marked edge eliminate a distinct vertex of G
+      this is implied by contraction which combines 2 vertices into 1.
+      > thus the uncovered vertices are still remained in G’
+      think it as relabeling one vertex (i.e. uncovered which means unremoved) and remove one vertex.
+    - >  Furthermore, since the MST of G’ will also be induced by Boruvka phases, the MST of G’ is also a subgraph of the MST of G
+      This is the **key part**. Also see the [above][MST_construction_process]
+      At each stage, we will include those *necessary edges* by lemma 1 and generates [one graph minor](https://en.wikipedia.org/wiki/Graph_minor) G' by removing edges (implementation 4) unable in one spanning tree.
+      - "induced" means generated
+      - "subgraph" shows how we can generate the spanning tree by using all *contracted* edges.
+  - This [proof][safe_edge_MST] is based on safe edges which is also referred to in CRLS.
+    TODO randomization to linear.
 - [ ] 32 proves "Kruskal’s algorithm"
+  - > Some edge e in this simple circuit is not in S
+    Here we only need this to ensure $-\{e\}$ won't delete the edge among 
+    $\{e_1,\cdots,e_k\}$ which is already shown in [primsproof]
+    - ~~Compared with Prim's we *don't need it to be incident* with one edge among $\{e_1,\cdots,e_k\}$ (The book proof of prim's has one [too strong condition][Prim_find_incident_edge])~~
+      ~~so the problem ~~
+      This proof is almost same as Prims's 3rd proof (because these 2 algorithms are almost same) above where $S$ is one special case of $S_{k+1}$.
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -9757,6 +9913,7 @@ A  E /|\
 - Why is [this](#Pseudo_polynomial) based on the length of the input instead of the value?
 - [This](https://stackoverflow.com/q/33590974/21294350) related with [scc]
   CRLS gives the detailed proof.
+- the above [safe_edge_MST]
 # TODO after compiler
 - [This](https://stackoverflow.com/a/575337/21294350) related with naming and binding in 10_5_64 code.
 # TODO after complexity book
@@ -9777,6 +9934,10 @@ A  E /|\
 [directed_graph_detecting_cycle_proof]:#directed_graph_detecting_cycle_proof
 [u_first_in_the_white_path]:#u_first_in_the_white_path
 [one_cycle_when_tree_plus_one_edge]:#one_cycle_when_tree_plus_one_edge
+[Prim_find_incident_edge]:#Prim_find_incident_edge
+[MST_scratch]:#MST_scratch
+[second_shortest_path]:#second_shortest_path
+[MST_construction_process]:#MST_construction_process
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
@@ -9891,6 +10052,8 @@ A  E /|\
 [tree_imply_all_cut_edge_i_e_no_circuit]:https://web.math.ucsb.edu/~padraic/ucsb_2013_14/math137a_w2014/math137a_w2014_lecture3.pdf
 [white_path_3_colors]:https://www.clear.rice.edu/comp314/lec/week3/Depth-First.htm
 [primsproof]:./lectures/primsproof.pdf
+[Boruvka_proof]:./lectures/MST.pdf
+[safe_edge_MST]:https://courses.engr.illinois.edu/cs374/fa2015/slides/18-mst.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
@@ -9908,3 +10071,6 @@ A  E /|\
 
 <!-- geeksforgeeks -->
 [Detect_cycle_Directed_Graph]:https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
+
+<!-- valuable links -->
+[houseofgraphs_search]:https://houseofgraphs.org/result-graphs
