@@ -9,6 +9,8 @@ check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
 BTW, "exactly one path" implies only one cycle is created after adding one edge because 1. trivially this cycle must contain $e$ otherwise the original graph is not one tree. 2. $e$ can be only concatenated with the path $p(v_1,v_2)$ in the original graph to construct one cycle. This is also shown in [this QA](https://math.stackexchange.com/a/420543/1059606).
 
 As [wikipedia](https://en.wikipedia.org/wiki/Path_(graph_theory)#Walk,_trail,_and_path) shows, whether path can "pass the same vertex" depends on the definition. IMHO in the daily life problem, the graph is probably one *simple graph* because it seems weird to loop at one middle point when we want to get to one destination (no loop) and only considers one candidate path between each vertex (not one multigraph). Then the case in Guy's example is impossible.
+
+IMHO, we can show we can only decrease *by one* since one edge can be only incident with at most 2 components (if 1, then the SCC number stay the same.) and influence them (i.e. [contract](https://en.wikipedia.org/wiki/Edge_contraction#) them if thinking of the SCC as one vertex as the [Boruvka’s Algorithm](https://community.wvu.edu/~krsubramani/courses/fa01/random/lecnotes/lec11/MST.pdf) does).
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -8143,7 +8145,7 @@ print(subgraph_of_complete_graph(4))
     because each edge will bring the point to *the other part*.
   - see the [code][counting_path]
 - [x] 26 see [counting_path]
-- [ ] 28
+- [ ] 28 <a name="minimum_edge_number_connected_graph"></a>
   - Also [see](https://www.quora.com/How-do-I-prove-that-the-minimum-number-of-edges-in-a-connected-graph-with-n-vertices-is-n-1/answer/Abhijith-N-Raj-1?comment_id=385204198&comment_type=2)
     - Also see [this](https://qr.ae/pKdkCa) which seems to not shown when first reading [this](https://qr.ae/pKdkgK).
   - The book one is similar to [this](https://math.stackexchange.com/a/237136/1059606) where "smallest possible number" corresponds to here "a connected graph with n + 1 vertices and fewer than n edges" (This is shown in the note).
@@ -9650,7 +9652,8 @@ A  E /|\
         - Here we use path definition [not implying distinct](https://en.wikipedia.org/wiki/Path_(graph_theory)#Walk,_trail,_and_path) (i.e. walk) as the book 10.4 definition 1
         - > This is a contradiction
           because $u$ and $v$ are already disconnected.
-        - This shows *explicitly* for the 2 components.
+        - Here T' may mean G'.
+        - This proof shows *explicitly* for the 2 components.
       - We can also prove this [more easily](https://qr.ae/pKdIbP)
         > adding an edge may connect two of them but it can't do anything for the third.
         so if 3 or more after the removal, there must be 2 or more components in the original, contradiction.
@@ -9662,14 +9665,17 @@ A  E /|\
     - > Travel C from u in the direction opposite to e1 until you come to the first vertex in the same component as v
       ~~For $C\subset E(T_2)$, it either in ~~
       ~~$E(T_2)\cap E(T_1)$ or $E(T_2)\setminus E(T_1)$~~
-      This is the process to choose $e_2$
+      This is the process to choose $e_2$ and it meets the following properties:
       1. $e_2\in C\subset E(T_2)$
       2. Using the symbols in [cut_edge_2_components],
         $e_2=(a,b),a\in V_1,b\in V_2$
         Then this edge can connect two components trivially.
         - Since we start from $u$ we must encounter $k\in V_1$ in the former process.
-          And since the endpoint has $v$, we must have one such $e_2$ (in the worst case when inner vertices are in $V_1$, at least we have $e_2=(pred(v),v)$).
-      - Notice this process doesn't need the used *edges* in $C$ "until you come to the first vertex" to be also in $E(T_1)$, it only needs used vertices are in $V_1$.
+          And since the endpoint has $v$, we must have one such $e_2$ (in the worst case when inner vertices are in $V_1$, at least we have $e_2=(pred(v),v)$). <a name="circuit_connect_components"></a>
+      - Notice this process doesn't need the used *edges* in $C$ "until you come to the first vertex" to be also in $E(T_1)$, 
+        it *only* needs used *vertices* are in $V_1$.
+        So this process aims to splitting the *inner vertices* into 2 categories *instead of inner edges* and each category has at least one member (i.e. u,v in each), then traversing the path $C-\{e_1\}$ from u to v, we must get from one category to the other.
+      - $T1 − {e1}\cap {e2}$ is connected and with $n-1$ edges after $\cap$ -> tree.
   - IMHO this problem can't be easily use "dually" to prove "T2 remains a spanning tree if e2 is removed from it and e1 is added to it" when having already proved "T1 remains a spanning tree if e1 is removed from it and e2 is added to it" although it is truly dual.
     More specifically, we got $f(e_1,T_1,T_2)=e_2$ when having $e_1$ be the condition.
     If we just prove by dual, we can only show there is one $f(e_2,T_2,T_1)$ with the swap property with 
@@ -9731,7 +9737,7 @@ A  E /|\
       > whether the status of v is “seen.”
     3. `visited[v] = True; recStack[v] = False`
 ### 11.5
-- 2~8,14~16,22(same as 20) skipped
+- 2~8,14~16,22(same as 20),29(same as 28),31(implied by 30 although the ans mistakenly inversed the sign) skipped
 - [ ] 9
   - all weights same.
   - see the ans
@@ -9833,7 +9839,7 @@ A  E /|\
         2. this circuit can't be in a tree $S$
         So there is one $e'' \in T − S$
       - "“supervertices" is implied by the contraction in [Boruvka_proof]
-  - [Boruvka_proof] in [this](https://www-student.cse.buffalo.edu/~atri/cse331/fall16/recitations/Recitation10.pdf)
+  - [Boruvka_proof] ([i.e. Sollin's algorithm](https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm)) in [this](https://www-student.cse.buffalo.edu/~atri/cse331/fall16/recitations/Recitation10.pdf)
     - > finally, eliminate the self-loops and multiple edges created by these contractions.
       This is impossible
       1. self-loop -> one unmarked edge $w$ connecting vertices $a,b$ in the tree with one path $p(a,b)$
@@ -9868,6 +9874,20 @@ A  E /|\
       - "subgraph" shows how we can generate the spanning tree by using all *contracted* edges.
   - This [proof][safe_edge_MST] is based on safe edges which is also referred to in CRLS.
     TODO randomization to linear.
+- [x] 28
+  - each edge is at most shared by 2 vertices.
+    So "at least $\lceil n/2 \rceil$ edges" to cover all vertices.
+- [x] 29
+  - see the ans which is also based on the worst case as 28
+    - > Each of the r trees is joined to at least one other tree by a new edge
+      i.e. maybe 2 edges are incident with one same vertex, then at least 3 trees are contracted together.
+    - > there are at most r/2 trees in the result
+      when r is odd, it is $\lfloor r/2 \rfloor$ (also see 30)
+      - > To accomplish this, we need to add r − (r∕2) = r∕2 edges
+        since one edge [at most decreases one](https://cs.stackexchange.com/a/116850/161388) (also implied by [$G-e$](https://math.stackexchange.com/a/1497029/1059606) where ["path component"](https://proofwiki.org/wiki/Definition:Path_Component) is related with topological space) component (i.e. tree here), then to decrease at least $r-\lfloor r/2 \rfloor=\lceil r/2\rceil$ components, we need at least $\lceil r/2\rceil$ edges.
+        - [In SCC we can decrease more](https://stackoverflow.com/questions/59199701/can-the-number-of-scc-strong-connected-component-be-increased-if-only-one-edg#comment137425421_60133937) due to the direction
+        - similar to 30, we can also get $\lceil\rceil$ by "at least".
+- [ ] 30 see the ans "at most" implies $\lfloor\rfloor$.
 - [ ] 32 proves "Kruskal’s algorithm"
   - > Some edge e in this simple circuit is not in S
     Here we only need this to ensure $-\{e\}$ won't delete the edge among 
@@ -9875,6 +9895,28 @@ A  E /|\
     - ~~Compared with Prim's we *don't need it to be incident* with one edge among $\{e_1,\cdots,e_k\}$ (The book proof of prim's has one [too strong condition][Prim_find_incident_edge])~~
       ~~so the problem ~~
       This proof is almost same as Prims's 3rd proof (because these 2 algorithms are almost same) above where $S$ is one special case of $S_{k+1}$.
+- [ ] 33
+  - Assume we have one spanning tree $T$ which doesn't have $w$ which is the maximum weight edge in the circuit $C$.
+    Then as exercise 11.4-56 shows, we can transform to one spanning tree $T'=T+\{w\}-\{e\},e\in C,e\neq w$ which must have one greater weight sum.
+    This implies having $w$ won't construct one MST.
+    - TODO the above process may not construct all spanning trees containing such one edge $w$.
+  - see the ans
+    - Here $uv$ is one cut edge,
+      so by [cut_edge_2_components], we have can partition vertices into $V_{1,2}$.
+      - > At some point this path must jump from the component of T−e containing u to the component of T−e containing v, say using edge f
+        See [circuit_connect_components] and the related notice.
+    - This is one variant of 11.4-55
+      We are transforming the graph $T_1$ with the maximum edge $e_1$ to one graph $T'$ 
+      without $e_1$ which may be not $T_2$.
+      Since $e_2\in C$ where $C$ is *one circuit "containing e1"*, we are finished.
+    - "smaller" to construct the contradiction with the assumption "minimum"
+      implies we need "distinct edge weights" (at least for this used cycle).
+- [ ] 35
+  - > doing so does not disconnect the graph
+    implies in ont circuit. So we can use 33.
+  - > because the algorithm never disconnects the graph and upon termination there can be no more simple circuits
+    We can also think as the following: This graph start with [edge number $\ge n-1$][minimum_edge_number_connected_graph] and decrease 1 edge one time, so must terminate with $n-1$ edges.
+  - IMHO this is the reverse process of Kruskal's algorithm from the maximum weight to the minimum where both ends with no circuits.
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -9938,6 +9980,8 @@ A  E /|\
 [MST_scratch]:#MST_scratch
 [second_shortest_path]:#second_shortest_path
 [MST_construction_process]:#MST_construction_process
+[circuit_connect_components]:#circuit_connect_components
+[minimum_edge_number_connected_graph]:#minimum_edge_number_connected_graph
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
