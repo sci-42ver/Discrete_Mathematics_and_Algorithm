@@ -149,9 +149,11 @@ if not ONLY_TREE:
     graph_n(5)
     # basis step https://math.stackexchange.com/q/4849754/1059606
     graph_n(3)
-# 11.1-12
-graph_n(4,True)
-# 11.1-13
-graph_n(5,True)
-# 11.1-11 (38 is labelled instead of unlabelled)
-graph_n(3,True)
+# # 11.1-12
+# graph_n(4,True)
+# # 11.1-13
+# graph_n(5,True)
+# # 11.1-11 (38 is labelled instead of unlabelled)
+# graph_n(3,True)
+# 11-supplementary 2
+graph_n(6,True)

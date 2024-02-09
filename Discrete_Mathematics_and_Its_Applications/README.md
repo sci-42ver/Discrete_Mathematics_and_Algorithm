@@ -11,6 +11,12 @@ BTW, "exactly one path" implies only one cycle is created after adding one edge 
 As [wikipedia](https://en.wikipedia.org/wiki/Path_(graph_theory)#Walk,_trail,_and_path) shows, whether path can "pass the same vertex" depends on the definition. IMHO in the daily life problem, the graph is probably one *simple graph* because it seems weird to loop at one middle point when we want to get to one destination (no loop) and only considers one candidate path between each vertex (not one multigraph). Then the case in Guy's example is impossible.
 
 IMHO, we can show we can only decrease *by one* since one edge can be only incident with at most 2 components (if 1, then the SCC number stay the same.) and influence them (i.e. [contract](https://en.wikipedia.org/wiki/Edge_contraction#) them if thinking of the SCC as one vertex as the [Boruvka’s Algorithm](https://community.wvu.edu/~krsubramani/courses/fa01/random/lecnotes/lec11/MST.pdf) does).
+
+I give one summary for the chat between OP and A.S which has [one valuable image](https://chat.stackexchange.com/transcript/message/8438683#8438683) for explanation. If the original graph $G$ has one cycle $C$. Then take arbitrary 2 adjacent vertices $v,w$ (we can also take one pair not adjacent. For simplicity, I assume adjacent) inside this cycle. Then 2 cycles are created. One is the multiedge $(v,w)$, while the other is $C-\{v,w\}+\{v,w\}^{(*)}$ where the superscript $(*)$ shows whether the edge is in the original graph. This is contradiction. So $G$ is acyclic.
+
+@AmelioVazquez-Reina In [wikipedia](https://en.wikipedia.org/wiki/B-tree#Definition) it says about B-tree "In Knuth's terminology, the *"leaf"* nodes are the *actual data* objects / chunks". Could you offer some references?
+
+IMHO 1. more specially, the graph has no cycles because one mere cycle has $\delta(G)=2$ and we have one more besides the cycle which causes the degree can be 3. 2. $\delta(G)=1$ implies it may be a tree with leaves and the proof of the acyclic property verifies this.
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -1219,6 +1225,11 @@ check(R_1)
 - [List all possible graphs](https://math.stackexchange.com/a/2783775/1059606) with one specific property list.
   - Here ~~number of Vertices can be only set to~~ [one range](https://houseofgraphs.org/result-graphs)
     - Here default to be simple graphs.
+    - vertex orbit -> ["automorphism"](http://www.cs.columbia.edu/~cs4203/files/GT-Lec2.pdf) which is related with permutation of vertices (then corresponding edge permutation) based on labeling, e.g. p20.
+    - TODO 
+      - [index](https://en.wikipedia.org/wiki/Topological_index)
+      - group size
+      - [genus](https://en.wikipedia.org/wiki/Genus_(mathematics)#Graph_theory) may be the number of spheres to be planar.
 ### 10.1
 - > We can distinguish between two chemical compounds with the same molecular formula but different structures using graphs
   See [this](https://www.toppr.com/ask/question/compounds-having-the-same-molecular-formula-but-different-structures-are-called/)
@@ -1673,6 +1684,10 @@ check(R_1)
   This is due to that to keep the connectivity, the 1st can connect 2 vertices, while the rest can at most connect one more each. So $n-1$.
   > and when (ii) and (iii) hold, (i) must also hold.
 - [complete "same"](https://en.wikipedia.org/wiki/M-ary_tree#Types_of_m-ary_trees) is stronger than balanced ["n/n-1" p15](https://w3.cs.jmu.edu/spragunr/CS228/lectures/trees/trees.pdf).
+- > Rooted trees can also be defined *recursively*. Refer to Section 5.3 to see how this can be done.
+  i.e. Definition 3 which is defined by *level*.
+  We can do this by branch each node *down* instead of at the same level or up due to *no circuits*. <a name="tree_level_recursive"></a>
+- see p785 rooted trees are *default to be ordered*.
 ### 11.2
 - ALGORITHM 1
   - > If x equals the key of v, then the algorithm has found the location of x and terminates
@@ -1775,10 +1790,11 @@ check(R_1)
     i.e. form one loop.
   - > we examine each edge at most twice to determine whether to add this edge
     i.e. once for each endpoint.
-  - > Because the graph has a finite number of edges and is connected, this process ends with the production of a spanning tree
-    1. trivially all vertices are visited -> spanning
+  - > Because the graph has a *finite number of edges* and is connected, this process ends with the production of a spanning tree
+    1. trivially all edges are visited -> all vertices are visited, i.e. spanning <a name="DFS_construct_tree"></a>
     2. backtracking -> connected
     3. it must have $n-1$ edges based on this process because except for the 1st edge leading from the root, all the rest must add one *new vertex* based on "visited" -> tree with the plus of "connected"
+      - Or since each is *visited once* -> no circuit, so tree.
     - > Each vertex that *ends a path* at a stage of the algorithm will be a *leaf* in the rooted tree, and each vertex where a path is constructed starting at this vertex will be an internal vertex
       "ends a path" -> no child -> leaf
   - [backtracking][backtracking_AND_DFS_imply_preorder]
@@ -1868,7 +1884,7 @@ check(R_1)
             $w'$ *first when $w\to w'$* -> contradiction.
           - > discover w’ after starting u
             This is same as [this][u_first_in_the_white_path]
-          - [Parenthesis Theorem][lec_13]
+          - [Parenthesis Theorem][lec_13_parenthesis_theorem]
             Here $d(u)<d(v)<f(u)<f(v)$ is impossible because of the process of DFS
             i.e. discover later must means finish (backtrack) earlier 
             - > By parenthesis theorem, w’ is also a descendant of u, contradiction.
@@ -1891,7 +1907,7 @@ check(R_1)
       > DFS can explore a long path *before* it finds a shorter path
       - > Performing a topological sort of a directed acyclic graph (DAG).
         See [this](https://www.geeksforgeeks.org/topological-sorting/)
-        here `stack.append(v)` will only be done after `self.topologicalSortUtil(i, visited, stack)` for all adjacent vertices (in the directed graph, i.e. ~~parents~~ children) or `visited[i] == True` which implies `topologicalSortUtil(self, v, visited, stack)` have already been done. Then *all children are appended before itself*, so ensuring the Topological Sorting.
+        here `stack.append(v)` will only be done after `self.topologicalSortUtil(i, visited, stack)` for all adjacent vertices (in the directed graph, i.e. ~~parents~~ children) or `visited[i] == True` which implies `topologicalSortUtil(self, v, visited, stack)` have already been done. Then *all children are appended before itself*, so ensuring the Topological Sorting. <a name="DFS_directed_topological_sorting"></a>
         - [defaultdict](https://www.geeksforgeeks.org/defaultdict-in-python/) can have `list` as the type of "value"
       - the modification to [update the weight](https://stackoverflow.com/questions/54198910/cant-we-find-shortest-path-by-dfsmodified-dfs-in-an-unweighted-graph-and-if#comment137344391_54199609) is obviously more complex to find the shortest path.
     - [BFS](https://www.geeksforgeeks.org/shortest-path-unweighted-graph/) to find the shortest is trivial
@@ -3857,7 +3873,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
         i.e. it is impossible.
     4. The above process already shows that the worst case is possible.
     - For the relation with problem 7, [see p3,16](https://www.cs.rochester.edu/u/brown/282/oheads/C05.pdf) which is related with graph and the state machine.
-    - ~~TODO~~ [medium][lec_13_Adversary_Arguments]
+    - ~~TODO~~ [medium][lec_13_parenthesis_theorem_Adversary_Arguments]
       - here the upper and lower bound in p5 should be the supremum and the Infimum.
         the lower bound is related with [$\Omega$](https://www-student.cse.buffalo.edu/~atri/cse331/support/lower-bound/index.html), similar upper with $O$.
         so upper bound only needs to prove existence as the above shows.
@@ -3881,7 +3897,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     - Also see [the table](https://personal.utdallas.edu/~chandra/documents/6363/lbd.pdf) where the number indicates the information number
   - compared with 7, the latter needs to traverse all items to find the minimum, so it takes more than here.
   - In summary, the proof is based on proving **both** the upper and the lower bound to one specific number
-    with 7 in [lec_13_Adversary_Arguments] and 8 in [lower_bound_second_largest_element] with a bit different algorithms.
+    with 7 in [lec_13_parenthesis_theorem_Adversary_Arguments] and 8 in [lower_bound_second_largest_element] with a bit different algorithms.
 - [x] 10
   similar to one exercise before. This is just 3.1-32
   here only take comparison in account, then $n-1$ steps to calculate the difference between adjacent pairs and compare with the $min$.
@@ -8296,11 +8312,11 @@ print(subgraph_of_complete_graph(4))
   - If using the same method like 64
     This may be one huge graph
     because
-    1. Here anyone can be on the boat instead of the necessity to have the "farmer"
+    1. Here *anyone* can be on the boat instead of the necessity to have the "farmer"
     2. the boat doesn't need to be with the farmer
       so $(H_1W_1H_2W_2<b>,\varnothing)\to (H_2W_2,H_1W_1<b>)\to (H_1H_2W_2<b>,W_1)$
       or $(H_1W_1H_2W_2<b>,\varnothing)\to (H_1H_2W_2,W_1<b>)$
-    3. Here the *tree* is better to get the shortest path. Also see the following uni link where obviously it doesn't show the whole tree.
+    3. Here the *tree* is better to get the shortest path. Also see the following *uni link* where obviously it doesn't show the whole tree.
   - The following doesn't have many relations with the graph theory.
     - The [wikipedia](https://en.wikipedia.org/wiki/Missionaries_and_cannibals_problem#The_problem) uses 3 couples 
       > there cannot be both women and men present on a bank with *women outnumbering men*
@@ -8309,16 +8325,18 @@ print(subgraph_of_complete_graph(4))
       but not vice versa
       because when equal number of women and men, $H_1H_2W_2W_3$ will also contradict with the requirements. This is also shown in 
       > In this case we may neglect the *individual identities* of the missionaries and cannibals
+      and
+      > they *cannot be outnumbered* by cannibals (if they were, the cannibals would eat the missionaries)
       - Notice the possible restriction
         > *only one man can get out* of the boat at a time
         and
         > If a woman in the boat at the shore (but not on the shore) counts as being by herself
       - I skipped the reference [4](./papers/From_China_to_Paris_Jealous_Husbands.pdf) (only give one solution without the explanation) and [5](https://sci-hub.se/https://doi.org/10.1145/144052.144106) (not using graph theory)
-    - [This uni link](https://www.cs.uni.edu/~wallingf/teaching/cs3530/sessions/session23.html) one give one generalization for $n$-couple based on the recursive algorithm
-      This seems to not ensure the shortest.
     - [geeksforgeeks](https://www.geeksforgeeks.org/puzzle-couples-crossing-river/) doesn't show how to think of this problem detailedly.
     - [This](https://aperiodical.com/2016/11/a-more-equitable-statement-of-the-jealous-husbands-puzzle/) only shows related problems but doesn't give one solution, similar to [this](https://www.math.utoronto.ca/barbeau/puzzles.pdf)
     - [This](https://sci-hub.se/https://doi.org/10.2307/3619658) has *islands*, not same as this exercise.
+  - [This uni link](https://www.cs.uni.edu/~wallingf/teaching/cs3530/sessions/session23.html) one give one generalization for $n$-couple based on the *recursive* algorithm
+    This seems to *not ensure the shortest*.
 - [ ] 66 see the ans
 ### 10.5
 - 2,6~10,14,17(similar to theorem 2),
@@ -9599,7 +9617,7 @@ A  E /|\
   - This is just enumeration for all sub-cases when not the tree edge.
     1. between the ancestor and the descendant
     2. [not case 1 -> cross edge](https://en.wikipedia.org/wiki/Depth-first_search#Output_of_a_depth-first_search)
-      - "connecting a vertex to a vertex in a previously *unvisited* subtree." -> tree edge
+      - "connecting a vertex to a vertex in a previously *unvisited* subtree." where the subtree is the *child tree* (non-child unvisited one is impossible because that must be visited by the current node [to be expanded]()) -> tree edge
         see the ans
         > it must be the case that its head v had already been visited
         excludes this case.
@@ -9643,6 +9661,7 @@ A  E /|\
       See [this](https://math.stackexchange.com/a/2783785/1059606) which is [based on 11.1 theorem 1](https://math.stackexchange.com/questions/2783749/adding-an-edge-to-a-tree-creates-a-cycle-is-my-proof-correct#comment10350833_2783785). <a name="one_cycle_when_tree_plus_one_edge"></a>
       - The added edge function as one edge in the created circuits,
         since in the original graph, "Any two vertices in a tree are connected by exactly one path", so only one cycle is created by concatenating $e$ and the unique $p(v_1,v_2)$.
+        - Also [see][tree_iff_add_any_edge]
     - > The graph T1 − {e1} has two connected components
       - See [this][cut_edge_2_components]
         - The 1st paragraph is trivial due to 2 paths -> 1 circle as the reference in 11.1 theorem 1 says.
@@ -9839,6 +9858,7 @@ A  E /|\
         2. this circuit can't be in a tree $S$
         So there is one $e'' \in T − S$
       - "“supervertices" is implied by the contraction in [Boruvka_proof]
+      - [“adjacent” edges](https://en.wikipedia.org/wiki/Edge_coloring#Definitions)
   - [Boruvka_proof] ([i.e. Sollin's algorithm](https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm)) in [this](https://www-student.cse.buffalo.edu/~atri/cse331/fall16/recitations/Recitation10.pdf)
     - > finally, eliminate the self-loops and multiple edges created by these contractions.
       This is impossible
@@ -9917,6 +9937,261 @@ A  E /|\
   - > because the algorithm never disconnects the graph and upon termination there can be no more simple circuits
     We can also think as the following: This graph start with [edge number $\ge n-1$][minimum_edge_number_connected_graph] and decrease 1 edge one time, so must terminate with $n-1$ edges.
   - IMHO this is the reverse process of Kruskal's algorithm from the maximum weight to the minimum where both ends with no circuits.
+### supplementary
+- 12,20(same as 14,16 where the binomial tree is one special Sk-tree where "the child" is specified as "the leftmost child"),28,32,36 skipped
+- [ ] 1
+  - > the addition of an edge connecting two *nonadjacent* vertices
+    based on "a simple graph", only "nonadjacent" is possible.
+  - "only if" [see][one_cycle_when_tree_plus_one_edge]
+  - "if"
+    ~~if *any* edge added will cause~~
+    Here if the graph is *disconnected* and only one edge is not added and it will cause the circuit but not connect all vertices with the original edges after added, then it is not one tree.
+    - see the ans
+      - The above is wrong because the question says *any* edge "connecting two nonadjacent vertices" which may be not in the original graph will cause the circuit.
+        But as the ans says, disconnected graphs doesn't meet this requirement.
+      - Same as [this](https://math.stackexchange.com/a/1118188/1059606) and [this][tree_iff_add_any_edge]
+      - [changing "tree" to "connected"](https://math.stackexchange.com/questions/325279/proving-a-simple-connected-graph-is-a-tree-if-adding-an-edge-between-two-existin?rq=1#comment10355421_325279), the theorem is still valid.
+      - This edge must be connecting [already existing vertices](https://math.stackexchange.com/a/1663569/1059606)
+- [x] 2
+  - By [nonisomorphic_simple_connected], it has 6 unrooted trees.
+    - Same as [houseofgraphs_search] "Number of Vertices = 6,Connected,Acyclic"
+      - 208: 3(path length)+1
+      - 288: 4+1 simlar to the above
+      - 334: by symmetry only consider the half, 1+1
+      - 496: by symmetry 4 by dropping the half part of 2 points in the symmetric part
+      - 568: by symmetry 3
+      - 598: 2
+      - So $4+5+2+4+3+2=20$
+  - The number of rooted tree based on one unrooted tree is similar to chromatic number. But not same, for example, the [Cross Graph](https://houseofgraphs.org/graphs/208) has 2 different rooted trees when rooted at the center and the furthest vertex from the center while these 2 vertices can be colored same.
+  - see the ans
+    - > If they are both attached directly to the original path, then there are C(3 + 2 −1, 2) = 6 ways to attach them (since there are three possible points of attachment).
+      This is [stars and bars](https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)#Proofs_via_the_method_of_stars_and_bars) shown before.
+      - Here no length-2 branches.
+        same as
+        > If there are not two disjoint paths of length 2 from the root, then there are 4 ways that the other 3 vertices can be attached to a given path of length 2 from the root
+      - > hen there are 4 ways that the other 3 vertices can be attached to a given path of length 2 from the root
+        is one special similar case $\binom{n+m-1}{m-1}=n+m-1=4,n=3,m=2$.
+    - here disjoint paths should be edge disjoint (i.e. [not sharing edges](https://math.stackexchange.com/questions/641978/showing-equivalency-between-vertex-disjoint-and-edge-disjoint-path-problems-in-u#comment1353774_641978)) based on connectivity instead of [vertex disjoint](https://research.nii.ac.jp/~k_keniti/quaddp1.pdf).
+    - Here $x$-height will necessitate $x$ edges in one path trivially because one edge at most increase the height by 1, then *$x+1$ vertices*.
+      For the rest vertices $S$, the subsequence of them *can't be added* to the path such that the *longest* length from the root *increases*.
+      We can manipulate the rest vertices one by one and the vertices except for the first are *either* connected with the long path or vertices already added from $S$.
+- [ ] 4
+  - i.e. $n-1$ leaves if rooted at the degree-$n-1$ vertex, so isomorphic to K1,n−1
+  - see the ans which shows explicitly for the 2 parts.
+- [ ] 6
+  - Here we just use [Havel–Hakimi Theorem](https://math.stackexchange.com/a/3082170/1059606) (~~TODO I skips the proof since I don't have time to read all proofs of theorems I met and~~ this theorem is a bit intuitive at least for "if" part) to prove this can be a *simple graph*.
+    - the key part is "In the second case".
+      kw: 
+      > change the graph ${\displaystyle G}$ so that ${\displaystyle S}$ is adjacent to ${\displaystyle T_{i}}$
+      > we have two possibilities:
+      - $W\neq T_i,D_j$ is by "another vertex ${\displaystyle W}$ be adjacent to ${\displaystyle T_{i}}$ and not ${\displaystyle D_{j}}$"
+        $W\neq S$ is by "${\displaystyle S}$ is not adjacent to some vertex ${\displaystyle T_{i}}$"
+      - > This modification preserves the degree sequence
+        because each vertex degree decreases by one then increases by one.
+        - This implies the *adjacency matrix* may be different for one degree sequence, i.e. different graphs. This is also implied by isomorphism checking methods which only use degree sequence as one *necessary instead of sufficient* condition.
+      - simple graph
+        1. A' -> A by adding one vertex must be simple otherwise the added vertex is already in A'.
+        2. A->A' 
+          - first case: remove one vertex, similar to 1.
+          - second case: 
+            - $t_i=d_j$ by relabeling, trivially a simple graph.
+            - $t_i>d_j$
+              since $\{\{S,T_i\},\{W,D_j\}\}\not\subseteq G$ -> no multiedge.
+              loop trivially doesn't exist.
+  - [See](https://math.stackexchange.com/a/732428/1059606) this which says we can use induction.
+  - see the ans
+    - > The problem is trivial if n ≤ 2, 
+      $n=1$ -> singleton
+      $n=2$ -> $1,1$ by postive.
+    - since $d_n=1$ we just inductively add one leaf.
+- [ ] 8
+  - See [tree_level_recursive]
+- [ ] 10
+  - > Computer files can be accessed efficiently when B-trees are used to represent them
+    [B+](https://stackoverflow.com/a/45324533/21294350) is better
+    > increase the fanout factor (number of children), *reducing the height* of tree and, thus, *reducing the number of disk access* that we have to make in order to find a leave
+    > pack more keys in the internal nodes in order to *fill up one disk* ... The more keys you pack in a node *the more children* it will point to
+    
+    [key](https://en.wikipedia.org/wiki/B-tree#Definition)
+  - > its root has at least two and at most k children unless it is a leaf, 
+    
+    [See](https://en.wikipedia.org/wiki/B-tree#Definition) because maybe "fewer than L−1 elements"
+    > and every internal vertex other than the root has at least ⌈k/2⌉, but no more than k, children
+    
+    because "two half-full nodes can be joined to make a legal node ..." See how this help [Insertion and deletion](https://en.wikipedia.org/wiki/B-tree#Insertion_and_deletion) 
+    - > would have been in the middle *to the parent* node
+      "middle" is implied by "separation values" in the definition of "key".
+    - > if an internal node and its neighbor each have ${\displaystyle d}$ keys, then a key may be deleted from the internal node by combining it with its neighbor
+      what if only one node goes to $d$? TODO
+      > plus one more key brought down from the neighbor's parent
+      This is also due to "separation values" to *order* these 2 combined nodes.
+      - TODO
+        See 11 what if the root has 2d, then no parent for the root based on "moving the key that would have been in the middle *to the parent node*".
+        similarly the root has no neighbors, so delete has problems.
+- [ ] 11
+  - Similar to [this][graph_based_on_explored_set_complexity]
+    By [tree_level_recursive] choose for each level based on root/Internal.
+    upper bound when complete k-ary tree so $k^h$
+    lower bound $2\cdot \lceil k/2\rceil^{h-1}$
+- [ ] 14
+  - binomial trees seems to occur in older exercises.
+- [x] 16
+  - see the ans
+    - "the basis step" is [$\binom{0}{0}=1$](https://math.stackexchange.com/a/2020891/1059606)
+    - > This holds for j = k as well, and at the 0th level, too
+      j=k: $C(k+1,k+1)=0+C(k,k)=1$
+      at the 0th level: trivially one root.
+- [x] 18
+  - We can only use the hypothesis as the exercise "the vertex of largest degree in Bk is the root" which is enough.
+    because each time we *only adds one degree* to the root and the other endpoint, so the root keeps "the vertex of largest degree".
+- [x] 21
+  - trivial by induction
+  - see the ans
+    - > The result is trivial for k = 0.
+      here no $T_{k-1}$ since $k-1<0$
+      so only one single $v$.
+    - > the parent tree
+      one tree having the same root as $T$
+- [ ] 24
+  - we just check the *path* as 11.3.2 says.
+    1. all addresses are distinct.
+    2. each index $x_i$ at level $i$ has $x_i\le k_i$.
+  - see the ans
+    - we need also check "prefix" as 11.2.4 says.
+    - > we check that there is an address in the list with prefix a1:a2: · · · :ai−1:b.
+      TODO this seems to include all internal vertices which is weird.
+- [ ] 26
+  - if no edges "in common"
+    This means when removing the cut set, we can still construct one spanning tree.
+    But the graph is already disconnected, contradiction.
+  - see the ans
+    - > If it is not, then the statement is *vacuously true*.
+      think the exercise as "a graph" has "a cut set" -> "at least one edge in common with any spanning tree of this graph".
+      Then the cut set is $\varnothing$, so F(alse).
+- [x] 30
+  - assume it is not one cactus
+    then there are at least 2 circuits sharing one edge sequence $p(a)$, let its edge number be 
+    $a$.
+    Let the 1st circuit be $p(a)+p(b)$ and the 2nd be 
+    $p(a)+p(c)$.
+    Then $p(b)+p(c)$ is also odd.
+    summing up all 3 circuit edge number we get $2(\sum_{k=a,b,c} p(k))$ is odd, but that is impossible.
+- [ ] 34
+  - start from the root
+    it has at most 2 children
+    either 2 or 1 child of the root, each child has only one child.
+    Then recursively until we have $n-1$ edges, we construct one Hamilton path.
+  - [This](https://math.stackexchange.com/a/3112861/1059606)
+    "it is connected and has no vertices of degree greater than 2" -> "a path".
+    - [relation](https://math.stackexchange.com/questions/3112683/proving-that-graph-g-is-a-path#comment10357165_3112683) with this exercise
+    - "We know that ..." is one recursive process which will always include one *new* vertex $u_i$ due to acyclic.
+    - > there cannot be any other vertices
+      otherwise degree will maybe be 3.
+    - This proof is very similar to the above construction process.
+- [ ] 35
+  - By viewing the ans, since the maximum difference is $n-1$ and the minimum difference is $1$, so probably we can assign these $n-1$ numbers to $n-1$ edges
+    - It is the ["the Graceful Tree Conjecture (GTC)"](https://prideout.net/blog/graceful/)
+- [ ] 38
+  - a) trivially, $n$ must be adjacent to $1$ because it is the only choice for $n-1$.
+    then by trial, $1-n-2-(n-1)-\cdots-\lfloor n/2\rfloor-\lceil n/2\rceil$ (The last 2 may be same).
+    - TODO by this we may choose starting labeling one longest path by DFS for GTC.
+  - see the ans
+    - Here a) has the ending $\lceil n/2\rceil$ and $\lceil n/2\rceil+1$ because
+      1. n is even. 
+        Each part has the same size. so $\lceil n/2\rceil=n/2$
+      2. n is odd.
+        the middle one $\frac{n+1}{2}=\lceil n/2\rceil$ will be chosen by only one part.
+        since $1$ starts first, so this number will be chosen by that part including $1$.
+    - b)
+      let the spine be with $k$ vertices.
+      The $i$th vertex has $p_i$ adjacent vertices.
+      ```
+          1---------------------(n-p_1)-------------------2+p_2
+         / \                      / \
+        /   \                    /   \
+       /     \                  /     \  
+      n ... n-(p_1-1)          2       2+p_2-1
+      ```
+      the difference sequence from left to right is $n-1,n-2,\cdots,1$ with decreasing step 1 and decreases $n-2$ times due to $n-1$ edges.
+      - relation with a)
+        pay attention to the long path, it is one variable-step sequence similar to the alternating sequence but the sign is substituted by the relation of greater or smaller.
+- [ ] 40
+  - Since the [DFS implies preorder][backtracking_AND_DFS_imply_preorder] which always has the root preceding its children.
+    - The above *doesn't consider* this is one directed graph, so not necessarily preorder as [DFS_directed_topological_sorting] shows where 4 precedes 1 but it is in *one separate tree* which causes it is visited at last.
+    - As [this blog](https://eli.thegreenplace.net/2015/directed-graph-traversal-orderings-and-applications-to-data-flow-analysis/) shows
+      > we have pre-order, which visits a node *before recursing into its children*;
+      > However, for directed graphs, these orderings are not as natural and *slightly different* definitions are used.
+      > Whereas in trees, we may assume that in pre-order traversal we always see a node before all its successors, this *isn't true for graph pre-order*.
+
+      preorder *differs* for undirected and directed graphs.
+      - Same as [this](https://qr.ae/pKLl8G)
+        > preorder might visit one of the two parents first, and then visit the child before visiting the other parent.
+      - Also implied in [backtracking_AND_DFS_imply_preorder] which is used in the code of [DFS_directed_topological_sorting]
+        > **Reverse postordering** produces a topological sorting of any directed acyclic graph
+    - Notice here we should use [this preorder definition][backtracking_AND_DFS_imply_preorder] as the [notice](https://en.wikipedia.org/wiki/Preorder#) before (Top) of wikipedia preorder shows.
+  - Kahn’s Algorithm based on BFS
+    - [proof][kahn_proof]
+      - p6 the in-degree 0 vertex can be safely output earlier to ensure one Topological Sort because there are *no parents* of them.
+        - > Remove all its outgoing edges ;
+          to avoid removed vertices *influencing* the rest graph.
+      - always at least one in-degree 0 vertex in the *induced* graph
+        - [detailed proof](https://math.stackexchange.com/a/3232355/1059606) (same as [this](https://math.stackexchange.com/a/1196995/1059606) to prove at least one *source* vertex) where *finite* is assumed by the real-life problems which is same as p8
+          it is reversing back up to one of the parent recursively constructing one cycle.
+        - This can be used to [check cycles](https://www.geeksforgeeks.org/detect-cycle-in-a-directed-graph-using-bfs/)
+          ~~since for one directed graph, cyclic -> recursively have "at least one in-degree 0 vertex" (This is one *necessary* condition although we can use ).~~
+      - It also proves DFS's method to find one Topological Sort which is based on [lec_13_parenthesis_theorem].
+        - here "neighbors" of $u$ means $u$ has edges *to* these neighbors.
+        - kw: shall show $f(v)<f(u)$, two cases
+          where "(u,v) be an edge" is one arbitrary edge.
+  - see the ans
+    - > in order of their finishing.
+      implies postorder is the finishing order which is also shown in [kahn_proof]
+    - > Clearly this is true if uv is a tree edge
+      > if uv is a forward edge
+      case 1 in [kahn_proof]
+    - > consistent with our given partial order
+      because we only needs ensuring ancestors before descendants.
+    - > then v is in a previously visited subtree
+      case 2 in [kahn_proof]
+- [x] 41
+  - see [Boruvka_proof] which is stronger to say *each MST must* contain this minimum edge.
+- [ ] 42
+  - This is related with 10.4-65 but ~~more general~~ ~~which needs one model instead of only one solution.~~ with *jealous wives* and 3 pairs.
+  - see the ans
+    - It draws the whole graph and uses Dijkstra’s algorithm.
+    - It brings X,x,z,Y,y,Z almost alternatively in order to the other bank.
+- [ ] 43
+  - This is related with 41.
+    see [Boruvka_proof].
+- [ ] 44
+  - based on 34, this is one Hamilton path.
+  - a)
+    So for $\triangle bcd$ we can only choose one 1 and one 2.
+    For abef (three 2s are impossible), we delete ab or be and we choose the greater one be to delete.
+    So $e-f-a-b-d-c$
+  - b)
+    we must choose ab
+    - if choosing 1 incident with b, then 5,2,4 incident with b are removed. but choose one from 2,6,2 incident with g will make the graph disconnected.
+      by symmetry we can't choose 4 incident with b as well.
+      - Then we choose 2 incident with b, then remove 5,1,4.
+        - For $\triangle efg$ we choose 4,2.
+          (If choose 5 incident with b, similarly we choose 4,2 for $\triangle efg$. This path choice has the greater weight sum than the former.)
+  - Tree can be one Hamiltonian path [only when $P_n$](https://math.stackexchange.com/a/2927153/1059606)
+  - Since The Hamiltonian path problem is one [NP-complete problem](https://en.wikipedia.org/wiki/Hamiltonian_path_problem#), I didn't dig into one algorithm related.
+  - see the ans
+    - > Since b is a *cut vertex* we must include ...
+      Here it splits the graph into 2 components, so we need 1 edge to connect to each component induced.
+      - This is more elegant than the above.
+    - b) is same as the above.
+- [ ] 46
+  - Also see 11.4-60
+  - "only if" is trivial
+  - "if" is the definition.
+  - see the ans
+    - use DFS for the "spanning tree"
+      where we use [weakly connected](https://math.stackexchange.com/questions/1356193/how-to-define-a-directed-spanning-tree/1360491#comment10351049_1360491) to [ensure][DFS_construct_tree] by 11.4 theorem 1 we can have one spanning tree.
+- [ ] 47
+  - This is similar to [scc] but the latter uses DFS for each (connected) component while the former uses BFS. 
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -9956,6 +10231,7 @@ A  E /|\
 - [This](https://stackoverflow.com/q/33590974/21294350) related with [scc]
   CRLS gives the detailed proof.
 - the above [safe_edge_MST]
+- The above "B-tree".
 # TODO after compiler
 - [This](https://stackoverflow.com/a/575337/21294350) related with naming and binding in 10_5_64 code.
 # TODO after complexity book
@@ -9982,6 +10258,9 @@ A  E /|\
 [MST_construction_process]:#MST_construction_process
 [circuit_connect_components]:#circuit_connect_components
 [minimum_edge_number_connected_graph]:#minimum_edge_number_connected_graph
+[tree_level_recursive]:#tree_level_recursive
+[DFS_directed_topological_sorting]:#DFS_directed_topological_sorting
+[DFS_construct_tree]:#DFS_construct_tree
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
@@ -10034,6 +10313,7 @@ A  E /|\
 [check_Hamilton_path]:https://math.stackexchange.com/a/2442781/1059606
 [4xm_knight_tour]:https://math.stackexchange.com/questions/2195746/knights-tour-on-a-4-x-m-board#comment4518180_2195762
 [vertex_connectivity_less_than_minimum_degree]:https://math.stackexchange.com/a/453732/1059606
+[tree_iff_add_any_edge]:https://math.stackexchange.com/a/420543/1059606
 
 <!-- stack overflow -->
 [longest_simple_path_NP_hard]:https://stackoverflow.com/a/53399638/21294350
@@ -10049,10 +10329,11 @@ A  E /|\
 [O_Theta_Omega_relation_with_limit]:https://cs.stackexchange.com/a/827/161388
 [Graph_space_complexity_vs_time_complexity]:https://cs.stackexchange.com/a/165324/161388
 [DFS_only_2_types_edges]:https://cs.stackexchange.com/a/11552/161388
+[graph_based_on_explored_set_complexity]:https://cs.stackexchange.com/q/165308/161388
 
 <!-- paper or lectures -->
 [second_largest_element_Adversary]:https://www.cse.unsw.edu.au/~cs2011/lect/2711_Adversary.pdf
-[lec_13_Adversary_Arguments]:https://jeffe.cs.illinois.edu/teaching/algorithms/notes/13-adversary.pdf
+[lec_13_parenthesis_theorem_Adversary_Arguments]:https://jeffe.cs.illinois.edu/teaching/algorithms/notes/13-adversary.pdf
 [Szwarcfiter_stable_marriage]:https://core.ac.uk/download/pdf/82429549.pdf
 [McVitie_stable_marriage]:./papers/McVitie_stable_marriage.pdf
 [AHajnal_058]:./papers/AHajnal_058.pdf
@@ -10090,7 +10371,7 @@ A  E /|\
 [incl_excl_n]:./lectures/incl_excl_n.pdf
 [Kuratowski]:./lectures/Kuratowski.pdf
 [Xuyifan_Kuratowski]:./papers/Xu,Yifan.pdf
-[lec_13]:./lectures/Lecture-13.pdf
+[lec_13_parenthesis_theorem]:./lectures/Lecture-13.pdf
 [lec_14]:./lectures/Lecture-14.pdf
 [lecture10_notes]:./lectures/lecture10-notes.pdf
 [tree_imply_all_cut_edge_i_e_no_circuit]:https://web.math.ucsb.edu/~padraic/ucsb_2013_14/math137a_w2014/math137a_w2014_lecture3.pdf
@@ -10098,6 +10379,7 @@ A  E /|\
 [primsproof]:./lectures/primsproof.pdf
 [Boruvka_proof]:./lectures/MST.pdf
 [safe_edge_MST]:https://courses.engr.illinois.edu/cs374/fa2015/slides/18-mst.pdf
+[kahn_proof]:https://www.cs.nthu.edu.tw/~wkhon/ds/ds11/lecture/lecture12.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
