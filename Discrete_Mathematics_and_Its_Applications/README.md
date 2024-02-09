@@ -2062,6 +2062,17 @@ check(R_1)
   ~~By CRLS, they are same with "O(m log n)".~~
   > it is preferable to use Kruskal’s algorithm for graphs that are sparse,
   But it is shown in CRLS both in 3rd and 4th exercise 23-2 that we can improve only for Prim’s further.
+## 12
+### 12.1
+- > Boolean algebras may also be defined using the notion of a lattice
+  1. Identity laws
+    here 0 may mean the *least possible* number
+    This is [Bounded lattice](https://en.wikipedia.org/wiki/Boolean_algebra_(structure)#Definition)
+  2. Associative laws are trivial
+  3. Commutative laws are trivial
+  4. distributivity may not hold. See [not_distributive_lattice]
+  5. complements see 9-supplementary-43
+  6. absorption shown in wikipedia: trivial since the upper bound of $a$ and one lower bound of $a$ is trivially $a$.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -7805,6 +7816,12 @@ def unimodal(start,end,List):
 - [ ] 43
   - See [this][not_distributive_lattice]
     > I check if distributive law ...
+    - Here ["every pair of elements has a unique supremum ... and a unique infimum"](https://en.wikipedia.org/wiki/Lattice_(order)#)
+      1. They are in the same path from 1 to 0
+        then the supremum is the ancestor ...
+      2. if not in the same path
+        then the supremum is 1 ...
+    - [complements p20](https://profs.info.uaic.ro/~fliacob/An1/2016-2017/Resurse_2016-2017/R02/Calvin%20Jongsma_Discrete%20Mathematics-%20Chapter%207%20Posets%20Lattices%20&%20Boolean%20Alge.pdf) is done by generalization definition. 
 - [ ] 46
   - based on [not_distributive_lattice]
     $b$ has 2 complements
@@ -10191,7 +10208,11 @@ A  E /|\
     - use DFS for the "spanning tree"
       where we use [weakly connected](https://math.stackexchange.com/questions/1356193/how-to-define-a-directed-spanning-tree/1360491#comment10351049_1360491) to [ensure][DFS_construct_tree] by 11.4 theorem 1 we can have one spanning tree.
 - [ ] 47
-  - This is similar to [scc] but the latter uses DFS for each (connected) component while the former uses BFS. 
+  - This is similar to [scc] but the latter uses DFS for each (connected) component while the former uses BFS.
+## 12
+### 12.1
+- 
+- [ ] 35~42
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
