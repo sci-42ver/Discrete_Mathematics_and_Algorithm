@@ -2065,12 +2065,12 @@ check(R_1)
 ## 12
 ### 12.1
 - > Boolean algebras may also be defined using the notion of a lattice
-  1. Identity laws
+  1. Identity laws <a name="lattice_boolean_algebra"></a>
     here 0 may mean the *least possible* number
     This is [Bounded lattice](https://en.wikipedia.org/wiki/Boolean_algebra_(structure)#Definition)
   2. Associative laws are trivial
   3. Commutative laws are trivial
-  4. distributivity may not hold. See [not_distributive_lattice]
+  4. distributivity *may not hold*. See [not_distributive_lattice]
   5. complements see 9-supplementary-43
   6. absorption shown in wikipedia: trivial since the upper bound of $a$ and one lower bound of $a$ is trivially $a$.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
@@ -7807,6 +7807,7 @@ def unimodal(start,end,List):
   $x \wedge y=x\Rightarrow x\prec y\Rightarrow ub(x,y)=y\Rightarrow lub(x,y)=y$
   the other side is similar.
   - see the ans which uses some already proved conclusion.
+- [ ] 41 see the ans
 - [ ] 42
   - By *recursively* calculating glb
     then we will finally get one element $k_1$. Then conversely, $k_1\preccurlyeq x,\forall x\in L$
@@ -10211,8 +10212,39 @@ A  E /|\
   - This is similar to [scc] but the latter uses DFS for each (connected) component while the former uses BFS.
 ## 12
 ### 12.1
-- 
+- 2~28(20 where checks for all possible cases of LHS),30,31($2^{2^{n-1}}=2^4=16,n=3$),34([Juxtaposition](https://en.wikipedia.org/wiki/Juxtaposition#Mathematics)),40 skipped
+- [ ] 29
+  - we can also use $\Pi x_i=\overline{\sum \overline{x_i}}$ where 
+    $x_i$ may be vacuously true or false (Then only all $x_i$ are 1 LHS will be 1, similarly for RHS).
+    here $\Pi,\sum$ are all sum or multiplication related with Boolean algebra.
+  - see the ans
+    - [De Morgan's laws](https://en.wikipedia.org/wiki/De_Morgan%27s_laws)
+      Here all operations in Boolean expressions in p849 are contained.
+      - When we do $\neg$ again for both sides of ${\displaystyle \neg (P\lor Q)\iff (\neg P)\land (\neg Q)}$. we have the exercise form where F has only 
+      $\land$.
+        - If F has *both* $\lor$ and $\land$, we can manipulate 2 minimum operands at one time and continue until all operators are manipulated.
+- [ ] 32
+  - see the ans
+    - enumeration and use transitive property of $=$.
 - [ ] 35~42
+  - [ ] 35
+    1. $0\lor 0=0$ by Identity laws
+      $1\lor 1$
+    - see the ans
+  - [ ] 36 see the ans
+  - [ ] 37 use 36 and see the ans for the detailed.
+  - [ ] 38 see the ans which thinks $\overline{x}$ as one variable.
+  - [x] 39
+    $(x\lor y)\land(\overline{x}\land\overline{y})=((x\lor y)\land\overline{x})\land\overline{y}=((x\land \overline{x})\lor(y\land \overline{x}))\land \overline{y}=(y\land \overline{x})\land \overline{y}=0\land \overline{x}=0$
+    others related with 36 are similar.
+  - [ ] 41
+    - we can also exclude the other 3 possibilities and verify the only left to prove.
+  - [ ] 42 same as 29 using De Morgan’s laws by 39.
+    - see the ans which is based on since the *initial conditions are dual*, so all the induced identities are also dual.
+- [ ] 43
+  - See [this][lattice_boolean_algebra]
+  - see the ans
+    - 9-supplementary-41 shows identity where c),d) can be proved by dual here.
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -10282,6 +10314,7 @@ A  E /|\
 [tree_level_recursive]:#tree_level_recursive
 [DFS_directed_topological_sorting]:#DFS_directed_topological_sorting
 [DFS_construct_tree]:#DFS_construct_tree
+[lattice_boolean_algebra]:#lattice_boolean_algebra
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
