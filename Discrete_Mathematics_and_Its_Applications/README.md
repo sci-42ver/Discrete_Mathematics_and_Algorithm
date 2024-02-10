@@ -2073,6 +2073,15 @@ check(R_1)
   4. distributivity *may not hold*. See [not_distributive_lattice]
   5. complements see 9-supplementary-43
   6. absorption shown in wikipedia: trivial since the upper bound of $a$ and one lower bound of $a$ is trivially $a$.
+### 12.2
+- > any Boolean function can be represented by a Boolean sum of Boolean products of the variables and their complements.
+  This problem first occurs in COD where I said "TODO learn the boolean algebra"
+- "disjunctive normal form of the Boolean function" is same as "Exercise 46 in Section 1.3".
+- $\overline{x}=\overline{x\land x}=x\vert x$
+  - $\overline{xy}=\overline{x}\lor \overline{y}=\overline{x\land y}=x\vert y$  
+    Then use the above, we have $xy=(x\vert y)\vert(x\vert y)$
+### 12.3
+- 
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -10245,6 +10254,33 @@ A  E /|\
   - See [this][lattice_boolean_algebra]
   - see the ans
     - 9-supplementary-41 shows identity where c),d) can be proved by dual here.
+### 12.2
+- 2~16(10 is dual of the [Disjunctive Normal Form](https://mathworld.wolfram.com/DisjunctiveNormalForm.html),14 also see the above 12.2 and c) can prove based on a) which then RHS equals $\overline{\overline{x}\overline{y}}$, 15 is similar to 14) skipped
+- [x] 19
+  - based on "idempotent laws", we can only get $x$ when $x+x$ and $x\cdot x$
+- [ ] 20
+  - ~~$x\oplus 0=\overline{x}$~~ $x\oplus 1=\overline{x}$
+  - see the ans
+    - a) shows one counterexample.
+    - b) XOR operator is associative proof by [conditional flip](https://math.stackexchange.com/a/1534362/1059606) or [addition modulo 2](https://math.stackexchange.com/questions/293793/prove-xor-is-commutative-and-associative#comment9452408_293793) whose associativity can be proved [using](https://proofwiki.org/wiki/Modulo_Addition_is_Associative) [residue class $[x]_m$](https://proofwiki.org/wiki/Definition:Modulo_Addition) (i.e. [transformed](https://math.stackexchange.com/a/3563774/1059606) to $a+b+c$)
+      - > every expression involving these two operations and x and y can be reduced to an XORof the literals x, x, y , and y.
+        here we can *use parentheses based on "associative"* to construct many pairs and manipulate each pair one by one which generalized one pair to any expression.
+        
+        For each pair, it either has $\overline$ for both variables or not
+        then each variable has $\overline$ or not. (Here only $\oplus$ is one 2-ary operator.)
+        So we have
+        > an XORof the literals x, x, y , and y
+        - Then based on "an XORof the literals x, x, y , and y", we only focus on one pair.
+          > since x ⊕x = 0 , x ⊕x = 1 , x ⊕1 = x and x ⊕0 = x
+          we care about the possible cases with 0,1 and only x or y.which will enumerate *all possible pairs* when doing xor pair by pair.
+        - Since each term of $\oplus$ has 6 choices, i.e. $1,0,x,y,\overline{x},\overline{y}$.
+          we have $6\cdot 6/2=18$ choices if considering symmetry.
+          Then since $\overline{x}\oplus\overline{x},\overline{x}\oplus 1,\overline{x}\oplus 0$ and
+          the corresponding $\overline{y}$ version are not considered, so 
+          $18-3\cdot 2=12$ needs to be considered as the answer shows $4+4+4$.
+      - > Since none of these has the same table of values as x + y
+        because none has 3 ones or zeroes.
+        - Also see [this](https://math.stackexchange.com/a/3331501/1059606) although it is a bit out of the range to the logic.
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -10289,6 +10325,8 @@ A  E /|\
 - [This](https://stackoverflow.com/a/575337/21294350) related with naming and binding in 10_5_64 code.
 # TODO after complexity book
 - [This](https://cs.stackexchange.com/questions/165101/how-can-the-approximation-algorithm-of-one-np-complete-problem-be-used-to-prove#comment342996_165101)
+# TODO after logic
+- 12.2-20-b)
 
 ---
 
