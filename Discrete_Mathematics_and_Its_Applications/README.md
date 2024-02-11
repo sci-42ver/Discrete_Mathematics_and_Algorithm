@@ -2,21 +2,7 @@ Please point out errors if any. Thanks in advance.
 
 check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
 
-3. What does "asymptotically equal to "asymptotically equal to "$\Theta(k)$" if we consider $k$ to be a function of the input size $n$." mean? I think $k=g(n)$ has no relation with $\Theta(k)$. Then maybe "This means the running time is proportial to $k$ or, in other words, asymptotically equal to "$\Theta(k)$". *And* we can also consider $k$ to be a function of the input size $n$" is better. 4. I edited the answer with some trivial understanding points based on "to avoid exploring redundant paths". Feel free to review them to show whether they are right.
-
-1. More specifically, "pre-order" is the [visiting order by DFS](https://en.wikipedia.org/wiki/Depth-first_search#Vertex_orderings) where "This is a compact and natural way of describing the progress of the search" is shown in the [example](https://en.wikipedia.org/wiki/Depth-first_search#Example). 2. BFS uses [level-order search](https://en.wikipedia.org/wiki/Tree_traversal#Breadth-first_search) because searching level by level (i.e. depth by depth).
-
-BTW, "exactly one path" implies only one cycle is created after adding one edge because 1. trivially this cycle must contain $e$ otherwise the original graph is not one tree. 2. $e$ can be only concatenated with the path $p(v_1,v_2)$ in the original graph to construct one cycle. This is also shown in [this QA](https://math.stackexchange.com/a/420543/1059606).
-
-As [wikipedia](https://en.wikipedia.org/wiki/Path_(graph_theory)#Walk,_trail,_and_path) shows, whether path can "pass the same vertex" depends on the definition. IMHO in the daily life problem, the graph is probably one *simple graph* because it seems weird to loop at one middle point when we want to get to one destination (no loop) and only considers one candidate path between each vertex (not one multigraph). Then the case in Guy's example is impossible.
-
-IMHO, we can show we can only decrease *by one* since one edge can be only incident with at most 2 components (if 1, then the SCC number stay the same.) and influence them (i.e. [contract](https://en.wikipedia.org/wiki/Edge_contraction#) them if thinking of the SCC as one vertex as the [Boruvka’s Algorithm](https://community.wvu.edu/~krsubramani/courses/fa01/random/lecnotes/lec11/MST.pdf) does).
-
-I give one summary for the chat between OP and A.S which has [one valuable image](https://chat.stackexchange.com/transcript/message/8438683#8438683) for explanation. If the original graph $G$ has one cycle $C$. Then take arbitrary 2 adjacent vertices $v,w$ (we can also take one pair not adjacent. For simplicity, I assume adjacent) inside this cycle. Then 2 cycles are created. One is the multiedge $(v,w)$, while the other is $C-\{v,w\}+\{v,w\}^{(*)}$ where the superscript $(*)$ shows whether the edge is in the original graph. This is contradiction. So $G$ is acyclic.
-
-@AmelioVazquez-Reina In [wikipedia](https://en.wikipedia.org/wiki/B-tree#Definition) it says about B-tree "In Knuth's terminology, the *"leaf"* nodes are the *actual data* objects / chunks". Could you offer some references?
-
-IMHO 1. more specially, the graph has no cycles because one mere cycle has $\delta(G)=2$ and we have one more besides the cycle which causes the degree can be 3. 2. $\delta(G)=1$ implies it may be a tree with leaves and the proof of the acyclic property verifies this.
+This [physics forums comment](https://www.physicsforums.com/threads/how-to-identify-xor-in-k-maps.809452/post-5081557) is helpful which has one similar map with the above and 1 can be only in the position where *odd* number of boxes overlap it similar to the user Student's answer.
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -2081,7 +2067,16 @@ check(R_1)
   - $\overline{xy}=\overline{x}\lor \overline{y}=\overline{x\land y}=x\vert y$  
     Then use the above, we have $xy=(x\vert y)\vert(x\vert y)$
 ### 12.3
-- 
+- FIGURE 9 A full adder
+  it calculates the sum of 3 single bits $x+y+c_i$
+  - $s=s_{x+y}\overline{c_i}+\overline{s_{x+y}}c_i=\ldots+(xy+\overline{x}\overline{y})c_i$
+  - Here $c_{i+1}=s_{x+y}c_i+xy$
+  - This is same as [wikipedia][full_adder] says which is also show in [asm_doc].
+    - ~~TODO~~
+      > The above expressions for ${\displaystyle S}$ and ${\displaystyle C_{in}}$ can be derived from using a *Karnaugh map to simplify* the truth table.
+      maybe similar to [this](https://stackoverflow.com/questions/34687917/detecting-xor-in-karnaugh-maps#comment137461623_34687917)
+      - [asm_doc] only shows examples using $+,\cdot$ without using $\oplus$
+        and "Maxterm" is already said in this book.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -10232,6 +10227,20 @@ A  E /|\
       - When we do $\neg$ again for both sides of ${\displaystyle \neg (P\lor Q)\iff (\neg P)\land (\neg Q)}$. we have the exercise form where F has only 
       $\land$.
         - If F has *both* $\lor$ and $\land$, we can manipulate 2 minimum operands at one time and continue until all operators are manipulated.
+    - Better see [this detailed proof](https://math.stackexchange.com/a/2586662/1059606) where the contents before "CLAIM" is to show "the recursive definition of statements" which is used for the proof
+      then each statement can be splitted into 1 or 2 parts so we can use "De Morgan's laws".
+
+      definition_1 which is ~~same as this exercise by $\neg$ both sides again where $F^d=\neg \varphi'$.~~ ~~different from this exercise which takes 2 negations for different objects.~~ related with this exercise since it proves $F^d'(\overline{x_1},\ldots,\overline{x_n})=\overline{F(x_1,\ldots,x_n)}$ where $F^d'$ only swaps operators but doesn't swap 0 and 1.
+      > The dual $φ$' of $φ$ is the formula obtained from $φ$ by replacing all occurrences of $∧$ by $∨$, of $∨$ by $∧$, and all propositional variables by their negations. Show that $φ$' is logically equivalent to $¬φ$.
+      - This also shows why Duality Principle can be [rephrased](https://www.cs.ucr.edu/~ehwang/courses/cs120a/00winter/boolean.pdf) ~~different from~~ similar to this exercise (considering 0 and 1 while this exercise doesn't for LHS *explicitly* because De Morgan's laws doesn't consider it, ~~e.g. $F^d=x\cdot 0=\overline{\overline{x}+\overline{0}}$~~ e.g. if $F(x,0)=x+0$, then we want $F^d(x,0)=x\cdot 1$ but RHS is $\overline{F(\overline{x},\overline{0})}=\overline{\overline{x}+\overline{0}}$ and De Morgan's laws will get RHS to be $\overline{\overline{x}+\overline{1}}$) and same as 12.1.4
+        > any algebraic equality derived from these axioms will still be valid whenever the *OR and AND* operators, and identity elements *0 and 1*, have been *interchanged*
+        e.g. in 12.1 TABLE 5
+        $\varphi:x+x=x$ will become $\neg \varphi \overline{x}\cdot \overline{x}=\overline{x}$
+        but we can substitute $\overline{x}$ with $x$ and get $x\cdot x=x$
+
+        similarly $x+0=x$ -> $\overline{x}\cdot 1=\overline{x}$, i.e. $x\cdot 1=x$
+        - in sum, we can substitute $\overline{x}$ with $x$
+          so we only need to interchange 0 and 1 but not interchange $x$ and $\overline{x}$
 - [ ] 32
   - see the ans
     - enumeration and use transitive property of $=$.
@@ -10281,6 +10290,70 @@ A  E /|\
       - > Since none of these has the same table of values as x + y
         because none has 3 ones or zeroes.
         - Also see [this](https://math.stackexchange.com/a/3331501/1059606) although it is a bit out of the range to the logic.
+### 12.3
+- 2~10,12,17~18(implied in 15~16) skipped
+- [ ] 11 see the ans
+  - TODO this seems to be covered in COD/[asm_doc] with one more complex example.
+  - here $d=x-(y+d_i)$
+    1. x=1,$y+d_i=0$ corresponds to the first 2 cases of the ans.
+    2. x=0 ...
+  - $b_{i+1}=x<y+d_i$
+- [x] 13
+  - $x_1\overline{y_1}+\overline{x_1\oplus y_1}x_0\overline{y_0}$
+- [ ] 14 see the ans
+  Here we think for each bit
+  1. summand cases ($n$ summands -> $2^n$ cases)
+  2. carry cases (whether or not)
+  - Use the same rules as decimal
+    ```
+      11
+    x 11
+    ----
+      11
+     11
+    ----
+    1001
+    ```
+  - $s_1=1$ 
+    ```
+            x_1 x_0
+          * y_1 y_0
+    ---------------
+            x_1 x_0 if y_0=1
+        x_1 x_0     if y_1=1
+    ---------------
+    s_3 s_2 s_1 s_0
+    ```
+    we need $x_1\oplus x_0=1$ because the rightmost $x_0$ *can't carry*.
+    when $x_1=1,x_0=0\Rightarrow y_0=1,y_1=0/1$, so we *at least have one zero* for $x_i,y_i$ when $x_1 y_0=1$.
+    - $s_2=1\Rightarrow x_1 y_1=1$ and $x_0,y_0=0$ to avoid both $x_1,x_0=1$ which are sumed up to *carry*. see the ans
+      - Here if $x_1=0$, then the middle $x_1 + x_0$ which equals $x_0$ at most can't carry so this case can't make $s_2=1$.
+- [ ] 15 a)~c) have been said in 12.2
+  - TODO how to prove using the minimal gates for 15,16?
+  - d) $x\oplus y=x\overline{y}+\overline{x}y$ Then we can construct it using a)~c)
+  - see the ans
+    - d) is simpler than the above.
+      it uses $w=\overline{x}\vert y=\overline{\overline{x}y}$
+      then $u=\overline{x}+y$
+      then $u\vert w=\overline{u}+\overline{w}=\overline{\overline{\overline{x}y}}+\overline{\overline{x\overline{y}}}=\overline{x}y+x\overline{y}$
+- [ ] 16 d) see the ans which excludes all ones based on $x+y$.
+  - Notice since here LHS has no 0,1 so we can use the formula of 12.1-29
+    - 15-a) here dual of $\overline{x}$ is $\overline{x}$
+      - dual of $x\vert y=overline{xy}$
+        (see 12.1-29): $x\downarrow y=overline{x+y}$ -(Formula of 12.1-29)> $\overline{\overline{\overline{x}\overline{y}}}=\overline{x}\overline{y}$
+        Then $x\downarrow x=\overline{x}\overline{x}=\overline{x}$
+    - 16-d) 
+      dual of $x\oplus y=x\overline{y}+\overline{x}y$ is $(x+\overline{y})(\overline{x}+y)=\overline{x}\overline{y}+xy$
+      so we should calculate $x\oplus \overline{y}$ of 16-d) to get 
+      $x\oplus y$ for 15-d)
+      - take the dual for LHS $x\oplus \overline{y}$
+        then the dual of RHS becomes $x\overline{y}+\overline{x+\overline{y}}=x\overline{y}+\overline{x}y$ which is just the above definition of $\oplus$ ...
+        Use Formula of 12.1-29, RHS becomes $\overline{(\overline{x}+y)\overline{(\overline{x}y)}}=\overline{(\overline{x}+y)(x+\overline{y})}=\overline{\overline{x\overline{y}}\overline{\overline{x}y}}$ (notice the last step we stop expanding because it already has one outer NAND which is similar to the ans here where we add one outer NOR at the 2nd equal sign because we have one 
+        $+$ already)
+- [x] 19
+  - $x_3c_1c_0+\ldots$
+- [ ] 20
+  - this depth is related with the delay as [full_adder] says.
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -10382,6 +10455,7 @@ A  E /|\
 [wikipedia_minimal_element]:https://en.wikipedia.org/wiki/Maximal_and_minimal_elements#Definition
 [Depth_first_traversal_3_colors]:https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search
 [backtracking_AND_DFS_imply_preorder]:https://en.wikipedia.org/wiki/Depth-first_search#Vertex_orderings
+[full_adder]:https://en.wikipedia.org/wiki/Adder_(electronics)#Full_adder
 
 <!-- brilliant wiki -->
 [brilliant_wiki_Dilworth_Theorem_antichain_ge_chain]:https://brilliant.org/wiki/dilworths-theorem/#proof-of-dilworths-theorem
@@ -10492,3 +10566,5 @@ A  E /|\
 
 <!-- valuable links -->
 [houseofgraphs_search]:https://houseofgraphs.org/result-graphs
+
+[asm_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
