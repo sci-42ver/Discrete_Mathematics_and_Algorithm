@@ -2,7 +2,9 @@ Please point out errors if any. Thanks in advance.
 
 check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
 
-This [physics forums comment](https://www.physicsforums.com/threads/how-to-identify-xor-in-k-maps.809452/post-5081557) is helpful which has one similar map with the above and 1 can be only in the position where *odd* number of boxes overlap it similar to the user Student's answer.
+@rus9384 Thanks for replies. Re to the 1st comment: 1. You are right. If "a minimum CNF can contain non-prime implicants", then "the Quine-McCluskey method" won't minimize. So my question can be reduced to yours. Hope someone can make these 2 questions closed. 2. BTW, "the Karnaugh Map" *may not find all* prime implicants in some cases as the question says.
+
+Re to the 2nd comment: Here you may define the goal function as the number of *2-ary* gates (implied in your question post "smallest amount of literal occurences") which will cause depth greater than 2 while the question assumes using gates with multiple inputs. Both are fine since I didn't find one *quantification formula* defining the size of the circuit when having one corresponding logical formula. Do you know some references showing one quantification formula?
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -1454,6 +1456,11 @@ check(R_1)
     maybe some cities excluded.
 - > Dirac’s theorem can be proved as a corollary to Ore’s theorem because the conditions of Dirac’s theorem imply those of Ore’s theorem.
   i.e. Dirac’s $\subset$ Ore’s
+- FIGURE 14
+  WLOG assume we start from 000
+  then based on symmetry the 010 can be also at the upper or right of 000
+  Then 110 adjacent with 100 can be *only* above 010 since it has distance 2 from 001.
+  Then 011,111 are decide by 001,110 since only one choice is left.
 ### 10.6
 - > has no interior vertices other than a
   based on p657, $a$ is not one interior vertex.
@@ -2077,6 +2084,38 @@ check(R_1)
       maybe similar to [this](https://stackoverflow.com/questions/34687917/detecting-xor-in-karnaugh-maps#comment137461623_34687917)
       - [asm_doc] only shows examples using $+,\cdot$ without using $\oplus$
         and "Maxterm" is already said in this book.
+        - But since $x\oplus y=x\overline{y}+\overline{x}y$ which is *sum-of-products*,
+          we can still use the Karnaugh map
+### 12.4
+TODO [this](https://cs.stackexchange.com/questions/165508/prove-or-disprove-that-the-quine-mccluskey-method-generates-the-circuit-with-the#comment344035_165508)
+- heuristic (or rule-of-thumb) methods
+  i.e. [based on experiences](https://www.mindtools.com/a01ufjx/heuristic-methods)
+- [literal](https://en.wikipedia.org/wiki/Literal_(mathematical_logic)) i.e. $x,\neg x$ or $1,\neg 1=0$ in TABLE 3
+- > we can eliminate from the table *the row for a minterm* if there is another minterm that is covered by a subset of the prime implicants that cover this minterm.
+  This may means row $r_i$ has *only one* minterm $t_i$
+  and there is another row $r_k$ which has $t_i$ and *other minterms*.
+  TODO So same as
+  > we can simplify the table by eliminating the rows for minterms *covered* by these prime implicants
+  - [wikipedia examples][Quine_McCluskey_example] finds "the essential prime implicants" $BC'D'$ and adds necessary 1 or more non-essential ones without using the above *a bit complex* tricks.
+    - Notice here 9,14 with `f=x` "where 'x' stands for don't care".
+    - [consensus theorem](https://en.wikipedia.org/wiki/Consensus_theorem)
+      here consensus $yz$ (i.e. $y=z=1$) *isn't excluded* by $xy\lor \overline{x}z$.
+      e.g. if we use $xy\lor \overline{x}\overline{z}\;(*)$ then 
+      $(0,1,1)$ will have $0$ for $(*)$ so we must have 
+      $yz$ to make the whole expression be 1 as expected by $xy\lor \overline{x}\overline{z}\lor yz$.
+- whether Karnaugh Map and Quine-McCluskey method "generate the circuit with the *minimum inputs and minimum gates*" [TODO](https://cs.stackexchange.com/q/165508/161388)
+- > A K-map in *three* variables is a rectangle divided into eight cells ... This K-map can be thought of as lying on a *cylinder*
+  > The K-map of a sum-of-products expansion in *four* variables can be thought of as lying on a *torus*, 
+  Here "A K-map in *three* variables" doesn't need "torus" because $x,\overline{x}$ always has distance 1 either in the cylinder or the torus. See FIGURE 9-(c)
+- > the rows and columns of a K-map are arranged using Gray codes
+  i.e.
+  > each string *differs in exactly one position* from the preceding bit string, and the last string differs from the first in exactly one position
+  same as K-map
+- 12.4.2
+  > the goal is to identify the largest blocks of 1s in the map that correspond to the *prime implicants* and to cover all the 1s using the *fewest* blocks needed, using the *largest blocks first*.
+  [comparison](https://math.stackexchange.com/questions/4458965/proof-of-karnaughk-map-method/4459351#comment10361492_4459351) between K-map and Quine-McCluskey which shows the *greatest* prime implicant may be not included in the *optimal* solution.
+  > We begin by selecting the *essential* prime implicants because each of these is represented by a block that covers a cell containing a 1 that is not covered by any other prime implicant. We add *additional* prime implicants to ensure that all 1s in the K-map are covered.
+  This is same as the above [Quine_McCluskey_example]
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -10354,6 +10393,82 @@ A  E /|\
   - $x_3c_1c_0+\ldots$
 - [ ] 20
   - this depth is related with the delay as [full_adder] says.
+### 12.4
+- 2~12(10 see 10.5-FIGURE 14),16,22(because most are similar) skipped
+- [ ] 14
+  - see the ans
+    - a) we have 4 essential prime implicants
+    - b) we have 3 implicants which can't be groups with all 4 directions.
+    - c,d) similar to a)
+- [x] 18
+  - > the first and fourth columns ...
+    because 4 directions at most give 4 minterms with one literal difference
+    so we need *one more*.
+- [ ] 20
+  Assume the binary code is $x_n\cdots x_0$
+  - a) $x_0$
+  - b) $$
+  - c) $\neg (4\lor 5\lor 6)$
+  - see the ans
+    - TODO the ANS seems to be wrong with `d`
+    - Here the ans assumes 4 variables with code $wxyz$ but the exercise doesn't (same for the 7th).
+    - a)
+      should be
+      $$
+      \begin{matrix}
+        1&0&0&1\\
+        1&0&0&1\\
+        1&0&0&1\\
+        1&0&0&1\\
+      \end{matrix}
+      $$
+    - b)
+      it should have 0 for $0000,0011,0110,1001,1100,1111$
+      $$
+      \begin{matrix}
+        0&1&0&1\\
+        1&1&1&0\\
+        0&1&0&1\\
+        1&0&1&1\\
+      \end{matrix}
+      $$
+      The above will make $x\overline{y},xz$ fail.
+      - [See](https://www.overleaf.com/read/sjjtkcdxcdzb#a34bc3)
+    - c)
+      it should add $+w$ TODO
+- [x] 21
+  - let it be $\overline{x}\overline{x}xyz$
+    then $xyz=110,010,011,001$
+    i.e. $y\overline{z}+\overline{x}z$
+  - see the ans
+    - This is not minimum
+    - the above 2 gates in the ans corresponds to the above latter 3 implicants
+      and the bottom gate -> 110
+- [ ] 22 see the ans
+  - a) all 3 are essential
+  - b,c) same as a)
+  - d) 2 prime implicants cover the rest 1
+- [ ] 24
+  - a) see the ans highlighted
+  - b) here 
+    1. using only one 2-literal block, we need one 3-literal block.
+      although block num is same, 2-literal blocks use less literals
+    2. using no 2-literal block, then we need $\lceil 5/2\rceil=3$ blocks which is worse.
+  - c)
+    here 2 3-literal blocks including $\overline{w}xyz,w\overline{x}yz$ are essential.
+    then the rest 1-literal block is fine to fill in the rest.
+- [ ] 26 [see](https://en.wikipedia.org/wiki/Karnaugh_map#Inverse) where $A\lor B$ corresponds the gray bar and others are similar.
+- [ ] 30 see the ans
+  - Here 2 is minimum since $\lceil 10/4\rceil=3$ if not using the 1-literal block.
+  - see the ans
+    - The above tries to include all `d` which is not necessary
+    - Here 1 block is impossible
+- [ ] 32 see the ans
+- [ ] 33 implied by how $Q_n$ is defined recursively.
+  - see the ans
+    - > the Cartesian product of that subcube with the line segment [0, 1]
+      "[0, 1]" corresponds to $x_{n+1}$ because 
+      "$x_{n+1}$ (or its complement) is not part of the product"
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -10456,6 +10571,7 @@ A  E /|\
 [Depth_first_traversal_3_colors]:https://en.wikipedia.org/wiki/Tree_traversal#Depth-first_search
 [backtracking_AND_DFS_imply_preorder]:https://en.wikipedia.org/wiki/Depth-first_search#Vertex_orderings
 [full_adder]:https://en.wikipedia.org/wiki/Adder_(electronics)#Full_adder
+[Quine_McCluskey_example]:https://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm#Step_2:_prime_implicant_chart
 
 <!-- brilliant wiki -->
 [brilliant_wiki_Dilworth_Theorem_antichain_ge_chain]:https://brilliant.org/wiki/dilworths-theorem/#proof-of-dilworths-theorem
