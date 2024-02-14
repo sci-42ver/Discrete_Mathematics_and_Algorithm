@@ -2087,7 +2087,6 @@ check(R_1)
         - But since $x\oplus y=x\overline{y}+\overline{x}y$ which is *sum-of-products*,
           we can still use the Karnaugh map
 ### 12.4
-TODO [this](https://cs.stackexchange.com/questions/165508/prove-or-disprove-that-the-quine-mccluskey-method-generates-the-circuit-with-the#comment344035_165508)
 - heuristic (or rule-of-thumb) methods
   i.e. [based on experiences](https://www.mindtools.com/a01ufjx/heuristic-methods)
 - [literal](https://en.wikipedia.org/wiki/Literal_(mathematical_logic)) i.e. $x,\neg x$ or $1,\neg 1=0$ in TABLE 3
@@ -2116,6 +2115,7 @@ TODO [this](https://cs.stackexchange.com/questions/165508/prove-or-disprove-that
   [comparison](https://math.stackexchange.com/questions/4458965/proof-of-karnaughk-map-method/4459351#comment10361492_4459351) between K-map and Quine-McCluskey which shows the *greatest* prime implicant may be not included in the *optimal* solution.
   > We begin by selecting the *essential* prime implicants because each of these is represented by a block that covers a cell containing a 1 that is not covered by any other prime implicant. We add *additional* prime implicants to ensure that all 1s in the K-map are covered.
   This is same as the above [Quine_McCluskey_example]
+  - Notice the Quine-McCluskey may be [not optimal](https://cs.stackexchange.com/questions/165508/prove-or-disprove-that-the-quine-mccluskey-method-generates-the-circuit-with-the#comment343984_165508) in [some cases](https://cs.stackexchange.com/questions/165508/prove-or-disprove-that-the-quine-mccluskey-method-generates-the-circuit-with-the#comment344058_165508).
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -10310,7 +10310,7 @@ A  E /|\
   - ~~$x\oplus 0=\overline{x}$~~ $x\oplus 1=\overline{x}$
   - see the ans
     - a) shows one counterexample.
-    - b) XOR operator is associative proof by [conditional flip](https://math.stackexchange.com/a/1534362/1059606) or [addition modulo 2](https://math.stackexchange.com/questions/293793/prove-xor-is-commutative-and-associative#comment9452408_293793) whose associativity can be proved [using](https://proofwiki.org/wiki/Modulo_Addition_is_Associative) [residue class $[x]_m$](https://proofwiki.org/wiki/Definition:Modulo_Addition) (i.e. [transformed](https://math.stackexchange.com/a/3563774/1059606) to $a+b+c$)
+    - b) XOR operator is associative proof by [conditional flip](https://math.stackexchange.com/a/1534362/1059606) or [addition modulo 2](https://math.stackexchange.com/questions/293793/prove-xor-is-commutative-and-associative#comment9452408_293793) whose associativity can be proved [using](https://proofwiki.org/wiki/Modulo_Addition_is_Associative) [residue class $[x]_m$](https://proofwiki.org/wiki/Definition:Modulo_Addition) (i.e. [transformed](https://math.stackexchange.com/a/3563774/1059606) to $a+b+c$) <a name="xor_associative"></a>
       - > every expression involving these two operations and x and y can be reduced to an XORof the literals x, x, y , and y.
         here we can *use parentheses based on "associative"* to construct many pairs and manipulate each pair one by one which generalized one pair to any expression.
         
@@ -10469,6 +10469,108 @@ A  E /|\
     - > the Cartesian product of that subcube with the line segment [0, 1]
       "[0, 1]" corresponds to $x_{n+1}$ because 
       "$x_{n+1}$ (or its complement) is not part of the product"
+### supplementary
+- 14,18(see [xor_associative]. 1. Then $LHS=(y \oplus \overline{x})\oplus x=y\oplus(\overline{x}\oplus x)$ 2. based on 1, for b, 
+  LHS=$(\overline{y}\oplus z)\oplus(\overline{y}\oplus \overline{z})=0\oplus 1=1$),20 skipped
+- [x] 2
+  - a,b) not (d,e similar to them)
+  - c)
+- [ ] 4 see the ans
+- [x] 5 
+  - there are $2^{n-1}$ pairs of 
+    $((x_1,\cdots,x_n),(\overline{x_1},\cdots,\overline{x_n}))$
+    each pair has 2 possibility value $0/1$
+- [x] 6
+  - Here $F\le G$ means G *includes all ones* in F
+- [ ] 8
+  - Use $F+G=1\Rightarrow F=1\lor G=1$
+  - see the ans
+    - Better use $\Leftrightarrow$
+- [x] 9
+  - Antisymmetry: $F\le G,G\le F$ means they have the same set of 1
+    so they are same.
+  - others are trivial
+- [ ] 10 see the ans
+  - 4-cube because each can *inverse one of 4* variables to get the adjacent set member which means it is $Q_4$.
+    where $1\to 0$ will decrease the level and $0\to 1$ will increase.
+    - > with two vertices adjacent when their subsets *differ in a single* element
+      [construction](https://en.wikipedia.org/wiki/Hypercube_graph) same as the book says before.
+- [x] 11
+  - a) to test $\overline{x\overline{yz}}=\overline{\overline{xy}z}$
+    (1,0,0) is one counterexample.
+  - b) (1,x,x) LHS=$\overline{x+\overline{y+z}}=0$
+    RHS=$\overline{\overline{x+y}+\overline{x+z}}=1$
+  - c) same as b) (1,x,x)
+- [x] 12 trivial
+  - [XNOR](https://en.wikipedia.org/wiki/Circled_dot#Mathematics)
+- [ ] 16
+  - see 12.2-20 where $\oplus$ with one of $+,\cdot,\overline{}$ are all not functionally complete
+    so based on 13, $\odot$ is not functionally complete.
+  - see the ans
+    - It is same as [this](https://copyprogramming.com/howto/functionally-complete-operations#how-to-determine-if-given-function-is-functionally-complete)
+      > Determining if a given boolean function can *produce the negation* is a straightforward task
+      i.e. if not, then we find *one counterexample* that it can't realize the $\neg$ function.
+    - To prove *functionally incomplete*
+      1. > has a property that not all truth functions do
+        [see](https://math.stackexchange.com/a/2629618/1059606)
+        > You cannot construct formulas with more than one variable.
+        - Or find one truth table it can't form like [all falses](https://math.stackexchange.com/a/1481631/1059606) and [odd ones](https://math.stackexchange.com/a/2173070/1059606) which is used before.
+- [ ] 17
+  - [See](https://gateoverflow.in/18849/many-%2416%24-boolean-functions-variables-represented-using-only?show=18895#a18895)
+    - a) since $\neg$ is one unary operator
+      there are $2\cdot=8$ possibilities but $\overline{0/1}=1/0$ 
+      so 8-2=6 possibilities
+    - b) ~~since 2-ary, for each location we have 5 possibilities including $\varnothing$~~
+      ~~based on symmetry, we have $\binom{5}{2}+5=10$ possibilities~~
+      1. using one variable, 4
+      2. using 2 variables, 
+        x.x = x, x.1 = x, x.0 = 0 and x.y
+        y.y = y, y.1,y.0 without y.x based on symmetry (WLOG based on x)
+        1.1,1.0 (duplicate of 1,0)
+        0.0 ...
+      - Based on *idempotence* when using $+$ multiple times, the possibilities don't increase.
+        Same for a),c).
+    - c) duality by $\cdot\Leftrightarrow +,0\Leftrightarrow 1$ won't increase possibilities
+    - d) 
+      - Here maybe related with closed set TODO
+  - We can also [enumerate](https://gateoverflow.in/18849/many-%2416%24-boolean-functions-variables-represented-using-only?show=18898#a18898)
+- [ ] 22
+  - see the ans
+    - a~e) are trivial because only 4 possibilities.
+    - f~g) we only need to ensure the *2 cases are met* where for example for
+      f) "either x = 1 or y = z = 1" and the complement $x=0\wedge \neg(y=z=1)$ where trivially at most be 
+      $1< \frac{3}{2}$ is also met.
+    - h) here $w=y=1 \sum w_i x_i=2$ doesn't meet the threshold
+      ~~here when $x=z=1$, $w=y=0$ has the same weight sum as ~~
+      Since we need to exclude $w=0,y=1$ ($2-\frac{1}{2}$) we can set the threshold to be $2-\frac{1}{4}=\frac{7}{4}$.
+      - Then if $x,z$ are not all ones, then at most $1+\frac{1}{2}<\frac{7}{4}$
+        so $x,z$ must be all ones,
+        Then use the above exclusion for the rest proof.
+- [ ] 23
+  - no solution for linear equations
+    $$
+    \begin{bmatrix}
+      0&0\\
+      0&1\\
+      1&0\\
+      1&1\\
+    \end{bmatrix}
+    \begin{bmatrix}
+      w_1\\
+      w_2
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      0\\
+      1\\
+      1\\
+      0\\
+    \end{bmatrix}
+    $$
+  - see the ans
+    - The above should be based on inequity instead of the equation.
+- [ ] 24
+  - see the ans which is one algebraic problem.
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -10541,6 +10643,7 @@ A  E /|\
 [DFS_directed_topological_sorting]:#DFS_directed_topological_sorting
 [DFS_construct_tree]:#DFS_construct_tree
 [lattice_boolean_algebra]:#lattice_boolean_algebra
+[xor_associative]:#xor_associative
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
