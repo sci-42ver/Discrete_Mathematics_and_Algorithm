@@ -2164,6 +2164,8 @@ check(R_1)
   and each symbol $\alpha$ from left to right are its children from left to right which implies ["ordered"][ordered_rooted_tree] (i.e. children are ordered w.r.t. their [~~direct~~ immediate ~~parent~~ ancestor](https://ducmanhphan.github.io/2020-04-25-Some-common-concepts-of-tree/)).
 - "[AhLaSeUl06]" may be "[AhHoUl74] A. V. Aho, J. E. Hopcroft, and J. D. Ullman, The Design and Analysis of Computer Algorithms, "
 - Definition 3 also [see](https://en.wikipedia.org/wiki/Formal_grammar#Formal_definition)
+### 13.2
+### 13.3
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -10840,12 +10842,11 @@ A  E /|\
   - see the ans
     - (cheese*) is enough.
 - [ ] 38
-  - 
-    $$
-    A?\to A\vert \lambda\\
-    A*\to (M\to AM\vert \lambda)\\
-    A+\to (M\to AM\vert A)
-    $$
+  $$
+  A?\to A\vert \lambda\\
+  A*\to (M\to AM\vert \lambda)\\
+  A+\to (M\to AM\vert A)
+  $$
   - see the ans
     - Here we assume only ? has the group version.
 - [x] 40
@@ -10860,6 +10861,32 @@ A  E /|\
   - $R$
   - see the ans
     - notice the exercise says "directly".
+    - [derivable](http://courses.ics.hawaii.edu/ReviewICS241/morea/computation-models/LanguagesAndGrammar-QA.pdf)
+### 13.2
+- 2(ans a,b corresponds to the book b,a),4(1. here a corresponds to the book a ... 2. Here I skip b because it is similar to a),6(similar to 4),20 skipped
+- [x] 8
+  - [see](https://www.overleaf.com/read/rbntjpdjrjmx#2a20cd)
+  - see the ans
+    - omits penny
+    - let all space be the final states which make the layout neat.
+- [ ] 10 see the ans
+- [ ] 12 sequence where if one step is wrong we go back to the initial state.
+  - how is "second left" implemented?
+  - [example lock](https://www.youtube.com/watch?v=-l20hR3O8w8)
+  - why (8,L,2) has no loop but (10,R,1) has?
+- [ ] 14
+  - Here if thinking of 4 digits as one component
+    then we have 4 states
+- [ ] 16 inputs are categorized into 3 types and the states are also categorized into 3 types based on $\mod$.
+  - see the ans
+    - TODO what does input 0,1 mean?
+      - if [binary](https://qr.ae/ps7P1n), then the 2 arrows should point to different nodes.
+      - [endian](https://qr.ae/ps7Ppq) also needs to be considered.
+- [ ] 18 similar to 14 where W means read 1 and R means read non-1. Then we needs 5 W's.
+  - see the ans
+    - We need one loop for $s_5$ and $s_0$
+- [ ] 22 see the ans
+- [ ] 24 similar to 16 see the ans 
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
