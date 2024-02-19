@@ -2165,7 +2165,31 @@ check(R_1)
 - "[AhLaSeUl06]" may be "[AhHoUl74] A. V. Aho, J. E. Hopcroft, and J. D. Ullman, The Design and Analysis of Computer Algorithms, "
 - Definition 3 also [see](https://en.wikipedia.org/wiki/Formal_grammar#Formal_definition)
 ### 13.2
+- The book definition 1 is similar to [this][13_2_definition_1] which is one specific version of [this](https://en.wikipedia.org/wiki/Finite-state_transducer#Formal_construction)
 ### 13.3
+- Kleene closure is similar to connectivity relation where both is related with the power operation.
+- [definition 3](https://en.wikipedia.org/wiki/Deterministic_finite_automaton#Formal_definition)
+  - Here we have no output alphabet and output function but have the final/accepting states in [13_2_definition_1]
+- Computable, i.e. [The Halting Problem in 3.1.6](https://www.geeksforgeeks.org/computable-and-non-computable-problems-in-toc/) and [Decidability](https://www.geeksforgeeks.org/decidability-and-undecidability-in-toc/) which is based on reduction.
+- example 6
+  - a) it trivially enumerates all possible bit strings.
+  - b,c,d,e) are related.
+- example 7 
+  1. trivially enumerates all possible ~~cases~~ states
+  2. has 2 input cases for each state.
+  So it enumerates all possible cases.
+- example 8
+  - > We leave it to the reader to fill in the details.
+    trivial listing all possible cases.
+  - we can also find that $s_0\to s_2\to s_4,s_0\to s_1$ in $M_0$ can be combined into 
+    $s_0\to s_1$ in $M_1$.
+- > the reader should provide an inductive proof of this
+  maybe based on the definition of "recognize" in THEOREM 1.
+- notice in EXAMPLE 12, $\{s_0,s_2\}$ only 
+  $s_0$ is the final state in Example 10.
+  Although letting $\{s_0,s_2\}$ be the final state in EXAMPLE 12 may be ambiguous because it includes oen unnecessary 
+  $s_2$, letting $\{s_0,s_2\}$ not be the final state will be *wrong*. 
+  So we let $\{s_0,s_2\}$ be the final state.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -4954,6 +4978,7 @@ $$
 - [ ] 34 similar to EXAMPLE 12.
   - see the ans
     - notice $ones(\lambda)$ needs to be defined.
+- [ ] 37 trivial based on the hint.
 - [ ] 40 notice $x$ is also considered besides $\lambda$
 - [ ] 42 see the ans which maybe adds one $1$ at each step.
 - [ ] 44 $(w^R)^{n+1}=(w^R)^n*w^R\overset{IH}{=}(w^n)^R*w^R\overset{38}{=}(w^{n+1})^R$
@@ -10887,6 +10912,138 @@ A  E /|\
     - We need one loop for $s_5$ and $s_0$
 - [ ] 22 see the ans
 - [ ] 24 similar to 16 see the ans 
+### 13.3
+- 6,18~22(similar to 16),
+  32~36(32: same as EXAMPLE 7 $s_{0,2},s_{3}$ and 2 states are enough. 34: similarly with 4 states),39,
+  40~48,54(1. trivial because 2 $01^n$ and $n\ge 0$ 2. the ans says: here $(s_1\xRightarrow{0} s_1,s_1\xRightarrow{0} s_2),(s_3\xRightarrow{0} s_3,s_3\xRightarrow{0} s_2)$ are duplicate pairs where we only keep productions related with the final states) skipped.
+- [ ] 2 see the ans
+- [ ] 4 see the ans for the strict proof of b)
+- [ ] 8
+  - a~e) are right and f) is wrong similar to 6.
+    a) by definition
+    b,c) proof by showing all cases.
+    d,e) same as 4-b)
+  - see the ans for a,b,e)
+- [x] 10
+  - in a,c,d) but not for b,e,f).
+- [ ] 12
+  - it recognizes $\{0^n,(0^n(10)^m)^*,(0^n(11(0,1))^m)^*\}$ 
+    (Here $*$ means we see $(0^n(10)^m)$ as one symbol and * means words of it)
+    here $s_3$ can't be reached because in-degree is 0 which can be removed.
+  - so a,d) can be recognized. 
+    b,c) can't.
+- [ ] 15 see the ans
+  - induction for the length of $y$.
+- [ ] 16
+  - $\lambda,1a,01^n0a$ where a means any bit string.
+- [x] 26
+  - 4 states including the initial state based on the consecutive 0 number.
+- [x] 28 similar to 26 but 1 causes one loop but won't go back to the initial state.
+- [ ] 37
+  - see the ans
+    - > so the transition from s0 on input 1 must be to s1
+      because $s_1$ needs to be reachable.
+- [ ] 38
+  - > Since the string 01 is not accepted (but some longer strings that start this way are accepted), there has to be a transition from s1 on input 1 either to itself or to s2.
+    here no next state is possible in the general case like EXAMPLE 9.
+- [ ] 56
+  - see the ans
+    - based on [this](https://cs.stackexchange.com/a/12596/161388), only removing the graveyard doesn't make the machine nondeterministic.
+      > My answer is an unequivocal: No.
+- [ ] 57 see the ans
+  - since we need to track the number of 0's and 1's, there are infinite cases.
+- [ ] 58~61
+  - > two states are equivalent if every input string either sends both states to a final state or sends both to a state that is not final
+    i.e. we only cares about whether final but not which non-final state.
+  - [x] 58 trivial
+    - [Refinements p24](https://www.isical.ac.in/~ansuman/flat2018/myhill-nerode-priti.pdf) of equivalence relation
+      - same as in topological where cover ~~means~~ is similar to [partition](https://en.wikipedia.org/wiki/Partition_of_a_set) in relation but the former doesn't need empty intersection for each pair of subsets.
+    - see the ans
+      - d) is based on c) with $\subseteq$
+      - f) assumes $l(x)>0$ is already met, then it manipulates the $l(x)=0$ case.
+  - [ ] 59
+    - It is to show every state has one matched *minimal*-length string which is unique for this state. This is trivial to be true.
+    - see the ans
+      - > But f (s, a) and f (t, a) are n-equivalent
+        because 
+        > states s and t that are (n + 1)-equivalent 
+  - [ ] 60
+    - a) only if is the definition of 0-equivalent
+      if is similar.
+      - ~~if $\overline{M}$ contains one non-final states ~~
+        ~~$t$ and final state, then s and t aren't 0-equivalent.~~
+        since final states can only be equivalent with final states. so conclusion ...
+    - b) if is the definition
+      only if is done by using exercise 15
+    - c) constructs the partition for $R_{*}$ using exercise 59,
+    - see the ans
+      - b) ["well defined"](https://en.wikipedia.org/wiki/Well-defined_expression) is to show unique value.
+        >  $\overline{f} ([s]R∗ , a ) = [f (s, a)]R∗$ for all states [s]R∗ of M and input symbols a ∈ I
+        "the choice of representative" means what state to choose for [s]R∗
+        since for $s,t\in [s]_{R_*}\Rightarrow s,t\in [s]_{R_k},k\ge 1$, 
+        $f(s,a)_{R_{k-1}}=f(t,a)_{R_{k-1}},k-1\ge 0\Rightarrow f(s,a)_{R_{*}}=f(t,a)_{R_{*}}$
+        so two RHS's are same -> well defined.
+  - [ ] 61
+    - [x] a) prove "string $w$ goes to the final state in $M$ if and only if it goes to the final state in $\overline{M}$"
+      only if: ~~trivially starting from $[s_0]_{R^*}$ we get to the next state ~~
+      ~~$k$ of $w$ which is same whether-final status as $f(w,a)$ one by one~~
+      if $f(s_0,x)$ is the final/non-final state,
+      then $f(s_0_{R^*},x)$ is also the final/non-final state by the definition of 
+      $R^*$.
+      if: similar to "only if" based on the symmetric property of $R^*$.
+    - b) [proof][Introduction_Automata_Theory_Languages_and_Computation] see the ans
+      - > The start states of M and N are indistinguishable because L(M) == L(N).
+        this is by "indistinguishable" definition where if distinguishable, there is one string $w\in F(M)$ where F means final state such that 
+        $w\notin F(M)$ contradicting with L(M) == L(N).
+      - Mapping
+        > Thus, every state of M is indistinguishable from at least one state of N
+        is based on 
+        > their successors on *any one input* symbol are also indistinguishable. The reason is that if we could distinguish the *successors*, then we could distinguish p from q.
+        which is based on Theorem 4.20.
+      - ~~because removing one state will at least destroy one indistinguishable pair $(u,v)$~~
+        ~~Assume $u$ is removed, then $()$~~
+        > Since N has fewer states than M, there are two states of M that are indistinguishable from the same state of N, and therefore indistinguishable from each other
+        based on the pigeonhole principle and the transitive property (Theorem 4.23 and equivalence relation in 58-b).
+        > But M was designed so that all its states are distinguishable from each other
+        this is the step 1 in ihe contents after Theorem 4.24.
+      - table-filling algorithm
+        induction is from the longer string to the shorter string.
+      - Theorem 4.20 is based on "the shortest strings" and then contradiction with one "shorter".
+      - In summary
+        L(M) = L(N) -(based on accepting split defines uniquely whether distinguishable in p169. OR *all* strings as input of the table-filling algorithm from the *start* state *won't differentiate* (not distinguished), so the start states of M,N are equivalent)> $s_{0}^{(M)}$ 
+        and $s_{0}^{(N)}$ are indistinguishable -> the above "Mapping" -> pigeonhole principle.
+        - Notice here we may probably ["*Remove all inaccessible* states" p32](https://people.csail.mit.edu/rrw/6.045-2020/lec5-before-class.pdf) which is implied by
+          > Neither M nor N could have an inaccessible state
+          This is implies as the exercise says
+          > for every state s of M there is a string x ∈ I∗ such that f (s0, x ) = s,
+        - **Intuitively** here just put states with the *same output for all strings* 
+          (1. i.e. $R_*$ 
+           2. it is also implied in $\overline{f}([s]_{R_*},a)$ are same for $[s]_{R_*}$ where the output states are combined correspondingly.)
+          together because they *function same* for the final result.
+          ~~And then all *corresponding functions* are also changed.~~
+    - NFA related in [Introduction_Automata_Theory_Languages_and_Computation] p177
+      - > Surely accepting state B is distinguishable from nonaccepting states A and c.
+        based on 0-distinguishable.
+  - [ ] 62
+    - $k=0$ trivial
+      $s_{0,1,2,4}$ are accepted.
+      $s_{3,5,6}$ are not accepted.
+      - $k=1$
+        $s_0$ both not accepted for 0 and 1
+        with 0(accepted) and 1(not accepted):
+        1. $s_1$ 
+        2. $s_{3,5}$ 
+        with both 0 and 1 are accepted:
+        1. $s_{2,4}$ 
+        2. $s_6$
+      - $k=2$ based on refinement and the single-element set can't be refined
+        since $s_{3,5}\xRightarrow{(0,1)}(s_3,s_5)$, we have 
+        $s_3 R_* s_5$
+        similarly for $s_{2,4}$
+        - This uses 60-b) where in
+          > f (s, a) and f (t, a) are (k − 1)-equivalent
+          k-1 is * since the transformed states are *same*.
+      - $k=*$ same $k=2$
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -10931,6 +11088,8 @@ A  E /|\
 - [This](https://stackoverflow.com/a/575337/21294350) related with naming and binding in 10_5_64 code.
 # TODO after complexity book
 - [This](https://cs.stackexchange.com/questions/165101/how-can-the-approximation-algorithm-of-one-np-complete-problem-be-used-to-prove#comment342996_165101)
+- decidable but not computable problems from [this](https://www.geeksforgeeks.org/difference-between-decidability-and-computability/)
+- [recursive function](https://en.wikipedia.org/wiki/General_recursive_function)
 # TODO after logic
 - 12.2-20-b)
 
@@ -10999,6 +11158,7 @@ A  E /|\
 [3_basic_tools]:https://cs.stackexchange.com/a/26159/161388
 [formal_proof_generate_Language]:https://cs.stackexchange.com/a/11316/161388
 [ordered_rooted_tree]:https://en.wikipedia.org/wiki/Tree_(graph_theory)#Ordered_tree
+[13_2_definition_1]:https://en.wikipedia.org/wiki/Mealy_machine#Formal_definition
 
 <!-- brilliant wiki -->
 [brilliant_wiki_Dilworth_Theorem_antichain_ge_chain]:https://brilliant.org/wiki/dilworths-theorem/#proof-of-dilworths-theorem
