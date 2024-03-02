@@ -14,6 +14,12 @@ IMHO we should do the following correction: 1. By cycle definition https://en.wi
 Here are some clarification: 1. "Note (in the case of products as above" may mean $(a_ka_{k-1})(a_{k-1}a_{k-2})\cdots (a_2a_1)$ can be written as $(a_2a_1)(a_3 a_2)\cdots (a_{k-1}a_{k-2})(a_ka_{k-1})$. This is shown in https://en.wikipedia.org/wiki/Cyclic_permutation#Properties and https://math.stackexchange.com/a/3420633/1059606 (Notice we should execute the right factor first as wikipedia says). 2. "does not use any transposition *more than once*" is due to permutation is decomposed into one or more *disjoint* cycles.
 
 More specifically, this answer shows the example of $\{a^ib^jc^k \mid i> j\}$ where $i,j,k\geq 0$ are trivially met since we normally *won't remove* symbols in the construction process. The $i<j,i\neq k$ cases are similar. Then we can use $S_1 \vert S_2$ to unionize them which solves the OP's problem as Ryan Dougherty's comment says.
+
+My account has "Your account is suspended and is not permitted to perform this action.". This seems to happen when I modify my list. I didn't post any not allowed posts and comments.
+
+I haven't done anything violent on X and harmful for others. Could you unsuspend my account as soon as possible? Thanks in advance.
+
+unknown
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -11128,7 +11134,16 @@ A  E /|\
           k-1 is * since the transformed states are *same*.
       - $k=*$ same $k=2$
 ### 13.4
-- 2 skipped
+- 2~4 skipped
+- [ ] 6
+  - a) here $\{\lambda\cup 0\cup 1\}\cup \{00,01,10,11\}\ldots$ is a bit complex.
+  - b) trivial by the exercise description.
+  - c) I assume 1 is followed by exactly 2 zeroes. So $(100)^*$.
+    - see the ans the above is wrong without considering the leading zeroes.
+  - d) similar to c) 
+    $0^* (10^*)^* 00$ ~~which can be transformed to $0^* (10\cup 0)^* 00$ trivially.~~
+    - The above is wrong because $10^*$ can be 1 then 11 is allowed.
+  - e) trivial see the ans.
 - [ ] 26
   - see Theorem ~~3.5.1~~ ~~Theorem 2.3.1 which is stronger.~~ 2.3.2 in [Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou]
   - ~~TODO $|-$ symbol meaning in the proof of Theorem 2.3.1.~~
