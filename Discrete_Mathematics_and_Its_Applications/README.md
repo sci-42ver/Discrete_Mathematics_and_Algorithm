@@ -14,12 +14,6 @@ IMHO we should do the following correction: 1. By cycle definition https://en.wi
 Here are some clarification: 1. "Note (in the case of products as above" may mean $(a_ka_{k-1})(a_{k-1}a_{k-2})\cdots (a_2a_1)$ can be written as $(a_2a_1)(a_3 a_2)\cdots (a_{k-1}a_{k-2})(a_ka_{k-1})$. This is shown in https://en.wikipedia.org/wiki/Cyclic_permutation#Properties and https://math.stackexchange.com/a/3420633/1059606 (Notice we should execute the right factor first as wikipedia says). 2. "does not use any transposition *more than once*" is due to permutation is decomposed into one or more *disjoint* cycles.
 
 More specifically, this answer shows the example of $\{a^ib^jc^k \mid i> j\}$ where $i,j,k\geq 0$ are trivially met since we normally *won't remove* symbols in the construction process. The $i<j,i\neq k$ cases are similar. Then we can use $S_1 \vert S_2$ to unionize them which solves the OP's problem as Ryan Dougherty's comment says.
-
-My account has "Your account is suspended and is not permitted to perform this action.". This seems to happen when I modify my list. I didn't post any not allowed posts and comments.
-
-I haven't done anything violent on X and harmful for others. Could you unsuspend my account as soon as possible? Thanks in advance.
-
-unknown
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -11134,7 +11128,7 @@ A  E /|\
           k-1 is * since the transformed states are *same*.
       - $k=*$ same $k=2$
 ### 13.4
-- 2~4 skipped
+- 2~4,10,14 skipped
 - [ ] 6
   - a) here $\{\lambda\cup 0\cup 1\}\cup \{00,01,10,11\}\ldots$ is a bit complex.
   - b) trivial by the exercise description.
@@ -11144,6 +11138,44 @@ A  E /|\
     $0^* (10^*)^* 00$ ~~which can be transformed to $0^* (10\cup 0)^* 00$ trivially.~~
     - The above is wrong because $10^*$ can be 1 then 11 is allowed.
   - e) trivial see the ans.
+- [ ] 8
+  - a) based on [DFA_partial_transition_function], FIGURE 1 (a) is also fine.  
+    The rest is similar.
+  - Also see [overleaf_automata]
+- [ ] 11
+  - Based on [definition 1](https://en.wikipedia.org/wiki/Regular_expression#Formal_definition), trivial by definition.
+  - see the ans
+    - Here $B^*$ is based on [string concatenation](https://en.wikipedia.org/wiki/Kleene_star).
+- [ ] 12
+  - see the ans
+    - TODO
+      - ~~a) here 0 should be pointed to one nonfinal state.~~
+    - ~~c) ~~
+      ~~1. the arrow should point to the top row 1st accepting state instead of the 2nd.~~
+      ~~2. ~~
+      See [overleaf_automata]
+- [x] 16 here $A$ is the final state $F$.
+- [ ] 18 TODO strict proof
+  - Here each transition has one **one-to-one correspondence** with the grammar production rule.
+  - This is different from [formal_proof_generate_Language].
+- [ ] 20 see the ans
+- [x] 21
+  - if
+    by the pigeonhole principle, there is one state revisited when processing $x$
+    this causes the loop, so infinite.
+  - only if
+    if $\forall x,l(x)<|S|$, then there are at most 
+    $|I|^|S|$ possible recognized words which is finite.
+- [x] 22
+  - same as 21, here $uv$ is the sub-string which **firstly** meets with the revisited state which has at most $|S|+1$ states. Then $l(uv)\le |S|+1-1$.
+  - see the ans
+    - Here it may be intended to say "EXAMPLE 6".
+- [x] 23 choose $n=|S|$ then 
+  $0^{2n+k}1^n,k\le n$ (all 0s because $l(uv)\le |S|$) is accepted unnecessarily.
+- [x] 24 same as 23's choice where $|S|^2+k\le |S|^2+|S|< (|S|+1)^2$ which is not one square.
+  - see the ans
+    - Here $n$ can be chosen very large or just meet the limit as the ans does.
+- [x] 25 $N=|S|$
 - [ ] 26
   - see Theorem ~~3.5.1~~ ~~Theorem 2.3.1 which is stronger.~~ 2.3.2 in [Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou]
   - ~~TODO $|-$ symbol meaning in the proof of Theorem 2.3.1.~~
@@ -11283,9 +11315,6 @@ A  E /|\
 [wikipedia_anbncn]:https://en.wikipedia.org/wiki/Context-sensitive_grammar#anbncn
 [type_1_grammar]:https://en.wikipedia.org/wiki/Chomsky_hierarchy#Context-sensitive_(Type-1)_grammars
 [Chomsky_hierarchy]:https://en.wikipedia.org/wiki/Chomsky_hierarchy#The_hierarchy
-[Proof_generate_Language]:https://cs.stackexchange.com/a/110858/161388
-[3_basic_tools]:https://cs.stackexchange.com/a/26159/161388
-[formal_proof_generate_Language]:https://cs.stackexchange.com/a/11316/161388
 [ordered_rooted_tree]:https://en.wikipedia.org/wiki/Tree_(graph_theory)#Ordered_tree
 [13_2_definition_1]:https://en.wikipedia.org/wiki/Mealy_machine#Formal_definition
 
@@ -11329,6 +11358,9 @@ A  E /|\
 [DFS_only_2_types_edges]:https://cs.stackexchange.com/a/11552/161388
 [graph_based_on_explored_set_complexity]:https://cs.stackexchange.com/q/165308/161388
 [DFA_partial_transition_function]:https://cs.stackexchange.com/a/12596/161388
+[Proof_generate_Language]:https://cs.stackexchange.com/a/110858/161388
+[3_basic_tools]:https://cs.stackexchange.com/a/26159/161388
+[formal_proof_generate_Language]:https://cs.stackexchange.com/a/11316/161388
 
 <!-- paper or lectures -->
 [second_largest_element_Adversary]:https://www.cse.unsw.edu.au/~cs2011/lect/2711_Adversary.pdf
