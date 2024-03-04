@@ -2225,7 +2225,7 @@ check(R_1)
       - It means $𝜆 ∈ A \cap B$
       - > Transition from sB in MB produces a transition from sAB = sA. 
         TODO IMHO this should not be contained except when $s_A$ is final so that we can directly go into $M_B$.
-        - It is same as [Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou] $s_A\xRightarrow{\epsilon}s_B\xRightarrow{i}(s_B,i)$
+        - It is same as [Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou] ~~$s_A\xRightarrow{\epsilon}s_B\xRightarrow{i}(s_B,i)$~~
         - This is also impled in the example 3 $01$ [see][overleaf_automata].
   - $A\cup B$
     - > {sA∪B} if 𝜆 ∈ A ∪ B
@@ -2233,7 +2233,7 @@ check(R_1)
   - [Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou]
     - $A\cup B$
       - here $(s,e,sl),(s,e,s2)$ are both $e$ so "nondeterministically".
-      - $(s,ew)=(s_w)|-_{M}(s_1,w)$
+      - $(s,ew)=(s,w)|-_{M}(s_1,w)$
     - $\circ$ see p56 concatenation
     - $AB$ uses $\epsilon$ which the book doesn't use.
     - $A^*$
@@ -11197,12 +11197,31 @@ A  E /|\
           state $k$.
         - It is based on definition (2~4) of "regular" in p62.
       - compared with FIGURE 4 in section 9.4, here we considers $R(k, k, k - 1)^*$ which is necessary for considering whether reachable in the Warshall’s Algorithm.
+        - This is also implied in reference "The O(n3) algorithm for the reflexive-transitive closure is from" in [Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou]
         - these 2 algorithms are similar because we can see finite automaton as one *graph* where the string is similar to the path.
       - This proof uses the **recursive** property of the regular set.
     - In summary,
       it is based on $\cup\{R(l,j, n) : q_j \in F\}$ -> 
       $R(i,j,O)\xRightarrow{\text{induction}}R(i,j, n)$ where $R(i,j,O)$ is one step difference which doesn't pass any state intermediately and 
       $R(i,j,k+1)$ is similar to the Warshall’s Algorithm.
+- [x] 28
+  - "distinguishable" here is ~~different from~~ similar to  [Introduction_Automata_Theory_Languages_and_Computation] where it is based on whether accepting.
+    Here it is based on accepting w.r.t. one specific $L$ instead of the recognized language.
+  - use the contrapositive proposition.
+  - Also see 13.3-61-b) where if $x$ and $y$ are indistinguishable then *possibly* $f(s_0,x)\neq f(s_0,y)$
+- [x] 29
+  - using 28, there are $n$ strings $x_{1\sim n}$ and 
+    $f(s_0,x_{i})\neq f(s_0,x_{j}),(i,j)\in S\times S\wedge i\neq j,S=\{1,2,\cdots,n\}$
+- [ ] 30
+  - $2^{n-1}$ because only $n-1$ bits in $n$ bits can be chosen.
+  - 
+  - see the ans
+    - end [meaning](https://cs.stackexchange.com/a/14009/161388)
+    - Based on 31, here $xz\in L,yz\notin L\Rightarrow L\setminus x\neq L\setminus y$
+      - > If x and y are two bit strings of length n that differ in bit i
+        implies x and y are distinct and we choose *one arbitrary distinct bit*.
+        So x and y are distinguishable based on the above $L\setminus x\neq L\setminus y$
+- [ ] 31 see the ans 
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
