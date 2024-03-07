@@ -14,6 +14,16 @@ IMHO we should do the following correction: 1. By cycle definition https://en.wi
 Here are some clarification: 1. "Note (in the case of products as above" may mean $(a_ka_{k-1})(a_{k-1}a_{k-2})\cdots (a_2a_1)$ can be written as $(a_2a_1)(a_3 a_2)\cdots (a_{k-1}a_{k-2})(a_ka_{k-1})$. This is shown in https://en.wikipedia.org/wiki/Cyclic_permutation#Properties and https://math.stackexchange.com/a/3420633/1059606 (Notice we should execute the right factor first as wikipedia says). 2. "does not use any transposition *more than once*" is due to permutation is decomposed into one or more *disjoint* cycles.
 
 More specifically, this answer shows the example of $\{a^ib^jc^k \mid i> j\}$ where $i,j,k\geq 0$ are trivially met since we normally *won't remove* symbols in the construction process. The $i<j,i\neq k$ cases are similar. Then we can use $S_1 \vert S_2$ to unionize them which solves the OP's problem as Ryan Dougherty's comment says.
+
+IMHO, "Briefly, the Cantor's diagonal argument reads as follow:" is a bit confusing because ["Cantor's diagonal argument"](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Uncountable_set) isn't related with the "injective function" and it proves by constructing one string not in the countable set $T$.
+
+1. More specifically about how to use "Cantor's diagonal argument": This is similar to exercise 2.5-38 in Discrete Mathematics and Its Applications 8th by Kenneth Rosen. The answer by the book has "Hint: First set up a *one-to-one correspondence* between
+the set of real numbers between 0 and 1 and a subset of
+these functions. Do this by associating to the real number
+$0.d_1d_2 … d_n …$ the function f with $f(n) = d_n$". It then concludes the set of the *total* function is countable and then the set of all functions including both total and *partial* functions is also countable.
+
+Then we follow http://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Real_numbers which constructs "a bijection from (0, 1) to R" in the proof process.
+2. Rushabh Mehta's answer complements Tsemo Aristide's comments where $\phi$ maps $f$ to the subset of $\mathbb{N}$
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -517,6 +527,8 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
       where NP-hard cares about "reducible"
       and NP cares about "solve", i.e. "solved on a deterministic sequential machine" with "polynomial" time.
       Since NP doesn't explicitly say it can't be "solved on a deterministic sequential machine" with "polynomial" time, so $P\subseteq NP$.
+- TODO [proof](https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem#Proof) of the Cook-Levin theorem
+- [Not all problems are NP](https://qr.ae/psGMxs)
 ## 4
 ### 4.1
 - Also see [csapp_doc] "modular_overflow" for relations between modular arithmetic and 2's complement.
@@ -2273,6 +2285,57 @@ check(R_1)
   - corresponding [PDA](https://en.wikipedia.org/wiki/Pushdown_automaton#Example)
     - Here $AZ,AA$ includes the original top and the pushed symbol.
     - Here [both modes](https://en.wikipedia.org/wiki/Pushdown_automaton#Formal_definition) of accepting are met.
+### 13.5
+- > finite-state automata to compute relatively simple functions such as the sum of two numbers
+  [see](https://cs.stackexchange.com/a/49348/161388)
+- > we can include the five-tuple (s2, 0, s2, 0, R)
+  Here we should also have (s2, 1, s2, 1, R) because "(s1, 0, s2, 0, R)" only implies the *old* 0 is unchanged but after R we may have the symbol *0 or 1*.
+- > many possible ways to define how to recognize sets using Turing machines
+  See [this](https://human.libretexts.org/Bookshelves/Philosophy/Sets_Logic_Computation_(Zach)/03%3A_Turing_Machines/12%3A_Turing_Machine_Computations/12.08%3A_Variants_of_Turing_Machines)
+  > We allow the machine to write a symbol to the tape and move at the same time, other definitions allow *either writing or moving*.
+- EXAMPLE 2
+  - > the machine will terminate in the nonfinal state s2
+    > will terminate in the final state s3
+    So s2 should be similar to s3 where both has no something like $(s2, 0, s2, 0, R)$.
+    - Here (s0, B, s2, 0, R) and (s1, B, s2, 0, R) may unnecessarily change tape because we only want to *recognize* strings.
+    - Then the machine will *halt* at the *nonfinal* state $s_2$ due to the undefined transition rule, so the string is not recognized.
+      So we *also don't need* "(s0, B, s2, 0, R) and (s1, B, s2, 0, R)" where we may halt at the *nonfinal* state $s_{0,1}$.
+  - > the bit string has at least two bits and the second bit of the input string is a 1
+    "at least two bits" is implied by "(s0, B, s2, 0, R) and (s1, B, s2, 0, R)".
+    "the second bit of the input string is a 1" is implied by "(s1, 1, s3, 1, R)".
+  - Also see this example which shows the *terminating transition rule* $(s_0, B, s_2, B, R)$ containing 
+  $B$
+- EXAMPLE 3
+  Here "(s3, M, s5, M, R)" is used when "MMMMMM" after "(s2, 1, s3, M, L)" for the 4th symbol 1 in "MMM1MM".
+  - Here "(s5, M, s6, M, R)" is to ensure $n\ge 1$ in "$\{0^n1^n ∣ n \ge 1\}$".
+- Normally, "number-theoretic function" has positive integer domain instead of the tuple of integers.
+- EXAMPLE 4
+  Here we have $n_1+1+1+n_2+1$ characters and we want $n_1+n_2+1$ 1s left.
+  so "(s0, 1, s1, B, R)" removes the *first* character
+  and "(s1, ∗, s3, B, R), (s1, 1, s2, B, R)" removes the *2nd* where "(s1, ∗, s3, B, R)" already has all 1s left so we terminate and 
+  after "(s1, 1, s2, B, R)" we need to ensure all left characters are 1s by "(s2, 1, s2, 1, R), and (s2, ∗, s3, 1, R)".
+- TODO 
+  > build up multitape Turing machines for the composition of functions
+  [1](https://www.hse.ru/mirror/pubs/share/167262307) [2](https://gyires.inf.unideb.hu/GyBITT/26/ch04s05.html)
+- > using (2 + 3n)-tuples to describe the Turing machine when n tapes are used
+  see [this](https://en.wikipedia.org/wiki/Multitape_Turing_machine#Formal_definition) where 2 corresponds to $Q\setminus F,Q$
+- > we can restrict the tape to be infinite in only one direction
+  i.e. only right direction when transformed from DFA.
+- > While the Church Turing Thesis is generally accepted as true, it's important to clarify that it's *not formally proven*
+  [See](https://www.studysmarter.co.uk/explanations/computer-science/theory-of-computation/church-turing-thesis/#:~:text=While%20the%20Church%20Turing%20Thesis,nature%20of%20'effective%20computability'.)
+- Definition 4
+  here a computer program always has one [corresponding Turing machine](https://en.wikipedia.org/wiki/Turing_completeness#Non-mathematical_usage), also [this](https://cs.stackexchange.com/a/142895/161388)
+  TODO proof
+- > That is, no Turing machine exists that
+  is based on "the Church–Turing thesis".
+- > It is fairly straightforward, using a *countability* argument, to show that there are number-theoretic functions that are not computable (see Exercise 39 in Section 2.5).
+  - ~~TODO~~ [Why doesn't Cantor's diagonal argument also apply to *natural numbers*?](https://math.stackexchange.com/a/35109/1059606)
+    [See](https://math.stackexchange.com/questions/35107/why-doesnt-cantors-diagonal-argument-also-apply-to-natural-numbers#comment10397344_35109)
+- > In a nondeterministic Turing machine, allowed steps are defined using a relation consisting of five-tuples rather than using a partial function
+  here (relation,partial) may corresponds to [(multivalued,well-defined)](https://math.stackexchange.com/a/271615/1059606)
+- > For a problem to be in NP, it is necessary only that there be a *nondeterministic* Turing machine that, when given a true statement from the set of statements addressed by the problem, can *verify* its truth in *polynomial* time
+  "verify" should be ["solvable"](https://en.wikipedia.org/wiki/NP_(complexity))
+- Although [a non-deterministic Turing machine can be converted into a deterministic Turing machine](https://cs.stackexchange.com/a/16797/161388) ([also](https://cs.stackexchange.com/a/148937/161388)), but [the running time may be not same](https://cs.stackexchange.com/a/93151/161388) for them
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -3531,7 +3594,8 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
 - [ ] 37
   > a string of symbols from a finite alphabet
   similar to 29, here the string is obviously finite to be stored on the computer.
-  then the number is $\underset{i=1}{\overset{n}{\bigcup}} S_i,|S_i|=26^i$ by changing 2 to 26.
+  then the number is $\underset{i=1}{\overset{n}{\bigcup}} S_i,|S_i|=26^i$ by changing 2 in exercise 29 to 26 (Here $\mathbb{N}$ implied by 
+  $n$ is countable).
   - ans
     - > all computer programs in a particular language is a *subset* of the set of all strings of a finite alphabet
       because *valid word strings* are limited.
@@ -3546,6 +3610,13 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - as the ans said, here must forbid one of $0.1\overline{0}$ and 
     $0.0\overline{1}$
     since $0.1\overline{0}=0.0\overline{1}\Rightarrow f(0.1\overline{0})\neq f(0.0\overline{1})$ contradict with the function inherent property that each preimage has one **unique** image.
+  - Notice here the function is only one subset of all [number-theoretic functions](https://en.wikipedia.org/wiki/Arithmetic_function) and it only considers [total functions](https://math.stackexchange.com/questions/3103275/is-the-set-of-functions-from-mathbbn-to-mathbbn-countable#comment10397361_3103279).
+    - >  a *subset* of the set of all functions from the set of positive integers to the set f0; 1; 2; 3; 4; 5; 6; 7; 8; 9g
+      is because of the above "total functions" and 
+      > A few functions are left out, because of forbidding representations such as 0:239999 : : :.
+      > with ambiguity resolved by forbidding the decimal to end with an infinite string of 9’s
+      as [this](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Real_numbers) says
+      > f 2(1000...) = 0.1000...2 = 1/2 and f 2(0111...) = 0.0111...2
 - [x] 39
   "com-puter program" number is countable, i.e. the set $S$ of com-puter programs.
   but the subset $T$ corresponding to 38 in the set $V$ of all functions may be not countable.
@@ -3554,6 +3625,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   - > We say that a function is computable if there is a com-puter program that finds the values of this function
     > Consequently, there are only a countable number of computable functions
     so for the set $P$ of computable functions, i.e. com-puter program that finds the values of one function, $|P|<|S|$.
+  - This is similar to [this](https://www.researchgate.net/post/A_simple_existence_proof_for_non-computable_functions)
 - [ ] 40
   hint's proof
   $\text{suppose }f(s)=T\Rightarrow \exists s\in T=f(s),s\notin f(s),\text{ then contradiction}\blacksquare$
@@ -3564,6 +3636,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     [comparison_of_cardinality_for_infinite_must_use_onto_and_one_to_one] shows not onto doesn't mean the opposite $|S|\le |\mathcal{P}(S)|$
     - here should be $|S|\neq |\mathcal{P}(S)|$
   - this is same as the wikipedia [proof](https://en.wikipedia.org/wiki/Cantor%27s_theorem#Proof), see "Equivalently, and slightly more formally" if having questions after reading the proof.
+    and same as [this](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#General_sets) where "every s in S ... T is not equal to f(s)" so we find $T$ which is not ~~onto~~ in the image of f.
 - [ ] 41
   1. $\forall a\in A$
     based on the assumption, let $a$ be the first the element, then because both $f$ and $g$ are injective, so the sequence is [well-defined](https://en.wikipedia.org/wiki/Well-defined_expression) which is same as what [Schröder_Bernstein_theorem] shows where [the partition](https://en.wikipedia.org/wiki/Partition_of_a_set#Examples) imply this.
@@ -11214,14 +11287,55 @@ A  E /|\
     $f(s_0,x_{i})\neq f(s_0,x_{j}),(i,j)\in S\times S\wedge i\neq j,S=\{1,2,\cdots,n\}$
 - [ ] 30
   - $2^{n-1}$ because only $n-1$ bits in $n$ bits can be chosen.
-  - 
   - see the ans
     - end [meaning](https://cs.stackexchange.com/a/14009/161388)
     - Based on 31, here $xz\in L,yz\notin L\Rightarrow L\setminus x\neq L\setminus y$
       - > If x and y are two bit strings of length n that differ in bit i
         implies x and y are distinct and we choose *one arbitrary distinct bit*.
         So x and y are distinguishable based on the above $L\setminus x\neq L\setminus y$
-- [ ] 31 see the ans 
+- [ ] 31 see the ans
+### 13.5
+- [ ] ~~13~~ 15 corresponding to EXAMPLE 3.
+  - Here $s_1$ means 0 in one pair is changed to M
+    $s_2$ means we have meet the end of the left *unmatched* string
+    $s_3$ means the rest 1 in one pair is changed to M
+    $s_4$ means we still have 0 unmatched
+    $s_5$ means we have no 0 unmatched
+    $s_6$ means we have $n\ge 1$.
+  - see the ans
+    - > Otherwise, the initial 0 is changed to an M 
+      (s0, 0, s 1, M, R ),
+      > the machine skips past all the intervening 0s and 1s
+      (s1, 0, s 1, 0, R ), (s1, 1, s 1, 1, R )
+      > until it either comes to the end of the input string or else comes to an M. At this point, it backs up one square and enters state s2.
+      (s1, M, s 2, M, L ), (s1, B, s 2, B, L )
+      > there must be a 1 here if the string is acceptable.
+      (s2, 1, s 3, M, L )
+      > it stays in s3 as long as it sees 1s,
+      (s3, 1, s 3, 1, L ), 
+      > then *stays* in s4 as long as it sees 0s.
+      (s3, 0, s 4, 0, L ), (s4, 0, s 4, 0, L )
+      > Eventually either it encouters a 1 while in s4 at which point it halts without accepting or else it reaches the rightmost M that had been written over a 0 at the start of the string.
+      Here $1$ is omitted
+      ~~(s4, M, s 0, M, R )~~
+      > so it had better be the case that there are no more 1s either; this is accomplished by the transitions (s3, M, s5, M, R) and (s5, M, s6, M, R), and s6 is a final state.
+      (s5, M, s6, M, R) achieves "no more 1s either", i.e. 1s are all changed to M.
+      > If it is in s4 when this M is encountered, things start all over again,
+      (s4, M, s 0, M, R )
+    - In summary,
+      0->1: it *only* accepts starting 0 [(s0, 0, s 1, M, R )],
+      1->2: then moves right until the ending *B/M* [(s1, 0, s 1, 0, R ), (s1, 1, s 1, 1, R ), (s1, M, s 2, M, L ), (s1, B, s 2, B, L )],
+      2->3: then *only* accepts ending 1 before the leftmost B/M [(s2, 1, s 3, M, L )].
+      3->4/5: Then there may be 
+      1. no 0s [(s3, M, s 5, M, R )] 
+        - 5->6: There should be also no 1s, i.e. s5 *only* accepts M [(s5, M, s 6, M, R )].
+      2. some 0s before 1s (if no 0s before 1s, then (s5, M, s 6, M, R ) will not accept it) and 1s should be more than 0s (if not, then (s2, 1, s 3, M, L ) will not accept this string because of (s2,0)) [(s3, 1, s 3, 1, L ), (s3, 0, s 4, 0, L )]
+        - 4->0: trivially we *don't accept 1s* and want to traverse 0s where afterwards restart the above process, so only [(s4, 0, s 4, 0, L ), (s4, M, s 0, M, R )].
+        - so 1s before 0s is impossible.
+      3. Notice here due to in the middle of the string, so *no (s3,B)*.
+    - Also see [this](https://cstaleem.com/turing-machine-for-0n1n/) where the basic idea is same as this exercise by manipulating with *one pair of 0 and 1* at each iteration.
+- [ ] 31
+- [ ] 32
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -11446,7 +11560,8 @@ A  E /|\
 [the_nature_of_computation]:./other_books/the-nature-of-computation-1nbsped-0199233217-9780199233212_compress.pdf
 [algebraic_graph_theory]:./other_books/algebraic_graph_theory.pdf
 [Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou]:./other_books/Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou.pdf
-[Introduction_Automata_Theory_Languages_and_Computation]:./other_books/Introduction_Automata_Theory_Languages_and_Computation.pdf
+<!-- J. E. Hopcroft, R. Motwani, and J. D. Ullman, Introduction to Automata Theory, Languages, and Computation -->
+[Introduction_Automata_Theory_Languages_and_Computation]:./other_books/Introduction_Automata_Theory_Languages_and_Computation.pdf 
 
 <!-- geeksforgeeks -->
 [Detect_cycle_Directed_Graph]:https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
