@@ -11295,13 +11295,24 @@ A  E /|\
         So x and y are distinguishable based on the above $L\setminus x\neq L\setminus y$
 - [ ] 31 see the ans
 ### 13.5
+- 2,8 skipped
+- [ ] 4
+  - b) all ones
+  - see the ans
+    - notice here  (s0 , B, s 1, B, L ) instead of  (s0 , B, s 1, B, R ).
+- [x] 6
+  - $(s_0,0,s_0,0,R),(s_0,1,s_0,1,R),(s_0,B,s_1,1,R)$ where $s_1$ is accepted.
+- [x] 10
+  - $(s_0,0,s_0,0,R),(s_0,1,s_1,1,R),(s_1,1,s_2,0,L),(s_1,0,s_0,0,R),(s_2,1,s_3,0,L)$ where $s_3$ is accepted.
+  - see the ans where it uses $(s_2,1,s_3,0,R)$ instead of 
+    $(s_2,1,s_3,0,L)$
 - [ ] ~~13~~ 15 corresponding to EXAMPLE 3.
   - Here $s_1$ means 0 in one pair is changed to M
     $s_2$ means we have meet the end of the left *unmatched* string
     $s_3$ means the rest 1 in one pair is changed to M
     $s_4$ means we still have 0 unmatched
     $s_5$ means we have no 0 unmatched
-    $s_6$ means we have $n\ge 1$.
+    $s_6$ means we have ~~$n\ge 1$~~ all 1s changed to M.
   - see the ans
     - > Otherwise, the initial 0 is changed to an M 
       (s0, 0, s 1, M, R ),
@@ -11318,8 +11329,8 @@ A  E /|\
       > Eventually either it encouters a 1 while in s4 at which point it halts without accepting or else it reaches the rightmost M that had been written over a 0 at the start of the string.
       Here $1$ is omitted
       ~~(s4, M, s 0, M, R )~~
-      > so it had better be the case that there are no more 1s either; this is accomplished by the transitions (s3, M, s5, M, R) and (s5, M, s6, M, R), and s6 is a final state.
-      (s5, M, s6, M, R) achieves "no more 1s either", i.e. 1s are all changed to M.
+      > so it had better be the case that there are *no more 1s* either; this is accomplished by the transitions (s3, M, s5, M, R) and (s5, M, s6, M, R), and s6 is a final state.
+      (s5, M, s6, M, R) achieves "no more 1s either" by excluding the (s5,1) situation [here (s5,0) is impossible because (s3, M, s5, M, R) and (s3, 0, s4, 0, L) imply it doesn't change to s4 after skipping all 1s by (s3, 1, s3, 1, L), so no 0s left.], i.e. 1s are all changed to M.
       > If it is in s4 when this M is encountered, things start all over again,
       (s4, M, s 0, M, R )
     - In summary,
@@ -11334,6 +11345,28 @@ A  E /|\
         - so 1s before 0s is impossible.
       3. Notice here due to in the middle of the string, so *no (s3,B)*.
     - Also see [this](https://cstaleem.com/turing-machine-for-0n1n/) where the basic idea is same as this exercise by manipulating with *one pair of 0 and 1* at each iteration.
+- [ ] 16
+  - compared with 15, here we add $(s_1, 0, s_2, M, R)$ and all later subscripts are added by 1.
+  - see the ans
+    - Here $n\ge 0$ so "(s0; B; s5; B; R)" where $s_5$ is accepted.
+    - and "(s3, 0, s4, 0, L), (s3, M, s5, M, R), (s4, 0, s4, 0, L), (s4, M, s0, M, R), and (s5, M, s6, M, R)" are changed to "(s4; 0; s4; 0; L), (s4; M; s0; M; R)" corresponding to "(s3, 0, s4, 0, L), ... (s4, M, s0, M, R)" after adding the subscript.
+      Here "(s0; M; s5; M; R)" is to ensure the *correct pair* of 0s and 1s, i.e. the number of 0s are two times the number of 1s.
+      - In summary, after transforming *one pair* of two 0s and one 1s after "(s3; 1; s4; M; L)"
+        it traverses *back until one M* by "(s4; 0; s4; 0; L), (s4; 1; s4; 1; L), (s4; M; s0; M; R)"
+        and then checks whether all strings are M by "(s0; M; s5; M; R)".
+        If so then 0s are twice the numeber of 1s.
+        - Notice the above "until one M" ensures "(s0; B; s5; B; R)" can only occur when empty string
+          since $s_0$ either occur at the beginning
+          or after "(s4; M; s0; M; R)" which ensure at least one pair where it must stop *inside* the string, so the latter case can't be $(s_0,B)$.
+      - Then 15 can be also changed similarly as 16
+        "(s3, 0, s4, 0, L), (s4, 0, s4, 0, L), (s4, M, s0, M, R)," are combined into "(s3, 0, s3, 0, L), (s3, M, s0, M, R)" and then adding the subscript "(s4, 0, s4, 0, L), (s4, M, s0, M, R)"
+        and "(s3, M, s5, M, R)," are changed to "(s4; M; s0; M; R)" where s4 are kept after a sequence of 1s by (s4; 1; s4; 1; L) or a sequence of 1s and 0s by "(s4; 0; s4; 0; L), (s4; 1; s4; 1; L)".
+        and "(s5, M, s6, M, R)." are changed to "(s0; M; s5; M; R)"
+        - In summary, in exercise 15 s5 is to ensure no 0s unchanged to M and s6 is to ensure no 1s unchanged to M
+          while here $(s4, M, s0, M, R),(s0; M; s5; M; R)$ is to ensure *all 0s and 1s* are changed to M.
+          So the latter one uses one less state.
+          - And here it doesn't use $s_{4,5}$ to differentiate between 0 and M before 1s, so *one less state again*.
+            See the above "combined into ... changed to"
 - [ ] 31
 - [ ] 32
 # miscs with sympy usage
