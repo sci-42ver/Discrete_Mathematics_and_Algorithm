@@ -24,6 +24,10 @@ $0.d_1d_2 … d_n …$ the function f with $f(n) = d_n$". It then concludes the 
 
 Then we follow http://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Real_numbers which constructs "a bijection from (0, 1) to R" in the proof process.
 2. Rushabh Mehta's answer complements Tsemo Aristide's comments where $\phi$ maps $f$ to the subset of $\mathbb{N}$
+
+You seems to only prove the TM accepts $\{a^nb^nc^n| n \geq 0\}$, but you doesn't prove that the TM doesn't accept other strings.
+
+Re to "why would you restrict the lemma to $n\neq m$": because you says "such that the machine *never enters a final state*". But the machine will enter a final state for $X^kq_00^nY^k1^m,n=m$.
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -58,6 +62,14 @@ $ tree --noreport -fp
 # should use the absolute path.
 $ ln -s $(pwd)/latexindent_pl.yaml miscs_learning/latexindent_pl.yaml
 ```
+# where to find the detailed answer for odd exercises
+- stackexchange
+- [filo](https://askfilo.com/user-question-answers-algebra-2/construct-a-turing-machine-that-computes-the-function-for-35383437353333)
+- **keywords** using google like "Turing machine function f(n1, n2) = min(n1,n2)" for exercise 13.5-25 "Construct a Turing machine that computes the function f (n1, n 2) = min (n1, n 2) for all nonnegative integers n1 and n2"
+## not free
+- numerade
+- quizlet
+- [chegg](https://www.androidauthority.com/what-is-chegg-3273806/)
 # similar exercises
 - 6-supplementary 32 with something in chapter 5.
 - 
@@ -10916,6 +10928,13 @@ A  E /|\
           - Here $M_i$ are probably *all possible* generated words at *each phase*.
             > One strategy is to *investigate phases* the grammar works through
             where $\sent{G}$ is *all possible* generated words.
+            - > While 2. is usually clear by definition of the  Mi
+              here is because $\sent{G}$ is "the set of sentences that can be derived from S".
+          - Both $\sent{G}\subseteq M$ and $M\subseteq \sent{G}$ are based on *induction*
+            - Example
+              Here only the final state $M_2$ corresponds to $L$
+              And all $M_{0\sim 2}$ *can be generated* so all of them are in 
+              $\sent{G}$
           - ~~TODO~~ ["non-linear grammars"](https://www.sanfoundry.com/compilers-questions-answers-right-left-linear-grammar-1/#:~:text=Explanation%3A%20Grammar%20is%20non%2Dlinear,on%20the%20right%2Dhand%20side.).
             means each production can *implicitly* add more than 1 *terminal sequences*.
             - Here we prefers linear
@@ -11344,10 +11363,10 @@ A  E /|\
         - 4->0: trivially we *don't accept 1s* and want to traverse 0s where afterwards restart the above process, so only [(s4, 0, s 4, 0, L ), (s4, M, s 0, M, R )].
         - so 1s before 0s is impossible.
       3. Notice here due to in the middle of the string, so *no (s3,B)*.
-    - Also see [this](https://cstaleem.com/turing-machine-for-0n1n/) where the basic idea is same as this exercise by manipulating with *one pair of 0 and 1* at each iteration.
+    - Also see [this][cstaleem_0_n_1_n] where the basic idea is same as this exercise by manipulating with *one pair of 0 and 1* at each iteration.
 - [ ] 16
   - compared with 15, here we add $(s_1, 0, s_2, M, R)$ and all later subscripts are added by 1.
-  - see the ans
+  - see the ans which is solution_1 when exercise 15 is solution_0
     - Here $n\ge 0$ so "(s0; B; s5; B; R)" where $s_5$ is accepted.
     - and "(s3, 0, s4, 0, L), (s3, M, s5, M, R), (s4, 0, s4, 0, L), (s4, M, s0, M, R), and (s5, M, s6, M, R)" are changed to "(s4; 0; s4; 0; L), (s4; M; s0; M; R)" corresponding to "(s3, 0, s4, 0, L), ... (s4, M, s0, M, R)" after adding the subscript.
       Here "(s0; M; s5; M; R)" is to ensure the *correct pair* of 0s and 1s, i.e. the number of 0s are two times the number of 1s.
@@ -11367,6 +11386,210 @@ A  E /|\
           So the latter one uses one less state.
           - And here it doesn't use $s_{4,5}$ to differentiate between 0 and M before 1s, so *one less state again*.
             See the above "combined into ... changed to"
+        - See exercise 15, there are also other ways to construct $0^n 1^n$, so I didn't dig into these equivalent ways.
+    - [This one (let it be solution_2)][uchicago_0_n_1_n] is better which removes $(q_0,\$,q_4,\$,R)$ based on 
+      [cstaleem_0_n_1_n] due to $n\ge 1$
+      because it can be easily generalized to $0^n 1^n 2^n$.
+      - (q1, X, R): marks the first 0 as X
+        q0 Y (q3, Y, R): it moves to the right most symbol because all 0s has been changed to X
+        
+        (q1, 0, R),(q1, Y, R): goes to the first/second/... 1 
+        (q2, Y, L): marks it as Y
+
+        (q2, 0, ~~R~~L),(q2, Y, L):  goes left to the second 0,
+        (q0, X, R): marks it as X
+
+        q3 Y (q3, Y, R): it moves to the right most symbol
+        (q4, B, R) : then accepts
+      - Notice the above assumes the string is $0^n 1^n$
+        if not 
+        > All *undefined* transitions means stuck, and the input is rejected.
+        - Since we think 0->X,1->Y as one valid operation, so we assign one state
+          and "all the 0’s and 1’s are marked" is also one state
+          and "it moves to the right most symbol and then accepts" is one state to ensure 1s *matching* 0s.
+          ~~and all 1s is one state.~~
+      - compared with [this](https://courses.cs.washington.edu/courses/cse322/04sp/Lect8.pdf) which uses only X and uses _(B) to mark the left end.
+        Here 012012 becomes XYZ012 and we goes into $q_4$, and rejects when XYZ0 is not XYZB.
+        But the latter link will go to the iteration "GOTO 3a" when 010010 becomes _XX010
+        - ~~notice although 010001100 is accepted unnecessarily, 001100010 won't be accepted becomes $_\overbrace{XXXXXX}^{6\text{ times }X}10$ and is stuck at $q_{skip0}$.~~
+        - "if w is not in $00^*11^*00^*$, REJECT; else," tests the form of the *whole* string at the beginning to be 
+          $0^n 1^n 0^n,n\ge 1$ using $q_3,1,R,q_{REJ}$
+          where $n=0$ is already cared by $q_0,_,R,q_{ACC}$.
+          So concatenation of multiple $0^n 1^n 0^n,n\ge 1$ like $010001100,001100010$ is disallowed.
+      - ~~TODO~~ ~~there may be [no one strict proof](https://cs.stackexchange.com/q/166978/161388) that one Turing machine recognizes one language, similarly for computing one function.~~
+        [strict proof][proof_Turing_Machine_recognize_language] which is same as definition 2 
+        > T is said to recognize a subset A of V∗ if x is recognized by T *if and only if* x belongs to A.
+        - > $w = 0^n1^m0x$ for $n, m \geq 1$ and $x \in \Sigma^*$
+          - $n=m$ which is similar to $w = 0^n1^m,m>n$
+            $q_0w \mapsto^* X^nq_0Y^n0x \mapsto^* X^n Y^n q_30x$
+          - $m>n$ similar to $w = 0^n1^m,m>n$
+            with $q_0w \mapsto^* X^nq_0Y^n1^{m - n}0x \mapsto^* X^nY^nq_31^{m - n}0x$
+          - $n>m$
+            - $1\not\subseteq x$
+              $$
+              q_0w \mapsto^* X^mq_00^{n - m}Y^m0^k \mapsto^* X^{m + 1}0^{n - m - 1}Y^mq_10^k \mapsto^* X^{m + 1}0^{n - m - 1}Y^m 0^kq_1B
+              $$
+            - $1\subseteq x$
+              $$
+              q_0w \mapsto^* X^mq_00^{n - m}Y^m0x \mapsto^* X^{m + 1}0^{n - m - 1}Y^mq_10x \mapsto^* X^{m + 1}0^{n - m - 1}Y^m 0^k' q_1 1 \mapsto^* X^{m + 1}0^{n - m - 1}Y^m 0^{k'-1}q_2 0Y \mapsto^* X^{m + 1}0^{n - m - 1}Y^{m-1} q_2 Y0^{k'}Y
+              $$
+          
+          Thanks for your patient explanation. 1. I add some correction of your answer based on my understanding. Hope the correction isn't wrong. 2. For the last case, I proved as the following hinted by your answer. Hope they are right. 2.1 $n=m$ which is similar to $w = 0^n1^m,m>n$: $$q_0w \mapsto^* X^nq_0Y^n0x \mapsto^* X^n Y^n q_30x$$ 2.2 $m>n$ similar to $w = 0^n1^m,m>n$: $$q_0w \mapsto^* X^nq_0Y^n1^{m - n}0x \mapsto^* X^nY^nq_31^{m - n}0x$$
+
+          2.3 $n>m$ 2.3.1 $1\not\subseteq x$ we have $$q_0w \mapsto^* X^mq_00^{n - m}Y^m0^k \mapsto^* X^{m + 1}0^{n - m - 1}Y^mq_10^k \mapsto^* X^{m + 1}0^{n - m - 1}Y^m 0^kq_1B$$ 2.3.2 $1\subseteq x$ we have $$q_0w \mapsto^* X^mq_00^{n - m}Y^m0x \mapsto^* X^{m + 1}0^{n - m - 1}Y^mq_10x \mapsto^* X^{m + 1}0^{n - m - 1}Y^m 0^{k'} q_1 1 \mapsto^* X^{m + 1}0^{n - m - 1}Y^m 0^{k'-1}q_2 0Y \mapsto^* X^{m + 1}0^{n - m - 1}Y^{m-1} q_2 Y0^{k'}Y$$
+      - compared with the book ans which uses $s_{1,2,3}$ to mark the pair of 0 and 1
+        for $0^n 1^n$ while uchicago uses $s_{1,2}$.
+    - TODO [using 2 tapes](https://cs.stackexchange.com/q/106557/161388)
+- [ ] 17 see [uchicago_0_n_1_n] 
+  - since the book ans for exercise 15,16 uses pair like $X0000\cdots 111\cdotsY$, it is not direct to be transformed to $0^n 1^n 2^n$
+  - (s0, B, s9, B, L) for $\lambda$ empty string
+    "(s0, 0, s1, 0, L), (s1, B, s2, E, R)" marks the left end.
+    "(s2, M, s2, M, R), (s2, 0, s3, M, R)" changes the rightmost 0 to M (i.e. $q_0$ in [uchicago_0_n_1_n])
+    "(s3, 0, s3, 0, R), (s3, M, s3, M, R), (s3, 1, s4, M, R)" changes the rightmost 1 to M (i.e. $q_1$ in [uchicago_0_n_1_n])
+    "(s4, 1, s4, 1, R), (s4, M, s4, M, R), (s4, 2, s5, M, R)" changes the rightmost 2 to M (i.e. $q_2$ in [uchicago_0_n_1_n])
+    - "(s5, 2, s5, 2, R), (s5, B, s6, B, L)" continues to the end and goes back
+      Then "(s6, M, s8, M, L), (s8, M, s8, M, L), (s8, E, s9, E, L)" to check through the whole string backwards.
+      - IMHO we can check forwards without "continues to the end and goes back" each time like [uchicago_0_n_1_n].
+    - "(s7, 0, s7, 0, L), (s7, 1, s7, 1, L), (s7, 2, s7, 2, L),(s7, M, s7, M, L), (s7, E, s2, E, R)," continues back to the left end and redo the above *iteration*.
+  - This one is very similar to [uchicago_0_n_1_n]
+    - [uchicago_0_n_1_n] doesn't need the left end marker for $0^n 1^n$ because $X,Y$ can differentiate so the tape will stop at X (similarly for $0^n 1^n 2^n$)
+      but here since all markers are M, so the tape *can't differentiate* between the markers for 0 and 1 and then *stop earlier* when meeting with the marker for 0.
+- [x] 18 same as exercise 6 by adding two 1s instead of "a 1".
+  - see the ans which achieves by preceding instead of appending.
+- [ ] 20
+  TODO strict proof of 20,22,25 for computing the function
+  - ~~$(s_0,1,s_1,1,R),(s_1,1,s_2,1,R),(s_2,1,s_3,1,R),(s_3,B,s_4,N,R),(s_3,1,s_4,E,R),(s_4,1,s_5,B,L),(s_5,1,s_6,B,R),(s_6,B,s_6,B,R),(s_6,E,s_1,1,R),(s_6,N,s_7,B,R)$~~
+    $$
+    (s_0,1,s_1,B,R),(s_1,1,s_2,B,R),(s_2,1,s_0,B,R)\;\text{change all met 1s to B, and }s_i\text{ means i times 1s}\\ 
+    (s_0,B,s_3,B,R),(s_1,B,s_3,1,R),(s_2,B,s_4,1,R),(s_4,B,s_3,1,R)\;\text{adds the corresponding number of 1s based on i for }s_i
+    $$ 
+    (Here $s_3$ is the accepted state)
+    - This is similar to [this](https://www.youtube.com/watch?v=aQUc__pfjaM) which uses $(v_1,#,v_2,1,L)$ corresponding to 
+      $(s_1,B,s_3,1,R)$
+      and similarly $(v_0,#,v_2,#,L)$
+  - see the ans ~~which is wrong because it erases nothing when $n=3$, i.e. $111$, where it halts at one nonfinal state $s_3$.~~
+    - It recognizes 4 1s with $11[s_4]11$
+      then $B[s_7]BB1$ and then $BB[s_8]B1\to BBB[s_0]1$
+    - Here it only erase 1s and halts when less than four 1s.
+      It *doesn't have one final state*.
+    - It uses $n+1$ 1s for $n$ as EXAMPLE 4 instead of $n$ 1s as the above assumes.
+- [ ] 22
+    $$
+    (s_0,1,s_1,E,L)\;\text{marks the right part of the pair of 1}\\
+    (s_0,B,s_n,B,L)\;\text{no 1s to double}\\
+    (s_1,B,s_2,1,R),(s_1,1,s_1,1,L)\;\text{adds the left part of the pair}\\
+    (s_2,1,s_2,1,R),(s_2,E,s_0,1,R)\;\text{redo the iteration}\\
+    $$
+    - For $111$ it has $E11\to 1E11\to 1111\to E1111\to \cdots$
+  - see the ans
+    - > s2 , scan left to first 1
+      means the rightmost 1.
+    - > (s2; B; s5; B; R)
+      means all 1s has been changed to 0 and all corresponding $n$ 1s have been appended
+    - > (s5; B; s6; B; R)
+      corresponds to $n=0$
+    - Notice for 20,22 and later exercises, it is complex and trifling to prove the TM constructed by myself is equivalent with the ans *each*.
+- [x] 24
+  - $(s_0,1,s_0,1,R),(s_0,\ast,s_1,1,R),(s_1,1,s_1,1,R),(s_1,B,s_2,1,R)$
+  - see the ans
+    - The above should be $(s_0,1,s_0,B,R)$
+    - It writes all 1s at the left.
+- [ ] 25
+    $$
+    (s_0,1,s_1,B,R)\;s_1\text{ means the left part of the pair of 1s is changed to }B\\
+    (s_1,1,s_1,1,R),(s_1,\ast,s_2,\ast,R)\;s_2\text{ means we go into }n_2\text{ part}\\
+    (s_2,E,s_2,E,R),(s_2,1,s_3,E,L)\;s_3\text{ means the right part of the pair of 1s is changed to }B\\
+    \text{Notice here we can't use B for }n_2\text{ marker of 1 because we want to skip all markers, so if all 1s  in }n_2 \text{ are changed to 1, we will go infinitely right}\\
+    (s_2,B,s_7,B,R)\;s_7\text{ means all 1s in }n_2\text{ are matched, so }n_1\ge n_2\\
+    (s_3,E,s_3,E,L),(s_3,\ast,s_4,\ast,L)\;s_4\text{ means we go back into }n_1\text{ part}\\
+    (s_4,1,s_6,1,L),(s_4,B,s_5,B,R)\;s_5\text{ means }n_2\ge n_1\Rightarrow f(n_1,n_2)=n_1\\
+    \text{Notice here we can use B for }n_1\text{ marker of 1 because we will stop at the }\textbf{rightmost}\text{ B}\\
+    (s_6,1,s_6,1,L),(s_6,B,s_0,B,R)\;s_6\text{ means there are 1s in }n_1\text{ unchanged to }B\\
+    $$
+  - The above one is similar to [this](https://www.geeksforgeeks.org/turing-machine-to-accept-maximum-of-two-numbers/) where both match the *pair* of 1s at each iteration and goes to the final when *one side have no 1s* (geeksforgeeks uses 0 instead of 1 and C instead of $\ast$. It calculates max instead of min although they are similar), but it doesn't change B/E back to the correct number of 1s
+    Also see [this](https://cs.stackexchange.com/q/166994/161388) which is based on [proof_Turing_Machine_recognize_language]
+    > Therefore for each input w there's *only one sequence* of IDs (one computation) we need to consider
+    so we can also have one **definite** sequence of mapping $\mapsto$ when $n_2</\ge n_1$
+    - > Hence change all Xs to Os and stop on leftmost side.
+      it implies changing Xs on the left side instead of all Xs including the right side.
+      similar to
+      > Hence convert all Xs to Os on *right-hand side* and stop.
+    - $q_0$: starting state of the process $K$ to change the pair of 0s
+      $q_1$: changing the left part of the pair
+      $q_7$: the left side is all changed to Xs
+      $q_2$: the process $K$ goes into the right side
+      $q_3$: the right side is all changed to Xs
+      $q_5$: changing the right part of the pair
+      $q_6$: the process $K$ goes back into the left side
+      $q_{4,9}$: final
+      $q_8$: meet the right end when changing the right side Xs back to 0s.
+    - > On receiving 0 in state q8, keep moving left and on receiving C move rightwards and change state to q9, accepting state for n2 >= n1.
+      maybe we can let $q_8$ be the final state since we already changes all necessary Xs to 0s.
+    - > But on receiving X replace it with 0 and move rightwards and change state back to q0.
+
+      we should *not replace X with 0* for q6 because q7 will "change every X with 0 while moving rightwards" for *the right side*.
+      If we also change *the left side* which is done by q6, then we will get $n_1+n_2$ 0s.
+      so we have $(q_6,X,q_0,X,R)$
+
+      - If we use the same machine as the original geeksforgeeks link, when $n_2\ge n_1$,
+        we have 
+        $$
+        q_0 0^{n_1}C 0^{n_2}\mapsto X q_1 0^{n_1-1}C 0^{n_2}\mapsto^* X 0^{n_1-1}q_1 C 0^{n_2}\mapsto X 0^{n_1-1} C q_2 0^{n_2} \mapsto X 0^{n_1-1} q_5 C X 0^{n_2-1} \mapsto X 0^{n_1-2} q_6 0 C X 0^{n_2-1} \mapsto^* q_6 X 0^{n_1-1} C X 0^{n_2-1} \mapsto 0 q_0 0^{n_1-1} C X 0^{n_2-1} 
+        $$
+        This means we have $q_0 0^{n_1}C 0^{n_2} \mapsto^* 0 q_0 0^{n_1-1} C X 0^{n_2-1},n_{1,2}\in \mathbb{N}^+$
+        Then 
+        $$
+        n_2\ge n_1\Rightarrow q_0 0^{n_1}C 0^{n_2} \mapsto^* 0^{n_1} q_0 C X^{n_1} 0^{n_2-n_1}\mapsto 0^{n_1} C q_7 X^{n_1} 0^{n_2-n_1} \mapsto^* 0^{n_1} C 0^{n_2} q_7 B\mapsto 0^{n_1} q_8 C 0^{n_2} \mapsto 0^{n_1} C q_9 0^{n_2}
+        $$
+        As we can see, it has the wrong number of 0s.
+      - If we use $(q_6,X,q_0,X,R)$, then based on the above process, we have
+        $$
+        q_0 0^{n_1}C 0^{n_2} \mapsto^* X^{n_1} q_0 C X^{n_1} 0^{n_2-n_1} \mapsto^* X^{n_1} C q_9 0^{n_2}
+        $$
+      - Then 
+        > From state q3, keep moving left on receiving 0 or C and on receiving X, replace X with 0 and move leftwards.
+
+        It also needs to be changed because this will change all X to 0s which also gets $n_1+n_2$ 0s.
+        - To remove $C$ as the askfilo link does and remove the above error,
+          we can use $(q_3,C,q_{10},X,L),(q_3,X,q_3,X,L)$ for 
+          $q_3$ ~~which only changes the right side Xs to 0s.~~
+          and $(q_{10},0,q_{10},0,L),(q_{10},X,q_{10},0,L),(q_{10},B,q_{4},B,R)$ ~~which stops earlier when meeting the rightmost X instead of going back until the left end.~~ It changes all 
+          Xs in the $n_1$ original 0s to 0s.
+          - Here I follow askfilo by removing the delimiter $C$.
+            - So we should have $(q_0,C,q_7,X,R),(q_7,B,q_8,B,L)$,
+              removes $q_9$ and let $q_8$ be accepted since we have already changed all necessary Xs to 0s when $q_8$ for 
+              $q_{7\sim 9}$.
+    - The special case $n_1=0$ or $n_2=0$ can be also verified similarly.
+      Or in some way $n_2=0$ case is included in $n_2<n_1$ when $n_1\neq 0$ 
+      $$
+      q_0 0^{n_1}C B (X^{n_2} q_0 0^{n_1-n_2} C X^{n_2})
+      $$
+      which skips the 1st step $q_0 0^{n_1}C 0^{n_2} \mapsto^* X^{n_2} q_0 0^{n_1-n_2} C X^{n_2}$
+      - and $n_1=0$ is included in $n_2 \ge n_1$
+        $$
+        q_0 C 0^{n_2} (X^{n_1} q_0 C X^{n_1} 0^{n_2-n_1})
+        $$
+        which also skips the 1st step
+        if we also have $n_2=0$, then we also skips $X^{n_1+1} q_7 X^{n_1} 0^{n_2-n_1} \mapsto^* X^{n_1+1} 0^{n_2} q_7 B$ and have $q_0 C B\mapsto X q_7 B\mapsto q_8 X B$
+      - Then when $n_{1,2}\neq 0$ we can get $X^{n_2} q_0 0^{n_1-n_2} C X^{n_2}$ or 
+        $X^{n_1} q_0 C X^{n_1} 0^{n_2-n_1}$ and the rest sequence is **definite**.
+  - Also see [this](https://askfilo.com/user-question-answers-algebra-2/construct-a-turing-machine-that-computes-the-function-for-35383437353333) which is same as the book ans
+    - > If it's the former, then you know that the second input,
+      similar to geeksforgeeks, it should be "latter" which meets $\ast$
+    - > The five-tuples for this much are: ... $(s_0,\ast,s_5,B,R)$ ...
+      This "erase the larger input entirely".
+    - > The following transitions accomplish this: ... $(s_5,B,s_5,B,L)$
+      it should be $(s_6,B,s_6,B,L),(s_6,0,s_7,0,L),$
+    - The last 3 transitions should be $(s4, ∗, s8, B, L), (s8, 0, s8, B, L), (s8, 1, s8, B, L)$
+    - In summary
+      - when $n_1<n_2$
+        the 1st sequence five-tuples removes $\ast,0,1$ of the $n_2$ part
+        2nd sequence changes $n_1$ part back to 1s.
+      - ~~continue the iteration~~ forwards to the end after changing the left part of the pair of 1s by the 3rd sequence
+      - continue the iteration by the 4th sequence
+      - $n_1\ge n_2$
+        > change the  0′ s in the second input string back to 1's and then erase the asterisk and remnants of the first input string.
+        similar to $n_1<n_2$.
 - [ ] 31
 - [ ] 32
 # miscs with sympy usage
@@ -11527,6 +11750,7 @@ A  E /|\
 [Proof_generate_Language]:https://cs.stackexchange.com/a/110858/161388
 [3_basic_tools]:https://cs.stackexchange.com/a/26159/161388
 [formal_proof_generate_Language]:https://cs.stackexchange.com/a/11316/161388
+[proof_Turing_Machine_recognize_language]:https://cs.stackexchange.com/a/166984/161388
 
 <!-- paper or lectures -->
 [second_largest_element_Adversary]:https://www.cse.unsw.edu.au/~cs2011/lect/2711_Adversary.pdf
@@ -11554,6 +11778,7 @@ A  E /|\
 [path_in_order_theory]:https://math24.net/closures-relations.html
 [find_euler_path_undirected_path]:https://cp-algorithms.com/graph/euler_path.html#:~:text=To%20find%20the%20Eulerian%20path%20%2F%20Eulerian%20cycle%20we%20can%20use,then%20remove%20the%20extra%20edge.
 [cut_edge_2_components]:https://sharmaeklavya2.github.io/theoremdep/nodes/graph-theory/deleting-bridge-gives-2-components.html
+[cstaleem_0_n_1_n]:https://cstaleem.com/turing-machine-for-0n1n/
 
 
 <!-- wolfram -->
@@ -11577,6 +11802,7 @@ A  E /|\
 [Boruvka_proof]:./lectures/MST.pdf
 [safe_edge_MST]:https://courses.engr.illinois.edu/cs374/fa2015/slides/18-mst.pdf
 [kahn_proof]:https://www.cs.nthu.edu.tw/~wkhon/ds/ds11/lecture/lecture12.pdf
+[uchicago_0_n_1_n]:https://www.classes.cs.uchicago.edu/archive/2015/winter/28000-1/Lec13.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
