@@ -28,6 +28,22 @@ Then we follow http://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Real_nu
 You seems to only prove the TM accepts $\{a^nb^nc^n| n \geq 0\}$, but you doesn't prove that the TM doesn't accept other strings.
 
 Re to "why would you restrict the lemma to $n\neq m$": because you says "such that the machine *never enters a final state*". But the machine will enter a final state for $X^kq_00^nY^k1^m,n=m$.
+
+More specifically as https://math.stackexchange.com/a/353405/1059606 says, "Write $w$ to its tape." doesn't mean write with *only one transition*. We can use many states to write each symbol of $w$. (This comment may be trivial. If someone has this same question as me when reading this answer the first time, this comment may help.)
+
+@seth Do you mean the author description "input $x$" should be "a blank (all-0) tape" as the definition https://en.wikipedia.org/wiki/Busy_beaver#The_game says? If so I agree with you because $BB(|M|)$ only ensures the maximal steps when *having the empty input*.
+
+This answer implements one TM similar to [this general one](https://cs.stackexchange.com/q/50710/161388) which is same as the 3rd paragraph of [the wikipedia related contents](https://en.wikipedia.org/wiki/Busy_beaver#Proof_for_uncomputability_of_S(n)_and_%CE%A3(n)).
+
+More specifically, 1. "there is an encoding $\langle M\rangle$ for $U$" means $U$ takes one Turing machine $\langle M\rangle$ as the input. It corresponds to [the above corrected reference link](https://web.archive.org/web/20231202213618/https://jeremykun.com/2012/02/08/busy-beavers-and-the-quest-for-big-numbers/) "When $ M$ is given the input $ \left \langle T \right \rangle$".
+
+2. "also upper-bounds the maximal number of steps run by the halting Turing machine with m states" because we runs $M$ on $U$ so the steps of $M$ is included in $UM$. (IMHO $M$ can be any machine as what the halting problem assumes.) 3. $BB(n)$ is [same](https://en.wikipedia.org/wiki/Busy_beaver#cite_note-ligocki_bb6-14) as $S(n)$. 4. "we can always determine corresponding value for n.": $n$ depends on how we "Construct a universal Turing machine U".
+
+5. "If there is any function that always upper bounds S" This ensures we can find one TM runs more steps than $M$. So we can "Run a Turing machine that many steps to determine whether it halts or not", i.e. $BB(n)\ge S(m)$ steps (This is same as `halting_problem_solver(TM)` in the OP's answer). Please point out errors if any. Thanks in advance.
+
+If $x$ is the empty string, then this is same as [this QA](https://cs.stackexchange.com/q/52949/161388)
+
+More specifically, to ensure "$M'$ enters the state $s_{n_0+1}$ which is simply *the initial state* of $M$", maybe we should have $(s_i,0,s_{i+1},1,L),1\le i\le n_0-1$. Then we have $(s_{n_0},0,s_{n_0+1},1,N)$ or $(s_{n_0},0,s_{n_0+1},1,L),(s_{n_0+1},0,s_{n_0+1},0,R)$ to ensure we start at [*the start cell*](https://introcs.cs.princeton.edu/java/52turing/) (Here I assume the cell with the leftmost nonblank symbol is the start cell).
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -503,6 +519,8 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
     - for example, in the above link, $g()$ 
       (i.e. $K(P)$ in the book) has no valid inputs to output, i.e. not one computable function.
     - the link $halts(P)=H(P,P)\text{ in the book}$
+    - The wikipedia proof needs much prerequisite knowledge "relies on the following constructs", "Turing-complete", etc. 
+      TODO this is out of my current ability.
 - the bubble sort just uses the pair chains to select the **maximum** in the list in each pass, so $i$ plus one and $j$ minus one in each pass in ALGORITHM 4.
 - the [insertion sort](https://en.wikipedia.org/wiki/Insertion_sort#Best,_worst,_and_average_cases) just tracks one more item which creates one ordered sublist beginning from the first item.
   the 2nd ~~is similar to the 1st except that it moves `x` directly to the correct place instead of propagating (the swap counts are same).~~ avoids many unnecessary swaps which uses 3 assignments by using all one assignment each time with one additional $x \leftarrow A[i]$ which is same as ALGORITHM 5 does.
@@ -1971,7 +1989,7 @@ check(R_1)
             "frontier" has at most $b^d=O(b^d)$.
           - > As for space complexity: for any kind of graph search, which stores every expanded node in the explored set, the space complexity is always *within a factor of b* of the time complexity
             See [this][Graph_space_complexity_vs_time_complexity]
-            - Notice this sentence is not shown in [4th edition](./other_books/Artificial.Intelligence.A.Modern.Approach.4th.Edition.Peter.Norvig.Stuart.Russell.pdf).
+            - Notice this sentence is not shown in [4th edition][Artificial_Intelligence_A_Modern_Approach_4th].
             - in the [chat](https://chat.stackexchange.com/?tab=site&sort=people&host=cs.stackexchange.com)
               - [1](https://chat.stackexchange.com/transcript/message/65094178#65094178) means same as "add the node on the other end of $e$ **not in $N_x$** to $N_x$"
               - [2](https://chat.stackexchange.com/transcript/message/65094172#65094172) is wrong based on [this](https://cs.stackexchange.com/questions/165308/prove-the-relation-between-space-complexity-and-time-complexity-of-the-graph-sea/165324#comment343617_165324)
@@ -11314,7 +11332,7 @@ A  E /|\
         So x and y are distinguishable based on the above $L\setminus x\neq L\setminus y$
 - [ ] 31 see the ans
 ### 13.5
-- 2,8 skipped
+- 2,8,12~14,30 skipped
 - [ ] 4
   - b) all ones
   - see the ans
@@ -11506,7 +11524,7 @@ A  E /|\
     \text{Notice here we can use B for }n_1\text{ marker of 1 because we will stop at the }\textbf{rightmost}\text{ B}\\
     (s_6,1,s_6,1,L),(s_6,B,s_0,B,R)\;s_6\text{ means there are 1s in }n_1\text{ unchanged to }B\\
     $$
-  - The above one is similar to [this](https://www.geeksforgeeks.org/turing-machine-to-accept-maximum-of-two-numbers/) where both match the *pair* of 1s at each iteration and goes to the final when *one side have no 1s* (geeksforgeeks uses 0 instead of 1 and C instead of $\ast$. It calculates max instead of min although they are similar), but it doesn't change B/E back to the correct number of 1s
+  - The above one is similar to [this][geeksforgeeks_max_f_n1_n2] where both match the *pair* of 1s at each iteration and goes to the final when *one side have no 1s* (geeksforgeeks uses 0 instead of 1 and C instead of $\ast$. It calculates max instead of min although they are similar), but it doesn't change B/E back to the correct number of 1s
     Also see [this](https://cs.stackexchange.com/q/166994/161388) which is based on [proof_Turing_Machine_recognize_language]
     > Therefore for each input w there's *only one sequence* of IDs (one computation) we need to consider
     so we can also have one **definite** sequence of mapping $\mapsto$ when $n_2</\ge n_1$
@@ -11584,14 +11602,98 @@ A  E /|\
     - In summary
       - when $n_1<n_2$
         the 1st sequence five-tuples removes $\ast,0,1$ of the $n_2$ part
-        2nd sequence changes $n_1$ part back to 1s.
+        2nd sequence changes $n_1$ part back to 1s which will move until the rightmost B at the left of the $n_1$ part.
       - ~~continue the iteration~~ forwards to the end after changing the left part of the pair of 1s by the 3rd sequence
       - continue the iteration by the 4th sequence
       - $n_1\ge n_2$
         > change the  0′ s in the second input string back to 1's and then erase the asterisk and remnants of the first input string.
-        similar to $n_1<n_2$.
+        similar to $n_1<n_2$
+        where $(s_4, 0, s_4, 1, L)$ changes the 
+        $n_2$ part back.
+        Here again we "will move until the rightmost B at the left of the $n_1$".
+- [ ] 26
+  - similar to EXAMPLE 4, we just removes one less 1
+    by $(s_1, ∗, s_3, B, R),(s_1, 1, s_2, B, R)\to (s_1, ∗, s_3, 1, R),(s_1, 1, s_2, 1, R)$
+  - see the ans which removes two 1s and adds one 1 having the same result as the above where removes only one 1.
+- [x] 28
+  - IMHO, after doing $f_1$, we should ~~move to~~ halts at the **left end** which implies the "the *start* state 
+  of T2".
+    So it the machine halts at the right end or in the middle of the string as [geeksforgeeks_max_f_n1_n2] $q_8$ does.
+    - Here exercise 18 will halt at the rightmost $B$ at the left of the original string.
+      So if we follow the preamble, it will have $(s_2; B; s_{0}'; 1; L)$, but we may 
+      go *left* unnecessarily for $B$ in the $B111\cdots$ due to $(s_0', B, s_1, B, L)$
+    - It is said in the ans
+      > The only catch is that the tape head needs to *be back at the leftmost 1*
+  - TODO [more formal description](http://staff.um.edu.mt/afra1/teaching/coco3.pdf)
 - [ ] 31
+  - I tried
+    $(s_0,B,s_1,1,R),(s_1,B,s_1,1,L),(s_1,1,s_0,1,L)$
+    which has
+    $s_0B\mapsto 1 s_1 B\mapsto s_1 11\mapsto s_0 B11\mapsto^* s_0 B1111$
+    unluckily it doesn't halt because $(s_0,1)$ can't be met.
+  - > $(s_0, B, s_1, 1, L), (s_0, 1, s_1, 1, R), (s_1, B, s_0, 1, R)$
+    $s_0B\mapsto s_1 B1\mapsto 1 s_0 1\mapsto 1 1 s_1 B\mapsto 111 s_0 B\mapsto 11 s_1 11$
+  - Also see [this](https://en.wikipedia.org/wiki/Busy_beaver#Visualizations) for the Visualization of the TM
+    although [$BB(2)\le 4$ may be difficult (TODO)](https://mathoverflow.net/a/91524).
 - [ ] 32
+  - use the halting problem which ~~isn't dependent of~~ doesn't care about the state ~~number~~ count.
+    - 1
+      > The blank tape halting problem is equivalent to the standard halting problem
+      see [this](https://cs.stackexchange.com/a/41240/161388)
+      - trivially $\langle M_w \rangle$ *functions same as* $\langle M,w \rangle$
+        so $T(\langle M_w \rangle)$ decides whether $M_w$ halts
+        means same as $R(\langle M,w \rangle)$ decides whether $\langle M,w \rangle$ halts
+        which is one contradiction.
+        > But this would decide $HALT_{TM}$
+    - [2](https://www.jeremykun.com/2012/02/08/busy-beavers-and-the-quest-for-big-numbers/) from [this](https://cs.stackexchange.com/q/52949/161388) (notice the reference has been changed after this QA is asked)
+      - > M determines in finite time the number of states that T has
+        same as [getting the cardinality of the set](https://cs.stackexchange.com/a/93326/161388)
+        TODO so how to use one TM to implement this?
+      - See [this](https://cs.stackexchange.com/a/167013/161388)
+      - Also see [this](https://cs.stackexchange.com/a/75590/161388) which is same as [this](https://qr.ae/pstNsf) "If we could compute $\text{max_steps}(n)$".
+  - [contradiction](https://cs.stackexchange.com/a/75615/161388) without using other prerequisite theorems for [$BB(n)/S(n)$](https://cs.stackexchange.com/questions/52949/understanding-proof-for-busy-beaver-being-uncomputable#comment345879_95517)
+    - Here $n_0$ may be $f(n)$ hinted by The_New_Turing_Omnibus which doesn't influence "the phase of cleaning will continue at least S(N) steps".
+    - > But the phase of cleaning will continue at least S(N) steps
+      because at most remove [one symbol at one time](https://en.wikipedia.org/wiki/Turing_machine#Description).
+      > move the tape left and right one (and *only one*) cell at a time
+    - similarly for [$\Sigma(n)$](https://cs.stackexchange.com/a/57153/161388)
+  - Notice both of the above 2 methods are included in [wikipedia](https://en.wikipedia.org/wiki/Busy_beaver#Proof_for_uncomputability_of_S(n)_and_%CE%A3(n))
+  - [The book answer reference](https://proofwiki.org/wiki/Book:A.K._Dewdney/The_New_Turing_Omnibus:_Sixty-Six_Excursions_in_Computer_Science) -> problem 39 p281
+    - This contradiction is based on the *growing* function instead of the *maximal* property for one *n-state* machine as the above.
+    - > Turing machine write binary notation of one number
+      [this](https://stackoverflow.com/a/4669482/21294350)
+      after wring each symbol to "the output tape" we do one $>>$ operation
+      e.g. $11(1011)>>1=5(101)$
+      - ~~So we at least can have $\lceil \log n\rceil$ states where each state.~~ TODO
+      - Here I only constructs one tape of the 2-tape machine
+        $$
+        (s_0,0,s_1,-,R),(s_0,-,s_4,-,R),(s_0,\#,s_2,\#,L)\\
+        (s_4,-,s_4,-,R),(s_4,0,s_1,-,R),(s_4,\#,s_{11},\#,L)\\
+        (s_1,0,s_6,-,R),(s_1,-,s_1,-,R),(s_1,\#,s_2,\#,L)\\
+        \text{Here }s_0\text{ means the leftmost state}\\
+        s_1:\text{means impossibly all -'s and find odd 0s}\\
+        s_4:\text{means possibly all -'s and even 0s}\\
+        s_6:\text{means impossibly all -'s}\\
+        s_2:\text{meet the right end and go back}\\
+        s_{11}:\text{the accepted state}\\
+        (s_2,0,s_3,-,L),(s_2,-,s_8,-,L),(s_2,\#,s_0,\#,R)\\
+        (s_8,-,s_8,-,L),(s_8,0,s_3,-,L),(s_8,\#,s_{11},\#,R)\\
+        (s_3,0,s_{10},-,L),(s_3,-,s_3,-,L),(s_3,\#,s_0,\#,R)\\
+        \text{similar to the above but with the reverse direction}
+        $$
+    - $B_n$ writes $\Sigma(n)$ in *unary* notation while 
+      $B$ is in *binary*
+    - ~~TODO why here $q$ is constant which is related with the *busy beaver function*?~~
+      Since $B$ can computes $\Sigma(n),n\in\mathbb{N}$
+      its state count can't be $f(n)$ otherwise it can't compute 
+      $\Sigma(n)$ which implies it is constant.
+    - > let $C$ be ... turing machine converts binary to unary
+      this has possibly the [constant state count](https://cs.stackexchange.com/a/156672/161388) -> [this](https://turingmachine.io/?import-gist=2787f81fa4b88c4eef65d4fd85c6423f)
+    - In summary
+      > prints as many 1s ...
+      means $\Sigma(m)\ge \Sigma(n),n>m=\lceil\log n\rceil+q+r$ which contradicts with the trivial conclusion that adding the state count must *strictly* adding the corresponding $\Sigma(n)$.
+      Here trivially we need $n$ much bigger so that $n-\lceil\log n\rceil$ can be much bigger so that 
+      it is bigger than $q+r$.
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -11815,7 +11917,8 @@ A  E /|\
 <!-- textbook -->
 [Graph_Theory_with_Applications]:./other_related_maths_book/BondyMurtyGTWA.pdf
 [graph_theory_graduate_textbook]:./other_related_maths_book/graph_theory.pdf
-[Artificial_Intelligence_A_Modern_Approach_3rd]:./other_books/Artificial_Intelligence_A_Modern_Approach_3rd.pdf
+[Artificial_Intelligence_A_Modern_Approach_3rd]:./other_books/Artificial_Intelligence_A_Modern_Approach/Artificial_Intelligence_A_Modern_Approach_3rd.pdf
+[Artificial_Intelligence_A_Modern_Approach_4th]:./other_books/Artificial_Intelligence_A_Modern_Approach/Artificial.Intelligence.A.Modern.Approach.4th.Edition.Peter.Norvig.Stuart.Russell.pdf
 [the_nature_of_computation]:./other_books/the-nature-of-computation-1nbsped-0199233217-9780199233212_compress.pdf
 [algebraic_graph_theory]:./other_books/algebraic_graph_theory.pdf
 [Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou]:./other_books/Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou.pdf
@@ -11824,6 +11927,7 @@ A  E /|\
 
 <!-- geeksforgeeks -->
 [Detect_cycle_Directed_Graph]:https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
+[geeksforgeeks_max_f_n1_n2]:https://www.geeksforgeeks.org/turing-machine-to-accept-maximum-of-two-numbers/
 
 <!-- valuable links -->
 [houseofgraphs_search]:https://houseofgraphs.org/result-graphs

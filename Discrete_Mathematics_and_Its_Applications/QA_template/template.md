@@ -1,13 +1,15 @@
-Recently, when I self-learnt Discrete Mathematics and Its Applications 8th by Kenneth Rosen, I did only the even-numbered exercises which the author offers the detailed description instead of the odd ones because the odd ones and the corresponding even ones are very similar.
-
-I have asked one similar question QA_1 ["The formal proof that one Turing Machine recognizes one specific *language*"][1] and the answer fills the part "It does not generate any string that is *not* in $L$." of [this QA_2 answer][2].
+I have asked one similar question QA_1 "The formal proof that one Turing Machine recognizes one specific *language*" and [the answer][1] fills the part "It does not generate any string that is *not* in $L$." of [this QA_2 answer][2].
 
 ---
 
-For one *general* function, the Halting Problem tells us it is [impossible][3] to "prove that the machine actually computes the function", so here I take one specific function $f(n_1,n_2)=\min(n_1,n_2)$ to investigate which is exercise 13-5-25:
+For one *general* function, the Halting Problem tells us it is [impossible][3] to "prove that the machine actually computes the function", so we need one specific function to investigate. 
+
+Recently when I self-learnt Discrete Mathematics and Its Applications 8th by Kenneth Rosen, I did the even-numbered exercises which the author offers the detailed description and the asterisk odd-numbered exercises which are more difficult than those exercises without the asterisk. Since the odd-numbered ones are very similar to the corresponding even-numbered ones and the book doesn't give the detailed answer for odd-numbered exercise, I skip all odd-numbered exercises without the asterisk. The exercise 13-5-25 in the book:
 > Construct a Turing machine that computes the function $f(n_1,n_2)=\min(n_1,n_2)$ for all nonnegative integers $n_1$ and $n_2$
 
-Since this is one *odd* number exercise, the book answer is simple without detailed explanation, so I searched for the internet and found [one askfilo link][4] which has the same answer as the book although the askfilo link has some small typo errors.
+Since this is one *asterisk odd-numbered* exercise, the book answer is simple without detailed explanation, so I searched for the internet and found [one askfilo link][4] which has the same answer as the book although the askfilo link has some small typo errors.
+
+The book answer uses "definition 2" in the wikipedia ["Turing machine" entry][5] for the transition function ("Turing instruction" in the wikipedia context). I use the same symbol convention as the book for the following.
 > $(s_0, 0, s_0, 0, R), (s_0, ∗, s_5, B, R), (s_3, ∗, s_3, ∗, L),
 (s_3, 0, s_3, 0, L), (s_3, 1, s_3, 1, L), (s_3, B, s_0, B, R), (s_5, 1, s_5, B, R),
 (s_5, 0, s_5, B, R), (s_5, B, s_6, B, L), (s_6, B, s_6, B, L), (s_6, 0, s_7, 1, L),
@@ -17,9 +19,12 @@ Since this is one *odd* number exercise, the book answer is simple without detai
 
 ---
 
-I also found [one geeksforgeeks link][5] computing $f(n_1,n_2)=\max(n_1,n_2)$ although it has some errors for me.
+I also found [one geeksforgeeks link][6] computing $f(n_1,n_2)=\max(n_1,n_2)$ although it has some errors for me.
 
-Since the geeksforgeeks and askfilo links share the same basic idea that we match *pairs* of numbers for the $n_{1,2}$ part and *change back the matching markers to the number markers* (in the geeksforgeeks link, matching marker is $X$ and the number marker is $0$) when finding the relation between $n_{1,2}$ (the askfilo link adds the step of only keeping the blank symbol $B$ and the number marker while the geeksforgeeks link leaves some matching markers unchanged), I take the geeksforgeeks link as the example here.
+The geeksforgeeks and askfilo links share the same basic idea that we match *pairs* of numbers for the $n_{1,2}$ part and *change back the matching markers to the number markers* (in the geeksforgeeks link, matching marker is $X$ and the number marker is $0$) when finding the relation between $n_{1,2}$ (the askfilo link adds the step of only keeping the blank symbol $B$ and the number marker while the geeksforgeeks link leaves some matching markers unchanged). But the geeksforgeeks link has one TM figure to help understanding and it has no typo errors. So I take the geeksforgeeks link as the example here.
+
+TM(Turing machine):
+[![7]][7]
 
 My understanding of the states used by the geeksforgeeks link:
 - $q_0$: the starting state of the process $K$ to change the pair of 0s
@@ -31,9 +36,6 @@ My understanding of the states used by the geeksforgeeks link:
 - $q_6$: the process $K$ goes back into the left side
 - $q_{4,9}$: final
 - $q_8$: meet the right end when changing the right side Xs back to 0s.
-
-TM(Turing machine):
-[![6]][6]
 
 My correction of possible errors in the geeksforgeeks link (I use the similar symbol notation as the QA_1 answer in the following):
 1. > But on receiving X replace it with 0 and move rightwards and change state back to q0.
@@ -106,5 +108,6 @@ Can we prove that the TM computes the function $f(n_1,n_2)=\max(n_1,n_2)$ by con
   [2]: https://cs.stackexchange.com/a/110858/161388
   [3]: https://math.stackexchange.com/questions/1643850/is-there-a-way-to-prove-that-a-turing-machine-computes-the-function-we-designed#comment3352654_1643850
   [4]: https://askfilo.com/user-question-answers-algebra-2/construct-a-turing-machine-that-computes-the-function-for-35383437353333
-  [5]: https://www.geeksforgeeks.org/turing-machine-to-accept-maximum-of-two-numbers/
-  [6]: https://i.stack.imgur.com/IjaE8.png
+  [5]: https://en.wikipedia.org/wiki/Turing_machine#Alternative_definitions
+  [6]: https://www.geeksforgeeks.org/turing-machine-to-accept-maximum-of-two-numbers/
+  [7]: https://i.stack.imgur.com/IjaE8.png
