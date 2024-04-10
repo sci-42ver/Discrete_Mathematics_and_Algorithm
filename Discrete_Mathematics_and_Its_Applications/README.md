@@ -11660,6 +11660,10 @@ A  E /|\
   - Notice both of the above 2 methods are included in [wikipedia](https://en.wikipedia.org/wiki/Busy_beaver#Proof_for_uncomputability_of_S(n)_and_%CE%A3(n))
   - [The book answer reference](https://proofwiki.org/wiki/Book:A.K._Dewdney/The_New_Turing_Omnibus:_Sixty-Six_Excursions_in_Computer_Science) -> problem 39 p281
     - This contradiction is based on the *growing* function instead of the *maximal* property for one *n-state* machine as the above.
+    - $\Sigma(n)$ is finite because of [the halting assumption](https://en.wikipedia.org/wiki/Busy_beaver#The_busy_beaver_function_%CE%A3)
+    - > since $\lceil \log n\rceil$ states are required by A
+      [See](https://math.stackexchange.com/a/3067710/1059606)
+      > The final state halts instead of moving the tape
     - > Turing machine write binary notation of one number
       [this](https://stackoverflow.com/a/4669482/21294350)
       after wring each symbol to "the output tape" we do one $>>$ operation
@@ -11681,6 +11685,8 @@ A  E /|\
         (s_3,0,s_{10},-,L),(s_3,-,s_3,-,L),(s_3,\#,s_0,\#,R)\\
         \text{similar to the above but with the reverse direction}
         $$
+    - Then based on the above
+      We go from right to left for `A`, then from left to right based on `B` assumption, and then from right to left until meeting the 1st blank symbol, and at last we use `C`.
     - $B_n$ writes $\Sigma(n)$ in *unary* notation while 
       $B$ is in *binary*
     - ~~TODO why here $q$ is constant which is related with the *busy beaver function*?~~
@@ -11694,6 +11700,14 @@ A  E /|\
       means $\Sigma(m)\ge \Sigma(n),n>m=\lceil\log n\rceil+q+r$ which contradicts with the trivial conclusion that adding the state count must *strictly* adding the corresponding $\Sigma(n)$.
       Here trivially we need $n$ much bigger so that $n-\lceil\log n\rceil$ can be much bigger so that 
       it is bigger than $q+r$.
+    - non-computable may be slower by the [intentionally construction](https://mathoverflow.net/q/346853)
+      similarly for the [fastest growing function](https://cs.stackexchange.com/questions/4678/is-busy-beaver-the-fastest-growing-function-known-to-man#comment9998_4678)
+    - > For any integer n such that n > flog nl + q + r, machine ABCprints just as many ls as En and yet uses fewer states
+      ~~Here ABC are all FTMs, so computable~~ See [this](https://www.physicsforums.com/threads/proof-that-bb-k-grows-faster-than-any-computable-function.945666/post-5986544)
+      - The book seems to only prove
+        > The busy beaver problem *cannot be solved* in general by a computer
+    - miscs:
+      the halting problem doesn't care about provability but [decide](https://en.wikipedia.org/wiki/Halting_problem#Background)/determine in the book.
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
