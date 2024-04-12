@@ -2,48 +2,7 @@ Please point out errors if any. Thanks in advance.
 
 check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
 
-IMHO "Note (in the case of products as above" may mean we can cycle the order of (123)(45)
- to (45)(123)
- instead of (54)(43)(32)(21)
- to something like (43)(32)(21)(54)
- (although it is after the contents related with (54)(43)(32)(21)
-) which is shown in the first 3 comments.
-
-IMHO we should do the following correction: 1. By cycle definition https://en.wikipedia.org/wiki/Cyclic_permutation#Definitio, (123)(45) should be (132)(45). 2. Maybe you want to say "you can put any *cycle* you like last" which corresponds to "give you the *last cycle*" 
-
-Here are some clarification: 1. "Note (in the case of products as above" may mean $(a_ka_{k-1})(a_{k-1}a_{k-2})\cdots (a_2a_1)$ can be written as $(a_2a_1)(a_3 a_2)\cdots (a_{k-1}a_{k-2})(a_ka_{k-1})$. This is shown in https://en.wikipedia.org/wiki/Cyclic_permutation#Properties and https://math.stackexchange.com/a/3420633/1059606 (Notice we should execute the right factor first as wikipedia says). 2. "does not use any transposition *more than once*" is due to permutation is decomposed into one or more *disjoint* cycles.
-
-More specifically, this answer shows the example of $\{a^ib^jc^k \mid i> j\}$ where $i,j,k\geq 0$ are trivially met since we normally *won't remove* symbols in the construction process. The $i<j,i\neq k$ cases are similar. Then we can use $S_1 \vert S_2$ to unionize them which solves the OP's problem as Ryan Dougherty's comment says.
-
-IMHO, "Briefly, the Cantor's diagonal argument reads as follow:" is a bit confusing because ["Cantor's diagonal argument"](https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Uncountable_set) isn't related with the "injective function" and it proves by constructing one string not in the countable set $T$.
-
-1. More specifically about how to use "Cantor's diagonal argument": This is similar to exercise 2.5-38 in Discrete Mathematics and Its Applications 8th by Kenneth Rosen. The answer by the book has "Hint: First set up a *one-to-one correspondence* between
-the set of real numbers between 0 and 1 and a subset of
-these functions. Do this by associating to the real number
-$0.d_1d_2 … d_n …$ the function f with $f(n) = d_n$". It then concludes the set of the *total* function is countable and then the set of all functions including both total and *partial* functions is also countable.
-
-Then we follow http://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Real_numbers which constructs "a bijection from (0, 1) to R" in the proof process.
-2. Rushabh Mehta's answer complements Tsemo Aristide's comments where $\phi$ maps $f$ to the subset of $\mathbb{N}$
-
-You seems to only prove the TM accepts $\{a^nb^nc^n| n \geq 0\}$, but you doesn't prove that the TM doesn't accept other strings.
-
-Re to "why would you restrict the lemma to $n\neq m$": because you says "such that the machine *never enters a final state*". But the machine will enter a final state for $X^kq_00^nY^k1^m,n=m$.
-
-More specifically as https://math.stackexchange.com/a/353405/1059606 says, "Write $w$ to its tape." doesn't mean write with *only one transition*. We can use many states to write each symbol of $w$. (This comment may be trivial. If someone has this same question as me when reading this answer the first time, this comment may help.)
-
-@seth Do you mean the author description "input $x$" should be "a blank (all-0) tape" as the definition https://en.wikipedia.org/wiki/Busy_beaver#The_game says? If so I agree with you because $BB(|M|)$ only ensures the maximal steps when *having the empty input*.
-
-This answer implements one TM similar to [this general one](https://cs.stackexchange.com/q/50710/161388) which is same as the 3rd paragraph of [the wikipedia related contents](https://en.wikipedia.org/wiki/Busy_beaver#Proof_for_uncomputability_of_S(n)_and_%CE%A3(n)).
-
-More specifically, 1. "there is an encoding $\langle M\rangle$ for $U$" means $U$ takes one Turing machine $\langle M\rangle$ as the input. It corresponds to [the above corrected reference link](https://web.archive.org/web/20231202213618/https://jeremykun.com/2012/02/08/busy-beavers-and-the-quest-for-big-numbers/) "When $ M$ is given the input $ \left \langle T \right \rangle$".
-
-2. "also upper-bounds the maximal number of steps run by the halting Turing machine with m states" because we runs $M$ on $U$ so the steps of $M$ is included in $UM$. (IMHO $M$ can be any machine as what the halting problem assumes.) 3. $BB(n)$ is [same](https://en.wikipedia.org/wiki/Busy_beaver#cite_note-ligocki_bb6-14) as $S(n)$. 4. "we can always determine corresponding value for n.": $n$ depends on how we "Construct a universal Turing machine U".
-
-5. "If there is any function that always upper bounds S" This ensures we can find one TM runs more steps than $M$. So we can "Run a Turing machine that many steps to determine whether it halts or not", i.e. $BB(n)\ge S(m)$ steps (This is same as `halting_problem_solver(TM)` in the OP's answer). Please point out errors if any. Thanks in advance.
-
-If $x$ is the empty string, then this is same as [this QA](https://cs.stackexchange.com/q/52949/161388)
-
-More specifically, to ensure "$M'$ enters the state $s_{n_0+1}$ which is simply *the initial state* of $M$", maybe we should have $(s_i,0,s_{i+1},1,L),1\le i\le n_0-1$. Then we have $(s_{n_0},0,s_{n_0+1},1,N)$ or $(s_{n_0},0,s_{n_0+1},1,L),(s_{n_0+1},0,s_{n_0+1},0,R)$ to ensure we start at [*the start cell*](https://introcs.cs.princeton.edu/java/52turing/) (Here I assume the cell with the leftmost nonblank symbol is the start cell).
+1. For the future readers reading this question, OP may mean we should derive $x=[z]$ from the assumption of $z$ instead of the converse direction in the reference lecture p36 where ['o/w' may mean otherwise](https://www.abbreviations.com/serp.php?st=O%2FW). 2. If someone is interested about this QA, [this similar SO QA](https://stackoverflow.com/a/42565842/21294350) may be helpful which uses *one more simpler grammar*.
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -11437,6 +11396,7 @@ A  E /|\
       - ~~TODO~~ ~~there may be [no one strict proof](https://cs.stackexchange.com/q/166978/161388) that one Turing machine recognizes one language, similarly for computing one function.~~
         [strict proof][proof_Turing_Machine_recognize_language] which is same as definition 2 
         > T is said to recognize a subset A of V∗ if x is recognized by T *if and only if* x belongs to A.
+        This is ~~*different* from~~ same as [formal_proof_generate_Language] ~~which directly gets show equality by $\subseteq$ and $\supseteq$~~ where it use contrapositive proposition of one direction.
         - > $w = 0^n1^m0x$ for $n, m \geq 1$ and $x \in \Sigma^*$
           - $n=m$ which is similar to $w = 0^n1^m,m>n$
             $q_0w \mapsto^* X^nq_0Y^n0x \mapsto^* X^n Y^n q_30x$
@@ -11708,6 +11668,84 @@ A  E /|\
         > The busy beaver problem *cannot be solved* in general by a computer
     - miscs:
       the halting problem doesn't care about provability but [decide](https://en.wikipedia.org/wiki/Halting_problem#Background)/determine in the book.
+### supplementary
+- 16 skipped
+- [ ] 2 see the ans
+  here to generate $0^{2^n}$
+  we doe as follows:
+  $$
+  \begin{align*}
+    S&\to \overbrace{D\cdots D}^{n\;\text{times}}0E\\
+      &\to \overbrace{D\cdots D}^{n-1\;\text{times}}00DE\\
+      &\to \overbrace{D\cdots D}^{n-2\;\text{times}}0000DDE\\
+      &\to \overbrace{D\cdots D}^{n-k\;\text{times}}\overbrace{00\cdots 00}^{k\text{ times }00}\overbrace{D\cdots D}^{k\;\text{times}}E\\
+      &\to 0^{2^n}\overbrace{D\cdots D}^{n\;\text{times}}E\\
+      &\to 0^{2^n}
+  \end{align*}
+  $$
+- [ ] 4 here we use [formal_proof_generate_Language]
+  $$
+  \begin{align*}
+    M_0=&S\mid A\mid \lambda\quad\text{Notice S to make I.A. work}\\
+    M_1=[A]B^n\quad\text{Here [A] means 0 or 1 A}\\
+    M_2=[A](A)^{n-k}B^k\quad\text{Notice here we assume the latter }B^k\text{ doesn't generate (A)}\\
+    \text{Then for A we do as M_{0\to 1\to 2} as before while }B^k\text{ is trivially balanced.}
+  \end{align*}
+  $$
+  Notice the above $M_i$ is not complete for all members in $\theta(G)$ due to nesting of 
+  $A\to B,B\to (A)$
+  - See [this](./13_supplementary_4.md) where [formal_proof_generate_Language] ~~can't be easily applied here.~~ needs to be combined with induction to show $\subseteq,\supseteq$
+- [ ] 6 see the ans
+  - initially I tried to show 2 derivations are same but it is not trivial.
+  - either $S\to 0$ ends or $S\to 0S$ continues.
+- [ ] 8 see the ans for the strict proof
+  - d is wrong because AB is excluded for the right.
+- [ ] 10 see the ans
+- [ ] 12
+  - a) $(0\cup 1)^\ast$
+  - b) $0(01^\ast)0$ because the consecutive 2 0s can be anywhere.
+  - c) $(0\cup 1)^\ast$ ~~since $10$ can be got from 0 and then 1. so all 2-bit strings are possible.~~ since $(0^\ast\cup 1^\ast)\ast$ has already contained all needed things.
+  - Similar to [formal_proof_generate_Language] we can prove the equality.
+  - TODO prove b) [can't be star height 1](https://core.ac.uk/reader/82286780). The above b) proof allows $01^\ast01^\ast$ which is wrong.
+- [ ] 14
+  - nondeterministic finite-state machine see [this p5](https://people.computing.clemson.edu/~goddard/texts/theoryOfComputation/3a.pdf) where we may end up at A or the accepted state D.
+- [ ] 17
+  - hinted by 18,
+    a) $n^{nk}\cdot m^{nk}\cdot n$
+    b) similar to a).
+- [ ] 18 see the ans
+  - a) should not use $|S|\cdot|I|\cdot|S|$ but 
+    $|S|^{|S|\cdot|I|}$
+  - b) similar to a) $(2^n)^{nk}\ldots$
+- [ ] 20 see the ans here is not the question being wrong.
+- [ ] 22 see the ans
+  - a) here doesn't mean the 0's and 1's are interrupted by the other number.
+  - c) here $\varnothing$ is to ensure the possible start of 1 or end of 0.
+- [ ] 23 see the ans
+- [ ] 24 see the ans
+- [ ] 25
+  - a) I lacks the loop of $s_5$ and adds $s_3\xRightarrow{0} s_7$ where $s_7$ is the sink non-final state.
+  - b) I lacks 2 final states $s_{2,5}$
+    here $s_{1,2,3}$ means odd-1,even-10,odd-101.
+    similarly for $s_{5\sim 7}$
+    then $s_{0}$ means even-no_pattern and $s_{4}$ means odd-no_pattern.
+  - c) IMHO the answer is wrong because it allows 0110 as valid but not for 1010 where both have 0's or 1's interrupted.
+    See [overleaf_automata]
+- [x] 26
+  Similar to [this](https://en.wikipedia.org/wiki/Pumping_lemma_for_regular_languages#Use_of_the_lemma_to_prove_non-regularity), let $w=0^{2^{\lceil\log p\rceil}}>0^{p}$. Then we can recognize 
+  $0^{2^{\lceil\log p\rceil}+m},m<p<2^{\lceil\log p\rceil}$. So the power is not one $2^n$.
+- [x] 27 same as 26 where the nonconstant difference implies 'not regular'.
+- [x] 28
+  - [proof](https://en.wikipedia.org/wiki/Pumping_lemma_for_context-free_languages#Formal_statement)
+    > must contain some nonterminal ${\displaystyle N}$ twice on some tree path
+    This is based on the left part can be [only one non-terminal](https://en.wikipedia.org/wiki/Chomsky_hierarchy#The_hierarchy).
+  - $1^n\to 1^{n+k}$ while keep the number of 0 and 1.
+- [x] 29 similar to 13.5-25.
+- [x] 30 compared with 29, following [this](https://cs.stackexchange.com/q/166994/161388) we change all Xs to Bs to keep $n_2-n_1$ hhen $n_2\ge n_1$ and change all symbols to Bs (i.e. moves back to then left end from the right end when finding no 0) when $n_2< n_1$.
+  - see the ans where it *just erases instead of marking first*.
+    $(s3; B; s0; B; R)\to (s0,∗,s5,1,L)$ will "replace the asterisk by a 1" after erasing all necessary bits.
+    $(s2; ∗; s4; B; L)\to (s4; 1; s4; B; L)\to^{*} (s4; B; s5; 1; L)$ will earse all and then add one 1.
+    - Notice the mark is necessary to recover $n_{1,2}$ otherwise we will end up in one loop where all the left part is B (maybe we can add one left and right end mark instead of all X mark.)
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -11865,6 +11903,7 @@ A  E /|\
 [DFA_partial_transition_function]:https://cs.stackexchange.com/a/12596/161388
 [Proof_generate_Language]:https://cs.stackexchange.com/a/110858/161388
 [3_basic_tools]:https://cs.stackexchange.com/a/26159/161388
+<!-- formal grammars / phrase-structure grammar -> formal languages -->
 [formal_proof_generate_Language]:https://cs.stackexchange.com/a/11316/161388
 [proof_Turing_Machine_recognize_language]:https://cs.stackexchange.com/a/166984/161388
 
