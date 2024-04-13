@@ -1,7 +1,5 @@
 Please point out errors if any. Thanks in advance.
 
-check p10 whether the ideas of each chapter are mastered. (Next: Data mining)
-
 1. For the future readers reading this question, OP may mean we should derive $x=[z]$ from the assumption of $z$ instead of the converse direction in the reference lecture p36 where ['o/w' may mean otherwise](https://www.abbreviations.com/serp.php?st=O%2FW). 2. If someone is interested about this QA, [this similar SO QA](https://stackoverflow.com/a/42565842/21294350) may be helpful which uses *one more simpler grammar*.
 # outline
 much of chapter 2,5,6 have been learned before.
@@ -2325,6 +2323,13 @@ check(R_1)
 - > For a problem to be in NP, it is necessary only that there be a *nondeterministic* Turing machine that, when given a true statement from the set of statements addressed by the problem, can *verify* its truth in *polynomial* time
   "verify" should be ["solvable"](https://en.wikipedia.org/wiki/NP_(complexity))
 - Although [a non-deterministic Turing machine can be converted into a deterministic Turing machine](https://cs.stackexchange.com/a/16797/161388) ([also](https://cs.stackexchange.com/a/148937/161388)), but [the running time may be not same](https://cs.stackexchange.com/a/93151/161388) for them
+## Appendix
+### 1
+- THEOREM 7 can be also used to prove 'the identity elements axiom'
+  'Consequently, −1 = 0' which is trivially wrong by Theorem 1.
+- [ARCHIMEDES method](https://maa.org/press/periodicals/convergence/archimedes-method-for-computing-areas-and-volumes-introduction) for computing the area under a curve
+- Archimedes [expressing large integers inexpressible by the usual Greek method](https://web.calstatela.edu/faculty/hmendel/Ancient%20Mathematics/Archimedes/SandReckoner/SandReckoner.html)
+- THEOREM 8 is based on 'the completeness property'.
 # miscs links from [this](https://semmedia.mhhe.com/math/Rosen_8e/CHAPTER_1_LINKS.html)
 - [atlas](https://web.archive.org/web/20060106014447/http:/www.math.niu.edu:80/~rusin/known-math/index/03-XX.html)
 # how I read the information center
@@ -11746,6 +11751,42 @@ A  E /|\
     $(s3; B; s0; B; R)\to (s0,∗,s5,1,L)$ will "replace the asterisk by a 1" after erasing all necessary bits.
     $(s2; ∗; s4; B; L)\to (s4; 1; s4; B; L)\to^{*} (s4; B; s5; 1; L)$ will earse all and then add one 1.
     - Notice the mark is necessary to recover $n_{1,2}$ otherwise we will end up in one loop where all the left part is B (maybe we can add one left and right end mark instead of all X mark.)
+## Appendix
+- 1,2,3,10 skipped
+- [ ] 4
+  - we can also use $-1\cdot (x+y)$ to prove.
+- [ ] 6 $(x+z)-(y+z)=0=x-y$
+- [ ] 8 just add $y/-y$ for 2 sides.
+- [ ] 12 notice the situation where $\frac{1}{x}=0$
+- [ ] 14
+  - Although we can prove by thinking of 3 situations where $x\cdot y =/</> 0$
+    the answer is more elegant.
+- [ ] 15
+  - it suffices to show $(x-y)\cdot z<0$ which can be got from $z<0$.
+  - see the ans
+    > if z < 0, then −z > 0
+    because $z+(-z)=0$
+- [ ] 16 see the ans
+  - Here assumes $x^2<0$ is impossible.
+- [ ] 18 we can also prove by excluding the situations where $\frac{1}{x} =\text{ or }< \frac{1}{y}$
+- [ ] 19,20 see the ans
+- [ ] 21 see the ans
+  - See p970 for how to construct 'the set of real numbers'.
+  - see the ans
+    Here 'well-defined' is to show whatever 'the representative of the equivalence classes chosen' the result is same.
+  - Here $(w, x)$ 
+    [means integer $x-w$](https://qr.ae/psobsD), also [see](https://math.stackexchange.com/a/413834/1059606)
+- [ ] 22
+  - similar to 21, this means rational $\frac{w}{x}$.
+    the proof is also similar.
+  - > the set of real numbers can then be constructed from the set of rational numbers
+    use one [~~convergent sequence~~Cauchy sequence](https://en.wikipedia.org/wiki/Construction_of_the_real_numbers#Construction_from_Cauchy_sequences) whose difference trivially tends to be zero. 
+    - Notice this is not same as convergent sequence due to [the set definition in metric space](https://www.math.nagoya-u.ac.jp/~richard/teaching/f2021/SML_LFJO_2.pdf)
+      This implies
+      > A standard procedure to force all Cauchy sequences in a metric space to converge is *adding new points* to the metric space in a process called completion.
+    Here based on $(x_n)+(y_n)=(x_n+y_n)$ 'well-defined' is trivially proved.
+    - from $l = u$ and $b<l\Rightarrow b<l_n$, we have
+      > u is a least upper bound for S
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
@@ -11774,6 +11815,9 @@ A  E /|\
 - [This](https://math.stackexchange.com/a/3896116/1059606) related with 9.6-38.
 # TODO after mathematical analysis
 - [This](#sup_Hardy_Littlewood) due to it may probably [introduce the supremum](https://math.stackexchange.com/q/4173249/1059606)
+- > the completeness of ≤, i.e. the least upper bound property.
+  from Appendix 1
+  why they mean same?
 # TODO after Computer Networking
 - 6.1 -> "1111111 is not available as the netid of a Class A network"
   also "hostids consisting of all 0s and all 1s are unavailable".
