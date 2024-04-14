@@ -12,3 +12,5 @@ CRLS and Discrete_Mathematicsand_Its_Applications book notes
 ## textbooks used by
 ### Discrete Mathematics with Applications
 1. [The University of Pittsburgh](https://sites.pitt.edu/~shk148/teaching/CS0441-2234/review-1-solution.html)
+# How to read these books
+- We should read the appendix first as the order of 'Eighth Edition SOLUTIONS' although when reading 'Discrete Mathematics with Applications' I read the main part first.

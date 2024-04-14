@@ -11752,6 +11752,7 @@ A  E /|\
     $(s2; ∗; s4; B; L)\to (s4; 1; s4; B; L)\to^{*} (s4; B; s5; 1; L)$ will earse all and then add one 1.
     - Notice the mark is necessary to recover $n_{1,2}$ otherwise we will end up in one loop where all the left part is B (maybe we can add one left and right end mark instead of all X mark.)
 ## Appendix
+### 1
 - 1,2,3,10 skipped
 - [ ] 4
   - we can also use $-1\cdot (x+y)$ to prove.
@@ -11787,6 +11788,8 @@ A  E /|\
     Here based on $(x_n)+(y_n)=(x_n+y_n)$ 'well-defined' is trivially proved.
     - from $l = u$ and $b<l\Rightarrow b<l_n$, we have
       > u is a least upper bound for S
+### 2
+- 
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
