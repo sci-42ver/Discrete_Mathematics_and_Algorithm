@@ -11793,6 +11793,38 @@ A  E /|\
 - all skipped
 ### 3
 - [ ] 2 trivially at least 2 for each assignment, but we need at least one more to ensure  correctness.
+# mcs
+- Here * sections mean that they are not included in Discrete_Mathematics_and_Its_Applications.
+## 1.1~1.8 skipped
+## 2.1
+- p30 here 
+  > the fraction m0=p n0=p cannot be in written in lowest terms either
+  is because it equals $\frac{m_0}{n_0}$.
+- Theorem 2.2.1 here the *minimal element* is similar to the *base* of induction.
+## 3.1
+- Here
+  > mathematical implications ignore causal connections
+  helps ignoring $C_i,i\neq 2,5$ which can therefore extract $C_i,i=2,5$.
+## 4.4
+- > bijective when it has both the [= 1 arrow out] and the [= 1 arrow in] property.
+  See [this](https://math.stackexchange.com/questions/1945015/is-a-one-to-one-function-also-a-total-function#comment10454547_1945015)
+- Definition 4.4.4 [see](https://en.wikipedia.org/wiki/Image_(mathematics)#Generalization_to_binary_relations)
+## 5.1
+- 5-choosable: see [2-choosable](https://en.wikipedia.org/wiki/List_coloring#Examples) which proves by giving one counterexample.
+## 5.2
+- > m + k is even IFF [m is even IFF k is even]
+  this means m,k has the same parity.
+## 6.3*
+- this has the example of jug 5 and jug 3 which is shown in one job review and also in one exercise of the Discrete_Mathematics_and_Its_Applications book.
+## 6.4*
+- > If we think of the robot as a nondeterministic state machine, then Claim 6.3.4 is a termination assertion
+  IMHO here 'nondeterministic' has no relations with 'termination assertion'.
+  It is only related with the 2 choices for east/west.
+- > An example of preferences among four people where there is *no stable buddy match* is given in Problem 6.22.
+  Since compared with the stable marriage problem, Theorem 6.4.3 is not held any more.
+- 6.4 the idea is almost same as Discrete_Mathematics_and_Its_Applications 3.1-65 and 3.3-31  although the latter doesn't show explicitly using the *preserved invariant*.
+## TODO (use the book page number)
+- p182
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
