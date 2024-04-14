@@ -12,6 +12,7 @@ much of chapter 2,5,6 have been learned before.
   - > (normally they are kinda *duplicates of the even* numbered ones anyway).
 - [review by someone](https://www.lesswrong.com/posts/TKguxsjPjXhjQGAqM/book-review-discrete-mathematics-and-its-applications-miri#What_should_I_read_)
 - homework is shown in [UC-berkeley](https://math.berkeley.edu/~ribet/55/spring_13/) which only includes part of the book homework.
+- I skip [Common Mistakes in Discrete Mathematics](https://highered.mheducation.com/sites/dl/free/125967651x/1106131/Common_Mistakes_in_Discrete_Math.pdf) because it may be a bit redundant.
 ## courses in some universities using this book
 - [ucsd](https://cseweb.ucsd.edu/classes/sp16/cse20-ac/HW8_Sp16.pdf) uses self-designed homework.
 # [online resources](https://highered.mheducation.com/sites/125967651x/student_view0/web_resources_guide.html) from [this](https://highered.mheducation.com/sites/125967651x/information_center_view0/)
@@ -11789,7 +11790,9 @@ A  E /|\
     - from $l = u$ and $b<l\Rightarrow b<l_n$, we have
       > u is a least upper bound for S
 ### 2
-- 
+- all skipped
+### 3
+- [ ] 2 trivially at least 2 for each assignment, but we need at least one more to ensure  correctness.
 # miscs with sympy usage
 - use `apart` for the Partial fraction decomposition
 - use `rational_algorithm` for finding the coefficient for rational generating function like $\frac{p(x)}{q(x)}$
