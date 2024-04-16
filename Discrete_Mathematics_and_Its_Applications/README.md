@@ -1,6 +1,13 @@
 Please point out errors if any. Thanks in advance.
 
 1. For the future readers reading this question, OP may mean we should derive $x=[z]$ from the assumption of $z$ instead of the converse direction in the reference lecture p36 where ['o/w' may mean otherwise](https://www.abbreviations.com/serp.php?st=O%2FW). 2. If someone is interested about this QA, [this similar SO QA](https://stackoverflow.com/a/42565842/21294350) may be helpful which uses *one more simpler grammar*.
+
+The above link is similar to [what wikipedia says](https://en.wikipedia.org/wiki/Zermelo%27s_theorem_(game_theory)#Details) (See the first question answer) with more details. They both consider 3 cases W(in)/T(ie)/L(ose). This is same as what Ross Millikan says. (Hope the above comments help you.)
+
+If someone is same as me to have questions in the proof of 'Fundamental Theorem for Win-Lose Games' in [mcs.pdf](https://courses.csail.mit.edu/6.042/spring17/mcs.pdf) and found this QA, I think this part in the book may be not friendly because it use the same symbol for one move and the game starting with that move, e.g. $M_0$ in 'Now if there is a move $M_0\in G$ where the second player in $M_0$ has a winning strategy,'. But as a whole, mcs is good.
+
+abbr:
+DMIA -> Discrete_Mathematics_and_Its_Applications
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -11700,7 +11707,7 @@ A  E /|\
   $$
   Notice the above $M_i$ is not complete for all members in $\theta(G)$ due to nesting of 
   $A\to B,B\to (A)$
-  - See [this](./13_supplementary_4.md) where [formal_proof_generate_Language] ~~can't be easily applied here.~~ needs to be combined with induction to show $\subseteq,\supseteq$
+  - See [this](./13_supplementary_4.md) which has links [1](https://stackoverflow.com/a/42565842/21294350) [2](https://cs.stackexchange.com/questions/153049/prove-that-the-grammar-s-rightarrow-sss-epsilon-generates-precisely-all-we#comment346785_153049) where [formal_proof_generate_Language] ~~can't be easily applied here.~~ needs to be combined with induction to show $\subseteq,\supseteq$
 - [ ] 6 see the ans
   - initially I tried to show 2 derivations are same but it is not trivial.
   - either $S\to 0$ ends or $S\to 0S$ continues.
@@ -11823,6 +11830,52 @@ A  E /|\
 - > An example of preferences among four people where there is *no stable buddy match* is given in Problem 6.22.
   Since compared with the stable marriage problem, Theorem 6.4.3 is not held any more.
 - 6.4 the idea is almost same as Discrete_Mathematics_and_Its_Applications 3.1-65 and 3.3-31  although the latter doesn't show explicitly using the *preserved invariant*.
+## 7.1
+- cons is [not one official operation in Python](https://pypi.org/project/cons/).
+- Definition 7.1.3 is based on induction of the length of $s$
+  - since $a\in A$, $\langle a, s\rangle=a\cdot s$
+    similarly for $a \cdot (t\cdot \lambda)=\langle a, t\cdot \lambda\rangle$
+## 7.2
+- Definition 7.2.1 Constructor case
+  this is very similar to DMIA 13-Supplementary-4, but here the production is from the inner to the outer which is the converse direction.
+  - notice Problem 7.20. means same as (ii) in p10 of link1.
+- here $\cdot's$ means the plural of $\cdot$.
+## 7.3*
+- Problem 7.25. is not included in DMIA 5.3, 5.4.
+  See [this](https://math.stackexchange.com/q/96483/1059606) and [this](https://en.wikipedia.org/wiki/Ackermann_function#General_remarks)
+  for this problem, 
+  (n goes down) $A(m,n-1)$ can be called infinitely until $A(m,1)=2$, 
+  (m goes down) then go up one stack $A(m-1,2)=A(m-2,A(m-1,1))=A(m-2,2)=^*A(0,2)=4$. Then we go up one stack again and do $A(m-1,4)=A(m-2,A(m-1,3))=A(m-2,A(m-2,A(m-1,2)))=A(m-2,A(m-2,4))...$ trivially $m$ will always go to 0 and go back stack up.
+  - Also see [the code](./others/mcs/codes/Ackermann_7_25.py)
+- TODO Union-Find algorithm
+## 7.5
+- 7.5.2 is more general.
+- notice [Theorem 7.5.3.](https://en.wikipedia.org/wiki/Zermelo%27s_theorem_(game_theory)#Details) is not same as 
+  > *each* of the players will have a strategy that guarantees a *win or a stalemate*
+  because the base will ensure one lose.
+- 'Definition. A play of a WL-2PerGm game G' is based on 
+  > the situation at any point during game play can itself be *treated as the start* of a new game.
+  So the 'Constructor case' is based on length.
+  - > Each game M 2 G is called a possible first move of G
+    implies G has moves although 'win' and 'lose' moves in base may be insufficient.
+- Theorem 7.5.3
+  - > the first player in G becomes the second player in M .
+    is based on 
+    > So this play of G is a length $n+1$ sequence that finishes with the same outcome
+  - better [see this](https://math.stackexchange.com/questions/3992275/if-a-winning-strategy-does-not-exist-for-player-2-does-it-exist-for-player-1#comment10457491_3993622)
+    - Here Definition 7.5.1 means possible moves make win or lose instead of directly win/lose.
+    - > pick M0 as the first move, and then follow the second player’s winning strategy for M0 .
+  - Lemma 7.5.2 is same as the top-right part in p1 of [this](https://oyc.yale.edu/sites/default/files/blackboard15_0_0.pdf)
+  - > Each game M 2 G is called a possible first move of G.
+    here move is generalized to one move which has many small child-moves.
+    Then
+    > Now if there is a move M0 2 G where the second player in M0 has a winning strategy, then the first player in G has a simple winning strategy: pick M0 as the first move, and then follow the second player’s winning strategy for M0 
+    means 'the first player' do one move $k$ which gets to the state $M_0$(i.e. 'pick M0 as the first move').
+    notice 'move M0' means one game as the above definition and 'as the first move' means one minimal unit move.
+    > if the first player in G makes the move M
+    means choose $M$ as the above 'pick M0 as the first move'.
+  - > Of course only the first move in the meta-chess-tournament is infinite, but then we could set up a tournament consisting of n meta-chess-tournaments.
+    choosing $n$ is infinite.
 ## TODO (use the book page number)
 - p182
 # miscs with sympy usage
