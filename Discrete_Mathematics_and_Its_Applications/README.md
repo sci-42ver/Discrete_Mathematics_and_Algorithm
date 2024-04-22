@@ -6,6 +6,31 @@ The above link is similar to [what wikipedia says](https://en.wikipedia.org/wiki
 
 If someone is same as me to have questions in the proof of 'Fundamental Theorem for Win-Lose Games' in [mcs.pdf](https://courses.csail.mit.edu/6.042/spring17/mcs.pdf) and found this QA, I think this part in the book may be not friendly because it use the same symbol for one move and the game starting with that move, e.g. $M_0$ in 'Now if there is a move $M_0\in G$ where the second player in $M_0$ has a winning strategy,'. But as a whole, mcs is good.
 
+IMHO, the right to left implication tries constructing the bijection by removing duplicate mappings sharing the same image value based on $g_{n + 1}(k) := g_n(k)$. I found one [similar QA](https://math.stackexchange.com/a/2052106/1059606) where $f:\mathbb{N}\to A$ can be surjective [means same as (see Lemma 4.5.3 proof)](https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_and_Computation_Fundamentals/Mathematics_for_Computer_Science_(Lehman_Leighton_and_Meyer)/01%3A_Proofs/04%3A_Mathematical_Data_Types/4.05%3A_Finite_Cardinality) $g:A\to \mathbb{N}$ can be injective.
+
+Then the proof can be simplified using $g(A)$ as the   intermediate medium during the proof. (Notice 1. here we only shows *the existence* of $g$. $g$ may be not $f^{-1}$ when $f(1)=f(2)$ for example. This is also implied by here the function can be total or partial. So we may use [left/right inverse](https://math.stackexchange.com/a/3971994/1059606)) BTW the above link 2 is almost same as [mcs.pdf](https://courses.csail.mit.edu/6.042/spring17/mcs.pdf) chapter 4.5.
+
+IMHO, here we should use $h(n)\in f^{n-1}(X)\setminus \bigcup_{k=1}^n f^k(X)$ if we considers $f^k(X)$ as function composition. For example in a Hilbert's hotel-like set, we may do [$f:n\to n+k,k\in\mathbb{N}^+$](https://en.wikipedia.org/wiki/Hilbert%27s_paradox_of_the_Grand_Hotel#Finitely_many_new_guests).
+
+Thanks. You solve the 2 questions by assuming the more general conclusion to prove and getting one contradiction while I originally tried to prove the conclusion directly. 1. Since $s$ and $P_s(s)$ have the bijection direction, recognizing one of them means recognizing the other. Then iterate for `No-halt`, we can recognize it. 2. Based on 1, decider on whether $P_s(s)$ halts means same as the decider on whether $s$ is in `No-halt`.
+
+After viewing the posted answer, the above questions should have the following correction:
+1. $\{P_s(s)\;\vert\;s\in\text{No-halt}\}$ instead of `No-halt` means same as the *non-halting program*s.
+
+2. "We only shows some strings / programs can't be recognized", i.e. *no programs will halt* with one valid output like True/False when having the string $s$ / program $P_s(s)$ to recognize as the input. This doesn't mean we know $P_s(s)$ won't halt, but means the program with input $P_s(s)$ won't halt, i.e. won't recognize $P_s(s)$. In a sum, the above "i.e. we know some programs won't halt" is wrong. Could you help checking whether my correction is right based on your answer? Thanks in advance.
+
+'The ideal fix for that would be forwarding of DBUS_SESSION_BUS_ADDRESS in the same way that DISPLAY is forwarded.': Since `DISPLAY` depends on [what is run in `$XDG_RUNTIME_DIR` dir](https://discourse.ubuntu.com/t/environment-variables-for-wayland-hackers/12750), we can do the same where we may have something like `$XDG_RUNTIME_DIR/bus`.
+
+IMHO, it is better to use the *currently running* dbus's `DBUS_SESSION_BUS_ADDRESS`. See [this QA answer](https://stackoverflow.com/a/72307609/21294350) for how to find that.
+
+`WAYLAND_DISPLAY` depends on the [setting](https://discourse.ubuntu.com/t/environment-variables-for-wayland-hackers/12750). Then we can use `WAYLAND_DISPLAY=$(sudo find /run/user/$UID -regex '.*wayland-[0-9]' 2>/dev/null | xargs -I{} echo {} | sed -e 's/\/.*\///p')` if some applications don't recognize `$XDG_RUNTIME_DIR`. This command may be a bit long. Anyone with one better  approach is appreciated.
+
+@DavidL. You can try `export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$UID/bus`. It works for me. (I tried in `cron`, it seems to not know `$XDG_RUNTIME_DIR`).
+
+Here the added $x\in \{n\}$ is to avoid 'Russell's paradox' ([$x\in \{n\}\vert x\neq x$](https://math.stackexchange.com/a/32493/1059606) notation may be better which is also the notation used in [wikipedia](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory#3._Axiom_schema_of_specification_(or_of_separation,_or_of_restricted_comprehension))). One better construction of the empty set based on 'the axiom of specification' is also shown in wikipedia.
+
+@TheSilverBullet 1. IMHO, the truth table is inappropriate here because here we are talking about Axiom schema instead of Axiom where the variable count is variant. 'functional formula' is implied by $u=v$ and 'the image of $\varphi(u,v,a)$ is indeed $\{x\in a\mid \phi(x)\}$' is implied by $u\in p\land\phi(u)$. 2. For future readers, 'ordered pairing' can be constructed as [this QA comment](https://math.stackexchange.com/questions/62908/how-can-an-ordered-pair-be-expressed-as-a-set#comment147191_62908) says.
+
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
 # outline
@@ -3463,6 +3488,8 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   the rest are similar.
 - [x] 12
   $A \subset B\Rightarrow A\to B\text{is one-to-one}$
+- [ ] 13 see the ans
+  - it is based on [$\mathbb{Z}^+$ is infinite countable](https://math.stackexchange.com/a/3463563/1059606)
 - [ ] 14
   $|A|=|B|\blacksquare$
   - notice the infinite set.
@@ -3584,7 +3611,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     - > We can encode subsets of the set of positive integers as strings of, say, 5’s and 6’s
       similar to 35 0/1
     - [Terminating](https://www.cuemath.com/numbers/terminating-decimal/) Decimal Definition
-      > A number has a terminating decimal expansion if the digits after the decimal point terminate or are *finite*
+      > A number has a terminating decimal expansion if the digits after the decimal point terminate or are *finite*@
       - [proof](https://math.stackexchange.com/questions/1404291/whether-a-real-number-is-a-dyadic-rational-iff-its-binary-expansion-terminates#:~:text=A%20real%20number%20is%20a%20dyadic%20rational%20if,if%20its%20binary%20expansion%20terminates.&text=Since%20this%20is%20base%2D2,x%20is%20a%20dyadic%20rational.) where
         1. "if" just use the definition
         2. "only if" uses $|a|\neq+\infin$
@@ -11802,6 +11829,23 @@ A  E /|\
 - [ ] 2 trivially at least 2 for each assignment, but we need at least one more to ensure  correctness.
 # mcs
 - Here * sections mean that they are not included in Discrete_Mathematics_and_Its_Applications.
+- This book skips most of state machines and Turing machine with only one chapter 6.
+- Theorem 8.2.2 is same as DMIA 3.1.6 which finds one *counterexample* using .
+  ~~$lang(s)\to H(P,P)$~~ ~~and~~ $s_0=K$
+  $s\in/\notin lang(P)$ means halt or not.
+  - > Following the usual diagonal approach, we define the language No-halt:
+    Here we *iterate over all recognizers* like $A_k$ in the original proof.
+    And finds strings not ~~related with~~recognized by all these recognizers like $C$ in the original proof.
+    Compared with the original proof
+    $\exists m, C=A_m\iff C[k]\neq A_k[k]$ which is wrong because $C[m]=A_m[m]$ contradicts with RHS.
+  - > A language is called recognizable when it equals lang.P / for some string procedure P 
+    so 'not recognizable' -> 'not halt', i.e. no  program can halt when input such one string/language.
+  - DMIA 3.1.6 is almost same as [this](https://math.stackexchange.com/q/867491/1059606) where `K(K)` is the nested `paradox()`.
+    - > there must be a program e that computes g, by the assumption that the model of computation is Turing-complete.
+      'Turing-complete' ensures the existence of `e`.
+- TODO why 'No-halt' string set is 'non-halting Java programs'
+  maybe it is probably one
+  $\text{No-halt} \Coloneqq \{s\vert P_s \text{applied to s does not halting}\} = \{s \notin lang(Ps)\}:(8.3)$
 ## 1.1~1.8 skipped
 ## 2.1
 - p30 here 
@@ -11812,7 +11856,7 @@ A  E /|\
 - Here
   > mathematical implications ignore causal connections
   helps ignoring $C_i,i\neq 2,5$ which can therefore extract $C_i,i=2,5$.
-## 4.4
+## 4.4 (rephrased using arrows)
 - > bijective when it has both the [= 1 arrow out] and the [= 1 arrow in] property.
   See [this](https://math.stackexchange.com/questions/1945015/is-a-one-to-one-function-also-a-total-function#comment10454547_1945015)
 - Definition 4.4.4 [see](https://en.wikipedia.org/wiki/Image_(mathematics)#Generalization_to_binary_relations)
@@ -11848,7 +11892,11 @@ A  E /|\
   (m goes down) then go up one stack $A(m-1,2)=A(m-2,A(m-1,1))=A(m-2,2)=^*A(0,2)=4$. Then we go up one stack again and do $A(m-1,4)=A(m-2,A(m-1,3))=A(m-2,A(m-2,A(m-1,2)))=A(m-2,A(m-2,4))...$ trivially $m$ will always go to 0 and go back stack up.
   - Also see [the code](./others/mcs/codes/Ackermann_7_25.py)
 - TODO Union-Find algorithm
-## 7.5
+- Definition 7.3.1 implies ordinary induction is almost same as structural induction but the latter allows multiple arguments and is more about *data structure construction* instead of increasing $n$ by one constant step.
+  as 7.6 says
+  > Structural induction then goes beyond number counting
+  - Also see 'The Principle of Structural Induction.'
+## 7.5 (maybe *)
 - 7.5.2 is more general.
 - notice [Theorem 7.5.3.](https://en.wikipedia.org/wiki/Zermelo%27s_theorem_(game_theory)#Details) is not same as 
   > *each* of the players will have a strategy that guarantees a *win or a stalemate*
@@ -11865,7 +11913,7 @@ A  E /|\
   - better [see this](https://math.stackexchange.com/questions/3992275/if-a-winning-strategy-does-not-exist-for-player-2-does-it-exist-for-player-1#comment10457491_3993622)
     - Here Definition 7.5.1 means possible moves make win or lose instead of directly win/lose.
     - > pick M0 as the first move, and then follow the second player’s winning strategy for M0 .
-  - Lemma 7.5.2 is same as the top-right part in p1 of [this](https://oyc.yale.edu/sites/default/files/blackboard15_0_0.pdf)
+  - Lemma 7.5.2 is same as the top-right part in p1 of [yale_Fundamental_Theorem_for_Win_Lose_Games]
   - > Each game M 2 G is called a possible first move of G.
     here move is generalized to one move which has many small child-moves.
     Then
@@ -11876,6 +11924,158 @@ A  E /|\
     means choose $M$ as the above 'pick M0 as the first move'.
   - > Of course only the first move in the meta-chess-tournament is infinite, but then we could set up a tournament consisting of n meta-chess-tournaments.
     choosing $n$ is infinite.
+## 7.6
+- > It is then possible to prove properties of data by ordinary induction on their size.
+  this is how the book proves 'Fundamental Theorem for Win-Lose Games' compared with [yale_Fundamental_Theorem_for_Win_Lose_Games] where the latter uses 'ordinary induction on their size'.
+## 8.1
+- infinite set ordinal see [$w$](https://www.ub.edu/topologia/seminars/Set_theory.pdf)
+- Lemma 8.1.3 See Definition 4.4.2.
+- See Definition 4.5.2 here inj *doesn't imply the necessity* of the injective total relation, but only shows *existence*.
+- Problem 8.12.
+  > might end at an element that has no arrow into it.
+  - See [stopper](https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem#:~:text=In%20set%20theory%2C%20the%20Schr%C3%B6der,function%20h%20%3A%20A%20%E2%86%92%20B.)
+    or more specifically, assume $f:5\to d$ and $g:d\to 5$
+    then we will end either at 5 or d.
+  - > paths that are unending but finite.
+    i.e. 'cyclic if it repeats' in wikipedia.
+  - (b) here we just start from the end for (i,ii) to the infinite ending.
+  - (a) 'infinite' is due to we are considering infinite sets.
+  - (c)
+    > if an element occurs in two sequences, all elements to the left and to the right must be the same in both, by the definition of the sequences.
+    this is caused by 1-1 of f and g.
+  - (d) see [this](https://math.stackexchange.com/questions/4068977/halmoss-proof-of-schr%C3%B6der-bernstein-theorem#comment8407122_4068977)
+- TODO ordinal and other related proofs after the set theory.
+- Problem 8.13 (b) is same as [this](https://math.stackexchange.com/a/2052106/1059606)
+  (a) see [this](https://math.stackexchange.com/a/3696479/1059606)
+  - (a) proof implies
+    'there is a *total* surjective function $g:\mathbb{N}\to C$' is same as
+    'there is a surjective function $g:\mathbb{N}\to C$'
+  - This is also almost as DMIA 2.5-13 but only using one *total* surjective function.
+- Problem 8.23 See [this](https://www.physicsforums.com/threads/i-proving-that-the-cross-product-of-2-countable-sets-is-countable.263517/post-1911104) or DMIA 2.5-28.
+- > adding one new element to an infinite set doesn’t change its size,
+  this is just how map [between $\mathbb{N}$ and $\mathbb{Z}^+$](https://math.stackexchange.com/questions/182459/an-infinite-set-having-one-more-element-than-another-infinite-set#comment420603_182459)
+- Problem 8.10. (b)
+  [See](https://math.stackexchange.com/a/2495180/1059606)
+  > e (hence X is equipotent to a proper subsets of itself
+  i.e. [$n+k$](https://en.wikipedia.org/wiki/Hilbert%27s_paradox_of_the_Grand_Hotel#Finitely_many_new_guests) or [$2n$](https://en.wikipedia.org/wiki/Hilbert%27s_paradox_of_the_Grand_Hotel#Infinitely_many_new_guests)
+- > Since any partial function with nonempty codomain can be extended to a total function with the same range (reader: ask yourself how)
+  See Problem 8.13 (a)
+- here $w$ is the ordinal corresponding to $\mathbb{N}$.
+- > $\mathbb{N}\text{ surj }(\mathbb{Z}^+)^\ast$
+  do calculation from right to left.
+- Problem 8.14.
+  [proof](https://math.stackexchange.com/a/317522/1059606) using that $n$ can be *infinitely bigger*.
+- Corollary 8.1.16.
+  this shrinks the size largely because it *only considers binary* bits after the decimal digit.
+- [$0.999\cdots=1$](https://en.wikipedia.org/wiki/0.999...#Intuitive_explanation) or [not](https://betterexplained.com/articles/a-friendly-chat-about-whether-0-999-1/#:~:text=In%20our%20current%20system%2C%20we,0.999%E2%80%A6%20is%20less%20than%201.)
+  - TODO I have read one book which says about it but can't find the location temporarily.
+- > This diagonal sequence C corresponds to the set fa 2 A j a ... g.a/g in the proof of Theorem 8.1.12.
+  think $a=(idx:0/1),g((idx:0/1))=A_{idx}$
+  - > Both are defined in terms of a countable subset of the uncountable infinity in a way that excludes them from that subset,
+    i.e. subset $A_{1\sim k}$
+    and a countable subset of *the power set* although the latter is not necessarily infinite.
+## 8.2
+- program [freezing](https://www.reddit.com/r/Windows10/comments/j83klk/comment/g88jw9g/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) (i.e. store the program for the latter running)
+- > simulate the program using an interpreter
+  like [python](https://cs.stackexchange.com/a/148444/161388)
+- each program can be thought as [one superset of the algorithm](https://qr.ae/ps4YWn).
+## 8.3
+- Russell’s paradox is also shown in DMIA 2.2-50. 
+  notice this is ~~same as~~ similar to cantor's diagonal argument $\{a \in A\vert a \notin g(a)\}$. See 8.1.
+### 8.3.2*
+- [First-order logic](https://en.wikipedia.org/wiki/First-order_logic#) just means not propositions but
+  > there exists x such that x is Socrates and x is a man
+  - compared with [Second-order logic](https://en.wikipedia.org/wiki/Second-order_logic) where $\forall P\forall x$ instead of $\forall x$
+- > range over sets
+  i.e. ~~a~~ ~~member of the set~~ ~~function~~ it [can be one set](https://math.stackexchange.com/a/1568778/1059606). This is also implied by
+  > For any two sets x and y
+  Also see [this](https://en.wikipedia.org/wiki/Second-order_logic#Syntax_and_fragments) where 'over sets of individuals' -> one set of individuals -> [unary relation](https://en.wikipedia.org/wiki/Finitary_relation#Unary).
+- ZFC
+  - Axiom of extensionality
+    can have [2 forms](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory#1._Axiom_of_extensionality)
+  - Pairing.
+    'z 2 u IFF .z D x OR z D y/' cares about $z$
+    while wikipedia cares about $x,y$
+    so the former uses OR while the latter uses AND.
+  - Union
+    here IFF is  implied by $=$ in $\cup F=$ in wikipedia.
+  - Axiom of infinity
+    - > the empty set  ${\displaystyle \varnothing }$, defined axiomatically
+      i.e. $\forall z\,\neg (z\in e)$
+      this constructs $0$
+      - > applying the axiom of pairing
+        we get $1$
+      - Then use $S(w)$ to get the following $2,\cdots$
+    - > if two elements are the same, the sequence will loop around in a finite cycle of sets.
+      See the following QA_1 answer_2.
+  - Axiom of regularity
+    > This (along with the axiom of pairing) implies, for example, that no set is an element of itself and that every set has an ordinal rank.
+    - the [rank](https://mathworld.wolfram.com/Rank.html#:~:text=In%20set%20theory%2C%20rank%20is,214).) implies
+      > *forbid any infinite* sequence of sets
+    - Notice 'First several von Neumann ordinals' in this page is different from [this](https://en.wikipedia.org/wiki/Von_Neumann_universe#Finite_and_low_cardinality_stages_of_the_hierarchy) like in $3$ it lacks $\{\{\varnothing\}\}$
+    - the axiom of pairing is to [allow something like $\{A\}$ in QA_1](https://math.stackexchange.com/q/2537526/1059606)
+    - proof see this [in brief QA_1 comment](https://math.stackexchange.com/questions/2537526/axiom-of-regularity-allows-for-this-set-be-an-element-of-itself#comment5239977_2537526)
+      or 
+      - [QA_1 answer_1](https://math.stackexchange.com/a/2537553/1059606)
+        this 1st paragraph says 'set' -> '... disjoint sets' doesn't mean the converse is also true.
+      - [QA_1 answer_2](https://math.stackexchange.com/a/2537670/1059606) which is more readable.
+    - This is needed to [simplify/(make possible) well-ordered sets](https://en.wikipedia.org/wiki/Axiom_of_regularity#:~:text=However%2C%20regularity%20makes%20some%20properties,as%20the%20lexicographical%20ordering%20on).
+      - And see [point 3 to avoid 'non-well-founded sets'](https://math.stackexchange.com/a/4866373/1059606) and its point 2 says same as [this QA_2](https://math.stackexchange.com/a/213649/1059606) that we use this axiom to simplify and make it possible to prove some theorems.
+        - point 1 may say something like $A=\{A,\{A,B}\}$ doesn't exist, (transitive is similar, e.g. the former $A\in \{A,B\}\in A$)
+          - How [this definition of pair](https://math.stackexchange.com/a/62937/1059606) is valid
+        - QA_2
+          if
+          > Its users couldn't care less whether or not ZF is the underlying theory of the universe or some other theory
+          then we can skip assuming this axiom.
+  - [Axiom *schema*](https://qr.ae/pskBLY) of specification -> Subset
+    - Notice 
+      > This restriction is necessary to avoid Russell's paradox
+    - > and ${\displaystyle y\in z}$ has not been established
+      is just the assumption
+      > we need to previously restrict the sets ${\displaystyle y}$ will regard within a set ${\displaystyle z}$ that leaves ${\displaystyle y}$ outside
+      which is same as 'Axiom of regularity'.
+    - > In some other axiomatizations of ZF, this axiom is redundant in that it follows from the axiom schema of replacement ~~and the axiom of the empty set~~.
+      since they are both *mapping*s where the former codomain is *same* as domain.
+      - See [QA_3 question](https://math.stackexchange.com/q/32483/1059606) for the mapping to the pairing axiom
+        where similarly we can get [$\{Z_0,Z_1,Z_2,\cdots\}$](https://en.wikipedia.org/wiki/Zermelo_set_theory#Connection_with_standard_set_theory)
+        by have the mapping $\varnothing\to Z_0,\{\varnothing\}\to Z_1,\cdots$
+        - TODO this can't be implemented using 'Axiom schema of specification' because it is  *restricted* in $z$ (i.e. subset).
+      - see [QA_3 answer](https://math.stackexchange.com/a/32493/1059606) which doesn't need 'the empty set'.
+    - > the domain of discourse must be nonempty
+      implies
+      > at least one set is known to exist
+      - > The axiom of extensionality implies the empty set is unique (does not depend on ${\displaystyle w})$
+        this is because $z\in x\Leftrightarrow z\in y$ is vacuously true due to $F\Leftrightarrow F$, so we have $x=y$.
+  - Replacement
+    here the 1st equation is similar to one-to-one function.
+    - > specifies a unique ${\displaystyle x}$-to-${\displaystyle y}$ correspondence
+      is implied by $\exists !$
+    - notice the image is similar to [collection](https://en.wikipedia.org/wiki/Axiom_schema_of_replacement#Collection) due to only $\Rightarrow$ instead of $\Leftrightarrow$
+    - > and ${\displaystyle f(x)}$ is a set for every ${\displaystyle x\in A,}$
+      is because both $x,y$ ranges over sets.
+      > Two sets are equal
+      Also see
+      > Thus the axioms of Zermelo–Fraenkel set theory refer only to *pure sets* and prevent its models from containing urelements (elements of sets that are not themselves sets)
+    - better see the above image.
+  - powerset
+    the book IFF combines the 2 lines in wikipedia into 1.
+  - Axiom of choice
+    - Problem 8.35
+      - > Verify that the axiom of choice can be expressed as a pure formula
+        trivial since 'pairwise-disjoint.s' and 'choice-set.c; s' can be described as one formula.
+      - See the last line of [this 'first-order logic'](https://en.wikipedia.org/wiki/Axiom_of_choice#Variants)
+    - [from AC to the well-ordering theorem](https://en.wikipedia.org/wiki/Well-ordering_theorem#Proof_from_axiom_of_choice)
+      just choose *one by one* the elements of the ordered sequence.
+      - ${\displaystyle \sup\{\alpha \mid a_{\alpha }{\text{ is defined}}\}}$ may mean the complement $\smallsetminus \{a_{\xi }\mid \xi <\alpha \}$.
+    - the converse
+      - > require just as *many choices* as simply choosing an element from each ${\displaystyle S}$.
+      - > making all uncountably many choices is not allowed under the axioms of Zermelo-Fraenkel set theory without the axiom of choice.
+        IMHO 'countably' is not allowed let alone 'uncountably'.
+### 8.3.3*
+- This is same as [this](https://en.wikipedia.org/wiki/Universal_set#Regularity_and_pairing)
+## 8.4*
+- TODO Banach-Tarski Theorem
+- 
 ## TODO (use the book page number)
 - p182
 # miscs with sympy usage
@@ -12093,6 +12293,7 @@ A  E /|\
 [safe_edge_MST]:https://courses.engr.illinois.edu/cs374/fa2015/slides/18-mst.pdf
 [kahn_proof]:https://www.cs.nthu.edu.tw/~wkhon/ds/ds11/lecture/lecture12.pdf
 [uchicago_0_n_1_n]:https://www.classes.cs.uchicago.edu/archive/2015/winter/28000-1/Lec13.pdf
+[yale_Fundamental_Theorem_for_Win_Lose_Games]:https://oyc.yale.edu/sites/default/files/blackboard15_0_0.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
