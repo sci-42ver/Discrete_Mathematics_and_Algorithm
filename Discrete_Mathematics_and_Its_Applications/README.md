@@ -1,38 +1,22 @@
 Please point out errors if any. Thanks in advance.
 
-1. For the future readers reading this question, OP may mean we should derive $x=[z]$ from the assumption of $z$ instead of the converse direction in the reference lecture p36 where ['o/w' may mean otherwise](https://www.abbreviations.com/serp.php?st=O%2FW). 2. If someone is interested about this QA, [this similar SO QA](https://stackoverflow.com/a/42565842/21294350) may be helpful which uses *one more simpler grammar*.
+In one comment of the QA referred to by poetasis, the above is similar to what [wikipedia](https://en.wikipedia.org/wiki/Lam%C3%A9%27s_theorem#:~:text=Lam%C3%A9's%20Theorem%20is%20the%20result,digits%20(decimal)%20of%20b.) says.
 
-The above link is similar to [what wikipedia says](https://en.wikipedia.org/wiki/Zermelo%27s_theorem_(game_theory)#Details) (See the first question answer) with more details. They both consider 3 cases W(in)/T(ie)/L(ose). This is same as what Ross Millikan says. (Hope the above comments help you.)
+This one is very similar to the proof in [the shoup's book 'Theorem 5.4' (reference of mcs.pdf)](https://www.shoup.net/ntb/ntb-v2_1.pdf) which also considers the odd number condition but this answer's step 4 is more elegant.
 
-If someone is same as me to have questions in the proof of 'Fundamental Theorem for Win-Lose Games' in [mcs.pdf](https://courses.csail.mit.edu/6.042/spring17/mcs.pdf) and found this QA, I think this part in the book may be not friendly because it use the same symbol for one move and the game starting with that move, e.g. $M_0$ in 'Now if there is a move $M_0\in G$ where the second player in $M_0$ has a winning strategy,'. But as a whole, mcs is good.
+For reference, $q\vert P(N+q)$ is based on [factorization of $a^n−b^n$](https://math.stackexchange.com/q/712758/1059606). The proof in 'Remark' is based on *the solution number*.
 
-IMHO, the right to left implication tries constructing the bijection by removing duplicate mappings sharing the same image value based on $g_{n + 1}(k) := g_n(k)$. I found one [similar QA](https://math.stackexchange.com/a/2052106/1059606) where $f:\mathbb{N}\to A$ can be surjective [means same as (see Lemma 4.5.3 proof)](https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_and_Computation_Fundamentals/Mathematics_for_Computer_Science_(Lehman_Leighton_and_Meyer)/01%3A_Proofs/04%3A_Mathematical_Data_Types/4.05%3A_Finite_Cardinality) $g:A\to \mathbb{N}$ can be injective.
+As the user694818's answer says, the question seems to lead the readers to prove using the form like $P(cm)$ instead of $P(m+k)$ which is used in the reference QA of lulu's comment. So c) may be fine if not wanting to get infinite composites. This is also implied by the hint of the question.
 
-Then the proof can be simplified using $g(A)$ as the   intermediate medium during the proof. (Notice 1. here we only shows *the existence* of $g$. $g$ may be not $f^{-1}$ when $f(1)=f(2)$ for example. This is also implied by here the function can be total or partial. So we may use [left/right inverse](https://math.stackexchange.com/a/3971994/1059606)) BTW the above link 2 is almost same as [mcs.pdf](https://courses.csail.mit.edu/6.042/spring17/mcs.pdf) chapter 4.5.
+1. To help future readers, we need to add one more step to connect to the question's statement $\lceil \log_2n \rceil\color{#0a0}{+1}$: when $\lceil \log_2 z_0 \rceil\notin \mathbb{N}$, we need $\lceil \log_2 z_0 \rceil$ iterations, otherwise $\lceil \log_2 z_0 \rceil+1$. 2. [reference](https://math.stackexchange.com/a/678643/1059606) of the nested quotient operation
 
-IMHO, here we should use $h(n)\in f^{n-1}(X)\setminus \bigcup_{k=1}^n f^k(X)$ if we considers $f^k(X)$ as function composition. For example in a Hilbert's hotel-like set, we may do [$f:n\to n+k,k\in\mathbb{N}^+$](https://en.wikipedia.org/wiki/Hilbert%27s_paradox_of_the_Grand_Hotel#Finitely_many_new_guests).
-
-Thanks. You solve the 2 questions by assuming the more general conclusion to prove and getting one contradiction while I originally tried to prove the conclusion directly. 1. Since $s$ and $P_s(s)$ have the bijection direction, recognizing one of them means recognizing the other. Then iterate for `No-halt`, we can recognize it. 2. Based on 1, decider on whether $P_s(s)$ halts means same as the decider on whether $s$ is in `No-halt`.
-
-After viewing the posted answer, the above questions should have the following correction:
-1. $\{P_s(s)\;\vert\;s\in\text{No-halt}\}$ instead of `No-halt` means same as the *non-halting program*s.
-
-2. "We only shows some strings / programs can't be recognized", i.e. *no programs will halt* with one valid output like True/False when having the string $s$ / program $P_s(s)$ to recognize as the input. This doesn't mean we know $P_s(s)$ won't halt, but means the program with input $P_s(s)$ won't halt, i.e. won't recognize $P_s(s)$. In a sum, the above "i.e. we know some programs won't halt" is wrong. Could you help checking whether my correction is right based on your answer? Thanks in advance.
-
-'The ideal fix for that would be forwarding of DBUS_SESSION_BUS_ADDRESS in the same way that DISPLAY is forwarded.': Since `DISPLAY` depends on [what is run in `$XDG_RUNTIME_DIR` dir](https://discourse.ubuntu.com/t/environment-variables-for-wayland-hackers/12750), we can do the same where we may have something like `$XDG_RUNTIME_DIR/bus`.
-
-IMHO, it is better to use the *currently running* dbus's `DBUS_SESSION_BUS_ADDRESS`. See [this QA answer](https://stackoverflow.com/a/72307609/21294350) for how to find that.
-
-`WAYLAND_DISPLAY` depends on the [setting](https://discourse.ubuntu.com/t/environment-variables-for-wayland-hackers/12750). Then we can use `WAYLAND_DISPLAY=$(sudo find /run/user/$UID -regex '.*wayland-[0-9]' 2>/dev/null | xargs -I{} echo {} | sed -e 's/\/.*\///p')` if some applications don't recognize `$XDG_RUNTIME_DIR`. This command may be a bit long. Anyone with one better  approach is appreciated.
-
-@DavidL. You can try `export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$UID/bus`. It works for me. (I tried in `cron`, it seems to not know `$XDG_RUNTIME_DIR`).
-
-Here the added $x\in \{n\}$ is to avoid 'Russell's paradox' ([$x\in \{n\}\vert x\neq x$](https://math.stackexchange.com/a/32493/1059606) notation may be better which is also the notation used in [wikipedia](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory#3._Axiom_schema_of_specification_(or_of_separation,_or_of_restricted_comprehension))). One better construction of the empty set based on 'the axiom of specification' is also shown in wikipedia.
-
-@TheSilverBullet 1. IMHO, the truth table is inappropriate here because here we are talking about Axiom schema instead of Axiom where the variable count is variant. 'functional formula' is implied by $u=v$ and 'the image of $\varphi(u,v,a)$ is indeed $\{x\in a\mid \phi(x)\}$' is implied by $u\in p\land\phi(u)$. 2. For future readers, 'ordered pairing' can be constructed as [this QA comment](https://math.stackexchange.com/questions/62908/how-can-an-ordered-pair-be-expressed-as-a-set#comment147191_62908) says.
+This is Problem 4.21 in [mcs.pdf](https://courses.csail.mit.edu/6.042/spring18/mcs.pdf). In summary here the difference is that relation allows "[$\ge$1 arrows out]" while function only allows "[=1 arrows out]" where the former is a bit like the superset of the latter.
 
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
+# tips
+- [this boy](https://math.stackexchange.com/search?q=user%3A22335+application) reads mcs *many years* after reading DMIA. His QAs are valuable.
+  - TODO where is [it](https://math.stackexchange.com/q/168214/1059606) in DMIA
 # outline
 much of chapter 2,5,6 have been learned before.
 - By [this](https://www.reddit.com/r/learnmath/comments/s4hunt/how_long_does_it_take_for_average_person_to_learn/)
@@ -2545,6 +2529,7 @@ I also read the asterisked ones.
     It is same as the book outline $p\{S_1\}q\dots$.
   - Some other "left as (an) exercise(s)" are contained in this note
   - The above is skipped because of similarity with the other exercises and triviality.
+- * means unread.
 ## 1
 ### 1.1
 - [x] 
@@ -3861,7 +3846,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
   we need $m\epsilon+i\ge m\Rightarrow k+i\ge m,i\ge m-k$, since $i$ stop at $n-1$ so there are $k$ right terms rounding up.$\blacksquare$
   - see the ans how to be tuned with this specific sum sequence.
     where small error: should be $\text{through }\lfloor x + (m - r − 1)/m\rfloor$
-- [ ] 28
+- [ ] 28 [also see*](https://math.stackexchange.com/q/103700/1059606)
   pattern: $1\xrightarrow{}2\xrightarrow{+u_1}3\xrightarrow{+u_1}4\xrightarrow{+u_2}6\xrightarrow{+u_2}8\xrightarrow{+u_3}11\ldots$
   proof of this pattern:
   $$
@@ -5689,7 +5674,7 @@ $$
   Then $C_{5\sim 8}$ can't access 
   $P$, contradiction.
 - [ ] 42 see the ans where we need symmetry which is not directly shown in the exercise description.
-- [ ] 43 similar to EXAMPLE 10.
+- [ ] 43 similar to EXAMPLE 10. [also see*](https://math.stackexchange.com/q/97397/1059606)
   The key is increasing $a_i$ denoting the number of ~~games~~ matches played on or before the jth ~~day~~ hour ~~of the month.~~
 - [ ] 44 similar to above: a,b are true.
   - see the ans
@@ -6193,6 +6178,7 @@ win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*
 - 1~6,14,15,
   24~26,
   30~36 skipped
+- [43*](https://math.stackexchange.com/q/106146/1059606)
 - [ ] 8 see the ans for c) and e).
 - [x] 10
   f) $\frac{2*4^{\overline{23}}}{26!}=\frac{1}{3}$ is also ok
@@ -6228,6 +6214,7 @@ win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*
 - [x] 40
   - > the probability that we wrongly answer “false” will be about $1/2^k$ if the list is a random permutation
     This means when the list is unsorted, we answer they are sorted, i.e. all $k$ are chosen ordered. Similar to [this](#success_probability_whether_tested_or_not)
+  - [Also see* (here see* means I didn't read it at all)](https://math.stackexchange.com/q/160800/1059606)
 ### 7.3
 - 2~14(8-b can be calculated by $0.9998*0.9999/(1-(0.999*1e-4+2*1e-4*0.9999))$, 10 similar to 8), 
   16,17,20~23 skipped
@@ -6307,7 +6294,7 @@ win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*
     > used by the bubble sort to put these integers into increasing order
     since bubble sort will make the list with the increasing order at the end, so $X(P)$ is just the "comparisons used by the bubble sort".
   d), see the ans
-- [ ] 42 
+- [ ] 42 [also see*](https://math.stackexchange.com/q/164410/1059606)
   - TODO why is a) asked?
   - See 5.4-52
   - > the element being compared with at each round is put between the two sublists, so it is never compared with any other elements after that round is finished
@@ -6766,7 +6753,7 @@ apart(6*x/((x+1)*(x+2)*(x+3))) # Partial fraction decomposition https://mattpap.
   T(n)=T(2^k)=2^{(\log{6}+2) 2^k-k-2}=2^{n\log{6}+2n-2-\log{n}}=\frac{6^n\cdot 4^{n-1}}{n}
   $$
 ### 8.3
-- 10~14,22 skipped
+- 10~14,[22*(unread reference)](https://math.stackexchange.com/q/170931/1059606) skipped
 - [x] 2
   - by Theorem 1, $f(n)=2n-2$.
 - [ ] 4 see the ans
@@ -6850,6 +6837,7 @@ power_recurrence(3,5,2,4,1,False)
       Then if both no, then it is in D, 
       if both yes, then it is in A, because $A\cap B \cap C=\varnothing \Rightarrow (A\cup B)\cap (A\cup C)=A$.
   - e. the [paper](https://sci-hub.se/https://doi.org/10.1016/0097-3165(87)90065-3) is not based on conquer. So I skip it.
+  - [Also see*](https://math.stackexchange.com/q/172372/1059606)
 - [ ] 29~33
   - [ ] 29
     - notice here is not $\sum_{j=0}^{k-1}a^j c(n)^d$, but $\sum_{j=0}^{k-1}a^j c(n/b^j)^d$.
@@ -11734,7 +11722,7 @@ A  E /|\
   $$
   Notice the above $M_i$ is not complete for all members in $\theta(G)$ due to nesting of 
   $A\to B,B\to (A)$
-  - See [this](./13_supplementary_4.md) which has links [1](https://stackoverflow.com/a/42565842/21294350) [2](https://cs.stackexchange.com/questions/153049/prove-that-the-grammar-s-rightarrow-sss-epsilon-generates-precisely-all-we#comment346785_153049) where [formal_proof_generate_Language] ~~can't be easily applied here.~~ needs to be combined with induction to show $\subseteq,\supseteq$
+  - See [this](./13_supplementary_4.md) which has links [1][2_methods_for_balanced_parethesis] [2](https://cs.stackexchange.com/questions/153049/prove-that-the-grammar-s-rightarrow-sss-epsilon-generates-precisely-all-we#comment346785_153049) where [formal_proof_generate_Language] ~~can't be easily applied here.~~ needs to be combined with induction to show $\subseteq,\supseteq$
 - [ ] 6 see the ans
   - initially I tried to show 2 derivations are same but it is not trivial.
   - either $S\to 0$ ends or $S\to 0S$ continues.
@@ -11846,25 +11834,99 @@ A  E /|\
 - TODO why 'No-halt' string set is 'non-halting Java programs'
   maybe it is probably one
   $\text{No-halt} \Coloneqq \{s\vert P_s \text{applied to s does not halting}\} = \{s \notin lang(Ps)\}:(8.3)$
-## 1.1~1.8 skipped
+## notice
+- I only did problems referred to in the main contents because some of them are very interesting and Enlightening.
+- starting from checking problems in chapter 8 where I have read up to 9.3 finished in mcs.pdf,
+  I began reading mcs_2018.pdf (difference between these 2 books see `compare_bmk.awk`)
+  TODO compare these [2 files](https://www.adobe.com/acrobat/how-to/compare-two-pdf-files.html)
+### relation with 6.042J 2019
+- currently the following chapter_1-3 problems, chapter_2-2 problems are not in IN-CLASS QUESTIONS or ASSIGNMENTS.
+## 1.1~1.8 skipped except for some problems
+- Problem 1.26
+  - a) trivial
+  - b) based on a)
+  - c) see [this](https://math.stackexchange.com/q/3552533/1059606).
+  - This is same as DMIA 4-supplementary-23 which is same as the [remark](https://math.stackexchange.com/a/304348/1059606).
+- Problem 1.15
+  splitting into cases are enough.
+- Problem 1.16
+  $n=4,m=8$
+  $n=6,m=4$
 ## 2.1
 - p30 here 
   > the fraction m0=p n0=p cannot be in written in lowest terms either
   is because it equals $\frac{m_0}{n_0}$.
 - Theorem 2.2.1 here the *minimal element* is similar to the *base* of induction.
+## chapter 2 problems
+- Problem 2.20
+  $n_s$ is the main part,
+  so $n_s+f$ is the minimal family among $n+f$
+  then $n_s+f_s$ is the minimal element in this family.
+- Problem 2.23 referred to in chapter 6.
+  - see [this](https://math.stackexchange.com/a/3548169/1059606) which uses contrapositive to prove.
+    - well ordered [implies](https://math.stackexchange.com/a/2756184/1059606) total order
 ## 3.1
 - Here
   > mathematical implications ignore causal connections
   helps ignoring $C_i,i\neq 2,5$ which can therefore extract $C_i,i=2,5$.
+## chapter 3 problems
+- Problem 3.16
+  - a) 
+    $$
+    \begin{align*}
+      \neg L&\to Q\\
+      \neg L&\to B\\
+      \neg L&\leftrightarrow N\\
+      \text{the above is based on point 1}\\
+      \neg Q&\to B\\
+      \neg B\\
+    \end{align*}
+    $$
+  - b,c) $B=F\Rightarrow (Q=T,L=T)\Rightarrow N=F$
+  - [See](https://www.assignmentexpert.com/homework-answers/mathematics/discrete-mathematics/question-154751) although it only has the correct process for a) and the correct answers for b,c) but not with the correct process.
+- Problem 3.6,7 are skipped because they are contained in COD and partly in DMIA.
+  And these problems are far from designing one real CPU although they are the basis.
+- Problem 3.17
+  - a) $(A\iff B)=(A \text{ and } B)\text{ or }(\neg A \text{ and } \neg B)$
+    xor is similar using the truth table
+  - b) [see](https://stackoverflow.com/a/8374918/21294350)
+  - c) see DMIA which also contains the above maybe.
 ## 4.4 (rephrased using arrows)
 - > bijective when it has both the [= 1 arrow out] and the [= 1 arrow in] property.
   See [this](https://math.stackexchange.com/questions/1945015/is-a-one-to-one-function-also-a-total-function#comment10454547_1945015)
 - Definition 4.4.4 [see](https://en.wikipedia.org/wiki/Image_(mathematics)#Generalization_to_binary_relations)
+## chapter 4 problems
+- Problem 4.5 uses [element-chasing](https://web.math.ucsb.edu/~mikew/MAT145Page/Set_Theory_Review.pdf) in the [proof](https://math.stackexchange.com/a/2782336/1059606)
+  - Show how union is [analogous](https://math.stackexchange.com/questions/4016966/show-how-union-is-analogous-to-logical-inclusive-or#comment8292345_4016966) to [logical inclusive OR](https://stackoverflow.com/a/22137436/21294350)
+- Problem 4.21 the reference of Lemma 8.1.3
+  - a) trivial due to the transitivity of $\le$
+  - b) trivial due to $|A|\ge |B|\Rightarrow |B|\le |A|$
+  - c) trivial based on a,b)
+  - d) 
+    - ~~$\Rightarrow$~~
+      do as the following process until $A=\varnothing$
+      1. choose one arbitrary element $x$ from $A$ and $y$ from $B$
+      2. let $f(x)=y,A=A\setminus \{x\},B=B\setminus \{y\}$
+      then $f$ is "a total injective function from A to B".
+    - Notice here is to prove from "relation" to "function"
+      instead of proving iff.
 ## 5.1
 - 5-choosable: see [2-choosable](https://en.wikipedia.org/wiki/List_coloring#Examples) which proves by giving one counterexample.
 ## 5.2
 - > m + k is even IFF [m is even IFF k is even]
   this means m,k has the same parity.
+## chapter 5 problems
+- Problem 5.8.
+  $$
+  \begin{align*}
+    F(n)\cdot F(n+2)-F(n+1)^2&=F(n)^2+F(n)F(n+1)-F(n+1)^2\\
+                             &\overbrace{=}^{IH}F(n-1)F(n+1)-(-1)^n+F(n)F(n+1)-F(n+1)^2\\
+                             &=-(-1)^n
+  \end{align*}
+  $$
+- 5.25 trivial by algebraic calculation
+- 5.30 similar to 5.25.
+- 
 ## 6.3*
 - this has the example of jug 5 and jug 3 which is shown in one job review and also in one exercise of the Discrete_Mathematics_and_Its_Applications book.
 ## 6.4*
@@ -11874,6 +11936,15 @@ A  E /|\
 - > An example of preferences among four people where there is *no stable buddy match* is given in Problem 6.22.
   Since compared with the stable marriage problem, Theorem 6.4.3 is not held any more.
 - 6.4 the idea is almost same as Discrete_Mathematics_and_Its_Applications 3.1-65 and 3.3-31  although the latter doesn't show explicitly using the *preserved invariant*.
+## chapter 6 problems
+- Problem 6.22
+  | Assignment | rogue couple  |
+  | ---------- | ------------- |
+  | A-B,R-M    | R-B           |
+  | A-M,R-B    | A-R           |
+  | ...        | ... similarly |
+  The main part is $x-M$ is always the *least* preferable, so $x$ is probably rogue.
+  Then only when the other 2 people has the *rank 1* for each other, then one of them $y$ must prefer $x$ more and trivially $x$ prefers $y$ more.
 ## 7.1
 - cons is [not one official operation in Python](https://pypi.org/project/cons/).
 - Definition 7.1.3 is based on induction of the length of $s$
@@ -11883,14 +11954,27 @@ A  E /|\
 - Definition 7.2.1 Constructor case
   this is very similar to DMIA 13-Supplementary-4, but here the production is from the inner to the outer which is the converse direction.
   - notice Problem 7.20. means same as (ii) in p10 of link1.
+  - In sum,
+    Lemma after Lemma 7.2.3 and Problem 7.20 combined together have the same process as the [reference p10][2_conditions_for_Balanced_Parentheses] where 1 is trivial to prove.
 - here $\cdot's$ means the plural of $\cdot$.
 ## 7.3*
 - Problem 7.25. is not included in DMIA 5.3, 5.4.
   See [this](https://math.stackexchange.com/q/96483/1059606) and [this](https://en.wikipedia.org/wiki/Ackermann_function#General_remarks)
+  based on the above "terminate ..."
   for this problem, 
   (n goes down) $A(m,n-1)$ can be called infinitely until $A(m,1)=2$, 
   (m goes down) then go up one stack $A(m-1,2)=A(m-2,A(m-1,1))=A(m-2,2)=^*A(0,2)=4$. Then we go up one stack again and do $A(m-1,4)=A(m-2,A(m-1,3))=A(m-2,A(m-2,A(m-1,2)))=A(m-2,A(m-2,4))...$ trivially $m$ will always go to 0 and go back stack up.
   - Also see [the code](./others/mcs/codes/Ackermann_7_25.py)
+  $$
+  \begin{align*}
+    A(m, n)&::=2n
+    &&\text{if } m = 0 \text{ or } n \le 1,
+    &(A-base)\\
+    A(m, n)&::=A(m-1,A(m,n-1))
+    &&\text{otherwise}
+    &(AA)
+  \end{align*}
+  $$
 - TODO Union-Find algorithm
 - Definition 7.3.1 implies ordinary induction is almost same as structural induction but the latter allows multiple arguments and is more about *data structure construction* instead of increasing $n$ by one constant step.
   as 7.6 says
@@ -11927,6 +12011,71 @@ A  E /|\
 ## 7.6
 - > It is then possible to prove properties of data by ordinary induction on their size.
   this is how the book proves 'Fundamental Theorem for Win-Lose Games' compared with [yale_Fundamental_Theorem_for_Win_Lose_Games] where the latter uses 'ordinary induction on their size'.
+## chapter 7 problems
+- Problem 7.9
+  based on Definition 7.1.2 and Lemma 7.1.4 proof.
+  - $s=\lambda$ trivial
+  - IS (inductive step)
+    $$
+    #_c(s\cdot t)&=#_c(\langle a,r\cdot t\rangle)\\
+                 &=1+#_c(r\cdot t)\\
+                 &\overbrace{=}^{IH}1+#_c(r)+#_c(t)\\
+                 &\overbrace{=}^{IH}#_c(s)+#_c(t)
+    $$
+- Problem 7.19
+  - a)
+    if $s\in \text{ RecMatch}$
+    then $s=[t]\Rightarrow$
+    - [See](https://math.stackexchange.com/a/2926966/1059606)
+  - b) trivial based on a) similar to the proof of lemma after Lemma 7.2.3.
+    - Also see c)
+      $[s]t,t=\lambda\Rightarrow [s]$
+      and $st$ of a)
+      so RecMatch becomes AmbRecMatch ...
+  - c) $s'=[s],s't=[s]t$
+    so AmbRecMatch become RecMatch -> RecMatch $\subseteq$ AmbRecMatch
+  - The above b,c) is similar to [2_methods_for_balanced_parethesis] but the latter doesn't need the strict equality because it cares about terminals instead of intermediate strings.
+    > since you don't need to cover all of these, as long as strings of terminals are covered
+- Problem 7.20
+  - a) start from
+    > If γ is a prefix of β1[S but not β1
+    in [2_conditions_for_Balanced_Parentheses]
+  - b)
+    IMHO "ends with 0" implies $L=R$
+    so "good count" is just the "Balanced_Parentheses".
+    Then the proof is same as [2_conditions_for_Balanced_Parentheses].
+  - Here I didn't prove $\Rightarrow$ as what is done in [2_conditions_for_Balanced_Parentheses] because they are very similar.
+- Problem 7.26
+  - a) 
+    - Environment Model
+      $$
+      \begin{align*}
+        eval(subst(3x, x(x-1)),2)&\to eval(x(x-1),eval(3x, 2))\\
+                                 &\to eval(x(x-1),3*2)\\
+                                 &\to eval(x,6)*eval(x-1,6)\\
+                                 &\to 6*(6-1)
+      \end{align*}
+      $$
+    - Substitution Model
+      $$
+      \begin{align*}
+        eval(subst(3x, x(x-1)),2)&\xrightarrow{\text{See equations between (7.18) and (7.19)}} 
+                                  eval(3x(3x-1),2)\\
+                                 &\to eval(3x,2)*eval(3x-1,2)\\
+                                 &\to (3*2)*((3*2)-1)\\
+                                 &\to 6*(6-1)
+      \end{align*}
+      $$
+    - trivially, the 1st one does 3*2 once
+      and doesn't manipulate $3x$ many times when $subst(3x, x(x-1))$
+      So here 'variable lookup's used in $subst$ is *totally* avoided and multiplication 
+  - b) if not taking multiplication in $subst$ in account,
+    then $(3*2)*((3*2)-1)$ compared with 
+    $eval(x,6)*eval(x-1,6)$ plus $3*2$ has one more multiplication,
+    i.e. $2-1$ where $2$ is the substitution count.
+    So [$x^{\underbar{7}}$](https://en.wikipedia.org/wiki/Falling_and_rising_factorials) instead of $x(x-1)$ will work.
+  - c) see [this](./others/mcs/7_26.md)
+- I skipped the reference Problem 4.7 because it is only shown as one game where we don't care what it is detailedly.
 ## 8.1
 - infinite set ordinal see [$w$](https://www.ub.edu/topologia/seminars/Set_theory.pdf)
 - Lemma 8.1.3 See Definition 4.4.2.
@@ -11945,13 +12094,13 @@ A  E /|\
     this is caused by 1-1 of f and g.
   - (d) see [this](https://math.stackexchange.com/questions/4068977/halmoss-proof-of-schr%C3%B6der-bernstein-theorem#comment8407122_4068977)
 - TODO ordinal and other related proofs after the set theory.
-- Problem 8.13 (b) is same as [this](https://math.stackexchange.com/a/2052106/1059606)
+- Problem 8.15 (b) is same as [this](https://math.stackexchange.com/a/2052106/1059606)
   (a) see [this](https://math.stackexchange.com/a/3696479/1059606)
   - (a) proof implies
     'there is a *total* surjective function $g:\mathbb{N}\to C$' is same as
     'there is a surjective function $g:\mathbb{N}\to C$'
   - This is also almost as DMIA 2.5-13 but only using one *total* surjective function.
-- Problem 8.23 See [this](https://www.physicsforums.com/threads/i-proving-that-the-cross-product-of-2-countable-sets-is-countable.263517/post-1911104) or DMIA 2.5-28.
+- Problem 8.25 See [this](https://www.physicsforums.com/threads/i-proving-that-the-cross-product-of-2-countable-sets-is-countable.263517/post-1911104) or DMIA 2.5-28.
 - > adding one new element to an infinite set doesn’t change its size,
   this is just how map [between $\mathbb{N}$ and $\mathbb{Z}^+$](https://math.stackexchange.com/questions/182459/an-infinite-set-having-one-more-element-than-another-infinite-set#comment420603_182459)
 - Problem 8.10. (b)
@@ -12075,7 +12224,70 @@ A  E /|\
 - This is same as [this](https://en.wikipedia.org/wiki/Universal_set#Regularity_and_pairing)
 ## 8.4*
 - TODO Banach-Tarski Theorem
-- 
+## chapter 8 problems
+- Problem 8.14,15,25 see above
+- Problem 8.13
+  - a) similar to 25
+  - b) still similar but dropping some terms
+    TODO see reference in [this](https://math.stackexchange.com/a/1312/1059606) which has no duplicity
+- Problem 8.24
+  - Cantor Pairing Function
+    - [from the graph to the polynomial](https://en.wikipedia.org/wiki/Pairing_function#Derivation)
+## 9.1.3* which says more about 'Jug Problem' (Also see 9.2)
+- it should be $(0,3a-b)$ instead of $(3a-2b,b)$
+## 9.2
+- [Problem 9.14](https://math.stackexchange.com/q/3707612/1059606)
+  here after 'n transitions', it get $(gcd(a,b),0)$, then one more step to terminate.
+  so $n+1$ steps at all.
+  since $F(n+1)\le a\le F(n+2)$, so we need 
+  $\lceil \log_{\varphi} a\rceil$
+  - TODO see [one variant](https://math.stackexchange.com/q/3734764/1059606)
+- (9.3) also see [this 'Euclidean Algorithm Machine'](https://www2.math.binghamton.edu/lib/exe/fetch.php/people/grads/eppolito/state_machines_and_algorithms.pdf) which is more comprehensive
+- 9.2.4
+  a) [see](https://math.stackexchange.com/a/705874/1059606) which starts from the conclusion and iff back.
+  b) trivial by the definition of gcd ($\Leftarrow$) and the Bezout’s lemma ($\Rightarrow$)
+  c) [multiply](https://math.stackexchange.com/a/675887/1059606) instead of add/minus to prove.
+  d) see DMIA.
+## 9.3
+- [p-adic number](https://en.wikipedia.org/wiki/P-adic_number#Example)
+- Problem 9.22. -> Shoup's book
+  - Lemma 5.3 -> [Legendre's formula](https://en.wikipedia.org/wiki/Legendre%27s_formula)
+  - EXERCISE 1.4: 2 cases
+  - See [this](https://math.stackexchange.com/a/1890792/1059606)
+    in 4) 
+    - the 2nd $\le$ is based on the prime factorization where each takes the highest power $\log_{p} 2n$
+  - > So we have ...
+    the 3rd $=$ is from $N=\prod p^{v_p(N)}$
+  - Then $\frac{\log 2}{2}>\frac{1}{3}$
+- > about 1 integer out of every ln n in the vicinity of n is a prime.
+  is implied by $n/\ln n$
+  This implies 9.4
+  > about 1 in $\ln 10^{10} =23$
+  where $n=10^{10}$
+## 9.4
+- Problem 9.25.
+  - a) hinted by [QA_1](https://math.stackexchange.com/a/1143135/1059606)
+    $$
+    \begin{align*}
+      (m+\sqrt{5}ni)(p+\sqrt{5}qi)=29&\xRightarrow{\text{complex number calculation}} (m^2+5n^2)(m^2+5n^2)=29^2\\
+                                     &\xRightarrow{\text{both can't be 1}} (m^2+5n^2)=29\\
+                                     &\Rightarrow m=3,n=2\qquad\text{one possible solution}
+    \end{align*}
+    $$
+  - b) [see](https://math.stackexchange.com/questions/94999/irreducible-in-mathbbz-sqrt-5#comment4635085_95005)
+  - c) similar to b)
+  - d) similar to a) we have $|x|\le|y|\Rightarrow |x|^2=1,|y|^2=9$
+  - e) from d) $w=3,2\pm \sqrt{5}i,|xy|=|w|,|x|\le|y|\Rightarrow \ldots \pm 1\Rightarrow w=y$
+    so irreducible
+  - Also see [wikipedia_1](https://en.wikipedia.org/wiki/Quadratic_integer#Examples_of_complex_quadratic_integer_rings)
+    > if they were not irreducible, they would have a factor of norm 3, which is impossible
+    same as the above b)
+  - [Irreducible element](https://en.wikipedia.org/wiki/Irreducible_element#Example)
+    > that is, they are the factors that cannot be further factorized.
+  - prove one number is [not prime](https://math.stackexchange.com/a/1143135/1059606) which is based on Euclid's lemma
+    This lemma can also prove ['Irreducibles are prime in a UFD'](https://math.stackexchange.com/questions/257955/irreducibles-are-prime-in-a-ufd#comment10468066_1913111)
+    - ~~TODO~~ the wikipedia [reference][introduction_to_number_theory] ~~doesn't say about ~~.
+      [See](https://math.stackexchange.com/questions/1141412/mathbb-z-sqrt-5-is-not-a-ufd#comment10468076_1143135) 'Euclid's lemma' in wikipedia
 ## TODO (use the book page number)
 - p182
 # miscs with sympy usage
@@ -12102,6 +12314,7 @@ A  E /|\
 - [This](https://math.stackexchange.com/q/3383113/1059606) related with 9-supplementary-43 and isomorphic. (example from [wikipedia](https://en.wikipedia.org/wiki/Distributive_lattice))
 - [chain vs cycle](https://en.wikipedia.org/wiki/Chain_(algebraic_topology)) [Also](https://math.stackexchange.com/a/3554072/1059606)
 - Burnside's lemma. See 10.3-74.
+- TODO relation with [p-adic valuation](https://en.wikipedia.org/wiki/P-adic_valuation)
 # TODO after set theory or order theory
 - [This](https://math.stackexchange.com/a/3896116/1059606) related with 9.6-38.
 # TODO after mathematical analysis
@@ -12226,6 +12439,7 @@ A  E /|\
 [BFS_level_order]:https://stackoverflow.com/questions/55243105/breadth-first-search-traversal-vs-pre-order-traversal-vs-depth-first-search-trav#comment137378786_55243795
 [DFS_no_cross_edge]:https://stackoverflow.com/a/28942405/21294350
 [DFS_no_cross_edge_improvement]:https://stackoverflow.com/questions/28942262/dfs-in-an-undirected-graph-can-it-have-cross-edges/28942405#comment137389481_28942405
+[2_methods_for_balanced_parethesis]:https://stackoverflow.com/a/42565842/21294350
 
 <!-- gateoverflow -->
 [assign_different_jobs_to_different_employees]:https://gateoverflow.in/79804/permutation-combo?show=80049#a80049
@@ -12294,6 +12508,7 @@ A  E /|\
 [kahn_proof]:https://www.cs.nthu.edu.tw/~wkhon/ds/ds11/lecture/lecture12.pdf
 [uchicago_0_n_1_n]:https://www.classes.cs.uchicago.edu/archive/2015/winter/28000-1/Lec13.pdf
 [yale_Fundamental_Theorem_for_Win_Lose_Games]:https://oyc.yale.edu/sites/default/files/blackboard15_0_0.pdf
+[2_conditions_for_Balanced_Parentheses]:http://cse.iitkgp.ac.in/%7Eabhij/course/theory/FLAT/Spring21/scribes/CFG-balanced.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
@@ -12313,6 +12528,7 @@ A  E /|\
 [Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou]:./other_books/Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou.pdf
 <!-- J. E. Hopcroft, R. Motwani, and J. D. Ullman, Introduction to Automata Theory, Languages, and Computation -->
 [Introduction_Automata_Theory_Languages_and_Computation]:./other_books/Introduction_Automata_Theory_Languages_and_Computation.pdf 
+[introduction_to_number_theory]:./other_books/introduction-to-number-theory-bad-scan-3rd-printingnbsped_compress.pdf
 
 <!-- geeksforgeeks -->
 [Detect_cycle_Directed_Graph]:https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
