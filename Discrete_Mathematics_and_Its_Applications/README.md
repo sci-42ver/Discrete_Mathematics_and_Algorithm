@@ -1,17 +1,5 @@
 Please point out errors if any. Thanks in advance.
 
-In one comment of the QA referred to by poetasis, the above is similar to what [wikipedia](https://en.wikipedia.org/wiki/Lam%C3%A9%27s_theorem#:~:text=Lam%C3%A9's%20Theorem%20is%20the%20result,digits%20(decimal)%20of%20b.) says.
-
-This one is very similar to the proof in [the shoup's book 'Theorem 5.4' (reference of mcs.pdf)](https://www.shoup.net/ntb/ntb-v2_1.pdf) which also considers the odd number condition but this answer's step 4 is more elegant.
-
-For reference, $q\vert P(N+q)$ is based on [factorization of $a^n−b^n$](https://math.stackexchange.com/q/712758/1059606). The proof in 'Remark' is based on *the solution number*.
-
-As the user694818's answer says, the question seems to lead the readers to prove using the form like $P(cm)$ instead of $P(m+k)$ which is used in the reference QA of lulu's comment. So c) may be fine if not wanting to get infinite composites. This is also implied by the hint of the question.
-
-1. To help future readers, we need to add one more step to connect to the question's statement $\lceil \log_2n \rceil\color{#0a0}{+1}$: when $\lceil \log_2 z_0 \rceil\notin \mathbb{N}$, we need $\lceil \log_2 z_0 \rceil$ iterations, otherwise $\lceil \log_2 z_0 \rceil+1$. 2. [reference](https://math.stackexchange.com/a/678643/1059606) of the nested quotient operation
-
-This is Problem 4.21 in [mcs.pdf](https://courses.csail.mit.edu/6.042/spring18/mcs.pdf). In summary here the difference is that relation allows "[$\ge$1 arrows out]" while function only allows "[=1 arrows out]" where the former is a bit like the superset of the latter.
-
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
 # tips
@@ -5674,7 +5662,7 @@ $$
   Then $C_{5\sim 8}$ can't access 
   $P$, contradiction.
 - [ ] 42 see the ans where we need symmetry which is not directly shown in the exercise description.
-- [ ] 43 similar to EXAMPLE 10. [also see*](https://math.stackexchange.com/q/97397/1059606)
+- [ ] 43 similar to EXAMPLE 10. [also see@#](https://math.stackexchange.com/q/97397/1059606)
   The key is increasing $a_i$ denoting the number of ~~games~~ matches played on or before the jth ~~day~~ hour ~~of the month.~~
 - [ ] 44 similar to above: a,b are true.
   - see the ans
@@ -6178,7 +6166,7 @@ win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*
 - 1~6,14,15,
   24~26,
   30~36 skipped
-- [43*](https://math.stackexchange.com/q/106146/1059606)
+- [43@#](https://math.stackexchange.com/q/106146/1059606)
 - [ ] 8 see the ans for c) and e).
 - [x] 10
   f) $\frac{2*4^{\overline{23}}}{26!}=\frac{1}{3}$ is also ok
@@ -6214,7 +6202,7 @@ win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*
 - [x] 40
   - > the probability that we wrongly answer “false” will be about $1/2^k$ if the list is a random permutation
     This means when the list is unsorted, we answer they are sorted, i.e. all $k$ are chosen ordered. Similar to [this](#success_probability_whether_tested_or_not)
-  - [Also see* (here see* means I didn't read it at all)](https://math.stackexchange.com/q/160800/1059606)
+  - [Also see@# (here see@# means I didn't read it at all)](https://math.stackexchange.com/q/160800/1059606)
 ### 7.3
 - 2~14(8-b can be calculated by $0.9998*0.9999/(1-(0.999*1e-4+2*1e-4*0.9999))$, 10 similar to 8), 
   16,17,20~23 skipped
@@ -6294,7 +6282,7 @@ win_probability((math.comb(5,1)*math.comb(64,4)+math.comb(5,0)*math.comb(64,5))*
     > used by the bubble sort to put these integers into increasing order
     since bubble sort will make the list with the increasing order at the end, so $X(P)$ is just the "comparisons used by the bubble sort".
   d), see the ans
-- [ ] 42 [also see*](https://math.stackexchange.com/q/164410/1059606)
+- [ ] 42 [also see@#](https://math.stackexchange.com/q/164410/1059606)
   - TODO why is a) asked?
   - See 5.4-52
   - > the element being compared with at each round is put between the two sublists, so it is never compared with any other elements after that round is finished
@@ -6753,7 +6741,7 @@ apart(6*x/((x+1)*(x+2)*(x+3))) # Partial fraction decomposition https://mattpap.
   T(n)=T(2^k)=2^{(\log{6}+2) 2^k-k-2}=2^{n\log{6}+2n-2-\log{n}}=\frac{6^n\cdot 4^{n-1}}{n}
   $$
 ### 8.3
-- 10~14,[22*(unread reference)](https://math.stackexchange.com/q/170931/1059606) skipped
+- 10~14,[22@#(unread reference)](https://math.stackexchange.com/q/170931/1059606) skipped
 - [x] 2
   - by Theorem 1, $f(n)=2n-2$.
 - [ ] 4 see the ans
@@ -6837,7 +6825,7 @@ power_recurrence(3,5,2,4,1,False)
       Then if both no, then it is in D, 
       if both yes, then it is in A, because $A\cap B \cap C=\varnothing \Rightarrow (A\cup B)\cap (A\cup C)=A$.
   - e. the [paper](https://sci-hub.se/https://doi.org/10.1016/0097-3165(87)90065-3) is not based on conquer. So I skip it.
-  - [Also see*](https://math.stackexchange.com/q/172372/1059606)
+  - [Also see@#](https://math.stackexchange.com/q/172372/1059606)
 - [ ] 29~33
   - [ ] 29
     - notice here is not $\sum_{j=0}^{k-1}a^j c(n)^d$, but $\sum_{j=0}^{k-1}a^j c(n/b^j)^d$.
@@ -11990,7 +11978,7 @@ A  E /|\
   So the 'Constructor case' is based on length.
   - > Each game M 2 G is called a possible first move of G
     implies G has moves although 'win' and 'lose' moves in base may be insufficient.
-- Theorem 7.5.3
+- Theorem 7.5.3 Fundamental Theorem for Win-Lose Game
   - > the first player in G becomes the second player in M .
     is based on 
     > So this play of G is a length $n+1$ sequence that finishes with the same outcome
@@ -12008,6 +11996,8 @@ A  E /|\
     means choose $M$ as the above 'pick M0 as the first move'.
   - > Of course only the first move in the meta-chess-tournament is infinite, but then we could set up a tournament consisting of n meta-chess-tournaments.
     choosing $n$ is infinite.
+- > Insert ref to Conway’s nimbers.
+  similarly use [induction](https://en.wikipedia.org/wiki/Surreal_number#Induction)
 ## 7.6
 - > It is then possible to prove properties of data by ordinary induction on their size.
   this is how the book proves 'Fundamental Theorem for Win-Lose Games' compared with [yale_Fundamental_Theorem_for_Win_Lose_Games] where the latter uses 'ordinary induction on their size'.
@@ -12076,6 +12066,7 @@ A  E /|\
     So [$x^{\underbar{7}}$](https://en.wikipedia.org/wiki/Falling_and_rising_factorials) instead of $x(x-1)$ will work.
   - c) see [this](./others/mcs/7_26.md)
 - I skipped the reference Problem 4.7 because it is only shown as one game where we don't care what it is detailedly.
+- Problem 7.36
 ## 8.1
 - infinite set ordinal see [$w$](https://www.ub.edu/topologia/seminars/Set_theory.pdf)
 - Lemma 8.1.3 See Definition 4.4.2.
@@ -12132,13 +12123,37 @@ A  E /|\
 - Russell’s paradox is also shown in DMIA 2.2-50. 
   notice this is ~~same as~~ similar to cantor's diagonal argument $\{a \in A\vert a \notin g(a)\}$. See 8.1.
 ### 8.3.2*
+- description related with “pure” sets@@
+  - $\{0,1\}^w$ where [$w$ definition](https://en.wikipedia.org/wiki/Ordinal_number)
 - [First-order logic](https://en.wikipedia.org/wiki/First-order_logic#) just means not propositions but
   > there exists x such that x is Socrates and x is a man
   - compared with [Second-order logic](https://en.wikipedia.org/wiki/Second-order_logic) where $\forall P\forall x$ instead of $\forall x$
+    > In first-order theories, predicates are often associated with sets. In interpreted higher-order theories, predicates may be interpreted as sets of sets.
 - > range over sets
   i.e. ~~a~~ ~~member of the set~~ ~~function~~ it [can be one set](https://math.stackexchange.com/a/1568778/1059606). This is also implied by
   > For any two sets x and y
   Also see [this](https://en.wikipedia.org/wiki/Second-order_logic#Syntax_and_fragments) where 'over sets of individuals' -> one set of individuals -> [unary relation](https://en.wikipedia.org/wiki/Finitary_relation#Unary).
+- proper class@@ (@@ means this is in 2018 but not 2017)
+  - prove "the class ${\displaystyle C}$ of *all* ordinals" are not a set by [contradiction](https://qr.ae/psuWjO).
+    - This is similar to [why we need "proper class"](https://math.stackexchange.com/a/139337/1059606).
+      > However once axiomatic set theory came into play we have the seemingly *circular* definition
+      i.e. contradiction.
+- Theorem 8.3.2
+  - [the class of all sets is a proper class](https://math.stackexchange.com/q/1096528/1059606)
+  - > requires careful use of the Choice axiom to prove that T is a set.
+    may [probably means](https://en.wikipedia.org/wiki/Axiom_of_choice)
+    > Formally, it states that for every indexed family ${\displaystyle (S_{i})_{i\in I}}$ of nonempty sets, there exists an *indexed set* ${\displaystyle (x_{i})_{i\in I}}$ such that ${\displaystyle x_{i}\in S_{i}}$ for every ${\displaystyle i\in I}$
+    Here let the family be
+    $U,S,N_{0,\cdots}$ where $U$ is the universal set.
+    Then let the choice function be
+    $U\to S,S\to N_0,\cdots$
+    - [indexed set](https://math.stackexchange.com/a/3427023/1059606)
+  - This is similar to [this](https://math.stackexchange.com/q/1370976/1059606) ($x=\varnothing$ here) but $x\subseteq y$ can let $y$ contain *anything* more than $x$
+    while here we must choose from `Recset` which at the bottom can only have $\varnothing$
+    - in the link
+      $T=\bigcup$ implies class
+      and $y\in S$ is similar to "*S* is a nonempty set of *Recset*"
+  - See [this QA](https://math.stackexchange.com/q/4905904/1059606) similar to [this*](https://math.stackexchange.com/a/3544645/1059606)
 - ZFC
   - Axiom of extensionality
     can have [2 forms](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory#1._Axiom_of_extensionality)
@@ -12157,21 +12172,31 @@ A  E /|\
       - Then use $S(w)$ to get the following $2,\cdots$
     - > if two elements are the same, the sequence will loop around in a finite cycle of sets.
       See the following QA_1 answer_2.
-  - Axiom of regularity
-    > This (along with the axiom of pairing) implies, for example, that no set is an element of itself and that every set has an ordinal rank.
-    - the [rank](https://mathworld.wolfram.com/Rank.html#:~:text=In%20set%20theory%2C%20rank%20is,214).) implies
-      > *forbid any infinite* sequence of sets
-    - Notice 'First several von Neumann ordinals' in this page is different from [this](https://en.wikipedia.org/wiki/Von_Neumann_universe#Finite_and_low_cardinality_stages_of_the_hierarchy) like in $3$ it lacks $\{\{\varnothing\}\}$
-    - the axiom of pairing is to [allow something like $\{A\}$ in QA_1](https://math.stackexchange.com/q/2537526/1059606)
-    - proof see this [in brief QA_1 comment](https://math.stackexchange.com/questions/2537526/axiom-of-regularity-allows-for-this-set-be-an-element-of-itself#comment5239977_2537526)
-      or 
-      - [QA_1 answer_1](https://math.stackexchange.com/a/2537553/1059606)
-        this 1st paragraph says 'set' -> '... disjoint sets' doesn't mean the converse is also true.
-      - [QA_1 answer_2](https://math.stackexchange.com/a/2537670/1059606) which is more readable.
+  - Axiom of regularity/the axiom of foundation
+    - how this means the book "forbid any infinite sequence of sets of the form"
+      $\forall y \in x. y \notin m\Rightarrow x\cap m=\varnothing$
+    - > This (along with the axiom of pairing) implies, for example, that no set is an element of itself and that every set has an ordinal rank.
+      - the [rank](https://mathworld.wolfram.com/Rank.html#:~:text=In%20set%20theory%2C%20rank%20is,214).) implies
+        > *forbid any infinite* sequence of sets
+        - Notice 'First several von Neumann ordinals' in this page is different from [this](https://en.wikipedia.org/wiki/Von_Neumann_universe#Finite_and_low_cardinality_stages_of_the_hierarchy) like in $3$ it lacks $\{\{\varnothing\}\}$
+      - the axiom of *pairing* is to [allow something like $\{A\}$ in QA_1](https://math.stackexchange.com/q/2537526/1059606)
+      - proof see this [in brief QA_1 comment](https://math.stackexchange.com/questions/2537526/axiom-of-regularity-allows-for-this-set-be-an-element-of-itself#comment5239977_2537526)
+        or 
+        - [QA_1 answer_1](https://math.stackexchange.com/a/2537553/1059606)
+          this 1st paragraph says 'set' -> '... disjoint sets' doesn't mean the converse is also true.
+        - [QA_1 answer_2](https://math.stackexchange.com/a/2537670/1059606) which is more readable.
+        - Also [see](https://en.wikipedia.org/wiki/Ordered_pair#Proving_that_definitions_satisfy_the_characteristic_property) as one reference of Problem 8.38@@.
     - This is needed to [simplify/(make possible) well-ordered sets](https://en.wikipedia.org/wiki/Axiom_of_regularity#:~:text=However%2C%20regularity%20makes%20some%20properties,as%20the%20lexicographical%20ordering%20on).
-      - And see [point 3 to avoid 'non-well-founded sets'](https://math.stackexchange.com/a/4866373/1059606) and its point 2 says same as [this QA_2](https://math.stackexchange.com/a/213649/1059606) that we use this axiom to simplify and make it possible to prove some theorems.
+      - And see [point 3 to avoid '*non-well-founded* sets'](https://math.stackexchange.com/a/4866373/1059606) and its point 2 says same as [this QA_2](https://math.stackexchange.com/a/213649/1059606) that we use this axiom to simplify and make it possible to prove some theorems.
         - point 1 may say something like $A=\{A,\{A,B}\}$ doesn't exist, (transitive is similar, e.g. the former $A\in \{A,B\}\in A$)
           - How [this definition of pair](https://math.stackexchange.com/a/62937/1059606) is valid
+          - This is same as Problem 8.38 in mcs@@
+            - b) either $(\{1\},2)$ or $(\{2\},1)$
+              This is similar to [this](https://mathoverflow.net/a/32201).
+            - c) see [this](https://en.wikipedia.org/wiki/Ordered_pair#Variants)
+              where "the axiom of regularity" corresponds to the hint.
+              - This problem targets at [functions](https://math.stackexchange.com/questions/25791/definition-of-an-ordered-pair#comment55654_25791) instead of sets
+            - [This](https://math.stackexchange.com/a/308428/1059606) says normally we only need one formula $\varphi$ to keep the proof consistent / "the same".
         - QA_2
           if
           > Its users couldn't care less whether or not ZF is the underlying theory of the universe or some other theory
@@ -12209,6 +12234,7 @@ A  E /|\
   - powerset
     the book IFF combines the 2 lines in wikipedia into 1.
   - Axiom of choice
+    - TODO prove it [1](https://math.stackexchange.com/q/1839913/1059606) [2](https://math.stackexchange.com/q/1628106/1059606)
     - Problem 8.35
       - > Verify that the axiom of choice can be expressed as a pure formula
         trivial since 'pairwise-disjoint.s' and 'choice-set.c; s' can be described as one formula.
@@ -12220,6 +12246,15 @@ A  E /|\
       - > require just as *many choices* as simply choosing an element from each ${\displaystyle S}$.
       - > making all uncountably many choices is not allowed under the axioms of Zermelo-Fraenkel set theory without the axiom of choice.
         IMHO 'countably' is not allowed let alone 'uncountably'.
+    - [Why we need this axiom](https://math.stackexchange.com/a/1083058/1059606)
+      - I skip the last part of 3
+      - The Axiom of Selection is the "Axiom schema of specification".
+        - IMHO In summary, we need "the Axiom of Choice" to manipulate with / constrain the infinity implied in the axiom schema where The Axiom of Replacement / Selection have (This is similar to [this answer](https://math.stackexchange.com/a/1243483/1059606) where it first chooses one choice function based on $\exists$). Notice its [difference](https://math.stackexchange.com/questions/1935724/why-is-axiom-of-choice-required-for-the-proof-of-countable-union-of-countable-se#comment3976215_1935724) from [$AC_w$](https://en.wikipedia.org/wiki/Axiom_of_countable_choice).
+          - This is [similar to $AC_w$](https://math.stackexchange.com/questions/1935724/why-is-axiom-of-choice-required-for-the-proof-of-countable-union-of-countable-se#comment3974549_1935734).
+        - It may be not needed for ["normal, informal mathematics"](https://math.stackexchange.com/questions/2617081/why-do-we-need-the-axiom-of-choice#comment5404959_2617081)
+        - Also see [this](https://math.stackexchange.com/questions/2617081/why-do-we-need-the-axiom-of-choice#comment5404940_2617081) which means same as the answer to ~~prove~~ ensure "existence".
+      - > it doesn't only say that there are choice functions out there, but also that we're allowed to pick one.
+        it may mean possibly one choice function instead of multiple.
 ### 8.3.3*
 - This is same as [this](https://en.wikipedia.org/wiki/Universal_set#Regularity_and_pairing)
 ## 8.4*
@@ -12230,9 +12265,39 @@ A  E /|\
   - a) similar to 25
   - b) still similar but dropping some terms
     TODO see reference in [this](https://math.stackexchange.com/a/1312/1059606) which has no duplicity
-- Problem 8.24
+- [Problem 8.24](https://math.stackexchange.com/questions/91366/proof-that-union-of-a-sequence-of-countable-sets-is-countable#comment10471525_91366)
+  - > For clarity, 1. the point 3 may mean "mapping ... *firstly*" and then we can use $g$ to map to the target $\mathbb{N}$. 2. "the Cantor-Bernstein Theorem" means not [the "Cantor–Bernstein theorem" entry in wikipedia](https://en.wikipedia.org/wiki/Cantor%E2%80%93Bernstein_theorem) but wikipedia "Schröder–Bernstein theorem" entry. 2.1 A "embeds into" B means $|A|\le |B|$.  "maps $\mathbb{N}$ to $X_1$ into the union" means firstly map to "$X_1$" and then map to "the union". 3. [proof](https://mathoverflow.net/a/100725) when ZF.
+    This is one deleted comment of mine as the answer author thought it may be inappropriate.
+    1. the original point 3 already combines $f_n$ and $g$ together which have codomain $\mathbb{N}$
+    2. The wikipedia top has
+      > the Wikipedia entry at the very top *directs you to the appropriate page* if you are looking for the theorem;
+    2.1 the author doesn't say something about it.
+    3. > Especially given your utterly cryptic "3" that appears to claim that you are linking to a proof of the original statement in ZF (i.e., without Choice), when in fact you are linking to a proof that the statement *need not hold* in ZF... exactly what I said.
+      TODO maybe this is said detailedly in the book, but I only grasped
+      > So we have that the real numbers are a countable union of countable sets.
   - Cantor Pairing Function
     - [from the graph to the polynomial](https://en.wikipedia.org/wiki/Pairing_function#Derivation)
+      - [This](https://math.stackexchange.com/a/222646/1059606) is similar but from one algebraic view
+        where when $s$ is fixed we are at the diagonal where when $a$ is changed we moved along the diagonal
+        when $s$ is changed "function resets back to the x-axis".
+        - This also says about the triangular number.
+        - In summary, this shows $f$ is strictly increasing (so one-to-one) for one order of $(a,b)$ with step 1 (so onto).
+    - [invertible](https://math.stackexchange.com/a/91323/1059606) where at last all are functions of $z\in\mathbb{N}$.
+  - > the real numbers are a countable union of countable sets
+    TODO [this](https://mathoverflow.net/a/100725) -> [book THEOREM 10.6.](https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf) / [paper](https://web.archive.org/web/20120109193548/https://www.illc.uva.nl/Research/Reports/MoL-2006-03.text.pdf)
+- Problem 8.12
+- Problem 8.18
+- Problem 8.16
+- Problem 8.38 p311
+- Problem 8.39
+- Problem 8.42 in p234
+  - This is really similar to ["von Neumann ordinals"](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory#7._Axiom_of_infinity).
+  - base case $Nim_{\langle \varnothing\rangle}$ 
+    trivially "Next player" loses
+  - Constructor step $Nim=Fmv=\{(x\vert x\in Recset)\land(x\text{ is possible for the next Fmv})\}$
+    IH (Inductive Hypothesis) we know `Recset` can have one winner
+    then trivially also for `Nim`
+  - IMHO this is very similar to the proof of "Fundamental Theorem for Win-Lose Game". See the corresponding "better [see this]".
 ## 9.1.3* which says more about 'Jug Problem' (Also see 9.2)
 - it should be $(0,3a-b)$ instead of $(3a-2b,b)$
 ## 9.2
