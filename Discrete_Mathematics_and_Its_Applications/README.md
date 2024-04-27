@@ -2671,11 +2671,12 @@ $ latexdef -t latex -s -f -E cases
   So the 'Constructor case' is based on length.
   - > Each game M 2 G is called a possible first move of G
     implies G has moves although 'win' and 'lose' moves in base may be insufficient.
-- Theorem 7.5.3 Fundamental Theorem for Win-Lose Game
+- Theorem 7.5.3 Fundamental Theorem for Win-Lose Games
   - > the first player in G becomes the second player in M .
     is based on 
     > So this play of G is a length $n+1$ sequence that finishes with the same outcome
   - better [see this](https://math.stackexchange.com/questions/3992275/if-a-winning-strategy-does-not-exist-for-player-2-does-it-exist-for-player-1#comment10457491_3993622)
+    - This means same as DMIA 11.2 EXAMPLE 6
     - Here Definition 7.5.1 means possible moves make win or lose instead of directly win/lose.
     - > pick M0 as the first move, and then follow the second player’s winning strategy for M0 .
   - Lemma 7.5.2 is same as the top-right part in p1 of [yale_Fundamental_Theorem_for_Win_Lose_Games]
@@ -2760,6 +2761,29 @@ $ latexdef -t latex -s -f -E cases
   - c) see [this](./others/mcs/7_26.md)
 - I skipped the reference Problem 4.7 because it is only shown as one game where we don't care what it is detailedly.
 - Problem 7.36
+  - All of the following proof is a bit less trickier than [wikipedia](https://en.wikipedia.org/wiki/Nim#Proof_of_the_winning_formula)
+    - "the usual associative and commutative" combined together means we can choose *any 2* of all elements to calculate firstly. So we have the 4th $=$.
+    - Ignores "These strategies for normal play and a misère game are the same until the number of heaps with at least two objects is exactly equal to one. ..." part because it may be impossible. See the following SE answer.
+  - This is implied very implicitly in DMIA 11.2-39,40.
+  - Here I follow the terms used in Problem 8.42
+  - I skip Problem 3.6 because it seems to be only one reference for the carry.
+  - a) ~~trivial for the next player~~
+    ~~for the ~~
+    ~~assume not, i.e. after one move for one pile, then the changed pile number binary representation~~
+    To keep still zero, we need each bit of the changed pile number kept *unchanged*. That's  impossible.
+  - b) make that one become "the Nim sum"
+    then $a\oplus a=0$
+  - c) if equal, by b) that's impossible.
+    See this
+    this just means that pile has that "most significant binary digit" set but not for "the Nim sum of the all the other piles", so that pile is bigger.
+  - d)
+    as b) says, "the first player" does one move to let the "Nim sum" become zero.
+    then the 2nd player will again let "Nim sum" "not zero"
+    then recursively, since the total number of stones strictly decreases, at last "the first player" will have one move to get to the zero stones (i.e. one  special case of the zero "Nim sum")
+  - e) 
+    see [the last diagram](https://en.wikipedia.org/wiki/Nim#Mathematical_theory)
+    trivially the piles disappear one by one.
+    See [this](https://math.stackexchange.com/a/4906435/1059606)
 ## 8.1
 - infinite set ordinal see [$w$](https://www.ub.edu/topologia/seminars/Set_theory.pdf)
 - Lemma 8.1.3 See Definition 4.4.2.
@@ -2841,6 +2865,29 @@ $ latexdef -t latex -s -f -E cases
     Then let the choice function be
     $U\to S,S\to N_0,\cdots$
     - [indexed set](https://math.stackexchange.com/a/3427023/1059606)
+  - This needs understanding of pure sets
+    - > modelling a real number r 2R by the set of rationals *greater than* r
+      [See](https://en.wikipedia.org/wiki/Dedekind_cut#Representations)
+      > but each of A and B does determine the other
+      - one [example](https://en.wikipedia.org/wiki/Dedekind_cut#Construction_of_the_real_numbers)
+        - It only shows the [definition][Dedekind_cut_definition] part 4
+          the rest [see](https://www.math.brown.edu/reschwar/INF/handout3.pdf)
+          - as the pdf says
+            > so really the main new input is that you need an idea for Property 5
+            This is trivial because $b\in \neg B=\{x\vert x\le 0\lor x^2\le 2\}\overbrace{=}^{\text{Property 1}}\{x\vert x< 0\lor x^2\le 2\}$
+            Then $a<b\Rightarrow a\in\{x\vert x< 0\lor x^2< 2\}$
+            - This also says why multiplication definition [needs 2 cases](https://en.wikipedia.org/wiki/Construction_of_the_real_numbers#Construction_by_Dedekind_cuts)
+            - It doesn't manipulate with multiplication explicitly but only give one reference.
+        - $2-y^2\le \frac{\epsilon}{2}$
+          see the code
+          ```python
+          from sympy import roots,nsolve,solve,reduce_inequalities
+          from sympy.abc import x, a, b, c, y
+          y=(2*x+2)/(x+2)
+          func=2-y**2-(2-x**2)/2
+          print(reduce_inequalities([func<0], x))
+          ```
+        - Here is [one summary](https://math.stackexchange.com/a/62868/1059606)
   - This is similar to [this](https://math.stackexchange.com/q/1370976/1059606) ($x=\varnothing$ here) but $x\subseteq y$ can let $y$ contain *anything* more than $x$
     while here we must choose from `Recset` which at the bottom can only have $\varnothing$
     - in the link
@@ -3166,6 +3213,7 @@ $ latexdef -t latex -s -f -E cases
 [Chomsky_hierarchy]:https://en.wikipedia.org/wiki/Chomsky_hierarchy#The_hierarchy
 [ordered_rooted_tree]:https://en.wikipedia.org/wiki/Tree_(graph_theory)#Ordered_tree
 [13_2_definition_1]:https://en.wikipedia.org/wiki/Mealy_machine#Formal_definition
+[Dedekind_cut_definition]:https://en.wikipedia.org/wiki/Construction_of_the_real_numbers#Construction_by_Dedekind_cuts
 
 <!-- brilliant wiki -->
 [brilliant_wiki_Dilworth_Theorem_antichain_ge_chain]:https://brilliant.org/wiki/dilworths-theorem/#proof-of-dilworths-theorem
