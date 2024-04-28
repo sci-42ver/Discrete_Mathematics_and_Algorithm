@@ -2609,6 +2609,23 @@ $ latexdef -t latex -s -f -E cases
     - Notice here is to prove from "relation" to "function"
       instead of proving iff.
 - Problem 4.10
+  $$
+  \begin{align*}
+    z&\in A-(B\cup C)&\\
+     &\iff (z\in A)\land(\neg z\in B\cup C)&(\text{def of }-)\\
+     &\iff (z\in A)\land(\neg (z\in B\lor z\in C))&(\text{def of }\cup)\\
+     &\iff (z\in A)\land(z\notin B\land z\notin C)&(\text{De Morgan's laws})\\
+     &\iff (z\in A)\land(z\in A)\land(z\notin B\land z\notin C)&(a\land a=a)\\
+     &\iff (z\in A \land z\notin B)\land(z\in A \land z\notin C)&(\text{Associativity and Commutativity})\\
+     &\iff (A-B)\cap(A-C)&(\text{def of }\cap,-)
+  \end{align*}
+  $$
+  - > Conclude that any set equality that is valid in a domain of size one will be valid in all domains.
+    focus on the 2nd to last equation sequence in p107, we only need to care about each propositional literal like $z\in A$ and the above $\neg z\in A=z\notin A$
+    Then for "a domain of size one" like $\{1\}$ which the problem seems to assume including $\varnothing$
+    we choose $z$ as the only element in that set, i.e. $1$ in the above. Then $1\in\{1\}=T,1\in\varnothing=F$. So that for each $z\in A$ we can choose $T$ or $F$.
+    Then *all possible* truth assignment for the truth table can be tested in "a domain of size one".
+    $\blacksquare$
 ## 5.1
 - 5-choosable: see [2-choosable](https://en.wikipedia.org/wiki/List_coloring#Examples) which proves by giving one counterexample.
 ## 5.2
