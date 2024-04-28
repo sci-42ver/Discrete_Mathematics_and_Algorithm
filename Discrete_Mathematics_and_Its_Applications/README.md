@@ -2621,7 +2621,8 @@ $ latexdef -t latex -s -f -E cases
   \end{align*}
   $$
   - > Conclude that any set equality that is valid in a domain of size one will be valid in all domains.
-    focus on the 2nd to last equation sequence in p107, we only need to care about each propositional literal like $z\in A$ and the above $\neg z\in A=z\notin A$
+  
+    Focus on the 2nd to last equation sequence in p107, we only need to care about each propositional literal like $z\in A$ and the above $\neg z\in A=z\notin A$.
     Then for "a domain of size one" like $\{1\}$ which the problem seems to assume including $\varnothing$
     we choose $z$ as the only element in that set, i.e. $1$ in the above. Then $1\in\{1\}=T,1\in\varnothing=F$. So that for each $z\in A$ we can choose $T$ or $F$.
     Then *all possible* truth assignment for the truth table can be tested in "a domain of size one".
