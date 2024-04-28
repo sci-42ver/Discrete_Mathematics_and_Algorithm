@@ -2457,7 +2457,7 @@ while 1:
 - [ ] 85 trivial
   - see the ans which uses one linear transform.
 ### 5.2
-- 2~6,14,26,30~32,37 skipped
+- 2~6,14,26,30~32,[37](https://math.stackexchange.com/questions/499789/proof-of-division-algorithm-using-well-ordering-principle#comment10474306_499789) -> [QA](https://math.stackexchange.com/questions/526908/uniqueness-proof-for-division-algorithm-using-contradiction/526938#526938) skipped
 - [ ] 8 see the ans
   - it uses $8+2=5*2$ and $5*3+1=8*2$
 - [ ] 9 it may still use the idea similar to before.

@@ -2,6 +2,14 @@ Please point out errors if any. Thanks in advance.
 
 5.3. Strong Induction vs. Induction vs. Well Ordering 
 
+Following what J.W.Perry says, then we can show $S$ has one *minimal element* $r$ which has the property $0\le r< a$. See point 2 of [this QA answer](https://math.stackexchange.com/a/1332116/1059606)
+
+The 2nd question can be proved using [contradiction](https://math.stackexchange.com/a/526938/1059606) where actually we only need to prove one of $r,q$ is unique.
+
+1. For reference of user60887's comment, the proof of the division algorithm is done by proving existence using the well ordering principle and uniqueness using contradiction. See https://math.stackexchange.com/q/499789/1059606. 2. The Shobhit's reference link gives a proof of equivalence of these 2 theorems. This has a bit differences from proof "recast".
+
+More specifically if someone has questions, the last sentence means for the other direction, we need to assume $K:(\lnot \forall  n \in \mathbb{N}: P(n)\implies P(n+1))$ instead of $\lnot \forall  n \in \mathbb{N}: P(n)$. Then there is one subset $S\subseteq \mathbb{N}$ which has the *minimal* element satisfying $K$. Then follow the similar process ["Well order implies induction"](https://math.stackexchange.com/a/433023/1059606)
+
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
 # tips
@@ -639,6 +647,8 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   - here b is ~~both~~ the least y-coordinate ~~and~~ based on the smallest x-coordinate
 - Well ordering principle is [not for real](https://people.eecs.berkeley.edu/~daw/teaching/cs70-s08/notes/n6.pdf) but for integer.
   its main idea is the **least** exists.
+- EXAMPLE 5
+  See [this](https://math.stackexchange.com/questions/499789/proof-of-division-algorithm-using-well-ordering-principle#comment10474315_499789) -> QA which means same.
 ### 5.3
 - [Well-formed formula](https://en.wikipedia.org/wiki/Well-formed_formula) is related with compiler.
 - structural induction is just one special "mathematical induction"
@@ -2604,6 +2614,12 @@ $ latexdef -t latex -s -f -E cases
 ## 5.2
 - > m + k is even IFF [m is even IFF k is even]
   this means m,k has the same parity.
+## 5.3
+- > Even so, there is a mechanical way to reformat any induction proof into a Well Or-dering proof, and vice versa
+  [See](https://math.stackexchange.com/a/490249/1059606)
+  - This is different from DMIA 5.2-{41~43}.
+    where 41 tries getting one contradiction using one artificial set and induction
+    This is similar to [ProofWiki](https://proofwiki.org/wiki/Equivalence_of_Well-Ordering_Principle_and_Induction/Proof/WOP_implies_PFI) but the latter gets the contradiction from induction hypothesis while the former is from assumption that there is no the least element in $S$.
 ## chapter 5 problems
 - Problem 5.8.
   $$
