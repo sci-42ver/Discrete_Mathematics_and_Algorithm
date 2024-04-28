@@ -2620,6 +2620,10 @@ $ latexdef -t latex -s -f -E cases
      &\iff (A-B)\cap(A-C)&(\text{def of }\cap,-)
   \end{align*}
   $$
+  - > Explain how, given a set-theoretic equality between two set expressions that is not valid, to *construct a counter-example using any truth assignment* that falsifies the corresponding propositional equivalence
+    
+    Since we get the final expression, it is easy to show the counter-example or directly show the equality "is not valid". If wanting to make connection with the "truth assignment" anyway, we can use $T\land F\neq T\lor F$ where $(\land,\lor)$ corresponds to $(\cap,\cup)$. Or more  specifically, let $(z\in A \land z\notin B)=T$ and $(z\in A \land z\notin C)=F$.
+    ~~We can also use the method implied in the following proof, i.e. .~~
   - > Conclude that any set equality that is valid in a domain of size one will be valid in all domains.
   
     Focus on the 2nd to last equation sequence in p107, we only need to care about each propositional literal like $z\in A$ and the above $\neg z\in A=z\notin A$.
