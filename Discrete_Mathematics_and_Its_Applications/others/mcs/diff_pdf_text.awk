@@ -12,6 +12,11 @@ BEGIN {
   # block_delimeter="^"ansi_prefix orange_color"---$"
   block_delimeter="^"ansi_prefix orange_color"---"reset_color
 
+  add_pattern=ansi_prefix"(7;)?[0-9]+;34m"
+  delete_pattern=ansi_prefix"(7;)?[0-9]+;31m"
+  total_add=""
+  total_add_pattern="("add_pattern"|"delete_pattern")([^\x1b]*)"reset_color""
+
   begin_output=0
   start_pattern="This text explains"
   # https://stackoverflow.com/a/14064658/21294350
@@ -57,6 +62,20 @@ BEGIN {
       find_weird_ctrl_L=0
     }
   }
+  # use `^(\x1b\[(7;)?[0-9]+;34m|\x1b\[(7;)?[0-9]+;34m)(.*)...$` in regex101
+  # `^(\[(7;)?[0-9]+;31m|\[(7;)?[0-9]+;34m)(.*)\[m` with esc removed
+  if (match($0, "^"total_add_pattern,a) && total_add=="") {
+    total_add=a[4]
+    print "find total_add:" total_add ";with line:" $0
+  }
+  if (total_add!="" \
+      && match($0, "^ +"total_add_pattern,a) \
+      && a[4]==total_add) {
+    print "find matching total_add:" a[4]
+    total_add=""
+    find_ansi-=2
+  }
+
   if (match($0, block_delimeter)) {
     if (find_ansi && !find_problem) {
       print block 
@@ -67,6 +86,7 @@ BEGIN {
     block=$0
     find_ansi=0
     find_problem=0
+    total_add=""
     next
     print "block_delimeter:" $0
   }
@@ -76,7 +96,7 @@ BEGIN {
   }
   if (match($0, all_color)) {
     # print "find ansi_prefix:" $0
-    find_ansi=1
+    find_ansi+=1
   }
   block=block"\n"$0
 }
