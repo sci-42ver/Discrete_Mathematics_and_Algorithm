@@ -2537,6 +2537,7 @@ $ latexdef -t latex -s -f -E cases
 - starting from checking problems in chapter 8 where I have read up to 9.3 finished in mcs.pdf,
   I began reading mcs_2018.pdf (difference between these 2 books see `compare_bmk.awk`)
   TODO compare these [2 files](https://www.adobe.com/acrobat/how-to/compare-two-pdf-files.html)
+  - The migration may probably began from commit e7d0044d95aa8675c19af4745f24084e7080a59e to .
 ### relation with 6.042J 2019
 - currently the following chapter_1-3 problems, chapter_2-2 problems are not in IN-CLASS QUESTIONS or ASSIGNMENTS.
 ## 1.1~1.8 skipped except for some problems
@@ -2738,6 +2739,14 @@ $ latexdef -t latex -s -f -E cases
     choosing $n$ is infinite.
 - > Insert ref to Conway’s nimbers.
   similarly use [induction](https://en.wikipedia.org/wiki/Surreal_number#Induction)
+- > as in the once famous third game in the 1961 movie Last Year at Marienbad.
+  [see](https://www.qedcat.com/moviemath/index.html) or [wikipedia](https://en.wikipedia.org/wiki/Nim#History)
+- > The proof shows that even in infinite games, every play must have an outcome. This is not the same as saying that the length of play has a fixed bound.
+  This means the former $\Rightarrow$ the latter but not conversely.
+- TODO
+  > reference TBA
+  may mean ["to be announced"](https://dictionary.cambridge.org/us/dictionary/english/tba#:~:text=tba%20%7C%20Business%20English&text=written%20abbreviation%20for%20to%20be,on%20November%2012%2C%20venue%20tba.), i.e. maybe in the book *in the future*.
+  - This has no relation with ['[21] Michael Garey and David Johnson. tba. tba, 1970. 68'](https://bohr.wlu.ca/hfan/cp412/references/ChapterOne.pdf)
 ## 7.6
 - > It is then possible to prove properties of data by ordinary induction on their size.
   this is how the book proves 'Fundamental Theorem for Win-Lose Games' compared with [yale_Fundamental_Theorem_for_Win_Lose_Games] where the latter uses 'ordinary induction on their size'.
@@ -3071,7 +3080,7 @@ $ latexdef -t latex -s -f -E cases
     - [invertible](https://math.stackexchange.com/a/91323/1059606) where at last all are functions of $z\in\mathbb{N}$.
   - > the real numbers are a countable union of countable sets
     TODO [this](https://mathoverflow.net/a/100725) -> [book THEOREM 10.6.](https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf) / [paper](https://web.archive.org/web/20120109193548/https://www.illc.uva.nl/Research/Reports/MoL-2006-03.text.pdf)
-- Problem 8.12
+- Problem 8.12@@
 - Problem 8.18
 - Problem 8.16
 - Problem 8.38 p311
