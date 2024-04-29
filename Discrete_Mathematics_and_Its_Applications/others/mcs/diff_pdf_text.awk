@@ -36,28 +36,29 @@ BEGIN {
   # https://stackoverflow.com/a/14064658/21294350
   x = SUBSEP
   # These lines are skipped
-  skip_pattern_str="“mcs”" \
-    x all_color"([0-9]+| |\\([0-9\\.]+\\))"reset_color \
-    x "^ *" all_color "?((Exam|Homework|Class|Practice) )?Problems"
+  skip_line_pattern_str="“mcs”" \
+    x all_color"([0-9]+| |\\([0-9\\.]+\\))"reset_color
   find_weird_ctrl_L=0
   skip_patterns[0]=""
-  split(skip_pattern_str, skip_patterns, x)
+  split(skip_line_pattern_str, skip_patterns, x)
   print skip_patterns[1]
   block=""
-  problem_pattern="Problem [0-9]"
+  problem_pattern="^ *"all_color"?((Exam|Homework|Class|Practice) )?Problem(s| [0-9])"
   find_problem=0
   find_ansi=0
 
   skip_ctrl_L=1
   limit_ctrl_L_skip=1
   skip_ctrl_L_cnt=0
+  skip_ctrl_L_contents=""
+  skip_cnt=1
 
   # logging
   log_filter=0
   log_total_mod=0
   log_skip=0
   if (skip_ctrl_L) {
-    log_ctrl_L=1 
+    log_ctrl_L=0
   } else{
     log_ctrl_L=0
   }
@@ -78,6 +79,10 @@ BEGIN {
       next
     }
   }
+  if (match($0, problem_pattern)) {
+    # print "find problem_pattern:" $0
+    find_problem=1
+  }
   # ^L is FF https://www.gnu.org/software/gawk/manual/html_node/Escape-Sequences.html
   # To avoid skip '7.6 Search Trees'.
   if (skip_ctrl_L) {
@@ -86,21 +91,44 @@ BEGIN {
         print "find ^L in:"$0";" 
       }
       find_weird_ctrl_L=1
+      if (limit_ctrl_L_skip) {
+        skip_ctrl_L_contents=$0
+        if (log_ctrl_L) {
+          print "skip_ctrl_L_contents reset to ^L:"$0";"
+        }
+      }
       next
     }
     if (find_weird_ctrl_L) {
       if (match($0, "^ *"all_color)) {
-        if (log_ctrl_L) {
-          print "skip due to ^L in:"$0";"
-        }
-        if (limit_ctrl_L_skip) {
+        if (skip_ctrl_L_cnt<skip_cnt) {
+          if (log_ctrl_L) {
+            print "skip due to ^L in:"$0";"
+          }
+          if (limit_ctrl_L_skip) {
+            skip_ctrl_L_cnt+=1
+            skip_ctrl_L_contents=skip_ctrl_L_contents"\n"$0
+            if (log_ctrl_L) {
+              print "skip_ctrl_L_contents becomes:"skip_ctrl_L_contents\
+                ";skip_ctrl_L_contents becomes end"
+            }
+          }
+          next # notice this may skipped one block.
+        } else if (skip_ctrl_L_cnt == skip_cnt) {
+          block=block"\n"skip_ctrl_L_contents
+          find_ansi+=skip_cnt+1 # include ^L
+          # in the above process, 
+          # 1. "block_delimeter" is impossible
+          # 2. total_mod is implicitly checked
           skip_ctrl_L_cnt+=1
         }
-        next # notice this may skipped one block.
-      } else{
+        # when skip_ctrl_L_cnt>skip_cnt, we let the following manipulate.
+      } else {
         find_weird_ctrl_L=0
+        skip_ctrl_L_cnt=0
+        # block,find_ansi will be reset when going into the next block.
       }
-    } 
+    }
   }
 
   if (match($0, block_delimeter)) {
@@ -160,10 +188,6 @@ BEGIN {
         ";idx:" find_total_add_file_idx 
       }
     }
-  }
-  if (match($0, "^ *"all_color"?"problem_pattern)) {
-    # print "find problem_pattern:" $0
-    find_problem=1
   }
   if (match($0, all_color)) {
     # print "find ansi_prefix:" $0
