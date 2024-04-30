@@ -6,7 +6,7 @@
 # problems:
 # 1. some texts are dropped like the block 'For example, in the base case of the deﬁnition of concatenation 7.1.3 ...'
 ######################
-# Run `icdiff mcs-unlocked.txt mcs_2018-unlocked.txt | awk -f diff_pdf_text.awk | less_n`.
+# Run `. ~/.virtualenv/misc/bin/activate; icdiff mcs-unlocked.txt mcs_2018-unlocked.txt | awk -f diff_pdf_text.awk | less_n`.
 function reset_total_mod()
 {
   # print "reset_total_mod"
@@ -37,7 +37,7 @@ BEGIN {
   x = SUBSEP
   # These lines are skipped
   skip_line_pattern_str="“mcs”" \
-    x all_color"([0-9]+| |\\([0-9\\.]+\\))"reset_color
+    x all_color"([0-9]+| |\\([0-9\\.]+\\))"reset_color # skip exact number / single space / (num_idx). At least until 'Problem 4.12', they have no unnecessary filters.
   find_weird_ctrl_L=0
   skip_patterns[0]=""
   split(skip_line_pattern_str, skip_patterns, x)
@@ -51,17 +51,18 @@ BEGIN {
   limit_ctrl_L_skip=1
   skip_ctrl_L_cnt=0
   skip_ctrl_L_contents=""
+  # when skip_cnt=1, it occasionally skips all total_mod lines for mcs.pdf file comparison.
   skip_cnt=1
 
   # logging
   log_filter=0
-  log_total_mod=0
   log_skip=0
   if (skip_ctrl_L) {
     log_ctrl_L=0
   } else{
     log_ctrl_L=0
   }
+  log_total_mod=1
 }
 {
   if (match($0, start_pattern)) {
@@ -74,6 +75,8 @@ BEGIN {
   for (Index = 1; Index <= length(skip_patterns); Index++) {
     if (match($0, skip_patterns[Index])) {
       if (log_skip) {
+        # 1. . ~/.virtualenv/misc/bin/activate;icdiff mcs-unlocked.txt mcs_2018-unlocked.txt | awk -f diff_pdf_text.awk | less_n | grep -v 'page ' | less_n
+        # probably means “mcs” doesn't filter anything unnecessarily.
         print "find skip_patterns:" skip_patterns[Index] ":in "$0";" 
       }
       next
@@ -103,6 +106,8 @@ BEGIN {
       if (match($0, "^ *"all_color)) {
         if (skip_ctrl_L_cnt<skip_cnt) {
           if (log_ctrl_L) {
+            # At least until Chapter 5
+            # Only skips something like 'Chapter 5 Induction' or '5.3. Strong Induction vs. Induction vs. Well Ordering'
             print "skip due to ^L in:"$0";"
           }
           if (limit_ctrl_L_skip) {
@@ -137,7 +142,14 @@ BEGIN {
     } else if (log_filter) {
       print "no diff found after filter with (find_ansi,find_problem):("\
          find_ansi "," find_problem ")"
-      print "skip\n" block "\nskip end"
+      if (!find_ansi) {
+        # until '32 \n\n.... Chapter 2 The Well Ordering Principle' all skipped contents have no color highlighted contents
+        print "find_ansi=0 -> skip\n" block "\nskip end" 
+      }
+      if (find_problem) {
+        # until 'Problem 2.1.' no unnecessary filters.
+        print "find_problem=1 -> skip\n" block "\nskip end" 
+      }
     }
     # print "new block"
     block=$0
