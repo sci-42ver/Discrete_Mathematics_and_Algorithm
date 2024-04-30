@@ -1,17 +1,12 @@
 Please point out errors if any. Thanks in advance.
 
-5.3. Strong Induction vs. Induction vs. Well Ordering 
-
-Following what J.W.Perry says, then we can show $S$ has one *minimal element* $r$ which has the property $0\le r< a$. See point 2 of [this QA answer](https://math.stackexchange.com/a/1332116/1059606)
-
-The 2nd question can be proved using [contradiction](https://math.stackexchange.com/a/526938/1059606) where actually we only need to prove one of $r,q$ is unique.
-
-1. For reference of user60887's comment, the proof of the division algorithm is done by proving existence using the well ordering principle and uniqueness using contradiction. See https://math.stackexchange.com/q/499789/1059606. 2. The Shobhit's reference link gives a proof of equivalence of these 2 theorems. This has a bit differences from proof "recast".
-
-More specifically if someone has questions, the last sentence means for the other direction, we need to assume $K:(\lnot \forall  n \in \mathbb{N}: P(n)\implies P(n+1))$ instead of $\lnot \forall  n \in \mathbb{N}: P(n)$. Then there is one subset $S\subseteq \mathbb{N}$ which has the *minimal* element satisfying $K$. Then follow the similar process ["Well order implies induction"](https://math.stackexchange.com/a/433023/1059606)
+1. IMHO, more specifically, "Tree (c) appears as a *right subtree* in Tree (e)" may mean a similar tree to Tree (c) appears ... . 2. Thanks for Prof.Chaos's link which gives one sketch of the process.
 
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
+# notice
+- here I may confuse adjacent in trees where I think 2 nodes with the same parents as adjacent (They should be called "[sibling nodes](https://en.wikipedia.org/wiki/Tree_(data_structure)#:~:text=Child%20nodes%20with%20the%20same,case%20it%20is%20called%20empty.)")。
+  This is trivially false when thinking such a tree as one graph.
 # tips
 - [this boy](https://math.stackexchange.com/search?q=user%3A22335+application) reads mcs *many years* after reading DMIA. His QAs are valuable.
   - TODO where is [it](https://math.stackexchange.com/q/168214/1059606) in DMIA
@@ -2532,6 +2527,7 @@ $ latexdef -t latex -s -f -E cases
 - TODO why 'No-halt' string set is 'non-halting Java programs'
   maybe it is probably one
   $\text{No-halt} \Coloneqq \{s\vert P_s \text{applied to s does not halting}\} = \{s \notin lang(Ps)\}:(8.3)$
+- This books seems to have much more typos than DMIA.
 ## notice
 - I only did problems referred to in the main contents because some of them are very interesting and Enlightening.
 - starting from checking problems in chapter 8 where I have read up to 9.3 finished in mcs.pdf,
@@ -2609,7 +2605,7 @@ $ latexdef -t latex -s -f -E cases
       then $f$ is "a total injective function from A to B".
     - Notice here is to prove from "relation" to "function"
       instead of proving iff.
-- Problem 4.10
+- Problem 4.10 @#@ (Here @#@ means problems in mcs 2018 whose solution is not certain and not verified)
   $$
   \begin{align*}
     z&\in A-(B\cup C)&\\
@@ -2722,7 +2718,7 @@ $ latexdef -t latex -s -f -E cases
   - > the first player in G becomes the second player in M .
     is based on 
     > So this play of G is a length $n+1$ sequence that finishes with the same outcome
-  - better [see this](https://math.stackexchange.com/questions/3992275/if-a-winning-strategy-does-not-exist-for-player-2-does-it-exist-for-player-1#comment10457491_3993622)
+  - better [see this][game_as_decision_tree]
     - This means same as DMIA 11.2 EXAMPLE 6
     - Here Definition 7.5.1 means possible moves make win or lose instead of directly win/lose.
     - > pick M0 as the first move, and then follow the second player’s winning strategy for M0 .
@@ -2750,7 +2746,141 @@ $ latexdef -t latex -s -f -E cases
 ## 7.6
 - > It is then possible to prove properties of data by ordinary induction on their size.
   this is how the book proves 'Fundamental Theorem for Win-Lose Games' compared with [yale_Fundamental_Theorem_for_Win_Lose_Games] where the latter uses 'ordinary induction on their size'.
+## 7.6@@
+- Definition 7.6.1.
+  based on the example of (7.25), the operation is from right to left.
+  So when $f\cdot \vec{Q}$, we first do $subtree_T(\vec{Q})$
+- proof that Figure 7.4 is one tree with no duplicate nodes.
+  at $n$th row starting from 0, it has $2^n$ elements.
+  the leftmost is $2^n-1$ and the rightmost is $2 \cdot 2^{n} - 2$
+```python
+from sympy import Function, rsolve, latex, simplify
+from sympy.abc import n
+from sympy import init_printing
+init_printing()
+a = Function('a')
+f=a(n)-1-2*a(n-1)
+leftmost=rsolve(f, a(n), {a(0):0})
+print(latex(leftmost))
+f=a(n)-2-2*a(n-1)
+rightmost=rsolve(f, a(n), {a(0):0})
+print(latex(rightmost))
+print(latex(simplify(leftmost-rightmost.subs(n,n-1)))) # so strictly increase between rows.
+rightmost-leftmost # strictly increase inside rows.
+```
+  Since until the rightmost node of the nth row, we have $2^{n+1}-1=\sum_{k=0}^n 2^k$ elements which start from 0 to $2 \cdot 2^{n} - 2$, so their step must be 1.
+  - Also see Theorem 7.6.16 which is trivial.
+- Compared with DMIA chapter 11, this book says a bit about 'the circular and infinite weirdness' in trees. The former DFS/BFS implicitly avoids 'circular' and it says most of games is finite same as mcs.
+- recursive trees is similar to [game_as_decision_tree]
+- Theorem 7.6.11
+  - $Rec\subseteq Fin$
+    > Next we show that T has no shared subtree.
+    - focus on what tree is shared
+      i.e. in (7.27), whether the $|A\cup B|=|A|+|B|$ (See Lemma 7.6.13.)
+      1. $T$ (excluded by finite)
+      2. After $T$ is excluded
+        we only need to care about $left\cup right$ 
+        1. inside left/right (excluded by IH)
+        2. between (excluded by def)
+  - $Fin\subseteq Rec$
+    - Here "an infinite path $f_n,\ldots,f_0$" is possible because they are all not leaves, i.e. they are Branchings.
+    - ~~Here we only need to prove one instance of "a shared subtree" for "... or ...".~~
+      ~~Then follow the sequence of $\notin$.~~
+      Here due to definition we need to check "shared subtree" at each step.
+    - > there is no sharing or infinite path in f1.f0 .T //
+      sharing implies infinite
+  - intuitively `RecTr` decrease the node count at each row one by one until the count becomes 1.
+    Notice "the infinite binary tree" ~~has~~ ~~no leaves~~ must have one infinite path down from root because otherwise it is finite. Then we can't get that tree with only leaves and its production backwards.
+- See Definition 7.6.9 for `size(T)`.
+- $\vec{P}$ in (7.35) is one n-tuple.
+- "proof checker" is why we may need "some tedious manipulation" with "The structural induction".
+- > searches need not be any longer than log2 of the size of the set of values.
+  i.e. $d\le \log_2(s-1)$ in Theorem 7.6.18.
+  Then with (7.39) $\log_2(s+1)-1\le d\le \log_2(s-1)$
+  so the length can be limited to one small range for "fully balanced" trees which is intuitive.
+- > has depth at most log2 n.
+  here means $\lfloor \log_2 n\rfloor$
+  - See DMIA 11.1 COROLLARY 1 and chapter 11 RESULTS.
+- AVL compared with "a fully balanced tree":
+  see [the 2nd paragraph](https://cs.stackexchange.com/a/131229/161388)
+  where the latter cares about subtree while the latter is the entire.
+  - This says mainly about [the "normal binary tree" and the "AVL tree"](https://qr.ae/ps5xc0).
+- (7.41) assumes $a>0$
+- Corollary 7.6.22. is based on `1/math.log((1+math.sqrt(5))/2,2)=1.44` where = means $\approx$
+- Definition 7.6.24 is Inorder
+- Theorem 7.6.26 proof exercise
+  1. T is Leaf,
+    "then ..." is included in $ r=num(T) $
+    "Otherwise ..." is included in $ r\neq num(T) $ Base case.
+  2. T is Branching
+    induction based on depth.
+    1. $ r=num(T) $ trivial
+    2. $r\in nums(left(T))$ (right is similar)
+      based on IH, $num(subtree_{left(T)}(srch(left(T),r)))=r(*)$
+      then $(*)=num(subtree_{T}(srch(left(T),r)\cdot left))=num(subtree_{T}(srch(T,r)))$
+    3. $r\notin nums(left(T))$
+      similar to 2, $srch(left(T),r)=fail_l\cdot \vec{P_l}$
+      Then we can choose $fail_l\cdot \vec{P_l}\cdot left$ or $fail_r\cdot \vec{P_r}\cdot right$.
+### 7.6.4
+- > there is a way to arrange the values so that no search takes any longer than this minimum amount
+  See Theorem 7.6.18
+- > So a first question to address is *how short* can we guarantee searches will be compared to the size of the set to be searched?
+  explains 7.6.6
+  > used it to explain why the connection between tree size and *depth* is important.
+  since the above asterisked words are positively related.
+### 7.6.7*
+- Figure 7.5,6
+  Here all 2 /'s or \'s means one length-1 branch, so they have the same labels/nums.
+- > which is within one of depth .U /
+  it means one is within.
+- > depth .X/ is d C 2 or d C 3 which is within one of depth .T /.
+  This is not needed for
+  > the depths of subtrees of X and Y are properly balanced according to the AVL rule
+- based on 
+  > The basic idea behind search trees is simple. ...
+  search trees means binary trees / "a kind of branching “tree”".
+- Figure 7.6 corresponds to [avl_insertion_detailed] 3. Right Right Case where $z=N,y=S,x=U$
+  Figure 7.14 similarly with $(z,y,x)=(N,S,R)$ corresponds to 4. Right Left Case
+  - Notice the former means `r>mid(S)>max(B)`
+    and in the latter if $r\in V$ it is possible `max(B)<r<min(S)`.
+    So
+    > max.B/ < r < min.S /; or max.S / < r < min.B/; 
+    in Lemma 7.6.27. is incomplete.
+- Lemma 7.6.27
+  - TODO
+    - > nums.rotate.B; r; S // D nums.B/ [ frg [ nums.S /;
+      lacks num(N) and $\{r\}\cup nums(S)$ may be just $nums(S)$
+      > The result of inserting r into A will be a new AVL tree S with the same labels as A along with r.
+    - > size-three sets Snew , Sold
+      maybe $S_{old}=\{N,S,r\}$ and $S_{new}=\{Y,X,r\}$
+      IMHO, the relabelling is not necessary.
+      especially for Theorem 7.6.29 which relabel for each level implied by '1:44 log2 size .T /'.
+  - comparison with Red-Black Trees
+    better see [wikipedia](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree#Properties) instead of [this definition](https://www.geeksforgeeks.org/introduction-to-red-black-tree/#)
+    where 
+    - the latter property 4 and 5 are same
+      > alternatively, it could be defined as the black depth of any leaf node
+    - Rule 2 is not needed
+      > Since the root can always be changed from red to black
+      but maybe not the other direction.
+    - Since 
+      > The AVL trees are *more balanced* compared to Red-Black Trees
+      so
+      > but they may cause more rotations during insertion and deletion
+      - See "How does a Red-Black Tree ensure balance?"
+        where the root and the leaf color can have only 1 choice if assuming property 1.
+    - TODO detailed in CRLS for Red-Black Trees.
+    - one [example](https://www.geeksforgeeks.org/red-black-tree-vs-avl-tree/) where one Red-Black Tree is not AVL where normally we may color 3 as Red in AVL.
+  - [See](https://cs.stackexchange.com/a/167872/161388)
+    - > depth .S /  depth .rotate.B; r; S //  depth .S / C 1;
+      Here just `depth(S)`.
+- Definition 7.6.28
+  - Here
+    > N ... Subtrs.S / [ Subtrs.B/;
+    This is to avoid shared subtrees.
 ## chapter 7 problems
+Here I skipped verification of Problem 7.44,42 because they are about induction which may be tedious and without many creative ideas.
+Although Problem 7.43 may be not trivial but it is still based on induction.
 - Problem 7.9
   based on Definition 7.1.2 and Lemma 7.1.4 proof.
   - $s=\lambda$ trivial
@@ -2839,6 +2969,75 @@ $ latexdef -t latex -s -f -E cases
     see [the last diagram](https://en.wikipedia.org/wiki/Nim#Mathematical_theory)
     trivially the piles disappear one by one.
     See [this](https://math.stackexchange.com/a/4906435/1059606)
+- Problem 7.44
+  - base case: trivially since $T$ is the leaf, so $\vec{P}=\lambda$
+  - Constructor case:
+    Suppose $\vec{P}=(f_n,\ldots,f_0)$
+    $subtree_T(\vec{P})=subtree_{f_0\cdot T}((f_n,\ldots,f_1))$
+    let $\vec{P'}=(f_n,\ldots,f_1)$
+    Then
+    $$
+    \begin{align*}
+      \text{depth}(T)&=\ldots&(7.35)\\
+                     &=|(f_0)|+\max\{\vec{P'}\ldots\}&(\text{def of tuple})\\
+                     &=1+\max\{\text{depth}(\text{left}(T))\ldots\}&(\text{see above})\\
+                     &\overbrace{=}^{IH}\text{RHS of Constructor case}&\blacksquare
+    \end{align*}
+    $$
+- Problem 7.40 (trivial so with no verification online)
+  - Since in Figure 7.5, depth(R)=d/d+1, depth(U)=d+1
+    So it included the case in Figure 7.13
+  - In a summary here we just find one method to break the pair (B,S) by categorization.
+  - Here the bottom level is d/d-1 where at most one is d-1. Then "AVL tree" is trivial. The rest is same as Figure 7.5
+    While Figure 7.5 d/d+1.
+  - Notice here we need to [ensure ~~inorder "Insertion in AVL Tree:"~~](https://www.geeksforgeeks.org/insertion-in-an-avl-tree/)
+  - complement resources
+    - ~~TODO~~ one *deletion* may need [more than 1 rotations](https://stackoverflow.com/a/14035092/21294350).
+      - > You can verify that Tree (c) and Tree (d) have one rotation upon removal, in the worst case.
+        if caring about the deletions of one node, then trivial.
+      - > On the other hand, removing a node from the right subtree may ultimately imbalance the tree resulting in a rotation of the root. Therefore, the right subtrees are of prime interest.
+        because in the example trees, the right depth is less than the left.
+        So it may cause difference 2 after deletion.
+    - [insertion][avl_insertion_detailed]
+      1. ~~$(T_1,T_2)=(a,a\pm 1\text{ or }a)$~~
+        Then $T_3=$
+      - [This](https://cs.stackexchange.com/a/53559/161388) means [this](https://www.geeksforgeeks.org/introduction-to-avl-tree/)
+        > By looking at the setup graphics of the four types of rotation
+    - one [equivalent definition](https://stackoverflow.com/a/230966/21294350) of AVL
+      where the former 2 allows the balance factor to be 0.
+      The last one forbids 2.
+    - [comparison (see the 2nd paragraph)](https://cs.stackexchange.com/a/118948/161388) of deletion and insertion
+- Problem 7.42
+  - a) follow [Inorder Traversal](https://www.geeksforgeeks.org/inorder-traversal-of-binary-tree/)
+  - b)
+    - Here I assume "Search tree" means same as BBTr which assumes branching when not leaves.
+      > Search trees have a numerical label on each subtree. Abstractly, this means there is a total function num W BBTr ! 
+      This is also implied in $(T \in Branching)$ of the def.
+    - proof of (odd-label)
+      based on the induction of `size(T)`
+      base case: `size(T)=1`, then the only leaf is odd.
+      - lemma: `size(T)` must be odd with the same induction.
+        trivial for base case
+        `1+odd+odd` is still odd.
+      - Based on lemma, then the `num(root)` must be even
+        then based on IH, `leaves(T_{[a,b]})=leaves(T_{[a,root-1]})\cup leaves(T_{[root+1,b]})`
+        they are still odd.
+    - > the updated tree can share all but proportional to log2 (tree size) subtrees.
+      TODO doesn't totally 2 for example $[1,n]$ and $[2,n+1]$?
+      ```
+        2                     3
+       / \                   / \
+      1   3       ----->    2   4
+           \
+            4
+      ```
+      - But this can
+        > Having this extra label at the leaves serves as a buffer that allows comprehensive relabelling to be *deferred*
+        TODO better see the codes
+- Problem 7.43
+  I follow the [process](https://stackoverflow.com/questions/13367981/what-is-the-minimum-sized-avl-tree-where-a-deletion-causes-2-rotations#comment122365176_14035092) https://webdocs.cs.ualberta.ca/~holte/T26/tree-deletion.html
+  base case: two labels -> delete one; one label -> delete node and rotate upwards
+  constructor case: `r > num(T)? delete(right(T),r) : (r=num(T)? delete_label(T,r): delete(left(T),r));if(depth_diff <=1){}else{rotate_upward()}`
 ## 8.1
 - infinite set ordinal see [$w$](https://www.ub.edu/topologia/seminars/Set_theory.pdf)
 - Lemma 8.1.3 See Definition 4.4.2.
@@ -3297,6 +3496,7 @@ $ latexdef -t latex -s -f -E cases
 [4xm_knight_tour]:https://math.stackexchange.com/questions/2195746/knights-tour-on-a-4-x-m-board#comment4518180_2195762
 [vertex_connectivity_less_than_minimum_degree]:https://math.stackexchange.com/a/453732/1059606
 [tree_iff_add_any_edge]:https://math.stackexchange.com/a/420543/1059606
+[game_as_decision_tree]:https://math.stackexchange.com/questions/3992275/if-a-winning-strategy-does-not-exist-for-player-2-does-it-exist-for-player-1#comment10457491_3993622
 
 <!-- stack overflow -->
 [longest_simple_path_NP_hard]:https://stackoverflow.com/a/53399638/21294350
@@ -3398,6 +3598,7 @@ $ latexdef -t latex -s -f -E cases
 <!-- geeksforgeeks -->
 [Detect_cycle_Directed_Graph]:https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
 [geeksforgeeks_max_f_n1_n2]:https://www.geeksforgeeks.org/turing-machine-to-accept-maximum-of-two-numbers/
+[avl_insertion_detailed]:https://www.geeksforgeeks.org/insertion-in-an-avl-tree/
 
 <!-- valuable links -->
 [houseofgraphs_search]:https://houseofgraphs.org/result-graphs
