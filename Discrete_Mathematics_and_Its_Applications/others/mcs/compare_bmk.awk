@@ -1,6 +1,6 @@
 #! /bin/awk -f
 # Use `pdf-bookmark -p ~/Discrete_Mathematics_and_Algorithm/Discrete_Mathematics_and_Its_Applications/others/mcs/mcs.pdf > mcs.bmk` to generate bmk
-# Then `id2c "./compare_bmk.awk -v summary=1 mcs.bmk" "./compare_bmk.awk -v summary=1 mcs_2018.bmk" | less_n`
+# Then `summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.awk -v summary=$summary mcs_2018.bmk" | less_n`
 BEGIN {
   target_num=1
   # here maybe passed to bash which will transform \\ to \ https://stackoverflow.com/a/25867768/21294350
@@ -14,7 +14,7 @@ BEGIN {
 {
   # https://stackoverflow.com/a/21479520/21294350
   chapter_regex_pattern="^ +"target_num" .*\\.+([0-9]+)$"
-  subchapter_start_regex_pattern="^ +"target_num"\\.1.*\\.+([0-9]+)$"
+  subchapter_start_regex_pattern="^ +"target_num"\\.1 .*\\.+([0-9]+)$"
   subchapter_regex_pattern="^ +"target_num"\\.([2-9]) .*\\.+([0-9]+)$"
   subchapter_regex_pattern_2="^ +"target_num"\\.([0-9][0-9]+) .*\\.+([0-9]+)$"
   first_problem_pattern="^ +Problem "target_num"\\.1\\.+([0-9]+)$"
@@ -28,13 +28,14 @@ BEGIN {
     start=a[1]
     last_subchapter=1
   }
-  if (match($0, subchapter_regex_pattern, a) || match($0, subchapter_regex_pattern_2, a)) {
+  # Notice the order where 1x is checked first to avoid unnecessary useless match()
+  if (match($0, subchapter_regex_pattern_2, a) || match($0, subchapter_regex_pattern, a)) {
     # print $0 ";" a[2]
     end=a[2]
     len=int(end)-int(start)
     if (!summary) {
       # https://stackoverflow.com/a/46885991/21294350
-      print target_num "." last_subchapter ":" len 
+      print target_num "." last_subchapter ":" len
     }
     start=a[2]
     last_subchapter=int(a[1])
@@ -48,7 +49,7 @@ BEGIN {
       print target_num ":" len
     } else{
       len=int(end)-int(start)
-      print target_num "." last_subchapter ":" len
+      print "last chapter-" target_num "." last_subchapter ":" len
     }
     target_num=target_num+1
   }

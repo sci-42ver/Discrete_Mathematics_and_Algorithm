@@ -15,20 +15,34 @@ function reset_total_mod()
 }
 BEGIN {
   # This is got from google AI
-  ansi_prefix="\x1b\\["
+  ansi_prefix="\x1b\\[" # Since [] will be used in regex, we need to escape [ in regex.
   orange_color="0;34m"
   all_foreground_color=ansi_prefix"[0-9]+;[0-9]+m"
   all_background_color=ansi_prefix"7;[0-9]+;[0-9]+m"
   all_color="(" all_foreground_color "|" all_background_color ")"
   reset_color=ansi_prefix"m"
+  reset_color_in_non_regex="\x1b\[m"
   # block_delimeter="^"ansi_prefix orange_color"---$"
   block_delimeter="^"ansi_prefix orange_color"---"reset_color
 
   add_pattern=ansi_prefix"(7;)?[0-9]+;34m"
   delete_pattern=ansi_prefix"(7;)?[0-9]+;31m"
   reset_total_mod()
-  total_add_pattern="("add_pattern"|"delete_pattern")([^\x1b]*)"reset_color""
+  # ..." +$" see total_add_space_ending.txt
+  ####################
+  # {""} - {" +$"} (maths set diff) should be `total_add_pattern_1st_file` with the ending `" +"total_add_pattern" +$"`
+  # $ . ~/.virtualenv/misc/bin/activate;icdiff mcs-unlocked.txt mcs_2018-unlocked.txt | awk -f diff_pdf_text.awk | grep -o "find matching total_mod:.*" > total_add_diff.txt
+  # # The rest is generated similarly.
+  # $ wc -l total_add_space_ending.txt total_add_not_check_space_ending.txt total_add_diff.txt
+  #  130 total_add_space_ending.txt
+  #  141 total_add_not_check_space_ending.txt
+  #   11 total_add_diff.txt
+  # # All the above diff are after 8.3.2 which has not been read when doing this patch, so it is fine to continue reading without recheck the former. 
+  ####################
+  # total_add_pattern="("add_pattern"|"delete_pattern")([^\x1b]*)"reset_color""
+  total_add_pattern="("add_pattern"|"delete_pattern")([^\x1b]*)"reset_color" +$"
   total_add_pattern_2nd_file="^ +"total_add_pattern
+  # total_add_pattern_1st_file="^"total_add_pattern" +"total_add_pattern" +$"
   total_add_pattern_1st_file="^"total_add_pattern
 
   begin_output=0
@@ -46,6 +60,8 @@ BEGIN {
   problem_pattern="^ *"all_color"?((Exam|Homework|Class|Practice) )?Problem(s| [0-9])"
   find_problem=0
   find_ansi=0
+
+  check_total_mod=1
 
   skip_ctrl_L=1
   limit_ctrl_L_skip=1
@@ -158,6 +174,10 @@ BEGIN {
     reset_total_mod()
     next # only skip duplicate `block_delimeter` in `block`
   }
+  # put after the reset of find_problem to ensure it can be reset
+  # if (find_problem) {
+  #   next
+  # }
 
   # 1. Put after block_delimeter to exclude matching '---'
   # 2. use `^(\x1b\[(7;)?[0-9]+;34m|\x1b\[(7;)?[0-9]+;34m)(.*)...$` in regex101
@@ -173,31 +193,37 @@ BEGIN {
   # b
   # Here I only check the 1st pair (a,a) of 3.
   #############################
-  if (total_mod!="") {
-    if (find_total_add_file_idx==1) {
-      match($0, total_add_pattern_2nd_file,a)
-    } else if (find_total_add_file_idx==2) {
-      match($0, total_add_pattern_1st_file,a)
-    }
-    if (a[4]==total_mod) {
-      if (log_total_mod) {
-        print "find matching total_mod:" a[4] ";with line:" $0
+  if (check_total_mod) {
+    if (total_mod!="") {
+      if (find_total_add_file_idx==1) {
+        match($0, total_add_pattern_2nd_file,a)
+      } else if (find_total_add_file_idx==2) {
+        match($0, total_add_pattern_1st_file,a)
       }
-      reset_total_mod()
-      find_ansi-=2 
-      fflush("/dev/stdout")
-    }
-  } else {
-    if (match($0, total_add_pattern_1st_file,a)) {
-      find_total_add_file_idx=1
-    } else if (match($0, total_add_pattern_2nd_file,a)){
-      find_total_add_file_idx=2
-    }
-    if (find_total_add_file_idx) {
-      total_mod=a[4]
-      if (log_total_mod) {
-        print "find total_mod:" total_mod ";with line:" $0 \
-        ";idx:" find_total_add_file_idx 
+      if (a[4]==total_mod) {
+        # When not exact match, it may drop 'find matching total_mod:8.3.2 The ZFC Axioms for Sets;with line:8.3.2 The ZFC Axioms for Sets ... Choice (ZFC), using a few simple logical deduction rules. This matches:8.3.2 The ZFC Axioms for Sets'
+        if (log_total_mod) {
+          print "find matching total_mod:" a[4] ";with line:" $0 ";This matches:" mod_orig_contents
+        }
+        reset_total_mod()
+        find_ansi-=2 
+        fflush("/dev/stdout")
+      }
+    } else {
+      if (match($0, total_add_pattern_1st_file,a)) {
+        find_total_add_file_idx=1
+      } else if (match($0, total_add_pattern_2nd_file,a)){
+        find_total_add_file_idx=2
+      }
+      if (find_total_add_file_idx) {
+        total_mod=a[4]
+        # in the normal string, unlike regex, we don't need '\\' for '\'
+        # mod_orig_contents=a[1]a[4] reset_color_in_non_regex
+        mod_orig_contents=$0
+        if (log_total_mod) {
+          print "find total_mod:" total_mod ";with line:" $0 \
+          ";idx:" find_total_add_file_idx 
+        }
       }
     }
   }
@@ -205,6 +231,6 @@ BEGIN {
     # print "find ansi_prefix:" $0
     find_ansi+=1
   }
-  block=block"\n"$0
+  block=block"\n"$0"" # We can add the ending ; to see trailing spaces
   # print "ansi_cnt:" find_ansi
 }
