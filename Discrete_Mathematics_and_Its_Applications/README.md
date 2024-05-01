@@ -2536,6 +2536,32 @@ $ latexdef -t latex -s -f -E cases
   - The migration may probably began from commit e7d0044d95aa8675c19af4745f24084e7080a59e to .
 ### relation with 6.042J 2019
 - currently the following chapter_1-3 problems, chapter_2-2 problems are not in IN-CLASS QUESTIONS or ASSIGNMENTS.
+## diff between 2017 and mcs 2018
+```bash
+$ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.awk -v summary=$summary mcs_2018.bmk" | less_n
+      1 /proc/self/fd/11                                                                              /proc/self/fd/12                                                                             1       
+      2 last chapter-6.4:6                                                                            last chapter-6.4:6                                                                           2       
+      3 7.1:4                                                                                         7.1:4                                                                                        3       
+      4 7.2:4                                                                                         7.2:4                                                                                        4       
+      5 7.3:2                                                                                         7.3:2                                                                                        5       
+      6 7.4:5                                                                                         7.4:5                                                                                        6
+      #  The diff is mainly the contents before Definition 7.5.1
+      7 7.5:4                                                                                         7.5:6                                                                                        7       
+      # The whole chapter is the diff
+      8                                                                                               7.6:19                                                                                       8       
+      9 last chapter-7.6:1                                                                            last chapter-7.7:1                                                                           9       
+     10 8.1:9                                                                                         8.1:9                                                                                       10       
+     11 8.2:4                                                                                         8.2:4                                                                                       11       
+    #  8.3 diff is mainly at 8.3.2
+     12 8.3:4                                                                                         8.3:5                                                                                       12       
+    #  They are mostly same but with one different layout (i.e. one spreading 2 pages while the other spreading 3).
+     13 last chapter-8.4:1                                                                            last chapter-8.4:2                                                                          13       
+     14 9.1:5                                                                                         9.1:5                                                                                       14       
+     15 9.2:7                                                                                         9.2:7                                                                                       15       
+     16 9.3:2                                                                                         9.3:3   
+     17 9.4:3                                                                                         9.4:2
+    #  The rest is same until 9.11: which I have not read when compare these 2 pdf's.
+```
 ## 1.1~1.8 skipped except for some problems
 - Problem 1.26
   - a) trivial
@@ -2560,6 +2586,10 @@ $ latexdef -t latex -s -f -E cases
 - Problem 2.23 referred to in chapter 6.
   - see [this](https://math.stackexchange.com/a/3548169/1059606) which uses contrapositive to prove.
     - well ordered [implies](https://math.stackexchange.com/a/2756184/1059606) total order
+## 3 preface
+- > we’ll come across the most important open problem in computer science
+  may mean SAT
+  > It turns out that an efficient solution to SAT would immediately imply efficient solutions to many other important problems
 ## 3.1
 - Here
   > mathematical implications ignore causal connections
@@ -2650,7 +2680,11 @@ $ latexdef -t latex -s -f -E cases
   $$
 - 5.25 trivial by algebraic calculation
 - 5.30 similar to 5.25.
-- 
+## 6 preface
+- > They also come up in many other settings such as designing digital circuits and mod-eling probabilistic processes.
+  i.e. Sequential logic.
+  - TODO the relation between [subshifts of finite type](https://math.stackexchange.com/q/3839480/1059606) same as [the wikipedia definition](https://en.wikipedia.org/wiki/Subshift_of_finite_type#Definition) and [SYMBOLIC DYNAMICS](https://s-schmieding.github.io/SDnotes.pdf)
+  - compared with Markov chain, [probabilistic automaton](https://en.wikipedia.org/wiki/Probabilistic_automaton) has inputs.
 ## 6.3*
 - this has the example of jug 5 and jug 3 which is shown in one job review and also in one exercise of the Discrete_Mathematics_and_Its_Applications book.
 ## 6.4*
@@ -3038,6 +3072,8 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
   I follow the [process](https://stackoverflow.com/questions/13367981/what-is-the-minimum-sized-avl-tree-where-a-deletion-causes-2-rotations#comment122365176_14035092) https://webdocs.cs.ualberta.ca/~holte/T26/tree-deletion.html
   base case: two labels -> delete one; one label -> delete node and rotate upwards
   constructor case: `r > num(T)? delete(right(T),r) : (r=num(T)? delete_label(T,r): delete(left(T),r));if(depth_diff <=1){}else{rotate_upward()}`
+## 8 preface*
+- In a summary, it is reasonable to solve with the general case like "infinite" instead of one special case "finite".
 ## 8.1
 - infinite set ordinal see [$w$](https://www.ub.edu/topologia/seminars/Set_theory.pdf)
 - Lemma 8.1.3 See Definition 4.4.2.
@@ -3253,6 +3289,9 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 - This is same as [this](https://en.wikipedia.org/wiki/Universal_set#Regularity_and_pairing)
 ## 8.4*
 - TODO Banach-Tarski Theorem
+- > In particular, every axiom system is incomplete: it cannot prove all the truths of mathematics.
+  This means at least 'an ax-iom system like ZFC is consistent' can't be proven (This implies its negative is also unable to prove because then we can prove the original statement implicitly.)
+  > In fact, while there is broad agreement that the ZFC axioms are capable of proving all of *standard* mathematics
 ## chapter 8 problems
 - Problem 8.14,15,25 see above
 - Problem 8.13

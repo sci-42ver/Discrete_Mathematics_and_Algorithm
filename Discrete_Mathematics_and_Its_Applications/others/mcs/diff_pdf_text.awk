@@ -78,7 +78,7 @@ BEGIN {
   } else{
     log_ctrl_L=0
   }
-  log_total_mod=1
+  log_total_mod=0
 }
 {
   if (match($0, start_pattern)) {
@@ -218,6 +218,7 @@ BEGIN {
       if (find_total_add_file_idx) {
         total_mod=a[4]
         # in the normal string, unlike regex, we don't need '\\' for '\'
+        # Here the `reset_color` passed to `print` won't influence the processed text.
         # mod_orig_contents=a[1]a[4] reset_color_in_non_regex
         mod_orig_contents=$0
         if (log_total_mod) {
