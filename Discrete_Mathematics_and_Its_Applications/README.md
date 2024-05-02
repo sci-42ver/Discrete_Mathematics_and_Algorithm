@@ -28,6 +28,14 @@ If $A=\mathbb{N}$, someone may think it is impossible to have one infinite subse
 
 IMHO, "pairwise disjoint family" is a bit like one proper subset of "family", so one direction may be much easier than the other (i.e. $\Leftarrow$ here). One more elegant rephrase of the above proof can be seen [here $2\Leftrightarrow 4$](https://andrescaicedo.files.wordpress.com/2009/11/502-equivalents.pdf). The $\Rightarrow$ part shares the same basic idea to construct one disjoint set from one arbitrary set based on [disjoint union](https://en.wikipedia.org/wiki/Disjoint_union).
 
+The second to last equality $\Big[\prod\limits_{i=0}^{r}\big(\sum\limits_{j_{i}=0}^{k_{i}}p_{i}^{j_{i}}\big)\Big]\Big[\prod\limits_{i=1}^{s}\big(\sum\limits_{j_{i}=0}^{l_{i}}q_{i}^{j_{i}}\big)\Big]$ is one variable renaming said in "Now let".
+
+This can be used to prove one seemingly stronger statement of the question by changing from 2 prime powers to [2 coprime numbers](https://t5k.org/glossary/page.php?sort=MultiplicativeFunction). Also see https://math.stackexchange.com/q/3464143/1059606 starting from the 2nd equal sign.
+
+I add some description the last equation sequence here. The 3rd is due to coprime so that $p_i\neq q_j,i=1\sim r,j=1\sim s$
+
+For reference, IMHO we need to prove "express ... $a_ib_i$" *without duplicity* because the divisor of mn must take one part from each of m and n. Suppose *contradiction* $a_pb_q=a_{p'}b_{q'}$. After factoring, it will be shown that $m$ and $n$ are not coprime. Also see https://math.stackexchange.com/a/866815/1059606 which proves implicitly by giving the factorization form of the divisor.
+
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
 # notice
@@ -2600,6 +2608,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
 - Problem 1.16
   $n=4,m=8$
   $n=6,m=4$
+- Problem 1.2 referred to by 9.1.3 Die Hard skipped due to that it is only to be as one reference of "the convention ... the nonnegative square root".
 ## 2.1
 - p30 here 
   > the fraction m0=p n0=p cannot be in written in lowest terms either
@@ -3420,7 +3429,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
   $\lceil \log_{\varphi} a\rceil$
   - TODO see [one variant](https://math.stackexchange.com/q/3734764/1059606)
 - (9.3) also see [this 'Euclidean Algorithm Machine'](https://www2.math.binghamton.edu/lib/exe/fetch.php/people/grads/eppolito/state_machines_and_algorithms.pdf) which is more comprehensive
-- 9.2.4
+- 9.2.4 Lemma 9.2.6
   a) [see](https://math.stackexchange.com/a/705874/1059606) which starts from the conclusion and iff back.
   b) trivial by the definition of gcd ($\Leftarrow$) and the Bezout’s lemma ($\Rightarrow$)
   c) [multiply](https://math.stackexchange.com/a/675887/1059606) instead of add/minus to prove.
@@ -3465,6 +3474,22 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
     This lemma can also prove ['Irreducibles are prime in a UFD'](https://math.stackexchange.com/questions/257955/irreducibles-are-prime-in-a-ufd#comment10468066_1913111)
     - ~~TODO~~ the wikipedia [reference][introduction_to_number_theory] ~~doesn't say about ~~.
       [See](https://math.stackexchange.com/questions/1141412/mathbb-z-sqrt-5-is-not-a-ufd#comment10468076_1143135) 'Euclid's lemma' in wikipedia
+## chapter 9 problems
+- Problem 9.2
+  i.e. to prove $1+\ldots+2^{k-1}+(2^{k}-1)(1+\ldots+2^{k-2})=2^k-1+(2^{k}-1)(2^{k-1}-1)=(2^{k}-1)2^{k-1}$
+  - [reference](https://t5k.org/notes/proofs/EvenPerfect.html)
+    - proof that [odd and even are coprime](https://math.stackexchange.com/a/2251831/1059606).
+    - [$\sigma(n)$](https://t5k.org/glossary/page.php?sort=SigmaFunction#:~:text=The%20sigma%20function%20of%20a,using%20the%20greek%20letter%20sigma.&text=Clearly%2C%20for%20primes%20p%2C%20%CF%83,(p)=p+1.) is [multiplicative](https://math.stackexchange.com/a/1948512/1059606)
+      Notice here we add $n$ itself due to the definition which also makes the elegant $\Prod$ possible (otherwise we need to remove one term which will make it impossible to be expressed in  multiplication of sum).
+    - > This means that m is prime and its only two divisors are itself (m) and one (M)
+      because this is the minimal state. So prime.
+- Problem 9.13 trivial here give one sketch.
+  - Inv1 is by [Euclidean algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm#Proof_of_validity)
+  - Inv2,3 base trivial
+    - Inv2
+      $(u-sq)a+(v-tq)b\overbrace{=}^{IH}x-qy=rem(x,y)$
+    - Inv3 probably same, skipped.
+  - b) TODO [see](https://math.stackexchange.com/q/4909510/1059606)
 ## TODO (use the book page number)
 - p182
 # mcs 2018 added/changed based on mcs 2017
