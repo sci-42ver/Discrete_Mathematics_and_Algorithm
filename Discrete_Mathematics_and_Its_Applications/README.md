@@ -26,6 +26,8 @@ The 4th proof means $|w|>|n|$ so it is impossible for $g\circ f$ to be injective
 
 If $A=\mathbb{N}$, someone may think it is impossible to have one infinite subset because of the [definition](https://mathworld.wolfram.com/CountablyInfinite.html) of "Countably Infinite". But it is [not that case](https://www.physicsforums.com/threads/is-there-a-smallest-infinite-subset-of-the-naturals.1050122/post-6857092).
 
+IMHO, "pairwise disjoint family" is a bit like one proper subset of "family", so one direction may be much easier than the other (i.e. $\Leftarrow$ here). One more elegant rephrase of the above proof can be seen [here $2\Leftrightarrow 4$](https://andrescaicedo.files.wordpress.com/2009/11/502-equivalents.pdf). The $\Rightarrow$ part shares the same basic idea to construct one disjoint set from one arbitrary set based on [disjoint union](https://en.wikipedia.org/wiki/Disjoint_union).
+
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
 # notice
@@ -3146,7 +3148,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
             i.e. we can choose $\{-1\}$ from $f(1)$. "finite subset" is implied by $n\in \mathbb{N}$.
             - "More precisely ..." is just one rephrase.
         - > the union of the members of G. U is an infinite countable
-          see Problem 8.24
+          see [union_countable_is_countable]
         - see [ProofWiki](https://proofwiki.org/wiki/Equivalent_Conditions_for_Dedekind-Infinite_Set#(1)_implies_(2)) which proves "an infinite countable subset" based on Dedekind-infinite
         - [See](https://math.stackexchange.com/questions/3255573/infinite-sets-a-is-infinite-iff-there-is-a-bijection-between-a-and-a-cup#comment10479328_3255606) -> https://proofwiki.org/wiki/Infinite_Set_has_Countably_Infinite_Subset/Proof_4
           - [this](https://proofwiki.org/wiki/Set_is_Infinite_iff_exist_Subsets_of_all_Finite_Cardinalities) is trivial.
@@ -3176,7 +3178,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 - here $w$ is the ordinal corresponding to $\mathbb{N}$.
 - > $\mathbb{N}\text{ surj }(\mathbb{Z}^+)^\ast$
   do calculation from right to left.
-- Problem 8.14.
+- Problem 8.14 (Problem 8.16 in mcs 2018).
   [proof](https://math.stackexchange.com/a/317522/1059606) using that $n$ can be *infinitely bigger*.
 - Corollary 8.1.16.
   this shrinks the size largely because it *only considers binary* bits after the decimal digit.
@@ -3331,13 +3333,15 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
     the book IFF combines the 2 lines in wikipedia into 1.
   - Axiom of choice
     - TODO prove it [1](https://math.stackexchange.com/q/1839913/1059606) [2](https://math.stackexchange.com/q/1628106/1059606)
-    - Problem 8.35
+    - Problem 8.35 (i.e. 8.39 in mcs 2018)
       - > Verify that the axiom of choice can be expressed as a pure formula
         trivial since 'pairwise-disjoint.s' and 'choice-set.c; s' can be described as one formula.
       - See the last line of [this 'first-order logic'](https://en.wikipedia.org/wiki/Axiom_of_choice#Variants)
     - [from AC to the well-ordering theorem](https://en.wikipedia.org/wiki/Well-ordering_theorem#Proof_from_axiom_of_choice)
       just choose *one by one* the elements of the ordered sequence.
       - ${\displaystyle \sup\{\alpha \mid a_{\alpha }{\text{ is defined}}\}}$ may mean the complement $\smallsetminus \{a_{\xi }\mid \xi <\alpha \}$.
+      - Notice this use the original definition instead of the variant (i.e. the book one) although they are [equivalent](https://math.stackexchange.com/q/4532500/1059606).
+        - TODO I saw [the idea "disjoint union"](https://math.stackexchange.com/questions/4532500/axiom-of-choice-equivalence-is-my-proof-correct#comment10481032_4532500) in one former math Stack Exchange link.
     - the converse
       - > require just as *many choices* as simply choosing an element from each ${\displaystyle S}$.
       - > making all uncountably many choices is not allowed under the axioms of Zermelo-Fraenkel set theory without the axiom of choice.
@@ -3364,7 +3368,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
   - a) similar to 25
   - b) still similar but dropping some terms
     TODO see reference in [this](https://math.stackexchange.com/a/1312/1059606) which has no duplicity
-- [Problem 8.24](https://math.stackexchange.com/questions/91366/proof-that-union-of-a-sequence-of-countable-sets-is-countable#comment10471525_91366)
+- [Problem 8.24](https://math.stackexchange.com/questions/91366/proof-that-union-of-a-sequence-of-countable-sets-is-countable#comment10471525_91366) <a name="union_countable_is_countable"></a>
   - > For clarity, 1. the point 3 may mean "mapping ... *firstly*" and then we can use $g$ to map to the target $\mathbb{N}$. 2. "the Cantor-Bernstein Theorem" means not [the "Cantor–Bernstein theorem" entry in wikipedia](https://en.wikipedia.org/wiki/Cantor%E2%80%93Bernstein_theorem) but wikipedia "Schröder–Bernstein theorem" entry. 2.1 A "embeds into" B means $|A|\le |B|$.  "maps $\mathbb{N}$ to $X_1$ into the union" means firstly map to "$X_1$" and then map to "the union". 3. [proof](https://mathoverflow.net/a/100725) when ZF.
     This is one deleted comment of mine as the answer author thought it may be inappropriate.
     1. the original point 3 already combines $f_n$ and $g$ together which have codomain $\mathbb{N}$
@@ -3382,12 +3386,21 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
         - This also says about the triangular number.
         - In summary, this shows $f$ is strictly increasing (so one-to-one) for one order of $(a,b)$ with step 1 (so onto).
     - [invertible](https://math.stackexchange.com/a/91323/1059606) where at last all are functions of $z\in\mathbb{N}$.
-  - > the real numbers are a countable union of countable sets
+- > the real numbers are a countable union of countable sets
     TODO [this](https://mathoverflow.net/a/100725) -> [book THEOREM 10.6.](https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf) / [paper](https://web.archive.org/web/20120109193548/https://www.illc.uva.nl/Research/Reports/MoL-2006-03.text.pdf)
 - Problem 8.18
+  - almost same as Lemma 8.1.7 but with beginning 
+    $$
+    e(b_i)=a_{i},b_i\in B,i\in\mathbb{N}\\
+    e(a_n)=a_{n+|B|},b_i\in B\\
+    \text{same as orig}
+    $$
+  - See [this](https://math.stackexchange.com/a/1967807/1059606) based on [union_countable_is_countable] where 'infinite' in 'countably infinite' is based on the cardinality.
+    compared with above, it takes $A\cap B\neq\varnothing$ in account and use $T\cup B'\to T$ (i.e. the above $e(b_i,a_n)$) implicitly.
 - Problem 8.16
-- Problem 8.38 p311
-- Problem 8.39
+  - by Definition 8.1.1 and Theorem 8.1.5, we know (a) and (b) means same.
+- Problem 8.38 p311 See above
+- Problem 8.39 See above
 - Problem 8.42 in p234
   - This is really similar to ["von Neumann ordinals"](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory#7._Axiom_of_infinity).
   - base case $Nim_{\langle \varnothing\rangle}$ 
@@ -3539,6 +3552,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 [lattice_boolean_algebra]:#lattice_boolean_algebra
 [xor_associative]:#xor_associative
 [producuction_for_each_nonterminal_one_by_one]:#producuction_for_each_nonterminal_one_by_one
+[union_countable_is_countable]:#union_countable_is_countable
 
 <!-- textbook -->
 [SOLUTIONS_8th]:./Discrete%20Mathematics%20and%20Its%20Applications,%20Eighth%20Edition%20SOLUTIONS.pdf
