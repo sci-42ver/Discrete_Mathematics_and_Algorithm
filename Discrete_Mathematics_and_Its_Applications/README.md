@@ -2584,6 +2584,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
      13 last chapter-8.4:1                                                                            last chapter-8.4:2                                                                          13       
      14 9.1:5                                                                                         9.1:5                                                                                       14       
      15 9.2:7                                                                                         9.2:7                                                                                       15       
+    #  A Prime for Google is put in one different location where the `icdiff mcs-unlocked.txt mcs_2018-unlocked.txt` shows as the diff of deleting and adding '9.4 The Fundamental Theorem of Arithmetic' preface at one different location.
      16 9.3:2                                                                                         9.3:3   
      17 9.4:3                                                                                         9.4:2
     #  The rest is same until 9.11: which I have not read when compare these 2 pdf's.
