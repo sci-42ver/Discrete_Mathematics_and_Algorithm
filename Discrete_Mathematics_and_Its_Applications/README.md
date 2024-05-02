@@ -2,6 +2,30 @@ Please point out errors if any. Thanks in advance.
 
 1. IMHO, more specifically, "Tree (c) appears as a *right subtree* in Tree (e)" may mean a similar tree to Tree (c) appears ... . 2. Thanks for Prof.Chaos's link which gives one sketch of the process.
 
+For reference, 1. [$\preccurlyeq$](https://math.stackexchange.com/q/3562173/1059606) is a symbol to denote "injective" although it is not used in some books. 2. "then there exists an infinite countable subset of $A$": the reference link in the answer proves this part almost same as the [Mrcrg's reference link ProofWiki Proof_4](https://proofwiki.org/wiki/Infinite_Set_has_Countably_Infinite_Subset/Proof_4) where $n$ is one finite number therefore we can't directly use $F_n$.
+
+$T$ in the above ProofWiki is same as $U$ in [the wikipedia proof](https://en.wikipedia.org/wiki/Dedekind-infinite_set#Proof_of_equivalence_to_infinity,_assuming_axiom_of_countable_choice) of the above theorem where they also share the same idea.
+
+IMHO, 1. here $n$ may mean ['von Neumann ordinal'](https://en.wikipedia.org/wiki/Ordinal_number#Von_Neumann_definition_of_ordinals) by the form of '$\omega$-sequence'. 2. Maybe one typo $h(n)=A_n$.
+
+The above proof sketch is same as ProofWiki [proof 2](https://proofwiki.org/wiki/Infinite_Set_has_Countably_Infinite_Subset/Proof_2) (If `$...$` fails to be rendered, maybe it is because they are not in one line). Then we can follow [reference link of marty cohen's answer wikipedia proof](https://en.wikipedia.org/wiki/Dedekind-infinite_set#Proof_of_equivalence_to_infinity,_assuming_axiom_of_countable_choice) to construct one $B$ to have "bijective correspondence" between the "proper subset" and $A$.
+
+As the answer says, it [depends](https://math.stackexchange.com/questions/3063329/example-of-a-set-of-real-numbers-that-is-dedekind-finite-but-not-finite#comment6316699_3063329) on what set theory is used.
+
+Andrés E. Caicedo may mean the definition of "finite set" is not standard. See https://math.stackexchange.com/a/656929/1059606 and dfeuer's answer.
+
+If someone wants one example directly, the reference link https://math.stackexchange.com/questions/2473059/elucidating-the-nature-of-infinite-dedekind-finite-subsets-in-the-reals of Asaf Karagila will help.
+
+The 2nd proof may mean $g:A\longrightarrow A\setminus\{f(0)\}$ and $g$ is bijective based on another answer https://math.stackexchange.com/a/3255606/1059606 of yours. Then your first 2 proofs share the similar ideas as the wikipedia proof https://en.wikipedia.org/wiki/Dedekind-infinite_set#Proof_of_equivalence_to_infinity,_assuming_axiom_of_countable_choice. The 3rd proof shares the  similar idea as https://proofwiki.org/wiki/Equivalent_Conditions_for_Dedekind-Infinite_Set#(1)_implies_(2). You may mean $n_0\in \mathcal{N}$ by your definition.
+
+The 4th proof means $|w|>|n|$ so it is impossible for $g\circ f$ to be injective. Thanks for your sharing.
+
+1. It seems weird that you ask [many (3) questions with similar titles](https://math.stackexchange.com/search?q=user%3A368425+Axiom+of+Dependent+Choice+implies+Axiom+of+Countable+Choice) 'Axiom of Dependent Choice implies Axiom of Countable Choice'. It may be better if you can connect them to show their relations. IMHO, this proof looks fine for me. I didn't dig into your detailed proof in another seemingly duplicate QA.
+
+2. The key part of the proof is to find one [total relation](https://en.wikipedia.org/wiki/Axiom_of_dependent_choice#Formal_statement) like [$\neq$](https://www.physicsforums.com/threads/about-the-axiom-of-dependent-choice.947017/post-5995190) which shows the application of this axiom.
+
+If $A=\mathbb{N}$, someone may think it is impossible to have one infinite subset because of the [definition](https://mathworld.wolfram.com/CountablyInfinite.html) of "Countably Infinite". But it is [not that case](https://www.physicsforums.com/threads/is-there-a-smallest-infinite-subset-of-the-naturals.1050122/post-6857092).
+
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
 # notice
@@ -2623,7 +2647,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
 ## chapter 4 problems
 - Problem 4.5 uses [element-chasing](https://web.math.ucsb.edu/~mikew/MAT145Page/Set_Theory_Review.pdf) in the [proof](https://math.stackexchange.com/a/2782336/1059606)
   - Show how union is [analogous](https://math.stackexchange.com/questions/4016966/show-how-union-is-analogous-to-logical-inclusive-or#comment8292345_4016966) to [logical inclusive OR](https://stackoverflow.com/a/22137436/21294350)
-- Problem 4.21 the reference of Lemma 8.1.3
+- Problem 4.21 (Problem 4.22 in mcs 2018) the reference of Lemma 8.1.3
   - a) trivial due to the transitivity of $\le$
   - b) trivial due to $|A|\ge |B|\Rightarrow |B|\le |A|$
   - c) trivial based on a,b)
@@ -3101,10 +3125,52 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 - Problem 8.25 See [this](https://www.physicsforums.com/threads/i-proving-that-the-cross-product-of-2-countable-sets-is-countable.263517/post-1911104) or DMIA 2.5-28.
 - > adding one new element to an infinite set doesn’t change its size,
   this is just how map [between $\mathbb{N}$ and $\mathbb{Z}^+$](https://math.stackexchange.com/questions/182459/an-infinite-set-having-one-more-element-than-another-infinite-set#comment420603_182459)
-- Problem 8.10. (b)
-  [See](https://math.stackexchange.com/a/2495180/1059606)
-  > e (hence X is equipotent to a proper subsets of itself
-  i.e. [$n+k$](https://en.wikipedia.org/wiki/Hilbert%27s_paradox_of_the_Grand_Hotel#Finitely_many_new_guests) or [$2n$](https://en.wikipedia.org/wiki/Hilbert%27s_paradox_of_the_Grand_Hotel#Infinitely_many_new_guests)
+- Problem 8.10 (Problem 8.12 in mcs 2018). 
+  - (b)
+    [See link1](https://math.stackexchange.com/a/2495180/1059606)
+    > e (hence X is equipotent to a proper subsets of itself
+    i.e. [$n+k$](https://en.wikipedia.org/wiki/Hilbert%27s_paradox_of_the_Grand_Hotel#Finitely_many_new_guests) or [$2n$](https://en.wikipedia.org/wiki/Hilbert%27s_paradox_of_the_Grand_Hotel#Infinitely_many_new_guests)
+    - For "surjective", $s(x)=n\ldots$ is enough.
+  - a) 
+    - [wikipedia](https://en.wikipedia.org/wiki/Dedekind-infinite_set#Proof_of_equivalence_to_infinity,_assuming_axiom_of_countable_choice)
+      - > That every Dedekind-infinite set is infinite can be easily proven in ZF
+        proved using the definition point 2.
+        - TODO proof "any, and then *all*".
+      - > namely that every infinite set X is Dedekind-infinite, as follows:
+        - let $X=-1\cup\mathbb{N}$
+          > f(n) is the set of finite subsets of X of size n
+          then $f(1)$ may be $\{\{-1\},\{0\},\ldots\}$
+          so this member implies
+          > whose members are themselves infinite (and possibly uncountable) sets.
+          - > may choose one member from each of these sets, and this member is itself a finite subset of X.
+            i.e. we can choose $\{-1\}$ from $f(1)$. "finite subset" is implied by $n\in \mathbb{N}$.
+            - "More precisely ..." is just one rephrase.
+        - > the union of the members of G. U is an infinite countable
+          see Problem 8.24
+        - see [ProofWiki](https://proofwiki.org/wiki/Equivalent_Conditions_for_Dedekind-Infinite_Set#(1)_implies_(2)) which proves "an infinite countable subset" based on Dedekind-infinite
+        - [See](https://math.stackexchange.com/questions/3255573/infinite-sets-a-is-infinite-iff-there-is-a-bijection-between-a-and-a-cup#comment10479328_3255606) -> https://proofwiki.org/wiki/Infinite_Set_has_Countably_Infinite_Subset/Proof_4
+          - [this](https://proofwiki.org/wiki/Set_is_Infinite_iff_exist_Subsets_of_all_Finite_Cardinalities) is trivial.
+    - This proof is [same as](https://math.stackexchange.com/a/3255611/1059606) (also same as [this](https://math.stackexchange.com/a/3255606/1059606)) the book but highlights the *subset* where $a_{n+1}$ always exist by "*infinite* countable subset" $B$.
+      - one-to-one is ensured by $a_{n+1}$
+        - TODO 
+          maybe this means
+          > if not circular
+          is impossible, i.e. the case that ~~we can't have one infinite sequence $$~~ we have no such a $a_{n+1}$ for one $a_n$ is impossible.
+        onto is because the mapping starts from $a_1$.
+      - Notice here if $A=\mathbb{N}$, due to the infinity, the function still works.
+      - [detailed proof link2](https://math.stackexchange.com/a/3255651/1059606) about Dedekind-infinite sets.
+        - b->c same as [ProofWiki](https://proofwiki.org/wiki/Equivalent_Conditions_for_Dedekind-Infinite_Set#(1)_implies_(2)).
+          - > Let A be an element of S not in the image of F.
+            may use [Axiom of Specification](https://proofwiki.org/wiki/Axiom:Axiom_of_Specification/Set_Theory).
+        - a->b i.e. b) in this problem.
+        - TODO "*the proof* of Lemma 8.1.7" may mean
+          ~~where~~ 'the proof of Lemma 8.1.7', the link1, the link2 all defines one bijective function.
+      - I skipped [this](https://math.stackexchange.com/a/911426/1059606) because they may probably be same.
+    - TODO
+      - [Cofinite Choice](https://math.stackexchange.com/a/3985542/1059606)
+      - [cantor set](https://math.stackexchange.com/questions/524029/a-set-is-infinite-iff-there-is-a-one-to-one-correspondent-with-one-of-its-proper/#comment1120394_524029)
+    - Also [see](https://math.stackexchange.com/a/250124/1059606) which is similar to the wikipedia proof.
+      - [See](https://math.stackexchange.com/q/2750930/1059606)
 - > Since any partial function with nonempty codomain can be extended to a total function with the same range (reader: ask yourself how)
   See Problem 8.13 (a)
 - here $w$ is the ordinal corresponding to $\mathbb{N}$.
@@ -3318,7 +3384,6 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
     - [invertible](https://math.stackexchange.com/a/91323/1059606) where at last all are functions of $z\in\mathbb{N}$.
   - > the real numbers are a countable union of countable sets
     TODO [this](https://mathoverflow.net/a/100725) -> [book THEOREM 10.6.](https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf) / [paper](https://web.archive.org/web/20120109193548/https://www.illc.uva.nl/Research/Reports/MoL-2006-03.text.pdf)
-- Problem 8.12@@
 - Problem 8.18
 - Problem 8.16
 - Problem 8.38 p311
