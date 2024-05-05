@@ -1,43 +1,34 @@
 Please point out errors if any. Thanks in advance.
 
-1. IMHO, more specifically, "Tree (c) appears as a *right subtree* in Tree (e)" may mean a similar tree to Tree (c) appears ... . 2. Thanks for Prof.Chaos's link which gives one sketch of the process.
 
-For reference, 1. [$\preccurlyeq$](https://math.stackexchange.com/q/3562173/1059606) is a symbol to denote "injective" although it is not used in some books. 2. "then there exists an infinite countable subset of $A$": the reference link in the answer proves this part almost same as the [Mrcrg's reference link ProofWiki Proof_4](https://proofwiki.org/wiki/Infinite_Set_has_Countably_Infinite_Subset/Proof_4) where $n$ is one finite number therefore we can't directly use $F_n$.
+Thanks for your clarification and hints. I thought the key part is how to interpret "partial correctness". I have understood (b) if using your highlighted book definition (chapter 6 is read some time ago, I didn't pay much attention to *partial* correctness at that time. Sorry for that). 1. For (c), after comparison, as I have said in the  question, it seems that "Extended" is only done by adding adding 2 sequences which doesn't influence termination. Then why does the problem highlight *no more than*?
 
-$T$ in the above ProofWiki is same as $U$ in [the wikipedia proof](https://en.wikipedia.org/wiki/Dedekind-infinite_set#Proof_of_equivalence_to_infinity,_assuming_axiom_of_countable_choice) of the above theorem where they also share the same idea.
+(I will give some ideas about (c) here. If that will be long, then I will open one new post. Do you think this is fine?) 2. Can we say "correct" based on (b,c)? The book says "Floyd distinguished *two required properties to verify* a program." which seemingly implies that.
 
-IMHO, 1. here $n$ may mean ['von Neumann ordinal'](https://en.wikipedia.org/wiki/Ordinal_number#Von_Neumann_definition_of_ordinals) by the form of '$\omega$-sequence'. 2. Maybe one typo $h(n)=A_n$.
+(I will give some ideas about (c) here. If that will be long, then I will open one new post. Do you think this is fine?) 2. Then we can [say "correct" based on (b,c)](https://maa.org/sites/default/files/images/upload_library/46/Pengelley_projects/Project-15/correct-project.pdf)
 
-The above proof sketch is same as ProofWiki [proof 2](https://proofwiki.org/wiki/Infinite_Set_has_Countably_Infinite_Subset/Proof_2) (If `$...$` fails to be rendered, maybe it is because they are not in one line). Then we can follow [reference link of marty cohen's answer wikipedia proof](https://en.wikipedia.org/wiki/Dedekind-infinite_set#Proof_of_equivalence_to_infinity,_assuming_axiom_of_countable_choice) to construct one $B$ to have "bijective correspondence" between the "proper subset" and $A$.
+@JulioDiEgidio Thanks. That is also said in the 3rd paragraph of https://en.wikipedia.org/wiki/Partial_function after your hints. I understand now. Then the assumption seems to be reasonable. But why does the problem assume one function $B$ and prove $B$ is same as $A$ instead of directly proving $A$ is total? This seems to beat around the bush unnecessarily.
 
-As the answer says, it [depends](https://math.stackexchange.com/questions/3063329/example-of-a-set-of-real-numbers-that-is-dedekind-finite-but-not-finite#comment6316699_3063329) on what set theory is used.
+As the reference for someone maybe with doubts about the above question, the above "if" in "if and only if there exist integers ..." seems to be not trivial to be got from the construction of $\alpha,\beta$ using the extended Euclidean algorithm since it *only gives one possible* linear combination. This method is informally used in some books. https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity#Proof can prove the "if" part correctly which also proves the "only if" part since $1$ is the minimal integer greater than 0.
 
-Andrés E. Caicedo may mean the definition of "finite set" is not standard. See https://math.stackexchange.com/a/656929/1059606 and dfeuer's answer.
+@JulioDiEgidio 1. Sorry, I missed saying proving A is well-defined. As the question says, the wikipedia reference gives one recursive process to calculate the unique value for each $A(m,n)$. So $B$ is not necessary. 2. After rethoughts, it seems the book expected proof and the wikipedia one is different. Is it that case? If so, could you give one for the book proof (If such a proof is not available, it is still ok to close this question since I have understood the proof in wikipedia)?
 
-If someone wants one example directly, the reference link https://math.stackexchange.com/questions/2473059/elucidating-the-nature-of-infinite-dedekind-finite-subsets-in-the-reals of Asaf Karagila will help.
+@IzaakvanDongen As the above process shows, $A(m,n)$ will be only related with $A(m',n'),m'<m$ in the  recursion process. And since we will continue the recursion until $n$ *decreases* to one $n_{def}$ which *is defined*, by your assumption the recursion process for $A(m,n)$ will be as short as the above $A(m,2)$ since $A(m',n'),m'<m,n'<n$ are all defined.
 
-The 2nd proof may mean $g:A\longrightarrow A\setminus\{f(0)\}$ and $g$ is bijective based on another answer https://math.stackexchange.com/a/3255606/1059606 of yours. Then your first 2 proofs share the similar ideas as the wikipedia proof https://en.wikipedia.org/wiki/Dedekind-infinite_set#Proof_of_equivalence_to_infinity,_assuming_axiom_of_countable_choice. The 3rd proof shares the  similar idea as https://proofwiki.org/wiki/Equivalent_Conditions_for_Dedekind-Infinite_Set#(1)_implies_(2). You may mean $n_0\in \mathcal{N}$ by your definition.
+@IzaakvanDongen As the above process shows, $A(m,n)$ will be only related with $A(m',n'),m'<m$ in the  recursion process. And since we will continue the recursion until $n$ *decreases* to one $n_{def}$ which *is defined*. And each time $n=n'$, $m$ will decrease one. Although as my updated sequence $A(0,A(1,15))$ shows the nest level may increase exponentially, they are only defined by $A(m',n'),m'<m,n'<n_{def}$
 
-The 4th proof means $|w|>|n|$ so it is impossible for $g\circ f$ to be injective. Thanks for your sharing.
+@IzaakvanDongen As the above process shows, $A(m,n)$ will be only related with $A(m',n'),m'<m$ in the  recursion process. And since we will continue the recursion until $n$ *decreases* to one $n'$ which *is defined*. But each time $n=n'$, $m$ will decrease one.
 
-1. It seems weird that you ask [many (3) questions with similar titles](https://math.stackexchange.com/search?q=user%3A368425+Axiom+of+Dependent+Choice+implies+Axiom+of+Countable+Choice) 'Axiom of Dependent Choice implies Axiom of Countable Choice'. It may be better if you can connect them to show their relations. IMHO, this proof looks fine for me. I didn't dig into your detailed proof in another seemingly duplicate QA.
+@IzaakvanDongen 1. I think you mean "lexicographic order" as wikipedia says. If that can be thought rigorous then It's fine now. Then I will mark this question solved. 2. More specifically, use the order as normally defined https://en.wikipedia.org/wiki/Lexicographic_order#Cartesian_products. If $A(m_0,n_0)$ is the minimal counterexample, then $A(m_0-1,n),n\in\mathbb{N}$ and $A(m_0,n_0-1)$ is defined. Then by (AA), $A(m_0,n_0)$ is also defined, leading to the contradiction. My problem in the question post is that I skip many steps like $A(m,3)$ and that will cause the too deep nested level.
 
-2. The key part of the proof is to find one [total relation](https://en.wikipedia.org/wiki/Axiom_of_dependent_choice#Formal_statement) like [$\neq$](https://www.physicsforums.com/threads/about-the-axiom-of-dependent-choice.947017/post-5995190) which shows the application of this axiom.
+1. Compared with the other 2. (7.5) $f_4(n)$ may be defined by $n'<n$ or $n'>n$ and (7.3) must be defined by $n'>n$. Although $A(m,n)$ may involve "an evaluation of A at arguments that may be a lot bigger than m and n", i.e. $A(m,n-1)$, it is ok when using lexicographic order.
 
-If $A=\mathbb{N}$, someone may think it is impossible to have one infinite subset because of the [definition](https://mathworld.wolfram.com/CountablyInfinite.html) of "Countably Infinite". But it is [not that case](https://www.physicsforums.com/threads/is-there-a-smallest-infinite-subset-of-the-naturals.1050122/post-6857092).
-
-IMHO, "pairwise disjoint family" is a bit like one proper subset of "family", so one direction may be much easier than the other (i.e. $\Leftarrow$ here). One more elegant rephrase of the above proof can be seen [here $2\Leftrightarrow 4$](https://andrescaicedo.files.wordpress.com/2009/11/502-equivalents.pdf). The $\Rightarrow$ part shares the same basic idea to construct one disjoint set from one arbitrary set based on [disjoint union](https://en.wikipedia.org/wiki/Disjoint_union).
-
-The second to last equality $\Big[\prod\limits_{i=0}^{r}\big(\sum\limits_{j_{i}=0}^{k_{i}}p_{i}^{j_{i}}\big)\Big]\Big[\prod\limits_{i=1}^{s}\big(\sum\limits_{j_{i}=0}^{l_{i}}q_{i}^{j_{i}}\big)\Big]$ is one variable renaming said in "Now let".
-
-This can be used to prove one seemingly stronger statement of the question by changing from 2 prime powers to [2 coprime numbers](https://t5k.org/glossary/page.php?sort=MultiplicativeFunction). Also see https://math.stackexchange.com/q/3464143/1059606 starting from the 2nd equal sign.
-
-I add some description the last equation sequence here. The 3rd is due to coprime so that $p_i\neq q_j,i=1\sim r,j=1\sim s$
-
-For reference, IMHO we need to prove "express ... $a_ib_i$" *without duplicity* because the divisor of mn must take one part from each of m and n. Suppose *contradiction* $a_pb_q=a_{p'}b_{q'}$. After factoring, it will be shown that $m$ and $n$ are not coprime. Also see https://math.stackexchange.com/a/866815/1059606 which proves implicitly by giving the factorization form of the divisor.
+@IzaakvanDongen From the above unique sequence which eventually is reduced to $A(m',n'),(m',n')\le (m,n)$ and that they are all reduced to $A(0,p),A(q,1)$ which are unique, we can also say $A(m,n)$ value is uniquely defined. Is that right?
 
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
+# Watching question
+- https://math.stackexchange.com/questions/4909510/why-is-the-pulverizer-machine-partially-correct#comment10482360_4909606
 # notice
 - here I may confuse adjacent in trees where I think 2 nodes with the same parents as adjacent (They should be called "[sibling nodes](https://en.wikipedia.org/wiki/Tree_(data_structure)#:~:text=Child%20nodes%20with%20the%20same,case%20it%20is%20called%20empty.)")。
   This is trivially false when thinking such a tree as one graph.
@@ -578,8 +569,9 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   how this is [related](https://crypto.stanford.edu/pbc/notes/numbertheory/17gon.html#:~:text=In%201796%2C%20a%20teenage%20Gauss,quadratic%20equations%20over%20the%20rationals.) with number theory?
 - [mathematical analysis](https://en.wikipedia.org/wiki/Mathematical_analysis#Main_branches) includes calculus.
 - > there is no multiplicative inverse of 2 modulo 6
-  [TODO](https://math.stackexchange.com/a/2670313/1059606)
-- TODO why define [Multiplicative group](https://math.stackexchange.com/a/135928/1059606)?
+  [~~TODO~~](https://math.stackexchange.com/a/2670313/1059606)
+- ~~TODO~~ why define [Multiplicative group](https://math.stackexchange.com/a/135928/1059606)?
+  All the above 2 strikethroughed are shown in 4.4 .
 - [Commutative ring](https://en.wikipedia.org/wiki/Commutative_ring#Definition_and_first_examples)
   > To form a ring these two operations have to satisfy a number of properties: the ring has to be an abelian *group* under addition as well as a *monoid* under multiplication, where multiplication distributes over addition
   where "abelian group" is group with [Commutativity](https://en.wikipedia.org/wiki/Abelian_group#Definition) and group is the monoid with [inverses](https://math.stackexchange.com/a/146902/1059606)
@@ -606,7 +598,16 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - >  they were *incorrect* in concluding that n is necessarily prime if the congruence holds
   this doesn't mean the congruence is necessary condition for that n is prime
   i.e. n is odd prime -> congruence. This is correct.
-- THEOREM 1 [iff proof](https://math.stackexchange.com/a/2670313/1059606) based on the Bezout's theorem.
+- THEOREM 1 [iff proof (this link gives the proof based on the iff sequence of length 2)](https://math.stackexchange.com/a/2670313/1059606) based on the Bezout's theorem.
+  - Based on Extended Euclidean algorithm, $\alpha$/inverse is unique.
+    Also see mcs Lemma 9.9.2 which is almost same as exercise 7.
+    This basic idea is same as [Identity_Unique].
+  - "only if there exist integers ..."
+    - [See](https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity#Proof)
+      - > Similarly d is also a divisor
+        i.e. $r=b-q'd$
+      - > this implies c ≤ d.
+        at least $|c|\le |d|$. Since both are positive, we have the above.
 ### 4.6
 - > $f(p)=(ap+b)mod\;m$ is bijective if and only if $gcd(a,m)=1$
 
@@ -676,7 +677,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   - here b is ~~both~~ the least y-coordinate ~~and~~ based on the smallest x-coordinate
 - Well ordering principle is [not for real](https://people.eecs.berkeley.edu/~daw/teaching/cs70-s08/notes/n6.pdf) but for integer.
   its main idea is the **least** exists.
-- EXAMPLE 5
+- EXAMPLE 5 proof of the division algorithm.
   See [this](https://math.stackexchange.com/questions/499789/proof-of-division-algorithm-using-well-ordering-principle#comment10474315_499789) -> QA which means same.
 ### 5.3
 - [Well-formed formula](https://en.wikipedia.org/wiki/Well-formed_formula) is related with compiler.
@@ -1267,6 +1268,7 @@ check(R_1)
     then it is not easy to say the [*strict order*](https://mathworld.wolfram.com/StrictOrder.html) (adding [connected](https://en.wikipedia.org/wiki/Total_order#Strict_and_non-strict_total_orders) it becomes the total order) (because not Asymmetric) between them which is used for partial order.
     > his means that there does not exist any element $s\in S$ such that ${\displaystyle m\leq s}$ and ${\displaystyle m\neq s.}$
     so we think of **both** $x,y$ are minimal.
+- Definition 4 is same as [this](https://en.wikipedia.org/wiki/Well-order#:~:text=In%20mathematics%2C%20a%20well%2Dorder,called%20a%20well%2Dordered%20set.)
 ## 10
 - [graph visualizer](https://math.stackexchange.com/questions/13841/online-tool-for-making-graphs-vertices-and-edges#comment10322484_13841)
 - [List all possible graphs](https://math.stackexchange.com/a/2783775/1059606) with one specific property list.
@@ -2561,13 +2563,15 @@ $ latexdef -t latex -s -f -E cases
 - TODO why 'No-halt' string set is 'non-halting Java programs'
   maybe it is probably one
   $\text{No-halt} \Coloneqq \{s\vert P_s \text{applied to s does not halting}\} = \{s \notin lang(Ps)\}:(8.3)$
-- This books seems to have much more typos than DMIA.
+- This books seems to have much more typos than DMIA (even wrong hints like Problem 6.6...) and it has many ambiguous description (TODO give one specific example of such one ambiguous description).
+  - typo like "more than $\sqrt{n}$ steps" in p361.
 ## notice
 - I only did problems referred to in the main contents because some of them are very interesting and Enlightening.
 - starting from checking problems in chapter 8 where I have read up to 9.3 finished in mcs.pdf,
   I began reading mcs_2018.pdf (difference between these 2 books see `compare_bmk.awk`)
   TODO compare these [2 files](https://www.adobe.com/acrobat/how-to/compare-two-pdf-files.html)
   - The migration may probably began from commit e7d0044d95aa8675c19af4745f24084e7080a59e to .
+- From 9.6, if "Lemma 9.6.1", etc, are highlighted, it means their proofs are skipped because of  duplicity with DMIA.
 ### relation with 6.042J 2019
 - currently the following chapter_1-3 problems, chapter_2-2 problems are not in IN-CLASS QUESTIONS or ASSIGNMENTS.
 ## diff between 2017 and mcs 2018
@@ -2609,6 +2613,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
   $n=4,m=8$
   $n=6,m=4$
 - Problem 1.2 referred to by 9.1.3 Die Hard skipped due to that it is only to be as one reference of "the convention ... the nonnegative square root".
+- Problem 1.13 is skipped due to triviality.
 ## 2.1
 - p30 here 
   > the fraction m0=p n0=p cannot be in written in lowest terms either
@@ -2646,12 +2651,44 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
   - b,c) $B=F\Rightarrow (Q=T,L=T)\Rightarrow N=F$
   - [See](https://www.assignmentexpert.com/homework-answers/mathematics/discrete-mathematics/question-154751) although it only has the correct process for a) and the correct answers for b,c) but not with the correct process.
 - Problem 3.6,7 are skipped because they are contained in COD and partly in DMIA.
-  And these problems are far from designing one real CPU although they are the basis.
+  And these problems are far from *designing one real CPU* although they are the basis.
 - Problem 3.17
   - a) $(A\iff B)=(A \text{ and } B)\text{ or }(\neg A \text{ and } \neg B)$
     xor is similar using the truth table
   - b) [see](https://stackoverflow.com/a/8374918/21294350)
   - c) see DMIA which also contains the above maybe.
+- Problem 3.24
+  - equisatisfiable diff equivalent see [lec_02](https://lara.epfl.ch/w/_media/fv20/lec02.pdf) from [this](https://lara.epfl.ch/w/fv20/top) ~~which is more readable than~~ which has one different structure but almost the same contents from [2019](https://lara.epfl.ch/w/fv19/top) listed in [this](https://lara.epfl.ch/w/fv)
+    - 2019 [lec_03](https://lara.epfl.ch/w/_media/fv19/lec03.pdf)
+      - in p14, the latter means $F=T\Leftrightarrow G=T$
+        in p13, $FV$ means [all literals p14](https://lara.epfl.ch/w/_media/fv19/lec02-bmc.pdf)
+      - propositional logic [compared with syllogistic logic](https://brilliant.org/wiki/propositional-logic/#:~:text=As%20the%20name%20suggests%20propositional,and%20connected%20via%20logical%20connectives.)
+        - better see [this](https://lara.epfl.ch/w/sav08/predicate_logic_informally)
+    - 2020
+      - p17
+        see p16 for definition of $FV$ where $\exists$ may introduce [one new variable p8](https://lara.epfl.ch/w/_media/fv20/lec01-main2.pdf).
+      - notice here exponentially larger is [only possible][2020_lec_02] but not necessary.
+  - b) trivial based on a).
+  - notice ["a reduction from 3SAT to Circuit SAT"](https://en.wikipedia.org/wiki/Circuit_satisfiability_problem#Proof_of_NP-completeness) is much more trivial than the converse direction since the former *doesn't need to introduce new variables*.
+    - proof based on [this structure](https://stackoverflow.com/a/4294435/21294350) where $P$ needs [one TM](https://en.wikipedia.org/wiki/P_(complexity)#Definition) and NP [doesn't see paragraph 3](https://en.wikipedia.org/wiki/NP_(complexity))
+  - a)
+    - [example](https://en.wikipedia.org/wiki/Tseytin_transformation#Simple_combinatorial_logic)
+      - [CNF sub-expression](https://en.wikipedia.org/wiki/Tseytin_transformation#Gate_sub-expressions), take AND for example.
+        - based on CNF sub-expression,
+          if $C=T$ then we need $A=B=T$ based on the latter 2 components in conjunction.
+          else, we need $(A=F) \lor (B=F)$ based on the 1st component.
+          The above is same for "Operation".
+      - linear is due to for each gate, we have one *decidable* number of the minimal operation.
+        while normally we may [duplicate almost for all literals](https://en.wikipedia.org/wiki/Disjunctive_normal_form#..._by_semantic_means) (also can be got due to [recursive p25][2020_lec_02] [distributive property](https://en.wikipedia.org/wiki/Tseytin_transformation#Motivation)) instead of using one variable to substitute some groups of them.
+        - also see [this](http://courses.csail.mit.edu/6.892/spring19/psets/ps4sol.pdf)
+          > Each vertex and edge in the circuit leads to a *constant* amount of the formula, so the blowup is linear
+        - [summary](https://en.wikipedia.org/wiki/Circuit_satisfiability_problem#The_Tseytin_transformation) where "net" may mean "pin". (I give one brief reading before "Conjoining"). This corresponds to the problem
+          > to the number of wires
+        - notice: based on [this p26][2020_lec_02], the transformed SAT formula has the *same output* as before because each CNF sub-expression is correct (also implied by "translate" in the later link) with that property but with [one *different* valuation](https://personal.cis.strath.ac.uk/robert.atkey/cs208/converting-to-cnf.html#:~:text=Because%20the%20original%20formula%20P,that%20they%20are%20equi%2Dsatisfiable.) $e$.
+      - "constant 1" may mean "gate8" variable which needs to be T due to the satisfiability problem.
+- Problem 3.25 [(b)](https://math.stackexchange.com/q/4910135/1059606)
+  - > After padding all clauses, 2k-1 extra clauses[note 4] have to be appended to ensure that only d1 = ⋯ = dk=FALSE can lead to a satisfying assignment.
+    TODO This seems to exclude one situation -> $2^k-1$. But why $2^k$ instead of $2^{k-j}$. and why all "FALSE"?
 ## 4.4 (rephrased using arrows)
 - > bijective when it has both the [= 1 arrow out] and the [= 1 arrow in] property.
   See [this](https://math.stackexchange.com/questions/1945015/is-a-one-to-one-function-also-a-total-function#comment10454547_1945015)
@@ -2700,7 +2737,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
 - > m + k is even IFF [m is even IFF k is even]
   this means m,k has the same parity.
 ## 5.3
-- > Even so, there is a mechanical way to reformat any induction proof into a Well Or-dering proof, and vice versa
+- > Even so, there is a mechanical way to *reformat* any induction proof into a Well Or-dering proof, and vice versa
   [See](https://math.stackexchange.com/a/490249/1059606)
   - This is different from DMIA 5.2-{41~43}.
     where 41 tries getting one contradiction using one artificial set and induction
@@ -2721,8 +2758,20 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
   i.e. Sequential logic.
   - TODO the relation between [subshifts of finite type](https://math.stackexchange.com/q/3839480/1059606) same as [the wikipedia definition](https://en.wikipedia.org/wiki/Subshift_of_finite_type#Definition) and [SYMBOLIC DYNAMICS](https://s-schmieding.github.io/SDnotes.pdf)
   - compared with Markov chain, [probabilistic automaton](https://en.wikipedia.org/wiki/Probabilistic_automaton) has inputs.
-## 6.3*
+## 6.2*
 - this has the example of jug 5 and jug 3 which is shown in one job review and also in one exercise of the Discrete_Mathematics_and_Its_Applications book.
+## 6.3*
+- > The word “partial” comes from viewing a process that might not terminate as computing a partial relation.
+  Maybe it means the starting state can't be recursively related to the termination state.
+- > So it can’t be halved more than dlog be C 1 times
+  ~~TODO IMHO merely $\lceil\log b\rceil$ is enough.~~
+  ~~because~~ 
+  Problem 6.6
+  when $b=2^k$ (i.e. k-bit binary number), then $\lceil\log b\rceil+1=k+1$
+  when $2^k<b<2^{k+1}$ (still k-bit binary number), then $\lceil\log b\rceil=k+1$ is enough instead of $\lceil\log b\rceil+1$.
+  > involves at most two multiplications
+  i.e. $x^2$ and $xy$
+  - Also [see](https://math.stackexchange.com/questions/3625697/prove-that-the-fast-exponentiation-algorithm-halts-after-lceil-log-2n-rceil#comment10468349_3625726) -> https://math.stackexchange.com/a/678643/1059606
 ## 6.4*
 - > If we think of the robot as a nondeterministic state machine, then Claim 6.3.4 is a termination assertion
   IMHO here 'nondeterministic' has no relations with 'termination assertion'.
@@ -2731,6 +2780,15 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
   Since compared with the stable marriage problem, Theorem 6.4.3 is not held any more.
 - 6.4 the idea is almost same as Discrete_Mathematics_and_Its_Applications 3.1-65 and 3.3-31  although the latter doesn't show explicitly using the *preserved invariant*.
 ## chapter 6 problems
+- Problem 6.6 See above
+  - if using induction,
+    base: $b=1$ then $\text{quotient}(b,2)=0$, so one transition is enough.
+    step: after one step, we need to prove $\overbrace{(\lceil \log (\text{quotient}(b, 2)=\lfloor b/2\rfloor) \rceil+1)}^{IH}+1=\lceil \log b \rceil+1$
+      ~~Here when  we can interpret $$~~
+      TODO but that may be invalid.
+      when `b=0b101`, then $LHS=\log(0b10)+1+1=3$
+      while $RHS=\lceil\log(0b101)\rceil+1$
+      The key problem is that one side is rounded up while the other isn't.
 - Problem 6.22
   | Assignment | rogue couple  |
   | ---------- | ------------- |
@@ -2798,7 +2856,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
     Then
     > Now if there is a move M0 2 G where the second player in M0 has a winning strategy, then the first player in G has a simple winning strategy: pick M0 as the first move, and then follow the second player’s winning strategy for M0 
     means 'the first player' do one move $k$ which gets to the state $M_0$(i.e. 'pick M0 as the first move').
-    notice 'move M0' means one game as the above definition and 'as the first move' means one minimal unit move.
+    **notice** 'move M0' means one game as the above definition and 'as the first move' means one minimal unit move.
     > if the first player in G makes the move M
     means choose $M$ as the above 'pick M0 as the first move'.
   - > Of course only the first move in the meta-chess-tournament is infinite, but then we could set up a tournament consisting of n meta-chess-tournaments.
@@ -3204,6 +3262,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 - > simulate the program using an interpreter
   like [python](https://cs.stackexchange.com/a/148444/161388)
 - each program can be thought as [one superset of the algorithm](https://qr.ae/ps4YWn).
+- see this for [the Halting Problem](https://math.stackexchange.com/q/4900611/1059606)
 ## 8.3
 - Russell’s paradox is also shown in DMIA 2.2-50. 
   notice this is ~~same as~~ similar to cantor's diagonal argument $\{a \in A\vert a \notin g(a)\}$. See 8.1.
@@ -3307,7 +3366,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
             - [This](https://math.stackexchange.com/a/308428/1059606) says normally we only need one formula $\varphi$ to keep the proof consistent / "the same".
         - QA_2
           if
-          > Its users couldn't care less whether or not ZF is the underlying theory of the universe or some other theory
+          > Its users *couldn't care less whether or not ZF is the underlying theory* of the universe or some other theory
           then we can skip assuming this axiom.
   - [Axiom *schema*](https://qr.ae/pskBLY) of specification -> Subset
     - Notice 
@@ -3474,6 +3533,59 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
     This lemma can also prove ['Irreducibles are prime in a UFD'](https://math.stackexchange.com/questions/257955/irreducibles-are-prime-in-a-ufd#comment10468066_1913111)
     - ~~TODO~~ the wikipedia [reference][introduction_to_number_theory] ~~doesn't say about ~~.
       [See](https://math.stackexchange.com/questions/1141412/mathbb-z-sqrt-5-is-not-a-ufd#comment10468076_1143135) 'Euclid's lemma' in wikipedia
+- Lemma 9.4.2 is one rephrase of DMIA 4.3 LEMMA 2.
+  - Lemma 9.4.3 is then also duplicate in DMIA 4.3.
+## 9.5
+- [comparison](https://en.wikipedia.org/wiki/AKS_primality_test#Importance) between the Miller–Rabin test and AKS.
+## 9.6
+- Lemma 9.6.4 skips the proof of DMIA 4.1 THEOREM 4.
+## 9.7* (This is said in DMIA 4.1.5 Arithmetic Modulo m although not detailed)
+- compared with DMIA 4.2.4 Modular Exponentiation which cares about simplifying the exponent, 9.7 cares about the base.
+- > all of the following equalities
+  these are those in [the ring definition](https://en.wikipedia.org/wiki/Ring_(mathematics)#Definition)
+  [proof](https://proofwiki.org/wiki/Ring_of_Integers_Modulo_m_is_Ring)
+  - Addition
+    - [Modulo Addition is Associative](https://proofwiki.org/wiki/Modulo_Addition_is_Associative) which is based on *Associative Law of Addition*.
+    - [cyclic proof](https://proofwiki.org/wiki/Quotient_Group_of_Cyclic_Group/Proof_1)
+      TODO Here $(gH)^k=g^kH$ is based on [this](https://proofwiki.org/wiki/Power_of_Coset_Product_is_Coset_of_Power)
+      We can also prove by [inspecting](https://math.stackexchange.com/a/2602937/1059606) the [specific group](https://en.wikipedia.org/wiki/Quotient_group#Remainders_of_integer_division) (Notice [coset](https://en.wikipedia.org/wiki/Coset#Definition) depends on the operation/factor is $+$ or $\times$, etc.)
+      - See the 1st paragraph of [this](https://math.stackexchange.com/a/69063/1059606) and [this](https://en.wikipedia.org/wiki/Quotient_group#Motivation_for_the_name_%22quotient%22) which shows why we name "quotient group".
+      - TODO [prove](https://proofwiki.org/wiki/Cyclic_Group_is_Abelian) Cyclic Group is Abelian.
+        Here for "Integers Modulo m", $\cdot$ should be substituted by $+$.
+      - Abelian -> normal group because (binary) operation implies [closure](https://en.wikipedia.org/wiki/Binary_operation#Terminology) which combined with inverse we have [$gng^{-1}\in N$](https://en.wikipedia.org/wiki/Normal_subgroup).
+    - [closure](https://proofwiki.org/wiki/Modulo_Addition_is_Closed) is implied by definition (See (9.11)).
+      "Note" means $x,y\in\mathbb{Z}_m,\llbracket x\rrbracket_z+\llbracket y\rrbracket_z\notin \mathbb{Z}_m$.
+    - Identity / Inverse can be proved similar to "Associative".
+    - commutative can be proved based on cyclic or directly from definition.
+  - Modulo Multiplication
+    - closure use the [Division Theorem](https://proofwiki.org/wiki/Modulo_Multiplication_is_Closed) although we can still use the definition of modulo operation directly.
+    - associative, identity, "commutative" and Distributivity is similar to the above.
+      In summary they are all based on those properties in the *normal* addition and multiplication based on "Lemma 9.7.1".
+      > The overall theme is that remainder arithmetic is a lot like ordinary arithmetic
+    - Identity of Monoid/algebraic structure is Unique is based on [the definition of Identity][Identity_Unique].
+- > the range [0..n)
+  is due to [the modulo operation](https://en.wikipedia.org/wiki/Ring_(mathematics)#Example:_Integers_modulo_4)
+- > polynomials with integer coefficients
+  This ring [see](https://www.math.uci.edu/~ndonalds/math120b/2poly.pdf)
+  similar to the above, it is ring because its operation is ~~based on~~ almost same as those operations in $\mathbb{N}$.
+- > On the other hand, the set fT; Fg of truth values with OR for addition and AND for multiplication is not a commutative ring because it fails to satisfy one of these equalities.
+  i.e. "inverse for $+$" because $T\lor X=T\neq F$
+  All the others are satisfied [including distributivity](https://en.wikipedia.org/wiki/Principle_of_distributivity).
+- > The n  n matrices of integers are not a commutative ring because they fail to satisfy another one of these equalities.
+  i.e. commutativity
+  Here "inverse for $+$" can be satisfied.
+  [All the others](https://en.wikipedia.org/wiki/Matrix_multiplication#General_properties) are satisfied
+- > But there are a couple of exceptions we’re about to examine.
+  see 9.9
+## 9.9
+- Lemma 9.9.1 see DMIA 4.4 THEOREM 1.
+- 0 [relatively prime](https://www.splashlearn.com/math-vocabulary/relatively-prime#:~:text=0%20and%201%20are%20relatively,is%20divisible%20by%20any%20integer.) to 1 based on definition.
+- > if k is not relatively prime to n, then we can show it isn’t cancellable
+  Assume this is $A\to B=\neg (A\land\neg B)=T$
+  so $A\land\neg B=F$
+  i.e. Assume A and $\neg B$ "it *is* cancellable", we need contradiction.
+
+### 9.9.2*
 ## chapter 9 problems
 - Problem 9.2
   i.e. to prove $1+\ldots+2^{k-1}+(2^{k}-1)(1+\ldots+2^{k-2})=2^k-1+(2^{k}-1)(2^{k-1}-1)=(2^{k}-1)2^{k-1}$
@@ -3489,7 +3601,13 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
     - Inv2
       $(u-sq)a+(v-tq)b\overbrace{=}^{IH}x-qy=rem(x,y)$
     - Inv3 probably same, skipped.
-  - b) TODO [see](https://math.stackexchange.com/q/4909510/1059606)
+  - b) ~~TODO~~ [see](https://math.stackexchange.com/q/4909510/1059606)
+  - c) See the above link maybe here "at most" can be stronger to = but it is enough to show polynomial.
+  - Since the book only refer to 2 
+- Problem 9.70
+- Problem 9.64
+- Problem 9.85
+- Problem 9.87
 ## TODO (use the book page number)
 - p182
 # mcs 2018 added/changed based on mcs 2017
@@ -3520,6 +3638,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 - [This](https://math.stackexchange.com/q/3383113/1059606) related with 9-supplementary-43 and isomorphic. (example from [wikipedia](https://en.wikipedia.org/wiki/Distributive_lattice))
 - [chain vs cycle](https://en.wikipedia.org/wiki/Chain_(algebraic_topology)) [Also](https://math.stackexchange.com/a/3554072/1059606)
 - Burnside's lemma. See 10.3-74.
+- "Integers Modulo m under Addition" in mcs 9.7
 - TODO relation with [p-adic valuation](https://en.wikipedia.org/wiki/P-adic_valuation)
 # TODO after set theory or order theory
 - [This](https://math.stackexchange.com/a/3896116/1059606) related with 9.6-38.
@@ -3641,6 +3760,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 [vertex_connectivity_less_than_minimum_degree]:https://math.stackexchange.com/a/453732/1059606
 [tree_iff_add_any_edge]:https://math.stackexchange.com/a/420543/1059606
 [game_as_decision_tree]:https://math.stackexchange.com/questions/3992275/if-a-winning-strategy-does-not-exist-for-player-2-does-it-exist-for-player-1#comment10457491_3993622
+[Identity_Unique]:https://math.stackexchange.com/a/622845/1059606
 
 <!-- stack overflow -->
 [longest_simple_path_NP_hard]:https://stackoverflow.com/a/53399638/21294350
@@ -3718,6 +3838,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 [uchicago_0_n_1_n]:https://www.classes.cs.uchicago.edu/archive/2015/winter/28000-1/Lec13.pdf
 [yale_Fundamental_Theorem_for_Win_Lose_Games]:https://oyc.yale.edu/sites/default/files/blackboard15_0_0.pdf
 [2_conditions_for_Balanced_Parentheses]:http://cse.iitkgp.ac.in/%7Eabhij/course/theory/FLAT/Spring21/scribes/CFG-balanced.pdf
+[2020_lec_02]:https://lara.epfl.ch/w/_media/fv20/lec03-main2.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
@@ -3748,3 +3869,5 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 [houseofgraphs_search]:https://houseofgraphs.org/result-graphs
 
 [asm_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
+
+<!-- proofwiki -->
