@@ -1,34 +1,20 @@
 Please point out errors if any. Thanks in advance.
 
+If someone has doubts about "The prime factors of ..." in Chinmay Nirkhe's commment. Chinmay Nirkhe may mean the prime factors of $k_1k_2$. Then $\gcd(k_1k_2,n)=\gcd(n,k_1 *_n k_2)=1$ based on the definition of $*_n$ as Bill Dubuque and Wojowu says.
 
-Thanks for your clarification and hints. I thought the key part is how to interpret "partial correctness". I have understood (b) if using your highlighted book definition (chapter 6 is read some time ago, I didn't pay much attention to *partial* correctness at that time. Sorry for that). 1. For (c), after comparison, as I have said in the  question, it seems that "Extended" is only done by adding adding 2 sequences which doesn't influence termination. Then why does the problem highlight *no more than*?
+Also see https://math.stackexchange.com/a/2326680/1059606 $\gcd(c,m)\ge 1,\gcd(c,m)\mid 1\Rightarrow \gcd(c,m)=1$
 
-(I will give some ideas about (c) here. If that will be long, then I will open one new post. Do you think this is fine?) 2. Can we say "correct" based on (b,c)? The book says "Floyd distinguished *two required properties to verify* a program." which seemingly implies that.
+So you said "recursive equality". IMHO the above 2 machines are with *the same states* but with different information (plus 2 sequences for "extended") related with the state. So bisimulation may be not needed. Can we say that?
 
-(I will give some ideas about (c) here. If that will be long, then I will open one new post. Do you think this is fine?) 2. Then we can [say "correct" based on (b,c)](https://maa.org/sites/default/files/images/upload_library/46/Pengelley_projects/Project-15/correct-project.pdf)
+@JulioDiEgidio 1. You said "so *if you can prove* the former you have proved the latter". IMHO that means my proof is not verified and there may be possibility for "less than". 2. Maybe you want to prove the possibility of machine comparison like p41 in https://homes.cs.washington.edu/~djg/msr_russia2012/sangiorgi.pdf shows where the state number may be *not same*.
 
-@JulioDiEgidio Thanks. That is also said in the 3rd paragraph of https://en.wikipedia.org/wiki/Partial_function after your hints. I understand now. Then the assumption seems to be reasonable. But why does the problem assume one function $B$ and prove $B$ is same as $A$ instead of directly proving $A$ is total? This seems to beat around the bush unnecessarily.
-
-As the reference for someone maybe with doubts about the above question, the above "if" in "if and only if there exist integers ..." seems to be not trivial to be got from the construction of $\alpha,\beta$ using the extended Euclidean algorithm since it *only gives one possible* linear combination. This method is informally used in some books. https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity#Proof can prove the "if" part correctly which also proves the "only if" part since $1$ is the minimal integer greater than 0.
-
-@JulioDiEgidio 1. Sorry, I missed saying proving A is well-defined. As the question says, the wikipedia reference gives one recursive process to calculate the unique value for each $A(m,n)$. So $B$ is not necessary. 2. After rethoughts, it seems the book expected proof and the wikipedia one is different. Is it that case? If so, could you give one for the book proof (If such a proof is not available, it is still ok to close this question since I have understood the proof in wikipedia)?
-
-@IzaakvanDongen As the above process shows, $A(m,n)$ will be only related with $A(m',n'),m'<m$ in the  recursion process. And since we will continue the recursion until $n$ *decreases* to one $n_{def}$ which *is defined*, by your assumption the recursion process for $A(m,n)$ will be as short as the above $A(m,2)$ since $A(m',n'),m'<m,n'<n$ are all defined.
-
-@IzaakvanDongen As the above process shows, $A(m,n)$ will be only related with $A(m',n'),m'<m$ in the  recursion process. And since we will continue the recursion until $n$ *decreases* to one $n_{def}$ which *is defined*. And each time $n=n'$, $m$ will decrease one. Although as my updated sequence $A(0,A(1,15))$ shows the nest level may increase exponentially, they are only defined by $A(m',n'),m'<m,n'<n_{def}$
-
-@IzaakvanDongen As the above process shows, $A(m,n)$ will be only related with $A(m',n'),m'<m$ in the  recursion process. And since we will continue the recursion until $n$ *decreases* to one $n'$ which *is defined*. But each time $n=n'$, $m$ will decrease one.
-
-@IzaakvanDongen 1. I think you mean "lexicographic order" as wikipedia says. If that can be thought rigorous then It's fine now. Then I will mark this question solved. 2. More specifically, use the order as normally defined https://en.wikipedia.org/wiki/Lexicographic_order#Cartesian_products. If $A(m_0,n_0)$ is the minimal counterexample, then $A(m_0-1,n),n\in\mathbb{N}$ and $A(m_0,n_0-1)$ is defined. Then by (AA), $A(m_0,n_0)$ is also defined, leading to the contradiction. My problem in the question post is that I skip many steps like $A(m,3)$ and that will cause the too deep nested level.
-
-1. Compared with the other 2. (7.5) $f_4(n)$ may be defined by $n'<n$ or $n'>n$ and (7.3) must be defined by $n'>n$. Although $A(m,n)$ may involve "an evaluation of A at arguments that may be a lot bigger than m and n", i.e. $A(m,n-1)$, it is ok when using lexicographic order.
-
-@IzaakvanDongen From the above unique sequence which eventually is reduced to $A(m',n'),(m',n')\le (m,n)$ and that they are all reduced to $A(0,p),A(q,1)$ which are unique, we can also say $A(m,n)$ value is uniquely defined. Is that right?
+So you said "recursive equality". IMHO the above 2 machines are with *the same states* but with different information (plus 2 sequences for "extended") related with the state. So bisimulation may be not needed. Can we say that?
 
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
 # Watching question
-- https://math.stackexchange.com/questions/4909510/why-is-the-pulverizer-machine-partially-correct#comment10482360_4909606
+- https://math.stackexchange.com/questions/4911036/the-state-machine-for-extended-euclidean-gcd-algorithm-terminates-after-at-mos
+- https://math.stackexchange.com/questions/4910633/the-ackermann-function-must-be-total-and-unique-based-on-one-specific-list-of-ru
 # notice
 - here I may confuse adjacent in trees where I think 2 nodes with the same parents as adjacent (They should be called "[sibling nodes](https://en.wikipedia.org/wiki/Tree_(data_structure)#:~:text=Child%20nodes%20with%20the%20same,case%20it%20is%20called%20empty.)")。
   This is trivially false when thinking such a tree as one graph.
@@ -598,7 +584,19 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - >  they were *incorrect* in concluding that n is necessarily prime if the congruence holds
   this doesn't mean the congruence is necessary condition for that n is prime
   i.e. n is odd prime -> congruence. This is correct.
-- THEOREM 1 [iff proof (this link gives the proof based on the iff sequence of length 2)](https://math.stackexchange.com/a/2670313/1059606) based on the Bezout's theorem.
+- THEOREM 1 [iff proof (this link gives the proof based on the iff sequence of length 2)](https://math.stackexchange.com/a/2670313/1059606) based on the Bezout's theorem. (i.e. mcs Theorem 9.2.2)
+  Also see [coprime_iff_invertible] -> [this (I skipped Remark ...)](https://math.stackexchange.com/a/3290965/1059606)
+  - [coprime_iff_invertible]
+    - Euler's Theorem seems to only prove one direction.
+    - when $b=1$, we have $\gcd(c,m)\ge 1,\gcd(c,m)\mid 1\Rightarrow \gcd(c,m)=1$
+    - ~~TODO~~ "conceptual proof" for [~~the "minimal" part~~ "the integers of the form az + bt are exactly the multiples of d." in wikipedia](https://math.stackexchange.com/a/664094/1059606)
+      One direction.
+      - "closed under subtraction" (trivial to prove) -> "multiple of the least" -> $d\mid a(a\cdot 1+b\cdot 0),b$
+      - Proof 1 
+        well-ordered is implied by $\{x\in\mathbb{Z}\mid x\ge \ell\}$
+      - Remark ... skipped.
+    - $3\Rightarrow 4$ since both is on $\mathbb{Z}_n$ (See mcs.)
+    - 
   - Based on Extended Euclidean algorithm, $\alpha$/inverse is unique.
     Also see mcs Lemma 9.9.2 which is almost same as exercise 7.
     This basic idea is same as [Identity_Unique].
@@ -608,6 +606,15 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
         i.e. $r=b-q'd$
       - > this implies c ≤ d.
         at least $|c|\le |d|$. Since both are positive, we have the above.
+- THEOREM 2
+  - [alternative proof](https://en.wikipedia.org/wiki/Chinese_remainder_theorem#General_case) although "Case of two moduli" solution is maybe guessed or from [this link2](https://en.wikipedia.org/wiki/Chinese_remainder_theorem#Existence_(direct_construction)) same as the book
+    Then see $n_1n_2$ as the new $n_1$ to use IH.
+  - link2 
+    - refers to Lagrange interpolation which solves the system of *equations* and *sum up sub-solutions* for each equation.
+      They are similar.
+  - based on [bijective](https://en.wikipedia.org/wiki/Chinese_remainder_theorem#Existence_(first_proof))
+    - > Moreover, it cannot be generalized to other situations where the following proof can.
+      TODO what are "other situations"?
 ### 4.6
 - > $f(p)=(ap+b)mod\;m$ is bijective if and only if $gcd(a,m)=1$
 
@@ -625,22 +632,47 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
 - p335 affine transformation is one [linear](https://math.stackexchange.com/a/1059233/1059606) transformation
 - permutation is one-to-one because its inverse can't be one-to-mul.
 - Euler's totient function [proof](https://en.wikipedia.org/wiki/Euler%27s_totient_function#Proof_of_Euler's_product_formula)
-  - [basis](https://en.wikipedia.org/wiki/Euler%27s_totient_function#Phi_is_a_multiplicative_function)
-    based on the ~~book~~ [SOLUTIONS_8th] p111 table for Chinese remainder theorem ->  bijection.
-    $f:(a,b)\text{with }a\equiv a\pmod m,b\equiv b\pmod n\to k\equiv k\pmod mn$
-  - TODO use inclusion-exclusion principle.
-  - so in RSA, coprime probability is [higher](https://crypto.stackexchange.com/a/25649).
-    [~~TODO~~ $P^{\varPhi(N)}\equiv 1\pmod N$](https://crypto.stackexchange.com/questions/25648/how-do-we-guarantee-plaintext-is-coprime-in-rsa#comment58896_25648) (i.e. [${\displaystyle (m^{e})^{d}\equiv m{\pmod {pq}}}$](https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Proof_using_Fermat's_little_theorem)) also [see](https://crypto.stackexchange.com/a/1006)
+  - [basis][Euler_Phi_multiplicative]
+    based on the ~~book~~ [SOLUTIONS_8th] p111 table for Chinese remainder theorem ->  *bijection*.
+    $f:(a,b)\text{with }a\equiv a\pmod m,b\equiv b\pmod n\to \exists! k\equiv k\pmod{mn}$
+    - [$\exists!$](https://math.stackexchange.com/a/1241209/1059606) used in mcs
+  - ~~TODO~~ use inclusion-exclusion principle.
+    This may be unnecessarily complicate since $A_i\cap A_j$, etc, will rise up to $\bigcap^{i=k_r} A_i$
+  - so in RSA, coprime probability is [very high][RSA_coprime_guarantee].
+    [~~TODO~~ Euler's theorem $P^{\varPhi(N)}\equiv 1\pmod N$ is not totally same as RSA](https://crypto.stackexchange.com/questions/25648/how-do-we-guarantee-plaintext-is-coprime-in-rsa#comment58896_25648) ~~(i.e. [${\displaystyle (m^{e})^{d}\equiv m{\pmod {pq}}}$][RSA_Fermat_little_theorem])~~ 
+    - also [see][RSA_proof] almost same as [RSA_Fermat_little_theorem]
+      - > differ in length by a few digits.
+        IMHO may to avoid brute-force guess. Otherwise if equal digits, then square $n$ we can almost get the length of the factors which can save some efforts.
+        This is also implied in the 2nd "Note:".
+      - the 1st "Note:" may be got when $e=\lambda(n)+1$.
+      - [this comment](https://crypto.stackexchange.com/questions/1004/does-rsa-work-for-any-message-m#comment29353_1006) implies mcs Problem 9.85. (c).
+      - I skip "following another question".
+      - Addition 2 is same as [RSA_coprime_guarantee].
+      - TODO Addition 3.
 - RSA
-  - ~~TODO~~ [$\gcd(m,N)=1$](https://crypto.stackexchange.com/a/58182)
-    > either p  and q , and so that rather *leaks* the factorization of N
-  - why p339 $\gcd(e,(p-1)(q-1))=1$
-    see [this](https://en.wikipedia.org/wiki/RSA_(cryptosystem)#cite_note-24) because if the above condition is met, then we can use the **decryption** easily.
-    - TODO also [this](https://math.stackexchange.com/questions/1123180/understanding-why-the-public-exponent-e-is-chosen-the-way-it-is-in-rsa#comment2294881_1123643)
+  - ~~TODO~~ [$\gcd(m,N)=1$](https://crypto.stackexchange.com/a/58182) (This is only as one link to give [references](https://crypto.stackexchange.com/questions/58180/why-does-gcdm-n-have-to-be-1-in-rsa/58182#comment127827_58180))
+    > either p and q , and so that rather *leaks* the factorization of N
+    - As mcs Theorem 9.10.10 (b) says,
+      so the probability of not relatively prime is $1-\frac{(p-1)(q-1)}{pq}$ which is really small.
+      - This is same as [this reference][RSA_coprime_guarantee] starting from paragraph 3.
+        kw: minuscule in comparison
+        - > with overwhelming probability, not coprime to N
+          may mean "coprime" instead of "not coprime".
+  - why p~~339~~340 $\gcd(e,(p-1)(q-1))=1$
+    see ~~[this](https://en.wikipedia.org/wiki/RSA_(cryptosystem)#cite_note-24)~~ [RSA_Fermat_little_theorem] because if the above condition is met, then we can use the **decryption** easily where it is used for $ed-1$.
+    - TODO (This needs abstract algebra -> Cauchy's theorem) also [this](https://math.stackexchange.com/questions/1123180/understanding-why-the-public-exponent-e-is-chosen-the-way-it-is-in-rsa#comment2294881_1123643)
       where "an element x of order r" implies [$x^r=x^0=1$](https://en.wikipedia.org/wiki/Cyclic_group#Definition_and_notation) <a id="RSA_Cauchy_theorem"></a>
       It shows if the above condition is not met, then **one-to-mul decryption**.
-    - here $m\equiv 0\pmod p$ is the cases where $\gcd(m,p)=1$ doesn't hold. <a id="RSA_m_not_coprime_n"></a>
-  - $2525$ is to ensure [injective](https://math.stackexchange.com/a/1148743/1059606) which can be decrypted.
+    - ~~here $m\equiv 0\pmod p$ is the cases where $\gcd(m,p)=1$ doesn't hold~~. <a id="RSA_m_not_coprime_n"></a>
+    - TODO 
+      - [proof of Carmichael's Lambda Function](https://brilliant.org/wiki/carmichaels-lambda-function/#proof-of-the-formulas)
+      - [the 1st paragraph](https://math.stackexchange.com/questions/1552992/show-that-varphi-a-an-is-an-automorphism-of-g-if-g-is-abelian-and/1553015#1553015)\
+        - > there it goes any possibility of (uniquely) *recovering* the orginal message.
+    - [Proof using Euler's theorem][RSA_Euler_theorem] is almost same since Fermat's little theorem is one special case of Euler's theorem as mcs says.
+      It directly manipulates with $n$ instead of $p,q$.
+    - [This comment](https://math.stackexchange.com/questions/1123180/understanding-why-the-public-exponent-e-is-chosen-the-way-it-is-in-rsa#comment2291732_1123180) says why "not injective" is not as expected.
+      > *Multiple plaintexts* can be encrypted to give the *same crypt* text, which would be bad
+  - $2525$ comparison is to ~~ensure~~ check [injective](https://math.stackexchange.com/a/1148743/1059606) which can be decrypted (i.e. the number can be ).
 - p341 although in [Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm#Description), $a<b$, i.e. here $d<(p − 1)(q − 1)$, but in the practical case, it may be not that case.
 - EXAMPLE 11
   multiplication->encryption is same as encryption->multiplication.
@@ -2772,6 +2804,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
   > involves at most two multiplications
   i.e. $x^2$ and $xy$
   - Also [see](https://math.stackexchange.com/questions/3625697/prove-that-the-fast-exponentiation-algorithm-halts-after-lceil-log-2n-rceil#comment10468349_3625726) -> https://math.stackexchange.com/a/678643/1059606
+- Fast Exponentiation is same as DMIA ALGORITHM 5 where $x'=y,power=x,n=z$ (Here use $x'$ for $x$ in DMIA).
 ## 6.4*
 - > If we think of the robot as a nondeterministic state machine, then Claim 6.3.4 is a termination assertion
   IMHO here 'nondeterministic' has no relations with 'termination assertion'.
@@ -2810,7 +2843,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
     Lemma after Lemma 7.2.3 and Problem 7.20 combined together have the same process as the [reference p10][2_conditions_for_Balanced_Parentheses] where 1 is trivial to prove.
 - here $\cdot's$ means the plural of $\cdot$.
 ## 7.3*
-- Problem 7.25. is not included in DMIA 5.3, 5.4.
+- Problem 7.25. is not included in DMIA 5.3, 5.4 (exercise 50-57 doesn't show the "well-defined" property).
   See [this](https://math.stackexchange.com/q/96483/1059606) and [this](https://en.wikipedia.org/wiki/Ackermann_function#General_remarks)
   based on the above "terminate ..."
   for this problem, 
@@ -3579,13 +3612,27 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
   see 9.9
 ## 9.9
 - Lemma 9.9.1 see DMIA 4.4 THEOREM 1.
+  - Here [$\gcd(0,n)=n$](https://math.stackexchange.com/a/1156819/1059606), so 0 and 1 are relatively prime.
 - 0 [relatively prime](https://www.splashlearn.com/math-vocabulary/relatively-prime#:~:text=0%20and%201%20are%20relatively,is%20divisible%20by%20any%20integer.) to 1 based on definition.
-- > if k is not relatively prime to n, then we can show it isn’t cancellable
+- Theorem 9.9.5
+  > if k is not relatively prime to n, then we can show it isn’t cancellable
   Assume this is $A\to B=\neg (A\land\neg B)=T$
   so $A\land\neg B=F$
   i.e. Assume A and $\neg B$ "it *is* cancellable", we need contradiction.
-
+  - See [this](https://math.stackexchange.com/questions/4910592/textif-1-neq-gcdc-m-textthen-ac-equiv-bc-pmod-m-nrightarrow#comment10484446_4910592) where we only needs one counterexample.
+- Riemann Hypothesis
+  - [relation](https://math.stackexchange.com/a/1922389/1059606) with the prime distribution.
+    - notice "The second Chebyshev function" has [2 $\sum$](https://en.wikipedia.org/wiki/Chebyshev_function) which causes $\log_p x$
+    - $\ge$ is based on $\log_p x\ge 1$ and $x^{1-\epsilon}\le p$.
+      TODO the last equality from $\pi(x)-\pi(x^{1-\epsilon})$
+    - "The next step ..." is  temporarily dropped.
+- Lemma 9.10.6 is proved by showing 1-to-1. "total" is implicit.
 ### 9.9.2*
+## 9.10
+- Theorem 9.10.10(b) proof same as [wikipedia](https://en.wikipedia.org/wiki/Euler's_totient_function#Value_of_phi_for_a_prime_power_argument)
+- proof of Corollary 9.10.11 using the inclusion-exclusion principle may be unnecessarily
+- > This would be a much stronger theoretical assurance of RSA security than is presently known.
+  TODO doesn't this share the same idea about factoring with the previous paragraph?
 ## chapter 9 problems
 - Problem 9.2
   i.e. to prove $1+\ldots+2^{k-1}+(2^{k}-1)(1+\ldots+2^{k-2})=2^k-1+(2^{k}-1)(2^{k-1}-1)=(2^{k}-1)2^{k-1}$
@@ -3605,9 +3652,34 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
   - c) See the above link maybe here "at most" can be stronger to = but it is enough to show polynomial.
   - Since the book only refer to 2 
 - Problem 9.70
+  - (a,b) are trivial. [See](./others/mcs/9_70.md)
+  - (c) See [this](https://math.stackexchange.com/questions/1083751/prove-that-if-k-1-and-k-2-are-relatively-prime-to-n-then-so-is-k-1-n-k-2#comment10485470_1083751)
+- Problem 9.61 is skipped due to duplicity.
 - Problem 9.64
+  - a) trivial based on the *unique solution* using the Chinese Remainder Theorem.
+  - b) since $ab$ only has $1,a,b,ab$ factors
+    $\gcd(k,ab)=\gcd(k,a)=\gcd(\text{rem}(k,a),a)=1$, so the function is well-defined.
+    - Same as [Euler_Phi_multiplicative]
+  - c) because $|\varphi|=|\mathbb{Z}^\ast|$ (Definition 9.10.2)
+  - d) see the book
 - Problem 9.85
+  - a) See [RSA_Euler_theorem]
+  - b) See [RSA_Fermat_little_theorem]
+  - c) see [this](https://math.stackexchange.com/a/1942165/1059606) based on the definition of lcm. Then use $\text{lcm}(p_i,\ldots)=\prod p_i$ based on the Fundamental Theorem of Arithmetic
+    - Also see [RSA_proof]
+  - d) i.e. let $a=m^a$ in c).
+    We can get $a\equiv 1\pmod{p_i-1}$, then use b) and then c), we get d).
 - Problem 9.87
+  - a) by definition of $ed$.
+  - b) since both $p-1,q-1$ are even.
+  - c) by Euler_theorem.
+  - d) $\text{rem}(r^{c/2},n)=y\equiv r^{c/2}\pmod{n}\Rightarrow y^2\equiv r\pmod{n}$
+    Then $n\mid y^2-1$
+    Since $y\le n-2\Rightarrow y+1\le n-1$
+    trivially $(p\mid y+1)\vee(q\mid y+1)$ since otherwise $n\mid y-1<n$ is impossible where $y\neq 1$.
+    Then $0<y+1\le n-1$ also excludes $(p\mid y+1)\land(q\mid y+1)$
+  - TODO why 4 square roots modulo n.
+  - e) by probability, 1 in 2 *relatively prime numbers* .
 ## TODO (use the book page number)
 - p182
 # mcs 2018 added/changed based on mcs 2017
@@ -3735,6 +3807,9 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 [ordered_rooted_tree]:https://en.wikipedia.org/wiki/Tree_(graph_theory)#Ordered_tree
 [13_2_definition_1]:https://en.wikipedia.org/wiki/Mealy_machine#Formal_definition
 [Dedekind_cut_definition]:https://en.wikipedia.org/wiki/Construction_of_the_real_numbers#Construction_by_Dedekind_cuts
+[Euler_Phi_multiplicative]:https://en.wikipedia.org/wiki/Euler%27s_totient_function#Phi_is_a_multiplicative_function
+[RSA_Euler_theorem]:https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Proof_using_Euler's_theorem
+[RSA_Fermat_little_theorem]:https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Proof_using_Fermat's_little_theorem
 
 <!-- brilliant wiki -->
 [brilliant_wiki_Dilworth_Theorem_antichain_ge_chain]:https://brilliant.org/wiki/dilworths-theorem/#proof-of-dilworths-theorem
@@ -3761,6 +3836,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 [tree_iff_add_any_edge]:https://math.stackexchange.com/a/420543/1059606
 [game_as_decision_tree]:https://math.stackexchange.com/questions/3992275/if-a-winning-strategy-does-not-exist-for-player-2-does-it-exist-for-player-1#comment10457491_3993622
 [Identity_Unique]:https://math.stackexchange.com/a/622845/1059606
+[coprime_iff_invertible]:https://math.stackexchange.com/a/2326680/1059606
 
 <!-- stack overflow -->
 [longest_simple_path_NP_hard]:https://stackoverflow.com/a/53399638/21294350
@@ -3871,3 +3947,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 [asm_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
 
 <!-- proofwiki -->
+
+<!-- crypto stackexchange -->
+[RSA_coprime_guarantee]:https://crypto.stackexchange.com/a/25649
+[RSA_proof]:https://crypto.stackexchange.com/a/1006

@@ -2049,7 +2049,11 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
     - ~~TODO $p\mid (a-b)\nRightarrow p*\ldots\mid(a-b)$~~
       It uses induction to show $\forall p_{ik}|m_i\Rightarrow p_{ik}|(a-b)\Rightarrow \Pi m_i=\Pi_{\text{all }i,k}p_{ik}|(a-b)$
     - Also see [this](https://math.stackexchange.com/a/289346/1059606) which also uses induction where $a,b=m_i,m_{i+1}$.
+      This is *recommended*.
 - [x] 30 based on 29, this is trivial to prove $x\equiv y\pmod m$, so unique.
+  - Also [see](https://en.wikipedia.org/wiki/Chinese_remainder_theorem#Uniqueness)
+    > As the ni are pairwise coprime, their product N also divides x − y
+    i.e. put $n_i$ in the factor list of $x-y$ by putting its factors one by one and they each must occupy one slot due to "pairwise coprime". Or by the Fundamental Theorem of Arithmetic.
 - [x] 37 trivial
 - [ ] 40
   $7\mid (n^7-n)$ is trivial
@@ -2708,6 +2712,7 @@ $$
   5-tower of 2 $2^{65536}$ 
 ### 5.4
 - 2~12(here the orders of 4,6 in the ans and the book differ),16~24,27,28,32,36~40,44~46,47 skipped
+- 53 notice here doesn't mean [Primitive recursive](https://en.wikipedia.org/wiki/Primitive_recursive_function) and the answer is one mere translation of the definition.
 - [ ] 14 see the ans
   just by removing one mode and forming the recursive list.
   with two special cases, i.e. $n=1$ and mode occupying the entire list.
@@ -2838,7 +2843,13 @@ $$
   - see the ans
     - > $a_j = 2^{2^{a_{j−2}}}$ is a multiple of $2^s$ 
       here $a_{j-1} = 2^{a_{j−2}}$ is enough
-    - TODO [proof of Euler's theorem](https://en.wikipedia.org/wiki/Euler%27s_theorem#Proofs)
+    - ~~TODO~~ [proof of Euler's theorem](https://en.wikipedia.org/wiki/Euler%27s_theorem#Proofs)
+      2 of this is ~~implied~~ same as mcs's proof.
+      - [Reduced residue system](https://en.wikipedia.org/wiki/Reduced_residue_system)
+        ~~2 is to ensure all relatively prime numbers are contained.~~
+        3 is to ensure no duplicate which with 2 can show *all* relatively prime (implide by 1) numbers are contained.
+      - > axj ≡ axk (mod n) then j = k
+        i.e. Use multiplicative inverse and then $a_j=a_k\Rightarrow j=k$. 
     - > for some integer $t_i$ , $a_i = t_i r + c$.
       more specifically to say, $a_i = t_i r + c,i>k$, so we can use induction.
 - [ ] 44
