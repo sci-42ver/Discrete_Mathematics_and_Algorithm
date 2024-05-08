@@ -1,14 +1,6 @@
 Please point out errors if any. Thanks in advance.
 
-If someone has doubts about "The prime factors of ..." in Chinmay Nirkhe's commment. Chinmay Nirkhe may mean the prime factors of $k_1k_2$. Then $\gcd(k_1k_2,n)=\gcd(n,k_1 *_n k_2)=1$ based on the definition of $*_n$ as Bill Dubuque and Wojowu says.
-
-Also see https://math.stackexchange.com/a/2326680/1059606 $\gcd(c,m)\ge 1,\gcd(c,m)\mid 1\Rightarrow \gcd(c,m)=1$
-
-So you said "recursive equality". IMHO the above 2 machines are with *the same states* but with different information (plus 2 sequences for "extended") related with the state. So bisimulation may be not needed. Can we say that?
-
-@JulioDiEgidio 1. You said "so *if you can prove* the former you have proved the latter". IMHO that means my proof is not verified and there may be possibility for "less than". 2. Maybe you want to prove the possibility of machine comparison like p41 in https://homes.cs.washington.edu/~djg/msr_russia2012/sangiorgi.pdf shows where the state number may be *not same*.
-
-So you said "recursive equality". IMHO the above 2 machines are with *the same states* but with different information (plus 2 sequences for "extended") related with the state. So bisimulation may be not needed. Can we say that?
+The above definition may be from https://courses.csail.mit.edu/6.042/spring18/mcs.pdf which is  different from wikipedia says based on trail. The problem may be Problem 10.4. (a)
 
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
@@ -615,6 +607,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
   - based on [bijective](https://en.wikipedia.org/wiki/Chinese_remainder_theorem#Existence_(first_proof))
     - > Moreover, it cannot be generalized to other situations where the following proof can.
       TODO what are "other situations"?
+- Definition 3 is one rephrase of cyclic group.
 ### 4.6
 - > $f(p)=(ap+b)mod\;m$ is bijective if and only if $gcd(a,m)=1$
 
@@ -663,7 +656,7 @@ I read it after chapter 1,2 but when I read it I thought I should read it while 
     - TODO (This needs abstract algebra -> Cauchy's theorem) also [this](https://math.stackexchange.com/questions/1123180/understanding-why-the-public-exponent-e-is-chosen-the-way-it-is-in-rsa#comment2294881_1123643)
       where "an element x of order r" implies [$x^r=x^0=1$](https://en.wikipedia.org/wiki/Cyclic_group#Definition_and_notation) <a id="RSA_Cauchy_theorem"></a>
       It shows if the above condition is not met, then **one-to-mul decryption**.
-    - ~~here $m\equiv 0\pmod p$ is the cases where $\gcd(m,p)=1$ doesn't hold~~. <a id="RSA_m_not_coprime_n"></a>
+    - ~~here $m\equiv 0\pmod p$ is the cases where $\gcd(m,p)=1$ doesn't hold~~. trivial <a id="RSA_m_not_coprime_n"></a>
     - TODO 
       - [proof of Carmichael's Lambda Function](https://brilliant.org/wiki/carmichaels-lambda-function/#proof-of-the-formulas)
       - [the 1st paragraph](https://math.stackexchange.com/questions/1552992/show-that-varphi-a-an-is-an-automorphism-of-g-if-g-is-abelian-and/1553015#1553015)\
@@ -1992,9 +1985,10 @@ check(R_1)
     - why DFS [can't](https://qr.ae/pKj7Qr)
       > DFS can explore a long path *before* it finds a shorter path
       - > Performing a topological sort of a directed acyclic graph (DAG).
-        See [this](https://www.geeksforgeeks.org/topological-sorting/)
+        See [this][get_Topological_Sorting_from_DAG]
         here `stack.append(v)` will only be done after `self.topologicalSortUtil(i, visited, stack)` for all adjacent vertices (in the directed graph, i.e. ~~parents~~ children) or `visited[i] == True` which implies `topologicalSortUtil(self, v, visited, stack)` have already been done. Then *all children are appended before itself*, so ensuring the Topological Sorting. <a name="DFS_directed_topological_sorting"></a>
         - [defaultdict](https://www.geeksforgeeks.org/defaultdict-in-python/) can have `list` as the type of "value"
+        - adjacent means same as reachable in mcs 10.5.
       - the modification to [update the weight](https://stackoverflow.com/questions/54198910/cant-we-find-shortest-path-by-dfsmodified-dfs-in-an-unweighted-graph-and-if#comment137344391_54199609) is obviously more complex to find the shortest path.
     - [BFS](https://www.geeksforgeeks.org/shortest-path-unweighted-graph/) to find the shortest is trivial
       It just find len-$1,2,3,\cdots,n$ until find one with the target destination `if (adj[u][i] == dest):`.
@@ -2577,6 +2571,7 @@ $ latexdef -t latex -s -f -E cases
 - [mathjax](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference)
 - search [help](https://math.stackexchange.com/search)
 # mcs
+- Here I didn't care about more circuit knowledge than already learnt since it is too complex to design one by myself. (skip_circuit)
 - Here * sections mean that they are not included in Discrete_Mathematics_and_Its_Applications.
 - This book skips most of state machines and Turing machine with only one chapter 6.
 - Theorem 8.2.2 is same as DMIA 3.1.6 which finds one *counterexample* using .
@@ -2598,7 +2593,8 @@ $ latexdef -t latex -s -f -E cases
 - This books seems to have much more typos than DMIA (even wrong hints like Problem 6.6...) and it has many ambiguous description (TODO give one specific example of such one ambiguous description).
   - typo like "more than $\sqrt{n}$ steps" in p361.
 ## notice
-- I only did problems referred to in the main contents because some of them are very interesting and Enlightening.
+- I only did problems *referred to in the main contents* because some of them are very interesting and Enlightening.
+  IMHO they are probably not in IN-CLASS QUESTIONS and ASSIGNMENTS, so not in this [solution](https://github.com/spamegg1/Math-for-CS-solutions?tab=readme-ov-file).
 - starting from checking problems in chapter 8 where I have read up to 9.3 finished in mcs.pdf,
   I began reading mcs_2018.pdf (difference between these 2 books see `compare_bmk.awk`)
   TODO compare these [2 files](https://www.adobe.com/acrobat/how-to/compare-two-pdf-files.html)
@@ -2606,6 +2602,11 @@ $ latexdef -t latex -s -f -E cases
 - From 9.6, if "Lemma 9.6.1", etc, are highlighted, it means their proofs are skipped because of  duplicity with DMIA.
 ### relation with 6.042J 2019
 - currently the following chapter_1-3 problems, chapter_2-2 problems are not in IN-CLASS QUESTIONS or ASSIGNMENTS.
+### theorem
+- proofs which I learnt in DMIA may be skipped.
+  - Theorems proved in DMIA but not in mcs are also skipped.
+### solution
+- As [this](https://github.com/ossu/computer-science/issues/1090#issuecomment-1282535965) says, the problem may be easy although some are not. But most of them give one detailed hint sequence.
 ## diff between 2017 and mcs 2018
 ```bash
 $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.awk -v summary=$summary mcs_2018.bmk" | less_n
@@ -2651,6 +2652,8 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
   > the fraction m0=p n0=p cannot be in written in lowest terms either
   is because it equals $\frac{m_0}{n_0}$.
 - Theorem 2.2.1 here the *minimal element* is similar to the *base* of induction.
+## 2.3
+- DMIA uses induction which is same as 5.2.3 (I only give one brief overlook) while the book uses WOP although they are equivalent.
 ## chapter 2 problems
 - Problem 2.20
   $n_s$ is the main part,
@@ -2667,6 +2670,12 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
 - Here
   > mathematical implications ignore causal connections
   helps ignoring $C_i,i\neq 2,5$ which can therefore extract $C_i,i=2,5$.
+## 3.5
+- > as with testing validity, this approach quickly bogs down for formulas with many variables
+  See 3.3.2
+  > There is also a close relationship between validity and satisfiability: a statement P is satisfiable iff its negation NOT.P / is not valid.
+- > validity testing is a special case of determining if a formula simplifies to T.
+  i.e. all T is one subset of existing one T.
 ## chapter 3 problems
 - Problem 3.16
   - a) 
@@ -2785,6 +2794,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
   $$
 - 5.25 trivial by algebraic calculation
 - 5.30 similar to 5.25.
+- Problem 5.4
 ## 6 preface
 - > They also come up in many other settings such as designing digital circuits and mod-eling probabilistic processes.
   i.e. Sequential logic.
@@ -3528,7 +3538,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
   d) see DMIA.
 ## 9.3
 - [p-adic number](https://en.wikipedia.org/wiki/P-adic_number#Example)
-- Problem 9.22. -> Shoup's book
+- Problem 9.22. -> [Shoup's book](./other_books/ntb-v2_1.pdf) Also see [notes](https://crypto.stanford.edu/pbc/notes/numbertheory/)
   - Lemma 5.3 -> [Legendre's formula](https://en.wikipedia.org/wiki/Legendre%27s_formula)
   - EXERCISE 1.4: 2 cases
   - See [this](https://math.stackexchange.com/a/1890792/1059606)
@@ -3568,7 +3578,8 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
       [See](https://math.stackexchange.com/questions/1141412/mathbb-z-sqrt-5-is-not-a-ufd#comment10468076_1143135) 'Euclid's lemma' in wikipedia
 - Lemma 9.4.2 is one rephrase of DMIA 4.3 LEMMA 2.
   - Lemma 9.4.3 is then also duplicate in DMIA 4.3.
-## 9.5
+    This means $\gcd(p,\prod a_i)=p$
+## 9.5* (So also 9.8*)
 - [comparison](https://en.wikipedia.org/wiki/AKS_primality_test#Importance) between the Miller–Rabin test and AKS.
 ## 9.6
 - Lemma 9.6.4 skips the proof of DMIA 4.1 THEOREM 4.
@@ -3611,6 +3622,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 - > But there are a couple of exceptions we’re about to examine.
   see 9.9
 ## 9.9
+DMIA 4.1 only says in brief in th end.
 - Lemma 9.9.1 see DMIA 4.4 THEOREM 1.
   - Here [$\gcd(0,n)=n$](https://math.stackexchange.com/a/1156819/1059606), so 0 and 1 are relatively prime.
 - 0 [relatively prime](https://www.splashlearn.com/math-vocabulary/relatively-prime#:~:text=0%20and%201%20are%20relatively,is%20divisible%20by%20any%20integer.) to 1 based on definition.
@@ -3628,11 +3640,18 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
     - "The next step ..." is  temporarily dropped.
 - Lemma 9.10.6 is proved by showing 1-to-1. "total" is implicit.
 ### 9.9.2*
-## 9.10
+- This is said in brief in DMIA 4.3 THEOREM 7.
+## 9.10*
 - Theorem 9.10.10(b) proof same as [wikipedia](https://en.wikipedia.org/wiki/Euler's_totient_function#Value_of_phi_for_a_prime_power_argument)
 - proof of Corollary 9.10.11 using the inclusion-exclusion principle may be unnecessarily
 - > This would be a much stronger theoretical assurance of RSA security than is presently known.
   TODO doesn't this share the same idea about factoring with the previous paragraph?
+## 9.12*
+This uses SAT to solve factoring [which is NP](https://stackoverflow.com/questions/2642476/is-the-integer-factorization-problem-used-for-many-cryptographic-applications#comment2657380_2642476) since SAT is NP-complete.
+- > the remaining 2n inputs
+  this is due to $(2^{n}-1)^2<2^{2n}-1$.
+- > uses proportional to n2 gates
+  skip_circuit
 ## chapter 9 problems
 - Problem 9.2
   i.e. to prove $1+\ldots+2^{k-1}+(2^{k}-1)(1+\ldots+2^{k-2})=2^k-1+(2^{k}-1)(2^{k-1}-1)=(2^{k}-1)2^{k-1}$
@@ -3643,6 +3662,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
     - > This means that m is prime and its only two divisors are itself (m) and one (M)
       because this is the minimal state. So prime.
 - Problem 9.13 trivial here give one sketch.
+  Also [see](https://math.stackexchange.com/a/4911211/1059606) which I only gives one overlook because that is not very helpful with much redundant information.
   - Inv1 is by [Euclidean algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm#Proof_of_validity)
   - Inv2,3 base trivial
     - Inv2
@@ -3680,8 +3700,153 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
     Then $0<y+1\le n-1$ also excludes $(p\mid y+1)\land(q\mid y+1)$
   - TODO why 4 square roots modulo n.
   - e) by probability, 1 in 2 *relatively prime numbers* .
+## 10.3
+- Theorem 10.3.2 is same as DMIA 10.4.7.
+- > will be the smallest value k for which .AG /kuv is nonzero
+  same as DMIA 10.4-56.
+- > its length will be $\le n - 1$
+  It is also said in DMIA 9.4.
+- > Refinements of this idea lead to methods that find shortest paths in reasonably efficient ways. ... and we won’t go into them any further.
+  One different method (maybe not one refinement) based on Warshall’s algorithm (by adding $v_k$ successively) is said in DMIA 9.4-32.
+## 10.4
+- (10.9) Here it may think $G$ doesn't contain the "identity relation".
+  $G\cup G^0$ is needed due to there is no length 1 walk from a to a except for the self-loop which doesn't always exist.
+  But for length-k $k>1$ walks, they must be based on length-1 recursively.
+  So $(G\cup G^0)^{|V(G)|-1}$ will contain all walks with length $1<n<|V(G)|-1$.
+## 10.5* (not said in DMIA but is read in GeeksforGeeks)
+- See [get_Topological_Sorting_from_DAG] and [DAG_to_topological_ordering_proof]
+  and also [this](https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/) same as [kahn_proof] which is same as the former 2.
+  - > If the queue is empty and there are still nodes in the graph, the graph contains a cycle and cannot be topologically sorted.
+    since the nodes in the loop can't be removed because by removing minimal elements outside the loop we can't make one node inside the loop in-degree 0.
+- > One peculiarity of this terminology is that a DAG may have no minimum element but lots of minimal elements
+  [See](https://math.stackexchange.com/a/1047426/1059606)
+  - So we can say
+    > we could build a topological sort starting from maximal elements at the end of paths
+    maybe in the reverse order.
+    > picking vertices arbitrarily from a finite DAG and simply inserting them into the list *wherever they will fit*
+    This seems to say nothing useful.
+- > A finite chain is said to end at its maximum element.
+  infinite may [not hold this property](https://math.stackexchange.com/a/2509331/1059606) where the order is lexicographic
+- critical path is said in csapp although not giving one formal definition in mathematics.
+- > Lemma 10.5.12 also follows from a more general result known as Dilworth’s Theorem, which we will not discuss.
+  This is solved in DMIA [Dilworth_theorem_proof_wikipedia].
+  "disjoint chains" -> "the smallest chain decomposition" is $n/t$ when "a chain of size not greater than t".
+## 10.6
+- Definition 10.6.7 may assume Asymmetry since it is based on digraph.
+- Theorem 10.6.8 "only if" seems to be wrong since the domain of $R$ may be not vertices except that we geenralize everything as vertices like the former example seeing clothes as vertices.
+- in Corollary 10.6.11 ~~may be~~ [~~not precise~~](https://en.wikipedia.org/wiki/Asymmetric_relation#Definition), it combines the [irreflexive, asymmetric](https://en.wikipedia.org/wiki/Partially_ordered_set#Strict_partial_orders) [together](https://en.wikipedia.org/wiki/Asymmetric_relation) since the definition of "asymmetric" includes $a=b$ case so that $aRa$ doesn't hold.
+## 10.7
+- [inverse images](https://en.wikipedia.org/wiki/Image_(mathematics)#Generalization_to_binary_relations) means $\{x\mid x\preceq y\}$.
+- > You can think of a linear order as one where all the elements are *lined up* so that everyone knows exactly who is ahead and who is behind them in the line
+  we can always transform from one total order into such one list.
+  By [finite_chain_maximum_minimum], we can recursively choose minimum element similar to lexicographic sorting.
+  - See [chain](https://en.wikipedia.org/wiki/Total_order#Chains)
+## chapter 10 problems
+Many of problems later are not verified. Only those I really have doubts may be verified on Stack Exchange / Stack Overflow.
+- Problem 10.3 @#@
+  - a) suppose by contradiction $x$ is not on.
+    ~~then $dist (u, x) + dist (x, v)>dist (u, v)$ leading to the contradiction with "shortest path"~~
+    ~~or $dist (u, x) + dist (x, v)<dist (u, v)$ leading to the contradiction with $dist(u,v)$.~~
+    Since "dist (u, x) + dist (x, v)" defines one "shortest path" = dist (u, v). 
+    Then $x$ is on that path.
+  - b) if x is on a shortest path from u to v, then it must take the shortest from u to x and x to v (otherwise that path is not shortest).
+  - the [proof](https://math.stackexchange.com/a/737495/1059606) of The Triangle Inequality similar to the book
+- Problem 10.4
+  - a) [see](https://math.stackexchange.com/a/498928/1059606) A->D->A
+    - Also see wikipedia ["H–A–B–A–H" example](https://en.wikipedia.org/wiki/Cycle_(graph_theory)#Definitions)
+    - Here cycle *uses book definition* not based on circuit.
+  - b) [see](https://math.stackexchange.com/a/2938479/1059606)
+    - [lazy](https://ocw.mit.edu/courses/18-409-topics-in-theoretical-computer-science-an-algorithmists-toolkit-fall-2009/100377025e8520aab9f61d8585e71cc5_MIT18_409F09_scribe4.pdf)
+    - "nonbacktracking" may mean not going back by verbatim.
+      This is implied by the example in the answer.
+    - IMHO nonbacktracking ensures circuit and then non-lazy ensures cycle.
+    - notice this answer is correct about the *necessary* additional conditions.
+    - Here cycle *uses wikipedia definition* based on circuit.
+  - IMHO here a) and b) seems to be in conflict.
+    Since the definition of cycle may be not official. I skips digging into it.
+  - Ignore the above see [this](https://math.stackexchange.com/a/4911852/1059606)
+    - (a) imply positive length based on "including two vertices".
+    - TODO is the following right?
+      > a digraph that has a closed walk including *one* vertex *must* has *a* cycle including that vertex.
+      - By
+        > We need to forbid such closed walks, which by Lemma 10.2.6 is the same as forbidding cycles.
+        the above seems to be true.
+    - b) same as [this](https://math.stackexchange.com/a/3478309/1059606)
+- Problem 10.11
+  Notice the following are all boolean matrices.
+  - (a) first walk $m$ then $n$ which is same as the Proof of Theorem 10.3.2.
+  - (b) same as Corollary 10.3.3
+    > which by convention is the identity matrix, is the length-0 walk counting matrix.
+    > More generally, it follows by induction that
+  - (c) If taken $\bigcup$ as $\lor$
+    then trivial by $R^+$ definition where $|A|$ can be $|A|-1$ (See 10.3.1).
+  - Also see the contents in 10.4 for (c)
+- Problem 10.25
+  - (a) suppose " when j < k, *one* vertex in Aj is reachable from any vertex in Ak"
+    Then $A_j$ should has at least depth $k>j$ leading to the contradiction.
+  - (b) almost same as (a) by contradiction when assuming "*one* walk exists between *some* two different vertices in the set.".
+- Problem 10.26
+  - (a) trivial by definition
+  - (b) since we must do $n-(t-1)$ bottom tasks first if possible with $n-(t-1)$ number of processors
+    and then follow the chain of $t-1$ tasks which is the minimal steps to do due to dependency.
+    Since each step is determined, it is unique.
+  - (c) 
+    $$
+    \lceil \frac{n-(t-1)}{p}\rceil+t-1\quad\text{Here we must finish n-(t-1) before t-1, so we can't take one from t-1 to the possible gap }\lceil \frac{n-(t-1)}{p}\rceil-\frac{n-(t-1)}{p}
+    $$
+    - $t,p\ge n-(t-1)$ is contained in the above.
+  - (d)
+    base: $t=1$ trivial since each step we have at most $p$ tasks.
+    induciton: IMHO the above $M$ is specific for $D_{n,t}$ and doesn't work for other situations like the possibility for filling the above gap when some of the next level can be in parallel with the rest in the former level.
+- Problem 10.31
+  - See [this sol](https://dspace.mit.edu/bitstream/handle/1721.1/104426/6-042j-spring-2010/contents/lecture-notes/MIT6_042JS10_lec12_sol.pdf) from [this](https://dspace.mit.edu/bitstream/handle/1721.1/104426/6-042j-spring-2010/contents/lecture-notes/index.htm) -> [local sol copy](./others/mcs/sol/MIT6_042JS10_lec12_sol.pdf)
+  - (a) see [this](https://math.stackexchange.com/q/4244719/1059606)
+  - (b) following the QA link
+    > If a covers b, then there is no longer path between a and b other than the edge itself.
+    so if a doesn't cover b, then $ab$ will be removed. But since there is one longer path, positive walk relation $R^+$ doesn't change.
+    - also [see](https://math.stackexchange.com/a/4244916/1059606)
+  - (c) suppose not
+    then use (b) to make them "consisting of only the covering edges".
+  - (d) see sol.
+  - (e) see sol.
+  - (f) 
+    - (i) remove one of 3 pairs like $1\to 2,2\to 1$.
+    - (ii) nothing changed
+    - (iii) same.
+    - see sol where (i,) in the above are wrong.
+- Problem 10.37
+  - (a) 
+    1-to-1: for each $L(a)$, there must be one maximum element which is $a$.
+    onto: see the above.
+  - (b)
+    only if: $x\preceq a\preceq b\Rightarrow x\preceq b$ by transitive property.
+      i.e. $x\in L(a)\Rightarrow x\in L(b)$, so $L(a)\subseteq L(b)$
+    if: similarly we have $x\preceq a\Rightarrow x\preceq b (*)$
+      if $\neg(a\preceq b)$, then either $a$ and $b$ are incomparable or $b\prec a$
+      both cases can't ensure $(*)$
+- Problem 10.38
+  - (a)
+    only if: similar to 37, first we prove $\subseteq$.
+      $aRb\Rightarrow a\in L(b)$
+      $xRaRb\Rightarrow x\in L(b)$
+      then we show $\exists y\in L(b),y\notin L(a)$
+      just choose $y=b$ since $bRa$ and $aRb$ can't hold ~~when $aRb\Rightarrow a\neq b$.~~ for Asymmetry.
+    if: we have $a\in L(b)$, then $a\neq b$ (otherwise $L(a)=L(b)$ trivially), so we have $aRb$.
+  - (b)
+    similar to (a), we have $a\in L(b)$,
+      if $a=b$, then all is fine.
+      if $a\neq b$, we must have $aRb$. Then similarly $bRa$ leading to contradiction since $R$ is Asymmetric.
+  - (c)
+    if $A=\{1,2,3\},1R2,1R3$ where "asymmetric" and "transitive" hold vacuously, then $L(2)=L(3)$ but $2\neq 3$.
+- Problem 10.52
+- Problem 10.58
+- Problem 10.57
+## chapter 11 problems
+- Problem 11.8
 ## TODO (use the book page number)
 - p182
+  TODO Maybe I wrote this due to the doubts about
+  > viewing a process that might not terminate as computing a partial relation 
 # mcs 2018 added/changed based on mcs 2017
 ## 4.1
 - > for example by truth table or algebra
@@ -3810,6 +3975,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 [Euler_Phi_multiplicative]:https://en.wikipedia.org/wiki/Euler%27s_totient_function#Phi_is_a_multiplicative_function
 [RSA_Euler_theorem]:https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Proof_using_Euler's_theorem
 [RSA_Fermat_little_theorem]:https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Proof_using_Fermat's_little_theorem
+[Dilworth_theorem_proof_wikipedia]:https://en.wikipedia.org/wiki/Dilworth%27s_theorem#Inductive_proof
 
 <!-- brilliant wiki -->
 [brilliant_wiki_Dilworth_Theorem_antichain_ge_chain]:https://brilliant.org/wiki/dilworths-theorem/#proof-of-dilworths-theorem
@@ -3915,6 +4081,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 [yale_Fundamental_Theorem_for_Win_Lose_Games]:https://oyc.yale.edu/sites/default/files/blackboard15_0_0.pdf
 [2_conditions_for_Balanced_Parentheses]:http://cse.iitkgp.ac.in/%7Eabhij/course/theory/FLAT/Spring21/scribes/CFG-balanced.pdf
 [2020_lec_02]:https://lara.epfl.ch/w/_media/fv20/lec03-main2.pdf
+[DAG_to_topological_ordering_proof]:http://www.cs.emory.edu/~cheung/Courses/253/Syllabus/Graph/DAG.html
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
@@ -3936,10 +4103,11 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 [Introduction_Automata_Theory_Languages_and_Computation]:./other_books/Introduction_Automata_Theory_Languages_and_Computation.pdf 
 [introduction_to_number_theory]:./other_books/introduction-to-number-theory-bad-scan-3rd-printingnbsped_compress.pdf
 
-<!-- geeksforgeeks -->
+<!-- GeeksforGeeks -->
 [Detect_cycle_Directed_Graph]:https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
 [geeksforgeeks_max_f_n1_n2]:https://www.geeksforgeeks.org/turing-machine-to-accept-maximum-of-two-numbers/
 [avl_insertion_detailed]:https://www.geeksforgeeks.org/insertion-in-an-avl-tree/
+[get_Topological_Sorting_from_DAG]:https://www.geeksforgeeks.org/topological-sorting/
 
 <!-- valuable links -->
 [houseofgraphs_search]:https://houseofgraphs.org/result-graphs

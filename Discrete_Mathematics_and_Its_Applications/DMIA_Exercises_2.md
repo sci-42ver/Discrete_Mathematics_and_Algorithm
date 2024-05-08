@@ -466,7 +466,7 @@
   - see the ans
 - [ ] 45
   - see the ans 
-    Simmialr to [finite_chain_maximum_minimum]
+    similar to [finite_chain_maximum_minimum]
 - [ ] 46
   - $(S,R^{-1})$ is the converse version of $(S,R)$
   - better explicitly saying the existence of LUB and GLB
@@ -555,7 +555,7 @@
     And by the pigeonhole principle, $k$ can't be larger for the antichain.
     - This is wrong based on [Dilworth_theorem_proof_combination]
       because it needs to prove from "the largest number of elements in an antichain" to "partitioned into k chains" instead of the converse version.
-  - [wikipedia](https://en.wikipedia.org/wiki/Dilworth%27s_theorem#Inductive_proof) same as [Dilworth_theorem_proof_combination] (similar to the [graph_theory] book proof p68) where the latter proof 2 has the exact same description as this exercise (Also same as the brilliant wiki).
+  - [wikipedia][Dilworth_theorem_proof_wikipedia] same as [Dilworth_theorem_proof_combination] (similar to the [graph_theory] book proof p68) where the latter proof 2 has the exact same description as this exercise (Also same as the brilliant wiki).
     - > Clearly, $A_0\cap C_i\neq \varnothing$
       This is based on the hypothesis.
     - ~~TODO Here $x_i$ may be unique.~~
@@ -1601,7 +1601,8 @@ Breakpoint 1 at /home/czg_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathe
   - see the ans
     - Here "in a weighted directed graph with no simple circuits" means " directed *acyclic* graph"
     - DAG must have one Topological sorting
-      [proof](http://www.cs.emory.edu/~cheung/Courses/253/Syllabus/Graph/DAG.html)
+      [proof][DAG_to_topological_ordering_proof]
+      - "not have any incoming edges" imply "minimal" in mcs
       - > there is some vertex that does not have any incoming edges
         if all have, then we can start from arbitrary vertex and back to its incoming vertex
         then since with the finite vertices, it will must back to one vertex which has been visited before.
@@ -4541,6 +4542,7 @@ A  E /|\
 [Chomsky_hierarchy]:https://en.wikipedia.org/wiki/Chomsky_hierarchy#The_hierarchy
 [ordered_rooted_tree]:https://en.wikipedia.org/wiki/Tree_(graph_theory)#Ordered_tree
 [13_2_definition_1]:https://en.wikipedia.org/wiki/Mealy_machine#Formal_definition
+[Dilworth_theorem_proof_wikipedia]:https://en.wikipedia.org/wiki/Dilworth%27s_theorem#Inductive_proof
 
 <!-- brilliant wiki -->
 [brilliant_wiki_Dilworth_Theorem_antichain_ge_chain]:https://brilliant.org/wiki/dilworths-theorem/#proof-of-dilworths-theorem
@@ -4642,6 +4644,7 @@ A  E /|\
 [uchicago_0_n_1_n]:https://www.classes.cs.uchicago.edu/archive/2015/winter/28000-1/Lec13.pdf
 [yale_Fundamental_Theorem_for_Win_Lose_Games]:https://oyc.yale.edu/sites/default/files/blackboard15_0_0.pdf
 [2_conditions_for_Balanced_Parentheses]:http://cse.iitkgp.ac.in/%7Eabhij/course/theory/FLAT/Spring21/scribes/CFG-balanced.pdf
+[DAG_to_topological_ordering_proof]:http://www.cs.emory.edu/~cheung/Courses/253/Syllabus/Graph/DAG.html
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
