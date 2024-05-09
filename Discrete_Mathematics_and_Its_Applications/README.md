@@ -2794,7 +2794,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
   $$
 - 5.25 trivial by algebraic calculation
 - 5.30 similar to 5.25.
-- Problem 5.4
+- Problem 5.4 referred to in 11.2.2 is skipped due to triviality.
 ## 6 preface
 - > They also come up in many other settings such as designing digital circuits and mod-eling probabilistic processes.
   i.e. Sequential logic.
@@ -3883,8 +3883,63 @@ Many of problems later are not verified. Only those I really have doubts may be 
         by Definition 10.5.6, $[a]_R$ is a partition.
     - (c) both directions by transitive property.
        similar to (b) in Problem 10.58.
+## 11.1
+- Here is one *special* [complete binary tree](https://en.wikipedia.org/wiki/Binary_tree#Types_of_binary_trees)
+- > In a tree there is a unique path between every pair of vertices
+  This is proved in DMIA 11.1 THEOREM 1.
+- $\pi(i)$ is to ensure bijection from $[0..N-1]$ to $[0..N-1]$.
+## 11.2
+- > This is nearly the best possible with 3  3 switches.
+  - TODO see [this one with router](https://serverfault.com/a/150086/1032032) and [this](https://community.spiceworks.com/t/most-efficient-way-to-connect-three-network-switches/950173/2)
+- > all paths are the same length
+  ~~because all from the bottom level to the bottom level, the *longest* is trivially .~~
+  $(IN_{0},OUT_{1})$ latency is different from $(IN_{0},OUT_{3})$.
+- > By extending the notion of congestion to networks, we can also distinguish be-tween “good” and “bad” networks with respect to bottleneck problems.
+  because congestion occurs when packets flood up which imply the bottleneck.
+## 11.3
+- 2-D
+  - notice Theorem 11.3.1 is based on permutation. So $in_{0\sim 3}\to out_0$ is impossible which may cause the congestion to 4.
+  - notice switch size of 2-D may only use 1x2 for some switches.
+- Butterfly
+  - TODO it seeems to be read in COD / csapp.
+  - > 2nC1 .n C 1/ of columns.
+    should be $2^{n+1}(n+2)$ for $F_{n+1}$.
+    - Then $n+2$ columns -> $n+1$ length
+      > from an input switch to an output is length-n C 1
+  - By "new inputs" in Figure 11.5, we can get "switch size".
+- Lemma 11.3.3
+  - The book Beneš is not totally same as [the wikipedia one](https://en.wikipedia.org/wiki/Clos_network#Bene%C5%A1_network_(m_=_n_=_2)).
+  - Theorem 12.8.3
+    "only if" is trivial which is already shown in DMIA.
+    "if" non-cycle must be colored by 2-colors.
+    - 2. IMPLIES 3
+      - > there will be a walk wu starting at u and ending at r
+        this should be shortest walk to ensure uniquity.
+        we can color radially from $r$.
+      - > So there must be an edge between two nodes u and v with the same color.
+        this implies $u,v$ are adjacent. So $|w_u|-|w_v|=2n,n\in\mathbb{N}$.
+    - 3. IMPLIES 1
+      - This is also implied in Lemma 10.2.6.
+    - Notice here if using only "every cycle in it has even length" to show it can be "2-colorable" may be more difficult since it is more easy to find one counterexample than proving valid in all cases.
+      i.e. $\exists$ ~~is~~ may probably be easy for $\forall$.
+      See [this](https://math.stackexchange.com/a/4910599/1059606)
+  - Case 1 ~~can be seen as a single edge as one connected component.~~ See $2-6$ in the  example.
+  - > a unique edge hu—vi 2 E1 and a unique edge hu—wi 2 E2 .
+    i.e. one in the leftmost and one in the rightmost column.
 ## chapter 11 problems
 - Problem 11.8
+  - Assume column 0 is the leftmost column
+    then 
+    > there is a path from ex-actly 2i input vertices to v
+    is trivial by the recursive construction from $i=1$.
+    And
+    > a path from v to exactly 2n i output vertices.
+    is similar.
+  - Since the related input/output vertices w.r.t column $i$ is $\min(2^i,2^{n-i})$
+    so the congestion will be $2^{n/2}=\sqrt{2^n}=\sqrt{N}$ at column $n/2$.
+  - odd:
+    similarly $\min(2^i,2^{n-i})$ will take max when $i=(n\pm 1)/2$
+    so the congestion will be $2^{(n-1)/2}=\sqrt{N/2}$.
 ## chapter 12 problems
 - Problem 12.44
 - Problem 12.35
@@ -3936,6 +3991,7 @@ Many of problems later are not verified. Only those I really have doubts may be 
   also "hostids consisting of all 0s and all 1s are unavailable".
 - 11.4 IP Multicasting
   why it can't have the loop.
+- mcs 11.2
 # TODO after algorithm
 - [6.2-27](https://leetcode.cn/problems/longest-increasing-subsequence/description/?utm_source=LCUS&utm_medium=ip_redirect&utm_campaign=transfer2china)
 - Why is [this](#Pseudo_polynomial) based on the length of the input instead of the value?
