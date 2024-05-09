@@ -3737,10 +3737,28 @@ This uses SAT to solve factoring [which is NP](https://stackoverflow.com/questio
 - in Corollary 10.6.11 ~~may be~~ [~~not precise~~](https://en.wikipedia.org/wiki/Asymmetric_relation#Definition), it combines the [irreflexive, asymmetric](https://en.wikipedia.org/wiki/Partially_ordered_set#Strict_partial_orders) [together](https://en.wikipedia.org/wiki/Asymmetric_relation) since the definition of "asymmetric" includes $a=b$ case so that $aRa$ doesn't hold.
 ## 10.7
 - [inverse images](https://en.wikipedia.org/wiki/Image_(mathematics)#Generalization_to_binary_relations) means $\{x\mid x\preceq y\}$.
+## 10.8
 - > You can think of a linear order as one where all the elements are *lined up* so that everyone knows exactly who is ahead and who is behind them in the line
   we can always transform from one total order into such one list.
   By [finite_chain_maximum_minimum], we can recursively choose minimum element similar to lexicographic sorting.
   - See [chain](https://en.wikipedia.org/wiki/Total_order#Chains)
+## 10.10
+- > the age-height relation Y is a partial order.
+  implide by "AND".
+- > an antichain of 11 students—that is, 11 students who get taller as they get younger,
+  Since $(y_1,h_1)\not Y(y_2,h_2)\Rightarrow (y_1\le y_2\land h_1> h_2)\lor(y_1> y_2\land h_1\le h_2)$ where they both mean "get taller as they get younger".
+- > any weak partial order is a total relation but generally won’t be linear.
+  Since for each $a$ at least $b=a\Rightarrow aRb$
+  - "total relation" [definition (see mcs Definition 4.4.2)](https://en.wikipedia.org/wiki/Total_relation) is different from [this](https://math.stackexchange.com/a/2656651/1059606)
+## 10.11
+- > R is transitive and irreflexive iff R is transitive and asymmetric
+  "if" trivial
+  "only if" suppose irreflexive but not asymmetric
+  then [$\exists a,b\in X:aRb\land bRa$](https://en.wikipedia.org/wiki/Asymmetric_relation#Definition) based on $\neg(A\to B)=A\land\neg B$
+  by transitivity, we have $aRa$ contradiction.
+- > R equals the in-the-same-block-relation for some partition of domain.R/
+  implied by 
+  > being the relation of “having the same label” according to some labelling scheme.
 ## chapter 10 problems
 Many of problems later are not verified. Only those I really have doubts may be verified on Stack Exchange / Stack Overflow.
 - Problem 10.3 @#@
@@ -3839,10 +3857,39 @@ Many of problems later are not verified. Only those I really have doubts may be 
   - (c)
     if $A=\{1,2,3\},1R2,1R3$ where "asymmetric" and "transitive" hold vacuously, then $L(2)=L(3)$ but $2\neq 3$.
 - Problem 10.52
+  - (a)
+    1. by definition $(a_1,a_2)(R_1\times R_2)(a_1,a_2)\text{ iff }[a_1 R_1 a_1\land a_2 R_2 a_2]$
+      Since RHS is T, ...
+    2. by definition $(a_1,a_2)(R_1\times R_2)(b_1,b_2)\land(b_1,b_2)(R_1\times R_2)(a_1,a_2)\Rightarrow (a_1 R_1 b_1\land b_1 R_1 a_1) \ldots\Rightarrow a_1=b_1\ldots\Rightarrow (a_1,a_2)=(b_1,b_2)$
+    3. similar to 2 but use $a_1 R_1 b_1 R_1 c_1\ldots\Rightarrow a_1 R_1 c_1\ldots\Rightarrow (a_1,a_2)(R_1\times R_2)(c_1,c_2)$
+  - (b)
+    based on (a) $R_1\times R_2$ is ~~partial order.~~ transitive.
+    WLOG suppose $R_1$ is strict.
+    Then $a_1 R_1 b_1\Rightarrow \neg(b_1 R_1 a_1)\Rightarrow \neg((b_1,b_2)(R_1\times R_2)(a_1,a_2))$. So Asymmetry
+    Then strict.
 - Problem 10.58
+  - (a)
+    trivially by $=$ has all 3 properties.
+  - (b)
+    $f .a/ D R.a/$ is got from $f(a)$ definition.
+    - See the [Math-for-CS-solutions](./others/mcs/sol/Math-for-CS-solutions/MIT6_042JS15_cp18_solutions.pdf).
+      - > The proof of the converse a ≡f b IMPLIES aRb is very similar.
+        $a\in f(a)$ trivially, so we have $a\in f(b)\Rightarrow bRa\Rightarrow aRb$
 - Problem 10.57
+  - This is shown in DMIA 9.5.4 THEOREM 1 context.
+    - (a) trivial. at least $a\in [a]_R$
+    - (b) trivial by the transitive property.
+      - $a R b\Rightarrow [a]_R=[b]_R$ so every element is only in one $[a]_R$.
+        by Definition 10.5.6, $[a]_R$ is a partition.
+    - (c) both directions by transitive property.
+       similar to (b) in Problem 10.58.
 ## chapter 11 problems
 - Problem 11.8
+## chapter 12 problems
+- Problem 12.44
+- Problem 12.35
+## chapter 13 problems
+- Problem 13.9
 ## TODO (use the book page number)
 - p182
   TODO Maybe I wrote this due to the doubts about
