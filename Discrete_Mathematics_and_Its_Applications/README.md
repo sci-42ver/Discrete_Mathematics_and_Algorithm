@@ -2,6 +2,8 @@ Please point out errors if any. Thanks in advance.
 
 The above definition may be from https://courses.csail.mit.edu/6.042/spring18/mcs.pdf which is  different from wikipedia says based on trail. The problem may be Problem 10.4. (a)
 
+If someone struggled to understand the above, wikipedia  defines automorphism as one permutation and isomorphism as bijection. IMHO the difference is their codomains as the answer says. Examples for automorphism https://mathworld.wolfram.com/GraphAutomorphism.html and isomorphism https://en.wikipedia.org/wiki/Graph_isomorphism.
+
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
 # Watching question
@@ -2647,6 +2649,10 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
   $n=6,m=4$
 - Problem 1.2 referred to by 9.1.3 Die Hard skipped due to that it is only to be as one reference of "the convention ... the nonnegative square root".
 - Problem 1.13 is skipped due to triviality.
+- 1.14
+  - (a) if not even, then $n^2$ is odd.
+  - (b) similar since $3=1\cdot 3$.
+- ~~1.15~~
 ## 2.1
 - p30 here 
   > the fraction m0=p n0=p cannot be in written in lowest terms either
@@ -2730,6 +2736,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
 - Problem 3.25 [(b)](https://math.stackexchange.com/q/4910135/1059606)
   - > After padding all clauses, 2k-1 extra clauses[note 4] have to be appended to ensure that only d1 = ⋯ = dk=FALSE can lead to a satisfying assignment.
     TODO This seems to exclude one situation -> $2^k-1$. But why $2^k$ instead of $2^{k-j}$. and why all "FALSE"?
+- ~~3.6 3.7~~
 ## 4.4 (rephrased using arrows)
 - > bijective when it has both the [= 1 arrow out] and the [= 1 arrow in] property.
   See [this](https://math.stackexchange.com/questions/1945015/is-a-one-to-one-function-also-a-total-function#comment10454547_1945015)
@@ -2795,6 +2802,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
 - 5.25 trivial by algebraic calculation
 - 5.30 similar to 5.25.
 - Problem 5.4 referred to in 11.2.2 is skipped due to triviality.
+- ~~Problems 5.8, 5.25, and 5.30~~
 ## 6 preface
 - > They also come up in many other settings such as designing digital circuits and mod-eling probabilistic processes.
   i.e. Sequential logic.
@@ -3235,7 +3243,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
     'there is a *total* surjective function $g:\mathbb{N}\to C$' is same as
     'there is a surjective function $g:\mathbb{N}\to C$'
   - This is also almost as DMIA 2.5-13 but only using one *total* surjective function.
-- Problem 8.25 See [this](https://www.physicsforums.com/threads/i-proving-that-the-cross-product-of-2-countable-sets-is-countable.263517/post-1911104) or DMIA 2.5-28.
+- Problem 8.25 (same index for mcs 2017 and 2018) See [this](https://www.physicsforums.com/threads/i-proving-that-the-cross-product-of-2-countable-sets-is-countable.263517/post-1911104) or DMIA 2.5-28.
 - > adding one new element to an infinite set doesn’t change its size,
   this is just how map [between $\mathbb{N}$ and $\mathbb{Z}^+$](https://math.stackexchange.com/questions/182459/an-infinite-set-having-one-more-element-than-another-infinite-set#comment420603_182459)
 - Problem 8.10 (Problem 8.12 in mcs 2018). 
@@ -3940,8 +3948,93 @@ Many of problems later are not verified. Only those I really have doubts may be 
   - odd:
     similarly $\min(2^i,2^{n-i})$ will take max when $i=(n\pm 1)/2$
     so the congestion will be $2^{(n-1)/2}=\sqrt{N/2}$.
+## 12.1
+- > But a simple graph must have at least one vertex—jV .G/j is required to be at least one.
+  This is to [simplify the following discussion](https://math.stackexchange.com/a/276692/1059606).
+  And Null graph can be thought as simple graph or [digraph](https://www.sfu.ca/~mdevos/notes/graph/345_digraphs.pdf).
+## 12.4
+- > Notice that if f is an isomorphism between G and H , then f 1 is an isomor-phism between H and G.
+  This is trivial based on bijective function.
+  Similar for
+  > Isomorphism is also *transitive* because the composition of isomorphisms is an isomorphism.
+  Then the above is combined with reflexive, we have
+  > In fact, isomorphism is an equivalence rela-tion
+- > secure protocols for encryption and remote authentication can be built on the hypothesis that graph isomorphism is computationally exhausting.
+  Actually they are [not used](https://crypto.stackexchange.com/questions/34198/are-there-any-crypography-schemes-which-rely-on-graph-isomorphism-not-being-in-p#comment79780_34198).
+  - zero-knowledge proof is based on probability.
+    > her chance of successfully anticipating all of Victor's requests would be reduced to 1 in 220, or 9.56 × 10−7.
+    Here Prover needs to [solve graph isomorphism to be granted access](https://arxiv.org/pdf/1911.09329).
+- Some books are [invalid](https://cstheory.stackexchange.com/a/32291).
+  - [This](https://web.archive.org/web/20180117232426/https://funkybee.narod.ru/graphs.htm) seems to show the counterexample for [the book](https://web.archive.org/web/20171226183300/http://www.dharwadker.org/tevet/isomorphism/)
+  - automorphism [vs](https://math.stackexchange.com/a/790119/1059606) isomorphism referred to in [this](https://algorist.com/problems/Graph_Isomorphism.html) by [this](https://funkybee.narod.ru/graphs.htm)
+    [This one](https://www.geeksforgeeks.org/group-isomorphisms-and-automorphisms/#) which says the former doesn't have onto may be wrong.
+## 12.5
+- Definition 12.5.1 cares about vertice set instead of edge set compared Lemma 11.3.3.
+- Compared with The Stable Marriage Problem, Hall’s Matching Theorem doesn't need every man likes *all* women and vice versa with *one list* for each person.
+- I skip the proof of Theorem 12.5.2 since it is shown in DMIA.
+- > The vertices incident to an edge in M are said to be covered by M
+  This is different from [Covering graph](https://en.wikipedia.org/wiki/Covering_graph) and also vertex cover. And it is also different from that in Problem 10.31.
+  IMHO here it means inclusion.
+- Notice Theorem 12.5.6 is one sufficient condition for "a matching".
+  For example we can construct one bipartite graph based on one matching by adding one edge.
+  i.e. $E=\{\langle i-idx(i)\rangle\mid i\in A\}\cup\{\langle b-0\rangle,\langle c-0\rangle\}$ where $A$ is the alphabet and $idx(i)='i'-'a'$.
+  So $\deg(0)=3>2=\max(\deg(l)),l\in L(G)$
+  By the 1st paragraph in the proof of Theorem 12.5.2, we have "the matching condition holds".
+## 12.6
+- > Since only graphs with no edges—the empty graphs—have chromatic number 1
+  - IMHO this has no relations with Lemma 12.6.2
+  - This is because one edge must imply at least 2 colors.
+## 12.8
+- "connected" definition is based on "path" although we can also define that based on ["walk"](https://math.stackexchange.com/a/699805/1059606).
+- Definition 12.8.2 is based on radial shape of the component
+  and the [wikipedia definition](https://en.wikipedia.org/wiki/Component_(graph_theory)#Definitions_and_examples) is based on
+  > there are no paths between vertices in different pieces.
+## 12.10
+- Definition 12.10.1 also see [wikipedia](https://en.wikipedia.org/wiki/K-edge-connected_graph#Formal_definition)
+  - "at least one of the paths" is thought as one set.
+  - "max-flow min-cut theorem" is temporarily skipped.
+## 12.11
+- "circuit" can be one simple graph which is [different from simple circuit](https://en.wikipedia.org/wiki/Cycle_(graph_theory)#Circuit_and_cycle).
 ## chapter 12 problems
+Search "Problems" or "Problem ".
+- Problem 12.31
+  - (a)
+    - Figure 12.30
+    See [this][3_SAT_to_3_Coloring]
+    we only needs triangle with $N$ to ensure only $T,F$ are assigned to literals.
+    - Then the OR gate is based on $(P,Q,[P,P\lor Q],[Q,P\lor Q],P\lor Q)=(T,T,F,N,T),(T,F,F,N,T),(F,T,N,F,T),(F,F,T,N,F)$ where $[P,P\lor Q]$ means the vertex adjacent to both vertices.
+      Here we ensure 
+      1. only $T,F$ are assigned to $P,Q$
+      2. inspect all $2^2=4$ cases for $P,Q$
+      3. the output is OR.
+      - Notice since 3-colorable is one possible minimum coloring, this doesn't mean we *must use 3 colors* but means we can.
+        So the above gives one possible assignment of $T,F$.
+  - (b) since here it doesn't need $P$.
+    So we can [transform E into DNF which is NP-hard](https://en.wikipedia.org/wiki/Conjunctive_normal_form#Computational_complexity).
+    Then follow [3_SAT_to_3_Coloring] but here we need $n-1$ OR gates for each clause.
+  - (c) [3_SAT_to_3_Coloring] and [this](https://cs.bme.hu/thalg/3sat-to-3col.pdf) all assumes clause form is the prerequisite condition. So an efficient procedure for 3-colorable mean an efficient procedure for SAT with the DNF/CNF form.
+  - Notice 3-colorable [maybe can't be reduced to 2-SAT](https://cs.stackexchange.com/a/13083/161388).
+  - [This](https://math.stackexchange.com/q/2010628/1059606) is one a bit different problem since it cares about subset.
+    [This](https://math.stackexchange.com/q/1032515/1059606) says about fixed color. But in [3_SAT_to_3_Coloring] it just use $T,F,N(one)$ where $N$ is interpreted by me as None.
+  - See [sol_20]
+    The above needs proving "iff".
+    TODO (c) in that sol.
+- 12.32
+  - (a) [see](https://www.overleaf.com/read/skjcnqsbsjgf#ca8e3c)
+  - (b) implied by (a).
+    Since the crossing have only 4 cases, we are done.
+  - By the replacement, "no easier" mean "same as".
 - Problem 12.44
+  - (a) based on in-degree and out-degree when following the walk.
+  - (b) otherwise not one connected graph.
+  - (c) Notice here we [need "finite"](https://en.wikipedia.org/wiki/Eulerian_path#In_infinite_graphs) to make the theorem work.
+    - IMHO maybe the book use "longest" and "at most once" to prove exactly "once".
+      But that doesn't use the "even" condition. TODO
+    - Better see DMIA proof based on construction of such a tour.
+  - (d) ~~This is not based on closed walk, so this means we can continuing the end to find one bigger walk if some edges incident to it are unincluded?~~
+    Since we can add that unincluded edge to construct one longer walk, contradiction.
+  - (e) trivial based on the degree equals $2n+1$ where $n$ is the pass count of the end vertex.
+  - (f) based on (e,b) we know $w$ must be closed and then an Euler tour.
 - Problem 12.35
 ## chapter 13 problems
 - Problem 13.9
@@ -4185,6 +4278,7 @@ Many of problems later are not verified. Only those I really have doubts may be 
 [2_conditions_for_Balanced_Parentheses]:http://cse.iitkgp.ac.in/%7Eabhij/course/theory/FLAT/Spring21/scribes/CFG-balanced.pdf
 [2020_lec_02]:https://lara.epfl.ch/w/_media/fv20/lec03-main2.pdf
 [DAG_to_topological_ordering_proof]:http://www.cs.emory.edu/~cheung/Courses/253/Syllabus/Graph/DAG.html
+[3_SAT_to_3_Coloring]:https://cgi.csc.liv.ac.uk/~igor/COMP309/3CP.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
@@ -4222,3 +4316,6 @@ Many of problems later are not verified. Only those I really have doubts may be 
 <!-- crypto stackexchange -->
 [RSA_coprime_guarantee]:https://crypto.stackexchange.com/a/25649
 [RSA_proof]:https://crypto.stackexchange.com/a/1006
+
+<!-- Math-for-CS-solutions -->
+[sol_20]:./others/mcs/sol/Math-for-CS-solutions/MIT6_042JS15_cp20_solutions.pdf
