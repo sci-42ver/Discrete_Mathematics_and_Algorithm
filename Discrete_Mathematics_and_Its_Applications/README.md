@@ -3956,6 +3956,8 @@ Many of problems later are not verified. Only those I really have doubts may be 
     so the congestion will be $2^{(n-1)/2}=\sqrt{N/2}$.
 ## 12.1
 I may use $u-v$ as the edge notation in the following.
+> scheduling, constraint satisfaction
+This is by letting edge indicating conflict restriction, etc.
 - > But a simple graph must have at least one vertex—jV .G/j is required to be at least one.
   This is to [simplify the following discussion](https://math.stackexchange.com/a/276692/1059606).
   And Null graph can be thought as simple graph or [digraph](https://www.sfu.ca/~mdevos/notes/graph/345_digraphs.pdf).
@@ -4122,8 +4124,95 @@ Search "Problems" or "Problem ".
   - > There is a five-vertex graph that exhibits this property.
     e.g. $u-p-q-v,p-k-q$
   - > Then either u and w, or w and v, must be a dpp
+## 13.1
+- Figure 13.2 This means is there one planar $K_5$ complete graph.
+- > are helpful in displaying graphical data such as program flow charts
+  See [this](https://stackoverflow.com/a/2593143/21294350) 
+  TODO [linear time testing](https://stackoverflow.com/questions/2445313/provable-planarity-of-flowcharts#comment2600654_2445371)
+- [This (See Figure 3)](https://digitalcommons.morris.umn.edu/cgi/viewcontent.cgi?article=1049&context=horizons) is different from [Conflict graphs](https://www.math.cmu.edu/~bkell/21110-2010s/conflict-graphs.html) in the book.
+## 13.2*
+- **Compared with DMIA definition** Definition 1 in 10.7 which doesn't restrict how we draw, mcs cares about "how we draw" by in Definition 13.2.1.
+- connected region see [this "Definition"](https://math.mit.edu/~jorloff/suppnotes/suppnotes02/v5.pdf) which is related with complex analysis.
+- Constructor case (split a face)
+  Here we assume these 2 paths $\alpha,\beta$ are totally disjoint. So we can layout them like the bipartite graph.
+  If they share some vertices except for $a,b$, then by WOP assume $k$ is the *first* shared non-adjacent vertex, then the 2 path from $b$ to $k$ constructs one cycle, contradiction.
+  If adjacent, then we begin from $k$ and follow the above process again by seeing $k$ as the new $b$ OR we can say $b-k$ should not be considered inside that face.
+  If all are adjacent, i.e. line graph in the footnote ...
+- Constructor case (add a bridge)
+  - > Suppose G and H are connected graphs with planar embeddings and disjoint sets of vertices
+    i.e. 2 connected components based on "A planar embedding of a connected graph" in Definition 13.2.2 which causes "G and H" each to have only one connected component.
+  - > suppose that $\gamma$ begins and ends at vertex a.
+    As the example shows, $\gamma$ can have multiple different instances. But only one will consider the added $a-b$ due to that it is the "cut edge".
+  - > as op-posed to once on each of two faces
+    i.e. 2 sides.
+- 2 Constructor case's are complete since adding one edge based on whether 2 endpoints are in the same component will only imply 2 cases.
+  Here all assume adding such one edge is possible to keep "planar".
+  But it is not always that case, e.g. adding one edge to one of the connected graphs in Figure 13.4.
+  But we temporarily skipped that digging.
+  > Of course we can’t prove this without an excursion into exactly the kind of continuous math that we’re trying to avoid.
+- > a planar embedding could be drawn with any given face on the outside
+  [See](https://mathematica.stackexchange.com/a/244393)
+  > stretching the puncture hole to a circle around the rest of the faces, and flattening the circular drawing onto the plane.
+  The above is just one "An intuitive explanation" instead of strictly considering all cases.
+  TODO There are too many cases. For example, think of one very big map/grid.
+  If we want to take the center square in one grid as the outer face, then how to ensure the edge relation is kept and the planar property is also kept at the same time?
+## 13.3
+- The proof of Theorem 13.3.1 in DMIA is based on adding one edge to *one connected graph*.
+  But here we may connect 2 connected graphs based on the definition of "planar embedding".
+  - The former skips the *trival graph*.
+## 13.4
+- > once in each of two different faces, or occurs exactly twice in one face.
+  i.e. split or bridge.
+- Lemma 13.4.2
+  - base case
+    based on [this](https://houseofgraphs.org/result-graphs)
+    ```bash
+    # adjacency list
+    1: 2 3
+    2: 1 3
+    3: 1 2
+
+    1: 3
+    2: 3
+    3: 1 2
+    ```
+    the inside face and outside face in the above 2 graphs are same with length 3 and 4 each.
+  - Constructor case
+    - Here it probably assumes simple graph since $a-b$ with 2 edges has one face of length 2.
+      Then split in the extreme case has one triangle which has length 3.
+    - bridge
+      > these two graphs with a bridge merges the two bridged faces into a single face, and leaves all other faces unchanged.
+      So the changed outer face length is $2+l(G_{sub})+l(H_{sub})$ where $G_{sub}$ means the changed face in $G$. Then still length at least 3.
+- Theorem 13.4.3 is same as DMIA 10.7 COROLLARY 1 proof where it assumes without proof
+  > (either in two different regions, or twice in the same region). Because each region has degree greater than or equal to three
+## 13.5
+- Theorem 13.5.3 is same as DMIA 10.7 COROLLARY 3 but the former targets at one more specific graph "connected bipartite graph".
 ## chapter 13 problems
 - Problem 13.9
+  - (a) 
+    To make (c) work, we take all 4 cases in account although some may not "obtain a planar embedding" but multiple.
+    Notice we only consider planar embeddings *changed* because those unchanged trivially won't influence the result.
+    - ~~one~~ both of them is "split", trivially they are independent since the operation only operates *inside* the connected component. Then we can switch.
+    - $e$ is "split" and $f$ is "bridge"
+      Since the splitted component can't influence the "bridge" between 2 component (i.e. operation *inside* the component doesn't influence the operation *outside* (see 13.2.4) the component), then we can switch.
+    - $e$ is "bridge" and $f$ is "split"
+      one case is dual of the above
+      - the other is "split" of the combined graph instead of one of 2 graphs to combine.
+        Here it must split the *outer face* as Figure 13.10 shows (the strict proof may need geometry. I didn't dig into that.)
+        Then we can switch that (still I didn't dig into that due to the need of geometry. We can use Figure 13.10 where we see the 2 components as one *big vertex*, then all is trivial). (1)
+    - both are "bridge".
+      - 2 outside non-crossing edges can be swapped. Same as (1).
+  - (b) 
+    - This is based on [each permutation can be done with swap of adjacent elements @%@ (@%@ means it is not read)](https://math.stackexchange.com/a/3791184/1059606).
+      This is probably done in DMIA with one Stack Exchange link where the link is temporarily not found. TODO
+    - IMHO "By induction on the number of switches" is not needed.
+      Since the swap number must be finite based on the above proof, we are done using (a).
+  - (c)
+    if same as Minimum-Weight Gray Edge Procedure, we start with $n$ vertices,
+    then based on (b) we can get one arbitrary set of planar embeddings which by 13.2.3 is a planar graph.
+    Then if we want to delete edge $k$, we can use (b) to let it be the last edge and then revert the last operation we still get one planar graph.
+  - (d)
+    trivially deleting vertices doesn't influence "planar". Then with (c), we are done.
 ## TODO (use the book page number)
 - p182
   TODO Maybe I wrote this due to the doubts about
