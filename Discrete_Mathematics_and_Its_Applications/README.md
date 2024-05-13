@@ -4,6 +4,12 @@ The above definition may be from https://courses.csail.mit.edu/6.042/spring18/mc
 
 If someone struggled to understand the above, wikipedia  defines automorphism as one permutation and isomorphism as bijection. IMHO the difference is their codomains as the answer says. Examples for automorphism https://mathworld.wolfram.com/GraphAutomorphism.html and isomorphism https://en.wikipedia.org/wiki/Graph_isomorphism.
 
+@MishaLavrov Thanks for your clarification. 1. Based on your interpretation and the relation among connectivity, edge-connectivity and minimum degree, I understand the definition. 2. Then "X maximal" normally mean differently from "maximal X" where the former is similar to "maximally X" due to "X is a numerical parameter".
+
+Based on https://en.wikipedia.org/wiki/Cycle_(graph_theory) definition, "do not cross each other" may mean no shared vertex.
+
+If assuming "the same vertex set" as one comment in Igor Rivin's answer says, https://math.stackexchange.com/a/420543/1059606 is helpful where one direction is same as what proofwiki https://proofwiki.org/wiki/Adding_Edge_to_Tree_Creates_One_Cycle says.
+
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
 # Watching question
@@ -3949,6 +3955,7 @@ Many of problems later are not verified. Only those I really have doubts may be 
     similarly $\min(2^i,2^{n-i})$ will take max when $i=(n\pm 1)/2$
     so the congestion will be $2^{(n-1)/2}=\sqrt{N/2}$.
 ## 12.1
+I may use $u-v$ as the edge notation in the following.
 - > But a simple graph must have at least one vertex—jV .G/j is required to be at least one.
   This is to [simplify the following discussion](https://math.stackexchange.com/a/276692/1059606).
   And Null graph can be thought as simple graph or [digraph](https://www.sfu.ca/~mdevos/notes/graph/345_digraphs.pdf).
@@ -3984,8 +3991,12 @@ Many of problems later are not verified. Only those I really have doubts may be 
 - > Since only graphs with no edges—the empty graphs—have chromatic number 1
   - IMHO this has no relations with Lemma 12.6.2
   - This is because one edge must imply at least 2 colors.
+## 12.7
+- > The walk is a path iff all the vi ’s are different, that is, if i ¤ j , then vi ¤ vj .
+  This implies [all edges are distinct](https://qr.ae/psUZgQ).
+  > for if an edge is repeated, a vertex is necessarily repeated.
 ## 12.8
-- "connected" definition is based on "path" although we can also define that based on ["walk"](https://math.stackexchange.com/a/699805/1059606).
+- "connected" definition is based on "path" although we can also define that based on ["walk"][walk_implies_path] generally.
 - Definition 12.8.2 is based on radial shape of the component
   and the [wikipedia definition](https://en.wikipedia.org/wiki/Component_(graph_theory)#Definitions_and_examples) is based on
   > there are no paths between vertices in different pieces.
@@ -3993,8 +4004,78 @@ Many of problems later are not verified. Only those I really have doubts may be 
 - Definition 12.10.1 also see [wikipedia](https://en.wikipedia.org/wiki/K-edge-connected_graph#Formal_definition)
   - "at least one of the paths" is thought as one set.
   - "max-flow min-cut theorem" is temporarily skipped.
-## 12.11
+## 12.11 (12.11.4* which generalizes Prim's and Kruskal’s algorithm)
 - "circuit" can be one simple graph which is [different from simple circuit](https://en.wikipedia.org/wiki/Cycle_(graph_theory)#Circuit_and_cycle).
+- > The forest in Figure 12.18 has 4 leaves
+  here the root is also one leaf in ["an unrooted tree"](https://mathworld.wolfram.com/TreeLeaf.html).
+- In Definition 12.11.2, "at most one" should be [just one](https://mathworld.wolfram.com/TreeLeaf.html)
+  This is [the definition in maths graph theory](https://stackoverflow.com/a/33987475/21294350) instead of in CS.
+- > A forest with an isolated vertex won’t be connected unless it consists of just the one vertex
+  Here it can be still [thought as one tree](https://math.stackexchange.com/a/3909178/1059606).
+- "edge-maximal acyclic" means [the edge number is maximal when acyclic](https://math.stackexchange.com/a/2116227/1059606). Similar for "edge-minimal connected".
+  This [may be different from maximally edge-connected](https://math.stackexchange.com/q/4915005/1059606).
+  - When vertex- and edge-connectivity can be [less than minimum degree](https://mathoverflow.net/a/423085)
+- Lemma 12.11.3 proof is based on 2 cases where we assume $u-v_1,v_1\notin \textbf{k}$ or $u-v_2,v_2\in \textbf{k}$ where $\textbf{k}$ is the longest path.
+- Theorem 12.11.4
+  - (3) implies (4)
+    - Here it drops the proof of *at least one* path which can be proved using cycle implies 2 paths between each pair of vertices.
+    - [trivial graph definition](https://www.prepbytes.com/blog/graphs/trivial-graph-in-graph-theory/#:~:text=Trivial%20Graph%3A%20Contains%20only%20one,in%20a%20more%20complex%20structure.)
+    - Based on [walk_implies_path] which also means trail (i.e. simple path in DMIA) implies path, we can use DMIA 10.4-59 to solve with the above directly using one method to *construct the cycle*.
+      Since that proof doesn't need each walk / path in DMIA to have *distinct vertices*, so we can directly use that proof.
+      That proof is based on *comparison* of these 2 walks/paths by inspecting vertices one by one.
+      - Rephrase:
+        - > If they diverge only after one of them has ended, then the rest of the other path is a simple circuit from v to v
+          This is impossible here since $v$ is duplicate in the walk so the *longer* walk is not one path.
+        - > we follow it along—forwards or backwards, as necessary—to return to xi
+          here "forwards" is impossible since it implies the cross point *has been met* and then we forward to $x_i$ as before. Then the *longer* walk is not one path.
+        - Similarly see "no duplicate vertex ..." in DMIA notes for the only case the cycle can occur.
+    - Also see [this](https://chat.stackexchange.com/transcript/message/24773662#24773662) although it is incomplete.
+    - The book proof is same as [this](https://math.stackexchange.com/a/1484818/1059606)
+    - Notice this [doesn't prove for the infinite forest](https://math.stackexchange.com/a/98098/1059606).
+      > the time would never come when the whole train would be in motion.
+      - From now on, I  didn't focus comparison between finite graphs and infinite graphs since it seems to be [one heavy work](https://1stprinciples.wordpress.com/2008/03/11/infinite-trees-have-no-leaves/) as 12.4 says
+        > In the rest of this chapter we’ll assume graphs are finite.
+      - infinite graph [may not have leaves](https://en.wikipedia.org/wiki/Eulerian_path#In_infinite_graphs) as DMIA says.
+- Theorem 12.11.5 is same as DMIA 11.1-31.
+- Theorem 12.11.6
+  - > G E has one component
+    due to connected.
+  - > So by WOP
+    based on edge number and connectivity.
+- Lemma 12.11.10: here "gray edge" is different from that in "white path theorem".
+  - > Therefore at some point on the path there has to be an edge that starts with a black vertex and ends with a white one.
+    This is said similarly in one DMIA exercise answer.
+- Theorem 12.11.12
+  - > decreases the number of connected components of S by one
+    This implies still "spanning forest".
+  - Lemma 12.11.11 is based on the assumption
+    > assume there are no same-weight edges:
+- Lemma 12.11.14 shares the same idea as DMIA proof of Prim's and Kruskal’s algorithm by constructing MST step by step based on adding and deleting one edge.
+  - notice $+e$ only causes one cycle. See DMIA [tree_iff_add_any_edge] and "proves exactly one".
+    This is enough to ensure "connected" although trivial since adding one edge must keep connectedness.
+    Then "connected" + "acyclic" -> tree.
+    - > if C is a spanning tree of G, then C g C e will also be a spanning tree
+      We can also be based on Theorem 12.11.6 (3)->(1).
+      Then "connected" + "edge number" -> tree.
+  - Since we only manipulate with edges, so "spanning" is kept.
+- > such that all the vertices in the same connected component of S have the same color.
+  - Algorithm 1
+    - Here "exactly one endpoint" ensures "acyclic" kept.
+    - > This is the algorithm that comes from coloring the growing tree white and all the vertices not in the tree black.
+      So it constructs one partition of size 2 based on the original component partition.
+      So Algorithm 3 is similar to it.
+  - Algorithm 2
+    - > An edge does not create a cycle in S iff it connects different components of S .
+      "only if" assume by contradiction that "it connects" the same component, then cycle ...
+      "if" trivial.
+    - > adding a minimum weight edge among the edges that do not create a cycle in S 
+      This can be done by finding the "minimum weight edge" and then assigning different colors to  the 2 components which each endpoint is in.
+  - Algorithm 3
+    - > with limited communication between processors.
+      [See](https://stackoverflow.com/a/46161900/21294350)
+      > Higher L3 latency means bandwidth is limited by the number of outstanding L1 or L2 *misses / prefetch* requests.
+      Here L1/2 miss will [cause L2/3 prefetch](https://developer.arm.com/documentation/ddi0488/h/level-2-memory-system/l2-cache-prefetcher). Also [see](https://community.intel.com/t5/Software-Tuning-Performance/Understanding-L1-L2-L3-misses/td-p/1056573)
+      > where processor sends lot of L1 miss requests quickly to L2
 ## chapter 12 problems
 Search "Problems" or "Problem ".
 - Problem 12.31
@@ -4036,6 +4117,11 @@ Search "Problems" or "Problem ".
   - (e) trivial based on the degree equals $2n+1$ where $n$ is the pass count of the end vertex.
   - (f) based on (e,b) we know $w$ must be closed and then an Euler tour.
 - Problem 12.35
+  - $u-p-\textbf{w_{pq}}-q-v$
+    If $w_{pq}$ can have more than 1 choices, then we are done.
+  - > There is a five-vertex graph that exhibits this property.
+    e.g. $u-p-q-v,p-k-q$
+  - > Then either u and w, or w and v, must be a dpp
 ## chapter 13 problems
 - Problem 13.9
 ## TODO (use the book page number)
@@ -4199,6 +4285,7 @@ Search "Problems" or "Problem ".
 [game_as_decision_tree]:https://math.stackexchange.com/questions/3992275/if-a-winning-strategy-does-not-exist-for-player-2-does-it-exist-for-player-1#comment10457491_3993622
 [Identity_Unique]:https://math.stackexchange.com/a/622845/1059606
 [coprime_iff_invertible]:https://math.stackexchange.com/a/2326680/1059606
+[walk_implies_path]:https://math.stackexchange.com/a/699805/1059606
 
 <!-- stack overflow -->
 [longest_simple_path_NP_hard]:https://stackoverflow.com/a/53399638/21294350

@@ -1264,6 +1264,21 @@ print(subgraph_of_complete_graph(4))
       > $x_0x_1=y_0y_1,x_1x_2=y_1y_2,\ldots,\text{but }x_{i}x_{i+1}\neq y_{i}y_{i+1}$
     - > since no edge among the xks or the yl s can be repeated (P1 and P2 are simple by hypothesis) and no edge among the xks can equal one of the edges yl that we used, since we abandoned P2 for P1 as soon as we hit P1
       firstly along the common path, then unique for $P_2$ and then unique for $P_1$.
+    - > If they diverge only after one of them has ended, then the rest of the other path is a simple circuit from v to v
+      notice this is based on DMIA path definition which is different from mcs. DMIA path is similar to the general walk.
+      Simlarly "circuit" is closed walk in mcs.
+    - > we follow it along— forwards or backwards, as necessary—to return to x
+      "forwards" may occur, e.g. 2 paths can be $a-b-c-d$ and $a-b-c-e-f-b-g-h-d$ although one has duplicate vertices.
+      ```
+           g--------h
+           |        |
+      a----b----c---d
+           |    |
+           |    |
+           f----e
+      ```
+    - > no edge among the xks can equal one of the edges yl that we used, since we abandoned P2 for P1 as soon as we hit P1.
+      More specifically, no duplicate vertex $v\in P_{1,2}$ except for their cross $x_i,x_m$ where "forwards" occur when $m<i$ and "backwards" occur when $m>i$. Then no duplicate edge.
 - [x] 61
   - This is same as [graph_link_with_relation]
 - [ ] 63
@@ -2066,6 +2081,7 @@ Redo 5.4-48
       - This is the *lower bound* of the "internal vertices".
   - b)
     - see the ans
+- [x] 31 trival based on THEOREM 2
 - [x] 38
   - see [nonisomorphic_simple_connected]
     - a)
@@ -2912,6 +2928,7 @@ A  E /|\
 ### supplementary
 - 12,20(same as 14,16 where the binomial tree is one special Sk-tree where "the child" is specified as "the leftmost child"),28,32,36 skipped
 - [ ] 1
+  See `git log -p` where I may assume cycle as the definition in wikipedia ensuring distinct vertices when reading mcs.
   - > the addition of an edge connecting two *nonadjacent* vertices
     based on "a simple graph", only "nonadjacent" is possible.
   - "only if" [see][one_cycle_when_tree_plus_one_edge]
@@ -2921,9 +2938,19 @@ A  E /|\
     - see the ans
       - The above is wrong because the question says *any* edge "connecting two nonadjacent vertices" which may be not in the original graph will cause the circuit.
         But as the ans says, disconnected graphs doesn't meet this requirement.
-      - Same as [this](https://math.stackexchange.com/a/1118188/1059606) and [this][tree_iff_add_any_edge]
+      - Same as [this](https://math.stackexchange.com/a/1118188/1059606) and [this which *proves exactly one*][tree_iff_add_any_edge]
+        - the former is based on "disconnected" -> "components".
+        - TODO [weirdly I say](https://math.stackexchange.com/questions/1118176/proving-if-g-has-no-cycles-but-by-adding-one-edge-between-any-two-vertices-wil?rq=1#comment10355422_1118188)
+          > IMHO Here "do not cross each other" may mean "are not same" based on isomorphism.
+        - The latter is trivial when assuming cycle, path as the definition in DMIA book since they have no distinct vertex/edge restriction.
+          - Also trivial when not using the above assumption since cycle is based on path where both assuming distinct vertices.
       - [changing "tree" to "connected"](https://math.stackexchange.com/questions/325279/proving-a-simple-connected-graph-is-a-tree-if-adding-an-edge-between-two-existin?rq=1#comment10355421_325279), the theorem is still valid.
-      - This edge must be connecting [already existing vertices](https://math.stackexchange.com/a/1663569/1059606)
+        - See this comment in comment_backup.md. This is one weird comment which has been deleted.
+      - This edge must connect [already existing vertices](https://math.stackexchange.com/a/1663569/1059606) to make the theorem work.
+        The following links are from [this](https://math.stackexchange.com/questions/1663565/adding-one-edge-to-a-tree-creates-exactly-one-cycle/1663569#comment3393226_1663565)
+        - This [proof](https://math.stackexchange.com/a/1569078/1059606) doesn't explicit show exactly one but at least one.
+        - [This proof](https://math.stackexchange.com/a/325283/1059606) hint *proves exactly one*
+          See [the stared messages](https://chat.stackexchange.com/rooms/7833/discussion-between-andrew-salmon-and-dj) where in the image dashed edge is added although it is different from that hint says. Here "connect two vertices of" $C_3$ is impossible when assuming simple graph kept.
 - [x] 2
   - By [nonisomorphic_simple_connected], it has 6 unrooted trees.
     - Same as [houseofgraphs_search] "Number of Vertices = 6,Connected,Acyclic"
@@ -3861,7 +3888,7 @@ A  E /|\
           > for every state s of M there is a string x ∈ I∗ such that f (s0, x ) = s,
         - **Intuitively** here just put states with the *same output for all strings* 
           (1. i.e. $R_*$ 
-           2. it is also implied in $\overline{f}([s]_{R_*},a)$ are same for $[s]_{R_*}$ where the output states are combined correspondingly.)
+           1. it is also implied in $\overline{f}([s]_{R_*},a)$ are same for $[s]_{R_*}$ where the output states are combined correspondingly.)
           together because they *function same* for the final result.
           ~~And then all *corresponding functions* are also changed.~~
     - NFA related in [Introduction_Automata_Theory_Languages_and_Computation] p177
@@ -3877,8 +3904,8 @@ A  E /|\
         1. $s_1$ 
         2. $s_{3,5}$ 
         with both 0 and 1 are accepted:
-        1. $s_{2,4}$ 
-        2. $s_6$
+        3. $s_{2,4}$ 
+        4. $s_6$
       - $k=2$ based on refinement and the single-element set can't be refined
         since $s_{3,5}\xRightarrow{(0,1)}(s_3,s_5)$, we have 
         $s_3 R_* s_5$
