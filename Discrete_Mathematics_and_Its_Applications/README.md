@@ -4187,6 +4187,38 @@ Search "Problems" or "Problem ".
   > (either in two different regions, or twice in the same region). Because each region has degree greater than or equal to three
 ## 13.5
 - Theorem 13.5.3 is same as DMIA 10.7 COROLLARY 3 but the former targets at one more specific graph "connected bipartite graph".
+## 13.6
+- Lemma 13.6.1 has been proved in Problem 13.9 (d)
+  - Lemma 13.6.2 ~~can be done by letting the merged edge length zero since the graph doesn't depend on edge length.~~ (The strikethrough sentence still keeps the edge constraint which can be stretched to make one planar graph. But merged graph doesn't have such one constraint. So they are not equivalent directly.)
+    If using structural induction, then based on Figure 13.9 and Figure 13.10 we can merge that added edge (still this is not one strict proof).
+    - Compared with DMIA 10.8-41 where it is based on interchanging color, here we merge until the adjacent vertices of v become 4.
+## 13.7*
+the green underlined words lack strict proofs.
+- We can understand Figure 13.14 by projecting them onto the sphere.
+  (c) can be seen as use one triangle face as the base then expand following the rest edges.
+  - [The mere Stereographic projection](https://www.cosmic-core.org/free/article-42-geometry-platonic-solids-part-3-spherical-stereographic-solids/).
+  - Also see [this by stretching][plus_math_polyhedron].
+- [nondegenerate polygon](https://en.wikipedia.org/wiki/Degeneracy_(mathematics)#Triangle) i.e. at least the area is greater than 0.
+- > at least 3 polygons must meet to form a corner, so $m \ge 3$
+  if there is 2, then it can't be 3D.
+  ~~one non-strict proof: 2 lines construct one plane, suppose there is one exception TODO~~
+  ~~trivially each face is one cycle which already implies ~~
+  Also we can use the claim in geometry that at least 3 planes are needed to decide one vertex.
+- > m edges incident to each of the v vertices.
+  implied by "Let m be *the number of faces* that meet at each corner of a polyhedron" without the strict proof
+- $mv=2e$ is based on one edge will be counted twice by each endpoint and $nf=2e$ is based on one edge will be counted twice by the 2 faces crossed to decide that edge.
+- > Checking the finitely-many cases that remain turns up only five solutions
+  This can be also done by [checking the *corner angle*](https://www.reddit.com/r/explainlikeimfive/comments/nrxcds/comment/h0j9rcj/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
+  - > 3 regular hexagons connected by their corners form a plane and can’t actually fold into a corner
+    i.e. $3\cdot 120=360$ which must be in one plane.
+  - notice the total symmetry.
+  - TODO why icosahedron has more faces than dodecahedron since the corner angle is $60\cdot 5=300$ vs $108\cdot 3=324$? (Use geometry proof instead of algebraic)
+- > The largest polyhedron, the dodecahedron, was the other great mathematical secret of the Pythagorean sect.
+  See [Platonic solid](https://www.britannica.com/science/Platonic-solid) although they are [not actually the first](https://www.math.lsu.edu/art/quantum-connections/pythagoras#:~:text=Pythagoreans%20discovered%20the%20dodecahedron%2C%20the%20fifth%20regular/Platonic,However%2C%20the%20Pythagoreans%20gave%20the%20mathematical%20proof.) to find that.
+- > so that they uniformly blanket the globe—tough luck!
+  this seeems to assume polyhedra since sphere may probably be uniformly split.
+- Definition 13.8.2 is the reverse operation of [subdivision](https://en.wikipedia.org/wiki/Homeomorphism_(graph_theory)#Subdivision_and_smoothing) (i.e. remove $e_1$ and then merge $w,u$)
+  remove vertex is implied by [subgraph](https://en.wikipedia.org/wiki/Kuratowski%27s_theorem)
 ## chapter 13 problems
 - Problem 13.9
   - (a) 
@@ -4426,7 +4458,7 @@ Search "Problems" or "Problem ".
 [find_euler_path_undirected_path]:https://cp-algorithms.com/graph/euler_path.html#:~:text=To%20find%20the%20Eulerian%20path%20%2F%20Eulerian%20cycle%20we%20can%20use,then%20remove%20the%20extra%20edge.
 [cut_edge_2_components]:https://sharmaeklavya2.github.io/theoremdep/nodes/graph-theory/deleting-bridge-gives-2-components.html
 [cstaleem_0_n_1_n]:https://cstaleem.com/turing-machine-for-0n1n/
-
+[plus_math_polyhedron]:https://plus.maths.org/content/eulers-polyhedron-formula
 
 <!-- wolfram -->
 [connected_planar_simple_graph]:https://mathworld.wolfram.com/PlanarConnectedGraph.html

@@ -1821,7 +1821,7 @@ for i,j in [(3,4),(4,4),(5,5)]: print(thickness_lower_bound_bipartite(i,j))
     "still properly colored" because when we change vertices with color azure to chartreuse, we **only** needs to ensure it won't be adjacent to chartreuse, but since "interchange", it is ensured and due to component no other vertices need to be cared about.
   - > with b in one of them and m in the other
     Here I assume this cycle is similar to the circle shape.
-    here b must be inside of the region, otherwise based on clockwise, $vb$ must cross $ac$
+    here b must be inside of the region, otherwise based on clockwise, $vb$ must cross $ac$ (I didn't give one strict geometric proof)
     ~~based on clockwise, m must be outside~~.
     - Also see [this](https://math.stackexchange.com/q/2418524/1059606)
       if the $vc$ line is curved to the left such that $vd$ is on the right of $vc$. Then $BD$ is possible.
@@ -1829,7 +1829,7 @@ for i,j in [(3,4),(4,4),(5,5)]: print(thickness_lower_bound_bipartite(i,j))
       But here maybe we should recolor interchange $C,D$ and others are changed correspondingly. Then $BC$ is impossible which corresponds to $m$ (i.e. C) must be outside.
       Also see this [comment](https://math.stackexchange.com/questions/2418524/5-color-theorem-proof#comment8974142_2418535)
   - > If we now interchange blue and magenta on all the vertices in the same region as b, we will still have a proper coloring of G
-    obviously vertices inside the region can't have edges with vertices outside the region.
+    obviously vertices inside the region can't have edges with vertices outside the region since the graph is planar.
 - [ ] 44,45 see the ans
   - > The sets of locations from which the tips of different prongs are visible are disjoint
     this means to see each tip, we need at least one guard each.
