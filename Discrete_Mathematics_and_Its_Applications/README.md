@@ -2797,6 +2797,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
     where 41 tries getting one contradiction using one artificial set and induction
     This is similar to [ProofWiki](https://proofwiki.org/wiki/Equivalence_of_Well-Ordering_Principle_and_Induction/Proof/WOP_implies_PFI) but the latter gets the contradiction from induction hypothesis while the former is from assumption that there is no the least element in $S$.
 ## chapter 5 problems
+- Problem 5.4 skipped which is referred to in chapter 14.
 - Problem 5.8.
   $$
   \begin{align*}
@@ -3713,7 +3714,8 @@ This uses SAT to solve factoring [which is NP](https://stackoverflow.com/questio
     trivially $(p\mid y+1)\vee(q\mid y+1)$ since otherwise $n\mid y-1<n$ is impossible where $y\neq 1$.
     Then $0<y+1\le n-1$ also excludes $(p\mid y+1)\land(q\mid y+1)$
   - TODO why 4 square roots modulo n.
-  - e) by probability, 1 in 2 *relatively prime numbers* .
+  - e) by probability, 1 in 2 *relatively prime numbers*.
+- Problem 9.33 (chapter 16 reference)
 ## 10.3
 - Theorem 10.3.2 is same as DMIA 10.4.7.
 - > will be the smallest value k for which .AG /kuv is nonzero
@@ -4245,6 +4247,164 @@ the green underlined words lack strict proofs.
     Then if we want to delete edge $k$, we can use (b) to let it be the last edge and then revert the last operation we still get one planar graph.
   - (d)
     trivially deleting vertices doesn't influence "planar". Then with (c), we are done.
+## 14.1
+- > Perhaps surprisingly, but certainly not coincidentally, these two numbers are the same: 1820.
+  $C_{12+5-1}^{4}=C_{16}^{4}=1820$
+- > at most 2 log n multiplications
+  here only keeps the main part (see p184)
+- > $50,000 a year for 20 years ought to be worth less than a million dollars right now
+  This assumes currency inflation.
+- Notice (14.7) saying about $0.999\cdots$
+## 14.4*
+- Figure 14.5
+  - physics [proof](https://www.mathscareers.org.uk/the-infinite-block-stacking-problem-or-the-leaning-tower-of-lire/) using "moment" from [wikipedia](https://en.wikipedia.org/wiki/Block-stacking_problem#Proof_of_solution_of_single-wide_variant)
+    - Possible overhang with one block: trivial by symmetry although we can also prove using "moment".
+    - Possible overhang with two blocks:
+      - $l/2$ is got by seeing the 1st block and the table as one whole entity. Then follow "Possible overhang with one block".
+      - Notice here we see 2 blocks each as one small entity giving the gravity force at the *center of mass*. So $x,l/2-x$.
+        > The blocks can be modelled as point-masses located at the center of each block, assuming uniform mass-density.
+    - Possible overhang with three blocks
+      - "balance point" can be seen as "center of mass" (here I didn't give one strict proof.)
+      - The above doesn't influence the proof
+        we only need one equivalent of $2mg$ which is very trivial.
+  - [more elegant proof](https://web.archive.org/web/20231204233816/http://wrean.ca/cazelais/block_problem.pdf) also from wikipedia
+    - Here $d_{n,n-1}$ is calculated [based on center of mass](https://raptor-scientific.com/resources/center-of-gravity/#:~:text=M%20%3D%20W%20x%20d%3A%20Where%20M,of%20gravity%20of%20the%20object.)
+    - We thought the right edge is the pivot vertical line generalized from pivot point.
+      Also [see](https://www.ncl.ac.uk/webtemplate/ask-assets/external/maths-resources/mechanics/moments-main/moments.html#:~:text=The%20moment%20of%20a%20force%20about%20a%20point%20is%20(the,the%20force%20from%20the%20point).)
+  - We can also use ["center of mass"](https://physlab.org/wp-content/uploads/2020/02/Stacking-4.pdf)
+    The formula is same as mathscareers link.
+    e.g. for (2) we have $mgx+mg\cdot(-(\frac{l}{2}-x))=0$.
+    - (4) using mathematical induction
+      Let $S_{n+1}-S_n=x$, then as mathscareers says, we have $nmgx+mg\cdot(-(\frac{l}{2}-x))=0\Rightarrow x=\frac{l}{2(n+1)}$. This is what Figure 4 shows.
+  - wikipedia
+    - > by assuming the inductive hypothesis
+      i.e. all have the form $\frac{l}{2k}$.
+  - mcs proof
+    - > But now the center of mass of the bottom book has horizontal coordinate 1=2
+      it uses "center of mass" coordinate. Here the positive direction is the left direction.
+- > Moreover, the bottom book extends 3/4 of a book length past the end of the table
+  i.e. $1-\frac{1}{4}$. In Figure 14.8 (a) we take the table edge as the pivot line. Then use the same  analysis process as mathscareers.
+  > which is the same as the maximum overhang for the top book in a two book stack.
+  Notice this doesn't hold the the 3rd and more.
+  For 3rd, it is because $1-\frac{1}{6}\neq \sum_{k=1}^{3}\frac{1}{2k}$.
+  ```python
+  # trivial
+  from fractions import Fraction
+  Fraction('3/4')+Fraction('1/6')-Fraction('1/3')-Fraction('1/2')
+  ```
+- I skipped [this reference](https://sci-hub.se/10.1088/0031-9120/42/1/F05) because it seems to be [too more about physics](https://archive.org/details/GurskiiElementaryPhysicsProblemsAndSolutions/page/n87/mode/2up)
+  also skipped [16], [Maximum Overhang](https://maa.org/sites/default/files/pdf/upload_library/22/Robbins/Patterson2.pdf) since it is one a bit heavy work.
+## 14.5
+- Theorem 14.5.1
+  [See](https://en.wikipedia.org/wiki/Stirling's_approximation#Speed_of_convergence_and_error_estimates) -> [paper](https://sci-hub.se/https://doi.org/10.2307/2308012)
+  - (7) is based on $3^k>2k+1,k\ge 2$.
+    the last step 
+    LHS=$\frac{1}{12(p^2+p+\frac{1}{6})}$
+    RHS=$\frac{1}{12(p^2+p+\frac{p+(p+1)}{12})+\frac{1}{12}\cdot(1+\frac{1}{12})}$
+  - ~~TODO how to get~~ (9) by canceling consecutive shared terms.
+  - $\log(\frac{1+x}{1-x})$ see [this -> $\log(1+x)-\log(1-x)$](https://socratic.org/questions/how-do-you-find-the-maclaurin-series-expansion-of-ln-1-x-1-x) Then use [this](https://math.stackexchange.com/a/878376/1059606)
+  - > may be shown by one of the usual methods to have the value V/2i
+    This is based on $n!\sim {\sqrt {2\pi n}}\left({\frac {n}{e}}\right)^{n}$. See DMIA notes.
+  - > The editor has pointed out ...
+    - > Then the serie
+      That is $\epsilon_p+1$.
+    - $\frac{v_n}{v_{n+1}}=e^{\epsilon_n-(\frac{1}{12n}-\frac{1}{12(n+1)})}$
+    - $\frac{u_{n+1}}{u_{n}}=e^{-\epsilon_n}$
+      so $u_{\infty}=u_1\cdot e^{\sum_{n=1}^{\infty}-\epsilon_n}$. This is definition of $C$.
+    - > where rn satisfies (2)
+      This is from $v_n < C < w_n$. Then we have $u_n<Ce^{\frac{1}{12n}}$ ...
+- > Theorem 14.5.1 can be proved by induction (with some pain)
+  I skipped this due to that is probably mechanic.
+- > For n  10, this means we will be within 1% of the correct value.
+  ~~This means error~~
+  ```python
+  1/math.exp(1/120)
+  Out[3]: 0.991701292638876
+  1/math.exp(1/1200)
+  Out[4]: 0.9991670137924582
+  ```
+  - Here we assume "the correct value" as the form without $e^{\epsilon_n}$ since that factor can't get the exact value.
+  - > For n  10, this means that either bound will be within 0.01% of the correct value. For n  100, the error will be less than 0.0001%.
+    ~~TODO What does this mean?~~
+    ```python
+    bound=lambda n:1/math.exp(1/144*n**2+12*n)
+    bound(10)
+    Out[6]: 3.8288537799628814e-53
+    ```
+  - Table 14.1
+    ```python
+    # Table 14.1 row 1
+    acc=lambda n:(math.sqrt(2*math.pi*n)*(n/math.e)**n-math.factorial(n))/math.factorial(n)
+    for i in range(4):
+      print(acc(10**i))
+    -0.07786299110421091
+    -0.008295960443938127
+    -0.000832983432148802
+    OverflowError: (34, 'Numerical result out of range')
+    ```
+  - 
+    ```python
+    approx=lambda n:math.sqrt(2*math.pi*n)*(n/math.e)**n
+    acc=lambda n:(approx(n)-math.factorial(n))/approx(n)
+    for i in range(4):
+      print(acc(10**i))
+    -0.08443755141922758
+    -0.008365359132399853
+    -0.0008336778720039303
+    ```
+## 14.6
+- (14.28) is one exact value which is close to $n\ln n-n+\ln n$ also close to $n\ln n-n+1$.
+## 14.7
+- Little Oh see DMIA 3.2-63.
+- Lemma 14.7.3
+  - ~~TODO How to ensure~~ $\sqrt{x^{\delta}}\ge 1$ since we considers $x\to \infty$
+  - also [see @%@](https://math.stackexchange.com/a/601462/1059606)
+- > Lemma 14.7.3 and Corollary 14.7.4 can also be proved using l’Hôpital’s Rule or the Maclaurin Series for log x and e x
+  So I skipped the proof of Corollary 14.7.4.
+- $\le c$ implies $\limsup\ldots<\infty$.
+- > as large as 8d/c
+  Does this mean "8d or 8c"?
+- $\sim$ implies having limit but $\Theta$ same as $O$ may not.
+  > We need lim sup’s in Definition 14.7.5 to cover cases when limits don’t exist.
+- $\lim e^{\frac{1}{12n}}=1\Rightarrow e^{\frac{1}{12n}}+1=o(f(n)),\lim f(n)\neq 0$
+- > For example, f  g in general does not even imply that 3f D ‚ .3g /
+  See [this](https://math.stackexchange.com/a/4916846/1059606)
+- Similar to from $o$ we can get $O$, we can get $\Omega$ from $\omega$.
+## chapter 14 problems
+- Problem 14.2 (trivial by algebraic calculation)
+  $$
+  \begin{align*}
+    zT&=z^2+\ldots+nz^{n+1}\\
+    (1-z)T&=z+z^2+\ldots+z^n-nz^{n+1}\\
+    T&=\frac{1}{1-z}\cdot(\frac{1-z^{n+1}}{1-z}-1-nz^{n+1})
+  \end{align*}
+  $$
+- Problem 14.10 (trivial by mirror the the plot with the middle vertical line as the axis) (Also see Math-for-CS-solutions)
+- Problem 14.27
+  - (a) see above
+  - (b) see [this](https://math.stackexchange.com/q/2183605/1059606)
+    notice if $\lim \ln g(x)=0$, then $\lim \frac{\ln f(x)}{\ln g(x)}=1$ may not hold as OP says.
+  - (c) We have $\lim \frac{\log(2\pi n)^{\frac{1}{2}}+\log n^n-n}{\log(n!)}=1$
+    - if we have $\lim \frac{n}{\log(n!)}=0$, then we have $\lim \frac{\log(2\pi n)^{\frac{1}{2}}}{\log(n!)}=\lim \frac{\frac{1}{2}\log(2\pi)}{\log(n!)}+\frac{\frac{1}{2}\log(n)}{\log(n!)}=\lim \frac{1}{2}\frac{\log(n)}{\log(n!)}\overbrace{=}^{\log n<n}0$
+    Then we have $\lim \frac{\log n^n}{\log(n!)}=1$
+      - [Proof of the assumption](https://math.stackexchange.com/a/4916905/1059606)
+        - [This](https://math.stackexchange.com/a/4916904/1059606) is based on [this](https://math.stackexchange.com/a/704506/1059606)
+        - Stolz–Cesàro theorem seems to be [not said in calculus](https://rodrigopacios.github.io/mrpacios/download/Thomas_Calculus.pdf). So I didn't follow [this ans](https://math.stackexchange.com/a/4916902/1059606).
+    - Also see [this](https://math.stackexchange.com/a/377012/1059606) and [the comment using ${\displaystyle \ln(n!)=n\ln n-n+O(\ln n),}$ "one liner" directly](https://math.stackexchange.com/questions/376988/limit-of-frac-lognn-logn-as-n-to-infty#comment809135_377012)
+      This can be proved using the equation above (14.24). Suppose we have $\ln(n!)=n\ln n-n+g(n)$ then $\limsup g(n)/\ln n<\frac{1+\ln n}{\ln n}=1<\infty$.
+      Then we have $\lim O(\ln n)/n\ln n=0$ since although $O(\ln n)/\ln n$ may oscillate but it must be similar to one constant, then $0\cdot O(\ln n)/\ln n=0$.
+      Then one liner $\lim \ln(n!)/n\ln n=\lim 1-1/\ln n+0=1$
+    - Also see [this](https://math.stackexchange.com/a/377087/1059606) by step by step approximation.
+    - [$\lim\limits_{n \to\infty} \frac{n!}{n^n}$](https://math.stackexchange.com/a/61741/1059606)
+      is not equal to [$\lim_{n\to\infty}\frac{\sqrt[n]{n!}}{n}$](https://math.stackexchange.com/a/201911/1059606) since $\lim f/g= \lim \ln f/\ln g$ is not necessary.
+## chapter 15 problems
+- Problem 15.59
+- Problem 15.72 (chapter 16 reference)
+## chapter 16 problems
+- Problem 16.5
+- Problem 16.8
+- Problems 16.14, 16.15, 16.18, and 16.19
+- Problem 16.25
 ## TODO (use the book page number)
 - p182
   TODO Maybe I wrote this due to the doubts about
@@ -4299,6 +4459,8 @@ the green underlined words lack strict proofs.
   CRLS gives the detailed proof.
 - the above [safe_edge_MST]
 - The above "B-tree".
+- mcs
+  > In fact, the O.n2:55/-operation multiplication pro-cedure is almost never used in practice because it only becomes relatively efficient on matrices of impractical size.
 # TODO after compiler
 - [This](https://stackoverflow.com/a/575337/21294350) related with naming and binding in 10_5_64 code.
 # TODO after complexity book

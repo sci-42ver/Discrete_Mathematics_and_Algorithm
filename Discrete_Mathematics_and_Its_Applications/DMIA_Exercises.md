@@ -1554,6 +1554,7 @@ Although "generally more difficult" said in p12, but it is not the case, at leas
           > for all large enough values of $x$
           Then the book $\Omega$ corresponds to "Big Omega in ~~number theory~~complexity theory" in wikipedia.
           - [TODO prove](https://math.stackexchange.com/questions/4124155/asymptotic-analysis-difference-between-big-o-and-big-omega-limits#comment10305874_4124231) the equivalence between 2 definitions for $\Omega$ of the Hardy-Littlewood definition. <a id="sup_Hardy_Littlewood"></a>
+        - By the [reference](https://www.google.com/books/edition/Condition/SNu4BAAAQBAJ?hl=en&gbpv=1&pg=PA467&printsec=frontcover), here we should use $\limsup \frac{|f(n)|}{g(n)}$ for big-oh
 - [ ] 58 based on [O_Theta_Omega_relation_with_limit], it is trivial.
   - see the ans, it needs to recursively calculate the limit.
   - so $o\Rightarrow O\text{ but }O\nRightarrow o$
