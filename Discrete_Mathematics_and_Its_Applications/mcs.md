@@ -1411,6 +1411,8 @@ This is by letting edge indicating conflict restriction, etc.
   i.e. $E=\{\langle i-idx(i)\rangle\mid i\in A\}\cup\{\langle b-0\rangle,\langle c-0\rangle\}$ where $A$ is the alphabet and $idx(i)='i'-'a'$.
   So $\deg(0)=3>2=\max(\deg(l)),l\in L(G)$
   By the 1st paragraph in the proof of Theorem 12.5.2, we have "the matching condition holds".
+- matching means [no one-to-mul or mul-to-one](https://en.wikipedia.org/wiki/Matching_(graph_theory))
+  > no two edges share common vertices
 ## 12.6
 - > Since only graphs with no edges—the empty graphs—have chromatic number 1
   - IMHO this has no relations with Lemma 12.6.2
@@ -1867,8 +1869,33 @@ sections using bijection (not complete): 15.6,7.
   print(len(sums)==len(set(sums)))
   ```
   - TODO one more elegant proof that subset sums are distinct.
+- > the Assistant must reveal the same sequence of three cards for at least
+  This means *at least for one sequence* of three cards.
+### 15.8.5
+- > The more counterclockwise of these two cards is revealed first
+  ~~This should be "clockwise".~~
+  > The rank of the secret card is between 1 and 6 hops clockwise from the rank of the first card revealed
+  ~~What if pair (10,6)?~~
+  Here "counterclockwise" means the relation based on
+  > one is always between 1 and 6 hops clockwise from the other.
+  instead of starting from A.
+- > It turns out that there is a method which they could actually learn to use with a reasonable amount of practice for a 124-card deck, but we won’t explain it here
+  I skipped [this](https://www.apprendre-en-ligne.net/crypto/magie/card.pdf) since it may be one mere generalization from 52 to 124.
 ## chapter 15 problems
 - Problem 15.59
+  I read [one proof based on induction](https://math.stackexchange.com/a/1674481/1059606) before in one pdf (temporarily not found).
+  - (a) choose $1/x_i$ for each multiplicand we get RHS.
+  - (b) 
+    (15.14) 2 cases for whether $x\in T$.
+    (15.15) trivial based on the definition of $\cap$.
+    (15.16) based on when one $M_i=1$, then LHS=1.
+  - (c) 
+    $LHS=1-\prod_{i\in I}(1-M_i)=1-\sum_{I\ldots}(-1)^{|I|}\prod_{j\in I}M_j=RHS$
+  - (d) This means iterating for all elements and check whether in. If so contribute 1 to the size.
+  - (e)
+    $|U|=\sum_{u\in U}M_{U}(u)\overbrace{=}^{15.17}\sum_{u\in U}\sum_{\varnothing\neq \ldots}(-1)^{|I|+1} \prod_{j\in I}M_j(u)\overbrace{=}^{\text{swap the sum order and }(15.15)}\sum_{\varnothing\neq \ldots}(-1)^{|I|+1} \sum_{u\in U} M_{\cap_{i\in I}S_i}(u)\overbrace{=}^{15.18}\sum_{\varnothing\neq \ldots}(-1)^{|I|+1} |\cap_{i\in I}S_i|$
+  - (f)
+    trivial by pulling $|I|$ out with one variable assignment.
 - Problem 15.72 (chapter 16 reference)
 ## chapter 16 problems
 - Problem 16.5
