@@ -196,7 +196,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
   $$
   - > Explain how, given a set-theoretic equality between two set expressions that is not valid, to *construct a counter-example using any truth assignment* that falsifies the corresponding propositional equivalence
     
-    Since we get the final expression, it is easy to show the counter-example or directly show the equality "is not valid". If wanting to make connection with the "truth assignment" anyway, we can use $T\land F\neq T\lor F$ where $(\land,\lor)$ corresponds to $(\cap,\cup)$. Or more  specifically, let $(z\in A \land z\notin B)=T$ and $(z\in A \land z\notin C)=F$.
+    Since we get the final expression, it is easy to show the counter-example or directly show the equality "is not valid". If wanting to make connection with the "truth assignment" anyway, we can use $T\land F\neq T\lor F$ where $(\land,\lor)$ corresponds to $(\cap,\cup)$. Or more  specifically, let $(z\in A \land z\notin B)$ and $(z\in A \land z\notin C)$ have different boolean values.
     ~~We can also use the method implied in the following proof, i.e. .~~
   - > Conclude that any set equality that is valid in a domain of size one will be valid in all domains.
   
@@ -1852,6 +1852,9 @@ sections using bijection (not complete): 15.6,7.
 - Sets with Distinct Subset Sums can be constructed based on one [arbitrary set of subset sum](https://math.stackexchange.com/a/1074810/1059606).
   - I skipped [this paper](https://www.combinatorics.org/ojs/index.php/eljc/article/download/v5i1r3/pdf) and [this reddit post](https://www.reddit.com/r/askmath/comments/4y2a0f/sets_with_certain_distinct_subsets/) is much less valuable
   - Notice here $T'$ or the typo $T$ mean "*generating* set", i.e. one version of $B$.
+  - TODO [Conway-Guy Sequence](https://math.stackexchange.com/a/4079549/1059606) proof
+  - Paul Erdős [conjecture](https://www.sciencedirect.com/science/article/abs/pii/S0166218X22004103#:~:text=Let%20%7B%20a%201%20%2C%20.%20.,c%20%E2%8B%85%202%20n%20%2F%20n%20.)
+    TODO why [$min{max}$](http://www.openproblemgarden.org/op/sets_with_distinct_subset_sums) since that may allow $16$ for $n=5$ as the box shows.
 - > Here is one:
   ```python
   from itertools import chain, combinations
@@ -1863,6 +1866,7 @@ sections using bijection (not complete): 15.6,7.
   # https://stackoverflow.com/a/1541827/21294350
   print(len(sums)==len(set(sums)))
   ```
+  - TODO one more elegant proof that subset sums are distinct.
 ## chapter 15 problems
 - Problem 15.59
 - Problem 15.72 (chapter 16 reference)
