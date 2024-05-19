@@ -1,14 +1,3 @@
-Here the *unique remainder* of the integer modulo operation implies the bijection. This is probably *contrived* as mcs.pdf https://courses.csail.mit.edu/6.042/spring18/mcs.pdf says which includes this problem.
-
-Here when $n$ is odd, we need $b$ to be odd since $2a$ is even (Similar process for $n$ is even where we need $b$ to be even). So 
-$$
-S(n) = 
-\begin{cases}
-\left\lceil\left\lfloor \frac{n}{5} \right\rfloor/2\right\rceil & n \text{ odd} \\
-\left\lfloor\left\lfloor \frac{n}{5} \right\rfloor/2\right\rfloor & n \text{ even}
-\end{cases}
-$$ Then we can think about the $2\cdot 5=10$ cases for $n,p$ in $n=5t+p$. This is probably not what mcs.pdf https://courses.csail.mit.edu/6.042/spring18/mcs.pdf expects since it says "*direct simple* counting argument".
-
 # mcs
 - Here I didn't care about more circuit knowledge than already learnt since it is too complex to design one by myself. (skip_circuit)
 - Here * sections mean that they are not included in Discrete_Mathematics_and_Its_Applications.
@@ -39,6 +28,7 @@ $$ Then we can think about the $2\cdot 5=10$ cases for $n,p$ in $n=5t+p$. This i
   TODO compare these [2 files](https://www.adobe.com/acrobat/how-to/compare-two-pdf-files.html)
   - The migration may probably began from commit e7d0044d95aa8675c19af4745f24084e7080a59e to .
 - From 9.6, if "Lemma 9.6.1", etc, are highlighted, it means their proofs are skipped because of  duplicity with DMIA.
+- For some chapters like chapter 17 I read their prefaces (probably from 1 to 16 I all read their prefaces), but not for others. (The detailed list is not recorded since when reading mcs I forgot when I began reading prefaces and when I mistakenly discontinued.)
 ### relation with 6.042J 2019
 - currently the following chapter_1-3 problems, chapter_2-2 problems are not in IN-CLASS QUESTIONS or ASSIGNMENTS.
 ### theorem
@@ -1993,10 +1983,79 @@ I don't know why [$x>1$ -> Cauchy sequence](https://math.stackexchange.com/quest
 - TODO [Birthday attack](https://en.wikipedia.org/wiki/Birthday_attack)
 ## chapter 17 problems
 seemingly nothing.
+## 18.2
+- > The conditional probability would then be:
+  IMHO not in all problems and then all constructed "conditional probability"s are same as "unconditional probability".
+## 18.4* (DMIA doesn't give one systematic method for solving with probability problems. Also see 17.2*)
+- > which could be written in a form called the Product Rule for conditional probabilities:
+  There are many places where "Product Rule" occurs.
+- > Well, the probability that the smallest number in the random set is one of the k numbers in S is k=n.
+  ~~Here "random set" is size $n$~~
+  ~~$k/n$ is based on where we put "the smallest number" if the first $k$ positions correspond to the subset.~~
+  Here we first fix one "size-k subset S", then we construct one "randomly chosen set" by choosing elements one by one.
+  $k/n$ is because from $n$ numbers only $k$ numbers meet the expected property.
+  $k-i/n-i$ because we have chosen $i$ elements.
+- See 18.4.3 for what index should be considered.
+  > So, if the test is positive, then there is an 84.6% chance that the result is incorrect, even though the test is nearly 95% accurate!
+- > The number of healthy individuals is so large that even the mere 5% with false positive results *overwhelm* the number of genuinely positive results from the truly ill.
+  This means although $0.05<0.90$ but $0.99>>0.01$ based on their ratio.
+  so $0.99\cdot 0.05>>0.01\cdot 0.90$
+- "Natural Frequencies" may mean these "Frequencies" are from the real life.
+### 18.4.6
+This is talking about how we interpret one probability. The following (*) means probability is not allowed.
+1. The Prime Number Theorem
+2. innocent view by "either prime or it isn’t".
+3. "no randomness involved" -> "nonsense". (*)
+4. "Bayesian"
+  - See [this](https://en.wikipedia.org/wiki/Bayesian_probability)
+    - > as a degree of belief in a proposition.
+      i.e.
+      > In the Bayesian view, *a probability is assigned to a hypothesis*, whereas under frequentist inference, a hypothesis is typically *tested* without being assigned a probability.
+      which is also
+      > perfectly willing to *assign a probability* to each possibility.
+      > since the probability depends on one’s *initial be-liefs*
+      > If you’re comfortable using probability to describe your *personal belief* about primality after such an experiment, you are being a Bayesian. A frequentist would *not assign a probability* to N ’s primality, but they would also be happy to bet on primality with tremendous confidence
+5. repeatable processes (*)
+6. "probabilistic primality test".
+- > The Prime Number Theorem implies that only about 1 in 5 million numbers in this range are prime, so you might say that the probability is about 2  10 8
+  - [5 million](https://www.wolframalpha.com/input?i2d=true&i=Log%5BPower%5B2%2C6972607%5D-1%5D)
+  - Here should be $2\cdot 10^{-7}$
+- > As an aside, it is not clear whether Bayes himself was Bayesian in this sense.
+  TODO Maybe it means Bayes doesn't care about the *sequence* of conditions but [just one](https://en.wikipedia.org/wiki/Bayesian_probability#History)
+  > then Bayesianism provides a convincing framework for updating your beliefs as *further information* emerges.
+- > If a number N is composite, there is at least a 3=4 chance that the test will discover this.
+  maybe Volker Strassen's test.
+- > If you’re comfortable using probability to describe your personal belief about primality after such an experiment, you are being a Bayesian.
+  See [this](https://en.wikipedia.org/wiki/Bayesian_probability)
+- > the real world conclusions Bayesians and Fre-quentists reach from probabilities are pretty much the same
+  TODO proof.
 ## chapter 18 problems
 - Problem 18.1
+  - (a) trivial $\cap_{i=1}^{n-1}E_i$.
+  - (b) 
+    ~~$\text{Pr}[\cap_{i=1}^{n}E_i]=\text{Pr}[E_1]\text{Pr}[\cap_{i=2}^{n}E_i\vert E_1]$~~
+    Let $K=\cap_{i=1}^{n}E_i$
+    Then $\text{Pr}[K\cap E_{n+1}]=\text{Pr}[K]\text{Pr}[E_{n+1}\vert K]$
+    Then substitute the induction hypothesis formula for $\text{Pr}[K]$, we are done.
 - Problems 18.3 and 18.4
+  - 18.3
+    - See the preface of 18.5
+      Then we "splitting into cases" of size $n$
+      Then use "the Sum Rule" due to "disjoint" and "whole".
+      - This is based on $A=\bigcup(A \cap E_i)$
+  - 18.4
+    - just change the denominator.
 - Problem 18.14
+  - > This is easy to verify by plugging in the Definition 18.2.1 of conditional probabil-ity.
+    See $C$ as the whole set.
+    And divide by $\text{Pr}[C]$.
+  - (a)
+    Use Sum Rule, $\sum_{w\in B}\text{Pr}[w]=\text{Pr}[B]$
+  - (b)
+    $LHS=\sum_{w\in A}\text{Pr}_B[w]=\sum_{w\in A\cap B}\text{Pr}[w]/\text{Pr}[B]=RHS$
+  - (c)
+    i.e. to prove $\text{Pr}_B[C\cup D]\ldots$
+    Then use "disjoint" which still holds when in the domain of $B$.
 ## chapter 19 problems
 - Problem 19.1
 - Problem 19.2
