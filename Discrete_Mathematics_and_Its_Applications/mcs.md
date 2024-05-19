@@ -1838,6 +1838,7 @@ the green underlined words lack strict proofs.
     - Also see [this](https://math.stackexchange.com/a/377087/1059606) by step by step approximation.
     - [$\lim\limits_{n \to\infty} \frac{n!}{n^n}$](https://math.stackexchange.com/a/61741/1059606)
       is not equal to [$\lim_{n\to\infty}\frac{\sqrt[n]{n!}}{n}$](https://math.stackexchange.com/a/201911/1059606) since $\lim f/g= \lim \ln f/\ln g$ is not necessary.
+- Problems 14.14 and 14.16 (chapter 19 reference)
 ## 15.1
 sections using bijection (not complete): 15.6,7.
 ## 15.3
@@ -1978,6 +1979,38 @@ I don't know why [$x>1$ -> Cauchy sequence](https://math.stackexchange.com/quest
   - if
     we have $h_0=1-g_0$
     Then we have $h_k=\frac{-\sum_{i=1}^{k}g_ih_{k-i}}{g_0}$ which is well-defined.
+## 17.3*
+- > But this intuitive idea is simply false:
+  Here the result is based on comparison.
+  We have $B\xRightarrow{3+2+0}C\xRightarrow{3+1+1}$
+  - We can think it as 3 monsters with 3 ability values.
+    When combining these 3 ability values based on comparison instead of directly sum,
+    they may have the behavior like "inter inhibition of the five elements".
+- TODO [Ron Graham paper](https://mathweb.ucsd.edu/~ronspubs/pre_nontransitive.pdf)
+## 17.4
+- > For d  n2 =2, the probability of no match turns out to be asymptotically equal to the upper bound (17.7).
+  intuitively when $d$ becomes bigger, $\frac{i}{d}\to 0,0\le i\le n-1$.
+- TODO [Birthday attack](https://en.wikipedia.org/wiki/Birthday_attack)
+## chapter 17 problems
+seemingly nothing.
+## chapter 18 problems
+- Problem 18.1
+- Problems 18.3 and 18.4
+- Problem 18.14
+## chapter 19 problems
+- Problem 19.1
+- Problem 19.2
+- Problem 19.36
+- Problem 19.29
+## chapter 20 problems
+- Problem 20.3
+- Problem 20.19
+## chapter 21 problems
+- Problem 21.2
+- Problem 21.12
+- Problem 21.8
+## chapter 22 problems
+seemingly nothing.
 ## TODO (use the book page number)
 - p182
   TODO Maybe I wrote this due to the doubts about
