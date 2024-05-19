@@ -1,3 +1,14 @@
+Here the *unique remainder* of the integer modulo operation implies the bijection. This is probably *contrived* as mcs.pdf https://courses.csail.mit.edu/6.042/spring18/mcs.pdf says which includes this problem.
+
+Here when $n$ is odd, we need $b$ to be odd since $2a$ is even (Similar process for $n$ is even where we need $b$ to be even). So 
+$$
+S(n) = 
+\begin{cases}
+\left\lceil\left\lfloor \frac{n}{5} \right\rfloor/2\right\rceil & n \text{ odd} \\
+\left\lfloor\left\lfloor \frac{n}{5} \right\rfloor/2\right\rfloor & n \text{ even}
+\end{cases}
+$$ Then we can think about the $2\cdot 5=10$ cases for $n,p$ in $n=5t+p$. This is probably not what mcs.pdf https://courses.csail.mit.edu/6.042/spring18/mcs.pdf expects since it says "*direct simple* counting argument".
+
 # mcs
 - Here I didn't care about more circuit knowledge than already learnt since it is too complex to design one by myself. (skip_circuit)
 - Here * sections mean that they are not included in Discrete_Mathematics_and_Its_Applications.
@@ -191,7 +202,7 @@ $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.
      &\iff (z\in A)\land(z\notin B\land z\notin C)&(\text{De Morgan's laws})\\
      &\iff (z\in A)\land(z\in A)\land(z\notin B\land z\notin C)&(a\land a=a)\\
      &\iff (z\in A \land z\notin B)\land(z\in A \land z\notin C)&(\text{Associativity and Commutativity})\\
-     &\iff (A-B)\cap(A-C)&(\text{def of }\cap,-)
+     &\iff z\in (A-B)\cap(A-C)&(\text{def of }\cap,-)
   \end{align*}
   $$
   - > Explain how, given a set-theoretic equality between two set expressions that is not valid, to *construct a counter-example using any truth assignment* that falsifies the corresponding propositional equivalence
@@ -1021,7 +1032,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
 ## 9.7* (This is said in DMIA 4.1.5 Arithmetic Modulo m although not detailed)
 - compared with DMIA 4.2.4 Modular Exponentiation which cares about simplifying the exponent, 9.7 cares about the base.
 - > all of the following equalities
-  these are those in [the ring definition](https://en.wikipedia.org/wiki/Ring_(mathematics)#Definition)
+  these are those in [the ring definition](https://en.wikipedia.org/wiki/Ring_(mathematics)#Definition) plus commutativity of $\cdot$ where 2 rules of distributivity are combined.
   [proof](https://proofwiki.org/wiki/Ring_of_Integers_Modulo_m_is_Ring)
   - Addition
     - [Modulo Addition is Associative](https://proofwiki.org/wiki/Modulo_Addition_is_Associative) which is based on *Associative Law of Addition*.
@@ -1135,7 +1146,14 @@ This uses SAT to solve factoring [which is NP](https://stackoverflow.com/questio
     Then $0<y+1\le n-1$ also excludes $(p\mid y+1)\land(q\mid y+1)$
   - TODO why 4 square roots modulo n.
   - e) by probability, 1 in 2 *relatively prime numbers*.
-- Problem 9.33 (chapter 16 reference)
+- Problem 9.33 (chapter 16 reference) Also see [Identity_Unique]
+  - (a) similar to [Identity_Unique]
+    if $z_{1,2}\oplus r=r$
+    Then $z_1\oplus z_2=z_1=z_2$
+  - (b) $r\oplus r_1\oplus r_2=0\oplus r_2=r_2\tag{*}$
+    similarly $LHS\text{ of }(*)=r\oplus r_2\oplus r_1=r_1$
+  - similarly with the definition of 1.
+    Here we don't need the "unique" property of 1 although that is held.
 ## 10.3
 - Theorem 10.3.2 is same as DMIA 10.4.7.
 - > will be the smallest value k for which .AG /kuv is nonzero
@@ -1897,11 +1915,69 @@ sections using bijection (not complete): 15.6,7.
   - (f)
     trivial by pulling $|I|$ out with one variable assignment.
 - Problem 15.72 (chapter 16 reference)
+  - (a) trivial 1.
+  - (b) 0 since if 1 must be swapped with another element which is greater than 1.
+  - (c) choose positions for $k$ ($k-1$)
+    then choose the permutation for the rest numbers ($(k-1)!$).
+  - (d) as (b,c) implied.
+  - This is same as [the reference][everywhere_divergent_generating_functions] "I like counting proofs" paragraph.
+    This also uses induction as the alternative method.
+    - Also see
+      > If you buy that, then the first proof is just the repeated application of this identity.
+    - relations
+      kw: "either fixes n or does not", .
+## 16.2
+- > So for the series G.x/ whose coefficients are all equal to 1, the Product Rule implies in a purely formal way that
+  This is due to $G(x)$ is one *infinite* series.
+  See the derivation of (16.3) where we won't reach $x^n$ forever.
+  Also [see](https://math.stackexchange.com/a/4918453/1059606)
+- > we could have used this algebraic argument and the Convolution Rule to derive the donut-counting formula.
+  "the Convolution Rule" is used to connect the coefficient with "the donut-counting" problem.
+- > conversely, they can allow algebraic identities to be derived by counting techniques.
+  i.e. the example in 16.2.5.
+## 16.3
+- Lemma 16.3.1 is said in control theory book which I learned when I was one undergraduate.
+  Also for its generalization.
+## 16.4
+- > So, for example, picking up the whole stack of disks at once and dropping them on another post is illegal.
+  i.e. reverse their order.
+## 16.5
+See [this QA](https://math.stackexchange.com/q/4918436/1059606) for more information. I skipped [1](https://math.stackexchange.com/questions/4918436/why-thinking-about-generating-function-algebraically-doesnt-care-about-converge#comment10504307_4918436), [2](https://math.stackexchange.com/questions/4918436/why-thinking-about-generating-function-algebraically-doesnt-care-about-converge#comment10504316_4918436) (TODO after abstract algebra)
+I don't know why [$x>1$ -> Cauchy sequence](https://math.stackexchange.com/questions/4918436/why-thinking-about-generating-function-algebraically-doesnt-care-about-converge#comment10504365_4918436)
+- > so H.x/ and F .x/ describe the same, trivial, partial function on the reals
+  Here it may mean their properties of "partial function on the reals" since $H(0)\neq F(0)$.
+- (16.19)
+  - ~~TODO Here should be $n\ge 2$~~
+    Here when $n=1$ the coefficient is 0.
+  - This is almost same as [everywhere_divergent_generating_functions] (?).
+    - > One important step was (4) where we used the identity (2).
+      only part of (2).
+- > not coordinatewise
+  See [this](https://math.stackexchange.com/a/28553/1059606) which means $(G\otimes H)_i$ may depend one $G_k,k<i$ instead of $G_i$.
+- > undefined over the real numbers or the ring Zn of Section 9.7.1
+  the latter is implied by the division is "defined over the real numbers".
+- > how do we justify the kind of manipulation in the previous section to derive the formula (16.19)
+  Maybe it means (16.16) where we can cancel infinitely
 ## chapter 16 problems
 - Problem 16.5
+  - $a_n=\frac{k(k+1)\cdots(k+n-1)(1-x)^{-(k+n)}}{n!}_{x=0}=\binom{n+k-1}{n}$
+  - Why the book has this problem since it is already said in p741.
 - Problem 16.8
+  - See 16.8.md.
 - Problems 16.14, 16.15, 16.18, and 16.19
+  - I skipped them since the theorem is THEOREM 6 in DMIA 8.2 which already has many exercises.
+    This is also probably learnt in calculus. [See comparison of Thomas’ Calculus](https://www.physicsforums.com/threads/understanding-the-different-versions-of-thomas-calculus-12th-ed-textbooks.544722/) although I read that as one reference instead of the textbook.
+    - Although they don't use generating function method.
+  - The former 2 has more complex contexts than the latter 2.
 - Problem 16.25
+  - only if
+    By definition of $\otimes$, we have $g_0+h_0=1$.
+    if $g_0=0$, then $h_0=1$
+    then $g_1=0$. Then similarly we have $g_ih_0=0\Rightarrow g_i=0$
+    Then $G=Z$. But $Z$ doesn't have "a multiplicative inverse".
+  - if
+    we have $h_0=1-g_0$
+    Then we have $h_k=\frac{-\sum_{i=1}^{k}g_ih_{k-i}}{g_0}$ which is well-defined.
 ## TODO (use the book page number)
 - p182
   TODO Maybe I wrote this due to the doubts about
@@ -2128,3 +2204,6 @@ sections using bijection (not complete): 15.6,7.
 
 <!-- Math-for-CS-solutions -->
 [sol_20]:./others/mcs/sol/Math-for-CS-solutions/MIT6_042JS15_cp20_solutions.pdf
+
+<!-- mathoverflow -->
+[everywhere_divergent_generating_functions]:https://mathoverflow.net/a/45873

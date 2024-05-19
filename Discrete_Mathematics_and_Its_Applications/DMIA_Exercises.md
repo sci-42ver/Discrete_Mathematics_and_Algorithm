@@ -4052,7 +4052,7 @@ simplify((x+1)*(2*x+1)/6-(1+x)**2/4).subs(x, 8)
     - here not all to peg 2 for disk 1,2 based on the above "other than".
   - [ ] 39 see the ans
   - [ ] 40
-    - [stewart1941] which is referred to in the paper from [wikipedia](https://en.wikipedia.org/wiki/Tower_of_Hanoi#cite_note-19)
+    - [stewart1941] which is referred to in the paper from [wikipedia](https://en.wikipedia.org/wiki/Tower_of_Hanoi#cite_note-19) ("Cyclic Hanoi" restricts the direction "clockwise" / "counterclockwise").
       - > In addition, they proved that if n is equal to the triangular number $t_k$, then the optimizing choice for i is in fact i = k, while if $t_{k−1} < n < t_k$
         TODO where is the proof in the above reference [stewart1941] which is referred in wikipedia paper [12] and [18]?
     - > Next move the stack of the k largest disks from peg 1 to peg 4, using the three-peg algorithm from the Tower of Hanoi puzzle
