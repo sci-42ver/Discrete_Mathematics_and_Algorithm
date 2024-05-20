@@ -1,3 +1,8 @@
+@msantama Sorry for the ambiguity. This is my understanding the above probabilities. Leaf probability are either $\frac{1}{18}$ or $\frac{1}{9}$. Or we can say *the second to last* level of the tree has the uniform probability space and then the last level of the tree has the almost uniform probability space. This is one contrived term. I will update my question.
+
+1. Thanks for your detailed description. The 1st paragraph shows we can't directly assume these 2 methods must have the same result except after some inspection we know that fact really holds. The exactly "when" question seems to be not easy to answer. 2. IMHO you may mean $$\Pr[\text{not win}\mid \text{switch}]=\Pr[(A,-,-)\mid(-,A,B)] \Pr[(-,A,B)]+\ldots=\frac13\cdot\frac16\cdot 6$$ Here I use Figure 17.5 tree.
+3. To help future readers, the 2rd to 4th (up to "their first guess was wrong"), the 6th and the 8th paragraphs show why "unconditional probability" is always same when doing some kinds of changes to the probability distribution. The 5th paragraph shows the fact that "conditional probabilities" may be probably not that case. The 7th paragraph shows why the above coincidence occurs. The last paragraph shows "unconditional probability" may change under some *contrived* changes.
+
 # mcs
 - Here I didn't care about more circuit knowledge than already learnt since it is too complex to design one by myself. (skip_circuit)
 - Here * sections mean that they are not included in Discrete_Mathematics_and_Its_Applications.
@@ -1986,6 +1991,15 @@ seemingly nothing.
 ## 18.2
 - > The conditional probability would then be:
   IMHO not in all problems and then all constructed "conditional probability"s are same as "unconditional probability".
+  See this QA
+  - deleted comment entries
+    - > "insensitive to the probability distribution of where the showrunners put the car ...": This means we can change something like $\Pr[(A,-,-)]$. Temporarily sticking to your calculation, then $\frac34\cdot\frac16\cdot 6$ will change the probability to $\frac34$. Can we understand that this is due to the symmetry? 
+      - Yes.
+        And $\frac34\cdot\frac16\cdot 6$ is impossible by
+        > some of the conditional probabilities shrinking when other conditional probabilities grow.
+    - > "assemble the $\frac23$ weighted average a list of different conditional probabilities" may mean we can have something like $\frac13\cdot\frac16+\frac23\cdot\frac16\ldots$ which may be not equal to. But "The only way that a weighted average of six equal numbers" means $\sum\frac23\cdot k_i=\frac23$ when $\sum k_i=1$. Could you say more detailedly about the second and third to last paragraphs?
+      - "which may be not equal to." see the last comment entry.
+        This is impossible.
 ## 18.4* (DMIA doesn't give one systematic method for solving with probability problems. Also see 17.2*)
 - > which could be written in a form called the Product Rule for conditional probabilities:
   There are many places where "Product Rule" occurs.
@@ -2029,6 +2043,37 @@ This is talking about how we interpret one probability. The following (*) means 
   See [this](https://en.wikipedia.org/wiki/Bayesian_probability)
 - > the real world conclusions Bayesians and Fre-quentists reach from probabilities are pretty much the same
   TODO proof.
+## 18.6
+- > Since we don’t think the parity of a date is a cause for the outcome of an admission decision, we would most likely *dismiss* the “coincidence” that on *both* odd and even dates, women are *more frequently* admit-ted.
+  > We interpreted the same numbers differently based on our implicit causal beliefs, specifically that departments matter and date parity *does not*.
+  ~~i.e. the people are *uniformly* distributed in these 2 cases.~~
+  Here maybe Simpson's paradox still occurs. But we won't care about one probability comparison result (i.e. based on date parity). So we will only care about one type of comparison.
+  - > It is circular to claim that the data corroborated our beliefs that there is or is not discrimination.
+    i.e. we assume the classification will show the trend (like "department" classification). So we will inspect the results (one direction: belief that trend is shown by the results -> we research the result.)
+    Then the result may show the trend (the other direction: research -> verify the belief)
+    - > never assume that correlation implies causation.
+      So the other direction: correlation implies causation
+      one direction: causation make us check the correlation.
+## 18.7
+- > The opposite is true
+  i.e. "disjoint events are" not "independent" except for trivial case "one of them has probability zero" included in Definition 18.7.1 $\Pr[A]=0$ "An event with probability 0 ...".
+## 18.9
+1. 18.9.3,4 I only read the context of "fact" and "" each and related contents with these contexts.
+2. The example in 18.9.2 shows that "conditional probability" has not much relation with "confidence".
+   The confidence is used when calculating "Bayes-factor".
+  > The 99% confidence level is not nearly high enough to overcome the relatively tiny probability of having TB.
+  i.e. $100<<1/(1/9999)$.
+- > So the either-or of Corollary 18.9.1 is really an either-or between some-thing happening that is extremely unlikely—having TB—and something that is only very unlikely—the diagnosis being wrong.
+  TODO their sum may be not 1.
+  > how seriously to take a positive diagnosis
+  i.e. think the diagnosis is right.
+- > We have figured out that if a random person tests positive for TB, the probability they have TB is about 1/100.
+  more specifically, if odds is 1/100, then probability is $(1/100)/(1+1/100)=1/101$.
+- See 18.4.6
+  - > but that does not mean it has some probability of being true. It is *either true or false*, we just don’t know which.
+  - > or how serious he thinks the consequences of a mistaken diagnosis would be.
+    Here it is a bit *subjective* and the doctor may become conservative if "the consequences" are "serious".
+  - > we don’t need to make any Bayesian *assumptions about the probability* of a fair coin being chosen.
 ## chapter 18 problems
 - Problem 18.1
   - (a) trivial $\cap_{i=1}^{n-1}E_i$.
