@@ -1834,6 +1834,35 @@ the green underlined words lack strict proofs.
     - [$\lim\limits_{n \to\infty} \frac{n!}{n^n}$](https://math.stackexchange.com/a/61741/1059606)
       is not equal to [$\lim_{n\to\infty}\frac{\sqrt[n]{n!}}{n}$](https://math.stackexchange.com/a/201911/1059606) since $\lim f/g= \lim \ln f/\ln g$ is not necessary.
 - Problems 14.14 and 14.16 (chapter 19 reference)
+  - 14.14
+    - 7
+      - Here we can let the sum be one arbitrary number. [See Riemann’s Theorem.][Rearranging_Alternating_Harmonic_Series] (This also proves the limit of the original "Alternating Harmonic Series".)
+        - outline
+          i.e. oscillate around the target $S$ and let the term absolute decreasing.
+        - Abel's theorem
+          - TODO after real analysis [proof of Abel's theorem](https://en.wikipedia.org/wiki/Abel%27s_theorem#Outline_of_proof)
+          - p18 adds contrived zeroes into the sequence
+          - TODO construction of "This idea works more generally:".
+          - Based on the formula in p23 or p26 (they are same), if we use that formula then the solution is not one obvious fraction.
+            ```python
+            from sympy import *
+            init_printing()
+            x = Symbol('x')
+            solve(ln(2)-1/2*log(x/(1-x))-7, x)
+            ```
+            ~~I skipped the contents after p~~
+          - P29 Outline of the proof proves ~~"if" part.~~
+            ~~"only if"~~ ~~is~~ "iff" part implied in p32 "partial sum" where only $\frac{p_k}{q_k}$ limit is undetermined.
+          - TODO What is p36's purpose since it seems one arbitrary $\alpha$ is possible?
+        - Here we should use Riemann’s Theorem to achieve one arbitrary number like 7 although the pattern is not known.
+          - also see [this @%@](https://math.stackexchange.com/a/2721579/1059606) for the exact solution.
+    - $\infty$
+      See [this](https://math.stackexchange.com/a/2969950/1059606)
+      Notice here scaling is more loosed.
+      - IMHO here $N_2$ corresponds to $(3,5)$
+        then $N_3$ corresponds to $x\in (2,3)$ which is added to the sum with the range is changed to $(4,5)$.
+  - 14.16
+    See [Rearranging_Alternating_Harmonic_Series]
 ## 15.1
 sections using bijection (not complete): 15.6,7.
 ## 15.3
@@ -1986,6 +2015,9 @@ I don't know why [$x>1$ -> Cauchy sequence](https://math.stackexchange.com/quest
 - > For d  n2 =2, the probability of no match turns out to be asymptotically equal to the upper bound (17.7).
   intuitively when $d$ becomes bigger, $\frac{i}{d}\to 0,0\le i\le n-1$.
 - TODO [Birthday attack](https://en.wikipedia.org/wiki/Birthday_attack)
+## 17.5
+- Probability Space [definition](https://en.wikipedia.org/wiki/Probability_space)
+  Here "event space" is implied by "sample space".
 ## chapter 17 problems
 seemingly nothing.
 ## 18.2
@@ -2101,11 +2133,53 @@ This is talking about how we interpret one probability. The following (*) means 
   - (c)
     i.e. to prove $\text{Pr}_B[C\cup D]\ldots$
     Then use "disjoint" which still holds when in the domain of $B$.
+## 19.1
+- TODO after real analysis [measurable function](https://en.wikipedia.org/wiki/Random_variable#Definition) in definition.
+- > an nth bet is 2 n
+  It should be $2^{-n+1}$.
+## 19.3
+- Figure 19.3 
+  Here $L/n$ is due to "half-integers" choices which can be bijective with $n\in\mathbb{Z}\cap [0..n]$.
+- [Las Vegas standards](https://en.wikipedia.org/wiki/Las_Vegas_algorithm)?
+- > called quicksort, uses random numbers
+  [pivot](https://en.wikipedia.org/wiki/Quicksort#Algorithm)
+- TODO after algorithm Exponential backoff
+## 19.4
+Great may mean the *useful linearity* property.
+- Theorem 19.4.3
+  Here $[R=x]$ one event which is one *set* of outcomes.
+- TODO after real analysis [proof of Theorem 19.4.4][rearrangement_absolutely_convergent_series]
+- "How to Win the Lottery" doesn't show one precise strategy but shows one possibility that "if he won, he’d likely get the whole pot" which is excluded in Figure 19.7.
+  > Most lotteries now offer randomized tickets to help smooth out the distribution of selected se-quences.
+  maybe force the overall distribution which doesn't allow artificial intervention.
+## 19.5
+- Theorem 19.5.4 is the  generalization of (19.10).
+- > We leave it to the reader to verify that, under the given convergence hypothesis, all the sums in the following derivation are absolutely convergent, which justifies rearranging them as follows
+  This is by [rearrangement_absolutely_convergent_series].
+- IMHO 19.5.6 may be wrong due to here maybe infinitely green.
+- Simialr to Theorem 19.5.5, Theorem 19.4.6 (Law of Total Expectation) depends on "exchange order of summation", so it may not work for infinite series.
+  So 19.6.1 formula may not work.
 ## chapter 19 problems
 - Problem 19.1
-- Problem 19.2
+  - only if: trivial
+    based on 19.2 paragraph 1, we have $[I_A=1]$ and $[I_B=1]$ are independent.
+    Then $A$ and $B$ are independent.
+  - if:
+    we need to prove $\overline{A}$ and $B$ are independent.
+    We already have $\Pr[A\cap B]=\Pr[A]\cdot \Pr[B]$ based on (18.5).
+    Then $\Pr[\overline{A}\cap B]=\Pr[B]-\Pr[A\cap B]=(1-\Pr[A])\cdot\Pr[B]=\Pr[\overline{A}]\cdot\Pr[B]$
+    The other 2 cases are similar.
+- Problem 19.2 (chapter 20 reference)
 - Problem 19.36
+  - $\forall a,b, \Pr[f(R)=a,g(S)=b]=\sum_{i,j}\Pr[R=r_i,S=s_j]=\sum_{i,j}\Pr[R=r_i]\Pr[S=s_j]=\sum_{i}\Pr[R=r_i]\sum_{j}\Pr[S=s_j]=\Pr[f(R)=a]\Pr[g(S)=b]$
+  - > Lemmas 19.2.1 and 19.2.2 both extend straightforwardly to k-way independent variables.
+    19.2.2 is trivial because that is changing the sum terms.
+    19.2.1 is based on $\Pr[\overline{A}\cap (B\cap C)]\Pr[\overline{A}]\cdot \Pr[B\cap C]=\ldots$. The rest is probably similar.
+- Exercise 19.31 (This is the 1st occurence using "Exercise" for "Problem")
+  - (a) $LHS=xEx'_{x}=\ldots=RHS$
+  - (b) trivial by substituting $x$ with $p$, etc.
 - Problem 19.29
+  - Weird the solution is already there.
 ## chapter 20 problems
 - Problem 20.3
 - Problem 20.19
@@ -2221,6 +2295,7 @@ seemingly nothing.
 [Identity_Unique]:https://math.stackexchange.com/a/622845/1059606
 [coprime_iff_invertible]:https://math.stackexchange.com/a/2326680/1059606
 [walk_implies_path]:https://math.stackexchange.com/a/699805/1059606
+[rearrangement_absolutely_convergent_series]:https://math.stackexchange.com/q/3734769/1059606
 
 <!-- stack overflow -->
 [longest_simple_path_NP_hard]:https://stackoverflow.com/a/53399638/21294350
@@ -2301,6 +2376,7 @@ seemingly nothing.
 [2020_lec_02]:https://lara.epfl.ch/w/_media/fv20/lec03-main2.pdf
 [DAG_to_topological_ordering_proof]:http://www.cs.emory.edu/~cheung/Courses/253/Syllabus/Graph/DAG.html
 [3_SAT_to_3_Coloring]:https://cgi.csc.liv.ac.uk/~igor/COMP309/3CP.pdf
+[Rearranging_Alternating_Harmonic_Series]:https://math.iupui.edu/~ccowen/ButlerAHslides.pdf
 
 <!-- csapp -->
 [csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
