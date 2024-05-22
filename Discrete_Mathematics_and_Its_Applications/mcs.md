@@ -3,6 +3,10 @@
 1. Thanks for your detailed description. The 1st paragraph shows we can't directly assume these 2 methods must have the same result except after some inspection we know that fact really holds. The exactly "when" question seems to be not easy to answer. 2. IMHO you may mean $$\Pr[\text{not win}\mid \text{switch}]=\Pr[(A,-,-)\mid(-,A,B)] \Pr[(-,A,B)]+\ldots=\frac13\cdot\frac16\cdot 6$$ Here I use Figure 17.5 tree.
 3. To help future readers, the 2rd to 4th (up to "their first guess was wrong"), the 6th and the 8th paragraphs show why "unconditional probability" is always same when doing some kinds of changes to the probability distribution. The 5th paragraph shows the fact that "conditional probabilities" may be probably not that case. The 7th paragraph shows why the above coincidence occurs. The last paragraph shows "unconditional probability" may change under some *contrived* changes.
 
+IMHO the key point here is that sometimes we can't use probability because there is *no repeatable random process* if we are frequentist (See https://courses.csail.mit.edu/6.042/spring18/mcs.pdf 18.4.6 "repeatable process" and "no randomness involved" contexts) as above "There is no "probability" about it" says. So "confidence" is then used. This is also implied in mihaild's answer of stats_noob's problem "the true mean isn't (in frequentist approach) a random variable".
+
+@Mason Thanks. Then the book and wikipedia may assume $E(|X|)<\infty$, etc. When I learnt probability in the undergraduate course, I paid little attention to infinity cases. Maybe my teacher said briefly about infinity at that time but I missed.
+
 # mcs
 - Here I didn't care about more circuit knowledge than already learnt since it is too complex to design one by myself. (skip_circuit)
 - Here * sections mean that they are not included in Discrete_Mathematics_and_Its_Applications.
@@ -41,6 +45,8 @@
   - Theorems proved in DMIA but not in mcs are also skipped.
 ### solution
 - As [this](https://github.com/ossu/computer-science/issues/1090#issuecomment-1282535965) says, the problem may be easy although some are not. But most of them give one detailed hint sequence.
+### Comparison with DMIA
+- Although it skips some complex proofs like that for Kuratowski’s Theorem, it shows more infos about why we use some definitions or theorems, e.g. confidence (not said in DMIA) vs probability.
 ## diff between 2017 and mcs 2018
 ```bash
 $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.awk -v summary=$summary mcs_2018.bmk" | less_n
@@ -2003,6 +2009,8 @@ I don't know why [$x>1$ -> Cauchy sequence](https://math.stackexchange.com/quest
   - if
     we have $h_0=1-g_0$
     Then we have $h_k=\frac{-\sum_{i=1}^{k}g_ih_{k-i}}{g_0}$ which is well-defined.
+## Section IV notice
+- Notice the following theorems may not hold in Infinite Probability Spaces.
 ## 17.3*
 - > But this intuitive idea is simply false:
   Here the result is based on comparison.
@@ -2095,8 +2103,29 @@ This is talking about how we interpret one probability. The following (*) means 
    The confidence is used when calculating "Bayes-factor".
   > The 99% confidence level is not nearly high enough to overcome the relatively tiny probability of having TB.
   i.e. $100<<1/(1/9999)$.
+3. TODO polling
+4. confidence is normally [related with confidence interval](https://math.stackexchange.com/a/4605539/1059606)
+  - As [this](https://math.stackexchange.com/a/1967239/1059606) says which is almost same as 18.4.6.
+    > the frequentist *"long run"* approach to probability is in potential conflict with a naive interpretation of the interval. ... Either μ  lies in the interval *or it doesn't*. There is no "probability" about it.
+    - I skipped "interval estimates" and [joshphysics's comment](https://math.stackexchange.com/questions/1966211/probability-vs-confidence#comment5628450_1967239) to insist on using probability.
+      > Re: the third to last paragraph discussing the terms "confidence" v. "probability". To render it kosher to discuss the "95% coverage" in terms of probability instead of confidence, is it possible to consider, for a given sample size, the space of all possible confidence intervals one could compute (resulting from the set of all possible samples of the given size) and then put an appropriate probability measure on that space such that the measure of the subspace consisting of CI's that cover μ is 95%?
+    - TODO what does 3rd to 4th paragraphs mean in [this](https://math.stackexchange.com/a/4605539/1059606)?
+    - IMHO the *mere [johngreen's comment](https://math.stackexchange.com/questions/1966211/probability-vs-confidence#comment9029338_1967239)* doesn't sum up well.
+      > "The process by which the interval is derived leads to coverage in 95% of cases over the long run.". That sums up the explanation pretty well. Thank you!
+      because it doesn't even say about the differences between probability and confidence.
+    - I read only the context of "freq", "conf" in this answer.
+  - The above link used here:
+    we can interpret "the test result is correct" is *either true or false*. So we use confidence.
+  - The above link is also implied by
+    > If we stick to confidence rather than probability, we don’t need to make any Bayesian *assumptions about the probability* of a fair coin being chosen.
+    in preface of 20
+    > how much con-fidence we should have that *our estimate is OK*
+    in 20.4.3
+    > what’s objectionable about this statement is that it talks about the probability or “chance” that a real world fact is true
+    > being unknown does not make this quantity a ran-dom variable
 - > So the either-or of Corollary 18.9.1 is really an either-or between some-thing happening that is extremely unlikely—having TB—and something that is only very unlikely—the diagnosis being wrong.
-  TODO their sum may be not 1.
+  ~~TODO their sum may be not 1.~~
+  See 20.4.3 the above is one rephrase of confidence based on "If you test positive" which translate "test result is correct" to "you have TB".
   > how seriously to take a positive diagnosis
   i.e. think the diagnosis is right.
 - > We have figured out that if a random person tests positive for TB, the probability they have TB is about 1/100.
@@ -2145,7 +2174,7 @@ This is talking about how we interpret one probability. The following (*) means 
   [pivot](https://en.wikipedia.org/wiki/Quicksort#Algorithm)
 - TODO after algorithm Exponential backoff
 ## 19.4
-Great may mean the *useful linearity* property.
+Great ~~may mean the *useful linearity* property.~~ ~~may mean many types of Expectation?~~ may mean bigger due to countable infinite implied in Theorem 19.4.4.?
 - Theorem 19.4.3
   Here $[R=x]$ one event which is one *set* of outcomes.
 - TODO after real analysis [proof of Theorem 19.4.4][rearrangement_absolutely_convergent_series]
@@ -2153,12 +2182,21 @@ Great may mean the *useful linearity* property.
   > Most lotteries now offer randomized tickets to help smooth out the distribution of selected se-quences.
   maybe force the overall distribution which doesn't allow artificial intervention.
 ## 19.5
+- Theorem 19.5.1 Here we need to care about the infinite case where "rearranging terms" may not work.
+  See Theorem 19.5.5.
+  So here assume each $R_i$ must be finite so that Theorem 19.5.1 doesn't have the infinite case although ["Infinite Probability Spaces" / Sample spaces](https://www.statlect.com/glossary/sample-space#:~:text=and%20so%20on.-,Infinite%20sample%20space,a%20certain%20condition%20is%20met.) are possible (See 17.5.4).
+  - By (19.2) it assumes "nonnegative" so that we can use Theorem 19.4.4.
+  - TODO see [this](https://math.stackexchange.com/q/4920518/1059606)
 - Theorem 19.5.4 is the  generalization of (19.10).
 - > We leave it to the reader to verify that, under the given convergence hypothesis, all the sums in the following derivation are absolutely convergent, which justifies rearranging them as follows
   This is by [rearrangement_absolutely_convergent_series].
-- IMHO 19.5.6 may be wrong due to here maybe infinitely green.
+- ~~IMHO 19.5.6 may be wrong due to here maybe infinitely green.~~
+## 19.6
+Great mean bigger in number quantity.
 - Simialr to Theorem 19.5.5, Theorem 19.4.6 (Law of Total Expectation) depends on "exchange order of summation", so it may not work for infinite series.
-  So 19.6.1 formula may not work.
+  ~~So 19.6.1 formula may not work.~~
+  But here $r$ must be positive, so that is fine.
+  Compared with 19.5.7 where $B_n$ may be negative to mean "lose".
 ## chapter 19 problems
 - Problem 19.1
   - only if: trivial
@@ -2170,6 +2208,31 @@ Great may mean the *useful linearity* property.
     Then $\Pr[\overline{A}\cap B]=\Pr[B]-\Pr[A\cap B]=(1-\Pr[A])\cdot\Pr[B]=\Pr[\overline{A}]\cdot\Pr[B]$
     The other 2 cases are similar.
 - Problem 19.2 (chapter 20 reference)
+  - (a)
+    - > R takes whatever value S happens to have
+      i.e. suppose $S$ takes $s\in V$, then $R$ also takes that *among all $|V|$ values*.
+      So $\frac{1}{|V|}$.
+    - following the hint,
+      $\Pr[R=S]=\sum_{b\in V}\Pr[R=b]\Pr[S=b]$ by "disjoint" and "independent"
+      then it equals $\frac{1}{|V|}\sum_{b\in V}\Pr[S=b]=\frac{1}{|V|}$.
+      - Here $\sum_{b\in V}\Pr[S=b]$ implies we don't care what value $S$ is.
+  - (b)
+    - The argument means $\Pr[R=S\mid S=T]=\Pr[R=S]$ where LHS even doesn't care about whether $S=T$.
+      > equals *the first coordinate* of whatever value S  T happens to have
+    - Similar to proof of (a), 
+      strict proof: we only need to change $\sum_{b\in V}\Pr[S=b]$ to $\sum_{b\in V}\Pr[S\times T=(b,b)]\overbrace{=}^{S=T}1$ because $R$ is independent of S  T but may not be for $S$. Then the rest is same.
+    - If using $\Pr[R=S,S=T]=\Pr[R=S]\Pr[S=T]$
+      then $LHS=\frac{1}{|V|}\sum_{b\in V}\Pr[S\times T=(b,b)]=\frac{1}{|V|}\Pr[S=T]=RHS$
+  - (c)
+    1. $\Pr[R=a,S\times T=(b,c)]=\frac{1}{6}=\frac{1}{2}\cdot\frac{1}{3}=\Pr[R=a]\cdot\Pr[S\times T=(b,c)]$
+    2. TODO maybe (b) is "iff"?
+      $\Pr[R=S=T]=\frac{1}{6}$
+      $\Pr[R=S]=\frac{1}{3}$
+      $\Pr[S=T]=\frac{1}{3}$
+    3. similar to 2, we just calculate and each have $\frac{1}{|V|}$.
+  - relation with 20.3.5
+    Here $R$ is the probability for birthday which is trivially *uniform*. And "R is independent of S  T" trivially because one person's birthday must be independent from others.
+    Then we can use (b) to prove "pairwise independent".
 - Problem 19.36
   - $\forall a,b, \Pr[f(R)=a,g(S)=b]=\sum_{i,j}\Pr[R=r_i,S=s_j]=\sum_{i,j}\Pr[R=r_i]\Pr[S=s_j]=\sum_{i}\Pr[R=r_i]\sum_{j}\Pr[S=s_j]=\Pr[f(R)=a]\Pr[g(S)=b]$
   - > Lemmas 19.2.1 and 19.2.2 both extend straightforwardly to k-way independent variables.
@@ -2180,9 +2243,57 @@ Great may mean the *useful linearity* property.
   - (b) trivial by substituting $x$ with $p$, etc.
 - Problem 19.29
   - Weird the solution is already there.
+## 20.1
+### preface
+- in summary, the 2rd paragraph says we need "confidence" to measure how correct is our *sampling* and the 3rd says application.
+### main part
+- > Then of course ExŒRç D1,
+  Since $n\cdot \frac{1}{n}=1$
+## 20.2
+- Lemma 20.2.1 proof
+  This is due to $x^z I_x\le |R|^{z}$, the rest is similar to Theorem 20.1.1 proof.
+- > Now we see explicitly how the “likely” values of R are clustered in an O.R/-sized region around ExŒRç
+  Here $g=O(\sigma_R)$ corresponds to $\limsup$ which then corresponds to $\ge c\sigma_R$ because although it may oscillate but $< c\sigma_R$ *keeps in the range* of $\sigma_R\cdot\limsup \frac{g}{\sigma_R}$.
+- "The IQ Example" is based on
+  > But let’s observe an additional fact (which may be true): *no* MIT student has an IQ *less than 100*.
+## 20.3
+- 20.3.2
+  - Here $Ex[(C+1)^2]$ is same as 19.4.6.
+- Theorem 20.3.5 can be done with one step $\text{Ex}[((R+b)-\text{Ex}[(R+b)])^2]=\text{Ex}[(R-\text{Ex}[R])^2]$.
+- Notice $R$ in (20.11) is different from $R$ in (20.10) after replacement.
+- > Bi D Bj , namely, 1=d .
+  See Problem 19.2.
+## 20.4
+- (20.20) is based on $\text{Ex}[\frac{S_n}{n}]=p$.
+- TODO [this difference](https://en.wikipedia.org/wiki/Law_of_large_numbers#Differences_between_the_weak_law_and_the_strong_law) is different from [this](https://bitbucket.org/anom_mony/graduate_entrance_exam_simplified/src/4c6a0d7d21c9f78af8f037fde20b271f90dfe88a/textbooks/review/b_probability%20theory/README.md?at=master#README.md-117) where strong can be based on different distributions for $X_n$.
+  Maybe strong is more about "convergence".
+- "our estimation procedure" can be one random variable which is different from "voter preference" proportion.
+## 20.5
+### 20.5.7
+- > By considering the random variable n T , we can also use the Chernoff Bound to prove that the probability that T is much lower than ExŒT  is also exponentially small.
+  $\Pr[n-T\ge c\text{Ex}[n-T]]$
+  trivially $n-T\ge 0$
+  so again we need $c$ to be great
+  then we have 
+  $$
+  \begin{align*}
+    n-T\ge c(n-\text{Ex}[T])&\Rightarrow (1-c)n+c\text{Ex}[T]\ge T\\
+                            &\Rightarrow \frac{\text{Ex}[T]}{T}\ge \frac{T+(c-1)n}{cT}=\frac{1}{c}+(1-\frac{1}{c}\frac{n}{T})\\
+  \end{align*}
+  $$
+  So when $c$ becomes bigger RHS becomes $\frac{n}{T}$ which may be *one great value*. TODO
+  Then its corresponding probability is $e^{-(c\ln(c)-c+1)\text{Ex}[n-T]}$ which is small.
+- > that the probability that there is no winner is less than e 10 < 1=22000.
+  It should be $e^{-1k}$.
 ## chapter 20 problems
 - Problem 20.3
+  - (a) same as 20.1.2 example
+    $\Pr[R-b\ge x-b]\le \frac{Ex[R]-b}{x}<\frac{Ex[R]}{x}$
+  - (b) the greatest lower bound.
 - Problem 20.19
+  - reasons for Hint is same as Theorem 20.3.7
+  - Similarly we have $\text{Ex}[(\sum_{i=1}^n R_i)^2]=\text{Ex}[\sum_{i=1}^n R_i^2+2\sum_{i\neq j,i,j=1\sim n}2R_iR_j]$.
+    Then due to "pairwise independent", it equals $\text{Ex}[\sum_{i=1}^n R_i^2]=\sum_{i=1}^n\text{Ex}[R_i^2]=\sum_{i=1}^n\text{Var}[R_i]$.
 ## chapter 21 problems
 - Problem 21.2
 - Problem 21.12
