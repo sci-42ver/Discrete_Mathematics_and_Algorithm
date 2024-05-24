@@ -7,6 +7,10 @@ IMHO the key point here is that sometimes we can't use probability because there
 
 @Mason Thanks. Then the book and wikipedia may assume $E(|X|)<\infty$, etc. When I learnt probability in the undergraduate course, I paid little attention to infinity cases. Maybe my teacher said briefly about infinity at that time but I missed.
 
+IMHO, OP may want something like $p_{1\to 2}$ which is got similarly by $p=\frac{2}{3}+\frac{1}{3}p^2\Rightarrow p=1$ and then "you can play forever". This doesn't contradict with $p_{1\to 0}=\frac{1}{3}$ because they are done by maybe multiple steps so we may have $1\to 0\to 2$.
+
+1. Maybe you mean "goes down by one" for "goes down to $n-1$" since with the constraint "happens at time $n$" that doesn't consider all cases. 2. Your explanation by thinking two options is fine although I haven't seen one textbook calculates as that (I only had one undergraduate probability course which seems to care little about infinity).
+
 # mcs
 - Here I didn't care about more circuit knowledge than already learnt since it is too complex to design one by myself. (skip_circuit)
 - Here * sections mean that they are not included in Discrete_Mathematics_and_Its_Applications.
@@ -47,6 +51,7 @@ IMHO the key point here is that sometimes we can't use probability because there
 - As [this](https://github.com/ossu/computer-science/issues/1090#issuecomment-1282535965) says, the problem may be easy although some are not. But most of them give one detailed hint sequence.
 ### Comparison with DMIA
 - Although it skips some complex proofs like that for Kuratowski’s Theorem, it shows more infos about why we use some definitions or theorems, e.g. confidence (not said in DMIA) vs probability.
+- mcs gives very useful hints for Problems, so that they are easier than DMIA exercises although they are harder without hints.
 ## diff between 2017 and mcs 2018
 ```bash
 $ summary=0;id2c "./compare_bmk.awk -v summary=$summary mcs.bmk" "./compare_bmk.awk -v summary=$summary mcs_2018.bmk" | less_n
@@ -710,7 +715,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
         - see [ProofWiki](https://proofwiki.org/wiki/Equivalent_Conditions_for_Dedekind-Infinite_Set#(1)_implies_(2)) which proves "an infinite countable subset" based on Dedekind-infinite
         - [See](https://math.stackexchange.com/questions/3255573/infinite-sets-a-is-infinite-iff-there-is-a-bijection-between-a-and-a-cup#comment10479328_3255606) -> https://proofwiki.org/wiki/Infinite_Set_has_Countably_Infinite_Subset/Proof_4
           - [this](https://proofwiki.org/wiki/Set_is_Infinite_iff_exist_Subsets_of_all_Finite_Cardinalities) is trivial.
-    - This proof is [same as](https://math.stackexchange.com/a/3255611/1059606) (also same as [this](https://math.stackexchange.com/a/3255606/1059606)) the book but highlights the *subset* where $a_{n+1}$ always exist by "*infinite* countable subset" $B$.
+    - This proof is [same as (This may be link1)](https://math.stackexchange.com/a/3255611/1059606) (also same as [this](https://math.stackexchange.com/a/3255606/1059606)) the book but highlights the *subset* where $a_{n+1}$ always exist by "*infinite* countable subset" $B$.
       - one-to-one is ensured by $a_{n+1}$
         - TODO 
           maybe this means
@@ -2294,10 +2299,147 @@ Great mean bigger in number quantity.
   - reasons for Hint is same as Theorem 20.3.7
   - Similarly we have $\text{Ex}[(\sum_{i=1}^n R_i)^2]=\text{Ex}[\sum_{i=1}^n R_i^2+2\sum_{i\neq j,i,j=1\sim n}2R_iR_j]$.
     Then due to "pairwise independent", it equals $\text{Ex}[\sum_{i=1}^n R_i^2]=\sum_{i=1}^n\text{Ex}[R_i^2]=\sum_{i=1}^n\text{Var}[R_i]$.
+## 21.1
+As 21.1 preface says, here "walk" is just one interpretation which doesn't help analysing the process. So without "walk", all is fine with few changes.
+- intuition why expection is zero See 
+  > Bankruptcy costs him $1M, while when he wins, he wins only $100. The gambler’s average win remains zero dollars, which is what you’d expect when making fair bets.
+  - strict proof
+    See
+    > The expected payoff of Albert’s first bet is worth
+    Here it includes the normal case $p=q,r=1$
+    - Then it uses 2 methods to calculate the expection
+    - In summary it is based on
+      > Pascal’s ingenious idea was to alter the worth of the chips to make the game *fair regardless of p*.
+- (21.6)
+  - > but there’s no harm in using (21.5) to define wnC1 for all n C 1 > 1
+    because we only cares about $T$ terms in this sequence where all later terms can be arbitrary values.
+  - 
+    $$
+    \begin{align*}
+      rx^2W(x)=rw_0x^2+\ldots\\
+      -\frac{x}{p}W(x)=-\frac{1}{p}w_1x^2+\ldots\\
+      (rx^2-\frac{x}{p})W(x)=-w_2x^2-\ldots\qquad\text{This is due to the infinite series where we don't care about convergence}\\
+      (rx^2-\frac{x}{p}+1)W(x)=w_1x
+    \end{align*}
+    $$
+- > so his expected capital is n k.1 2p/
+  by [linearity][linearity_of_expection_Infinite_Probability_Space]
+- > 2p/. But from the formula (20.14), the binomial distribution has a standard deviation of only p kp.1
+  Here expection is not $p$ in one standard binomial distribution but $p-q$.
+  So following Lemma 20.3.1, $(p+q)-(p-q)^2=1-(p-q)^2$.
+  - (20.14) is based on indicator variables
+    but here [Probability mass function](https://en.wikipedia.org/wiki/Binomial_distribution)
+    we have mean be $k(2p-1)$ but not $kp$.
+    (Ignore this line) But the shape ~~is still like bell~~ because we can do as standard to calculate $p^kq^t$ probability and then have the ~~bijective~~ map to the "win".
+  - See [this](https://math.stackexchange.com/a/163221/1059606) for the relation between "expected capital" and "binomial distribution" got from [the in-site search](https://math.stackexchange.com/search?q=gambler+binomial+distribution+lose).
+    - Let "expected capital" be $M$
+      then $M=n+X$ which keeps variance.
+      Then $W\sim B(k,p)$ here.
+      Then $D(X)=4D(W)$
+      So the "standard deviation" is $2\sqrt{kp(1-p)}$
+    - $\Theta(\sqrt{k})$ is got from the limit without using $\limsup$.
+    - > In our study of binomial tails, we saw that this was extremely unlikely.
+      By [this image](http://mlwiki.org/index.php/Binomial_Proportion_Confidence_Intervals) when $\Theta(\sqrt{k})=1.96D(X)=1.96\cdot 2\sqrt{kp(1-p)}$, the probability will be already small.
+  - I skips [this variant](https://math.stackexchange.com/q/3108698/1059606) because here $\alpha$ is fixed as $\frac{1}{W_n}$ when we have $W_n$ money.
+- Lemma 21.1.4
+  - > must be at least as large as the probability that he loses when he has a target T > n.
+    the former trivially has all cases in the latter.
+    And the former also has the case like one may win $T+k,k\ge 0$ at most, but loses at last. Here the latter will win.
+  - > Hence, the probability of his losing while playing without any target has a lower bound arbitrarily close to 1, which means it must in fact be 1.
+    This is similar to prove $0.\dot{9}=1$.
+## 21.2
+I read almost all contents here because it is one real example.
+- > vote early, vote often,
+  here maybe only the latter where the former may cause the latter.
+- (21.13) only considers one edge instead of one possibly lone walk.
+- Definition 21.2.1 is same as [this](https://brilliant.org/wiki/stationary-distributions/) where at each step the whole state keeps.
+  This is also implied in (21.15) where LHS corresponds to $\pi$.
+  - > because the remaining constraints (21.15) could be satisfied by letting Rank.x/ WWD 0 for all x, which is useless.
+    This implies matrix $P$ may be not full rank.
 ## chapter 21 problems
 - Problem 21.2
+  - > Let r be the probability that starting with n > 0 dollars, the gambler’s stake ever gets reduced to n 1 dollars
+    Here assumes $r$ is independent from $n$ which is trivial based on the game facts.
+  - (a) either directly $n-1$ or $n\to n+1\to n-1$
+  - (b) $p=\frac{1}{1+r}\le \frac{1}{2}\Rightarrow r\ge 1$
+  - (c) by (b), we have $r=1$, so "the gambler" must lose money one by one until zero.
+  - (d) almost same as (a)
+    - I skipped the different methods to prove [1](https://math.stackexchange.com/q/1586693/1059606) [2](https://math.stackexchange.com/q/4281073/1059606) [3](https://math.stackexchange.com/a/2154228/1059606)
+      - [This](https://math.stackexchange.com/q/4319973/1059606) seems to care about *whether it is meaningful* to continue playing instead of the possibility to play forever.
+    - [Proof](https://math.stackexchange.com/a/3856428/1059606) when $p>\frac{1}{2}$ similar to here.
+      Here I skips the proof of "the correct solution is the minimal one".
+      - This corresponds to
+        > To illus-trate a situation where you really needn’t worry, think about mean time to failure with a really tiny probability of failure in any given second—say 10 100 .
+        - > even though you will eventually fail with probability one.
+          ~~is implied by $p_{1\to 0}$ where although we must go to infinity but we ~~
+          This should not use probability. If use that, then by [Gambler's fallacy](https://en.wikipedia.org/wiki/Gambler%27s_fallacy#Coin_toss), the probability should keep $10^{-100}$.
+          In real life, "mean time to failure" should be one dynamic value when using one object keeping aging.
+  - > So infinite expected time is not much consolation to a Gambler who goes broke quickly with high prob-ability.
+    This is same as [P.s.](https://math.stackexchange.com/q/4921154/1059606)
 - Problem 21.12
+  - (a) If $D=V$ then $\gamma=1$ to ensure $\sum d_1(x)=\sum d_2(x)=1$. This is impossible.
+    Then $V-D$ and $D$ are 2 disjoint connected components
+    "strongly connected" implies there is one edge between them which is $\langle y\to z\rangle$.
+  - (b) 
 - Problem 21.8
+  - (a) due to the sum is 1, we have
+    $$
+    \Pr[x]=\Pr[y]\cdot 1\\
+    \Pr[x]+\Pr[y]=1\\
+    \text{So}\\
+    \Pr[x]=\Pr[y]=\frac{1}{2}
+    $$
+  - (b) Assume $\text{Rank}(x)\neq \text{Rank}(y)$
+    then they will keep swap without becoming $\frac{1}{2}$.
+  - (c) 
+    ```python
+    import numpy as np
+    from numpy.linalg import eig
+    a = np.array([[0, 0.9],
+                  [1, 0.1]])
+    w,v=eig(a)
+    print('E-value:', w)
+    print('E-vector', v)
+    a@ np.array([[v[0][1]],[v[1][1]]])
+    Out[14]: 
+    array([[-0.66896473],
+           [-0.74329415]])
+    
+    from sympy import solve
+    from sympy.abc import x, y, z, w
+    solve([w+0.1*z-z, 0.9*z-w], w, z, dict=True)
+    Out[2]: [{w: 0.9*z}]
+    ```
+    So we have $z=\frac{10}{19}$
+  - (d)
+    ```python
+    import numpy as np
+    from numpy.linalg import eig
+    from fractions import Fraction
+    a = np.array([[0, 0.9],
+                  [1, 0.1]])
+    init_state=np.array([[0.99],[0.01]])
+    n=100
+    state=init_state
+    for i in range(n):
+      state=a@ state
+      if abs(state[0]/state[1]-0.9)<1e-4:
+        break
+      print(i,state,state[0]/state[1])
+    ```
+  - (e)
+    ```python
+    from sympy import solve
+    from sympy.abc import a,b,c,d
+    solve([a-a-1/2*b,b-1/2*c,c-1/2*b,d-d-1/2*c], a,b,c,d, dict=True)
+    Out[1]: [{b: 0.0, c: 0.0}]
+    ```
+    So (a,d) can be arbitrary values meeting $a+d=1\land a,d>0$
+  - (f)
+    0 because $b\to \frac{1}{2}c\to \frac{1}{4}b\ldots$
+  - (g)
+    See Math-for-CS-solutions sol.
+    The rest is almost same as the above.
 ## chapter 22 problems
 seemingly nothing.
 ## TODO (use the book page number)
@@ -2407,6 +2549,7 @@ seemingly nothing.
 [coprime_iff_invertible]:https://math.stackexchange.com/a/2326680/1059606
 [walk_implies_path]:https://math.stackexchange.com/a/699805/1059606
 [rearrangement_absolutely_convergent_series]:https://math.stackexchange.com/q/3734769/1059606
+[linearity_of_expection_Infinite_Probability_Space]:https://math.stackexchange.com/questions/4920518/prove-the-formula-for-variance-when-assuming-infinite-probability-spaces#comment10509616_4920518
 
 <!-- stack overflow -->
 [longest_simple_path_NP_hard]:https://stackoverflow.com/a/53399638/21294350
