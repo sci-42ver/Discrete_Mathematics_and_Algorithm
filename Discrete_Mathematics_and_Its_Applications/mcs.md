@@ -1,15 +1,8 @@
-@msantama Sorry for the ambiguity. This is my understanding the above probabilities. Leaf probability are either $\frac{1}{18}$ or $\frac{1}{9}$. Or we can say *the second to last* level of the tree has the uniform probability space and then the last level of the tree has the almost uniform probability space. This is one contrived term. I will update my question.
+1. One small error: we should say "$g(u)$ is bounded below by $c_1 g(x)$" 2. $M$ is one function of $x$ when $p(x)$ is strictly increasing. Then how do we know there is one upper bound for $M(x)$? 3. How do we have $c_1g(x)\le 1\Rightarrow c_1g(x)\le g(u)$? 4. How to get "the minimum polynomial value bounding $|g'(x)|$"? The problem says "upper bounded" but not "lower bounded". 5. I want to prove "polynomial-growth condition" instead of "already established ... satisfies the polynomial-growth condition" and then give one circular proof.
 
-1. Thanks for your detailed description. The 1st paragraph shows we can't directly assume these 2 methods must have the same result except after some inspection we know that fact really holds. The exactly "when" question seems to be not easy to answer. 2. IMHO you may mean $$\Pr[\text{not win}\mid \text{switch}]=\Pr[(A,-,-)\mid(-,A,B)] \Pr[(-,A,B)]+\ldots=\frac13\cdot\frac16\cdot 6$$ Here I use Figure 17.5 tree.
-3. To help future readers, the 2rd to 4th (up to "their first guess was wrong"), the 6th and the 8th paragraphs show why "unconditional probability" is always same when doing some kinds of changes to the probability distribution. The 5th paragraph shows the fact that "conditional probabilities" may be probably not that case. The 7th paragraph shows why the above coincidence occurs. The last paragraph shows "unconditional probability" may change under some *contrived* changes.
+Thanks anyway for your answer. Hope you can clarify based on my doubts.
 
-IMHO the key point here is that sometimes we can't use probability because there is *no repeatable random process* if we are frequentist (See https://courses.csail.mit.edu/6.042/spring18/mcs.pdf 18.4.6 "repeatable process" and "no randomness involved" contexts) as above "There is no "probability" about it" says. So "confidence" is then used. This is also implied in mihaild's answer of stats_noob's problem "the true mean isn't (in frequentist approach) a random variable".
-
-@Mason Thanks. Then the book and wikipedia may assume $E(|X|)<\infty$, etc. When I learnt probability in the undergraduate course, I paid little attention to infinity cases. Maybe my teacher said briefly about infinity at that time but I missed.
-
-IMHO, OP may want something like $p_{1\to 2}$ which is got similarly by $p=\frac{2}{3}+\frac{1}{3}p^2\Rightarrow p=1$ and then "you can play forever". This doesn't contradict with $p_{1\to 0}=\frac{1}{3}$ because they are done by maybe multiple steps so we may have $1\to 0\to 2$.
-
-1. Maybe you mean "goes down by one" for "goes down to $n-1$" since with the constraint "happens at time $n$" that doesn't consider all cases. 2. Your explanation by thinking two options is fine although I haven't seen one textbook calculates as that (I only had one undergraduate probability course which seems to care little about infinity).
+Why do you use this changed definition? IMHO the original definition is enough for application. Your definition is more general while the original paper needs $x_0\ge 1/b_i$, etc, to ensure the *induction* proof work (See p3 bottom).
 
 # mcs
 - Here I didn't care about more circuit knowledge than already learnt since it is too complex to design one by myself. (skip_circuit)
@@ -2440,6 +2433,103 @@ I read almost all contents here because it is one real example.
   - (g)
     See Math-for-CS-solutions sol.
     The rest is almost same as the above.
+## 22 preface
+- > such as enumeration of structures and analysis of random processes.
+  See 21.1.2 and 16
+## 22.2
+- > Step 3: Write Tn Using Early Terms with Known Values
+  assume $k\in\mathbb{N}$.
+## 22.3
+- > The sizes of the spiral patterns on the face of a sunflower grow in proportion to Fibonacci numbers.
+  See [this 0:55](https://www.youtube.com/watch?v=z9d1mxgZ0ag) and golden angle at 1:44.
+- > The input values on which Euclid’s gcd algorithm requires the greatest num-ber of steps are consecutive Fibonacci numbers
+  See Problem 9.14.
+- > If r is a repeated root with multiplicity k
+  This is proved in DMIA and the calculus textbook probably.
+- 22.3.4
+  Since it is just one guess I didn't give strict reasons why we guess that way.
+## 22.4
+- > jThe base case when j = 0 follows from the fact that T (x) = (1) when x 2 [1; x0] (provided that we choose c5 small enough).
+  Since "c5 small enough",  we have $\Theta(1)\ge \ldots$.
+- Theorem 22.4.1 [proof](./others/mcs/akrabazzi.pdf)
+  - Lemma 2 proof
+    - here $c_{4,5}$ have more complex forms but the proof is as it says similar.
+  - TODO Since $|h_i(x)|= O(x/\log^2 x)\Rightarrow|h_i(x)|=cx/\log^2 x$
+  - I skipped p8 "The inductive step is argued as follows: ..."
+  - Theorem 2 
+    both direction can be more strict by something like $\ge c_5 x^p(1+\int\ldots)$
+  - relations with the book "where: ..."
+    > nonnega-tive and bounded for 0  x  x0
+    corresponds to
+    > $T(x)=\Theta(1),1\le x\le x_0$
+    1. > x0 is large enough so that T is well-defined,
+      $b_i x_0\ge 1$ is to ensure $T(b_i x_0)$ has definition.
+      $x0 \ge 1/(1 -b_i)$ is to ensure "prior intervals.".
+      The latter can be always achieved when $x_0$ becomes larger.
+    2. Same
+    3. Same
+    4. [See][part_proof_Akra_Bazzi_theorem]
+      - Notice $f(x)$ is bounded [can't derive](https://math.stackexchange.com/a/4119457/1059606) $f'(x)$ is bounded. (I only checked the example $\sin(e^x)$ without reading all.)
+      - [This title](https://math.stackexchange.com/q/4496012/1059606) is similar but the question seems to be written poorly.
+    5. We have $\frac{|h_i(x)|}{x/\log^2 x}\le k\Rightarrow \frac{|h_i(x)|}{x/\log^{1+\epsilon} x}\le k/\log^{1-\epsilon} x,x\ge x_0$
+      Then $\exists x_1>x_0, k/\log^{1-\epsilon} x\le 1$ by $\log^{1-\epsilon} x$ is strictly decreasing.
+  - Better [not](https://math.stackexchange.com/a/3586870/1059606) to read [the original paper](https://sci-hub.se/10.1023/A:1018373005182)
+  - I skipped [this lecture](https://people.mpi-inf.mpg.de/~mehlhorn/DatAlg2008/NewMasterTheorem.pdf) use the above as one reference
+- Master Theorem proof see CRLS
+  - TODO [use Akra-Bazzi method to prove](https://math.stackexchange.com/q/4749539/1059606)
+  - why [3 cases](http://blog.geomblog.org/2014/10/on-master-theorem-vs-akra-bazzi.html)
+    > This recurrence represents the "battle" between the two terms involved in a recursive algorithm: the effort involved in dividing (the aT(n/b)) and the effort involved in putting things back together (the f(n)). 
+    - TODO what is [A/B](https://sci-hub.se/10.1145/2487241.2487242)
+- > We can drop the 1=n term in the last step, because the log n term dominates.
+  more strictly, $\lim_{x\to \infty} \frac{\log n+1/n}{\log n}=1$
+### 22.4.2
+The following is based on
+> The Akra-Bazzi formula together with our assertions about boundary conditions and integrality all follow from the Akra-Bazzi Theorem,
+- > But notice that Tn D ‚.n log n/ for every value of T1.
+  $T_n\le c_2 n \log n$ is trivial since $\log n$ increases faster than the constant.
+  $T_n\ge c_1 n \log n$ may let $c_1$ arbitrarily smaller similar to [part_proof_Akra_Bazzi_theorem].
+- > For example, the solution to T .n/ D 2T .n=2/ is either ‚.n/ or zero
+  This doesn't meet "polynomial-growth condition".
+- > Fortunately, the asymptotic solution to a divide and conquer recurrence is un-affected by floors and ceilings.
+  because we allow $h_i(x)$ in the Akra–Bazzi method.
+  Also see
+  > This justifies our earlier claim that applying floor and ceiling operators to the size of a subproblem does not alter the asymptotic solution to a divide-and-conquer recurrence.
+### 22.4.3
+- > other small adjustments to the sizes of subproblems
+  like $h_{1,2}(x)$ which has division and *sum*.
+### 22.4.4
+Compared with DMIA 8.3 THEOREM 2,
+1. if $a<b^d\xRightarrow{b>1} \log_b a<d$. So it corresponds to case 3 $f(n)=\Theta(cn^d)=\Theta(n^d)=O(n^d)$.
+  Notice mcs is stricter than DMIA.
+  The rest is similar.
+2. The book proof in 8.3-exercise 29~33 is one constructive proof for one specific case for $g(n)$.
+## 22.5
+In summary, the key parts are (See the last paragraph)
+1. > This suggests that generating *smaller subproblems* is far more important to al-gorithmic speed than reducing the *additional steps per recursive call*.
+2. > Divide-and-conquer recurrences are *also* sensitive to the *number* of subproblems.
+3. > How do boundary conditions affect the solution to a recurrence?
+  > Boundary conditions matter greatly only when they give the *dominant term a zero coefficient*,
+- > Here are some recurrences we solved earlier
+  They can be derived using the *exact* solution.
+- > Notice that the recurrence equations for Towers of Hanoi and Merge Sort are some-what similar,
+  one is $T_{n-1}$ while the other is $T_{n/2}$. So they differ a lot.
+- > while divide-and-conquer recurrences (which have small subproblems) usually have solutionsbounded above by a polynomial.
+  See Akra–Bazzi method where $x^p$ is polynomial and $g(u)$ is bounded above by one polynomial indicated by $g'(u)$ upper bound. So RHS is polynomial. See [part_proof_Akra_Bazzi_theorem]
+- > the Akra-Bazzi formula gives: ...
+  - $a<2$ corresponds to case 3
+    $$
+    \exists\epsilon>0,\log_b(a)+\epsilon<1\\
+    \Rightarrow n>n_0,n/n^{\log_b(a)+\epsilon}\ge k\\
+    \Rightarrow n=\Omega(n^{\log_b(a)+\epsilon})
+    $$
+    And $a(n/2-1)<c(n-1)$ is possible due to $a/2<c<1$ is possible.
+  - $a=2$ corresponds to case 2 where $k=0$.
+    $n-1=\Theta(n)$ is trivial because $\lim (n-1)/n=1$.
+  - $a>2$ similar to $a<2$.
+- > For linear re-currences, the solution is usually dominated by an exponential whose base is de-termined by the number and size of subproblems.
+  "size" correspond to ~~coefficients.~~ $n/b$ in $T(n/b)$.
+  > Boundary conditions matter greatly only when they give the dominant term a zero coefficient, which changes the asymptotic solution.
+  See p1005 if $f(0)=1,f(1)=\frac{1-\sqrt{5}}{2}$ then we have $s=0$ and then $f(n)=o(1)$.
 ## chapter 22 problems
 seemingly nothing.
 ## TODO (use the book page number)
@@ -2550,6 +2640,7 @@ seemingly nothing.
 [walk_implies_path]:https://math.stackexchange.com/a/699805/1059606
 [rearrangement_absolutely_convergent_series]:https://math.stackexchange.com/q/3734769/1059606
 [linearity_of_expection_Infinite_Probability_Space]:https://math.stackexchange.com/questions/4920518/prove-the-formula-for-variance-when-assuming-infinite-probability-spaces#comment10509616_4920518
+[part_proof_Akra_Bazzi_theorem]:https://math.stackexchange.com/q/4921759/1059606
 
 <!-- stack overflow -->
 [longest_simple_path_NP_hard]:https://stackoverflow.com/a/53399638/21294350
