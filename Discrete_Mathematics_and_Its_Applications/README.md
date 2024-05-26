@@ -10,6 +10,16 @@ DMIA -> Discrete_Mathematics_and_Its_Applications
 # notice
 - here I may confuse adjacent in trees where I think 2 nodes with the same parents as adjacent (They should be called "[sibling nodes](https://en.wikipedia.org/wiki/Tree_(data_structure)#:~:text=Child%20nodes%20with%20the%20same,case%20it%20is%20called%20empty.)")。
   This is trivially false when thinking such a tree as one graph.
+- I skipped [sample tests](./discrete-structure-solution-student39s-solutions-guide_compress_7th.pdf) and test bank.
+# Online Resources
+## TODO
+- Where is ["expanded table of contents (including subsection heads)"](https://highered.mheducation.com/sites/125967651x/student_view0/)?
+  - "Applications of Discrete Mathematics This ancillary contains 24 chapters" may be Answers_to_Odd-Numbered_Exercises (6643.0K) or Crib Sheets (268.0K) which are the only 2 not contained in the "0.1.2 Student Site" list but in [this list on the left](https://highered.mheducation.com/sites/125967651x/student_view0/crib_sheets.html)
+  - "immediately preceding this “To the Student” message." may mean "Online Resources" on page xvi.
+    The above may also correspond to
+    > These resources are described later in the front matter.
+- psychology in page 11 has no related contents in the book by searching "psycholo"
+- I didn't use "Interactive Demonstrations".
 # tips
 - [this boy](https://math.stackexchange.com/search?q=user%3A22335+application) reads mcs *many years* after reading DMIA. His QAs are valuable.
   - TODO where is [it](https://math.stackexchange.com/q/168214/1059606) in DMIA
