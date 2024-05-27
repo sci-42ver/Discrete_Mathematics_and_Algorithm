@@ -11,6 +11,9 @@ DMIA -> Discrete_Mathematics_and_Its_Applications
 - here I may confuse adjacent in trees where I think 2 nodes with the same parents as adjacent (They should be called "[sibling nodes](https://en.wikipedia.org/wiki/Tree_(data_structure)#:~:text=Child%20nodes%20with%20the%20same,case%20it%20is%20called%20empty.)")。
   This is trivially false when thinking such a tree as one graph.
 - I skipped [sample tests](./discrete-structure-solution-student39s-solutions-guide_compress_7th.pdf) and test bank.
+## errata (The following is added after finishing read. Too late.)
+- [no official](https://github.com/lair001/rosen-discrete-math-materials) [Also see](https://overflow.host/posts/2021-02-09/85ad1792-2dfe-11ed-af28-d7ffc61dbf28/)
+- [one error](https://www.researchgate.net/post/Error_in_Answer_Key_8th_Edition_Author_Kenneth_H_Rosen_Discrete_Mathematics_and_its_Applications) [Also see](https://math.stackexchange.com/a/4475134/1059606)
 # Online Resources
 ## TODO
 - Where is ["expanded table of contents (including subsection heads)"](https://highered.mheducation.com/sites/125967651x/student_view0/)?

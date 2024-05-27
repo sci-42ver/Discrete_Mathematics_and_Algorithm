@@ -16,5 +16,6 @@ CRLS and Discrete_Mathematicsand_Its_Applications book notes
 ### Discrete Mathematics with Applications
 1. [The University of Pittsburgh](https://sites.pitt.edu/~shk148/teaching/CS0441-2234/review-1-solution.html)
 # How to read these books
-- We should read the appendix first as the order of 'Eighth Edition SOLUTIONS' although when reading 'Discrete Mathematics with Applications' I read the main part first.
-- Since I have one book as the main book and the other as the complement, it is better to read them at the same time. Since reading the other book after having read one book, some contents have been learnt are blurred and it took some *unnecessary time to review* them.
+- We should *read the appendix first* as the order of 'Eighth Edition SOLUTIONS' although when reading 'Discrete Mathematics with Applications' I read the main part first.
+- Since I have one book as the main book and the other as the complement, it is better to *read them at the same time*. Since reading the other book after having read one book, some contents have been learnt are blurred and it took some *unnecessary time to review* them.
+- Notice to *read errata*.

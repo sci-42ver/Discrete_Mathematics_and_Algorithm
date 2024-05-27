@@ -1,9 +1,3 @@
-1. One small error: we should say "$g(u)$ is bounded below by $c_1 g(x)$" 2. $M$ is one function of $x$ when $p(x)$ is strictly increasing. Then how do we know there is one upper bound for $M(x)$? 3. How do we have $c_1g(x)\le 1\Rightarrow c_1g(x)\le g(u)$? 4. How to get "the minimum polynomial value bounding $|g'(x)|$"? The problem says "upper bounded" but not "lower bounded". 5. I want to prove "polynomial-growth condition" instead of "already established ... satisfies the polynomial-growth condition" and then give one circular proof.
-
-Thanks anyway for your answer. Hope you can clarify based on my doubts.
-
-Why do you use this changed definition? IMHO the original definition is enough for application. Your definition is more general while the original paper needs $x_0\ge 1/b_i$, etc, to ensure the *induction* proof work (See p3 bottom).
-
 # mcs
 - Here I didn't care about more circuit knowledge than already learnt since it is too complex to design one by myself. (skip_circuit)
 - Here * sections mean that they are not included in Discrete_Mathematics_and_Its_Applications.
@@ -27,6 +21,7 @@ Why do you use this changed definition? IMHO the original definition is enough f
 - This books seems to have much more typos than DMIA (even wrong hints like Problem 6.6...) and it has many ambiguous description (TODO give one specific example of such one ambiguous description).
   - typo like "more than $\sqrt{n}$ steps" in p361.
 ## notice
+No errata
 - I only did problems *referred to in the main contents* because some of them are very interesting and Enlightening.
   IMHO they are probably not in IN-CLASS QUESTIONS and ASSIGNMENTS, so not in this [solution](https://github.com/spamegg1/Math-for-CS-solutions?tab=readme-ov-file).
 - starting from checking problems in chapter 8 where I have read up to 9.3 finished in mcs.pdf,
