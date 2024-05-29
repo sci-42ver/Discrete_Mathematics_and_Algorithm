@@ -33,6 +33,10 @@ Out[11]: 12.416666666666666
   i.e. in errata TODO
 - > Chapter 4 underwent substantial  changes to improve its mathematical founda-tion and make it more robust and intuitive
   TODO how "robust"? and other page xvii~ list.
+## 1
+- > An incorrect algorithm might not halt at all on some input instances, or it might halt with an incorrect answer.
+  corresponds to mcs "6.3 Partial Correctness & Termin"
+- [gene relation](https://medlineplus.gov/genetics/understanding/basics/gene/) with DNA.
 # The Algorithm Design Manual
 - from [course page](https://www3.cs.stonybrook.edu/~skiena/373/)
   - maybe part 1 is [enough](https://www3.cs.stonybrook.edu/~skiena/373/syllabus.pdf)
