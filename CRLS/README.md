@@ -10,6 +10,7 @@ Out[11]: 12.416666666666666
 4. course list about algorithm rank from high to low based on the numbers of *general* courses (the latter 2 don't have corresponding graduate general courses for algorithm)
   list
   - mit
+  - UIUC
   - cmu
   - stanford
   - ucb
@@ -18,10 +19,13 @@ Out[11]: 12.416666666666666
     stanford has *no* specific algorithm courses for graduate but has *more* general algorithm courses.
     So their order may exchange.
     mit has all the above 2 advantages while ucb has none.
+    UIUC is similar to cmu but has *very useful* reference list.
   - These 4 universities [may be enough](https://www.usnews.com/best-graduate-schools/top-science-schools/computer-science-rankings)
     although [scientist rank](https://research.com/scientists-rankings/computer-science) which is [not h-index](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8238192/) doesn't follow that
     - The best is [unknown](https://careervillage.org/questions/767986/answers/769058)
     - TODO also [see](https://qr.ae/psSRT3)
+In summary, I read CRLS. 
+I use those general books in *general* algorithm courses as the *main* reference and other specific books when studying related topics. (They are in CRLS/others dir)
 ## stanford
 ### undergraduate
 [CS 161](https://stanford-cs161.github.io/winter2024/resources/#textbook-information)
@@ -50,7 +54,7 @@ textbook list shares 3 with cmu 15-451/651 with "Algorithms by Jeff Erikson" -> 
     TODO prerequisite
   - CS207 Antidiscrimination Law and Algorithmic Bias
     CS369O Optimization Algorithms no website
-  - CS125 [cancelled](https://law.stanford.edu/courses/data-algorithms-tools-policy-and-society/)
+  - ~~CS125~~ [cancelled](https://law.stanford.edu/courses/data-algorithms-tools-policy-and-society/)
   - I skipped
     - Algorithms for Interactive *Robotics*
     - Topics in *Geometric* Algorithms: Non-Euclidean Methods in Machine Learning
@@ -68,6 +72,21 @@ textbook list shares 3 with cmu 15-451/651 with "Algorithms by Jeff Erikson" -> 
       > translating C to/from *assembly*
       > a working understanding of the basics of *computer architecture*
       > understanding *compilers and disassemblers*
+### Algorithms Illuminated
+- See [author page](https://timroughgarden.org/videos.html)
+  -  364a Algorithmic Game Theory seems to be removed in 2024.
+    similarly for 364b which is [now](https://stanford.edu/class/ee364b/index.html) and 264 [now](https://web.stanford.edu/class/cs246/)
+    - see 364a,b [booklist](https://timroughgarden.org/f13/f13.html)
+      - 364a prerequisite
+        154N [maybe](http://kilby.stanford.edu/~rvg/154/)
+    - 264 seems no book
+  - CS261 [old](https://www.youtube.com/playlist?list=PLEGCF-WLh2RJh2yDxlJJjnKswWdoO8gAc)
+- full [list](https://timroughgarden.org/teaching.html) (only read Stanford Courses)
+  - CS167 skipped
+  - CS364B only the latter kept is checked (i.e. Frontiers in Mechanism Design)
+  - [CS369B](https://timroughgarden.org/w08b/w08b.html) with comprehensive booklist -> 261
+  - CS369C is one old course including [old 15-859](https://cstheory.stackexchange.com/questions/9901/an-intuitive-justification-metric-embedding-based-approximation-algorithms) [highly dependent on papers](https://www.cs.cmu.edu/~anupamg/metrics/)
+  - CS369E
 ## mit
 1. check [prerequisite](https://catalog.mit.edu/subjects/6/)
 2. graduate course updates are more frequent then undergraduate.
@@ -103,7 +122,8 @@ It only uses CRLS for undergraduate courses.
 [TODO](https://csd.cmu.edu/academics/undergraduate/requirements)
 > Computer Science Undergraduate curriculum information for prior years is available on the Current Student Resources page.
 - *book* recommendation
-  it doesn't include skiena manual and Sedgewick Algorithms book
+  it doesn't include skiena manual and Sedgewick Algorithms book in 15-451/651
+  15750/850 contains 4 in 15-451/651 with others added.
 - TODO check [objective](http://coursecatalog.web.cmu.edu/schools-colleges/schoolofcomputerscience/scsconcentrations/#algorithmsandcomplexitytextcontainer)
   > Relating algorithms and/or complexity of computation to a variety of complexity measures such as time, space, *communication, or information* content.
   > The understanding of several advanced algorithms *beyond what is covered* in the core.
@@ -111,7 +131,7 @@ It only uses CRLS for undergraduate courses.
   > The ability to understand and apply a variety of advanced algorithmic techniques and proof techniques, such as Lovasz Local Lemma, Johnson Lindenstrauss, Chernoff Bounds, sparsification, expanders, probabilistic method, regret bounds, spectral graph theory, fixed parameter tractability and semi-indefinite programming.
 ### undergraduate 15-451/651 [book](https://www.cs.cmu.edu/~15451-s24/FAQ.html)
 [Prerequisites](http://coursecatalog.web.cmu.edu/schools-colleges/schoolofcomputerscience/undergraduatecomputerscience/#coursestextcontainer)
-- TODO [15210](https://www.cs.cmu.edu/~15210/)
+- TODO [15210 Parallel and Sequential Data Structures and Algorithms](https://www.cs.cmu.edu/~15210/)
   [textbook no use](https://www.diderot.one/courses/44/books/260/chapter/3075) ~~because it is [not intended](https://www.cs.cmu.edu/afs/cs/academic/class/15210-f12/www/lectures/all.pdf)~~
   [old](https://sites.google.com/view/algorithms-book/home) or [this](https://www.cs.cmu.edu/afs/cs/academic/class/15210-s14/www/lectures/)
   [newer in Diderot](https://www.cs.cmu.edu/afs/cs/academic/class/15210-s21/www/syllabus.html) needs account.
@@ -123,14 +143,9 @@ It only uses CRLS for undergraduate courses.
       - [15-151](https://www.math.cmu.edu/~jmackey/151_128/welcome.html) [no Pre-required](https://csd.cmu.edu/course/15151/s24)
     - 15-150 **functional programming** [no textbook](https://www.cs.cmu.edu/~15150/resources.html)
       Prerequisites 15-151 15-122
-- others not in the curriculum but in the following search list
-  - [15-351](https://www.csd.cs.cmu.edu/15351-algorithms-and-advanced-data-structures) is *skipped* due to (graduate [15650](https://www.cs.cmu.edu/~ckingsf/class/15351-f15/))
-    > This course is not open to Computer Science Majors or Minors.
-    ~~maybe~~ it is for [~~B.S in Music and Technology~~](https://www.cs.cmu.edu/~music/mat/bachelor-curriculum.html) [CB and STAMACH](https://www.stat.cmu.edu/~hseltman/files/CMUCodes.pdf) as the list course description says.
-  - 15859 Randomized Algorithms -> old [15852](https://www.cs.cmu.edu/~avrim/Randalgs97/course_info.html) (TODO prerequisite)
 ### [graduate](https://aco.math.cmu.edu/reqs.html) (Also [see](https://fanpu.io/cmu-online/))
 with *no Prerequisites courses* but [just description of knowledge assumed](https://csd.cmu.edu/course/15850/s24).
-- maybe [15-850 (same book as 15750)](https://www.cs.cmu.edu/~15850/policies.html#:~:text=Prerequisites%3A) (no Textbook) is better by [FAQs](https://www.cs.cmu.edu/~15750/policies.html)
+- maybe [15-850 (same book as 15750)](https://www.cs.cmu.edu/~15850/policies.html#:~:text=Prerequisites%3A) (*no Textbook*) is better by [FAQs](https://www.cs.cmu.edu/~15750/policies.html)
   451/651 may already contain 50% os 750
   > If you still feel you want to take 15-750, please talk to us first.
 - 15750 [book](https://www.cs.cmu.edu/~15750/policies.html)
@@ -140,6 +155,11 @@ with *no Prerequisites courses* but [just description of knowledge assumed](http
 - [04630](https://enr-apps.as.cmu.edu/assets/SOC/ICT_FALL.htm) is skipped due to it is in *Africa*.
 - 18667 is skipped because it is more about *Machine Learning*.
 - 15495 Topics of Algorithmic Problem Solving seems to be one new course *with no website* (similar for 15795).
+- others not in the above curriculum but in the list
+  - [15-351](https://www.csd.cs.cmu.edu/15351-algorithms-and-advanced-data-structures) is *skipped* due to (graduate [15650](https://www.cs.cmu.edu/~ckingsf/class/15351-f15/))
+    > This course is not open to Computer Science Majors or Minors.
+    ~~maybe~~ it is for [~~B.S in Music and Technology~~](https://www.cs.cmu.edu/~music/mat/bachelor-curriculum.html) [CB and STAMACH](https://www.stat.cmu.edu/~hseltman/files/CMUCodes.pdf) as the list course description says.
+  - 15859 Randomized Algorithms -> old [15852](https://www.cs.cmu.edu/~avrim/Randalgs97/course_info.html) (TODO prerequisite)
 ## uc berkeley
 - textbook
   Sedgewick, DPV
@@ -172,6 +192,84 @@ See [map](https://hkn.eecs.berkeley.edu/courseguides) from PKUFlyingPig/Self-lea
     Also [implied](https://www.reddit.com/r/OMSCS/comments/huyd5z/comment/fyqbimz/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) by [CPE](https://www.techtarget.com/whatis/definition/CPE-credit)
   Its used books "A Common-Sense Guide to Data Structures and Algorithms" and "Grokking Algorithms: An Illustrated Guide for Programmers and Other Curious People" imply they are not as useful as the above ones.
   - [stanford online](https://online.stanford.edu/), [continuingstudies](https://continuingstudies.stanford.edu/courses/courses-by-category), [summer session](https://summer.stanford.edu/course-list) may be similar
+## UIUC due to [Jeff Erikson book](https://jeffe.cs.illinois.edu/teaching/algorithms/#blah)
+prerequisite list in [course list](https://cs.illinois.edu/academics/courses)
+- textbook 
+  - based on the "Useful Resources"
+    1. Jeff's Algorithms
+    2. DPV
+    3. CRLS
+  - It also has 2 *Data Structures* book recommendations in Jeff Erikson's link.
+  - cs374
+    the above 3 plus Kleinberg
+  - CS 473
+    the above 3 *without CRLS* plus preparata1985 (Computational Geometry) and Raghavan (randomized-algorithms-motwani-and-raghavan.pdf).
+### undergraduate
+CS [374 Introduction to Algorithms & Models of Computation](https://courses.grainger.illinois.edu/cs374al1/sp2024/) I [choose](https://jeffe.cs.illinois.edu/374-questions.html) [AL1](https://courses.grainger.illinois.edu/CS374AL1/su2024/)
+- prerequisite on the course page or [this which only needs "one of"](https://cs.illinois.edu/academics/courses/cs374)
+  - [CS173](https://courses.engr.illinois.edu/cs173/su2024/ALL-lectures/) [book](https://mfleck.cs.illinois.edu/building-blocks/index-sp2020.html)
+    - [prerequisite](https://courses.engr.illinois.edu/cs173/su2024/ALL-lectures/registration.html)
+      - [cs125](https://cs.illinois.edu/academics/courses/cs125) 
+        [book](https://math.hws.edu/eck/cs124/downloads/javanotes9-linked.pdf) from [this](https://courses.physics.illinois.edu/cs125/su2017/index.php)
+  - [Stuff](https://courses.engr.illinois.edu/cs374/sp2019/standards.html)
+    - Open Data Structures with link list "related projects"
+  - CS 225 Introduction to Data Structures and Algorithms with *C++*
+    with cpp *reference book* recommendation
+    - prerequisite [on the course page](https://courses.engr.illinois.edu/cs225/sp2024/policy/syllabus/) is different from that in the course list (but similar to that in the [course info page](https://cs.illinois.edu/academics/courses/CS225)).
+      - [CS 128 Intro to Computer Science II](https://cs128.org/)
+        prerequisite CS 125 (see above)
+        maybe [*no book*](https://www.reddit.com/r/UIUC/comments/w4tusv/cs128_lectures/)
+      - ece220 Computer Systems & Programming
+        [textbook](https://courses.grainger.illinois.edu/ece220/sp2024/#textbook) *has been* learnt (briefly due to it is similar to csapp) when learning ostep
+        [prerequisite](https://courses.illinois.edu/schedule/DEFAULT/DEFAULT/ECE/220) -> [ECE 120 - Introduction to Computing](https://ece.illinois.edu/academics/courses/ece120) (no public course website)
+- [very useful resourse list Useful Resources](https://courses.engr.illinois.edu/cs374al1/fa2023/resources.html) including textbooks from "see also here"
+  - I only read OP in "Tips to thrive in CS 374"
+  - [Sariel Har-Peled's algorithms notes](https://web.archive.org/web/20091227021139/http://valis.cs.uiuc.edu/~sariel/teach/courses/473/) I directly choose the biggest circle.
+  - Algorithm is not a four-letter word (Also [see](https://professor-l.github.io/mazes/))
+    my understanding is ["exercise consistently and frequently"](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#slide-10) which is different from [play](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#play).
+    We [ought to understand some of the theory](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#chin-up)
+    - TODO about maze
+      [uniform spanning tree](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#spanning-forest) 
+      - [proof](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#aldous-broder-snail) of [Aldous and Broder's method](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#aldous-broder)
+      - What does Wilson mean by [feelers](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#wilsons-feelers) and [this](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#wilsons-trailblaze)
+        > Except each time around, any point already in the tree is a valid "point B"
+      - [non-uniform maze and "Winding corridors, abundant dead-ends, and trivial solutions"](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#bias)
+      - how binary tree [works](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#binary-tree-demo) by proof
+      - [Sidewinder](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#sidewinder)
+    I skipped all algorithms from [Eller's](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#ellers) to [this](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#just-for-grins) because I *didn't care about algorithms for maze*
+    - generate new algorithm by [combination](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#the-point)
+      implementing them in an [unfamiliar environment](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#exercise-with-algorithms) for [resistance](https://www.jamisbuck.org/presentations/rubyconf2011/index.html#resistance)
+  - How to rock an algorithms interview
+    - TODO
+      Bloom filter
+    - key
+      > Looking at the corner cases is a good way to bound the complexity and scope of the problem
+### [CS 473](https://cs.illinois.edu/academics/courses/cs473) Algorithms which is a bit like [one graduate course](https://publish.illinois.edu/theory-cs/theory-courses/) with [*graduate* hours](https://cs.illinois.edu/academics/courses/CS473)
+[link](https://courses.grainger.illinois.edu/cs473/sp2023/)
+- [Stuff You Already Know](https://courses.engr.illinois.edu/cs473/fa2022/prereqs.html) almost same as the above
+- [prerequisite](https://cs.illinois.edu/academics/courses/cs473#:~:text=CS%20473%20%2D%20Algorithms&text=Course%20Information%3A%20Same%20as%20CSE,MATH%20463%20or%20STAT%20400.)
+  CS 374
+  CS 361 - Prob & Stat for Computer Sci
+- Useful Resources again similar to the above except for the last 2 links.
+- Preparata and Shamos's book -> preparata1985.pdf
+### booklist
+- [datastructures](https://donsheehy.github.io/datastructures/fullbook.pdf) by Don Sheehy
+- opendatastructures
+- Also see "More Algorithms Lecture Notes"
+- TODO
+  > Nothing will be more blasphemous than writing a textbook that anyone can go out and buy.
+### [courselist](https://cs.illinois.edu/academics/courses)
+- ~~CS 573~~ - Algorithms is *old*
+- [CS 554 - Parallel Numerical Algorithms](https://relate.cs.illinois.edu/course/cs554-f23/) ~~is skipped due to its prerequisite~~
+  prerequisite
+  [CS 450](https://cs.illinois.edu/academics/courses/cs450) - Numerical Analysis is skipped
+- ~~CS 491~~ CAP - Adv Competitive Algorithm Prog recommended by google 
+  with *no website*
+- CS 574 Randomized Algorithms with [useful book list](https://courses.grainger.illinois.edu/cs574/sp2021/)
+  [Mitzenmacher and Upfal 1st old version](https://www.cs.purdue.edu/homes/spa/courses/pg17/mu-book.pdf)
+  prerequisite CS374
+- [CS 583 Approximation Algorithms with booklist](https://courses.engr.illinois.edu/cs583/fa2021/)
+  prerequisite CS 473
 # CRLS
 ## [online resources](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
 - Pseudocode and Figures as PDFs is *already contained* in the book
