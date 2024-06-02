@@ -111,3 +111,6 @@ CRLS and Discrete_Mathematicsand_Its_Applications book notes
   Although for novels it's [not recommended to read the appendix first](https://www.reddit.com/r/dune/comments/15qbd5m/comment/jw260vo/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button).
 - Since I have one book as the main book and the other as the complement, it is better to *read them at the same time*. Since reading the other book after having read one book, some contents have been learnt are blurred and it took some *unnecessary time to review* them.
 - Notice to *read errata*.
+# miscs
+- check markdown size to [ensure indexed in GitHub](https://github.com/orgs/community/discussions/39043) by `find . -name "*.md" | xargs -I{} du -h {}`
+- This repo can be searched by "Discrete Mathematics and Its Applications 8th solution site:github.com" although not in the top list when 2024 June 2.
