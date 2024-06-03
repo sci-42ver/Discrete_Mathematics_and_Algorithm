@@ -1,9 +1,20 @@
 Please point out errors if any. Thanks in advance.
 
-IMHO 1. Here "repeated elements" is excluded by the definition of set. 2. "at least one of them is odd" needs $n\ge 2$. The base case $n=1$ can be constructed by $B=A$.
-
 abbr:
 DMIA -> Discrete_Mathematics_and_Its_Applications
+
+# How long I have taken to read the book
+- DMIA
+  This book is read from Oct 30 to Feb 20 (3 months and 20 days with 3 days ill).
+  Then from Feb 20 to Mar 2 (*12 days*) I got fever again. Then read the book up to Mar 9 (7 days).
+  Then up to Apr 10 (*1 months*) I took time to config Rime and other misc things.
+  Then Up to Apr 14 (4 days) I read the book.
+  So totally I took almost 4 months to read DMIA and finish all necessary exercises without considering related days not reading the book, i.e. italic words.
+- mcs
+  TODO weird Apr 14 directly read up to chapter 7.
+  Up to Apr 26 chapter 7 with necessarily problems solved.
+  Up to May 2 migrate from 2017 to 2018 version book and finish before chapter 9.
+  Up to May 26 finish the rest. (1 months and 12 days)
 # Watching question
 - https://math.stackexchange.com/questions/4911036/the-state-machine-for-extended-euclidean-gcd-algorithm-terminates-after-at-mos
 - https://math.stackexchange.com/questions/4910633/the-ackermann-function-must-be-total-and-unique-based-on-one-specific-list-of-ru

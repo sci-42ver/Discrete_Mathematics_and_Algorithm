@@ -1,8 +1,8 @@
-```python
-chapters=[2,3,3,7,4,5,4,4,3,3,5,3,4,5,4,4,3,3,4,5,2,5,3,3,3,3,3,3,3,3,8,5,3,5,5,2,5,5,2]
-sum(chapters)/12
-Out[11]: 12.416666666666666
-```
+# How long I have taken to read the book
+- From May 26 to Jun 2, I 
+  read the preface of some books
+  check the book list and course list
+  and decided to learn sicp and other related books.
 # course
 1. ~~all~~ most of them are based on lectures and use *multiple* textbooks as the reference
 2. CS 161 recommend [Tim Roughgarden](https://www.youtube.com/channel/UCcH4Ga14Y4ELFKrEYM1vXCg/playlists)
@@ -381,6 +381,8 @@ beginning from [2008](https://ocw.mit.edu/courses/6-006-introduction-to-algorith
     - If "Sorry." when visiting this page
       then [that means](https://news.ycombinator.com/item?id=38958700)
       > It turns out my IP was blocked.
+  - [3](https://news.ycombinator.com/item?id=1485366)
+    - it is not easy to solve all exercises shortly
 #### why it is discontinued
 Also see "why switch"
 - [1](https://www.wisdomandwonder.com/link/2110/why-mit-switched-from-scheme-to-python)
@@ -429,6 +431,10 @@ Also see "why switch"
     > His response was an emphatic ‘no’; in the general case, those core ideas and principles that scheme and SICP have helped to spread for so many years are just *as important as they ever were*.
     So it is fine to continue learning it.
     > However, he did say that starting off with python makes an undergraduate’s initial experiences *maximally productive* in the current environment.
+  - comment -> [this](https://jaortega.wordpress.com/2009/03/29/sussmaniana/)
+    > I must say, however, that the ideas SICP grew upon, that simple world where you built up complexity out of small pieces and system that you understood *completely*, have much to offer to new generations.
+    wingolog
+    > you have to build in robustness to the system, in a different way than the one SICP discusses.
 - [5](https://qr.ae/psSSHf)
   - one [**useful amazon Customer Review**](https://www.amazon.com/review/R403HR4VL71K8/ref=cm_cr_srp_d_rdp_perm?ie=UTF8) by [Peter Norvig](https://www.norvig.com/)
     > I think it is because SICP is a very personal message that works only if the reader is *at heart* a computer scientist (or willing to become one).
@@ -514,7 +520,7 @@ I will probably read only the top comment in reddit because these users have too
   > Therefore, this book is no longer maintained (for now)
   > For the material in the first half (programming), go to the DCIC book. That material is *now substantially bigger*, deeper, and richer than in PAPL.
   > For the material in the second half (programming languages), go to the PLAI book (which PAPL grew out of, and which will *eventually incorporate the material that PAPL added*).
-- [~~PLAI Programming Languages: Application and Interpretation~~](https://www.plai.org/)
+- [PLAI Programming Languages: Application and Interpretation](https://www.plai.org/)
   referred to in [this post](https://www.reddit.com/r/Racket/comments/xib8at/comment/ip29d4g/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
   > The Racket community recognises the value SICP
   at least listed in Shriram Krishnamurthi page
