@@ -594,6 +594,7 @@ Notice the following 2~4 are highly related because they are written by almost s
 - TODO [mentor help](https://exercism.org/tracks/racket) from [this](https://www.reddit.com/r/Racket/comments/sd3nc9/comment/huckkxb/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
 #### compared with JavaScript version
 better read [this diff between these 2 books](https://sicp.sourceacademy.org/chapters/making-of.html) from [sicp_computationalculture]
+[course](https://en.wikipedia.org/wiki/Structure_and_Interpretation_of_Computer_Programs#cite_note-8)
 - From [amazon](https://www.amazon.com/Structure-Interpretation-Computer-Programs-Engineering/dp/0262543230/ref=pd_lpo_sccl_1/141-2303586-3076928?pd_rd_w=QeIrK&content-id=amzn1.sym.1ad2066f-97d2-4731-9356-36b3edf1ae04&pf_rd_p=1ad2066f-97d2-4731-9356-36b3edf1ae04&pf_rd_r=BGR477QKVA0XXBF7MFG7&pd_rd_wg=z4mEP&pd_rd_r=6ce014d7-3955-43cf-9297-f4c642205e98&pd_rd_i=0262543230&psc=1)
   > Chapter four offers new material, in particular an introduction to the notion of program parsing.
   TODO

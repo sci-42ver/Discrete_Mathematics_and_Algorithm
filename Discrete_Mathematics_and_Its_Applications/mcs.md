@@ -754,8 +754,17 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
   - $\{0,1\}^w$ where [$w$ definition](https://en.wikipedia.org/wiki/Ordinal_number)
 - [First-order logic](https://en.wikipedia.org/wiki/First-order_logic#) just means not propositions but
   > there exists x such that x is Socrates and x is a man
-  - compared with [Second-order logic](https://en.wikipedia.org/wiki/Second-order_logic) where $\forall P\forall x$ instead of $\forall x$
-    > In first-order theories, predicates are often associated with sets. In interpreted higher-order theories, predicates may be interpreted as sets of sets.
+  - compared with [Second-order logic](https://en.wikipedia.org/wiki/Second-order_logic) where $\forall P\forall x$ ~~instead of $\forall x$~~
+    > In first-order theories, predicates are often associated with sets. In interpreted higher-order theories, predicates may be interpreted as *sets of sets*.
+    > First-order logic quantifies only variables that range over individuals (elements of the domain of discourse); second-order logic, in addition, quantifies *over relations.*
+    The key is *what we can quantify* differs instead of the number of quantifier (see "if there is more then one free variable we will denote it" in rutgers note).
+    > First-order logic can quantify over individuals, but not over properties ... However, we cannot do the same with the predicate.
+    > but this is a legitimate sentence of second-order logic. Here, P is a *predicate* variable and is semantically *a set of individuals.*
+    - different order may share the [axiom](https://encyclopediaofmath.org/index.php?title=Predicate_calculus), e.g. [zeroth-order](https://mathworld.wolfram.com/PropositionalCalculus.html)
+    - [~~predicate calculus /~~ first order logic (rutgers note)](https://sites.math.rutgers.edu/~tb822/Chapter%201.pdf) (I think the wikipedia definition as "first-order predicate calculus" (also implied in [britannica_predicate_calculus] "in any first-order, or lower, predicate calculus.") is more proper instead of directly "predicate calculus") ~~seems to include Second-order logic by $\exists x.\forall y.p(x,y)$~~
+      - [compared with *Propositional Calculus* / zeroth-order logic in 3.1](https://web.williams.edu/Mathematics/lg5/200/PropPred.pdf) which is same as [wikipedia says](https://en.wikipedia.org/wiki/Propositional_calculus), rutgers note "predicate" comparison with "statement", [britannica_predicate_calculus] "*does not* contain predicates (functions) that *range over predicates themselves*" and [this note](https://www.csd.uwo.ca/~lkari/logic14.pdf) about "proposition" and "predicate".
+        > Unlike first-order logic, propositional logic does not deal with non-logical objects
+        > However, in first-order logic, these two sentences may be couched as statements that *a certain individual or non-logical* object has a property. ... in the first sentence *the value of the variable* x is "Socrates", and in the second sentence it is "Plato". Due to the ability to speak about non-logical individuals along with the original logical connectives
 - > range over sets
   i.e. ~~a~~ ~~member of the set~~ ~~function~~ it [can be one set](https://math.stackexchange.com/a/1568778/1059606). This is also implied by
   > For any two sets x and y
@@ -2760,3 +2769,5 @@ seemingly nothing.
 
 <!-- mathoverflow -->
 [everywhere_divergent_generating_functions]:https://mathoverflow.net/a/45873
+
+[britannica_predicate_calculus]:https://www.britannica.com/topic/predicate-calculus
