@@ -237,7 +237,7 @@ See [map](https://hkn.eecs.berkeley.edu/courseguides) from PKUFlyingPig/Self-lea
   - prerequisite (Also see the above list)
     - [math 1a Calculus](https://math.berkeley.edu/~ogus/Math_1A/index.html) using
       > Single Variable Calculus, by Stewart, (Early Transcendentals for UC Berkeley). We will cover most of chapters 1--6
-      cs10 [*online book*](https://cs10.org/bjc-r/llab/html/topic.html?topic=berkeley_bjc%2Fpython%2Fbesides-blocks-oop-joshhug-edition.topic&course&novideo&noreading&noassignment)
+      cs10 [*online book*](https://cs10.org/bjc-r/llab/html/topic.html?topic=berkeley_bjc%2Fpython%2Fbesides-blocks-oop-joshhug-edition.topic&course&novideo&noreading&noassignment) whic can be skipped probably it is [AP using Snap!](https://bjc.berkeley.edu/)
     - cs61A Structure and Interpretation of Computer Programs
       book which uses [*scip* python customized version](https://cs61a.org/articles/about/#textbook)
       TODO [debugging](https://cs61a.org/articles/debugging/) and [tips](https://cs61a.org/articles/composition/)
@@ -567,14 +567,20 @@ I will probably read only the top comment in reddit because these users have too
   TODO [to pdf](https://github.com/daxwann/ComposingPrograms-to-PDF)
 ##### reading order
 Notice the following 2~4 are highly related because they are written by almost same people
+Read SDF and SICP at the same time as 6.5151 (6.905) does.
 - sicp since all other books are [derived from it][SICP_influence].
+- Software Design for Flexibility
+  This is the last because it may cover some knowledge for the graduate students.
+  [code](https://www.reddit.com/r/lisp/comments/mp00sy/comment/gu6tgjo/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
+  - This is like [the expansion of SICP](https://www.reddit.com/r/lisp/comments/mp00sy/comment/gu76il9/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button).
+See https://cs.brown.edu/courses/cs019/2023/ (one course using HtDP and DCIC)
 - HtDP based on [sicp_htdp_paper]
+  [placement exercises](https://cs.brown.edu/courses/cs019/2021/placement-self-test.html)
 - DCIC since it has ["a lot algorithmic content" compared with HtDP][DCIC_htdp_comparison] and use python (As "why It is still useful" says language doesn't matter).
   > HtDP is built around a beautiful idea: the data structures shown *grow in complexity in set-theoretic terms.*
   > However, this has a downside. You *have to imagine what the data represent* (this number is an age, that string is a name, that list is of GDPs), but they’re idealized
   > Buut there’s a big catch! A key feature of HtDP is that for every level of datatype, it provides a Design Recipe for programming over that datatype. Lists-of-structs are *complex. So is their programming recipe*.
   > *So* over the past few years, we’ve been working on different program design methods that address the same ends through different means. A lot of our recent education research has been putting new foundations in place. It’s very much work in progress. And DCIC is *the distillation of those efforts*. As we have new results, we’ll be weaving them into DCIC (and probably HtDP too). Stay tuned!
-- [PAPL/PLAI](https://www.reddit.com/r/BrownU/comments/1d67rf1/which_of_plai_and_papl_should_i_choose_to_learn/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
 - ~~EOPL probably sharing similar contents as PLAI by their names. Also [see](https://en.wikipedia.org/wiki/Essentials_of_Programming_Languages)~~
   > EOPL has spawned at least two other related texts: Queinnec's[2] Lisp in Small Pieces[3] and Krishnamurthi's Programming Languages: Application and Interpretation.
   > Its first part now *incorporates ideas on programming from HtDP*, another unconventional textbook, which uses Scheme to teach the principles of program design.
@@ -585,11 +591,11 @@ Notice the following 2~4 are highly related because they are written by almost s
     > Otherwise, reading this book is like learning how to build a car *without ever having seen one!*
     > That could almost be *a plug for PLAI.*
     PLAI is based on EOPL, so we can skip EOPL.
-- The Little Typer (check whether it is related with sicp. If not, skip it.)
 - https://www.composingprograms.com/ & sicpjs
+- [~~PAPL/~~PLAI](https://www.reddit.com/r/BrownU/comments/1d67rf1/which_of_plai_and_papl_should_i_choose_to_learn/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) See [this](https://www.reddit.com/r/BrownU/comments/1d67rf1/comment/l6vz9yo/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) for why PAPL is dropped.
+  This needs to be read [after SICP](https://web.archive.org/web/20231130001301/https://conservatory.scheme.org/schemers/Documents/)
+- The Little Typer (check whether it is related with sicp. If not, skip it.)
   after already understanding sicp based on the help of related similar books
-- Software Design for Flexibility
-  This is the last because it may cover some knowledge for the graduate students.
 #### racket
 - TODO [mentor help](https://exercism.org/tracks/racket) from [this](https://www.reddit.com/r/Racket/comments/sd3nc9/comment/huckkxb/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
 #### compared with JavaScript version
@@ -620,6 +626,8 @@ better read [this diff between these 2 books](https://sicp.sourceacademy.org/cha
 - [compared with python](https://lobste.rs/s/x1tnlj/new_edition_structure_interpretation#c_cku4t7)
 - [wikipedia](https://en.wikipedia.org/wiki/Structure_and_Interpretation_of_Computer_Programs,_JavaScript_Edition#Differences_from_the_original_textbook)
   > Since JavaScript shares its functional core with Scheme ... Chapter four offers new material ... The evaluator and compiler ...
+- https://functionalcs.github.io/curriculum/sicp.html
+  > the authors have had to make significant changes in chapter 4 because of the limitations of JavaScript.
 ## 3rd (2009)
 - it removes [Binomial Heaps](http://mitp-content-server.mit.edu:18180/books/content/sectbyfn?collid=books_pres_0&id=8030&fn=Chapter%2019.pdf) and [Sorting Networks](http://mitp-content-server.mit.edu:18180/books/content/sectbyfn?collid=books_pres_0&id=8030&fn=Chapter%2027.pdf)
 - [No official public](https://qr.ae/psSZmb) Java solution referred to in the transition guide
