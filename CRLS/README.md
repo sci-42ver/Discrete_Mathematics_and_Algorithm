@@ -1,5 +1,5 @@
 # How long I have taken to read the book
-- From May 26 to Jun 2, I 
+- From May 26 to Jun 2 (7 days), I 
   read the preface of some books
   check the book list and course list
   and decided to learn sicp and other related books.

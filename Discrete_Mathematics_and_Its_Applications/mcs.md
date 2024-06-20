@@ -1029,7 +1029,7 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
   - Lemma 9.4.3 is then also duplicate in DMIA 4.3.
     This means $\gcd(p,\prod a_i)=p$
 ## 9.5* (So also 9.8*)
-- [comparison](https://en.wikipedia.org/wiki/AKS_primality_test#Importance) between the Miller–Rabin test and AKS.
+- [comparison](https://en.wikipedia.org/wiki/AKS_primality_test#Importance) between the Miller–Rabin test and AKS (i.e. Manindra Agrawal, Neeraj Kayal, and Nitin Saxena).
 ## 9.6
 - Lemma 9.6.4 skips the proof of DMIA 4.1 THEOREM 4.
 ## 9.7* (This is said in DMIA 4.1.5 Arithmetic Modulo m although not detailed)
