@@ -516,7 +516,7 @@ I will probably read only the top comment in reddit because these users have too
   - [~~Concepts, Techniques, and Models of Computer Programming / CTMCP~~](https://news.ycombinator.com/item?id=36803081)
     *not recommended* by [softwareengineering_sicp_vs_HtDP]
     although it is recommended by [Stewart Mackenzie](https://github.com/sjmackenzie) in [mail_archive_after_sicp_eopl]
-- Also try [PAPL (no pdf)](https://papl.cs.brown.edu/2020/) in [Shriram Krishnamurthi page](https://cs.brown.edu/~sk/)
+- ~~Also try [PAPL (no pdf)](https://papl.cs.brown.edu/2020/) in [Shriram Krishnamurthi page](https://cs.brown.edu/~sk/)~~ (See [this](https://www.reddit.com/r/BrownU/comments/1d67rf1/comment/l6vz9yo/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) for why I skipped this book)
   > Therefore, this book is no longer maintained (for now)
   > For the material in the first half (programming), go to the DCIC book. That material is *now substantially bigger*, deeper, and richer than in PAPL.
   > For the material in the second half (programming languages), go to the PLAI book (which PAPL grew out of, and which will *eventually incorporate the material that PAPL added*).
@@ -527,7 +527,7 @@ I will probably read only the top comment in reddit because these users have too
   - referred to by the Racket documentation as [racket_discourse_SICP] says
     > PLAI is designed for *upper-level courses* that introduce the main ideas of programming languages.
     TODO read full of [racket_discourse_SICP]
-  - Directly read PAPL
+  - ~~Directly read PAPL~~ (See the above)
     > The second half of PAPL is a further revision of PLAI’s second edition.
     [Also see](https://news.ycombinator.com/item?id=8750689) although it is old.
     > PLAI is *almost completely subsumed* into PAPL. ... The first edition of PLAI tried one way to achieve this synthesis (but didn't really succeed as much as I'd have liked); PAPL *is a fresh attempt* at getting there.
