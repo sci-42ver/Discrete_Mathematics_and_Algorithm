@@ -553,9 +553,10 @@ I will probably read only the top comment in reddit because these users have too
 - [Software Design for Flexibility](https://groups.csail.mit.edu/mac/users/gjs/6.945/) referred to in [sicp_computationalculture]
   One course with both undergraduate and *graduate* version
   ~~TODO~~ ~~both 6.945 and~~ 6.5150/1 ~~are not listed in [2024 spring](https://student.mit.edu/catalog/archive/spring/m6a.html)~~ are listed as "Officially: Large-scale Symbolic Systems" in course list.
-  - prerequisite
+  - prerequisite (I don't have that time to learn all of these courses since my main goal is to learn SICP and it doesn't have prerequisites)
     [old 6.009 Fundamentals of Programming](https://py.mit.edu/spring19) [new](https://py.mit.edu/spring24)
-    - 6.100A
+    - This is not targeted for teaching "data structure" by searching 'MIT Fundamentals of Programming data structure'.
+    - [6.100A](https://introcomp.mit.edu/spring24)
   - sicp as [the background](https://groups.csail.mit.edu/mac/users/gjs/6.945/overview.pdf)
   - review
     [1](https://www.reddit.com/r/mit/comments/kv031p/comment/giw84j7/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
@@ -567,6 +568,7 @@ I will probably read only the top comment in reddit because these users have too
   TODO [to pdf](https://github.com/daxwann/ComposingPrograms-to-PDF)
 ##### reading order
 Notice the following 2~4 are highly related because they are written by almost same people
+
 Read SDF and SICP at the same time as 6.5151 (6.905) does.
 - sicp since all other books are [derived from it][SICP_influence].
 - Software Design for Flexibility
