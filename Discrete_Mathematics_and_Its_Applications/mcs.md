@@ -746,6 +746,21 @@ Although Problem 7.43 may be not trivial but it is still based on induction.
   like [python](https://cs.stackexchange.com/a/148444/161388)
 - each program can be thought as [one superset of the algorithm](https://qr.ae/ps4YWn).
 - see this for [the Halting Problem](https://math.stackexchange.com/q/4900611/1059606)
+  - > If you did have a decider, then you could create a recognizer...
+    is the answer for point 2.
+  - > 1. {Ps(s)|s∈No-halt}  instead of No-halt means same as the non-halting programs.
+    ~~wrong. IMHO `P_s` is complied from `s` which doesn't halt when applied to `s`, so "non-halting" (notice this *doesn't mean* s *always doesn't halt*).~~
+    since $P_s(s)$ doesn't halt.
+    - is the answer for point 1.
+  - > 1. As you says, since s and Ps(s) have the bijection direction, recognizing one of them means recognizing the other
+    ~~wrong. since recognizing aa doesn't mean recognizing (append aa b).~~
+    means "recognizer of $P_s(s)$" first get $P_s(s)$, then extract s from that.
+  - > Following the usual diagonal approach, we define the language No-halt:
+    Think that rows are recognizers and columns are strings.
+    Each element is halt/non-halt.
+    Then No-halt is just `s` in https://en.wikipedia.org/wiki/Cantor%27s_diagonal_argument#Uncountable_set.
+    - Compared with array in https://en.wikipedia.org/wiki/Halting_problem#Sketch_of_rigorous_proof
+      if "f was the halting function h", then contradiction is got from *one specific element* `g(e)` instead of *many elements* as the above.
 ## 8.3
 - Russell’s paradox is also shown in DMIA 2.2-50. 
   notice this is ~~same as~~ similar to cantor's diagonal argument $\{a \in A\vert a \notin g(a)\}$. See 8.1.
