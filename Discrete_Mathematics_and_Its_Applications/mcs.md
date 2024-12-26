@@ -382,6 +382,7 @@ rightmost-leftmost # strictly increase inside rows.
   Since until the rightmost node of the nth row, we have $2^{n+1}-1=\sum_{k=0}^n 2^k$ elements which start from 0 to $2 \cdot 2^{n} - 2$, so their step must be 1.
   - Also see Theorem 7.6.16 which is trivial.
 - Compared with DMIA chapter 11, this book says a bit about 'the circular and infinite weirdness' in trees. The former DFS/BFS implicitly avoids 'circular' and it says most of games is finite same as mcs.
+  TODO what does the above mean...
 - recursive trees is similar to [game_as_decision_tree]
 - Theorem 7.6.11
   - $Rec\subseteq Fin$

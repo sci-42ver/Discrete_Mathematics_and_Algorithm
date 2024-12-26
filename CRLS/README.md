@@ -362,7 +362,10 @@ CS [374 Introduction to Algorithms & Models of Computation](https://courses.grai
   prerequisite CS 473
 # CRLS 4th (2022)
 2nd -> 2001
-[mit_6_006_2020], [mit_6_006_2011] and [mit_6_006_2005] needs *A strong understanding* (see 2005) of programming prerequisite.
+[mit_6_006_2020], [mit_6_006_2011] and [mit_6_006_2005] needs [*A strong understanding*](https://www.reddit.com/r/learnprogramming/comments/1di8dbn/comment/l925w5r/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) (see 2005) of programming prerequisite.
+> You are expected to have taken 6.001 Structure and Interpretation of Computer Programs
+> So instead of the *project (a deep understanding* of software) start with your first small task (the basics)
+
 notice to follow the [style](https://github.com/wojtask/clrs4e-solutions/blob/main/CONVENTIONS.md) when writing the solution
 - useful quotes
   2020
