@@ -367,6 +367,9 @@ CS [374 Introduction to Algorithms & Models of Computation](https://courses.grai
 > So instead of the *project (a deep understanding* of software) start with your first small task (the basics)
 
 notice to follow the [style](https://github.com/wojtask/clrs4e-solutions/blob/main/CONVENTIONS.md) when writing the solution
+- why choose this book 
+  - [see](https://galaxy.opensyllabus.org/#!point/34600256537883) result of "algorithm".
+    link from [this](https://aima.cs.berkeley.edu/)
 - useful quotes
   2020
   > Written course material will be distributed via notes from lectures and recitations. ... though this text is *not required* for the course.
