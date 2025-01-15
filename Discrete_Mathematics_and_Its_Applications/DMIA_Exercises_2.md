@@ -292,7 +292,7 @@
     > And transitivity follows from the group table
     i.e. product table / Cayley table shown in the above link.
   - Similar to 59
-    here relatiton is the sequence of rotation or reflection operations.
+    here relation is the sequence of rotation or reflection operations.
     So
     > Each operation has an inverse
     i.e. let $a,b$ be bracelets of the same class, inverse is just swap the locations of $a,b$ in $a R b$.
