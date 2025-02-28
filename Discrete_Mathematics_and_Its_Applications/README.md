@@ -2832,7 +2832,7 @@ $ latexdef -t latex -s -f -E cases
 [3_SAT_to_3_Coloring]:https://cgi.csc.liv.ac.uk/~igor/COMP309/3CP.pdf
 
 <!-- csapp -->
-[csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
+[csapp_doc]:https://github.com/sci-42ver/csapp3e/blob/master/asm/README.md
 
 <!-- tex -->
 [main_tex]:./homework_tex/algorithm/main.tex
@@ -2860,7 +2860,7 @@ $ latexdef -t latex -s -f -E cases
 <!-- valuable links -->
 [houseofgraphs_search]:https://houseofgraphs.org/result-graphs
 
-[asm_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
+[asm_doc]:https://github.com/sci-42ver/csapp3e/blob/master/asm/README.md
 
 <!-- proofwiki -->
 

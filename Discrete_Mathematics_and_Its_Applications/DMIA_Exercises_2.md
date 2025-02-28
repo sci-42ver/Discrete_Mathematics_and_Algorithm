@@ -1484,12 +1484,12 @@ print(subgraph_of_complete_graph(4))
 ```bash
 $ python -m pdb 8x8_knight_tour.py
 <function save_history at 0x7f433b5814e0>
-> /home/czg_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathematics_and_Its_Applications/miscs_snippets/py_codes/10_5_64/8x8_knight_tour.py(1)<module>()
+> /home/hervey_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathematics_and_Its_Applications/miscs_snippets/py_codes/10_5_64/8x8_knight_tour.py(1)<module>()
 -> import matplotlib.pyplot as plt
 (Pdb) break 122
-Breakpoint 1 at /home/czg_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathematics_and_Its_Applications/miscs_snippets/py_codes/10_5_64/8x8_knight_tour.py:122
+Breakpoint 1 at /home/hervey_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathematics_and_Its_Applications/miscs_snippets/py_codes/10_5_64/8x8_knight_tour.py:122
 (Pdb) c
-> /home/czg_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathematics_and_Its_Applications/miscs_snippets/py_codes/10_5_64/8x8_knight_tour.py(122)<module>()
+> /home/hervey_arch/Discrete_Mathematics_and_Algorithm/Discrete_Mathematics_and_Its_Applications/miscs_snippets/py_codes/10_5_64/8x8_knight_tour.py(122)<module>()
 -> for edge in hamilton_circuit.edges:
 (Pdb) p degree(index(3,dim_2-3,dim_1)-1,adj_mat,hamilton_circuit)
 6
@@ -2107,7 +2107,7 @@ Redo 5.4-48
           - The above $G_c$ corresponds to the block $A_r$ in Theorem 3.9.
       - in (13.4) we get the right by hypothesis and derive the left by the definition of the determinant.
       - application to [prove Cayley formula](https://math.stackexchange.com/a/1252851/1059606)
-        - $\gamma _{A}(\lambda )\leq \mu _{A}(\lambda )$ [proof](https://math.stackexchange.com/a/458200/1059606) which is from this when I [prepares for the graduate_entrance_exam](https://bitbucket.org/czg980/graduate_entrance_exam_simplified/src/4c6a0d7d21c9f78af8f037fde20b271f90dfe88a/textbooks/review/linear%20algebra/README.md?at=master#README.md-158,281,391:393,396)
+        - $\gamma _{A}(\lambda )\leq \mu _{A}(\lambda )$ [proof](https://math.stackexchange.com/a/458200/1059606) which is from this when I [prepares for the graduate_entrance_exam](https://bitbucket.org/anom_mony/graduate_entrance_exam_simplified/src/4c6a0d7d21c9f78af8f037fde20b271f90dfe88a/textbooks/review/linear%20algebra/README.md?at=master#README.md-158,281,391:393,396)
           - Also [see](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors#Algebraic_multiplicity)
             - Due to the $R^n$ dimensional space property, we can find one "orthonormal set" to form ["an orthonormal basis"](https://en.wikipedia.org/wiki/Orthogonal_matrix#Matrix_properties), then we have $V^T V=I$.
             - > we get a matrix whose top left block is the diagonal matrix
@@ -4674,7 +4674,7 @@ A  E /|\
 [DAG_to_topological_ordering_proof]:http://www.cs.emory.edu/~cheung/Courses/253/Syllabus/Graph/DAG.html
 
 <!-- csapp -->
-[csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
+[csapp_doc]:https://github.com/sci-42ver/csapp3e/blob/master/asm/README.md
 
 <!-- tex -->
 [main_tex]:./homework_tex/algorithm/main.tex
@@ -4700,4 +4700,4 @@ A  E /|\
 <!-- valuable links -->
 [houseofgraphs_search]:https://houseofgraphs.org/result-graphs
 
-[asm_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
+[asm_doc]:https://github.com/sci-42ver/csapp3e/blob/master/asm/README.md

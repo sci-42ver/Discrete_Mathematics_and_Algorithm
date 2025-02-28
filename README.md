@@ -13,7 +13,7 @@ CRLS and Discrete_Mathematicsand_Its_Applications book notes
       - [3rd solution list](https://atekihcan.github.io/CLRS/foreword/)
         they are less detailed than [wojtask](https://github.com/wojtask/clrs4e-solutions) (See 1.1 answers)
     - it is enough to read it to [cover](https://qr.ae/pKA9wQ) the "data structures" although [too serious](https://qr.ae/pKA9b0).
-- More detailed see [this](https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md#algorithms-and-data-structures) related contexts.
+- More detailed see [this](https://github.com/sci-42ver/csapp3e/blob/master/asm/README.md#algorithms-and-data-structures) related contexts.
 - I didn't use Algorithms, Fourth Edition by Sedgewick referred to in teachyourselfcs although it has one [full solution](https://github.com/reneargento/algorithms-sedgewick-wayne/tree/master/src/chapter1/section1) (This is [not full](https://github.com/aistrate/AlgorithmsSedgewick/tree/master/1-Fundamentals/1-1-BasicProgModel)) due to 
   1. it is based on Java including Web Exercises / programming exercises. Although there are [other versions of solutions](https://forum.codeselfstudy.com/t/algorithms-4th-edition-sedgewick-wayne/25/13), pseudocode may be more appropriate for others to learn.
   2. It is published in 2011 which may be inappropriate in 2024.

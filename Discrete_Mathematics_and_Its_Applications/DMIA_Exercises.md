@@ -5006,7 +5006,7 @@ def unimodal(start,end,List):
 [2_conditions_for_Balanced_Parentheses]:http://cse.iitkgp.ac.in/%7Eabhij/course/theory/FLAT/Spring21/scribes/CFG-balanced.pdf
 
 <!-- csapp -->
-[csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
+[csapp_doc]:https://github.com/sci-42ver/csapp3e/blob/master/asm/README.md
 
 <!-- tex -->
 [main_tex]:./homework_tex/algorithm/main.tex
@@ -5032,4 +5032,4 @@ def unimodal(start,end,List):
 <!-- valuable links -->
 [houseofgraphs_search]:https://houseofgraphs.org/result-graphs
 
-[asm_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
+[asm_doc]:https://github.com/sci-42ver/csapp3e/blob/master/asm/README.md

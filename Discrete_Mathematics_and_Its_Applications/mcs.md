@@ -2744,7 +2744,7 @@ seemingly nothing.
 [Rearranging_Alternating_Harmonic_Series]:https://math.iupui.edu/~ccowen/ButlerAHslides.pdf
 
 <!-- csapp -->
-[csapp_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
+[csapp_doc]:https://github.com/sci-42ver/csapp3e/blob/master/asm/README.md
 
 <!-- tex -->
 [main_tex]:./homework_tex/algorithm/main.tex
@@ -2772,7 +2772,7 @@ seemingly nothing.
 <!-- valuable links -->
 [houseofgraphs_search]:https://houseofgraphs.org/result-graphs
 
-[asm_doc]:https://github.com/czg-sci-42ver/csapp3e/blob/master/asm/README.md
+[asm_doc]:https://github.com/sci-42ver/csapp3e/blob/master/asm/README.md
 
 <!-- proofwiki -->
 

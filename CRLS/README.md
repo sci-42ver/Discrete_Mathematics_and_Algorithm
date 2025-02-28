@@ -407,7 +407,7 @@ Also see "why switch"
     > he told me that he thought I was *placing to high an emphasis* on the specific language.
     maybe too high
     > Understanding the principles is *not essential* for an introduction to the subject matter anymore, it matters more that you can develop a *mental map* of systems and make things work for you which is what dealing with the *robots* in 6.01 will make you do.
-    [6.01 2008](https://courses.csail.mit.edu/6.01/spring08/resource.html)
+    [6. 001 2008](https://courses.csail.mit.edu/6.01/spring08/resource.html)
     > He sees 6.001 as obsolete. Personally, I wish it was possible to *understand all the principles*, but I guess its simply a reality that I must deal with.
     :)
     > Also, I’d like to say that the simple fact that Professor Sussman didn’t mind taking the time to talk to me really shows how *truly accessible the amazing staff* at MIT are.
@@ -415,7 +415,7 @@ Also see "why switch"
     > And even though languages aren’t supposed to be important, I think learning Python makes up for the loss of Scheme in many ways.
     also see HAWKINS's archive link.
 - [3](https://irreal.org/blog/?p=11127)
-  - [video](https://www.youtube.com/watch?v=OgRFOjVzvm0) almost same as link 1
+  - [video](https://www.youtube.com/watch?v=OgRFOjVzvm0) almost same as link 1 <a id="6.001_switch_video"></a>
     See 2:22, 2:33~3:09, 3:19~4:11, 4:21~37
   - > I’m *less convinced* by his rational for what replaced it. He describes the poking at “batteries included” libraries to figure out what they do as *a sort of science*. To me, it seems more like casting magic spells. ... I think *a lot is lost* with this approach but folks smarter than me—like Sussman—*disagree*.
     > Sussman is clearly a very smart guy but that *doesn't mean he's knowledgeable* about what's best in terms of *education*.
@@ -439,8 +439,10 @@ Also see "why switch"
     > However, he did say that starting off with python makes an undergraduate’s initial experiences *maximally productive* in the current environment.
   - comment -> [this](https://jaortega.wordpress.com/2009/03/29/sussmaniana/)
     > I must say, however, that the ideas SICP grew upon, that simple world where you built up complexity out of small pieces and system that you understood *completely*, have much to offer to new generations.
-    wingolog
-    > you have to build in robustness to the system, in a different way than the one SICP discusses.
+    - [wingolog](https://wingolog.org/archives/2009/03/24/international-lisp-conference-day-two) also in [this](https://www.reddit.com/r/scheme/comments/fg39mc/comment/fk2x2yc/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
+      > you have to build in robustness to the system, in a different way than the one SICP discusses.
+      - almost same as what Sussman said in the [video](#6.001_switch_video)
+        > In 1980 ... Code ran *close to the metal*, even Scheme -- it was understandable all the way down. ... 6.001 had been conceived to teach engineers *how to take small parts* that they understood entirely and use simple techniques to compose them into larger things that do what you want. ... Nowadays you muck around with *incomprehensible or nonexistent man pages* for software you don't know who wrote. You have to do basic science on your libraries to see how they work, *trying out different inputs* and seeing how the code reacts.
 - [5](https://qr.ae/psSSHf)
   - one [**useful amazon Customer Review**](https://www.amazon.com/review/R403HR4VL71K8/ref=cm_cr_srp_d_rdp_perm?ie=UTF8) by [Peter Norvig](https://www.norvig.com/)
     > I think it is because SICP is a very personal message that works only if the reader is *at heart* a computer scientist (or willing to become one).
